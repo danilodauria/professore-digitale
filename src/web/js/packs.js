@@ -135,7 +135,8 @@
       Object.keys(user).forEach(function (id) {
         var p = user[id], er = validate(p);
         if (er.length) errors.push({ file: id, errori: er.slice(0, 10) });
-        else { if (!byId[id]) order.push(id); byId[id] = { origine: "utente", pacchetto: p }; }
+        else if (!byId[id]) { order.push(id); byId[id] = { origine: "utente", pacchetto: p }; }
+        else if (cmp(p.versione, byId[id].pacchetto.versione) >= 0) byId[id] = { origine: "utente", pacchetto: p };
       });
       return Promise.resolve(done(order.map(function (id) { return byId[id]; }), errors));
     },

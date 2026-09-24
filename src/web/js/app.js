@@ -857,7 +857,7 @@
       '<div id="packs-list"></div><div class="row" style="margin-top:.6rem"><label class="btn ghost">➕ Importa pacchetto<input type="file" id="pack-import" accept="application/json,.json" hidden></label>' +
       '<button class="btn ghost" id="pack-template">⬇️ Scarica il modello</button></div><div id="pack-res" class="small" style="margin-top:.5rem"></div></div>' +
 
-      '<div class="card"><h2 style="margin-top:0">🔄 Aggiornamenti</h2><p class="small muted">Il Professore <b>non</b> si collega mai a Internet da solo. Il controllo avviene solo se premete il pulsante.</p>' +
+      '<div class="card"><h2 style="margin-top:0">🔄 Aggiornamenti</h2><p class="small muted">Il Professore <b>non</b> si collega mai a Internet da solo. Il controllo avviene solo se premete il pulsante. L\'indirizzo può essere un sito <b>https</b> oppure un computer della <b>rete locale</b> (es. http://192.168.1.10:8080/aggiornamenti.json).</p>' +
       field("Indirizzo del file di versione", '<input type="url" id="s-upd" value="' + esc(s.updateUrl || (S ? S.update_url : "")) + '">') +
       '<button class="btn ghost" id="check-upd"' + (PD.server ? "" : " disabled") + '>🌐 Controlla aggiornamenti</button><div id="upd-res" class="small" style="margin-top:.6rem"></div></div>' +
 
@@ -945,7 +945,7 @@
       var p = en.pacchetto;
       return '<div class="notice info small" style="display:flex;gap:.8rem;align-items:center;justify-content:space-between;flex-wrap:wrap"><div><b>' + esc(p.titolo) +
         "</b> · v" + esc(p.versione) + (p.autore ? " · " + esc(p.autore) : "") + "<br>" + (p.domande || []).length + " domande, " + (p.lezioni || []).length +
-        " lezioni · " + (en.origine === "sistema" ? "incluso nel programma" : "importato") + "</div>" +
+        " lezioni · " + ({ sistema: "incluso nel programma", computer: "installato per tutti gli utenti" }[en.origine] || "importato") + "</div>" +
         (en.origine === "utente" ? '<button class="btn ghost" data-pack-remove="' + esc(p.id) + '">Rimuovi</button>' : "") + "</div>";
     }).join("") : '<p class="small muted">Nessun pacchetto aggiuntivo.</p>';
     if (PD.packs.errors.length) html += '<div class="notice small"><b>Pacchetti ignorati perché non validi:</b><br>' +

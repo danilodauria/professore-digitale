@@ -29,7 +29,7 @@ Leggere questo file per intero prima di modificare qualunque cosa.
 | `src/web/js/packs.js` | Caricamento/validazione pacchetti lato browser (stesse regole di `pd_packs.py`) |
 | `src/web/js/board.js`, `practice.js` | Lavagna; Palestra |
 | `packaging/` | Avviatore, `professore-digitale-contenuti`, setup IA/voce, pulizia, .desktop, man, **changelog** |
-| `tools/` | `rilascio.sh`, `pubblica-contenuti.sh`, `pubblica-sito.sh`, `pubblica-tutto.sh`, `repo-apt.sh`, `make_standalone.py`, `metainfo.py`, `prepara-ambiente.sh` |
+| `tools/` | `rilascio.sh`, `pubblica-contenuti.sh`, `pubblica-sito.sh`, `pubblica-tutto.sh`, `pubblica-locale.sh`, `server-aggiornamenti.sh`, `backup-locale.sh`, `verifica_pubblicazione.py`, `repo-apt.sh`, `make_standalone.py`, `metainfo.py`, `prepara-ambiente.sh` |
 | `tests/` | `esegui_test.sh` (tutto), `test_packs.py`, `test_ui.py` (Playwright), `mock_ollama.py` |
 | `docs/` | Vademecum e Guida agli aggiornamenti (PDF); il vademecum entra nel .deb |
 | `archivio/` | Tutti i .deb rilasciati (servono al repository APT). Non cancellare |
@@ -46,6 +46,19 @@ tools/pubblica-sito.sh             # carica dist/pubblica/ su GitHub Pages (lo e
 tools/pubblica-tutto.sh ZIP        # per Danilo: verifica + firma APT + sito + sorgenti in un solo comando
 PD_SHARE_DIR=src python3 packaging/professore-digitale-contenuti valida src/contenuti/*.json
 ```
+
+## Pubblicazione: con GitHub oppure tutto in locale
+- **GitHub** (predefinito): `tools/pubblica-tutto.sh ZIP` → GitHub Pages + sorgenti.
+- **Senza GitHub**: `tools/pubblica-locale.sh ZIP --cartella DEST [--indirizzo http://IP:8080]` prepara una cartella
+  (chiavetta o PC server) con `installa-da-chiavetta.sh`, `LEGGIMI.txt` e, se c'è la chiave, `apt/` firmato;
+  `tools/server-aggiornamenti.sh DEST [--servizio]` la serve in rete locale; `tools/backup-locale.sh DEST` sostituisce
+  GitHub come copia di sicurezza (git bundle + archivio sorgenti).
+- Il server accetta aggiornamenti da `https://` ovunque e da `http://` solo verso la rete locale
+  (`indirizzo_locale()` in `pd_server.py`: IP privati, loopback, `.local`, `.lan`, `.home.arpa`). SHA-256 sempre obbligatorio.
+- Se Danilo lavora solo in locale, in `rilascio.conf` `BASE_URL` punta al PC server dell'aula (es. `http://192.168.1.10:8080`):
+  chiedergli l'indirizzo prima di un rilascio e nel messaggio finale indicare `pubblica-locale.sh` invece di `pubblica-tutto.sh`.
+- Contenuti installati "per tutti gli utenti" (`--sistema`) vanno in `/var/lib/professore-digitale/contenuti`
+  (mai in `/usr/share/...`, che appartiene al pacchetto); con lo stesso `id` vince la versione più alta.
 
 ## Numerazione delle versioni (SemVer)
 - **correzione** (2.1.1 → 2.1.2): solo errori corretti, nessuna novità da imparare.

@@ -120,6 +120,6 @@ ls -1 "$PUB"
 echo
 echo "Prossimi passi:"
 echo "  1. Provate il pacchetto su un PC di prova:  sudo apt install ./$PUB/professore-digitale_${NUOVA}_all.deb"
-echo "  2. Pubblicate il sito:  tools/pubblica-sito.sh   (oppure caricate a mano il contenuto di $PUB/ su $BASE_URL)"
+echo "  2. Pubblicate:  tools/pubblica-tutto.sh   (GitHub)   oppure   tools/pubblica-locale.sh --cartella DEST   (senza GitHub)"
 echo "     e inviate i sorgenti su GitHub:  git push origin main --tags"
 echo "  3. Dagli altri PC: Impostazioni → Aggiornamenti → «Controlla aggiornamenti»."

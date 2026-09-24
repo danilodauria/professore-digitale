@@ -87,6 +87,7 @@ DATA_DIR = os.environ.get("PD_DATA_DIR") or os.path.join(XDG_DATA, APP_ID)
 MODELS_DIR = os.path.join(DATA_DIR, "models")
 SYSTEM_PACKS = os.environ.get("PD_SYSTEM_PACKS") or os.path.join(SHARE_DIR, "contenuti")
 USER_PACKS = os.path.join(DATA_DIR, "contenuti")
+LOCAL_PACKS = os.environ.get("PD_LOCAL_PACKS") or "/var/lib/professore-digitale/contenuti"   # per tutti gli utenti del PC
 VENV_PY = os.path.join(DATA_DIR, "venv", "bin", "python3")
 RUNTIME_DIR = os.environ.get("XDG_RUNTIME_DIR") or tempfile.gettempdir()
 RUNTIME_FILE = os.path.join(RUNTIME_DIR, "%s-%d.json" % (APP_ID, os.getuid()))
@@ -97,7 +98,6 @@ if not OLLAMA_HOST.startswith("http"):
 
 UPDATE_URL_DEFAULT = DISTRIBUZIONE.get("aggiornamenti_url") or \
     "https://raw.githubusercontent.com/danilodauria/professore-digitale/main/aggiornamenti.json"
-ALLOW_HTTP_TEST = os.environ.get("PD_ALLOW_HTTP_TEST") == "1"   # solo per i test automatici
 
 DATA_KEYS = ("settings", "progress", "history", "board", "practice")
 MAX_BODY = 8 * 1024 * 1024        # 8 MB (audio del microfono)
@@ -331,16 +331,32 @@ def parse_version(v):
 RE_SHA = re.compile(r"^[0-9a-f]{64}$")
 
 
+def indirizzo_locale(host):
+    """True se l'host e' nella rete locale: IP privati (10.x, 172.16-31.x, 192.168.x), questo computer,
+    oppure nomi .local / .lan / .home.arpa. Serve per gli aggiornamenti senza Internet (server in aula)."""
+    import ipaddress
+    host = (host or "").strip("[]").lower()
+    if host == "localhost" or host.endswith((".local", ".lan", ".home.arpa")):
+        return True
+    try:
+        ip = ipaddress.ip_address(host)
+    except ValueError:
+        return False
+    return ip.is_private or ip.is_loopback
+
+
 def url_consentito(url):
+    """https ovunque; http solo verso la rete locale (le impronte SHA-256 restano obbligatorie per i pacchetti)."""
     if re.match(r"^https://[^\s]+$", url or ""):
         return True
-    return ALLOW_HTTP_TEST and re.match(r"^http://127\.0\.0\.1(:\d+)?/", url or "") is not None
+    m = re.match(r"^http://(\[[0-9a-fA-F:]+\]|[^/:\s]+)(:\d+)?(/[^\s]*)?$", url or "")
+    return bool(m and indirizzo_locale(m.group(1)))
 
 
 def scarica(url, limite):
     """Scarica al massimo `limite` byte da un indirizzo https (solo su richiesta dell'utente)."""
     if not url_consentito(url):
-        raise RuntimeError("indirizzo non valido (serve https)")
+        raise RuntimeError("indirizzo non valido (serve https, oppure http verso un computer della rete locale)")
     req = urllib.request.Request(url, headers={"User-Agent": "professore-digitale/" + VERSION})
     with urllib.request.urlopen(req, timeout=20) as r:
         data = r.read(limite + 1)
@@ -350,7 +366,7 @@ def scarica(url, limite):
 
 
 def pacchetti_installati():
-    return pd_packs.carica_tutti([("sistema", SYSTEM_PACKS), ("utente", USER_PACKS)], VERSION)
+    return pd_packs.carica_tutti([("sistema", SYSTEM_PACKS), ("computer", LOCAL_PACKS), ("utente", USER_PACKS)], VERSION)
 
 
 def check_update(url):
@@ -630,7 +646,7 @@ class Handler(BaseHTTPRequestHandler):
             try:
                 res = check_update(req.get("url") or UPDATE_URL_DEFAULT)
             except Exception as e:
-                return self._error(502, "controllo non riuscito: %s" % e)
+                return self._error(502, str(e))
             res["ok"] = True
             return self._send(200, res)
 

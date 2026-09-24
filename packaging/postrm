@@ -1,0 +1,8 @@
+#!/bin/sh
+# Con "apt purge" rimuove anche i contenuti installati per tutti gli utenti del computer.
+# I dati personali degli utenti (~/.local/share/professore-digitale) non vengono mai toccati.
+set -e
+if [ "$1" = "purge" ]; then
+  rm -rf /var/lib/professore-digitale
+fi
+exit 0

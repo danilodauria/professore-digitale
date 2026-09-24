@@ -32,7 +32,7 @@ json.dump(info, open(os.path.join(d, "aggiornamenti.json"), "w"), ensure_ascii=F
 PY
 python3 -m http.server 18991 --bind 127.0.0.1 --directory "$T/sito" >/dev/null 2>&1 & PIDS+=($!)
 python3 tests/mock_ollama.py 18992 >/dev/null 2>&1 & PIDS+=($!)
-HOME="$T/home" PD_DATA_DIR="$T/dati" OLLAMA_HOST=http://127.0.0.1:18992 PD_ALLOW_HTTP_TEST=1 \
+HOME="$T/home" PD_DATA_DIR="$T/dati" OLLAMA_HOST=http://127.0.0.1:18992 \
   python3 -B src/server/pd_server.py --port 18990 --idle-timeout 0 >"$T/server.log" 2>&1 & PIDS+=($!)
 sleep 2
 

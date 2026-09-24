@@ -6,7 +6,7 @@
 Uso:
   professore-digitale-contenuti valida FILE.json [...]      controlla uno o piu' pacchetti
   professore-digitale-contenuti installa FILE.json [--sistema]
-                                  installa per l'utente (o per tutti, con sudo e --sistema)
+                                  installa per l'utente (o per tutti gli utenti del PC, con sudo e --sistema)
   professore-digitale-contenuti elenco                      pacchetti installati
   professore-digitale-contenuti rimuovi ID [--sistema]      rimuove un pacchetto
   professore-digitale-contenuti modello > mio-pacchetto.json   crea un modello da compilare
@@ -24,7 +24,8 @@ except ImportError:
 
 DATA = os.path.join(os.environ.get("XDG_DATA_HOME") or os.path.expanduser("~/.local/share"), "professore-digitale")
 USER_DIR = os.path.join(DATA, "contenuti")
-SYS_DIR = os.path.join(SHARE, "contenuti")
+SHIP_DIR = os.path.join(SHARE, "contenuti")                       # inclusi nel pacchetto .deb (non toccare)
+SYS_DIR = os.environ.get("PD_LOCAL_PACKS", "/var/lib/professore-digitale/contenuti")   # installati per tutti gli utenti
 
 
 def versione_app():
@@ -62,7 +63,7 @@ def main(a):
     if cmd == "modello":
         print(json.dumps(pd_packs.MODELLO, ensure_ascii=False, indent=2)); return 0
     if cmd == "elenco":
-        packs, errori = pd_packs.carica_tutti([("sistema", SYS_DIR), ("utente", USER_DIR)], versione_app())
+        packs, errori = pd_packs.carica_tutti([("programma", SHIP_DIR), ("computer", SYS_DIR), ("utente", USER_DIR)], versione_app())
         if not packs:
             print("Nessun pacchetto di contenuti installato.")
         for p in packs:

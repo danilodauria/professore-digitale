@@ -46,18 +46,7 @@ echo "» Pubblicazione della versione $VER (sorgenti in questa cartella: $(cat V
 [ "$VER" = "$(cat VERSION)" ] || att "Attenzione: lo zip è della versione $VER ma i sorgenti di questa cartella sono $(cat VERSION). Estraete l'archivio sorgenti consegnato insieme allo zip."
 
 # ---- 1. impronte ----
-( cd "$T/sito" && sha256sum -c --quiet SHA256SUMS ) || err "Impronte SHA-256 non corrispondenti: file danneggiati, riscaricateli"
-python3 - "$T/sito" <<'PY' || exit 1
-import hashlib, json, os, sys
-d = sys.argv[1]; info = json.load(open(os.path.join(d, "aggiornamenti.json"), encoding="utf-8"))
-def chk(rel, sha):
-    p = os.path.join(d, rel)
-    if not os.path.isfile(p) or hashlib.sha256(open(p, "rb").read()).hexdigest() != sha:
-        sys.exit("✘ %s non corrisponde ad aggiornamenti.json" % rel)
-chk(info["pacchetto"], info["sha256"])
-for c in info.get("contenuti", []):
-    chk(c["url"], c["sha256"])
-PY
+python3 tools/verifica_pubblicazione.py "$T/sito" >/dev/null || err "Verifica non riuscita: file danneggiati, riscaricateli"
 ok "Impronte verificate"
 
 # ---- 2. repository APT ----

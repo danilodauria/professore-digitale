@@ -1,3 +1,15 @@
+professore-digitale (2.2.0) stable; urgency=medium
+
+  * Aggiornamenti anche senza Internet: il Professore accetta un indirizzo
+    della rete locale (es. un PC dell'aula), oltre ai siti https.
+  * Nuovi strumenti per lavorare senza GitHub: preparazione della chiavetta
+    di aggiornamento, server degli aggiornamenti per l'aula, copia di
+    sicurezza locale.
+  * Contenuti installabili per tutti gli utenti del computer; se lo stesso
+    pacchetto è presente più volte vale sempre la versione più recente.
+
+ -- Danilo D'Auria <danilodauria.site@gmail.com>  Thu, 24 Sep 2026 19:45:16 +0200
+
 professore-digitale (2.1.1) stable; urgency=medium
 
   * Il vademecum in PDF si apre direttamente dall'app (Impostazioni →

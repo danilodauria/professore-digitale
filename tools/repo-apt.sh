@@ -3,7 +3,8 @@
 #  Professore Digitale - repository APT firmato (aggiornamenti con "apt upgrade")
 #  Autore: Danilo D'Auria - Licenza MIT
 #
-#  Uso:  tools/repo-apt.sh CARTELLA_DESTINAZIONE
+#  Uso:  tools/repo-apt.sh CARTELLA_DESTINAZIONE [INDIRIZZO_BASE]
+#        (INDIRIZZO_BASE, es. http://192.168.1.10:8080, sostituisce BASE_URL di rilascio.conf)
 #        tools/repo-apt.sh --crea-chiave          (una sola volta: crea la chiave di firma)
 #
 #  Prende tutti i .deb della cartella archivio/ e crea un repository "piatto"
@@ -25,6 +26,7 @@ if [ "${1:-}" = "--crea-chiave" ]; then
   exit 0
 fi
 DEST="${1:?Indicare la cartella di destinazione}"
+BASE_URL="${2:-$BASE_URL}"
 for c in dpkg-scanpackages apt-ftparchive gpg; do
   command -v "$c" >/dev/null || { echo "Manca $c: sudo apt install dpkg-dev apt-utils gnupg"; exit 1; }
 done
@@ -53,7 +55,7 @@ set -e
 sudo mkdir -p /usr/share/keyrings
 curl -fsSL "$BASE_URL/apt/professore-digitale.gpg" | sudo tee /usr/share/keyrings/professore-digitale.gpg >/dev/null
 echo "deb [signed-by=/usr/share/keyrings/professore-digitale.gpg] $BASE_URL/apt ./" | sudo tee /etc/apt/sources.list.d/professore-digitale.list >/dev/null
-sudo apt update
+sudo apt update || echo "(alcune sorgenti del sistema non rispondono: proseguo)"
 sudo apt install -y professore-digitale
 echo "Fatto: il Professore Digitale è installato e verrà aggiornato insieme al sistema."
 EOS

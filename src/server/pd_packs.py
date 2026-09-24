@@ -205,7 +205,8 @@ def leggi_file(path, versione_app=None):
 
 def carica_tutti(cartelle, versione_app=None):
     """cartelle = [(origine, percorso), ...] in ordine di priorita' crescente.
-    Restituisce (elenco_pacchetti, errori). A parita' di id vince l'ultima cartella."""
+    Restituisce (elenco_pacchetti, errori). A parita' di id vince la versione piu' alta;
+    a parita' di versione vince l'ultima cartella (l'utente puo' sostituire, non retrocedere)."""
     per_id, ordine, errori = {}, [], []
     for origine, cartella in cartelle:
         try:
@@ -218,8 +219,11 @@ def carica_tutti(cartelle, versione_app=None):
             if err:
                 errori.append({"file": path, "errori": err[:10]})
                 continue
-            if pack["id"] not in per_id:
+            prec = per_id.get(pack["id"])
+            if prec is None:
                 ordine.append(pack["id"])
+            elif versione_tupla(pack["versione"]) < versione_tupla(prec["pacchetto"]["versione"]):
+                continue
             per_id[pack["id"]] = {"origine": origine, "file": path, "pacchetto": pack}
     return [per_id[i] for i in ordine], errori
 

@@ -20,7 +20,7 @@ grep -q "^$PKG ($VERSION)" packaging/changelog || { echo "Manca la voce $VERSION
 
 echo "» Verifica sintassi e contenuti"
 python3 -m py_compile src/server/*.py packaging/professore-digitale packaging/professore-digitale-contenuti
-for f in packaging/professore-digitale-setup-ia packaging/professore-digitale-setup-voce packaging/professore-digitale-pulizia packaging/prerm; do bash -n "$f"; done
+for f in packaging/professore-digitale-setup-ia packaging/professore-digitale-setup-voce packaging/professore-digitale-pulizia packaging/prerm packaging/postrm; do bash -n "$f"; done
 command -v node >/dev/null && for f in src/web/js/*.js; do node --check "$f"; done
 find src -name '__pycache__' -prune -exec rm -rf {} +
 if ls src/contenuti/*.json >/dev/null 2>&1; then
@@ -60,6 +60,7 @@ for c in professore-digitale-setup-ia professore-digitale-setup-voce professore-
   ln -s "$PKG.1.gz" "$S/man/man1/$c.1.gz"
 done
 install -m 0755 packaging/prerm "$BUILD/DEBIAN/prerm"
+install -m 0755 packaging/postrm "$BUILD/DEBIAN/postrm"
 
 SIZE=$(du -sk --exclude=DEBIAN "$BUILD" | cut -f1)
 cat > "$BUILD/DEBIAN/control" <<CTRL
