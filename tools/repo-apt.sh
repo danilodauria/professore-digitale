@@ -34,7 +34,9 @@ KEYID=$(gpg --list-secret-keys --with-colons "$EMAIL" 2>/dev/null | awk -F: '/^s
 [ -n "$KEYID" ] || { echo "Nessuna chiave di firma per $EMAIL. Createla con: tools/repo-apt.sh --crea-chiave"; exit 1; }
 
 rm -rf "$DEST"; mkdir -p "$DEST"
-cp archivio/*.deb "$DEST/"
+# tutti i pacchetti conservati: cartella ARCHIVIO (fuori dal progetto) e archivio/ locale
+for d in "$ARCHIVIO" archivio; do [ -d "$d" ] && cp -n "$d"/professore-digitale_*_all.deb "$DEST/" 2>/dev/null || true; done
+ls "$DEST"/*.deb >/dev/null 2>&1 || { echo "Nessun pacchetto in $ARCHIVIO né in archivio/"; exit 1; }
 (
   cd "$DEST"
   dpkg-scanpackages --multiversion . /dev/null 2>/dev/null > Packages

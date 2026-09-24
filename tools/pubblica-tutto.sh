@@ -53,8 +53,8 @@ ok "Impronte verificate"
 if [ "$APT" = 1 ]; then
   EMAIL=$(echo "$MANUTENTORE" | sed 's/.*<\(.*\)>.*/\1/')
   if gpg --list-secret-keys "$EMAIL" >/dev/null 2>&1; then
-    mkdir -p archivio; cp "$T/sito/"*.deb archivio/ 2>/dev/null || true
-    tools/repo-apt.sh "$T/sito/apt" >/dev/null && ok "Repository APT rigenerato e firmato ($(ls archivio/*.deb | wc -l) pacchetti)"
+    mkdir -p "$ARCHIVIO"; cp "$T/sito/"*.deb "$ARCHIVIO/" 2>/dev/null || true
+    tools/repo-apt.sh "$T/sito/apt" >/dev/null && ok "Repository APT rigenerato e firmato ($(ls "$T/sito/apt/"*.deb | wc -l) pacchetti)"
   else
     att "Nessuna chiave di firma per $EMAIL: salto il repository APT (crearla con tools/repo-apt.sh --crea-chiave)"
   fi

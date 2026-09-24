@@ -78,6 +78,7 @@ fi
 PUB=dist/pubblica; rm -rf "$PUB"; mkdir -p "$PUB/contenuti" archivio
 cp "dist/professore-digitale_${NUOVA}_all.deb" dist/professore-digitale-portatile.html "$PUB/"
 cp "dist/professore-digitale_${NUOVA}_all.deb" archivio/
+mkdir -p "$ARCHIVIO" 2>/dev/null && cp "dist/professore-digitale_${NUOVA}_all.deb" "$ARCHIVIO/" 2>/dev/null || true
 [ -d dist/contenuti ] && cp dist/contenuti/*.json "$PUB/contenuti/" 2>/dev/null || true
 [ -f docs/Vademecum_Professore_Digitale.pdf ] && cp docs/Vademecum_Professore_Digitale.pdf "$PUB/"
 python3 - "$NUOVA" "$DATA_ISO" "$PAGINA_PROGETTO" "$PUB" "${NOTE[@]}" <<'PY'

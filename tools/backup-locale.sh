@@ -17,10 +17,12 @@ D="$DEST/professore-digitale-backup/$DATA-v$VER"
 mkdir -p "$D"
 git bundle create "$D/professore-digitale.bundle" --all >/dev/null 2>&1 && git bundle verify "$D/professore-digitale.bundle" >/dev/null 2>&1 \
   && echo "✔ Storia completa (git bundle)"
-tar --exclude=./build --exclude=./dist --exclude='__pycache__' --transform 's,^\.,professore-digitale,' \
+tar --exclude=./build --exclude=./dist --exclude=./archivio --exclude='__pycache__' --transform 's,^\.,professore-digitale,' \
     -czf "$D/professore-digitale-$VER-sorgenti.tar.gz" . && echo "✔ Archivio sorgenti (da allegare a Claude)"
 [ -d dist/pubblica ] && (cd dist && zip -qr "$D/professore-digitale-$VER-da-pubblicare.zip" pubblica) && echo "✔ Ultima cartella da pubblicare"
-(cd "$D" && sha256sum -- * > SHA256SUMS)
+source ./rilascio.conf
+if ls "$ARCHIVIO"/*.deb >/dev/null 2>&1; then mkdir -p "$D/archivio" && cp "$ARCHIVIO"/*.deb "$D/archivio/" && echo "✔ Pacchetti pubblicati ($ARCHIVIO)"; fi
+(cd "$D" && find . -type f ! -name SHA256SUMS -print0 | xargs -0 sha256sum > SHA256SUMS)
 echo "✔ Copia di sicurezza in: $D"
 echo "  Ricordate di conservare separatamente anche la chiave di firma (chiave-privata.asc)."
 ls -1 "$DEST/professore-digitale-backup" | tail -5 | sed 's/^/    /'

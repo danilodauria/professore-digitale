@@ -32,7 +32,7 @@ Leggere questo file per intero prima di modificare qualunque cosa.
 | `tools/` | `rilascio.sh`, `pubblica-contenuti.sh`, `pubblica-sito.sh`, `pubblica-tutto.sh`, `pubblica-locale.sh`, `server-aggiornamenti.sh`, `backup-locale.sh`, `verifica_pubblicazione.py`, `repo-apt.sh`, `make_standalone.py`, `metainfo.py`, `prepara-ambiente.sh` |
 | `tests/` | `esegui_test.sh` (tutto), `test_packs.py`, `test_ui.py` (Playwright), `mock_ollama.py` |
 | `docs/` | Vademecum e Guida agli aggiornamenti (PDF); il vademecum entra nel .deb |
-| `archivio/` | Tutti i .deb rilasciati (servono al repository APT). Non cancellare |
+| `archivio/` | .deb prodotti in questa copia (ignorato da git, escluso dall'archivio sorgenti). I .deb pubblicati si conservano sul PC di Danilo in `$ARCHIVIO` (`~/professore-digitale-archivio`, vedi `rilascio.conf`) |
 
 ## Comandi
 ```bash
@@ -87,20 +87,26 @@ PD_SHARE_DIR=src python3 packaging/professore-digitale-contenuti valida src/cont
 - Le modifiche al validatore vanno fatte **in entrambi** `pd_packs.py` e `packs.js`; `tests/test_packs.py` ne verifica la parità.
 
 ## Procedura standard per un aggiornamento (anche per un assistente IA)
-1. Estrarre l'archivio sorgenti (contiene `.git`), `cd professore-digitale`, leggere questo file e `git log --oneline -10`.
+1. Estrarre l'archivio sorgenti (contiene `.git`, non contiene i .deb), `cd professore-digitale`, leggere questo file e `git log --oneline -10`.
 2. `tools/prepara-ambiente.sh`, poi `tests/esegui_test.sh` per partire da uno stato verde.
 3. Fare le modifiche richieste; aggiungere test per ogni correzione e per le nuove domande.
 4. `tests/esegui_test.sh` finché è tutto verde; per l'interfaccia, controllare anche gli screenshot (`test_ui.py` li salva).
 5. Scegliere il tipo di versione e lanciare `tools/rilascio.sh TIPO "note…"` (senza `--apt`: la chiave di firma è solo di Danilo).
 6. Consegnare: `dist/pubblica/` (zip, senza `apt/`), il nuovo .deb, la versione portatile e un **nuovo archivio sorgenti
-   completo di `.git` e `archivio/`**:
-   `tar --exclude=./build --exclude=./dist --exclude='__pycache__' --transform 's,^\.,professore-digitale,' -czf professore-digitale-X.Y.Z-sorgenti.tar.gz .`
+   completo di `.git`** (senza i .deb):
+   `tar --exclude=./build --exclude=./dist --exclude=./archivio --exclude='__pycache__' --transform 's,^\.,professore-digitale,' -czf professore-digitale-X.Y.Z-sorgenti.tar.gz .`
+   (deve restare sotto 30 MB: se cresce, `git gc --aggressive` e niente file binari pesanti in git)
 7. Ricordare a Danilo che per pubblicare gli basta, dalla cartella dei NUOVI sorgenti estratti:
    `tools/pubblica-tutto.sh ~/Scaricati/professore-digitale-X.Y.Z-da-pubblicare.zip`
    (verifica le impronte, firma il repository APT con la sua chiave se presente, carica il sito su GitHub Pages
    e invia sorgenti e tag). Con `--prova` fa solo i controlli. Nel messaggio finale riportare il comando esatto
    con il nome dello zip consegnato. Il suo manuale di riferimento è `docs/Manuale_Aggiornamenti_con_Claude.pdf`.
 8. Se è cambiato il comportamento visibile, aggiornare il Vademecum (`docs/`) e/o la Guida agli aggiornamenti.
+
+## Prova dell'aggiornamento dalla versione precedente
+Il .deb precedente non è nell'archivio sorgenti: ricostruirlo dal tag git, es.
+`git worktree add /tmp/prec v2.2.0 && (cd /tmp/prec && ./build.sh) && sudo apt install ./dist/...` (nel worktree),
+creare dei progressi, installare il nuovo .deb e controllare che i progressi restino.
 
 ## Note per l'ambiente di sviluppo
 - I test UI richiedono Playwright (Python) con Chromium. Porte usate dai test: 18990–18992.

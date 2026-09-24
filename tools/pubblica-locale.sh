@@ -63,7 +63,7 @@ rm -rf "$DEST/apt"
 if [ "$APT" = 1 ]; then
   EMAIL=$(echo "$MANUTENTORE" | sed 's/.*<\(.*\)>.*/\1/')
   if gpg --list-secret-keys "$EMAIL" >/dev/null 2>&1; then
-    mkdir -p archivio; cp "$DEST"/professore-digitale_*_all.deb archivio/ 2>/dev/null || true
+    mkdir -p "$ARCHIVIO"; cp "$DEST"/professore-digitale_*_all.deb "$ARCHIVIO/" 2>/dev/null || true
     tools/repo-apt.sh "$DEST/apt" "${IND:-$BASE_URL}" >/dev/null && ok "Repository APT firmato in $DEST/apt"
     [ -n "$IND" ] || att "Senza --indirizzo lo script apt/installa-repository.sh punta a $BASE_URL"
   else
