@@ -866,7 +866,8 @@
       '<div class="card"><h2 style="margin-top:0">ℹ️ Informazioni</h2><dl class="kv"><dt>Programma</dt><dd>Professore Digitale – Cattedra Digitale Portatile</dd>' +
       "<dt>Versione</dt><dd>" + PD.version + "</dd><dt>Ideazione e sviluppo</dt><dd>Danilo D'Auria – Tecnico IT &amp; Divulgatore Digitale per il Sociale</dd>" +
       "<dt>Contatti</dt><dd>danilodauria.site@gmail.com</dd><dt>Licenza</dt><dd>MIT (software libero)</dd>" +
-      "<dt>Componenti</dt><dd>Mermaid (MIT) per gli schemi; Ollama, espeak-ng, Vosk (facoltativi)</dd></dl></div>" +
+      "<dt>Componenti</dt><dd>Mermaid (MIT) per gli schemi; Ollama, espeak-ng, Vosk (facoltativi)</dd></dl>" +
+      (PD.server ? '<p><a class="btn ghost" href="docs/Vademecum_Professore_Digitale.pdf" target="_blank" rel="noopener">📖 Apri il vademecum (PDF)</a></p>' : "") + "</div>" +
       "</div>";
 
     function field(label, ctrl) { return '<div class="field"><label>' + label + "</label>" + ctrl + "</div>"; }

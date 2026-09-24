@@ -50,7 +50,10 @@ python3 tools/metainfo.py packaging/io.github.danilodauria.ProfessoreDigitale.me
 chmod 0644 "$S/metainfo/"*.xml
 install -m 0644 packaging/copyright "$S/doc/$PKG/copyright"
 install -m 0644 README.md "$S/doc/$PKG/README.md"
-[ -f docs/Vademecum_Professore_Digitale.pdf ] && install -m 0644 docs/Vademecum_Professore_Digitale.pdf "$S/doc/$PKG/"
+# il vademecum sta con l'interfaccia (apribile dall'app, anche su sistemi che non installano /usr/share/doc)
+if [ -f docs/Vademecum_Professore_Digitale.pdf ]; then
+  install -d -m 0755 "$S/$PKG/web/docs"; install -m 0644 docs/Vademecum_Professore_Digitale.pdf "$S/$PKG/web/docs/"
+fi
 gzip -9nc packaging/changelog > "$S/doc/$PKG/changelog.gz"; chmod 0644 "$S/doc/$PKG/changelog.gz"
 sed "s/@VERSION@/$VERSION/" packaging/professore-digitale.1 | gzip -9nc > "$S/man/man1/$PKG.1.gz"; chmod 0644 "$S/man/man1/$PKG.1.gz"
 for c in professore-digitale-setup-ia professore-digitale-setup-voce professore-digitale-pulizia professore-digitale-contenuti; do
