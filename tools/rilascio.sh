@@ -105,6 +105,8 @@ PY
 [ "$APT" = 1 ] && tools/repo-apt.sh "$PUB/apt"
 
 # ---- 6. git ----
+# version.txt nella radice del progetto: lo leggono le installazioni 2.0.0 (controllo aggiornamenti originale)
+cp "$PUB/version.txt" version.txt
 if [ "$GIT" = 1 ] && [ -d .git ]; then
   git add -A
   git -c user.name="${MANUTENTORE% <*}" -c user.email="$(echo "$MANUTENTORE" | sed 's/.*<\(.*\)>.*/\1/')" commit -qm "Versione $NUOVA" || true
@@ -118,5 +120,6 @@ ls -1 "$PUB"
 echo
 echo "Prossimi passi:"
 echo "  1. Provate il pacchetto su un PC di prova:  sudo apt install ./$PUB/professore-digitale_${NUOVA}_all.deb"
-echo "  2. Caricate TUTTO il contenuto di $PUB/ nella cartella pubblicata ($BASE_URL)."
+echo "  2. Pubblicate il sito:  tools/pubblica-sito.sh   (oppure caricate a mano il contenuto di $PUB/ su $BASE_URL)"
+echo "     e inviate i sorgenti su GitHub:  git push origin main --tags"
 echo "  3. Dagli altri PC: Impostazioni → Aggiornamenti → «Controlla aggiornamenti»."
