@@ -29,7 +29,7 @@ Leggere questo file per intero prima di modificare qualunque cosa.
 | `src/web/js/packs.js` | Caricamento/validazione pacchetti lato browser (stesse regole di `pd_packs.py`) |
 | `src/web/js/board.js`, `practice.js` | Lavagna; Palestra |
 | `packaging/` | Avviatore, `professore-digitale-contenuti`, setup IA/voce, pulizia, .desktop, man, **changelog** |
-| `tools/` | `rilascio.sh`, `pubblica-contenuti.sh`, `pubblica-sito.sh`, `repo-apt.sh`, `make_standalone.py`, `metainfo.py`, `prepara-ambiente.sh` |
+| `tools/` | `rilascio.sh`, `pubblica-contenuti.sh`, `pubblica-sito.sh`, `pubblica-tutto.sh`, `repo-apt.sh`, `make_standalone.py`, `metainfo.py`, `prepara-ambiente.sh` |
 | `tests/` | `esegui_test.sh` (tutto), `test_packs.py`, `test_ui.py` (Playwright), `mock_ollama.py` |
 | `docs/` | Vademecum e Guida agli aggiornamenti (PDF); il vademecum entra nel .deb |
 | `archivio/` | Tutti i .deb rilasciati (servono al repository APT). Non cancellare |
@@ -43,6 +43,7 @@ python3 src/server/pd_server.py --port 8800   # prova dai sorgenti → http://12
 tools/rilascio.sh correzione|minore|maggiore "Nota per gli utenti" ... [--apt] [--senza-git]
 tools/pubblica-contenuti.sh        # pubblica solo contenuti modificati (versione pacchetto aumentata)
 tools/pubblica-sito.sh             # carica dist/pubblica/ su GitHub Pages (lo esegue Danilo: servono le sue credenziali)
+tools/pubblica-tutto.sh ZIP        # per Danilo: verifica + firma APT + sito + sorgenti in un solo comando
 PD_SHARE_DIR=src python3 packaging/professore-digitale-contenuti valida src/contenuti/*.json
 ```
 
@@ -81,8 +82,11 @@ PD_SHARE_DIR=src python3 packaging/professore-digitale-contenuti valida src/cont
 6. Consegnare: `dist/pubblica/` (zip, senza `apt/`), il nuovo .deb, la versione portatile e un **nuovo archivio sorgenti
    completo di `.git` e `archivio/`**:
    `tar --exclude=./build --exclude=./dist --exclude='__pycache__' --transform 's,^\.,professore-digitale,' -czf professore-digitale-X.Y.Z-sorgenti.tar.gz .`
-7. Ricordare a Danilo: `tools/pubblica-sito.sh`, `git push origin main --tags` e, se usa il repository APT,
-   `tools/repo-apt.sh dist/pubblica/apt` con la sua chiave prima di pubblicare.
+7. Ricordare a Danilo che per pubblicare gli basta, dalla cartella dei NUOVI sorgenti estratti:
+   `tools/pubblica-tutto.sh ~/Scaricati/professore-digitale-X.Y.Z-da-pubblicare.zip`
+   (verifica le impronte, firma il repository APT con la sua chiave se presente, carica il sito su GitHub Pages
+   e invia sorgenti e tag). Con `--prova` fa solo i controlli. Nel messaggio finale riportare il comando esatto
+   con il nome dello zip consegnato. Il suo manuale di riferimento è `docs/Manuale_Aggiornamenti_con_Claude.pdf`.
 8. Se è cambiato il comportamento visibile, aggiornare il Vademecum (`docs/`) e/o la Guida agli aggiornamenti.
 
 ## Note per l'ambiente di sviluppo

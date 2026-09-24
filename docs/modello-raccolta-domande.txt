@@ -1,0 +1,28 @@
+PROFESSORE DIGITALE - RACCOLTA DELLE DOMANDE
+Tema (facoltativo): ____________________    Gruppo: ____________________    Periodo: ____________
+Copiate il blocco "--- DOMANDA ---" per ogni domanda. Niente nomi o dati personali degli allievi.
+Inviate questo file a Claude insieme all'ultimo archivio sorgenti (vedi Appendice B del manuale).
+
+--- DOMANDA ---
+Domanda (parole dell'allievo):
+Altri modi in cui è stata chiesta:
+Ho risposto:
+Dispositivo (computer / Android / iPhone / altro):
+Schema utile (sì / no):
+Fonte ufficiale / note:
+
+--- DOMANDA ---
+Domanda (parole dell'allievo):
+Altri modi in cui è stata chiesta:
+Ho risposto:
+Dispositivo (computer / Android / iPhone / altro):
+Schema utile (sì / no):
+Fonte ufficiale / note:
+
+--- ESEMPIO COMPILATO ---
+Domanda (parole dell'allievo): Come vedo le analisi del sangue sul telefono?
+Altri modi in cui è stata chiesta: dove trovo il referto; il fascicolo sanitario
+Ho risposto: si entra nel fascicolo sanitario della regione con SPID o CIE
+Dispositivo (computer / Android / iPhone / altro): Android
+Schema utile (sì / no): sì
+Fonte ufficiale / note: sito del fascicolo sanitario della nostra regione

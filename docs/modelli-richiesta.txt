@@ -1,0 +1,52 @@
+PROFESSORE DIGITALE - RICHIESTE PRONTE DA COPIARE
+Sostituite le parti tra [parentesi quadre]. Allegate SEMPRE l'ultimo archivio sorgenti (professore-digitale-X.Y.Z-sorgenti.tar.gz).
+
+=== Esempio di richiesta di correzione ===
+Ho provato la 2.2.0. Due cose da sistemare:
+1) alla domanda «come vedo le analisi sul telefono» risponde con la lezione sulle foto: deve rispondere con il fascicolo sanitario;
+2) nella risposta sulla PEC togli il riferimento al costo.
+Rifai il pacchetto con lo stesso numero di versione, visto che non l'ho ancora pubblicato.
+
+=== Messaggio ai facilitatori ===
+Ciao a tutti! È disponibile il Professore Digitale X.Y.Z.
+Novità: [copiate qui le note di versione].
+Come aggiornare: aprite il Professore → Impostazioni → Aggiornamenti → «Controlla aggiornamenti» e seguite le indicazioni. Nelle aule senza rete porto io la chiavetta.
+I progressi degli allievi restano al loro posto.
+Nuovo materiale per le lezioni: [argomenti]. Buon lavoro!
+Danilo
+
+=== 1 · Nuove domande (il caso più frequente) ===
+Allego i sorgenti del Professore Digitale (versione [X.Y.Z]) e le domande raccolte nelle ultime settimane. Segui la skill professore-digitale-aggiornamento.
+Trasforma le domande in un pacchetto di contenuti sul tema «[tema]», per [anziani alle prime armi / …].
+Se il tema esiste già, amplia quel pacchetto. Aggiungi i test di ricerca per le nuove domande.
+Pubblica come aggiornamento dei soli contenuti, a meno che non serva una nuova versione del programma.
+Consegnami tutto il necessario e il comando per pubblicare.
+
+=== 2 · Una nuova lezione ===
+Allego i sorgenti (versione [X.Y.Z]). Segui la skill professore-digitale-aggiornamento.
+Crea una nuova lezione «[titolo]» per [destinatari]: alla fine l'allievo deve saper [obiettivo].
+Circa [15] minuti, [4-5] passi con schemi dove utili, un quiz di [3] domande e, se ha senso, l'esercizio collegato in Palestra.
+Traccia che uso io a voce: [scaletta, facoltativa].
+Aggiungi anche 5-10 domande collegate alla lezione nella guida interna.
+
+=== 3 · Correggere un contenuto ===
+Allego i sorgenti (versione [X.Y.Z]). Segui la skill professore-digitale-aggiornamento.
+Nel Professore c'è un errore: nella [lezione / risposta] «[titolo o domanda]» è scritto: «[testo attuale]».
+Dovrebbe dire: «[testo corretto]». Motivo: [motivo].
+Aggiungi un test perché l'errore non torni e prepara l'aggiornamento.
+
+=== 4 · Segnalare un errore del programma ===
+Allego i sorgenti (versione [X.Y.Z]) e [una foto dello schermo / il testo della Diagnostica]. Segui la skill professore-digitale-aggiornamento.
+Cosa stavo facendo: [azione]. Cosa mi aspettavo: [atteso]. Cosa è successo: [accaduto].
+Computer: [modello, sistema, es. Linux Mint 22 XFCE]. Succede sempre / a volte: [frequenza].
+Trova la causa, correggila con un test e prepara una versione di correzione.
+
+=== 5 · Una nuova funzione ===
+Allego i sorgenti (versione [X.Y.Z]). Segui la skill professore-digitale-aggiornamento.
+Vorrei che il Professore [descrizione del bisogno, es. «permettesse di stampare la lezione in una pagina con testo grande»].
+Chi la userà: [facilitatori / allievi]. Deve funzionare anche offline e sui PC vecchi.
+Prima di realizzarla proponimi in breve come intendi farla; poi procedi, aggiorna il vademecum e prepara la nuova versione.
+
+=== 6 · Solo un controllo dello stato ===
+Allego i sorgenti (versione [X.Y.Z]). Non cambiare nulla: prepara l'ambiente, esegui tutti i test e dimmi in breve lo stato del progetto,
+quante domande e lezioni ci sono, e cosa mi consigli per il prossimo aggiornamento.
