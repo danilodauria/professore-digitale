@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=Professore Digitale: configura IA
+Comment=Installa e configura l'intelligenza artificiale locale (serve Internet una sola volta)
+Exec=professore-digitale-setup-ia
+Icon=professore-digitale
+Terminal=true
+Categories=Education;

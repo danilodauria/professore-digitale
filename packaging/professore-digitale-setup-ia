@@ -1,0 +1,108 @@
+#!/bin/bash
+# ==============================================================================
+#  Professore Digitale - Configurazione guidata dell'IA locale (Ollama)
+#  Autore: Danilo D'Auria - Licenza MIT
+#
+#  Uso:  professore-digitale-setup-ia [--modello NOME] [--si]
+#  Serve Internet SOLO durante questa configurazione; poi l'IA funziona offline.
+# ==============================================================================
+set -u
+MODELLO=""
+AUTO_SI=0
+while [ $# -gt 0 ]; do
+  case "$1" in
+    --modello|-m) MODELLO="${2:-}"; shift 2 ;;
+    --si|-y) AUTO_SI=1; shift ;;
+    -h|--help) sed -n '2,9p' "$0" | sed 's/^# \{0,1\}//'; exit 0 ;;
+    *) echo "Opzione sconosciuta: $1"; exit 1 ;;
+  esac
+done
+
+B=$'\e[1m'; V=$'\e[32m'; G=$'\e[33m'; R=$'\e[31m'; N=$'\e[0m'
+[ -t 1 ] || { B=""; V=""; G=""; R=""; N=""; }
+titolo() { echo; echo "${B}== $* ==${N}"; }
+ok() { echo "${V}✔ $*${N}"; }
+attenzione() { echo "${G}! $*${N}"; }
+errore() { echo "${R}✘ $*${N}"; }
+chiedi() {  # chiedi "domanda" -> 0 se si'
+  [ "$AUTO_SI" = 1 ] && return 0
+  local r; read -r -p "$1 [S/n] " r; case "${r,,}" in n|no) return 1 ;; *) return 0 ;; esac
+}
+fine() { echo; [ "$AUTO_SI" = 1 ] || read -r -p "Premete Invio per chiudere…" _; exit "${1:-0}"; }
+
+echo "${B}Professore Digitale — Configurazione dell'intelligenza artificiale locale${N}"
+echo "L'IA gira interamente su questo computer grazie a Ollama. Le domande non vengono inviate su Internet."
+
+RAM_MB=$(awk '/MemTotal/ {print int($2/1024)}' /proc/meminfo 2>/dev/null || echo 0)
+if   [ "$RAM_MB" -lt 3500 ];  then CONSIGLIATO="qwen2.5:0.5b"
+elif [ "$RAM_MB" -lt 6000 ];  then CONSIGLIATO="qwen2.5:1.5b"
+elif [ "$RAM_MB" -lt 12000 ]; then CONSIGLIATO="llama3.2:3b"
+else CONSIGLIATO="gemma3:4b"; fi
+
+titolo "1. Controllo del computer"
+echo "Memoria RAM: $((RAM_MB / 1024)) GB circa — Processore: $(nproc 2>/dev/null || echo ?) core — Architettura: $(uname -m)"
+case "$(uname -m)" in
+  x86_64|amd64|aarch64|arm64) ;;
+  *) errore "Ollama non è disponibile per l'architettura $(uname -m) (serve 64 bit)."
+     echo "Il Professore Digitale funziona comunque con la sua guida interna."; fine 1 ;;
+esac
+if [ "$RAM_MB" -lt 2500 ]; then
+  attenzione "Con meno di 3 GB di RAM l'IA sarà molto lenta. Il Professore funziona comunque con la guida interna."
+  chiedi "Volete proseguire lo stesso?" || fine 0
+fi
+
+titolo "2. Programma Ollama"
+if command -v ollama >/dev/null 2>&1; then
+  ok "Ollama è già installato ($(ollama --version 2>/dev/null | head -n1))."
+else
+  echo "Ollama non è installato. Verrà scaricato dal sito ufficiale (https://ollama.com) con il suo installatore."
+  echo "Servono Internet e la password di amministratore."
+  if chiedi "Installare Ollama adesso?"; then
+    if ! command -v curl >/dev/null 2>&1; then errore "Manca 'curl': installatelo con  sudo apt install curl"; fine 1; fi
+    if curl -fsSL https://ollama.com/install.sh | sh; then ok "Ollama installato."; else errore "Installazione di Ollama non riuscita."; fine 1; fi
+  else
+    echo "Nessun problema: il Professore userà la guida interna."; fine 0
+  fi
+fi
+
+titolo "3. Avvio del servizio"
+if curl -fsS --max-time 3 "${OLLAMA_HOST:-http://127.0.0.1:11434}/api/tags" >/dev/null 2>&1; then
+  ok "Il servizio Ollama è attivo."
+else
+  if command -v systemctl >/dev/null 2>&1 && systemctl list-unit-files 2>/dev/null | grep -q '^ollama.service'; then
+    sudo systemctl enable --now ollama >/dev/null 2>&1 || true
+  fi
+  if ! curl -fsS --max-time 3 "${OLLAMA_HOST:-http://127.0.0.1:11434}/api/tags" >/dev/null 2>&1; then
+    attenzione "Avvio manuale del servizio in background…"
+    (nohup ollama serve >/dev/null 2>&1 &)
+    for _ in $(seq 1 20); do sleep 1; curl -fsS --max-time 2 "${OLLAMA_HOST:-http://127.0.0.1:11434}/api/tags" >/dev/null 2>&1 && break; done
+  fi
+  if curl -fsS --max-time 3 "${OLLAMA_HOST:-http://127.0.0.1:11434}/api/tags" >/dev/null 2>&1; then ok "Servizio attivo."; else errore "Il servizio Ollama non risponde."; fine 1; fi
+fi
+
+titolo "4. Scelta del modello"
+if [ -z "$MODELLO" ]; then
+  echo "Modelli adatti alla didattica (più grande = risposte migliori ma più lente):"
+  echo "  1) qwen2.5:0.5b   ~0.4 GB  — PC molto datati (2 GB di RAM)"
+  echo "  2) qwen2.5:1.5b   ~1.0 GB  — PC datati (4 GB di RAM)"
+  echo "  3) llama3.2:3b    ~2.0 GB  — PC normali (8 GB di RAM)"
+  echo "  4) gemma3:4b      ~3.3 GB  — PC recenti (16 GB di RAM), ottimo italiano"
+  echo "  5) llama3.1:8b    ~4.7 GB  — PC potenti"
+  echo "Consigliato per questo computer: ${B}${CONSIGLIATO}${N}"
+  if [ "$AUTO_SI" = 1 ]; then MODELLO="$CONSIGLIATO"; else
+    read -r -p "Scegliete un numero (Invio = consigliato): " scelta
+    case "$scelta" in 1) MODELLO="qwen2.5:0.5b" ;; 2) MODELLO="qwen2.5:1.5b" ;; 3) MODELLO="llama3.2:3b" ;;
+      4) MODELLO="gemma3:4b" ;; 5) MODELLO="llama3.1:8b" ;; *) MODELLO="$CONSIGLIATO" ;; esac
+  fi
+fi
+echo "Scarico il modello ${B}${MODELLO}${N} (può richiedere diversi minuti)…"
+if ollama pull "$MODELLO"; then ok "Modello $MODELLO pronto."; else errore "Download del modello non riuscito."; fine 1; fi
+
+titolo "5. Prova"
+RISPOSTA=$(ollama run "$MODELLO" "Rispondi in una frase, in italiano: cos'è un mouse?" 2>/dev/null | head -c 400)
+if [ -n "$RISPOSTA" ]; then ok "Il modello risponde:"; echo "   $RISPOSTA"; else attenzione "Il modello non ha risposto alla prova, riprovate più tardi."; fi
+
+echo
+ok "Configurazione completata! Aprite il Professore Digitale: l'IA locale verrà usata automaticamente."
+echo "Da ora in poi il computer può restare scollegato da Internet."
+fine 0

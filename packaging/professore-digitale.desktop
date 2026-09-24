@@ -1,0 +1,11 @@
+[Desktop Entry]
+Type=Application
+Name=Professore Digitale
+GenericName=Cattedra Digitale Portatile
+Comment=Lezioni di informatica, assistente a voce e lavagna, tutto offline
+Exec=professore-digitale
+Icon=professore-digitale
+Terminal=false
+Categories=Education;ComputerScience;
+Keywords=Informatica;Scuola;Anziani;Alfabetizzazione;IA;Lezioni;Lavagna;
+StartupNotify=true

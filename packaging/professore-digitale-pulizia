@@ -1,0 +1,17 @@
+#!/bin/bash
+# Professore Digitale - pulizia dei dati personali dell'utente corrente
+# (progressi, impostazioni, conversazioni, modelli vocali, registri).
+# Il pacchetto di sistema si rimuove a parte con:  sudo apt purge professore-digitale
+# Autore: Danilo D'Auria - Licenza MIT
+set -u
+DATA="${XDG_DATA_HOME:-$HOME/.local/share}/professore-digitale"
+STATE="${XDG_STATE_HOME:-$HOME/.local/state}/professore-digitale"
+if [ "${1:-}" = "-h" ] || [ "${1:-}" = "--help" ]; then sed -n '2,5p' "$0" | sed 's/^# \{0,1\}//'; exit 0; fi
+echo "Verranno eliminati i dati del Professore Digitale di $(whoami):"
+echo "  $DATA"; echo "  $STATE"
+if [ "${1:-}" != "--si" ]; then
+  read -r -p "Confermate? [s/N] " r; case "${r,,}" in s|si|sì|y|yes) ;; *) echo "Annullato."; exit 0 ;; esac
+fi
+professore-digitale --stop >/dev/null 2>&1 || true
+rm -rf "$DATA" "$STATE"
+echo "Pulizia completata. (I modelli dell'IA restano gestiti da Ollama: 'ollama list' / 'ollama rm NOME'.)"

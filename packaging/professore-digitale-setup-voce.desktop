@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=Professore Digitale: configura microfono
+Comment=Attiva il riconoscimento vocale offline (serve Internet una sola volta)
+Exec=professore-digitale-setup-voce
+Icon=professore-digitale
+Terminal=true
+Categories=Education;

@@ -1,0 +1,141 @@
+#!/bin/bash
+# ==============================================================================
+#  Professore Digitale - Configurazione di microfono (riconoscimento vocale
+#  offline Vosk) e, a scelta, di una voce naturale (Piper).
+#  Autore: Danilo D'Auria - Licenza MIT
+#
+#  Uso:
+#    professore-digitale-setup-voce                    con Internet (circa 50 MB)
+#    professore-digitale-setup-voce --modello-da FILE  modello Vosk .zip gia' scaricato (installazione offline)
+#    professore-digitale-setup-voce --prepara-pacchetti DIR  (su un PC con Internet) salva in DIR
+#                                   tutto il necessario per installare Vosk senza rete
+#    professore-digitale-setup-voce --pacchetti-da DIR  installa Vosk dalla cartella DIR (offline)
+#    professore-digitale-setup-voce --voce-naturale    aggiunge la voce Piper "Paola" (circa 80 MB)
+#    professore-digitale-setup-voce --rimuovi          elimina i componenti vocali installati
+#  Tutto viene installato nella cartella dell'utente: non serve la password.
+# ==============================================================================
+set -u
+DATA="${XDG_DATA_HOME:-$HOME/.local/share}/professore-digitale"
+MODELS="$DATA/models"
+VENV="$DATA/venv"
+VOSK_URL="https://alphacephei.com/vosk/models/vosk-model-small-it-0.22.zip"
+PIPER_VER="2023.11.14-2"
+PIPER_VOICE_URL="https://huggingface.co/rhasspy/piper-voices/resolve/main/it/it_IT/paola/medium"
+MODELLO_DA=""; PACCHETTI_DA=""; PREPARA=""; PIPER=0; RIMUOVI=0; AUTO_SI=0
+while [ $# -gt 0 ]; do
+  case "$1" in
+    --modello-da) MODELLO_DA="${2:-}"; shift 2 ;;
+    --pacchetti-da) PACCHETTI_DA="${2:-}"; shift 2 ;;
+    --prepara-pacchetti) PREPARA="${2:-}"; shift 2 ;;
+    --voce-naturale) PIPER=1; shift ;;
+    --rimuovi) RIMUOVI=1; shift ;;
+    --si|-y) AUTO_SI=1; shift ;;
+    -h|--help) sed -n '2,17p' "$0" | sed 's/^# \{0,1\}//'; exit 0 ;;
+    *) echo "Opzione sconosciuta: $1"; exit 1 ;;
+  esac
+done
+B=$'\e[1m'; V=$'\e[32m'; G=$'\e[33m'; R=$'\e[31m'; N=$'\e[0m'
+[ -t 1 ] || { B=""; V=""; G=""; R=""; N=""; }
+ok() { echo "${V}✔ $*${N}"; }
+attenzione() { echo "${G}! $*${N}"; }
+errore() { echo "${R}✘ $*${N}"; }
+fine() { echo; [ "$AUTO_SI" = 1 ] || [ ! -t 0 ] || read -r -p "Premete Invio per chiudere…" _; exit "${1:-0}"; }
+scarica() {  # scarica URL DESTINAZIONE
+  if command -v curl >/dev/null 2>&1; then curl -fL --retry 3 --progress-bar -o "$2" "$1"
+  elif command -v wget >/dev/null 2>&1; then wget -q --show-progress -O "$2" "$1"
+  else python3 -c "import sys,urllib.request; urllib.request.urlretrieve(sys.argv[1], sys.argv[2])" "$1" "$2"; fi
+}
+
+echo "${B}Professore Digitale — Configurazione della voce${N}"
+mkdir -p "$MODELS"
+
+if [ -n "$PREPARA" ]; then
+  mkdir -p "$PREPARA"
+  T=$(mktemp -d); python3 -m venv "$T/v" || { errore "Serve python3-venv."; fine 1; }
+  "$T/v/bin/python3" -m pip install -q --upgrade pip wheel setuptools >/dev/null 2>&1 || true
+  if "$T/v/bin/python3" -m pip wheel -q vosk -w "$PREPARA"; then
+    echo "Scarico anche il modello italiano…"
+    scarica "$VOSK_URL" "$PREPARA/vosk-model-small-it-0.22.zip" || attenzione "Modello non scaricato."
+    ok "Pronto. Copiate la cartella sul PC senza rete e date:"
+    echo "   professore-digitale-setup-voce --pacchetti-da CARTELLA --modello-da CARTELLA/vosk-model-small-it-0.22.zip"
+  else errore "Preparazione non riuscita."; fi
+  rm -rf "$T"; fine 0
+fi
+
+if [ "$RIMUOVI" = 1 ]; then
+  rm -rf "$VENV" "$MODELS/vosk-it" "$MODELS/whisper" "$MODELS/piper" "$DATA/piper"
+  ok "Componenti vocali rimossi."; fine 0
+fi
+
+# ---- 1. ambiente Python personale con Vosk ----
+echo; echo "${B}1. Motore di riconoscimento vocale (Vosk)${N}"
+if [ ! -x "$VENV/bin/python3" ]; then
+  if ! python3 -m venv "$VENV" >/dev/null 2>&1; then
+    rm -rf "$VENV"
+    errore "Impossibile creare l'ambiente Python. Installate il pacchetto mancante con:"
+    echo "   sudo apt install python3-venv"; fine 1
+  fi
+fi
+if "$VENV/bin/python3" -c "import vosk" 2>/dev/null; then ok "Vosk è già installato."
+else
+  if [ -n "$PACCHETTI_DA" ]; then
+    "$VENV/bin/python3" -m pip install --no-index --find-links "$PACCHETTI_DA" vosk || { errore "Installazione offline di Vosk non riuscita."; fine 1; }
+  else
+    "$VENV/bin/python3" -m pip install --upgrade pip >/dev/null 2>&1 || true
+    if ! "$VENV/bin/python3" -m pip install vosk; then
+      errore "Installazione di Vosk non riuscita (serve Internet; Vosk non è disponibile per PC a 32 bit)."
+      fine 1
+    fi
+  fi
+  ok "Vosk installato."
+fi
+
+# ---- 2. modello italiano ----
+echo; echo "${B}2. Modello della lingua italiana${N}"
+if [ -d "$MODELS/vosk-it/am" ] && [ -z "$MODELLO_DA" ]; then ok "Modello italiano già presente."
+else
+  TMP=$(mktemp -d); trap 'rm -rf "$TMP"' EXIT
+  if [ -n "$MODELLO_DA" ]; then cp "$MODELLO_DA" "$TMP/m.zip" || { errore "File non trovato: $MODELLO_DA"; fine 1; }
+  else echo "Scarico il modello (circa 48 MB)…"; scarica "$VOSK_URL" "$TMP/m.zip" || { errore "Download non riuscito."; fine 1; }; fi
+  python3 - "$TMP/m.zip" "$TMP/x" <<'PY' || { errore "Archivio del modello non valido."; fine 1; }
+import sys, zipfile, os
+z = zipfile.ZipFile(sys.argv[1]); dest = os.path.realpath(sys.argv[2])
+for n in z.namelist():  # protezione da percorsi malevoli nell'archivio
+    if not os.path.realpath(os.path.join(dest, n)).startswith(dest + os.sep): sys.exit("percorso non valido: " + n)
+z.extractall(dest)
+PY
+  SRC=$(dirname "$(find "$TMP/x" -type d -name am | head -n1)")
+  [ -n "$SRC" ] && [ -d "$SRC/am" ] || { errore "Il file non contiene un modello Vosk."; fine 1; }
+  rm -rf "$MODELS/vosk-it"; mv "$SRC" "$MODELS/vosk-it"
+  ok "Modello italiano installato."
+fi
+
+# ---- 3. prova ----
+if "$VENV/bin/python3" /usr/share/professore-digitale/server/pd_stt_worker.py --probe --models "$MODELS" | grep -q '"vosk"'; then
+  ok "Riconoscimento vocale pronto."
+else
+  attenzione "Il riconoscimento vocale non risulta ancora attivo."
+fi
+
+# ---- 4. voce naturale facoltativa ----
+if [ "$PIPER" = 1 ]; then
+  echo; echo "${B}3. Voce naturale (Piper, voce \"Paola\")${N}"
+  case "$(uname -m)" in x86_64) PA="x86_64" ;; aarch64|arm64) PA="aarch64" ;; armv7l) PA="armv7l" ;; *) PA="" ;; esac
+  if [ -z "$PA" ]; then attenzione "Piper non è disponibile per $(uname -m): si userà espeak-ng."
+  else
+    TMP2=$(mktemp -d)
+    if scarica "https://github.com/rhasspy/piper/releases/download/$PIPER_VER/piper_linux_$PA.tar.gz" "$TMP2/p.tgz" \
+       && tar -xzf "$TMP2/p.tgz" -C "$DATA" \
+       && mkdir -p "$MODELS/piper" \
+       && scarica "$PIPER_VOICE_URL/it_IT-paola-medium.onnx" "$MODELS/piper/it_IT-paola-medium.onnx" \
+       && scarica "$PIPER_VOICE_URL/it_IT-paola-medium.onnx.json" "$MODELS/piper/it_IT-paola-medium.onnx.json"; then
+      if echo "Buongiorno" | "$DATA/piper/piper" --model "$MODELS/piper/it_IT-paola-medium.onnx" --output_file "$TMP2/t.wav" >/dev/null 2>&1; then
+        ok "Voce naturale installata."
+      else attenzione "Piper installato ma la prova non è riuscita: si userà espeak-ng."; fi
+    else errore "Download della voce naturale non riuscito."; fi
+    rm -rf "$TMP2"
+  fi
+fi
+
+echo; ok "Fatto! Nel Professore Digitale andate in Impostazioni → «Ricontrolla i componenti» (oppure riavviatelo)."
+fine 0

@@ -1,0 +1,8 @@
+#!/bin/sh
+# Ferma eventuali server locali ancora attivi prima di rimuovere o aggiornare i file.
+set -e
+if command -v pkill >/dev/null 2>&1; then
+  pkill -f "/usr/share/professore-digitale/server/pd_server.py" 2>/dev/null || true
+fi
+rm -rf /usr/share/professore-digitale/server/__pycache__
+exit 0

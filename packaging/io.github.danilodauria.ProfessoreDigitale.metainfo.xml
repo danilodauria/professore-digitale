@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop-application">
+  <id>io.github.danilodauria.ProfessoreDigitale</id>
+  <metadata_license>MIT</metadata_license>
+  <project_license>MIT</project_license>
+  <name>Professore Digitale</name>
+  <summary>Cattedra digitale portatile per l'alfabetizzazione informatica</summary>
+  <description>
+    <p>Lezioni guidate di informatica di base, un assistente che risponde a voce e con schemi alla lavagna,
+    esercizi per mouse e tastiera. Funziona interamente offline, anche su computer ricondizionati.</p>
+  </description>
+  <launchable type="desktop-id">professore-digitale.desktop</launchable>
+  <developer id="io.github.danilodauria"><name>Danilo D'Auria</name></developer>
+  <content_rating type="oars-1.1"/>
+  <releases><release version="2.0.0" date="2026-09-24"/></releases>
+</component>
