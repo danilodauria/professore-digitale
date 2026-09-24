@@ -10,7 +10,10 @@ cd "$(dirname "$0")/.."
 SUDO=""; [ "$(id -u)" -ne 0 ] && SUDO="sudo"
 PACCHETTI="git python3 python3-venv python3-pip nodejs dpkg-dev apt-utils gnupg lintian curl zip espeak-ng poppler-utils"
 MANCANTI=""
-for p in $PACCHETTI; do dpkg -s "$p" >/dev/null 2>&1 || MANCANTI="$MANCANTI $p"; done
+for p in $PACCHETTI; do
+  [ "$p" = nodejs ] && command -v node >/dev/null && continue
+  dpkg -s "$p" >/dev/null 2>&1 || MANCANTI="$MANCANTI $p"
+done
 if [ -n "$MANCANTI" ]; then
   echo "» Installo:$MANCANTI"
   $SUDO apt-get update -q >/dev/null && $SUDO apt-get install -y -q $MANCANTI >/dev/null || echo "! Installazione di alcuni pacchetti non riuscita:$MANCANTI"
