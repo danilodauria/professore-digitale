@@ -6,7 +6,7 @@
 (function () {
   "use strict";
 
-  var PD = window.PD = { version: "2.0.0" };
+  var PD = window.PD = { version: window.PD_VERSION || "" };
   var $ = function (s, r) { return (r || document).querySelector(s); };
   var $$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
   var ESC = { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" };
@@ -81,7 +81,7 @@
   PD.detect = function () {
     if (!/^https?:$/.test(location.protocol)) { PD.server = false; PD.status = null; renderChips(); return Promise.resolve(); }
     return timeout(8000, api("/api/status")).then(function (s) {
-      PD.server = true; PD.status = s;
+      PD.server = true; PD.status = s; PD.version = s.version;
     }).catch(function () { PD.server = false; PD.status = null; }).then(renderChips);
   };
   PD.aiReady = function () {
@@ -354,7 +354,8 @@
   var STOPSET = {}; STOP.forEach(function (w) { STOPSET[w] = 1; });
   function norm(s) {
     return String(s || "").toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "")
-      .replace(/@/g, " chiocciola ").replace(/[^a-z0-9]+/g, " ").trim();
+      .replace(/@/g, " chiocciola ").replace(/\bwi[\s-]?fi\b/g, "wifi").replace(/\be-mail\b/g, "email")
+      .replace(/[^a-z0-9]+/g, " ").trim();
   }
   function stem(w) {
     if (w.length <= 3) return w;
@@ -369,8 +370,9 @@
   function buildIndex() {
     var docs = [];
     (window.PD_KB || []).forEach(function (e, i) {
+      var qt = terms(e.q);
       docs.push({ kind: "kb", id: "kb" + i, title: e.q, answer: e.a, diagram: e.d, lesson: e.l,
-        f: [[terms(e.k.join(" ")), 3], [terms(e.q), 2.2], [terms(e.a), 0.6]], phrases: e.k.map(norm) });
+        f: [[terms(e.k.join(" ")), 3], [qt, 3.2 / Math.sqrt(Math.max(1, qt.length))], [terms(e.a), 0.6]], phrases: e.k.map(norm) });
     });
     (window.PD_LESSONS || []).forEach(function (L) {
       L.steps.forEach(function (st, si) {
@@ -405,6 +407,7 @@
     return res.slice(0, n || 3);
   };
   PD.KB_THRESHOLD = 3.2;
+  PD.resetIndex = function () { INDEX = null; };
 
   /* ------------------------------------------------------------------------
    *  Router (#/sezione/...), compatibile con il tasto "indietro" del browser
@@ -580,7 +583,7 @@
       '<h1>💬 Chiedi al Professore</h1><p class="lead">Scrivete la vostra domanda' + (PD.sttReady() ? " oppure premete il microfono e parlate" : "") +
       ". Non esistono domande sbagliate. " + aiLine + "</p>" +
       '<div class="ask-layout"><div class="card"><div class="chat" id="chat" aria-live="polite"></div>' +
-      '<div class="suggest" id="suggest">' + SUGGESTIONS.slice(0, PD.history.length ? 4 : 8).map(function (s) { return "<button>" + esc(s) + "</button>"; }).join("") + "</div>" +
+      '<div class="suggest" id="suggest">' + (PD.extraSuggestions || []).concat(SUGGESTIONS).slice(0, PD.history.length ? 4 : 8).map(function (s) { return "<button>" + esc(s) + "</button>"; }).join("") + "</div>" +
       '<form class="composer" id="composer"><button type="button" class="mic" id="mic" title="' +
       (PD.sttReady() ? "Premete e parlate; premete di nuovo per finire" : "Microfono non disponibile: vedi Impostazioni") + '" aria-label="Microfono"' +
       (PD.sttReady() ? "" : " disabled") + '>🎤</button>' +
@@ -850,6 +853,10 @@
       '<div class="row"><button class="btn ghost" id="export">⬇️ Esporta progressi</button><label class="btn ghost">⬆️ Importa<input type="file" id="import" accept="application/json" hidden></label>' +
       '<button class="btn danger" id="reset">Azzera progressi</button></div></div>' +
 
+      '<div class="card"><h2 style="margin-top:0">🧩 Contenuti aggiuntivi</h2><p class="small muted">Pacchetti di domande e lezioni preparati da voi o dal progetto. Si aggiungono senza reinstallare il programma.</p>' +
+      '<div id="packs-list"></div><div class="row" style="margin-top:.6rem"><label class="btn ghost">➕ Importa pacchetto<input type="file" id="pack-import" accept="application/json,.json" hidden></label>' +
+      '<button class="btn ghost" id="pack-template">⬇️ Scarica il modello</button></div><div id="pack-res" class="small" style="margin-top:.5rem"></div></div>' +
+
       '<div class="card"><h2 style="margin-top:0">🔄 Aggiornamenti</h2><p class="small muted">Il Professore <b>non</b> si collega mai a Internet da solo. Il controllo avviene solo se premete il pulsante.</p>' +
       field("Indirizzo del file di versione", '<input type="url" id="s-upd" value="' + esc(s.updateUrl || (S ? S.update_url : "")) + '">') +
       '<button class="btn ghost" id="check-upd"' + (PD.server ? "" : " disabled") + '>🌐 Controlla aggiornamenti</button><div id="upd-res" class="small" style="margin-top:.6rem"></div></div>' +
@@ -905,11 +912,21 @@
     });
     bind("check-upd", "click", function () {
       var out = $("#upd-res"); out.textContent = "Controllo in corso…";
-      api("/api/update-check", { url: $("#s-upd").value.trim() }).then(function (r) {
-        out.innerHTML = r.newer ? '<div class="notice">🆕 È disponibile la versione <b>' + esc(r.online) + "</b> (installata: " + esc(r.current) +
-          "). Scaricate il nuovo pacchetto .deb dalla pagina del progetto e installatelo con <code>sudo apt install ./file.deb</code>.</div>"
-          : '<div class="notice ok">✅ Avete già la versione più recente (' + esc(r.current) + ").</div>";
-      }).catch(function (e) { out.innerHTML = '<div class="notice">Controllo non riuscito: ' + esc(e.message) + "</div>"; });
+      api("/api/update-check", { url: $("#s-upd").value.trim() }).then(function (r) { renderUpdate(out, r); })
+        .catch(function (e) { out.innerHTML = '<div class="notice">Controllo non riuscito: ' + esc(e.message) + "</div>"; });
+    });
+    renderPacks();
+    bind("pack-import", "change", function () {
+      var f = this.files[0], res = $("#pack-res"); if (!f) return; this.value = "";
+      res.textContent = "Importazione…";
+      f.text().then(function (t) { return PD.packs.importText(t); }).then(function (p) {
+        res.innerHTML = '<div class="notice ok">✅ Importato «' + esc(p.titolo) + "» versione " + esc(p.versione) + ".</div>"; renderPacks();
+      }).catch(function (e) { res.innerHTML = '<div class="notice">Pacchetto non importato: ' + esc(e.message) + "</div>"; });
+    });
+    bind("pack-template", "click", function () {
+      var blob = new Blob([JSON.stringify(PD.packs.template(), null, 2)], { type: "application/json" });
+      var a = document.createElement("a"); a.href = URL.createObjectURL(blob); a.download = "modello-contenuti.json"; a.click();
+      setTimeout(function () { URL.revokeObjectURL(a.href); }, 2000);
     });
     var diag = {
       modalita: PD.server ? "applicazione installata (server locale)" : "versione portatile (file HTML)",
@@ -919,6 +936,60 @@
     };
     $("#diag", el).textContent = JSON.stringify(diag, null, 2);
   };
+
+  function renderPacks() {
+    var box = $("#packs-list"); if (!box || !PD.packs) return;
+    var L = PD.packs.list;
+    var html = L.length ? L.map(function (en) {
+      var p = en.pacchetto;
+      return '<div class="notice info small" style="display:flex;gap:.8rem;align-items:center;justify-content:space-between;flex-wrap:wrap"><div><b>' + esc(p.titolo) +
+        "</b> · v" + esc(p.versione) + (p.autore ? " · " + esc(p.autore) : "") + "<br>" + (p.domande || []).length + " domande, " + (p.lezioni || []).length +
+        " lezioni · " + (en.origine === "sistema" ? "incluso nel programma" : "importato") + "</div>" +
+        (en.origine === "utente" ? '<button class="btn ghost" data-pack-remove="' + esc(p.id) + '">Rimuovi</button>' : "") + "</div>";
+    }).join("") : '<p class="small muted">Nessun pacchetto aggiuntivo.</p>';
+    if (PD.packs.errors.length) html += '<div class="notice small"><b>Pacchetti ignorati perché non validi:</b><br>' +
+      PD.packs.errors.map(function (x) { return esc(x.file) + ": " + esc(x.errori.join("; ")); }).join("<br>") + "</div>";
+    box.innerHTML = html;
+    PD.$$("[data-pack-remove]", box).forEach(function (b) {
+      b.onclick = function () { PD.packs.remove(b.getAttribute("data-pack-remove")).then(function () { PD.toast("Pacchetto rimosso."); renderPacks(); }); };
+    });
+  }
+
+  function renderUpdate(out, r) {
+    var h = "";
+    if (r.newer) {
+      h += '<div class="notice">🆕 È disponibile la versione <b>' + esc(r.online) + "</b>" + (r.data ? " del " + esc(r.data) : "") + " (installata: " + esc(r.current) + ")." +
+        (r.note.length ? "<ul>" + r.note.map(function (n) { return "<li>" + esc(n) + "</li>"; }).join("") + "</ul>" : "") + "</div>";
+      if (r.pacchetto && r.sha256) h += '<button class="btn" id="upd-deb">⬇️ Scarica il nuovo pacchetto</button> ';
+      if (r.pagina) h += '<a class="btn ghost" href="' + esc(r.pagina) + '" target="_blank" rel="noopener">Pagina del progetto</a>';
+      h += '<div id="upd-deb-res" style="margin-top:.5rem"></div>';
+    } else {
+      h += '<div class="notice ok">✅ Avete già la versione più recente del programma (' + esc(r.current) + ").</div>";
+    }
+    if (r.contenuti.length) {
+      h += "<p><b>Contenuti disponibili</b></p>" + r.contenuti.map(function (c, i) {
+        var lab = c.stato === "nuovo" ? "➕ Aggiungi" : c.stato === "aggiornamento" ? "🔄 Aggiorna (" + esc(c.installata) + " → " + esc(c.versione) + ")" : "";
+        return '<div class="notice info small"><b>' + esc(c.titolo) + "</b> · v" + esc(c.versione) + (c.descrizione ? "<br>" + esc(c.descrizione) : "") +
+          (lab ? '<br><button class="btn ghost" data-pack-dl="' + i + '" style="margin-top:.4rem">' + lab + "</button>" : "<br>✔ già installato") + "</div>";
+      }).join("");
+    }
+    out.innerHTML = h;
+    var b = $("#upd-deb");
+    if (b) b.onclick = function () {
+      var o = $("#upd-deb-res"); o.textContent = "Scaricamento e verifica in corso…"; b.disabled = true;
+      api("/api/update-download", { url: r.pacchetto, sha256: r.sha256 }).then(function (x) {
+        o.innerHTML = '<div class="notice ok">✅ Pacchetto scaricato e verificato:<br><code>' + esc(x.file) + "</code><br>Per installarlo aprite un terminale e date:<br><code>sudo apt install " +
+          esc(x.file.replace(/'/g, "")) + "</code><br>Impostazioni e progressi verranno conservati.</div>";
+      }).catch(function (e) { b.disabled = false; o.innerHTML = '<div class="notice">Download non riuscito: ' + esc(e.message) + "</div>"; });
+    };
+    PD.$$("[data-pack-dl]", out).forEach(function (btn) {
+      btn.onclick = function () {
+        var c = r.contenuti[+btn.getAttribute("data-pack-dl")]; btn.disabled = true; btn.textContent = "Scaricamento…";
+        PD.packs.download(c.url, c.sha256).then(function () { btn.outerHTML = "✔ installato"; renderPacks(); PD.toast("Contenuti «" + c.titolo + "» installati."); })
+          .catch(function (e) { btn.disabled = false; btn.textContent = "Riprova"; PD.toast("Download non riuscito: " + e.message); });
+      };
+    });
+  }
 
   /* ------------------------------------------------------------------------
    *  Avvio
@@ -950,6 +1021,16 @@
   }
   window.addEventListener("resize", measureTop);
 
+  /* Migrazione dei dati salvati tra versioni: ogni cambio di struttura incrementa DATA_SCHEMA
+   * e aggiunge qui un passo (es. da 1 a 2). Cosi' i progressi degli allievi non si perdono mai. */
+  var DATA_SCHEMA = 1;
+  function migrate() {
+    var p = PD.progress;
+    if (!p.schema) p.schema = 1;
+    // esempio futuro:  if (p.schema < 2) { ...trasforma p...; p.schema = 2; }
+    if (p.schema !== DATA_SCHEMA) p.schema = DATA_SCHEMA;
+  }
+
   function heartbeat() {
     if (!PD.server) return;
     fetch("/api/heartbeat", { method: "POST", headers: { "Content-Type": "application/json" }, body: "{}" }).catch(function () { /* server spento */ });
@@ -963,7 +1044,10 @@
     }).then(function (r) {
       if (r[0] && typeof r[0] === "object") PD.settings = Object.assign({}, DEFAULTS, r[0]);
       if (r[1] && r[1].lessons) PD.progress = r[1];
+      migrate();
       if (Array.isArray(r[2])) PD.history = r[2];
+      return PD.packs ? PD.packs.load() : null;
+    }).then(function () {
       applySettings(); renderChips(); measureTop();
       $("#app-version").textContent = PD.version;
       if (PD.server) { setInterval(heartbeat, 20000); setInterval(function () { PD.detect(); }, 60000); }

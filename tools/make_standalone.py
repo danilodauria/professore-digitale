@@ -4,6 +4,12 @@ tutto incluso (CSS, JS, icona, motore degli schemi), si apre con doppio clic, se
 Autore: Danilo D'Auria - Licenza MIT"""
 import base64, os, re, sys
 web = sys.argv[1]; out = sys.argv[2]
+root = os.path.normpath(os.path.join(web, "..", ".."))
+import json, glob
+VERSION = open(os.path.join(root, "VERSION")).read().strip()
+packs = []
+for f in sorted(glob.glob(os.path.join(web, "..", "contenuti", "*.json"))):
+    packs.append(json.load(open(f, encoding="utf-8")))
 html = open(os.path.join(web, "index.html"), encoding="utf-8").read()
 
 def rd(p): return open(os.path.join(web, p), encoding="utf-8").read()
@@ -15,6 +21,8 @@ html = html.replace('href="img/icon.svg"', 'href="data:image/svg+xml;base64,' + 
 def inline_script(m):
     return "<script>\n" + js_safe(rd(m.group(1))) + "\n</script>"
 html = re.sub(r'<script src="(js/[^"]+)"></script>', inline_script, html)
+boot = "window.PD_VERSION=%s;window.PD_PACKS_BUILTIN=%s;" % (json.dumps(VERSION), json.dumps(packs, ensure_ascii=False))
+html = html.replace("<script>\n", "<script>\n" + js_safe(boot) + "\n", 1)
 mermaid = js_safe(rd("vendor/mermaid.min.js"))
 html = html.replace("</body>", '<script type="text/plain" id="pd-mermaid-src">' + mermaid + "</script>\n</body>")
 html = html.replace("<title>Professore Digitale</title>", "<title>Professore Digitale (versione portatile)</title>")

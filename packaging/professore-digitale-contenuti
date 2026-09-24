@@ -1,0 +1,103 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+# Professore Digitale - gestione dei pacchetti di contenuti (domande e lezioni aggiuntive)
+# Autore: Danilo D'Auria - Licenza MIT
+"""
+Uso:
+  professore-digitale-contenuti valida FILE.json [...]      controlla uno o piu' pacchetti
+  professore-digitale-contenuti installa FILE.json [--sistema]
+                                  installa per l'utente (o per tutti, con sudo e --sistema)
+  professore-digitale-contenuti elenco                      pacchetti installati
+  professore-digitale-contenuti rimuovi ID [--sistema]      rimuove un pacchetto
+  professore-digitale-contenuti modello > mio-pacchetto.json   crea un modello da compilare
+"""
+import json
+import os
+import sys
+
+SHARE = os.environ.get("PD_SHARE_DIR", "/usr/share/professore-digitale")
+sys.path.insert(0, os.path.join(SHARE, "server"))
+try:
+    import pd_packs
+except ImportError:
+    sys.exit("Installazione danneggiata: manca %s/server/pd_packs.py" % SHARE)
+
+DATA = os.path.join(os.environ.get("XDG_DATA_HOME") or os.path.expanduser("~/.local/share"), "professore-digitale")
+USER_DIR = os.path.join(DATA, "contenuti")
+SYS_DIR = os.path.join(SHARE, "contenuti")
+
+
+def versione_app():
+    try:
+        with open(os.path.join(SHARE, "VERSION")) as f:
+            return f.read().strip()
+    except OSError:
+        return None
+
+
+def valida(files):
+    tutto_ok = True
+    for f in files:
+        pack, err = pd_packs.leggi_file(f, versione_app())
+        if err:
+            tutto_ok = False
+            print("✘ %s" % f)
+            for e in err:
+                print("   - " + e)
+        else:
+            print("✔ %s — «%s» v%s: %d domande, %d lezioni" % (f, pack["titolo"], pack["versione"],
+                  len(pack.get("domande", [])), len(pack.get("lezioni", []))))
+    return 0 if tutto_ok else 1
+
+
+def main(a):
+    if not a or a[0] in ("-h", "--help", "aiuto"):
+        print(__doc__); return 0
+    cmd, resto = a[0], a[1:]
+    sistema = "--sistema" in resto
+    resto = [x for x in resto if x != "--sistema"]
+    dest = SYS_DIR if sistema else USER_DIR
+    if cmd == "valida":
+        return valida(resto) if resto else (print("Indicare almeno un file.") or 1)
+    if cmd == "modello":
+        print(json.dumps(pd_packs.MODELLO, ensure_ascii=False, indent=2)); return 0
+    if cmd == "elenco":
+        packs, errori = pd_packs.carica_tutti([("sistema", SYS_DIR), ("utente", USER_DIR)], versione_app())
+        if not packs:
+            print("Nessun pacchetto di contenuti installato.")
+        for p in packs:
+            k = p["pacchetto"]
+            print("%-28s v%-8s %-8s %3d domande %3d lezioni  %s" % (k["id"], k["versione"], p["origine"],
+                  len(k.get("domande", [])), len(k.get("lezioni", [])), k["titolo"]))
+        for e in errori:
+            print("! ignorato %s: %s" % (e["file"], "; ".join(e["errori"][:3])))
+        return 0
+    if cmd == "installa":
+        if len(resto) != 1:
+            print("Uso: installa FILE.json [--sistema]"); return 1
+        pack, err = pd_packs.leggi_file(resto[0], versione_app())
+        if err:
+            valida(resto); return 1
+        try:
+            path = pd_packs.salva(pack, dest)
+        except PermissionError:
+            print("Permesso negato: per installare per tutti gli utenti usate  sudo ... --sistema"); return 1
+        print("✔ Installato «%s» v%s in %s" % (pack["titolo"], pack["versione"], path))
+        print("  Riaprite il Professore Digitale (o ricaricate la pagina) per vederlo.")
+        return 0
+    if cmd == "rimuovi":
+        if len(resto) != 1 or not pd_packs.RE_ID.match(resto[0]):
+            print("Uso: rimuovi ID [--sistema]"); return 1
+        f = os.path.join(dest, resto[0] + ".json")
+        if not os.path.isfile(f):
+            print("Pacchetto non trovato in %s" % dest); return 1
+        try:
+            os.unlink(f)
+        except PermissionError:
+            print("Permesso negato: usate sudo ... --sistema"); return 1
+        print("✔ Rimosso %s" % resto[0]); return 0
+    print("Comando sconosciuto: %s\n%s" % (cmd, __doc__)); return 1
+
+
+if __name__ == "__main__":
+    sys.exit(main(sys.argv[1:]))

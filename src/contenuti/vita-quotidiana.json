@@ -1,0 +1,458 @@
+{
+ "formato": "professore-digitale-contenuti",
+ "formato_versione": 1,
+ "id": "vita-quotidiana",
+ "titolo": "Il digitale nella vita quotidiana",
+ "versione": "1.0.0",
+ "autore": "Danilo D'Auria",
+ "descrizione": "30 nuove risposte (stampa, foto, smartphone, acquisti, Wi-Fi pubblico, aggiornamenti) e 2 nuove lezioni: acquisti online sicuri e foto e ricordi al sicuro.",
+ "richiede_app": "2.1.0",
+ "suggerimenti": [
+  "Come stampo un documento?",
+  "Come faccio uno screenshot?",
+  "Come compro online in sicurezza?"
+ ],
+ "domande": [
+  {
+   "domanda": "Come stampo un documento?",
+   "parole_chiave": [
+    "stampare",
+    "stampa",
+    "stampo",
+    "ctrl p",
+    "stampare una lettera",
+    "stampare una foto",
+    "lettera",
+    "documento"
+   ],
+   "risposta": "1. Controllate che la stampante sia **accesa** e abbia carta.\n2. Aprite il documento.\n3. Premete **Ctrl + P** (oppure menu **File → Stampa**).\n4. Scegliete la stampante e il numero di copie.\n5. Premete **Stampa**.",
+   "schema": "flowchart LR\n  A[\"Apro il documento\"] --> B[\"Ctrl + P\"] --> C[\"Scelgo stampante e copie\"] --> D[\"Stampa\"]"
+  },
+  {
+   "domanda": "La stampante non stampa, cosa faccio?",
+   "parole_chiave": [
+    "stampante non stampa",
+    "stampante bloccata",
+    "non stampa",
+    "carta inceppata",
+    "stampante guasta",
+    "inceppata"
+   ],
+   "risposta": "Controllate con calma, uno alla volta:\n\n1. È **accesa** e collegata (cavo o Wi-Fi)?\n2. Ha **carta** e inchiostro o toner?\n3. C'è un foglio **inceppato**? Apritela seguendo le istruzioni e toglietelo piano.\n4. Nella finestra di stampa avete scelto la stampante giusta?\n5. Spegnete e riaccendete la stampante, poi riprovate."
+  },
+  {
+   "domanda": "Come si scansiona un documento?",
+   "parole_chiave": [
+    "scansionare",
+    "scanner",
+    "scansione",
+    "digitalizzare",
+    "fotocopia"
+   ],
+   "risposta": "Con una stampante multifunzione: appoggiate il foglio sul vetro a faccia in giù, aprite il programma **Scanner** (su Linux spesso si chiama *Scanner di documenti* o *Simple Scan*), premete **Scansiona** e poi **Salva**, di solito in formato PDF.\n\nSenza scanner: molte app per smartphone fotografano il foglio e lo raddrizzano da sole."
+  },
+  {
+   "domanda": "Cos'è un file PDF?",
+   "parole_chiave": [
+    "pdf",
+    "file pdf",
+    "aprire pdf",
+    "documento pdf"
+   ],
+   "risposta": "Il **PDF** è un tipo di documento che appare **uguale su ogni computer e telefono**, come una fotocopia digitale. Si usa per bollette, moduli, referti e documenti ufficiali.\n\nSi apre con un doppio clic: il computer usa il lettore di PDF o il browser."
+  },
+  {
+   "domanda": "Come faccio uno screenshot?",
+   "parole_chiave": [
+    "screenshot",
+    "schermata",
+    "foto dello schermo",
+    "cattura schermo",
+    "stamp"
+   ],
+   "risposta": "Uno **screenshot** è una foto di ciò che si vede sullo schermo.\n\n- Sul computer Linux: premete il tasto **Stamp** (o *PrtSc*). L'immagine finisce di solito nella cartella **Immagini**.\n- Sullo smartphone: di solito si premono insieme **accensione + volume giù**."
+  },
+  {
+   "domanda": "Come trasferisco le foto dal telefono al computer?",
+   "parole_chiave": [
+    "foto dal telefono",
+    "trasferire foto",
+    "cavo usb telefono",
+    "copiare foto",
+    "scaricare foto"
+   ],
+   "lezione": "foto-ricordi",
+   "risposta": "1. Collegate il telefono al computer con il **cavo USB**.\n2. Sul telefono compare un avviso: scegliete **Trasferimento file** (a volte *MTP*).\n3. Sul computer si apre il telefono come una chiavetta: aprite la cartella **DCIM**.\n4. **Trascinate** le foto in una cartella del computer, ad esempio *Immagini*.",
+   "schema": "flowchart LR\n  T[\"📱 Telefono\"] -- \"cavo USB\" --> C[\"💻 Computer\"] --> D[\"📁 Cartella DCIM\"] --> I[\"📁 Immagini\"]"
+  },
+  {
+   "domanda": "Cos'è il cloud?",
+   "parole_chiave": [
+    "cloud",
+    "nuvola",
+    "archivio online",
+    "drive"
+   ],
+   "lezione": "foto-ricordi",
+   "risposta": "Il **cloud** (nuvola) è un armadio che non sta in casa vostra ma nei computer di un'azienda, raggiungibile via Internet.\n\nÈ comodo per avere le foto su più dispositivi, ma i file stanno **su computer di altri**: scegliete servizi affidabili, usate una password forte e tenete comunque una copia a casa."
+  },
+  {
+   "domanda": "Come faccio una copia di sicurezza delle foto?",
+   "parole_chiave": [
+    "backup",
+    "copia di sicurezza",
+    "salvare foto",
+    "non perdere foto",
+    "disco esterno"
+   ],
+   "lezione": "foto-ricordi",
+   "risposta": "La regola semplice è **3-2-1**: tenete **3** copie delle foto importanti, su **2** supporti diversi (computer e disco esterno o chiavetta), e **1** copia lontano da casa (da un familiare o nel cloud).\n\nFatelo per esempio una volta al mese, a data fissa.",
+   "schema": "flowchart LR\n  F[\"🖼️ Foto\"] --> A[\"💻 Computer\"]\n  F --> B[\"💾 Disco esterno\"]\n  F --> C[\"🏠 Copia fuori casa\"]"
+  },
+  {
+   "domanda": "Cos'è il Bluetooth?",
+   "parole_chiave": [
+    "bluetooth",
+    "cuffie senza fili",
+    "auricolari",
+    "abbinare"
+   ],
+   "risposta": "Il **Bluetooth** collega due apparecchi **vicini** senza fili: cuffie, altoparlanti, auto, orologi.\n\nPer collegarli la prima volta bisogna **abbinarli**: si mette l'apparecchio in modalità abbinamento e lo si sceglie dall'elenco del telefono o del computer."
+  },
+  {
+   "domanda": "Cos'è un codice QR?",
+   "parole_chiave": [
+    "qr",
+    "codice qr",
+    "qr code",
+    "quadratino"
+   ],
+   "risposta": "Il **codice QR** è un quadratino a puntini che si legge con la **fotocamera** del telefono: porta a un sito, a un menù, a un pagamento.\n\nAttenzione ai QR attaccati sopra quelli originali (su parchimetri o volantini): se la pagina chiede dati o pagamenti inattesi, fermatevi."
+  },
+  {
+   "domanda": "Posso usare il Wi-Fi pubblico?",
+   "parole_chiave": [
+    "wifi pubblico",
+    "wifi gratuito",
+    "rete pubblica",
+    "hotspot bar",
+    "wifi aperto"
+   ],
+   "risposta": "Il Wi-Fi di bar, stazioni e alberghi va bene per leggere notizie o guardare mappe.\n\n**Evitate** invece di entrare in banca, fare acquisti o inserire password: su una rete condivisa qualcuno potrebbe spiare. Per queste cose usate la connessione del vostro telefono o la rete di casa."
+  },
+  {
+   "domanda": "Cos'è l'hotspot del telefono?",
+   "parole_chiave": [
+    "hotspot",
+    "condividere internet",
+    "tethering",
+    "router portatile"
+   ],
+   "risposta": "L'**hotspot** trasforma il telefono in un piccolo router: il computer si collega al Wi-Fi del telefono e usa i suoi dati.\n\nSi attiva dalle impostazioni del telefono (*Hotspot personale* o *Tethering*). Consuma giga e batteria: spegnetelo quando avete finito."
+  },
+  {
+   "domanda": "Perché devo fare gli aggiornamenti?",
+   "parole_chiave": [
+    "aggiornamenti",
+    "aggiornare",
+    "aggiornamento sistema",
+    "update"
+   ],
+   "risposta": "Gli **aggiornamenti** sono come le revisioni dell'auto: correggono difetti e soprattutto **chiudono porte** che i truffatori potrebbero usare.\n\nAccettateli quando il sistema li propone, meglio con il computer collegato alla corrente e senza fretta."
+  },
+  {
+   "domanda": "Serve l'antivirus su Linux?",
+   "parole_chiave": [
+    "antivirus",
+    "virus linux",
+    "protezione computer",
+    "malware"
+   ],
+   "risposta": "Su Linux i virus sono molto rari. La protezione migliore resta il **buon senso**:\n\n- installate programmi solo dal **gestore software** ufficiale;\n- fate gli aggiornamenti;\n- non aprite allegati inattesi;\n- non date la password a chi ve la chiede al telefono."
+  },
+  {
+   "domanda": "Cosa sono i cookie?",
+   "parole_chiave": [
+    "cookie",
+    "biscotti",
+    "accetta cookie",
+    "banner cookie"
+   ],
+   "risposta": "I **cookie** sono piccoli promemoria che i siti salvano nel browser: servono a ricordare la lingua o il carrello, ma anche a seguire i vostri gusti per la pubblicità.\n\nQuando compare l'avviso, potete scegliere **Rifiuta** o **Solo necessari**: il sito funziona lo stesso."
+  },
+  {
+   "domanda": "Come cancello la cronologia del browser?",
+   "parole_chiave": [
+    "cronologia",
+    "cancellare cronologia",
+    "dati di navigazione",
+    "privacy browser"
+   ],
+   "risposta": "Premete **Ctrl + Maiusc + Canc** nel browser: si apre la finestra per cancellare cronologia, cookie e file temporanei. Scegliete il periodo (per esempio *Sempre*) e confermate.\n\nUtile soprattutto sui computer condivisi."
+  },
+  {
+   "domanda": "Come compro online in sicurezza?",
+   "parole_chiave": [
+    "acquisti online",
+    "comprare online",
+    "shopping",
+    "negozio online",
+    "ecommerce"
+   ],
+   "lezione": "acquisti-sicuri",
+   "risposta": "- Comprate da **negozi conosciuti** o controllate le recensioni.\n- Verificate indirizzo e **lucchetto** del sito.\n- Diffidate dei **prezzi troppo bassi**.\n- Pagate con una **carta prepagata** o con sistemi che proteggono l'acquirente; mai con bonifico a sconosciuti.\n- Conservate la conferma dell'ordine."
+  },
+  {
+   "domanda": "Cos'è una carta prepagata?",
+   "parole_chiave": [
+    "prepagata",
+    "carta ricaricabile",
+    "carta prepagata"
+   ],
+   "lezione": "acquisti-sicuri",
+   "risposta": "È una carta che si **ricarica** con la cifra che si vuole spendere. Se qualcuno ne rubasse i dati, potrebbe usare solo quanto c'è sopra: per gli acquisti online è una protezione in più."
+  },
+  {
+   "domanda": "Come riconosco un negozio online falso?",
+   "parole_chiave": [
+    "negozio falso",
+    "sito truffa",
+    "sito falso acquisti",
+    "truffa acquisti"
+   ],
+   "lezione": "acquisti-sicuri",
+   "risposta": "Campanelli d'allarme:\n\n- prezzi **molto più bassi** del normale;\n- nessun indirizzo, partita IVA o telefono;\n- solo **bonifico** o ricarica come pagamento;\n- sito aperto da poco, pieno di errori;\n- recensioni tutte entusiaste o del tutto assenti.\n\nNel dubbio, non comprate."
+  },
+  {
+   "domanda": "Cos'è l'home banking?",
+   "parole_chiave": [
+    "home banking",
+    "banca online",
+    "conto online",
+    "app banca"
+   ],
+   "risposta": "È la **banca sul computer o sul telefono**: si vedono i movimenti, si pagano bollette e bonifici.\n\nRegole d'oro: usate solo l'**app ufficiale** o l'indirizzo scritto da voi, mai link ricevuti; attivate le notifiche dei movimenti; la banca **non** vi chiederà mai codici per telefono."
+  },
+  {
+   "domanda": "Come faccio una videochiamata dal computer?",
+   "parole_chiave": [
+    "videochiamata computer",
+    "webcam",
+    "jitsi",
+    "videoconferenza",
+    "chiamata video pc"
+   ],
+   "risposta": "Serve un computer con **webcam e microfono** (nei portatili ci sono già).\n\nUn modo semplice e gratuito: aprite il browser su **meet.jit.si**, scrivete un nome per la stanza e mandate il collegamento a chi volete incontrare. Quando il browser chiede il permesso per videocamera e microfono, premete **Consenti**."
+  },
+  {
+   "domanda": "Il telefono si scarica subito, cosa posso fare?",
+   "parole_chiave": [
+    "batteria",
+    "si scarica",
+    "durata batteria",
+    "risparmio energetico"
+   ],
+   "risposta": "- Abbassate la **luminosità** dello schermo.\n- Attivate il **risparmio energetico**.\n- Chiudete il GPS e il Bluetooth quando non servono.\n- Evitate il caldo eccessivo.\n- Se il telefono ha molti anni, la batteria potrebbe essere da sostituire da un tecnico."
+  },
+  {
+   "domanda": "Come ingrandisco le scritte sul telefono?",
+   "parole_chiave": [
+    "scritte piccole telefono",
+    "ingrandire telefono",
+    "carattere grande",
+    "dimensione testo telefono"
+   ],
+   "risposta": "Aprite le **Impostazioni** del telefono, cercate **Display** (o *Schermo*) e poi **Dimensione carattere** o **Zoom schermo**. Spostate il cursore verso destra finché leggete comodamente."
+  },
+  {
+   "domanda": "Cos'è un'app e come la installo?",
+   "parole_chiave": [
+    "installare app",
+    "scaricare app",
+    "play store",
+    "app store",
+    "applicazione"
+   ],
+   "risposta": "Un'**app** è un programma per il telefono. Si installa solo dal **negozio ufficiale** (Play Store su Android, App Store su iPhone): cercate il nome, controllate che l'autore sia quello giusto e premete **Installa**.\n\nNon installate app da link ricevuti per messaggio."
+  },
+  {
+   "domanda": "Cosa sono i giga?",
+   "parole_chiave": [
+    "giga",
+    "gigabyte",
+    "traffico dati",
+    "dati mobili",
+    "offerta telefonica"
+   ],
+   "risposta": "I **giga** sono la quantità di Internet che il telefono può usare fuori casa ogni mese, come i litri in un serbatoio. I video ne consumano molti, i messaggi pochissimi.\n\nA casa collegatevi al **Wi-Fi**: così non consumate i giga."
+  },
+  {
+   "domanda": "Come riconosco una telefonata truffa?",
+   "parole_chiave": [
+    "telefonata truffa",
+    "chiamata sospetta",
+    "finto operatore",
+    "vishing"
+   ],
+   "lezione": "truffe",
+   "risposta": "Fermatevi se chi chiama:\n\n- mette **fretta** o **paura** (conto bloccato, parente in pericolo);\n- chiede **codici, PIN o password**;\n- vuole farvi installare un programma.\n\nRiattaccate e richiamate voi l'ente al **numero ufficiale** scritto sulla carta o sul sito."
+  },
+  {
+   "domanda": "Come blocco un numero di telefono?",
+   "parole_chiave": [
+    "bloccare numero",
+    "numero molesto",
+    "chiamate indesiderate",
+    "spam telefonico"
+   ],
+   "risposta": "Aprite l'app **Telefono**, andate nelle **chiamate recenti**, toccate il numero (o la *i* accanto) e scegliete **Blocca**. Nelle app di messaggi si fa allo stesso modo dal profilo del contatto.\n\nPer ridurre le telefonate commerciali in Italia esiste il **Registro pubblico delle opposizioni**."
+  },
+  {
+   "domanda": "Posso fidarmi di un messaggio con il logo della banca?",
+   "parole_chiave": [
+    "logo banca",
+    "messaggio banca",
+    "sms banca",
+    "email banca"
+   ],
+   "lezione": "truffe",
+   "risposta": "No, il logo si copia in un attimo. Guardate cosa chiede: se c'è **fretta** o la richiesta di **cliccare e inserire dati**, è quasi certamente una truffa. Entrate nella banca solo dall'app ufficiale o scrivendo voi l'indirizzo."
+  },
+  {
+   "domanda": "Come proteggo il telefono se lo perdo?",
+   "parole_chiave": [
+    "telefono perso",
+    "telefono rubato",
+    "blocco schermo",
+    "trova dispositivo"
+   ],
+   "risposta": "Prima che succeda:\n\n- mettete un **blocco schermo** (PIN, impronta);\n- attivate la funzione **Trova il mio dispositivo** del telefono;\n- tenete copia delle foto.\n\nSe succede: bloccate la SIM chiamando l'operatore e, se serve, la banca; fate denuncia per il furto."
+  },
+  {
+   "domanda": "Cosa sono le notifiche?",
+   "parole_chiave": [
+    "notifiche",
+    "avvisi telefono",
+    "pallino rosso",
+    "suoni app"
+   ],
+   "risposta": "Le **notifiche** sono gli avvisi delle app: messaggi, promemoria, offerte. Se sono troppe, dalle **Impostazioni → Notifiche** potete spegnere quelle delle app che non vi interessano e tenere solo messaggi e chiamate."
+  }
+ ],
+ "lezioni": [
+  {
+   "id": "acquisti-sicuri",
+   "icona": "🛒",
+   "titolo": "Acquisti e pagamenti online sicuri",
+   "livello": "Sicurezza",
+   "minuti": 20,
+   "obiettivo": "Comprare online con tranquillità: scegliere il negozio, pagare in modo protetto, riconoscere i falsi.",
+   "passi": [
+    {
+     "titolo": "Come funziona un acquisto online",
+     "testo": "Comprare online è come ordinare per catalogo: si sceglie, si paga, il pacco arriva a casa.\n\n1. Si mette il prodotto nel **carrello**.\n2. Si inserisce l'**indirizzo** di consegna.\n3. Si **paga**.\n4. Arriva un'**email di conferma** con il numero dell'ordine.",
+     "schema": "flowchart LR\n  A[\"🛒 Carrello\"] --> B[\"🏠 Indirizzo\"] --> C[\"💳 Pagamento\"] --> D[\"📧 Conferma\"] --> E[\"📦 Consegna\"]"
+    },
+    {
+     "titolo": "Scegliere il negozio giusto",
+     "testo": "- Preferite negozi **conosciuti** o consigliati da persone di fiducia.\n- Controllate che il sito mostri **indirizzo, partita IVA e contatti**.\n- Leggete le **recensioni**, anche quelle negative.\n- Diffidate dei **prezzi troppo belli per essere veri**.",
+     "consiglio": "Se un'offerta vi mette fretta (\"solo per oggi!\"), prendetevi comunque il tempo di controllare."
+    },
+    {
+     "titolo": "Pagare in modo protetto",
+     "testo": "- Una **carta prepagata**, ricaricata con la cifra necessaria, limita i rischi.\n- I sistemi di pagamento che **proteggono l'acquirente** permettono di chiedere il rimborso se il pacco non arriva.\n- **Mai** bonifici o ricariche a privati sconosciuti.\n- La banca può chiedervi una **conferma sull'app**: leggete bene l'importo prima di approvare.",
+     "schema": "flowchart TD\n  P{\"Come pago?\"} --> A[\"✅ Carta prepagata\"]\n  P --> B[\"✅ Pagamento con tutela acquirente\"]\n  P --> C[\"⛔ Bonifico a sconosciuti\"]"
+    },
+    {
+     "titolo": "Dopo l'acquisto",
+     "testo": "Conservate l'**email di conferma**. Seguite la spedizione **dal sito del negozio**, non da link arrivati per SMS.\n\nSe qualcosa non va, contattate il negozio: per molti acquisti online esiste il **diritto di recesso**, cioè la possibilità di restituire il prodotto entro un certo periodo."
+    }
+   ],
+   "quiz": [
+    {
+     "domanda": "Un sito vende un televisore nuovo a un quarto del prezzo normale e accetta solo bonifico. Cosa fate?",
+     "opzioni": [
+      "Compro subito",
+      "Non compro: sono due campanelli d'allarme",
+      "Compro due televisori"
+     ],
+     "corretta": 1,
+     "spiegazione": "Prezzo troppo basso e solo bonifico sono segnali tipici dei negozi falsi."
+    },
+    {
+     "domanda": "Qual è un metodo di pagamento più protetto per gli acquisti online?",
+     "opzioni": [
+      "Carta prepagata",
+      "Bonifico a un privato",
+      "Ricarica a uno sconosciuto"
+     ],
+     "corretta": 0,
+     "spiegazione": "Con la prepagata si rischia al massimo la cifra caricata."
+    },
+    {
+     "domanda": "Dove seguo la spedizione del pacco?",
+     "opzioni": [
+      "Dal link arrivato per SMS",
+      "Dal sito o dall'app del negozio",
+      "Rispondendo all'SMS"
+     ],
+     "corretta": 1,
+     "spiegazione": "Gli SMS del finto corriere sono una truffa molto diffusa."
+    }
+   ]
+  },
+  {
+   "id": "foto-ricordi",
+   "icona": "🖼️",
+   "titolo": "Foto e ricordi al sicuro",
+   "livello": "Intermedio",
+   "minuti": 15,
+   "palestra": "drag",
+   "obiettivo": "Trasferire le foto dal telefono al computer, organizzarle e farne copie di sicurezza.",
+   "passi": [
+    {
+     "titolo": "Dove stanno le foto",
+     "testo": "Le foto del telefono stanno nella sua memoria, in una cartella che di solito si chiama **DCIM** (fotocamera). Se il telefono si rompe o si perde, senza una copia i ricordi si perdono con lui.",
+     "consiglio": "Una volta al mese, a data fissa: \"il giorno delle foto\"."
+    },
+    {
+     "titolo": "Dal telefono al computer",
+     "testo": "1. Collegate il telefono con il **cavo USB**.\n2. Sul telefono scegliete **Trasferimento file**.\n3. Sul computer aprite il telefono e la cartella **DCIM**.\n4. **Trascinate** le foto nella cartella *Immagini*.",
+     "schema": "flowchart LR\n  T[\"📱 Telefono\"] -- \"cavo USB\" --> C[\"💻 Computer\"] --> I[\"📁 Immagini\"]"
+    },
+    {
+     "titolo": "Mettere in ordine",
+     "testo": "Create una cartella per ogni anno e, dentro, una per ogni evento: *2026 → Compleanno di Anna*. Nomi chiari oggi, niente caccia al tesoro domani.",
+     "schema": "flowchart TD\n  I[\"📁 Immagini\"] --> A[\"📁 2025\"]\n  I --> B[\"📁 2026\"]\n  B --> C[\"📁 Compleanno di Anna\"]\n  B --> D[\"📁 Vacanze al mare\"]"
+    },
+    {
+     "titolo": "La regola 3-2-1",
+     "testo": "Per i ricordi importanti tenete **3 copie**, su **2 supporti** diversi (computer e disco esterno o chiavetta), di cui **1 fuori casa** (da un familiare o nel cloud).\n\nCosì nemmeno un guasto o un furto potrà cancellarli.",
+     "schema": "flowchart LR\n  F[\"🖼️ Foto\"] --> A[\"💻 Computer\"]\n  F --> B[\"💾 Disco esterno\"]\n  F --> C[\"🏠 Copia fuori casa\"]"
+    }
+   ],
+   "quiz": [
+    {
+     "domanda": "Come si chiama di solito la cartella delle foto sul telefono?",
+     "opzioni": [
+      "DCIM",
+      "Musica",
+      "Cestino"
+     ],
+     "corretta": 0,
+     "spiegazione": "DCIM è la cartella della fotocamera."
+    },
+    {
+     "domanda": "Cosa dice la regola 3-2-1?",
+     "opzioni": [
+      "3 copie, 2 supporti, 1 fuori casa",
+      "3 foto al giorno",
+      "Stampare 3 foto su 2"
+     ],
+     "corretta": 0,
+     "spiegazione": "Più copie in posti diversi proteggono da guasti, furti e incidenti."
+    }
+   ]
+  }
+ ]
+}

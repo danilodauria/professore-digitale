@@ -1,3 +1,16 @@
+professore-digitale (2.1.0) stable; urgency=medium
+
+  * Pacchetti di contenuti: domande e lezioni si aggiungono senza
+    reinstallare (Impostazioni o comando professore-digitale-contenuti).
+  * Nuovo pacchetto «Il digitale nella vita quotidiana»: 30 nuove
+    risposte e 2 lezioni (acquisti online sicuri, foto e ricordi al sicuro).
+  * Aggiornamenti migliorati: note di versione, scaricamento del nuovo
+    pacchetto verificato con SHA-256, contenuti scaricabili con un clic.
+  * Numero di versione in un unico file, migrazione automatica dei dati
+    salvati, ricerca più precisa, registro più pulito.
+
+ -- Danilo D'Auria <danilodauria.site@gmail.com>  Thu, 24 Sep 2026 18:27:34 +0200
+
 professore-digitale (2.0.0) stable; urgency=medium
 
   * Riprogettazione completa: server locale in Python puro (nessuna

@@ -36,6 +36,7 @@ import tempfile
 import threading
 import time
 import urllib.error
+import urllib.parse
 import urllib.request
 
 try:
@@ -43,16 +44,49 @@ try:
 except ImportError:  # Python < 3.7 (non supportato ufficialmente)
     from http.server import HTTPServer as ThreadingHTTPServer, BaseHTTPRequestHandler
 
-VERSION = "2.0.0"
 APP_ID = "professore-digitale"
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-WEB_DIR = os.path.normpath(os.environ.get("PD_WEB_DIR") or os.path.join(HERE, "..", "web"))
+sys.path.insert(0, HERE)
+import pd_packs  # noqa: E402  (pacchetti di contenuti)
+
+SHARE_DIR = os.path.normpath(os.path.join(HERE, ".."))
+WEB_DIR = os.path.normpath(os.environ.get("PD_WEB_DIR") or os.path.join(SHARE_DIR, "web"))
 STT_WORKER = os.path.join(HERE, "pd_stt_worker.py")
+
+
+def _leggi_versione():
+    """Unica fonte del numero di versione: il file VERSION (installato accanto a server/ e web/)."""
+    for p in (os.path.join(SHARE_DIR, "VERSION"), os.path.join(SHARE_DIR, "..", "VERSION")):
+        try:
+            with open(p) as f:
+                v = f.read().strip()
+            if re.match(r"^\d+\.\d+\.\d+$", v):
+                return v
+        except OSError:
+            pass
+    return "0.0.0"
+
+
+def _leggi_distribuzione():
+    """Impostazioni di chi distribuisce il programma (indirizzo aggiornamenti), scritte da build.sh."""
+    for p in (os.path.join(SHARE_DIR, "distribuzione.json"), os.path.join(SHARE_DIR, "..", "distribuzione.json")):
+        try:
+            with open(p, encoding="utf-8") as f:
+                return json.load(f)
+        except (OSError, ValueError):
+            pass
+    return {}
+
+
+VERSION = _leggi_versione()
+DISTRIBUZIONE = _leggi_distribuzione()
 
 XDG_DATA = os.environ.get("XDG_DATA_HOME") or os.path.join(os.path.expanduser("~"), ".local", "share")
 DATA_DIR = os.environ.get("PD_DATA_DIR") or os.path.join(XDG_DATA, APP_ID)
 MODELS_DIR = os.path.join(DATA_DIR, "models")
+SYSTEM_PACKS = os.environ.get("PD_SYSTEM_PACKS") or os.path.join(SHARE_DIR, "contenuti")
+USER_PACKS = os.path.join(DATA_DIR, "contenuti")
 VENV_PY = os.path.join(DATA_DIR, "venv", "bin", "python3")
 RUNTIME_DIR = os.environ.get("XDG_RUNTIME_DIR") or tempfile.gettempdir()
 RUNTIME_FILE = os.path.join(RUNTIME_DIR, "%s-%d.json" % (APP_ID, os.getuid()))
@@ -61,7 +95,9 @@ OLLAMA_HOST = (os.environ.get("OLLAMA_HOST") or "http://127.0.0.1:11434").rstrip
 if not OLLAMA_HOST.startswith("http"):
     OLLAMA_HOST = "http://" + OLLAMA_HOST
 
-UPDATE_URL_DEFAULT = "https://raw.githubusercontent.com/danilodauria/professore-digitale/main/version.txt"
+UPDATE_URL_DEFAULT = DISTRIBUZIONE.get("aggiornamenti_url") or \
+    "https://raw.githubusercontent.com/danilodauria/professore-digitale/main/aggiornamenti.json"
+ALLOW_HTTP_TEST = os.environ.get("PD_ALLOW_HTTP_TEST") == "1"   # solo per i test automatici
 
 DATA_KEYS = ("settings", "progress", "history", "board", "practice")
 MAX_BODY = 8 * 1024 * 1024        # 8 MB (audio del microfono)
@@ -289,19 +325,119 @@ def transcribe(wav_bytes):
 #  Aggiornamenti: SOLO su richiesta esplicita dell'utente (protocollo etico)
 # ------------------------------------------------------------------------------
 def parse_version(v):
-    return tuple(int(x) for x in re.findall(r"\d+", v)[:3])
+    return pd_packs.versione_tupla(v)
+
+
+RE_SHA = re.compile(r"^[0-9a-f]{64}$")
+
+
+def url_consentito(url):
+    if re.match(r"^https://[^\s]+$", url or ""):
+        return True
+    return ALLOW_HTTP_TEST and re.match(r"^http://127\.0\.0\.1(:\d+)?/", url or "") is not None
+
+
+def scarica(url, limite):
+    """Scarica al massimo `limite` byte da un indirizzo https (solo su richiesta dell'utente)."""
+    if not url_consentito(url):
+        raise RuntimeError("indirizzo non valido (serve https)")
+    req = urllib.request.Request(url, headers={"User-Agent": "professore-digitale/" + VERSION})
+    with urllib.request.urlopen(req, timeout=20) as r:
+        data = r.read(limite + 1)
+    if len(data) > limite:
+        raise RuntimeError("file troppo grande")
+    return data
+
+
+def pacchetti_installati():
+    return pd_packs.carica_tutti([("sistema", SYSTEM_PACKS), ("utente", USER_PACKS)], VERSION)
 
 
 def check_update(url):
-    if not re.match(r"^https://", url or ""):
-        raise RuntimeError("indirizzo di aggiornamento non valido (serve https)")
-    req = urllib.request.Request(url, headers={"User-Agent": "professore-digitale/" + VERSION})
-    with urllib.request.urlopen(req, timeout=8) as r:
-        online = r.read(64).decode("utf-8", "replace").strip()
+    """Legge aggiornamenti.json (oppure il vecchio version.txt) e confronta le versioni."""
+    testo = scarica(url, 256 * 1024).decode("utf-8", "replace").strip()
+    res = {"current": VERSION, "online": None, "newer": False, "note": [], "data": "",
+           "pacchetto": None, "sha256": None, "pagina": None, "contenuti": []}
+    if testo.startswith("{"):
+        try:
+            info = json.loads(testo)
+        except ValueError:
+            raise RuntimeError("file degli aggiornamenti non valido")
+        online = str(info.get("versione", ""))
+        res["data"] = str(info.get("data", ""))[:20]
+        res["note"] = [str(n)[:300] for n in (info.get("note") or [])[:30]]
+        for chiave in ("pacchetto", "pagina"):
+            u = info.get(chiave)
+            if isinstance(u, str) and u:
+                u = urllib.parse.urljoin(url, u)
+                if url_consentito(u):
+                    res[chiave] = u
+        sha = str(info.get("sha256", "")).lower()
+        res["sha256"] = sha if RE_SHA.match(sha) else None
+        installati = {p["pacchetto"]["id"]: p["pacchetto"]["versione"] for p in pacchetti_installati()[0]}
+        for c in (info.get("contenuti") or [])[:50]:
+            if not isinstance(c, dict):
+                continue
+            cid, cver, curl = str(c.get("id", "")), str(c.get("versione", "")), c.get("url")
+            if not pd_packs.RE_ID.match(cid) or not pd_packs.RE_VER.match(cver) or not isinstance(curl, str):
+                continue
+            curl = urllib.parse.urljoin(url, curl)
+            if not url_consentito(curl):
+                continue
+            have = installati.get(cid)
+            stato = "nuovo" if have is None else ("aggiornamento" if parse_version(cver) > parse_version(have) else "installato")
+            csha = str(c.get("sha256", "")).lower()
+            res["contenuti"].append({"id": cid, "versione": cver, "titolo": str(c.get("titolo", cid))[:120],
+                                     "descrizione": str(c.get("descrizione", ""))[:300], "url": curl,
+                                     "sha256": csha if RE_SHA.match(csha) else None,
+                                     "installata": have, "stato": stato})
+    else:
+        online = testo.splitlines()[0].strip() if testo else ""
     if not re.match(r"^\d+(\.\d+){0,2}$", online):
         raise RuntimeError("risposta non valida dal server degli aggiornamenti")
-    return {"current": VERSION, "online": online,
-            "newer": parse_version(online) > parse_version(VERSION)}
+    res["online"] = online
+    res["newer"] = parse_version(online) > parse_version(VERSION)
+    return res
+
+
+def cartella_download():
+    try:
+        p = subprocess.run(["xdg-user-dir", "DOWNLOAD"], stdout=subprocess.PIPE, stderr=subprocess.DEVNULL, timeout=5)
+        d = p.stdout.decode().strip()
+        if d and os.path.isdir(d) and d != os.path.expanduser("~"):
+            return d
+    except (OSError, subprocess.SubprocessError):
+        pass
+    for nome in ("Scaricati", "Downloads"):
+        d = os.path.join(os.path.expanduser("~"), nome)
+        if os.path.isdir(d):
+            return d
+    return os.path.expanduser("~")
+
+
+def scarica_pacchetto_deb(url, sha256):
+    """Scarica il nuovo .deb in Scaricati verificandone l'impronta SHA-256. Non installa nulla."""
+    import hashlib
+    nome = url.rsplit("/", 1)[-1]
+    if not re.match(r"^professore-digitale_\d+\.\d+\.\d+_all\.deb$", nome):
+        raise RuntimeError("nome del pacchetto non valido")
+    if not RE_SHA.match(sha256 or ""):
+        raise RuntimeError("manca l'impronta SHA-256: download rifiutato per sicurezza")
+    data = scarica(url, 200 * 1024 * 1024)
+    if hashlib.sha256(data).hexdigest() != sha256:
+        raise RuntimeError("impronta SHA-256 non corrispondente: file scartato")
+    dest = os.path.join(cartella_download(), nome)
+    with open(dest + ".part", "wb") as f:
+        f.write(data)
+    os.replace(dest + ".part", dest)
+    return dest
+
+
+def importa_pacchetto(pack):
+    err = pd_packs.valida(pack, VERSION)
+    if err:
+        raise ValueError("pacchetto non valido: " + "; ".join(err[:5]))
+    return pd_packs.salva(pack, USER_PACKS)
 
 
 # ------------------------------------------------------------------------------
@@ -437,6 +573,9 @@ class Handler(BaseHTTPRequestHandler):
                            "data_dir": DATA_DIR, "cpus": os.cpu_count()},
                 "update_url": settings.get("updateUrl") or UPDATE_URL_DEFAULT,
             })
+        if path == "/api/packs":
+            packs, errori = pacchetti_installati()
+            return self._send(200, {"ok": True, "packs": packs, "errori": errori})
         m = re.match(r"^/api/data/([a-z]+)$", path)
         if m:
             key = m.group(1)
@@ -494,6 +633,45 @@ class Handler(BaseHTTPRequestHandler):
                 return self._error(502, "controllo non riuscito: %s" % e)
             res["ok"] = True
             return self._send(200, res)
+
+        if path == "/api/packs/import":
+            req = self._read_json()
+            dest = importa_pacchetto(req.get("pack"))
+            return self._send(200, {"ok": True, "file": dest})
+
+        if path == "/api/packs/remove":
+            req = self._read_json()
+            pid = str(req.get("id", ""))
+            if not pd_packs.RE_ID.match(pid):
+                raise ValueError("id non valido")
+            f = os.path.join(USER_PACKS, pid + ".json")
+            if not os.path.isfile(f):
+                return self._error(404, "pacchetto non presente tra quelli importati")
+            os.unlink(f)
+            return self._send(200, {"ok": True})
+
+        if path == "/api/packs/download":
+            req = self._read_json()
+            try:
+                data = scarica(str(req.get("url", "")), pd_packs.MAX_BYTES)
+                sha = str(req.get("sha256") or "")
+                if sha:
+                    import hashlib
+                    if hashlib.sha256(data).hexdigest() != sha:
+                        raise RuntimeError("impronta SHA-256 non corrispondente")
+                pack = json.loads(data.decode("utf-8"))
+            except (RuntimeError, ValueError, OSError) as e:
+                return self._error(502, "download non riuscito: %s" % e)
+            dest = importa_pacchetto(pack)
+            return self._send(200, {"ok": True, "file": dest, "id": pack["id"], "versione": pack["versione"]})
+
+        if path == "/api/update-download":
+            req = self._read_json()
+            try:
+                dest = scarica_pacchetto_deb(str(req.get("url", "")), str(req.get("sha256") or ""))
+            except (RuntimeError, OSError) as e:
+                return self._error(502, str(e))
+            return self._send(200, {"ok": True, "file": dest})
 
         if path == "/api/stt-reprobe":
             self._read_body(1024)
@@ -571,6 +749,16 @@ class Handler(BaseHTTPRequestHandler):
 # ------------------------------------------------------------------------------
 #  Avvio
 # ------------------------------------------------------------------------------
+class Server(ThreadingHTTPServer):
+    daemon_threads = True
+
+    def handle_error(self, request, client_address):
+        # le finestre chiuse a meta' richiesta non sono errori: niente rumore nel registro
+        if isinstance(sys.exc_info()[1], (ConnectionResetError, BrokenPipeError, TimeoutError)):
+            return
+        ThreadingHTTPServer.handle_error(self, request, client_address)
+
+
 def idle_watchdog(server):
     while True:
         time.sleep(10)
@@ -612,7 +800,7 @@ def main(argv=None):
     server = None
     for port in range(args.port, args.port + 30):
         try:
-            server = ThreadingHTTPServer(("127.0.0.1", port), Handler)
+            server = Server(("127.0.0.1", port), Handler)
             break
         except OSError:
             continue

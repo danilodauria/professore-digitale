@@ -1,4 +1,4 @@
-# Professore Digitale 2.0 — Cattedra Digitale Portatile
+# Professore Digitale — Cattedra Digitale Portatile
 
 **Ideato e sviluppato da Danilo D'Auria** — Tecnico IT & Divulgatore Digitale per il Sociale
 Licenza **MIT** · Contatti: danilodauria.site@gmail.com
@@ -10,7 +10,7 @@ biblioteche e associazioni. Pensata per girare anche su **computer ricondizionat
 
 | Sezione | Funzione |
 |---|---|
-| 📚 **Lezioni** | 13 lezioni guidate (computer, mouse, tastiera, file, Internet, email, password, truffe, smartphone, SPID/CIE/IO, IA, Linux) con schemi alla lavagna, lettura ad alta voce e quiz finale. Progressi salvati. |
+| 📚 **Lezioni** | 15 lezioni guidate (computer, mouse, tastiera, file, Internet, email, password, truffe, smartphone, SPID/CIE/IO, IA, Linux) con schemi alla lavagna, lettura ad alta voce e quiz finale. Progressi salvati. |
 | 💬 **Chiedi al Professore** | Domande scritte o a voce. Risponde la **guida interna** (sempre disponibile) oppure l'**IA locale** (Ollama) se installata, con schema disegnato sulla lavagna e risposta letta ad alta voce. |
 | 🖊️ **Lavagna** | 28 schemi pronti da proiettare + disegno libero con gessetti colorati, cancellino, annulla, salvataggio PNG. |
 | 🎯 **Palestra** | Esercizi di clic, doppio clic, trascinamento e tastiera (fino a @ e maiuscole), con record personali. |
@@ -18,7 +18,7 @@ biblioteche e associazioni. Pensata per girare anche su **computer ricondizionat
 
 ## Due modi di usarlo
 
-1. **Pacchetto `.deb`** (consigliato) — `professore-digitale_2.0.0_all.deb`, circa 1 MB.
+1. **Pacchetto `.deb`** (consigliato) — `professore-digitale_<versione>_all.deb`, circa 1 MB.
    Un solo pacchetto per PC moderni **e** datati: non crea ambienti virtuali, non scarica nulla
    all'installazione, `Architecture: all` (funziona su amd64, i386, arm64, armhf).
 2. **Versione portatile** — `professore-digitale-portatile.html`: un unico file da aprire con doppio clic
@@ -28,7 +28,7 @@ biblioteche e associazioni. Pensata per girare anche su **computer ricondizionat
 ## Installazione del .deb
 
 ```bash
-sudo apt install ./professore-digitale_2.0.0_all.deb
+sudo apt install ./professore-digitale_<versione>_all.deb
 ```
 
 Oppure doppio clic sul file (Software Center / GDebi). Il programma compare nel menu, categoria *Istruzione*.
@@ -82,10 +82,35 @@ sudo apt purge professore-digitale   # rimuove il programma
 # facoltativo: ollama rm <modello>
 ```
 
+## Ampliare domande e lezioni: i pacchetti di contenuti
+
+Domande e lezioni si aggiungono **senza reinstallare** il programma, con file JSON in italiano:
+
+```bash
+professore-digitale-contenuti modello > mie-domande.json   # crea un modello da compilare
+professore-digitale-contenuti valida mie-domande.json      # controlla gli errori
+professore-digitale-contenuti installa mie-domande.json    # per l'utente (sudo ... --sistema per tutti)
+professore-digitale-contenuti elenco
+```
+
+Oppure dall'app: *Impostazioni → Contenuti aggiuntivi → Importa pacchetto*. I pacchetti inclusi nel
+programma stanno in `src/contenuti/`.
+
+## Pubblicare una nuova versione
+
+```bash
+tools/rilascio.sh minore "Nuove domande sulla stampa" "Correzioni varie"   # 2.1.0 -> 2.2.0
+```
+
+Lo script aggiorna `VERSION` e il changelog, esegue i test, compila e prepara `dist/pubblica/`
+(con `aggiornamenti.json`) da caricare sul sito indicato in `rilascio.conf`. Tutti i dettagli sono
+nella *Guida agli aggiornamenti* (`docs/`).
+
 ## Compilare dai sorgenti
 
 ```bash
-./build.sh      # produce dist/*.deb, dist/professore-digitale-portatile.html, sorgenti e SHA256SUMS
+./build.sh              # compila la versione scritta nel file VERSION
+tests/esegui_test.sh    # esegue tutti i test automatici
 ```
 
 ## Risoluzione problemi

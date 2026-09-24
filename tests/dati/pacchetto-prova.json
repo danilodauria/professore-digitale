@@ -1,0 +1,20 @@
+{
+ "formato": "professore-digitale-contenuti",
+ "formato_versione": 1,
+ "id": "prova-test",
+ "titolo": "Pacchetto di prova",
+ "versione": "1.0.0",
+ "autore": "Test automatici",
+ "suggerimenti": ["Come si innaffia il cactus digitale?"],
+ "domande": [
+  {"domanda": "Come si innaffia il cactus digitale?", "parole_chiave": ["cactus digitale", "innaffiare", "cactus"],
+   "risposta": "Il **cactus digitale** non si innaffia: è una domanda di prova.",
+   "schema": "flowchart LR\n  A[\"Cactus\"] --> B[\"Nessuna acqua\"]"}
+ ],
+ "lezioni": [
+  {"id": "prova-lezione", "icona": "🌵", "titolo": "Lezione di prova", "livello": "Extra", "minuti": 5,
+   "obiettivo": "Verificare i pacchetti.",
+   "passi": [{"titolo": "Unico passo", "testo": "Questo è un passo di prova.", "schema": "flowchart TD\n  A[\"Inizio\"] --> B[\"Fine\"]"}],
+   "quiz": [{"domanda": "È una prova?", "opzioni": ["Sì", "No"], "corretta": 0, "spiegazione": "Sì, è una prova."}]}
+ ]
+}

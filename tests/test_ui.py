@@ -96,6 +96,10 @@ with sync_playwright() as p:
         "come si allega una foto": "Come si allega una foto a un'email?",
         "dove sono i file scaricati": "Dove trovo i file scaricati?",
     }
+    if page.evaluate("PD_KB.some(e => e.pack === 'vita-quotidiana')"):
+        probe.update({"come stampo una lettera": "Come stampo un documento?", "posso usare il wifi del bar": "Posso usare il Wi-Fi pubblico?",
+                      "come passo le foto dal telefono al computer": "Come trasferisco le foto dal telefono al computer?",
+                      "comprare su internet in sicurezza": "Come compro online in sicurezza?", "cos'è il bluetooth": "Cos'è il Bluetooth?"})
     got = page.evaluate("(qs) => Object.fromEntries(qs.map(q => { const r = PD.search(q, 1)[0]; return [q, r ? [r.doc.title, r.score] : null]; }))", list(probe))
     wrong = {q: got[q] for q in probe if not got[q] or got[q][0] != probe[q] or got[q][1] < 3.2}
     check("ricerca guida interna (%d domande)" % len(probe), not wrong, wrong)
@@ -209,6 +213,52 @@ with sync_playwright() as p:
     page.select_option("#s-theme", "contrast") if page.is_visible("#s-theme") else page.evaluate("PD.settings.theme='contrast'; PD.saveSettings()")
     page.goto(ROOT + "#/home"); page.wait_for_timeout(400)
     page.screenshot(path=SHOTS + "/12-contrasto.png")
+    page.evaluate("PD.settings.theme='light'; PD.settings.fontSize=20; PD.settings.aiEnabled=true; PD.saveSettings()")
+
+    # --- pacchetti di contenuti ---
+    here = os.path.dirname(os.path.abspath(__file__))
+    page.goto(ROOT + "#/settings"); page.wait_for_selector("#packs-list")
+    page.wait_for_timeout(300)
+    expected = page.evaluate("""(files) => files.filter(f => !f.richiede_app || PD.cmpVersion(f.richiede_app, PD.version) <= 0).length""",
+        [json.load(open(f, encoding="utf-8")) for f in __import__("glob").glob(os.path.join(here, "..", "src", "contenuti", "*.json"))])
+    check("pacchetti inclusi caricati (%d, gli altri rifiutati per versione)" % expected, page.evaluate("PD.packs.list.length") == expected and
+          page.evaluate("PD.packs.errors.every(e => e.errori.every(x => x.indexOf('richiede_app') === 0))"),
+          page.evaluate("[PD.packs.list.length, PD.packs.errors]"))
+    page.set_input_files("#pack-import", os.path.join(here, "dati", "pacchetto-prova.json"))
+    page.wait_for_selector("#pack-res .notice.ok", timeout=10000)
+    check("importazione pacchetto", "Pacchetto di prova" in page.inner_text("#packs-list"))
+    page.goto(ROOT + "#/lessons"); page.wait_for_selector("#view-lessons .tile")
+    check("nuova lezione nell'elenco", "Lezione di prova" in page.inner_text("#view-lessons"))
+    page.goto(ROOT + "#/lessons/prova-lezione/0"); page.wait_for_selector("#lesson-board .diagram svg", timeout=20000)
+    check("nuova lezione con schema", True)
+    page.goto(ROOT + "#/ask"); page.wait_for_selector("#question")
+    page.evaluate("PD.settings.aiEnabled=false")
+    page.fill("#question", "come si innaffia il cactus digitale"); page.press("#question", "Enter")
+    page.wait_for_selector(".msg.bot >> text=non si innaffia", timeout=10000)
+    check("nuova domanda nella guida interna", True)
+    page.evaluate("PD.stopSpeech(); PD.settings.aiEnabled=true")
+    bad = os.path.join(here, "dati", "_non_valido.json")
+    open(bad, "w").write('{"formato":"professore-digitale-contenuti","formato_versione":1,"id":"x y"}')
+    page.goto(ROOT + "#/settings"); page.wait_for_selector("#pack-import", state="attached")
+    page.set_input_files("#pack-import", bad); page.wait_for_selector("#pack-res >> text=non importato", timeout=10000)
+    os.unlink(bad)
+    check("pacchetto non valido rifiutato con spiegazione", "id" in page.inner_text("#pack-res"))
+    if not standalone and os.environ.get("PD_TEST_SITO"):
+        sito = os.environ["PD_TEST_SITO"]
+        page.fill("#s-upd", sito + "/aggiornamenti.json"); page.click("#check-upd")
+        page.wait_for_selector("#upd-res >> text=9.9.9", timeout=15000)
+        txt = page.inner_text("#upd-res")
+        check("controllo aggiornamenti con note", "Nota di prova 1" in txt and "Contenuti remoti di prova" in txt, txt[:300])
+        page.click("#upd-deb"); page.wait_for_selector("#upd-deb-res .notice.ok", timeout=15000)
+        dl = os.path.join(os.environ["PD_TEST_HOME"], "Scaricati", "professore-digitale_9.9.9_all.deb")
+        check("pacchetto scaricato e verificato (SHA-256)", os.path.isfile(dl), page.inner_text("#upd-deb-res"))
+        page.click("[data-pack-dl]"); page.wait_for_selector("#upd-res >> text=✔ installato", timeout=15000)
+        check("contenuti scaricati dal sito", "prova-remota" in page.evaluate("PD.packs.list.map(x => x.pacchetto.id).join(',')"))
+        page.screenshot(path=SHOTS + "/14-aggiornamenti.png", full_page=True)
+    ids = page.evaluate("PD.packs.list.filter(x => x.origine === 'utente').map(x => x.pacchetto.id)")
+    for pid in ids:
+        page.click('[data-pack-remove="%s"]' % pid); page.wait_for_timeout(500)
+    check("rimozione pacchetti importati", page.evaluate("PD.packs.list.filter(x => x.origine === 'utente').length") == 0)
     page.evaluate("PD.settings.theme='light'; PD.settings.fontSize=20; PD.settings.aiEnabled=true; PD.saveSettings()")
 
     # --- telefono / schermo stretto ---

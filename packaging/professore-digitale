@@ -103,7 +103,11 @@ def main():
         print(__doc__)
         return 0
     if "--version" in args:
-        print("Professore Digitale 2.0.0")
+        try:
+            with open(os.path.join(SHARE, "VERSION")) as f:
+                print("Professore Digitale " + f.read().strip())
+        except OSError:
+            print("Professore Digitale (versione sconosciuta)")
         return 0
     port = running_port()
     if "--stop" in args:
