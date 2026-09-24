@@ -50,3 +50,7 @@ Prima di realizzarla proponimi in breve come intendi farla; poi procedi, aggiorn
 === 6 · Solo un controllo dello stato ===
 Allego i sorgenti (versione [X.Y.Z]). Non cambiare nulla: prepara l'ambiente, esegui tutti i test e dimmi in breve lo stato del progetto,
 quante domande e lezioni ci sono, e cosa mi consigli per il prossimo aggiornamento.
+
+=== 7 · Da aggiungere a qualsiasi richiesta, se lavorate senza GitHub ===
+Lavoro senza GitHub: pubblico con la chiavetta e con il server dell'aula all'indirizzo [http://192.168.1.10:8080].
+Imposta questo indirizzo in rilascio.conf e alla fine indicami i comandi di pubblica-locale.sh.
