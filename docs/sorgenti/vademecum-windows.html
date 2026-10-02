@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<title>Professore Digitale – Vademecum per Windows</title>
+<meta name="author" content="Danilo D'Auria">
+<link rel="stylesheet" href="stile-manuale.css">
+</head>
+<body>
+
+<!-- ======================================================= COPERTINA -->
+<section class="cover">
+  <div class="sopra">
+    <div class="ka">CATTEDRA DIGITALE PORTATILE</div>
+    <h1>Professore Digitale</h1>
+    <div class="sotto">Vademecum e libro di istruzioni<br>per Windows · da XP a Windows 11</div>
+    <div class="lavagna">
+      <div class="gesso">Imparare il digitale,<br>con calma e senza<br>Internet.</div>
+      <div class="riga">Lezioni guidate · Assistente a voce<br>Lavagna · Palestra di mouse e tastiera<br>IA locale scelta su misura per il vostro PC</div>
+    </div>
+    <img class="prof" src="professore.svg" alt="">
+  </div>
+  <div class="sotto2">
+    <span class="pill">100% offline</span><span class="pill">Privacy per costruzione</span><span class="pill">Windows XP · Vista · 7 · 8 · 10 · 11</span>
+    <span class="pill">32 e 64 bit</span><span class="pill">Software libero · MIT</span>
+    <div class="firma">
+      <div><b>Danilo D'Auria</b><small>Ideazione e sviluppo · Tecnico IT &amp; Divulgatore Digitale per il Sociale</small></div>
+      <div class="v">v2.3<small>Ottobre 2026</small></div>
+    </div>
+  </div>
+</section>
+<div class="segnaposto"></div>
+
+<!-- ======================================================= COME USARE -->
+<div class="pagina">
+<h2 style="margin-top:2mm">Come usare questo vademecum</h2>
+<p>Questo libretto accompagna chi installa il Professore Digitale su computer <b>Windows</b>, chi conduce gli incontri e chi lo usa per imparare.
+Non serve leggerlo tutto: ogni capitolo sta in piedi da solo. Esiste un vademecum gemello per i computer Linux (Debian, Ubuntu, Mint, FeniceOS):
+le lezioni, la guida e i pacchetti di contenuti sono gli stessi.</p>
+<table>
+<thead><tr><th>Se siete…</th><th>Leggete prima</th></tr></thead>
+<tbody>
+<tr><td><b>Chi installa</b> il programma (tecnico, volontario, rigeneratore di PC)</td><td>Capitoli 2, 3, 10, 14, 15 e 16</td></tr>
+<tr><td><b>Insegnante o facilitatore</b> che guida un gruppo</td><td>Capitoli 4–9, 11 e 12</td></tr>
+<tr><td><b>Allievo</b> che usa il programma da solo</td><td>Capitoli 4, 5, 6, 8 e il Glossario (17)</td></tr>
+</tbody></table>
+<div class="box"><span class="t">Convenzioni</span>
+I tasti sono indicati così: <kbd>Invio</kbd>, <kbd>Ctrl</kbd> + <kbd>Alt</kbd> + <kbd>Canc</kbd>, <kbd>Windows</kbd> + <kbd>E</kbd>
+(il tasto <kbd>Windows</kbd> è quello con il logo, in basso a sinistra). I percorsi dei menu sono in <b>grassetto</b>: <b>Start → Impostazioni</b>.
+I comandi da scrivere sono in <code>carattere a macchina</code>. I riquadri verdi contengono consigli, quelli gialli attenzioni.</div>
+<div class="box consiglio"><span class="t">Novità della versione 2.3</span>
+<b>Versione per Windows</b> con installatore unico da XP a Windows 11 · <b>configurazione automatica</b> dell'intelligenza artificiale in base
+all'hardware · <b>chiavetta</b> per i PC senza Internet · gli <b>occhi del Professore seguono il mouse</b> · 19 nuove risposte su Windows.</div>
+<p class="small" style="margin-top:12mm"><b>Professore Digitale – Cattedra Digitale Portatile</b>, versione 2.3.0 per Windows.<br>
+Ideato e sviluppato da <b>Danilo D'Auria</b>, Tecnico IT &amp; Divulgatore Digitale per il Sociale — danilodauria.site@gmail.com<br>
+Software libero rilasciato con licenza <b>MIT</b>. Componenti di terze parti: Mermaid (MIT), zlib (zlib), Vosk (Apache 2.0); quelli facoltativi
+(Ollama, KoboldCpp, modelli di IA, Piper, Supermium) hanno le proprie licenze, elencate nel file <code>LICENZE.txt</code>.<br>
+Questo vademecum può essere stampato, copiato e distribuito liberamente, anche allegato ai computer rigenerati.<br>
+Windows è un marchio di Microsoft Corporation; il Professore Digitale è un progetto indipendente.</p>
+
+<!-- ======================================================= INDICE -->
+<h2 style="break-before:page;margin-top:2mm">Indice</h2>
+<ul class="toc">
+<li><span class="n">1</span><span class="tt">Benvenuti nella Cattedra Digitale<small>Che cos'è, a chi serve, i suoi principi</small></span><span class="toc-p" data-c="1"></span></li>
+<li><span class="n">2</span><span class="tt">Di cosa avete bisogno<small>Versioni di Windows, computer, browser, file forniti</small></span><span class="toc-p" data-c="2"></span></li>
+<li><span class="n">3</span><span class="tt">Installazione<small>Installatore, aule, versione da chiavetta, versione portatile</small></span><span class="toc-p" data-c="3"></span></li>
+<li><span class="n">4</span><span class="tt">Il primo avvio<small>La finestra, l'icona vicino all'orologio, il Professore e i suoi occhi</small></span><span class="toc-p" data-c="4"></span></li>
+<li><span class="n">5</span><span class="tt">Le Lezioni<small>Il percorso, i passi, lo schema, il quiz</small></span><span class="toc-p" data-c="5"></span></li>
+<li><span class="n">6</span><span class="tt">Chiedi al Professore<small>Domande scritte e a voce, guida interna e IA</small></span><span class="toc-p" data-c="6"></span></li>
+<li><span class="n">7</span><span class="tt">La Lavagna<small>Schemi pronti e disegno libero</small></span><span class="toc-p" data-c="7"></span></li>
+<li><span class="n">8</span><span class="tt">La Palestra<small>Esercizi di mouse e tastiera</small></span><span class="toc-p" data-c="8"></span></li>
+<li><span class="n">9</span><span class="tt">Impostazioni e accessibilità<small>Vista, voce, IA, dati, aggiornamenti</small></span><span class="toc-p" data-c="9"></span></li>
+<li><span class="n">10</span><span class="tt">IA, microfono e voce: la configurazione automatica<small>Come sceglie il modello, Ollama e motore compatibile, la chiavetta</small></span><span class="toc-p" data-c="10"></span></li>
+<li><span class="n">11</span><span class="tt">Guida per il facilitatore<small>Preparare l'aula, condurre un incontro, consigli pratici</small></span><span class="toc-p" data-c="11"></span></li>
+<li><span class="n">12</span><span class="tt">Privacy e sicurezza<small>Dove stanno i dati, cosa non fa il programma</small></span><span class="toc-p" data-c="12"></span></li>
+<li><span class="n">13</span><span class="tt">Manutenzione, aggiornamenti e disinstallazione<small>Backup, aggiornare, togliere tutto</small></span><span class="toc-p" data-c="13"></span></li>
+<li><span class="n">14</span><span class="tt">Risoluzione dei problemi<small>Sintomo, causa, rimedio</small></span><span class="toc-p" data-c="14"></span></li>
+<li><span class="n">15</span><span class="tt">Riferimento rapido<small>Opzioni, cartelle, scorciatoie</small></span><span class="toc-p" data-c="15"></span></li>
+<li><span class="n">16</span><span class="tt">Windows XP e Vista<small>Istruzioni speciali per i computer più anziani</small></span><span class="toc-p" data-c="16"></span></li>
+<li><span class="n">17</span><span class="tt">Glossario semplice<small>Le parole del digitale spiegate in breve</small></span><span class="toc-p" data-c="17"></span></li>
+</ul>
+
+<!-- ======================================================= 1 -->
+<section class="capitolo"><span class="marca">§§c1§§</span>
+<div class="capitolo-testa"><span class="num">1</span><div><div class="eti">CAPITOLO</div><h1>Benvenuti nella Cattedra Digitale</h1></div></div>
+<p class="intro">Il Professore Digitale è un insegnante paziente che vive dentro il computer. Spiega l'informatica di base con parole semplici,
+disegna schemi alla lavagna, risponde alle domande a voce e fa esercitare mouse e tastiera. E lo fa <b>senza bisogno di Internet</b>.</p>
+<figure><img src="img-windows/01-home.jpg" alt=""><figcaption><b>Figura 1.</b> La schermata iniziale su Windows: il Professore saluta il corso,
+propone la prossima lezione e mostra i progressi. In alto, le «pastiglie» verdi dicono che IA, voce di Windows e microfono sono attivi.</figcaption></figure>
+<h2>A chi è rivolto</h2>
+<p>È pensato per i luoghi dove il divario digitale si sente di più: <b>centri anziani</b>, circoli culturali, biblioteche, parrocchie, scuole,
+associazioni e famiglie. Funziona bene anche dove la connessione è assente o instabile, perché tutto il lavoro avviene sul computer.
+La versione per Windows permette di usarlo sui computer che già ci sono, dal vecchio portatile con Windows XP al PC nuovo con Windows 11.</p>
+<h2>I principi del progetto</h2>
+<ul>
+<li><b>Offline per davvero.</b> Lezioni, guida, lavagna, palestra e voce funzionano senza rete. Internet serve solo, e una volta sola, per aggiungere i componenti facoltativi.</li>
+<li><b>Privacy per costruzione.</b> Domande, risposte e progressi restano sul computer. Nessun account, nessun tracciamento, nessun abbonamento.</li>
+<li><b>Tecnologia gentile e riuso.</b> Il programma è leggero (meno di 10 MB) e si adatta da solo a ciò che il computer può fare: meno rifiuti elettronici, più persone connesse.</li>
+<li><b>Su misura.</b> Prima di installare l'intelligenza artificiale, il Professore esamina il computer e sceglie il modello più adatto: né troppo grande (lento), né troppo piccolo.</li>
+<li><b>Non si blocca mai.</b> Se l'IA non c'è, o non risponde, il Professore usa la sua guida interna. L'allievo riceve sempre una risposta.</li>
+<li><b>Trasparenza.</b> Il programma non si collega a Internet da solo: aggiornamenti e scaricamenti partono solo se lo chiedete voi.</li>
+</ul>
+<h2>Cosa trovate dentro</h2>
+<table><thead><tr><th></th><th>Sezione</th><th>A cosa serve</th></tr></thead><tbody>
+<tr><td class="ico">📚</td><td><b>Lezioni</b></td><td>15 lezioni guidate (circa 5 ore in tutto), ognuna con passi brevi, uno schema alla lavagna, lettura ad alta voce e un quiz finale.</td></tr>
+<tr><td class="ico">💬</td><td><b>Chiedi al Professore</b></td><td>Domande scritte o a voce. Risponde la guida interna (92 risposte pronte, di cui 19 dedicate a Windows, più il testo delle lezioni) oppure l'IA locale.</td></tr>
+<tr><td class="ico">🖊️</td><td><b>Lavagna</b></td><td>Decine di schemi pronti da mostrare al gruppo e un foglio per disegnare con gessetti colorati.</td></tr>
+<tr><td class="ico">🎯</td><td><b>Palestra</b></td><td>Quattro esercizi: clic, doppio clic, trascinamento, tastiera. Con record personali.</td></tr>
+<tr><td class="ico">🧰</td><td><b>Configura IA e voce</b></td><td>Esame del computer e installazione guidata di intelligenza artificiale, microfono e voce naturale; chiavetta per i PC senza rete.</td></tr>
+<tr><td class="ico">⚙️</td><td><b>Impostazioni</b></td><td>Testo più grande, colori ad alto contrasto, modalità proiettore, voce, occhi che seguono il mouse, salvataggio dei progressi.</td></tr>
+</tbody></table>
+</section>
+
+<!-- ======================================================= 2 -->
+<section class="capitolo"><span class="marca">§§c2§§</span>
+<div class="capitolo-testa"><span class="num">2</span><div><div class="eti">CAPITOLO</div><h1>Di cosa avete bisogno</h1></div></div>
+<p class="intro">Il Professore Digitale si accontenta di poco: il programma di base funziona su qualsiasi Windows da XP in poi. Solo l'intelligenza
+artificiale chiede un computer più recente e un po' di memoria.</p>
+<h2>Che cosa funziona su quale Windows</h2>
+<table><thead><tr><th>Sistema</th><th>Lezioni, guida, lavagna, palestra</th><th>Voce</th><th>Microfono</th><th>IA locale</th></tr></thead><tbody>
+<tr><td><b>Windows 11</b>, <b>Windows 10 22H2</b></td><td class="si">✔</td><td class="si">✔ Windows + Paola</td><td class="si">✔ (64 bit)</td><td class="si">✔ Ollama</td></tr>
+<tr><td>Windows 10 non aggiornato (prima del 22H2)</td><td class="si">✔</td><td class="si">✔</td><td class="si">✔ (64 bit)</td><td class="si">✔ motore compatibile</td></tr>
+<tr><td><b>Windows 8 e 8.1</b></td><td class="si">✔</td><td class="si">✔</td><td class="si">✔ (64 bit)</td><td class="si">✔ motore compatibile (64 bit)</td></tr>
+<tr><td><b>Windows 7</b> SP1</td><td class="si">✔</td><td class="si">✔</td><td class="si">✔ (64 bit)</td><td class="si">✔ motore compatibile (64 bit)</td></tr>
+<tr><td><b>Windows Vista</b></td><td class="si">✔ con Supermium</td><td class="si">✔ se c'è una voce italiana</td><td class="no">—</td><td class="no">— guida interna</td></tr>
+<tr><td><b>Windows XP</b> SP3</td><td class="si">✔ con Supermium</td><td class="si">✔ se c'è una voce italiana</td><td class="no">—</td><td class="no">— guida interna</td></tr>
+<tr><td>Qualsiasi Windows a <b>32 bit</b></td><td class="si">✔</td><td class="si">✔</td><td class="no">—</td><td class="no">— guida interna</td></tr>
+</tbody></table>
+<p class="small">«Motore compatibile» è KoboldCpp, un programma che fa girare i modelli di IA anche sui Windows che Ollama non supporta (capitolo 10).
+Supermium è un browser moderno costruito apposta per Windows XP e Vista (capitolo 16).</p>
+<h2>Il computer</h2>
+<table><thead><tr><th>Uso</th><th>Memoria (RAM)</th><th>Processore</th><th>Spazio su disco</th></tr></thead><tbody>
+<tr><td><b>Programma di base</b><br><span class="small">lezioni, guida, lavagna, palestra, voce di Windows</span></td><td>1 GB (XP, Vista, 7) · 2 GB (8, 10, 11)</td><td>Qualsiasi, anche 32 bit</td><td>10 MB</td></tr>
+<tr><td><b>Con microfono</b> (Vosk)</td><td>2 GB</td><td>64 bit</td><td>+ 110 MB</td></tr>
+<tr><td><b>Con IA locale</b>, PC datato</td><td>4 GB</td><td>64 bit, 2 core</td><td>+ 1–2 GB</td></tr>
+<tr><td><b>Con IA locale</b>, PC normale</td><td>8 GB</td><td>64 bit, 4 core con AVX2</td><td>+ 3–5 GB</td></tr>
+<tr><td><b>Con IA locale</b>, PC recente o con scheda video</td><td>16–32 GB, oppure scheda video NVIDIA/AMD da 6–12 GB</td><td>64 bit</td><td>+ 7–10 GB</td></tr>
+</tbody></table>
+<p>Servono anche uno schermo, altoparlanti o cuffie per la voce e, per fare domande a voce, un microfono (anche quello del portatile o della webcam).</p>
+<h2>Il browser</h2>
+<p>Il Professore si mostra dentro un browser, in una finestra pulita, senza barre. Lo sceglie da solo: <b>Microsoft Edge</b> (già presente in
+Windows 10 e 11), <b>Google Chrome</b>, <b>Supermium</b>, Brave o Vivaldi; in mancanza usa <b>Firefox</b>. Su Windows 7 e 8 vanno bene le ultime
+versioni di Edge e Chrome per quei sistemi. Internet Explorer è troppo vecchio: se il Professore si apre lì, compare un messaggio con le istruzioni.</p>
+<h2>I file che ricevete</h2>
+<table><thead><tr><th>File</th><th>Cos'è</th></tr></thead><tbody>
+<tr><td><code>ProfessoreDigitale-Setup-2.3.0.exe</code></td><td>L'installatore per Windows, unico per tutti i sistemi da XP a 11, a 32 e 64 bit (circa 9 MB).</td></tr>
+<tr><td><code>professore-digitale-windows-2.3.0.zip</code></td><td>La <b>versione da chiavetta</b>: si estrae e si usa senza installare; i progressi restano sulla chiavetta.</td></tr>
+<tr><td><code>professore-digitale-portatile.html</code></td><td>La versione da aprire con doppio clic in qualsiasi browser, senza installazione (senza IA e senza microfono).</td></tr>
+<tr><td><code>professore-digitale_2.3.0_all.deb</code></td><td>Il pacchetto per i computer Linux.</td></tr>
+<tr><td><code>SHA256SUMS</code></td><td>Le «impronte digitali» dei file, per verificare che siano integri.</td></tr>
+</tbody></table>
+<div class="box"><span class="t">Installatore o versione portatile?</span>
+Installate il programma sui computer dell'aula: offre la voce di Windows, il microfono, l'IA locale, l'icona vicino all'orologio e il salvataggio su disco.
+Usate la versione da chiavetta sui computer che non potete modificare (biblioteca, ufficio) e la versione portatile <code>.html</code> per una prova veloce.</div>
+</section>
+
+<!-- ======================================================= 3 -->
+<section class="capitolo"><span class="marca">§§c3§§</span>
+<div class="capitolo-testa"><span class="num">3</span><div><div class="eti">CAPITOLO</div><h1>Installazione</h1></div></div>
+<p class="intro">Un solo installatore va bene per tutti i computer Windows. L'installazione non scarica nulla da Internet e richiede meno di un minuto.</p>
+<h2>Metodo A · Con il mouse (consigliato)</h2>
+<ol class="passi">
+<li>Copiate <code>ProfessoreDigitale-Setup-2.3.0.exe</code> sul desktop o nella cartella <b>Download</b> e fate <b>doppio clic</b>.</li>
+<li>Se compare la finestra blu <b>«Windows ha protetto il PC»</b>, fate clic su <b>Ulteriori informazioni</b> e poi su <b>Esegui comunque</b> (vedi riquadro).</li>
+<li>Scegliete <b>per chi</b> installare: <b>«Per tutti gli utenti»</b> (consigliato nelle aule: serve la password di amministratore) oppure
+<b>«Solo per me»</b> (non chiede nessuna password).</li>
+<li>Lasciate le spunte proposte: programma, icona sul desktop e — sui Windows a 64 bit — il motore del microfono.</li>
+<li>Al termine lasciate la spunta su <b>«Configura subito IA e voce»</b> se il computer è collegato a Internet: il Professore si apre e vi guida (capitolo 10).
+Altrimenti scegliete solo <b>«Apri il Professore Digitale»</b>.</li>
+</ol>
+<div class="box attenzione"><span class="t">Perché Windows avvisa?</span>
+SmartScreen mostra quell'avviso per tutti i programmi nuovi che non hanno ancora una «firma digitale» a pagamento. Il Professore è software libero:
+il suo codice è pubblico e ogni file ha un'impronta SHA-256 verificabile. Scaricatelo solo dal sito del progetto o dalla chiavetta del corso.
+Alcuni antivirus possono chiedere conferma la prima volta: è normale.</div>
+<h2>Metodo B · Per molti computer (aule, centri, scuole)</h2>
+<p>L'installatore accetta opzioni per lavorare senza domande, utili con gli strumenti di distribuzione o da un file <code>.bat</code> sulla chiavetta:</p>
+<pre><span class="c">rem per tutti gli utenti, in silenzio (da amministratore)</span>
+ProfessoreDigitale-Setup-2.3.0.exe /S /AllUsers
+<span class="c">rem solo per l'utente attuale, senza password</span>
+ProfessoreDigitale-Setup-2.3.0.exe /S /CurrentUser</pre>
+<p>I progressi degli allievi stanno nel profilo di ciascun utente di Windows: con un account per allievo, ognuno ritrova il proprio percorso.</p>
+<h2>Metodo C · Versione da chiavetta (senza installare)</h2>
+<ol class="passi">
+<li>Estraete <code>professore-digitale-windows-2.3.0.zip</code> sulla chiavetta (tasto destro → <b>Estrai tutto</b>).</li>
+<li>Aprite la cartella <code>ProfessoreDigitale</code> e fate doppio clic su <code>ProfessoreDigitale.exe</code>.</li>
+<li>I progressi vengono salvati nella sottocartella <code>dati</code>, accanto al programma: la chiavetta passa da un PC all'altro con il proprio percorso.</li>
+</ol>
+<h2>Metodo D · La versione portatile</h2>
+<p>Doppio clic su <code>professore-digitale-portatile.html</code>: si apre nel browser e funziona subito, anche da chiavetta. I progressi vengono ricordati dal browser di quel computer.</p>
+<h2>Verificare l'integrità del file (facoltativo)</h2>
+<p>Se il file è passato da molte chiavette, controllate che non si sia rovinato. Nella cartella del file, tenendo premuto <kbd>Maiusc</kbd>, fate clic destro in uno spazio vuoto,
+scegliete <b>Apri finestra PowerShell qui</b> (o <b>Prompt dei comandi</b>) e scrivete:</p>
+<pre>certutil -hashfile ProfessoreDigitale-Setup-2.3.0.exe SHA256</pre>
+<p>Il codice che compare deve essere uguale a quello scritto accanto al nome del file in <code>SHA256SUMS</code> (si apre con il Blocco note).</p>
+<div class="box consiglio"><span class="t">Consiglio</span>Per preparare molti computer, mettete su una chiavetta l'installatore, questo vademecum e la cartella
+<code>ProfessoreDigitale-kit</code> con l'IA e la voce già pronte (capitolo 10): in pochi minuti ogni PC è completo, anche senza Internet.</div>
+</section>
+
+<!-- ======================================================= 4 -->
+<section class="capitolo"><span class="marca">§§c4§§</span>
+<div class="capitolo-testa"><span class="num">4</span><div><div class="eti">CAPITOLO</div><h1>Il primo avvio</h1></div></div>
+<p class="intro">Fate doppio clic sull'icona <b>Professore Digitale</b> sul desktop, oppure cercatela nel menu <b>Start</b>.
+Dopo qualche secondo si apre una finestra pulita, senza le barre del browser.</p>
+<h2>Cosa succede dietro le quinte</h2>
+<p>L'icona avvia un piccolo programma invisibile che lavora solo dentro il computer (all'indirizzo <code>http://127.0.0.1:8765</code>) e apre
+l'interfaccia nel browser. Se l'icona viene premuta di nuovo, il programma non si duplica: riapre la finestra. Quando tutte le finestre del
+Professore restano chiuse per quattro minuti, si spegne da solo per non consumare memoria.</p>
+<h2>L'icona vicino all'orologio</h2>
+<p>Mentre il Professore è attivo, la sua icona compare nell'<b>area di notifica</b>, in basso a destra accanto all'orologio (su Windows 10 e 11 può essere
+nascosta sotto la piccola freccia <b>^</b>).</p>
+<table><thead><tr><th>Azione</th><th>Cosa fa</th></tr></thead><tbody>
+<tr><td>Clic sull'icona</td><td>Riapre la finestra del Professore.</td></tr>
+<tr><td>Tasto destro → <b>Configura IA e voce</b></td><td>Apre la configurazione guidata (capitolo 10).</td></tr>
+<tr><td>Tasto destro → <b>Vademecum (PDF)</b></td><td>Apre questo libretto.</td></tr>
+<tr><td>Tasto destro → <b>Cartella dei progressi</b></td><td>Mostra dove sono salvati progressi e impostazioni.</td></tr>
+<tr><td>Tasto destro → <b>Chiudi il Professore Digitale</b></td><td>Spegne il programma (non si perde nulla).</td></tr>
+</tbody></table>
+<h2>La barra in alto</h2>
+<table><thead><tr><th>Pastiglia</th><th>Significato</th></tr></thead><tbody>
+<tr><td>🤖 nome del modello / 🤖 Guida interna</td><td>Quale «cervello» risponde: l'IA locale oppure la guida interna.</td></tr>
+<tr><td>🔊 voce di Windows / voce naturale</td><td>Il motore della voce in uso.</td></tr>
+<tr><td>🎤 vosk / microfono spento</td><td>Se le domande a voce sono attive.</td></tr>
+<tr><td>🔒 Offline</td><td>Promemoria: tutto resta su questo computer.</td></tr>
+</tbody></table>
+<table><thead><tr><th>Pulsante</th><th>Cosa fa</th></tr></thead><tbody>
+<tr><td><b>■ Stop voce</b> (rosso)</td><td>Compare mentre il Professore parla: lo fa tacere subito. Anche <kbd>Esc</kbd> ferma la voce.</td></tr>
+<tr><td><b>A−</b> e <b>A+</b></td><td>Rimpiccioliscono o ingrandiscono tutto il testo.</td></tr>
+<tr><td><b>◐</b></td><td>Cambia i colori: chiaro, scuro, alto contrasto.</td></tr>
+<tr><td><b>⛶</b></td><td>Modalità proiettore: schermo intero, testo grande, menu nascosto.</td></tr>
+</tbody></table>
+<h2>Il Professore, i suoi stati e i suoi occhi</h2>
+<p>Il personaggio con il tocco e gli occhiali cambia espressione per far capire cosa sta facendo: un aiuto prezioso per chi è alle prime armi.
+Da questa versione <b>i suoi occhi seguono il puntatore del mouse</b>: ogni occhio guarda per conto suo (se avvicinate il mouse al viso, gli occhi
+si avvicinano tra loro come fanno i nostri), il movimento è morbido, le palpebre sbattono a intervalli irregolari, le pupille si allargano con i colori scuri
+e quando nessuno muove il mouse il Professore si guarda un po' intorno. Mentre l'allievo scrive una domanda, il Professore guarda la casella di testo.</p>
+<figure class="media"><img src="img-windows/occhi.jpg" alt=""><figcaption><b>Figura 2.</b> Lo sguardo segue il mouse: in alto a sinistra, in basso, a destra.</figcaption></figure>
+<table><thead><tr><th>Stato</th><th>Come si riconosce</th></tr></thead><tbody>
+<tr><td><b>Pronto ad aiutarvi</b></td><td>Sbatte le palpebre e segue con lo sguardo il mouse.</td></tr>
+<tr><td><b>Vi ascolto…</b></td><td>Onde arancioni vicino all'orecchio e sopracciglia alzate: il microfono è acceso.</td></tr>
+<tr><td><b>Sto pensando…</b></td><td>Nuvolette sopra la testa e sguardo verso l'alto: sta preparando la risposta.</td></tr>
+<tr><td><b>Sto spiegando…</b></td><td>La bocca si muove: sta leggendo ad alta voce.</td></tr>
+</tbody></table>
+<p class="small">Chi preferisce un'immagine ferma può spegnere gli occhi mobili in <b>Impostazioni → Vista</b>. Se in Windows è attiva l'opzione
+«Mostra animazioni» spenta (riduzione del movimento), gli occhi restano fermi da soli.</p>
+</section>
+<!-- ======================================================= 5 -->
+<section class="capitolo"><span class="marca">§§c5§§</span>
+<div class="capitolo-testa"><span class="num">5</span><div><div class="eti">CAPITOLO</div><h1>Le Lezioni</h1></div></div>
+<p class="intro">Il cuore della Cattedra è un percorso di 15 lezioni, dal primo contatto con il computer fino ai servizi pubblici digitali,
+agli acquisti sicuri e all'intelligenza artificiale. Ogni lezione dura dai 15 ai 25 minuti.</p>
+<h2>Il catalogo</h2>
+<table><thead><tr><th></th><th>Lezione</th><th>Livello</th><th>Min.</th><th>Obiettivo</th></tr></thead><tbody>
+<tr><td class="ico">🖥️</td><td><b>Il computer: com'è fatto</b></td><td>Primi passi</td><td>15</td><td>Conoscere le parti del computer, accenderlo e spegnerlo nel modo giusto.</td></tr>
+<tr><td class="ico">🖱️</td><td><b>Usare il mouse</b></td><td>Primi passi</td><td>20</td><td>Clic, doppio clic, clic destro, trascinare.</td></tr>
+<tr><td class="ico">⌨️</td><td><b>La tastiera senza paura</b></td><td>Primi passi</td><td>20</td><td>Scrivere, correggere, maiuscole, chiocciola @.</td></tr>
+<tr><td class="ico">🪟</td><td><b>Il desktop e le finestre</b></td><td>Primi passi</td><td>15</td><td>Orientarsi sul desktop, ridurre, ingrandire e chiudere finestre.</td></tr>
+<tr><td class="ico">📁</td><td><b>File e cartelle: l'armadio digitale</b></td><td>Intermedio</td><td>20</td><td>Salvare, ritrovare, cestino, chiavetta USB.</td></tr>
+<tr><td class="ico">🌐</td><td><b>Internet e il browser</b></td><td>Intermedio</td><td>20</td><td>Cos'è Internet, cercare, riconoscere i siti affidabili.</td></tr>
+<tr><td class="ico">✉️</td><td><b>La posta elettronica</b></td><td>Intermedio</td><td>20</td><td>Scrivere un'email, allegare una foto, riconoscere lo spam.</td></tr>
+<tr><td class="ico">📱</td><td><b>Smartphone, messaggi e videochiamate</b></td><td>Intermedio</td><td>20</td><td>Messaggi, vocali e videochiamate con i propri cari.</td></tr>
+<tr><td class="ico">🖼️</td><td><b>Foto e ricordi al sicuro</b></td><td>Intermedio</td><td>15</td><td>Passare le foto dal telefono al computer, ordinarle, farne copie.</td></tr>
+<tr><td class="ico">🔐</td><td><b>Password e sicurezza</b></td><td>Sicurezza</td><td>20</td><td>La frase segreta, dove conservarla, la verifica in due passaggi.</td></tr>
+<tr><td class="ico">🛡️</td><td><b>Riconoscere le truffe online</b></td><td>Sicurezza</td><td>25</td><td>Phishing, SMS falsi, finti tecnici; cosa fare se si è stati truffati.</td></tr>
+<tr><td class="ico">🛒</td><td><b>Acquisti e pagamenti online sicuri</b></td><td>Sicurezza</td><td>20</td><td>Scegliere il negozio, pagare in modo protetto, riconoscere i falsi.</td></tr>
+<tr><td class="ico">🏛️</td><td><b>Servizi pubblici digitali</b></td><td>Avanzato</td><td>25</td><td>SPID, CIE, app IO, pagoPA e come riconoscere i falsi.</td></tr>
+<tr><td class="ico">🤖</td><td><b>L'intelligenza artificiale, spiegata semplice</b></td><td>Avanzato</td><td>20</td><td>Cosa sa fare l'IA, dove sbaglia, perché l'IA locale tutela la privacy.</td></tr>
+<tr><td class="ico">🐧</td><td><b>Linux, software libero e riuso</b></td><td>Avanzato</td><td>15</td><td>Perché un computer vecchio può rinascere: utile anche a chi usa Windows XP o 7.</td></tr>
+</tbody></table>
+<h2>Come è fatta una lezione</h2>
+<figure><img src="img-windows/03-lezione.jpg" alt=""><figcaption><b>Figura 3.</b> Un passo della lezione sulle truffe: a sinistra il testo, a destra lo schema disegnato sulla lavagna.</figcaption></figure>
+<ol class="passi">
+<li>I pallini numerati in alto sono i <b>passi</b>; il punto interrogativo è il <b>quiz</b>. I passi già visti diventano verdi. Si può saltare avanti e indietro liberamente.</li>
+<li>Il testo è breve e usa metafore della vita quotidiana (l'armadio per le cartelle, la strada per Internet, la chiave per la password). In fondo c'è spesso un 💡 consiglio.</li>
+<li>La lavagna a destra mostra lo <b>schema</b> del passo, quando c'è.</li>
+<li><b>🔊 Leggi ad alta voce</b> fa leggere il passo al Professore; <b>💬 Ho una domanda</b> porta alle domande con l'argomento già scritto.</li>
+<li><b>Avanti →</b> e <b>← Indietro</b>, grandi e in basso, per chi ha difficoltà con il mouse.</li>
+</ol>
+<h2>Il quiz finale</h2>
+<div class="affianca"><figure><img src="img-windows/04-quiz.jpg" alt=""><figcaption><b>Figura 4.</b> Il quiz: ogni risposta viene spiegata subito.</figcaption></figure>
+<div><p>Il quiz <b>non dà voti</b>: serve a ripassare. Dopo ogni risposta il Professore dice se è giusta e spiega il perché, a voce e per iscritto.
+La risposta corretta viene sempre evidenziata in verde.</p>
+<p>Quando tutte le domande hanno una risposta, la lezione risulta completata e compaiono due pulsanti: la lezione successiva e, dove previsto,
+l'esercizio collegato in Palestra. I progressi (passi visti, lezioni completate, punteggi) vengono salvati da soli.</p></div></div>
+</section>
+
+<!-- ======================================================= 6 -->
+<section class="capitolo"><span class="marca">§§c6§§</span>
+<div class="capitolo-testa"><span class="num">6</span><div><div class="eti">CAPITOLO</div><h1>Chiedi al Professore</h1></div></div>
+<p class="intro">Qui si fanno le domande, con le proprie parole: «come si scrive la chiocciola?», «il programma non risponde», «mi è comparso un messaggio
+che dice di chiamare l'assistenza Microsoft». Il Professore risponde per iscritto, a voce e, quando serve, con uno schema sulla lavagna.</p>
+<figure><img src="img-windows/05-chiedi.jpg" alt=""><figcaption><b>Figura 5.</b> Una risposta della guida interna su Windows, con lo schema sulla lavagna e i suggerimenti collegati.</figcaption></figure>
+<h2>Fare una domanda</h2>
+<ul>
+<li><b>Scrivendo:</b> scrivete nel riquadro e premete <b>Invia</b> oppure <kbd>Invio</kbd>. Per andare a capo senza inviare: <kbd>Maiusc</kbd> + <kbd>Invio</kbd>.</li>
+<li><b>Con i suggerimenti:</b> i pulsanti tondi sopra il riquadro sono domande pronte, utili per rompere il ghiaccio.</li>
+<li><b>A voce:</b> premete il microfono arancione 🎤 e parlate. Quando smettete di parlare, dopo un paio di secondi il Professore capisce che avete finito
+(potete anche premere di nuovo il pulsante, diventato ■). La prima volta il browser chiede il permesso di usare il microfono: scegliete <b>Consenti</b>.
+Il microfono si attiva con la configurazione del capitolo 10.</li>
+</ul>
+<h2>Chi risponde: guida interna o IA</h2>
+<table><thead><tr><th></th><th>📚 Guida interna</th><th>🤖 IA locale</th></tr></thead><tbody>
+<tr><td><b>Sempre disponibile</b></td><td>Sì, su ogni Windows e nella versione portatile</td><td>Solo se configurata (capitolo 10)</td></tr>
+<tr><td><b>Cosa sa</b></td><td>92 risposte verificate (19 dedicate a Windows) più il testo delle 15 lezioni</td><td>Risponde a domande libere, formulate in molti modi</td></tr>
+<tr><td><b>Affidabilità</b></td><td>Contenuti scritti e controllati</td><td>Buona, ma può sbagliare: va verificata sui temi importanti</td></tr>
+<tr><td><b>Velocità</b></td><td>Istantanea</td><td>Da pochi secondi a un minuto, secondo il computer e il modello</td></tr>
+</tbody></table>
+<p>Quando l'IA è attiva, il Professore le passa anche le informazioni pertinenti della guida interna: così anche i modelli più piccoli danno risposte più precise.
+Se l'IA non risponde o dà errore, la risposta arriva comunque dalla guida interna, con una nota che lo segnala. Se la guida non trova una risposta adatta,
+lo dice apertamente e propone gli argomenti più vicini: meglio un «non lo so» onesto che una risposta sbagliata.</p>
+<p>Sui computer Windows, alle domande su argomenti comuni (file scaricati, chiavetta, antivirus, schermate) il Professore preferisce le risposte scritte
+<b>apposta per Windows</b>: menu Start, Esplora file, <kbd>Ctrl</kbd> + <kbd>Alt</kbd> + <kbd>Canc</kbd>, Windows Update, Sicurezza di Windows, voce italiana.</p>
+<h2>I pulsanti sotto le risposte</h2>
+<table><tbody>
+<tr><td><b>🔊 Riascolta</b></td><td>Fa rileggere la risposta.</td></tr>
+<tr><td><b>📊 Schema</b></td><td>Riporta sulla lavagna lo schema di quella risposta.</td></tr>
+<tr><td><b>📚 Apri la lezione</b></td><td>Porta al passo della lezione da cui proviene la risposta.</td></tr>
+<tr><td><b>■ Ferma la risposta</b></td><td>Interrompe l'IA mentre scrive (utile se la risposta è troppo lunga).</td></tr>
+<tr><td><b>🧹 Nuova conversazione</b></td><td>Cancella la conversazione e ricomincia (ad esempio quando cambia l'allievo).</td></tr>
+</tbody></table>
+<div class="box attenzione"><span class="t">Con l'IA, buon senso</span>Insegnate agli allievi a verificare con una fonte ufficiale o con una persona di fiducia
+le informazioni su salute, soldi, leggi e scadenze. Il Professore stesso lo ricorda nella lezione sull'intelligenza artificiale.</div>
+</section>
+
+<!-- ======================================================= 7 -->
+<section class="capitolo"><span class="marca">§§c7§§</span>
+<div class="capitolo-testa"><span class="num">7</span><div><div class="eti">CAPITOLO</div><h1>La Lavagna</h1></div></div>
+<p class="intro">La lavagna ha due facce: gli schemi pronti, da proiettare mentre si spiega, e il disegno libero, per tracciare a mano frecce, cerchi e parole.</p>
+<div class="affianca">
+<figure><img src="img-windows/06-lavagna.jpg" alt=""><figcaption><b>Figura 6.</b> Gli schemi pronti: si sceglie dall'elenco o si scorre con Precedente e Successivo.</figcaption></figure>
+<figure><img src="img-windows/07-disegno.jpg" alt=""><figcaption><b>Figura 7.</b> Il disegno libero: gessetti colorati, spessore, cancellino, annulla, pulisci e salva.</figcaption></figure>
+</div>
+<h2>Schemi pronti</h2>
+<p>L'elenco raccoglie gli schemi delle lezioni e della guida e, in cima, l'ultimo schema disegnato in una risposta. <b>⛶ Schermo intero</b> ingrandisce
+la lavagna per il proiettore. Sulle lavagne strette gli schemi orizzontali lunghi vengono ridisposti in verticale da soli, per restare leggibili.</p>
+<h2>Disegno libero</h2>
+<ul>
+<li><b>Gessetti:</b> sei colori (bianco, giallo, rosa, azzurro, verde, arancio). Funziona con il mouse, con il dito sugli schermi touch e con le penne.</li>
+<li><b>Spessore:</b> il cursore regola la grandezza del tratto.</li>
+<li><b>🧽 Cancellino</b>, <b>↶ Annulla</b> (fino a 20 passi indietro) e <b>🗑️ Pulisci</b>.</li>
+<li><b>💾 Salva immagine:</b> scarica il disegno come immagine PNG nella cartella <b>Download</b>, per stamparlo o mandarlo al gruppo.</li>
+</ul>
+<p>Il disegno resta sulla lavagna anche se passate a un'altra sezione e poi tornate.</p>
+</section>
+
+<!-- ======================================================= 8 -->
+<section class="capitolo"><span class="marca">§§c8§§</span>
+<div class="capitolo-testa"><span class="num">8</span><div><div class="eti">CAPITOLO</div><h1>La Palestra</h1></div></div>
+<p class="intro">Mouse e tastiera si imparano con le mani, non con gli occhi. La Palestra propone quattro esercizi brevi e giocosi, in cui non si può
+sbagliare: si può solo migliorare.</p>
+<div class="affianca">
+<figure><img src="img-windows/08-palestra.jpg" alt=""><figcaption><b>Figura 8.</b> I quattro esercizi, con i record personali.</figcaption></figure>
+<figure><img src="img-windows/09-tastiera.jpg" alt=""><figcaption><b>Figura 9.</b> Tastiera: le lettere giuste diventano verdi, quelle sbagliate rosse.</figcaption></figure>
+</div>
+<table><thead><tr><th></th><th>Esercizio</th><th>Cosa si allena</th><th>Come funziona</th></tr></thead><tbody>
+<tr><td class="ico">🎯</td><td><b>Il clic</b></td><td>Mira e clic sinistro</td><td>Compaiono 10 palloncini, uno alla volta, in punti diversi; diventano più piccoli man mano. Record: il tempo più breve.</td></tr>
+<tr><td class="ico">📂</td><td><b>Il doppio clic</b></td><td>Selezionare e aprire</td><td>Cinque cartelle: un clic le seleziona, due clic rapidi le aprono. Insegna la differenza tra i due gesti, fondamentale in Windows.</td></tr>
+<tr><td class="ico">✋</td><td><b>Trascinare</b></td><td>Tenere premuto e spostare</td><td>Cinque fogli da portare nella cartella in basso a destra, come in Esplora file.</td></tr>
+<tr><td class="ico">⌨️</td><td><b>La tastiera</b></td><td>Scrivere e correggere</td><td>Dodici parole di difficoltà crescente, da «casa» fino a «mario@esempio.it», con suggerimenti su Maiusc, spazio, <kbd>Alt Gr</kbd> e trattino.</td></tr>
+</tbody></table>
+<div class="box consiglio"><span class="t">Consiglio per il facilitatore</span>Fate fare l'esercizio del clic all'inizio di ogni incontro, come «riscaldamento».
+Vedere il proprio tempo migliorare di settimana in settimana è un grande incoraggiamento. Sui portatili, all'inizio, collegate un mouse con il filo:
+il touchpad è più difficile.</div>
+</section>
+
+<!-- ======================================================= 9 -->
+<section class="capitolo"><span class="marca">§§c9§§</span>
+<div class="capitolo-testa"><span class="num">9</span><div><div class="eti">CAPITOLO</div><h1>Impostazioni e accessibilità</h1></div></div>
+<p class="intro">Ogni gruppo è diverso. Le impostazioni adattano la Cattedra alla vista, all'udito e al ritmo di chi la usa. Le scelte vengono salvate
+e ritrovate al prossimo avvio.</p>
+<figure class="media"><img src="img-windows/10-impostazioni.jpg" alt=""><figcaption><b>Figura 10.</b> La pagina delle impostazioni, divisa in schede.</figcaption></figure>
+<h3>👁️ Vista</h3>
+<ul>
+<li><b>Dimensione del testo</b> da 14 a 34 punti (anche con A− / A+ in alto).</li>
+<li><b>Colori</b>: chiaro, scuro (riposante la sera o nelle stanze buie), alto contrasto giallo su nero per chi vede poco.</li>
+<li><b>Modalità proiettore</b>: testo grande e menu nascosto.</li>
+<li><b>Gli occhi del Professore seguono il mouse</b>: attivo di serie; spegnetelo se distrae.</li>
+<li><b>Nome dell'insegnante o del corso</b>: compare nel saluto iniziale e viene comunicato all'IA.</li>
+</ul>
+<div class="affianca">
+<figure><img src="img-windows/11-contrasto.jpg" alt=""><figcaption><b>Figura 11.</b> Colori ad alto contrasto.</figcaption></figure>
+<figure><img src="img-windows/12-proiettore.jpg" alt=""><figcaption><b>Figura 12.</b> Modalità proiettore con colori scuri.</figcaption></figure>
+</div>
+<h3>🔊 Voce</h3>
+<ul>
+<li><b>Voce attiva</b>: l'interruttore generale. <b>Leggi automaticamente le risposte</b> (attivo di serie) e <b>i passi delle lezioni</b> (spento di serie).</li>
+<li><b>Velocità</b> da 0,60 a 1,40. Per le persone anziane si consiglia tra 0,85 e 0,95.</li>
+<li><b>Motore vocale</b>: «Automatico» usa la voce naturale «Paola» se installata, altrimenti la <b>voce italiana di Windows</b> (ad esempio «Microsoft Elsa»),
+e in mancanza la voce del browser. <b>▶ Prova la voce</b> controlla volume e velocità.</li>
+</ul>
+<h3>🤖 Intelligenza artificiale e 🎤 microfono</h3>
+<p>Mostrano se l'IA (Ollama o il motore compatibile) e il riconoscimento vocale sono attivi, quale modello è in uso e quale è consigliato. Se qualcosa
+manca, un collegamento porta a <b>Configura IA e voce</b>. Si può spegnere l'IA (per usare solo la guida interna) e decidere se inviare subito la domanda
+dopo aver parlato. <b>🔄 Ricontrolla i componenti</b> aggiorna lo stato dopo un'installazione.</p>
+<h3>📦 Dati e progressi</h3>
+<p><b>Esporta progressi</b> salva un file <code>professore-digitale-progressi.json</code> nella cartella Download; <b>Importa</b> lo ricarica (anche su un altro computer,
+anche Linux); <b>Azzera progressi</b> ricomincia il percorso e chiede una seconda conferma. <b>📂 Cartella dei progressi</b> la apre in Esplora file.</p>
+<h3>🧩 Contenuti aggiuntivi, 🔄 Aggiornamenti e 🩺 Diagnostica</h3>
+<p>Si possono importare pacchetti di domande e lezioni (file <code>.json</code>) senza reinstallare. Il controllo degli aggiornamenti parte solo premendo il pulsante:
+se c'è una versione nuova il Professore la scarica, ne verifica l'impronta e propone <b>▶ Installa adesso</b> (capitolo 13). La Diagnostica riassume lo stato
+del sistema: utile da copiare quando si chiede aiuto.</p>
+</section>
+
+<!-- ======================================================= 10 -->
+<section class="capitolo"><span class="marca">§§c10§§</span>
+<div class="capitolo-testa"><span class="num">10</span><div><div class="eti">CAPITOLO</div><h1>IA, microfono e voce: la configurazione automatica</h1></div></div>
+<p class="intro">Il programma di base è completo. Tre componenti facoltativi lo arricchiscono: l'<b>intelligenza artificiale locale</b>, il <b>microfono</b>
+e la <b>voce naturale</b>. Il Professore esamina il computer, sceglie la combinazione migliore e installa tutto con un clic. Internet serve solo in quel momento.</p>
+<p>Si apre dal menu a sinistra (<b>🧰 Configura IA e voce</b>), dal menu <b>Start → Professore Digitale → Configura IA e voce</b> o dall'icona vicino all'orologio.</p>
+<figure><img src="img-windows/13-configura.jpg" alt=""><figcaption><b>Figura 13.</b> La configurazione guidata: a sinistra cosa c'è nel computer, a destra i modelli
+di IA con quello consigliato per questa macchina, sotto voce e microfono.</figcaption></figure>
+<h2>1 · L'esame del computer</h2>
+<p>Il Professore legge, senza inviare nulla a nessuno:</p>
+<table><thead><tr><th>Cosa controlla</th><th>Perché conta</th></tr></thead><tbody>
+<tr><td><b>Versione di Windows</b> (con aggiornamento, es. 22H2) e <b>32/64 bit</b></td><td>Decide il motore: Ollama richiede Windows 10 22H2 o 11 a 64 bit; i Windows più vecchi a 64 bit usano il motore compatibile; XP, Vista e i 32 bit usano la guida interna.</td></tr>
+<tr><td><b>Memoria (RAM)</b></td><td>Il modello deve starci comodo insieme a Windows e al browser.</td></tr>
+<tr><td><b>Processore</b>: core e istruzioni <b>AVX/AVX2</b></td><td>Senza AVX2 o con meno di 4 core i modelli grandi sarebbero troppo lenti: si scelgono quelli adatti ai «PC lenti».</td></tr>
+<tr><td><b>Scheda video</b> e sua <b>memoria</b> (VRAM)</td><td>Una scheda NVIDIA o AMD con almeno 6–8 GB fa correre modelli più grandi anche con poca RAM.</td></tr>
+<tr><td><b>Spazio libero</b> sul disco</td><td>Il modello scelto deve entrarci con margine.</td></tr>
+</tbody></table>
+<h2>2 · La scelta del modello</h2>
+<p>Tra i modelli del catalogo il Professore propone <b>il più capace che quel computer può far funzionare con risposte rapide</b>. Gli altri restano sceglibili
+a mano, con un'etichetta: «Consigliato per questo PC», «Potrebbe essere lento», «Troppo grande per questo PC».</p>
+<h3>Windows 10 22H2 e Windows 11 · motore Ollama</h3>
+<table><thead><tr><th>Modello</th><th>Dimensione</th><th>Scelto quando il PC ha…</th></tr></thead><tbody>
+<tr><td><b>Qwen 3.5 · 0,8 miliardi</b> <code>qwen3.5:0.8b</code></td><td>1 GB</td><td>4–5 GB di RAM, processori datati</td></tr>
+<tr><td><b>Qwen 3.5 · 2 miliardi</b> <code>qwen3.5:2b</code></td><td>2,7 GB</td><td>6–8 GB di RAM, oppure scheda video da 3 GB</td></tr>
+<tr><td><b>Qwen 3.5 · 4 miliardi</b> <code>qwen3.5:4b</code></td><td>3,4 GB</td><td>8–16 GB di RAM e processore moderno, oppure scheda video da 5 GB</td></tr>
+<tr><td><b>Qwen 3.5 · 9 miliardi</b> <code>qwen3.5:9b</code></td><td>6,6 GB</td><td>16 GB di RAM, oppure scheda video da 8 GB</td></tr>
+<tr><td><b>Gemma 4 · 12 miliardi</b> <code>gemma4:12b</code></td><td>8 GB</td><td>24–32 GB di RAM, oppure scheda video da 10–12 GB</td></tr>
+<tr><td colspan="3" class="small">Alternative da scegliere a mano: <b>Gemma 3 · 1 miliardo</b> (leggero), <b>Ministral 3 · 3 miliardi</b> (italiano molto naturale), <b>Gemma 3 · 4 miliardi</b>.</td></tr>
+</tbody></table>
+<h3>Windows 7, 8, 8.1 (64 bit) · motore compatibile KoboldCpp</h3>
+<table><thead><tr><th>Modello</th><th>Dimensione</th><th>Scelto quando il PC ha…</th></tr></thead><tbody>
+<tr><td><b>Qwen 2.5 · 0,5 miliardi</b></td><td>0,5 GB</td><td>3–4 GB di RAM</td></tr>
+<tr><td><b>Gemma 3 · 1 miliardo</b></td><td>0,8 GB</td><td>4–5 GB di RAM</td></tr>
+<tr><td><b>Qwen 2.5 · 1,5 miliardi</b></td><td>1,1 GB</td><td>6–8 GB di RAM</td></tr>
+<tr><td><b>Gemma 3 · 4 miliardi</b></td><td>2,5 GB</td><td>8 GB di RAM o più, processore con AVX2</td></tr>
+</tbody></table>
+<div class="box"><span class="t">Sempre «l'IA migliore del momento»</span>I modelli migliorano di mese in mese. L'elenco dei modelli è un piccolo file (il <b>catalogo</b>)
+che il progetto aggiorna e pubblica insieme agli aggiornamenti: premendo <b>Cerca un catalogo più recente</b> il Professore lo scarica, ne verifica l'impronta
+e da quel momento propone i modelli nuovi, senza reinstallare nulla.</div>
+<h2>3 · Un clic: «Configura automaticamente»</h2>
+<ol class="passi">
+<li><b>Motore.</b> Se Ollama manca, il Professore scarica il suo installatore ufficiale e lo installa in silenzio nella cartella dell'utente (non serve la password).
+Sui Windows più vecchi scarica il motore compatibile.</li>
+<li><b>Modello.</b> Scarica il modello scelto, mostrando la barra di avanzamento. Con un collegamento domestico servono da pochi minuti (modelli piccoli) a mezz'ora (i più grandi).</li>
+<li><b>Microfono e voce.</b> Se avete lasciato le spunte, scarica il modello italiano per il riconoscimento vocale (circa 50 MB) e la voce naturale «Paola» (circa 80 MB).</li>
+<li><b>Verifica.</b> Ogni file viene controllato con la sua impronta digitale SHA-256 (quando la fonte la pubblica) e con il controllo di integrità degli archivi.</li>
+<li><b>Prova.</b> Il Professore fa una domanda di prova in italiano al modello e mostra la risposta. Da quel momento il computer può restare scollegato.</li>
+</ol>
+<figure class="media"><img src="img-windows/14-configura-fatto.jpg" alt=""><figcaption><b>Figura 14.</b> Configurazione completata: l'IA è pronta e funziona offline.</figcaption></figure>
+<p>Potete continuare a usare il Professore mentre scarica. Il pulsante <b>■ Annulla</b> interrompe; ripetendo, i file già scaricati e verificati non vengono riscaricati.</p>
+<div class="box consiglio"><span class="t">Regola pratica</span>Meglio un modello piccolo che risponde in 10 secondi di uno grande che fa aspettare un minuto:
+davanti a un gruppo l'attenzione vale più della raffinatezza. Il Professore ragiona così quando sceglie per voi.</div>
+<h2>La voce di Windows</h2>
+<p>Il Professore parla con la <b>voce italiana di Windows</b>. Su Windows 10 e 11 in italiano di solito c'è già («Microsoft Elsa»). Se manca:
+<b>Start → Impostazioni → Ora e lingua → Voce → Aggiungi voci → Italiano</b>. In alternativa installate la <b>voce naturale «Paola»</b>,
+più morbida, che funziona senza Internet su Windows 7 e successivi a 64 bit.</p>
+<h2>Aule senza Internet: la chiavetta</h2>
+<p>Per i computer che non si collegheranno mai alla rete, preparate tutto una volta su un PC collegato e portatelo con una chiavetta (servono 2–10 GB secondo il modello).</p>
+<ol class="passi">
+<li>Sul PC collegato, in <b>Configura IA e voce → Computer senza Internet</b>, scegliete che Windows hanno i PC di destinazione, il modello e i componenti.</li>
+<li>Premete <b>💾 Prepara la chiavetta</b> e scegliete la chiavetta nella finestra di Windows. Il Professore crea la cartella <code>ProfessoreDigitale-kit</code>
+con i file, un elenco <code>kit.json</code> con le impronte di ciascuno e un <code>LEGGIMI.txt</code>. Copiate sulla chiavetta anche l'installatore del Professore.</li>
+<li>Su ogni PC senza rete: installate il Professore, aprite <b>Configura IA e voce</b>, premete <b>📥 Installa dalla chiavetta</b> e scegliete la cartella
+<code>ProfessoreDigitale-kit</code>. Ogni file viene verificato prima di essere installato: un file rovinato viene rifiutato con una spiegazione.</li>
+</ol>
+<p class="small">Per preparare un modello Ollama il PC collegato deve avere Windows 10 22H2 o 11 (il modello viene scaricato lì e poi copiato). Per i PC con Windows 7 e 8
+scegliete «Windows 7, 8 o 8.1»: la chiavetta conterrà il motore compatibile e il suo modello.</p>
+<h2>Togliere i componenti</h2>
+<p>In fondo alla pagina, <b>Togli l'IA</b>, <b>Togli il microfono</b> e <b>Togli la voce naturale</b> liberano spazio: il Professore continua con la guida interna
+e la voce di Windows. Ollama, se installato, è un programma a sé: si toglie da <b>Impostazioni di Windows → App</b> (o Pannello di controllo → Programmi).</p>
+</section>
+
+<!-- ======================================================= 11 -->
+<section class="capitolo"><span class="marca">§§c11§§</span>
+<div class="capitolo-testa"><span class="num">11</span><div><div class="eti">CAPITOLO</div><h1>Guida per il facilitatore</h1></div></div>
+<p class="intro">Il Professore Digitale non sostituisce il facilitatore: gli dà una lavagna, una voce in più e un percorso già pronto.
+Ecco come ottenere il meglio da un incontro con computer Windows.</p>
+<h2>Preparare l'aula</h2>
+<div class="colonne"><ul class="check">
+<li>Computer accesi prima dell'arrivo del gruppo: Windows Update a volte installa aggiornamenti all'accensione.</li>
+<li>Professore aperto e testo ingrandito (A+).</li>
+<li>Volume provato con <b>▶ Prova la voce</b>.</li>
+<li>Proiettore collegato (<kbd>Windows</kbd> + <kbd>P</kbd> → <b>Duplica</b>) e modalità proiettore attiva.</li>
+<li>Mouse con filo (più facili dei touchpad).</li>
+<li>Cuffie per chi sente poco.</li>
+<li>Un foglio con nome utente e password (o PIN) di ogni PC.</li>
+<li>Risparmio energia: schermo che non si spegne durante la lezione.</li>
+<li>Questo vademecum stampato, a portata di mano.</li>
+</ul></div>
+<h2>Un incontro tipo (90 minuti)</h2>
+<table><thead><tr><th>Tempo</th><th>Attività</th></tr></thead><tbody>
+<tr><td>0–10'</td><td><b>Accoglienza.</b> Caffè, nomi, cosa è successo in settimana con il telefono o il computer: spesso le domande migliori nascono qui.</td></tr>
+<tr><td>10–20'</td><td><b>Riscaldamento in Palestra.</b> Esercizio del clic o della tastiera; ognuno annota il proprio tempo.</td></tr>
+<tr><td>20–50'</td><td><b>La lezione del giorno</b>, proiettata. Il facilitatore legge o fa leggere il Professore, un passo alla volta, fermandosi sulle domande.</td></tr>
+<tr><td>50–60'</td><td>Pausa.</td></tr>
+<tr><td>60–75'</td><td><b>Pratica a coppie</b> sui PC: ripetere i passi della lezione (salvare un file, scrivere un'email…).</td></tr>
+<tr><td>75–85'</td><td><b>Quiz insieme</b>, proiettato: il gruppo vota a voce, poi si legge la spiegazione.</td></tr>
+<tr><td>85–90'</td><td>Domande libere in «Chiedi al Professore» e saluti.</td></tr>
+</tbody></table>
+<h2>Dieci consigli per insegnare agli adulti e agli anziani</h2>
+<ol>
+<li><b>Mani sul mouse loro, non vostre.</b> Guidate a parole; toccate il mouse solo se chiesto.</li>
+<li><b>Una cosa alla volta.</b> Un passo, una prova, un sorriso. Poi il passo successivo.</li>
+<li><b>Metafore concrete:</b> il Professore ne usa molte (l'armadio, la strada, la chiave); riprendetele e aggiungete le vostre.</li>
+<li><b>L'errore è benvenuto.</b> Mostrate <kbd>Ctrl</kbd> + <kbd>Z</kbd> e il Cestino fin dal primo giorno.</li>
+<li><b>Ripetere senza stancarsi.</b> Rivedere una lezione è normale: i passi già visti restano segnati in verde.</li>
+<li><b>Testo grande e voce lenta.</b> Regolateli all'inizio, non a metà incontro.</li>
+<li><b>Partite dai loro bisogni:</b> la videochiamata con il nipote motiva più di qualsiasi teoria.</li>
+<li><b>Sicurezza sempre.</b> Ripetete la regola d'oro: nessuno chiede password o codici per telefono. Microsoft non telefona mai.</li>
+<li><b>Scrivere su carta</b> i passaggi chiave: molti allievi ricordano meglio con un foglio accanto.</li>
+<li><b>Celebrare i progressi.</b> I record della Palestra e le lezioni completate sono piccoli traguardi da festeggiare.</li>
+</ol>
+<h2>Più allievi sullo stesso computer</h2>
+<p>I progressi appartengono all'utente di Windows. Se più persone usano lo stesso PC, create un account per ciascuna
+(<b>Start → Impostazioni → Account → Altri utenti</b>) e installate il Professore «per tutti gli utenti»; oppure usate <b>Esporta progressi</b>
+a fine incontro e <b>Importa</b> la volta dopo. Con la <b>versione da chiavetta</b> ogni allievo può portarsi il proprio percorso in tasca.</p>
+</section>
+
+<!-- ======================================================= 12 -->
+<section class="capitolo"><span class="marca">§§c12§§</span>
+<div class="capitolo-testa"><span class="num">12</span><div><div class="eti">CAPITOLO</div><h1>Privacy e sicurezza</h1></div></div>
+<p class="intro">Chi impara a usare il digitale deve poter sbagliare e fare domande senza timore. Per questo il Professore è costruito in modo da non far uscire nulla dal computer.</p>
+<h2>Cosa fa il programma</h2>
+<ul>
+<li>Il server interno ascolta solo <b>all'interno del computer</b> (127.0.0.1): dagli altri computer della rete non è raggiungibile, e Windows Firewall non deve aprire nulla.</li>
+<li>Accetta richieste solo dalla propria finestra: una pagina web estranea non può comandarlo.</li>
+<li>IA, voce e riconoscimento vocale lavorano sul computer: domande e registrazioni non vengono inviate a nessuno. Le registrazioni del microfono vengono trascritte e cancellate subito.</li>
+<li>Non richiede privilegi di amministratore durante l'uso.</li>
+<li>Ogni file scaricato su vostra richiesta (aggiornamenti, modelli, voce) viene verificato con la sua impronta SHA-256.</li>
+</ul>
+<h2>Cosa non fa</h2>
+<ul><li>Non crea account e non chiede dati personali.</li><li>Non contiene pubblicità né sistemi di tracciamento.</li>
+<li>Non si collega a Internet da solo, nemmeno per gli aggiornamenti.</li></ul>
+<h2>Dove stanno i dati</h2>
+<table><thead><tr><th>Dato</th><th>Posizione</th></tr></thead><tbody>
+<tr><td>Impostazioni, progressi, conversazione (ultimi 60 messaggi), lavagna</td><td><code>%APPDATA%\ProfessoreDigitale\</code><br><span class="small">(Windows XP: <code>Documents and Settings\NOME\Dati applicazioni\ProfessoreDigitale</code>)</span></td></tr>
+<tr><td>Pacchetti di contenuti importati</td><td><code>%APPDATA%\ProfessoreDigitale\contenuti\</code></td></tr>
+<tr><td>Modelli vocali, IA compatibile, registro tecnico (<code>server.log</code>)</td><td><code>%LOCALAPPDATA%\ProfessoreDigitale\</code></td></tr>
+<tr><td>Modelli di Ollama</td><td><code>%USERPROFILE%\.ollama\models\</code> (gestiti da Ollama)</td></tr>
+<tr><td>Versione da chiavetta</td><td>Cartella <code>dati</code> accanto a <code>ProfessoreDigitale.exe</code></td></tr>
+<tr><td>Versione portatile <code>.html</code></td><td>Memoria del browser di quel computer</td></tr>
+</tbody></table>
+<p class="small">Per aprire una di queste cartelle, scrivete il percorso (per esempio <code>%APPDATA%\ProfessoreDigitale</code>) nella barra degli indirizzi di Esplora file
+e premete <kbd>Invio</kbd>, oppure usate «Cartella dei progressi» dall'icona vicino all'orologio. Sono semplici file di testo, leggibili e cancellabili.</p>
+<div class="box attenzione"><span class="t">Su un computer condiviso</span>A fine corso, o prima di donare il computer, disinstallate il Professore rispondendo
+<b>Sì</b> alla domanda sulla cancellazione dei dati (capitolo 13), oppure usate <b>🧹 Nuova conversazione</b> e <b>Azzera progressi</b>.</div>
+</section>
+
+<!-- ======================================================= 13 -->
+<section class="capitolo"><span class="marca">§§c13§§</span>
+<div class="capitolo-testa"><span class="num">13</span><div><div class="eti">CAPITOLO</div><h1>Manutenzione, aggiornamenti e disinstallazione</h1></div></div>
+<h2>Salvare i progressi</h2>
+<p>In <b>Impostazioni → Dati e progressi → Esporta progressi</b> si ottiene un file da conservare su chiavetta. Per un salvataggio completo di un utente
+basta copiare la cartella <code>%APPDATA%\ProfessoreDigitale</code>.</p>
+<h2>Aggiornare</h2>
+<ol class="passi">
+<li>In <b>Impostazioni → Aggiornamenti</b> premete <b>🌐 Controlla aggiornamenti</b> (serve Internet in quel momento, oppure un PC dell'aula che fa da server).</li>
+<li>Se c'è una versione nuova, leggete le novità e premete <b>⬇️ Scarica il nuovo pacchetto</b>: il file va nella cartella Download e viene verificato.</li>
+<li>Premete <b>▶ Installa adesso</b>: il Professore si chiude, l'installatore aggiorna il programma e potete riaprirlo. Impostazioni e progressi vengono conservati.</li>
+</ol>
+<p>Senza Internet basta eseguire il nuovo <code>ProfessoreDigitale-Setup-X.Y.Z.exe</code> portato con la chiavetta: si installa sopra il precedente.
+Nella stessa scheda si possono aggiungere i nuovi <b>contenuti</b> (domande e lezioni) con un clic, senza aggiornare il programma.</p>
+<h2>Ripristino dopo un problema</h2>
+<p>Se dopo un'interruzione di corrente il Professore non si comporta bene: tasto destro sull'icona vicino all'orologio → <b>Chiudi il Professore Digitale</b>, poi riapritelo.
+Se non basta, eseguite di nuovo l'installatore: ripara i file del programma senza toccare i dati. Se il microfono smette di funzionare, toglietelo e reinstallatelo
+da <b>Configura IA e voce</b>.</p>
+<h2>Disinstallazione</h2>
+<ol class="passi">
+<li><b>Start → Impostazioni → App</b> (o <b>Pannello di controllo → Programmi e funzionalità</b>), scegliete <b>Professore Digitale</b> → <b>Disinstalla</b>.
+In alternativa: <b>Start → Professore Digitale → Disinstalla Professore Digitale</b>.</li>
+<li>Il programma viene chiuso e rimosso con le sue icone.</li>
+<li>Alla domanda «Volete cancellare anche i progressi…» rispondete <b>Sì</b> per restituire il computer «come nuovo» (prima di una donazione), <b>No</b> se pensate di reinstallare.
+La pulizia riguarda l'utente di Windows che disinstalla: per gli altri utenti cancellate a mano le loro cartelle <code>%APPDATA%\ProfessoreDigitale</code>.</li>
+<li>Facoltativo: Ollama si toglie da <b>Impostazioni → App</b>; i suoi modelli stanno in <code>%USERPROFILE%\.ollama</code>.</li>
+</ol>
+</section>
+
+<!-- ======================================================= 14 -->
+<section class="capitolo"><span class="marca">§§c14§§</span>
+<div class="capitolo-testa"><span class="num">14</span><div><div class="eti">CAPITOLO</div><h1>Risoluzione dei problemi</h1></div></div>
+<p class="intro">Prima di tutto: <b>Impostazioni → Diagnostica</b> mostra cosa è attivo e cosa no; il registro tecnico è in <code>%LOCALAPPDATA%\ProfessoreDigitale\server.log</code>.</p>
+<table><thead><tr><th style="width:27%">Sintomo</th><th style="width:25%">Causa probabile</th><th>Rimedio</th></tr></thead><tbody>
+<tr><td>«Windows ha protetto il PC»</td><td>SmartScreen, programma senza firma a pagamento</td><td><b>Ulteriori informazioni → Esegui comunque</b> (capitolo 3).</td></tr>
+<tr><td>Doppio clic sull'icona e non succede nulla</td><td>PC lento o browser mancante</td><td>Aspettate 30 secondi. Guardate se c'è l'icona vicino all'orologio e fateci clic. Installate o aggiornate Edge, Chrome o Firefox (su XP/Vista Supermium).</td></tr>
+<tr><td>Si apre una pagina con «browser troppo vecchio»</td><td>Si è aperto Internet Explorer</td><td>Installate un browser moderno (capitolo 2, su XP e Vista capitolo 16) e riaprite il Professore.</td></tr>
+<tr><td>Si apre il browser con barre e schede</td><td>C'è solo Firefox</td><td>È normale: funziona tutto. Per una finestra pulita usate Edge o Chrome.</td></tr>
+<tr><td>Il Professore non parla</td><td>Volume, voce spenta, nessuna voce italiana</td><td>Controllate il volume (icona dell'altoparlante). In Impostazioni: «Voce attiva» e «Prova la voce». Aggiungete la voce italiana di Windows o la voce «Paola» (capitolo 10).</td></tr>
+<tr><td>Parla con accento inglese</td><td>Windows non ha una voce italiana</td><td><b>Impostazioni di Windows → Ora e lingua → Voce → Aggiungi voci → Italiano</b>, oppure la voce naturale.</td></tr>
+<tr><td>Il microfono è grigio</td><td>Riconoscimento vocale non installato, o Windows a 32 bit</td><td><b>Configura IA e voce</b>, spunta «Microfono», poi <b>Ricontrolla i componenti</b>.</td></tr>
+<tr><td>«Non ho sentito nulla»</td><td>Microfono muto, lontano o non consentito</td><td><b>Impostazioni di Windows → Privacy → Microfono</b>: consentite l'accesso alle app e al browser. Controllate il livello in <b>Audio → Input</b>. Parlate a 20–30 cm.</td></tr>
+<tr><td>Risponde sempre la «Guida interna»</td><td>IA spenta o non configurata, Ollama fermo</td><td>Impostazioni → «Usa l'IA» attivo. Se Ollama è installato ma fermo, riavviate il computer o aprite <b>Ollama</b> dal menu Start. Altrimenti <b>Configura IA e voce</b>.</td></tr>
+<tr><td>L'IA è lentissima</td><td>Modello troppo grande per il PC</td><td>In Configura IA e voce scegliete il modello «Consigliato» o uno più piccolo. Chiudete gli altri programmi.</td></tr>
+<tr><td>La configurazione si ferma con «connessione sicura non riuscita»</td><td>Windows 7 senza aggiornamenti TLS 1.2, oppure XP/Vista</td><td>Su Windows 7 installate gli aggiornamenti di Windows (in particolare KB3140245) o usate la <b>chiavetta</b> preparata su un altro PC.</td></tr>
+<tr><td>«Spazio insufficiente»</td><td>Disco pieno</td><td>Liberate spazio (Pulizia disco) o scegliete un modello più piccolo.</td></tr>
+<tr><td>L'antivirus blocca il motore compatibile</td><td>Falso allarme su programmi poco diffusi</td><td>Il file è verificato con la sua impronta: aggiungete un'eccezione per la cartella <code>%LOCALAPPDATA%\ProfessoreDigitale\ia</code>, oppure usate solo la guida interna.</td></tr>
+<tr><td>Lo schema non si disegna</td><td>Schema dell'IA non valido</td><td>Compare comunque la descrizione testuale. Rifate la domanda o chiedete «fammi uno schema semplice».</td></tr>
+<tr><td>Le icone appaiono come quadratini</td><td>Windows 7 o XP senza caratteri emoji</td><td>Solo un difetto estetico: le funzioni restano tutte. Su Windows 7 aiuta l'aggiornamento KB2729094.</td></tr>
+<tr><td>Ho perso i progressi della versione portatile</td><td>La memoria del browser è stata cancellata</td><td>Usate regolarmente Esporta progressi; con il programma installato i progressi stanno in un file su disco.</td></tr>
+</tbody></table>
+</section>
+
+<!-- ======================================================= 15 -->
+<section class="capitolo"><span class="marca">§§c15§§</span>
+<div class="capitolo-testa"><span class="num">15</span><div><div class="eti">CAPITOLO</div><h1>Riferimento rapido</h1></div></div>
+<h2>Il programma</h2>
+<table><thead><tr><th>Comando (da Esegui, <kbd>Windows</kbd> + <kbd>R</kbd>, o da un collegamento)</th><th>Funzione</th></tr></thead><tbody>
+<tr><td><code>ProfessoreDigitale.exe</code></td><td>Apre il Professore (o la finestra già attiva)</td></tr>
+<tr><td><code>ProfessoreDigitale.exe --configura</code></td><td>Apre «Configura IA e voce»</td></tr>
+<tr><td><code>ProfessoreDigitale.exe --status</code></td><td>Stato di IA, voce, microfono e del computer (da Prompt dei comandi)</td></tr>
+<tr><td><code>ProfessoreDigitale.exe --stop</code></td><td>Chiude il Professore</td></tr>
+<tr><td><code>ProfessoreDigitale.exe --version</code></td><td>Versione installata</td></tr>
+<tr><td><code>ProfessoreDigitale.exe --port 9000</code></td><td>Usa un'altra porta interna (se la 8765 è occupata ne viene scelta un'altra da sola)</td></tr>
+<tr><td><code>ProfessoreDigitale.exe --idle-timeout 0</code></td><td>Non spegnersi mai da solo (per i PC che fanno da postazione fissa)</td></tr>
+</tbody></table>
+<h2>L'installatore</h2>
+<table><tbody>
+<tr><td><code>/S</code></td><td>Installazione silenziosa</td></tr>
+<tr><td><code>/AllUsers</code> · <code>/CurrentUser</code></td><td>Per tutti gli utenti (amministratore) · solo per l'utente attuale</td></tr>
+<tr><td><code>Disinstalla.exe /S</code></td><td>Disinstallazione silenziosa (nella cartella del programma)</td></tr>
+</tbody></table>
+<h2>Variabili d'ambiente (per tecnici)</h2>
+<table><tbody>
+<tr><td><code>PD_BROWSER</code></td><td>Browser da usare: nome (<code>firefox</code>, <code>chrome</code>, <code>msedge</code>) o percorso completo dell'exe</td></tr>
+<tr><td><code>OLLAMA_HOST</code></td><td>Indirizzo del servizio Ollama (predefinito <code>http://127.0.0.1:11434</code>)</td></tr>
+<tr><td><code>OLLAMA_MODELS</code></td><td>Cartella dei modelli di Ollama (per metterli su un altro disco)</td></tr>
+</tbody></table>
+<h2>Cartelle</h2>
+<table><tbody>
+<tr><td>Programma</td><td><code>C:\Program Files (x86)\ProfessoreDigitale</code> (per tutti) o <code>%LOCALAPPDATA%\Programs\ProfessoreDigitale</code> (solo per me)</td></tr>
+<tr><td>Interfaccia e contenuti inclusi</td><td><code>…\ProfessoreDigitale\web\</code> e <code>…\contenuti\</code></td></tr>
+<tr><td>Contenuti per tutti gli utenti</td><td><code>%ProgramData%\ProfessoreDigitale\contenuti\</code></td></tr>
+<tr><td>Dati dell'utente</td><td><code>%APPDATA%\ProfessoreDigitale\</code> e <code>%LOCALAPPDATA%\ProfessoreDigitale\</code></td></tr>
+</tbody></table>
+<h2>Scorciatoie da tastiera</h2>
+<div class="affianca"><table><tbody>
+<tr><td><kbd>Esc</kbd></td><td>Ferma la voce</td></tr><tr><td><kbd>Invio</kbd></td><td>Invia la domanda</td></tr>
+<tr><td><kbd>Maiusc</kbd> + <kbd>Invio</kbd></td><td>A capo nella domanda</td></tr><tr><td><kbd>Tab</kbd></td><td>Passa al pulsante successivo</td></tr>
+</tbody></table><table><tbody>
+<tr><td><kbd>Ctrl</kbd> + <kbd>+</kbd> / <kbd>−</kbd></td><td>Zoom</td></tr><tr><td><kbd>F11</kbd></td><td>Schermo intero</td></tr>
+<tr><td><kbd>Alt</kbd> + <kbd>←</kbd></td><td>Pagina precedente</td></tr><tr><td><kbd>Ctrl</kbd> + <kbd>P</kbd></td><td>Stampa la lezione aperta</td></tr>
+</tbody></table></div>
+<div class="affianca"><figure><img src="img-windows/15-telefono.jpg" alt="" style="width:62%;margin:0 auto"><figcaption><b>Figura 15.</b> Su schermi stretti il menu passa in basso.</figcaption></figure>
+<div class="box" style="align-self:center"><span class="t">Tablet e schermi piccoli</span>L'interfaccia si adatta da sola alle finestre strette e agli schermi touch
+(tablet Windows, netbook): menu in basso, pulsanti grandi, lavagna utilizzabile con il dito. Utile anche con due finestre affiancate.</div></div>
+</section>
+
+<!-- ======================================================= 16 -->
+<section class="capitolo"><span class="marca">§§c16§§</span>
+<div class="capitolo-testa"><span class="num">16</span><div><div class="eti">CAPITOLO</div><h1>Windows XP e Vista</h1></div></div>
+<p class="intro">Molti centri e famiglie hanno ancora computer con Windows XP o Vista che funzionano benissimo. Il Professore gira anche lì,
+con qualche attenzione: lezioni, guida interna, lavagna, palestra e voce sono complete; l'IA locale e il microfono no.</p>
+<h2>Il browser: Supermium</h2>
+<p>Internet Explorer e le ultime versioni di Firefox e Chrome per XP sono troppo vecchi per l'interfaccia. <b>Supermium</b> è un browser moderno,
+gratuito e libero, costruito apposta per Windows XP e Vista: il Professore lo riconosce e lo usa da solo.</p>
+<ol class="passi">
+<li>Su un PC con Internet aprite <b>Configura IA e voce → Computer senza Internet</b>, scegliete «Nessuna IA», mettete la spunta su
+<b>Browser per Windows XP e Vista</b> e premete <b>Prepara la chiavetta</b>. Nella cartella <code>ProfessoreDigitale-kit\browser</code> trovate l'installatore di Supermium a 32 bit.</li>
+<li>Sul PC con XP o Vista eseguite prima quell'installatore, poi <code>ProfessoreDigitale-Setup-2.3.0.exe</code>.</li>
+<li>Aprite il Professore: si apre in Supermium, in una finestra dedicata.</li>
+</ol>
+<div class="box attenzione"><span class="t">Perché la chiavetta?</span>Windows XP e Vista non riescono più a collegarsi alla maggior parte dei siti moderni
+(usano protocolli di sicurezza superati). Per questo i download si preparano su un altro computer.</div>
+<h2>La voce</h2>
+<p>Windows XP e Vista in italiano di solito non hanno una voce italiana: il Professore lo segnala e resta muto, oppure usa la voce del browser se presente.
+Le lezioni restano tutte leggibili; il testo grande e l'alto contrasto aiutano chi vede poco.</p>
+<h2>Prudenza</h2>
+<ul>
+<li>Windows XP e Vista non ricevono aggiornamenti di sicurezza da anni. Usateli per imparare, scrivere, guardare foto e per il Professore, che funziona <b>senza Internet</b>.</li>
+<li>Evitate banca online, pagamenti, email importanti e documenti personali su Internet con questi sistemi.</li>
+<li>Se il computer ha almeno 1–2 GB di RAM, valutate di farlo rinascere con una <b>distribuzione Linux leggera</b> (come FeniceOS, Q4OS o antiX): torna sicuro
+e può usare il Professore per Linux con tutte le funzioni. La lezione «Linux, software libero e riuso» lo spiega agli allievi.</li>
+</ul>
+</section>
+
+<!-- ======================================================= 17 -->
+<section class="capitolo"><span class="marca">§§c17§§</span>
+<div class="capitolo-testa"><span class="num">17</span><div><div class="eti">CAPITOLO</div><h1>Glossario semplice</h1></div></div>
+<dl class="glossario colonne">
+<div><dt>Allegato</dt><dd>File che viaggia insieme a un'email, come una foto nella busta.</dd></div>
+<div><dt>App</dt><dd>Programma, soprattutto sullo smartphone o nel Microsoft Store.</dd></div>
+<div><dt>Area di notifica</dt><dd>La zona in basso a destra, vicino all'orologio, con le piccole icone dei programmi attivi.</dd></div>
+<div><dt>Browser</dt><dd>Programma per navigare su Internet: Edge, Chrome, Firefox, Supermium.</dd></div>
+<div><dt>Cartella</dt><dd>Contenitore di file, come un cassetto dell'armadio.</dd></div>
+<div><dt>Cestino</dt><dd>Dove vanno i file eliminati; da lì si possono ancora recuperare.</dd></div>
+<div><dt>CIE</dt><dd>Carta d'Identità Elettronica, usata anche per entrare nei servizi pubblici online.</dd></div>
+<div><dt>Clic / doppio clic</dt><dd>Una pressione del tasto sinistro per scegliere; due rapide per aprire.</dd></div>
+<div><dt>Desktop</dt><dd>La «scrivania» con le icone che si vede all'accensione.</dd></div>
+<div><dt>Esplora file</dt><dd>Il programma di Windows per vedere cartelle e documenti (<kbd>Windows</kbd> + <kbd>E</kbd>).</dd></div>
+<div><dt>File</dt><dd>Un documento, una foto, una musica salvati nel computer.</dd></div>
+<div><dt>IA (intelligenza artificiale)</dt><dd>Programma che ha imparato da moltissimi testi a rispondere con parole probabili; utile, ma può sbagliare.</dd></div>
+<div><dt>IA locale</dt><dd>IA che funziona sul proprio computer, senza inviare dati a Internet.</dd></div>
+<div><dt>Impronta (SHA-256)</dt><dd>Un codice che identifica un file: se il file cambia anche di poco, l'impronta cambia. Serve a controllare che sia integro.</dd></div>
+<div><dt>Internet</dt><dd>La rete di strade che collega i computer di tutto il mondo.</dd></div>
+<div><dt>Linux</dt><dd>Sistema operativo libero, leggero, adatto anche ai computer datati.</dd></div>
+<div><dt>Menu Start</dt><dd>Il menu che si apre con il logo di Windows: da lì partono tutti i programmi.</dd></div>
+<div><dt>Modello</dt><dd>Il «cervello» dell'IA: più è grande, più sa, ma più è lento e occupa spazio.</dd></div>
+<div><dt>Offline</dt><dd>Senza connessione a Internet.</dd></div>
+<div><dt>Ollama</dt><dd>Programma che fa funzionare i modelli di IA sul computer (Windows 10 e 11).</dd></div>
+<div><dt>pagoPA</dt><dd>Il sistema per i pagamenti verso la Pubblica Amministrazione.</dd></div>
+<div><dt>Password e PIN</dt><dd>Chiavi segrete per entrare in un account o nel computer. Non si comunicano mai a nessuno.</dd></div>
+<div><dt>Phishing</dt><dd>Truffa con messaggi falsi che imitano banche o enti per rubare dati.</dd></div>
+<div><dt>RAM</dt><dd>La memoria di lavoro del computer: più ce n'è, più programmi lavorano insieme senza rallentare.</dd></div>
+<div><dt>Router</dt><dd>La scatolina con le lucine che porta Internet in casa.</dd></div>
+<div><dt>Scaricare</dt><dd>Copiare sul proprio computer un file che si trova su Internet; finisce nella cartella Download.</dd></div>
+<div><dt>Scheda video</dt><dd>La parte del computer che disegna le immagini; quelle potenti aiutano anche l'IA.</dd></div>
+<div><dt>Schema</dt><dd>Disegno con riquadri e frecce che mostra una sequenza o una struttura.</dd></div>
+<div><dt>Software libero</dt><dd>Programma che si può usare, studiare, modificare e condividere, come il Professore.</dd></div>
+<div><dt>SPID</dt><dd>Sistema Pubblico di Identità Digitale: le credenziali per i servizi pubblici online.</dd></div>
+<div><dt>Wi-Fi</dt><dd>Collegamento senza fili tra i dispositivi e il router.</dd></div>
+<div><dt>Windows Update</dt><dd>Il servizio che installa le correzioni di sicurezza di Windows.</dd></div>
+</dl>
+</section>
+
+</div>
+<!-- ======================================================= QUARTA DI COPERTINA -->
+<div class="segnaposto fine"></div>
+<section class="back">
+  <img class="prof" src="professore.svg" alt="">
+  <div class="dentro">
+    <h1>Tecnologia gentile,<br>per tutti.</h1>
+    <p>Il Professore Digitale nasce per democratizzare l'accesso al digitale là dove serve di più: nei centri anziani, nelle scuole, nelle associazioni
+    e nelle case, anche senza connessione e su computer che altrimenti finirebbero in discarica — da Windows XP a Windows 11, e su Linux.</p>
+    <p>È software libero: potete usarlo, copiarlo, migliorarlo e condividerlo. Se vi è stato utile, fatelo conoscere.</p>
+  </div>
+  <div class="piede"><div><b>Danilo D'Auria</b><br>Tecnico IT &amp; Divulgatore Digitale per il Sociale<br>danilodauria.site@gmail.com</div>
+  <div style="text-align:right">Professore Digitale 2.3.0 per Windows<br>Licenza MIT · Ottobre 2026</div></div>
+</section>
+</body>
+</html>

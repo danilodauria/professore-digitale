@@ -54,3 +54,10 @@ quante domande e lezioni ci sono, e cosa mi consigli per il prossimo aggiornamen
 === 7 · Da aggiungere a qualsiasi richiesta, se lavorate senza GitHub ===
 Lavoro senza GitHub: pubblico con la chiavetta e con il server dell'aula all'indirizzo [http://192.168.1.10:8080].
 Imposta questo indirizzo in rilascio.conf e alla fine indicami i comandi di pubblica-locale.sh.
+
+=== 8 · Versione per Windows ===
+Allego i sorgenti (versione [X.Y.Z]). Segui la skill professore-digitale-aggiornamento.
+Su Windows [versione, es. Windows 7 64 bit / Windows 11] succede questo: [descrizione].
+Oppure: aggiorna il catalogo dei modelli di IA per Windows con i modelli migliori del momento
+(controlla che siano su Ollama e su Hugging Face) e pubblicalo come aggiornamento dei soli contenuti.
+Consegnami anche il nuovo installatore ProfessoreDigitale-Setup-X.Y.Z.exe se cambia il programma.
