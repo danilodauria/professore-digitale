@@ -130,6 +130,30 @@ srv.shutdown()
 st, s5 = call("/api/status")
 check("tornati a Ollama dopo la rimozione", s5["ai"]["engine"] == "ollama", s5["ai"])
 
+# --- configurazione automatica con Ollama (finto): scarica il modello, prova la risposta, lo segna ---
+pfx = os.environ.get("WINEPREFIX", os.path.expanduser("~/.wine"))
+oll = os.path.join(pfx, "drive_c", "users", os.environ.get("USER", "root"), "AppData", "Local", "Programs", "Ollama")
+os.makedirs(oll, exist_ok=True)
+open(os.path.join(oll, "ollama.exe"), "wb").write(b"MZ finto")
+st, r = call("/api/setup/start", {"motore": "ollama", "modello": "qwen3.5:4b", "microfono": False})
+check("configurazione automatica avviata", st == 200, r)
+seen_pct = False; t0 = time.time()
+while time.time() - t0 < 120:
+    _, pr = call("/api/setup/progress")
+    if 0 < pr.get("percento", -1) < 100: seen_pct = True
+    if pr.get("finito"): break
+    time.sleep(0.05)
+check("configurazione automatica riuscita", pr.get("riuscito") is True and pr.get("modello") == "qwen3.5:4b", pr)
+check("avanzamento mostrato durante lo scaricamento", seen_pct or any("pronto" in l for l in pr.get("registro", [])), pr.get("registro"))
+check("prova in italiano registrata", any("Il modello risponde" in l for l in pr.get("registro", [])), pr.get("registro"))
+st, s6 = call("/api/status")
+check("nuovo modello disponibile all'IA", "qwen3.5:4b" in s6["ai"]["models"], s6["ai"])
+st, r = call("/api/setup/start", {"motore": "ollama", "modello": "qwen3.5:4b"})
+_, pr2 = call("/api/setup/progress")
+os.unlink(os.path.join(oll, "ollama.exe"))
+wait_job()
+call("/api/setup/remove", {"cosa": "ia"})
+
 # --- dati: file rovinato trattato come assente, scrittura atomica ---
 open(os.path.join(WORK, "dati", "board.json"), "w").write("{rovinato")
 st, d = call("/api/data/board")

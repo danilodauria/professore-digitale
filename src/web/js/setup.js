@@ -60,7 +60,7 @@
         : '<p class="small muted">Il microfono richiede Windows a 64 bit.</p>') +
       (p.voce_naturale_possibile ? sw("s-piper", "Voce naturale «Paola», più morbida di quella di Windows (circa 80 MB)" + (ins.voce_naturale ? " — già installata" : ""), !ins.voce_naturale && !ins.voce_windows)
         : '<p class="small muted">La voce naturale richiede Windows 7 o successivo a 64 bit.</p>') +
-      (p.browser_xp ? sw("s-browser", "Browser Supermium, compatibile con Windows XP e Vista (necessario per usare il Professore)", true) : "") + "</div>";
+      (p.browser_xp ? sw("s-browser", "Browser Supermium aggiornato, compatibile con Windows XP e Vista", false) : "") + "</div>";
     html += "</div>";
     // --- pulsante e avanzamento
     html += '<div class="card setup-go"><button class="btn big" id="go">▶ Configura automaticamente</button>' +

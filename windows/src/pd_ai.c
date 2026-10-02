@@ -103,6 +103,15 @@ static unsigned __stdcall start_engine_thread(void *arg) {
             pd_log("avvio del motore compatibile: %ls", cl);
             g_engine = start_process(cl, dir, 1, NULL);
             if (!g_engine) pd_log("motore compatibile non avviato (errore %lu)", GetLastError());
+            /* se le opzioni per i processori datati non sono riconosciute, si riprova senza */
+            else if (C.argomenti[0] && WaitForSingleObject(g_engine, 8000) == WAIT_OBJECT_0) {
+                CloseHandle(g_engine);
+                wchar_t *cl2 = wcsdup_printf(L"%ls --model %ls --port %d --host 127.0.0.1 --contextsize 4096 --threads %d --skiplauncher --quiet",
+                                             qe, qm, C.porta, threads);
+                pd_log("il motore si e' chiuso subito: riprovo senza \"%s\"", C.argomenti);
+                g_engine = start_process(cl2, dir, 1, NULL);
+                free(cl2);
+            }
             free(qe); free(qm); free(extra); free(cl);
         }
     } else {
