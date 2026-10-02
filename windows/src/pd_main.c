@@ -306,7 +306,7 @@ static void create_window(HINSTANCE inst, int tray) {
     /* la prima volta spieghiamo dove trovare il Professore */
     wchar_t *flag = path_join(G.local_dir, L"benvenuto.ok");
     if (!file_exists(flag)) {
-        tray_notify(L"Professore Digitale", L"Il Professore e' attivo. Lo ritrovate qui, accanto all'orologio: clic per aprirlo, tasto destro per le altre funzioni.");
+        tray_notify(L"Professore Digitale", L"Il Professore è attivo. Lo ritrovate qui, accanto all'orologio: clic per aprirlo, tasto destro per le altre funzioni.");
         file_write_atomic(flag, "1", 1);
     }
     free(flag);
@@ -330,13 +330,13 @@ int WINAPI wWinMain(HINSTANCE inst, HINSTANCE prev, PWSTR cmdline, int show) {
         if (!wcscmp(a, L"--version") || !wcscmp(a, L"-v")) { say("Professore Digitale %s\n", G.version); return 0; }
         else if (!wcscmp(a, L"--help") || !wcscmp(a, L"/?")) {
             say("Professore Digitale %s - cattedra digitale offline\n"
-                "  ProfessoreDigitale.exe              apre il Professore (o la finestra gia' attiva)\n"
+                "  ProfessoreDigitale.exe              apre il Professore (o la finestra già attiva)\n"
                 "  ProfessoreDigitale.exe --configura  apre la configurazione di IA e voce\n"
                 "  --status        stato di IA, voce, microfono\n"
                 "  --stop          chiude il Professore\n"
                 "  --no-browser    avvia solo il server interno\n"
                 "  --port N        porta del server interno (predefinita 8765)\n"
-                "  --idle-timeout S  secondi di inattivita' prima della chiusura (0 = mai)\n", G.version);
+                "  --idle-timeout S  secondi di inattività prima della chiusura (0 = mai)\n", G.version);
             return 0;
         }
         else if (!wcscmp(a, L"--status")) want_status = 1;
@@ -352,7 +352,7 @@ int WINAPI wWinMain(HINSTANCE inst, HINSTANCE prev, PWSTR cmdline, int show) {
     char rv[32] = "";
     int rp = running_port(rv, sizeof rv);
     if (want_stop) {
-        if (!rp) { say("Il Professore Digitale non e' attivo.\n"); return 0; }
+        if (!rp) { say("Il Professore Digitale non è attivo.\n"); return 0; }
         char url[64]; snprintf(url, sizeof url, "http://127.0.0.1:%d/api/shutdown", rp);
         http_result r; http_request("POST", url, "application/json", "{}", 2, 5, NULL, NULL, &r);
         say("Professore Digitale chiuso.\n");
@@ -366,7 +366,7 @@ int WINAPI wWinMain(HINSTANCE inst, HINSTANCE prev, PWSTR cmdline, int show) {
             buf_free(&b);
         } else {
             pd_hw h; hw_detect(&h); buf_t b; buf_init(&b); hw_json(&b, &h);
-            say("Il Professore Digitale non e' attivo. Versione %s\nComputer: %s\n", G.version, b.p);
+            say("Il Professore Digitale non è attivo. Versione %s\nComputer: %s\n", G.version, b.p);
             buf_free(&b);
         }
         return 0;

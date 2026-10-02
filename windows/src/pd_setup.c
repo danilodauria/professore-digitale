@@ -89,14 +89,14 @@ static void make_plan(plan_t *p) {
                  "Il Professore risponde con la sua guida interna, che funziona sempre.");
     } else if (h->os_major < 6 || (h->os_major == 6 && h->os_minor == 0)) {
         snprintf(p->motore, sizeof p->motore, "nessuno");
-        snprintf(p->motivo, sizeof p->motivo, "%s non e' supportato dai motori di IA moderni. Il Professore usa la guida interna; "
+        snprintf(p->motivo, sizeof p->motivo, "%s non è supportato dai motori di IA moderni. Il Professore usa la guida interna; "
                  "lezioni, voce, lavagna e palestra funzionano normalmente.", h->os_major == 5 ? "Windows XP" : "Windows Vista");
     } else if (h->ram_mb && h->ram_mb < 2500) {
         snprintf(p->motore, sizeof p->motore, "nessuno");
         snprintf(p->motivo, sizeof p->motivo, "Con meno di 3 GB di memoria l'IA sarebbe troppo lenta per una lezione. Il Professore usa la guida interna.");
     } else if ((h->os_major == 10 && h->os_build >= 19045) || h->os_major > 10) {
         snprintf(p->motore, sizeof p->motore, "ollama");
-        snprintf(p->motivo, sizeof p->motivo, "%s: si usa Ollama, il motore piu' diffuso e aggiornato, che sfrutta anche la scheda video se adatta.", h->os_build >= 22000 ? "Windows 11" : "Windows 10 22H2");
+        snprintf(p->motivo, sizeof p->motivo, "%s: si usa Ollama, il motore più diffuso e aggiornato, che sfrutta anche la scheda video se adatta.", h->os_build >= 22000 ? "Windows 11" : "Windows 10 22H2");
     } else if (h->arm64) {
         snprintf(p->motore, sizeof p->motore, "nessuno");
         snprintf(p->motivo, sizeof p->motivo, "Su questo Windows ARM serve almeno Windows 11 per l'IA locale.");
@@ -239,7 +239,7 @@ static int fetch(const char *what, const char *url, const char *sha, const wchar
     char s1[32];
     if (file_exists(dest) && sha && re_sha(sha)) {
         char hx[65];
-        if (sha256_file(dest, hx) && !strcmp(hx, sha)) { jlog("%s: gia' presente e verificato.", what); if (got_sha) strcpy(got_sha, hx); return 1; }
+        if (sha256_file(dest, hx) && !strcmp(hx, sha)) { jlog("%s: già presente e verificato.", what); if (got_sha) strcpy(got_sha, hx); return 1; }
     }
     jphase(0, "Scarico %s…", what);
     http_result r; memset(&r, 0, sizeof r);
@@ -248,7 +248,7 @@ static int fetch(const char *what, const char *url, const char *sha, const wchar
         return 0;
     }
     long long sz = file_size(dest);
-    if (sz < min_size) { DeleteFileW(dest); snprintf(J.errore, sizeof J.errore, "%s: file troppo piccolo, probabilmente non e' quello giusto", what); return 0; }
+    if (sz < min_size) { DeleteFileW(dest); snprintf(J.errore, sizeof J.errore, "%s: file troppo piccolo, probabilmente non è quello giusto", what); return 0; }
     jphase(0, "Verifico l'impronta SHA-256 di %s (%s)…", what, size_h(sz, s1, sizeof s1));
     char hx[65];
     if (!sha256_file(dest, hx)) { snprintf(J.errore, sizeof J.errore, "%s: file non leggibile", what); return 0; }
@@ -283,7 +283,7 @@ static int install_ollama_setup(const wchar_t *setup) {
 }
 
 static int ensure_ollama_installed(const wchar_t *tmpdir) {
-    if (ai_ollama_installed(NULL, 0)) { jlog("Ollama e' gia' installato."); return 1; }
+    if (ai_ollama_installed(NULL, 0)) { jlog("Ollama è già installato."); return 1; }
     jv *o = jget(g_cat, "ollama");
     char url[1024] = "", sha[65] = "", name[128];
     jphase(0, "Cerco l'ultima versione di Ollama…");
@@ -327,7 +327,7 @@ static int pull_sink(void *p, const char *d, size_t n) {
 }
 
 static int ollama_pull(const char *model) {
-    jphase(0, "Scarico il modello %s con Ollama (puo' richiedere diversi minuti)…", model);
+    jphase(0, "Scarico il modello %s con Ollama (può richiedere diversi minuti)…", model);
     char url[300]; snprintf(url, sizeof url, "%s/api/pull", G.ollama_host);
     buf_t body; buf_init(&body); buf_adds(&body, "{\"model\": "); json_str(&body, model); buf_adds(&body, ", \"stream\": true}");
     pull_ctx x; memset(&x, 0, sizeof x);
@@ -364,7 +364,7 @@ static void test_answer(int compat, const char *model) {
         else ans = jstr(jget(v, "message"), "content", NULL);
     }
     if (ans && *ans) { char a[220]; snprintf(a, sizeof a, "%s", ans); jlog("✔ Il modello risponde: «%s»", a); }
-    else jlog("! La prova non ha dato risposta (il primo avvio puo' essere lento): riprovate dalla pagina Chiedi al Professore.");
+    else jlog("! La prova non ha dato risposta (il primo avvio può essere lento): riprovate dalla pagina Chiedi al Professore.");
     json_free(v); buf_free(&body); buf_free(&out);
 }
 int pd_mem_sink(void *p, const char *d, size_t n) { buf_t *b = (buf_t *)p; return b->n + n < (8u << 20) && buf_add(b, d, n); }
@@ -432,10 +432,10 @@ static int do_compat(const char *nome, const wchar_t *kitdir, const pd_hw *h) {
     }
     if (ok && !kitdir) {
         write_ia_conf("compatibile", nome, jstr(m, "titolo", nome), exe, gguf, compat_args(h));
-        jphase(0, "Avvio il motore compatibile (la prima volta puo' servire un minuto)…");
+        jphase(0, "Avvio il motore compatibile (la prima volta può servire un minuto)…");
         buf_t s; buf_init(&s); ai_status_json(&s); buf_free(&s);
         if (wait_compat(240)) { jlog("✔ Motore compatibile attivo."); test_answer(1, nome); }
-        else jlog("! Il motore non ha ancora risposto: si avviera' con il Professore. Se non funziona, scegliete un modello piu' piccolo.");
+        else jlog("! Il motore non ha ancora risposto: si avvierà con il Professore. Se non funziona, scegliete un modello più piccolo.");
         snprintf(J.esito_modello, sizeof J.esito_modello, "%s", jstr(m, "titolo", nome));
         snprintf(J.esito_motore, sizeof J.esito_motore, "compatibile");
     }
@@ -447,7 +447,7 @@ static int do_ollama(const char *nome, const wchar_t *tmpdir) {
     if (!ensure_ollama_installed(tmpdir)) return 0;
     jphase(0, "Avvio il servizio Ollama…");
     if (!wait_ollama(90)) { if (!J.errore[0]) snprintf(J.errore, sizeof J.errore, "il servizio Ollama non risponde: riavviate il computer e riprovate"); return 0; }
-    jlog("✔ Ollama e' attivo.");
+    jlog("✔ Ollama è attivo.");
     if (!ollama_pull(nome)) return 0;
     write_ia_conf("ollama", nome, nome, NULL, NULL, "");
     test_answer(0, nome);
@@ -537,7 +537,7 @@ static int do_piper(const wchar_t *kitdir, const wchar_t *tmpdir) {
             buf_t wav; char used[32] = "", err[200] = "";
             if (tts_synthesize("Buongiorno, sono il Professore Digitale.", 1.0, NULL, &wav, used, sizeof used, err, sizeof err) && !strcmp(used, "piper"))
                 jlog("✔ Voce naturale installata e provata.");
-            else jlog("! Voce naturale installata, ma la prova non e' riuscita: si usera' la voce di Windows.");
+            else jlog("! Voce naturale installata, ma la prova non è riuscita: si userà la voce di Windows.");
             buf_free(&wav);
         }
     }
@@ -580,7 +580,7 @@ static void job_end(int ok) {
     if (J.cancel && !J.errore[0]) snprintf(J.errore, sizeof J.errore, "operazione annullata");
     snprintf(J.fase, sizeof J.fase, "%s", J.riuscito ? "Configurazione completata." : "Configurazione non completata.");
     LeaveCriticalSection(&G.lock);
-    jlog("%s", J.riuscito ? "✔ Fatto! Da ora il computer puo' restare scollegato da Internet." : J.errore);
+    jlog("%s", J.riuscito ? "✔ Fatto! Da ora il computer può restare scollegato da Internet." : J.errore);
     tts_invalidate();
     ai_reload_config();
     InterlockedExchange(&G.last_seen, (LONG)GetTickCount());
@@ -659,7 +659,7 @@ static int ollama_copy_model(const char *name, const wchar_t *from_root, const w
         char hx[65];
         jphase(0, "Copio e verifico una parte del modello (%u di %u)…", (unsigned)i + 1, (unsigned)total);
         if (!(file_exists(d) && file_size(d) == file_size(s))) ok = copy_file_v(s, d);
-        if (ok && (!sha256_file(d, hx) || strcmp(hx, dg + 7))) { snprintf(J.errore, sizeof J.errore, "una parte del modello e' rovinata (impronta diversa)"); ok = 0; }
+        if (ok && (!sha256_file(d, hx) || strcmp(hx, dg + 7))) { snprintf(J.errore, sizeof J.errore, "una parte del modello è rovinata (impronta diversa)"); ok = 0; }
         free(wbn); free(s); free(d);
     }
     if (!ok && !J.errore[0]) snprintf(J.errore, sizeof J.errore, "copia del modello non riuscita (spazio sulla chiavetta?)");
@@ -787,11 +787,11 @@ static unsigned __stdcall job_kit_prepare(void *arg) {
         ok = file_write_atomic(mp, man.p, man.n);
         wchar_t *lp = path_join(kit, L"LEGGIMI.txt");
         const char *leggimi =
-            "PROFESSORE DIGITALE - CHIAVETTA PER I COMPUTER SENZA INTERNET\r\n\r\n"
+            "\xEF\xBB\xBFPROFESSORE DIGITALE - CHIAVETTA PER I COMPUTER SENZA INTERNET\r\n\r\n"
             "1. Sul computer senza rete installate il Professore Digitale (ProfessoreDigitale-Setup-...exe).\r\n"
             "2. Aprite il Professore, andate in \"Configura IA e voce\" e premete \"Installa dalla chiavetta\".\r\n"
             "3. Scegliete questa cartella (ProfessoreDigitale-kit). Ogni file viene verificato con la sua impronta SHA-256.\r\n\r\n"
-            "Il contenuto e' descritto in kit.json. Non modificate i file: la verifica li rifiuterebbe.\r\n";
+            "Il contenuto è descritto in kit.json. Non modificate i file: la verifica li rifiuterebbe.\r\n";
         file_write_atomic(lp, leggimi, strlen(leggimi));
         free(mp); free(lp); buf_free(&man);
     }
@@ -823,7 +823,7 @@ static unsigned __stdcall job_kit_install(void *arg) {
     jv *man = load_json_file(mp);
     free(mp);
     int ok = 1;
-    if (!man || strcmp(jstr(man, "formato", ""), "professore-digitale-kit")) { snprintf(J.errore, sizeof J.errore, "in questa cartella non c'e' una chiavetta del Professore (manca kit.json)"); ok = 0; }
+    if (!man || strcmp(jstr(man, "formato", ""), "professore-digitale-kit")) { snprintf(J.errore, sizeof J.errore, "in questa cartella non c'è una chiavetta del Professore (manca kit.json)"); ok = 0; }
     jv *els = man ? jget(man, "elementi") : NULL;
     EnterCriticalSection(&G.lock); J.passi = els && els->t == J_ARR ? (int)els->n : 1; LeaveCriticalSection(&G.lock);
     wchar_t *iadir = path_join(G.local_dir, L"ia"), *exe = NULL, *gguf = NULL;
@@ -834,7 +834,7 @@ static unsigned __stdcall job_kit_install(void *arg) {
         jphase((int)i + 1, "Elemento %u di %u: %s", (unsigned)i + 1, (unsigned)els->n, tipo);
         wchar_t *f = NULL;
         if (!strcmp(tipo, "ollama-modello")) {
-            if (strcmp(p.motore, "ollama")) { jlog("! Modello Ollama saltato: su questo computer Ollama non e' supportato."); continue; }
+            if (strcmp(p.motore, "ollama")) { jlog("! Modello Ollama saltato: su questo computer Ollama non è supportato."); continue; }
             wchar_t *wc = u8to16(jstr(el, "cartella", "ollama-modelli")), *src = path_join(kit, wc), *dst = ollama_models_dir();
             snprintf(oll_model, sizeof oll_model, "%s", jstr(el, "nome", ""));
             ok = ollama_copy_model(oll_model, src, dst);
@@ -844,7 +844,7 @@ static unsigned __stdcall job_kit_install(void *arg) {
         if (!verify_kit_file(kit, el, &f)) { ok = 0; break; }
         if (!strcmp(tipo, "ollama-setup")) {
             if (strcmp(p.motore, "ollama")) jlog("! Ollama saltato: richiede Windows 10 22H2 o Windows 11.");
-            else if (ai_ollama_installed(NULL, 0)) jlog("Ollama e' gia' installato.");
+            else if (ai_ollama_installed(NULL, 0)) jlog("Ollama è già installato.");
             else ok = install_ollama_setup(f);
         } else if (!strcmp(tipo, "motore-compatibile")) {
             if (!p.hw.is64os) jlog("! Motore compatibile saltato: serve Windows a 64 bit.");
@@ -873,7 +873,7 @@ static unsigned __stdcall job_kit_install(void *arg) {
         write_ia_conf("compatibile", gg_name, gg_title, exe, gguf, compat_args(&p.hw));
         jphase(0, "Avvio il motore compatibile…");
         buf_t s; buf_init(&s); ai_status_json(&s); buf_free(&s);
-        if (wait_compat(240)) jlog("✔ Motore compatibile attivo."); else jlog("! Il motore si avviera' con il Professore.");
+        if (wait_compat(240)) jlog("✔ Motore compatibile attivo."); else jlog("! Il motore si avvierà con il Professore.");
         snprintf(J.esito_modello, sizeof J.esito_modello, "%s", gg_title); snprintf(J.esito_motore, sizeof J.esito_motore, "compatibile");
     }
     if (ok && oll_model[0]) {
@@ -975,7 +975,7 @@ static void info_json(buf_t *b) {
 }
 
 static int start_job(req_t *r, unsigned (__stdcall *fn)(void *)) {
-    if (InterlockedCompareExchange(&J.running, 1, 0) != 0) { send_error(r, 409, "c'e' gia' una configurazione in corso"); return 0; }
+    if (InterlockedCompareExchange(&J.running, 1, 0) != 0) { send_error(r, 409, "c'è già una configurazione in corso"); return 0; }
     J.cancel = 0;
     HANDLE t = (HANDLE)_beginthreadex(NULL, 0, fn, NULL, 0, NULL);
     if (!t) { J.running = 0; send_error(r, 500, "impossibile avviare la configurazione"); return 0; }
@@ -1026,7 +1026,7 @@ void setup_api(req_t *r, const char *path) {
     else if (!strcmp(path, "kit-prepare") || !strcmp(path, "kit-install")) {
         int prep = !strcmp(path, "kit-prepare");
         read_job_req(req, prep);
-        if (J.running) { send_error(r, 409, "c'e' gia' una configurazione in corso"); json_free(req); return; }
+        if (J.running) { send_error(r, 409, "c'è già una configurazione in corso"); json_free(req); return; }
         if (!JR.cartella[0] && !choose_folder(prep ? L"Scegliete la chiavetta (o la cartella) dove preparare i file per i PC senza Internet"
                                                      : L"Scegliete la cartella ProfessoreDigitale-kit sulla chiavetta", JR.cartella)) {
             send_error(r, 400, "nessuna cartella scelta"); json_free(req); return;
@@ -1056,7 +1056,7 @@ void setup_api(req_t *r, const char *path) {
     }
     else if (!strcmp(path, "remove")) {
         const char *cosa = jstr(req, "cosa", "");
-        if (J.running) send_error(r, 409, "c'e' una configurazione in corso");
+        if (J.running) send_error(r, 409, "c'è una configurazione in corso");
         else if (!strcmp(cosa, "ia")) {
             wchar_t *ia = path_join(G.local_dir, L"ia"), *cf = path_join(G.local_dir, L"ia.json");
             ai_shutdown(); Sleep(500);

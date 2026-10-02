@@ -57,7 +57,7 @@ int url_allowed(const char *url) {
 static void net_error(http_result *res, DWORD e, const char *where) {
     const char *m;
     switch (e) {
-        case 12007: m = "indirizzo non trovato: il computer e' collegato a Internet?"; break;
+        case 12007: m = "indirizzo non trovato: il computer è collegato a Internet?"; break;
         case 12029: m = "impossibile collegarsi al server"; break;
         case 12002: m = "il server non risponde (tempo scaduto)"; break;
         case 12030: m = "collegamento interrotto"; break;

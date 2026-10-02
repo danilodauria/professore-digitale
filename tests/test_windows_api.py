@@ -44,6 +44,10 @@ check("Origin estranea rifiutata (403)", st == 403, st)
 st, b = call("/../../../windows/win.ini", raw=True)
 check("niente file fuori dall'interfaccia", st == 404, st)
 
+with urllib.request.urlopen(BASE + "/") as r:
+    csp = r.headers.get("Content-Security-Policy", "")
+check("protezione della pagina (CSP) come su Linux", "default-src 'self'" in csp and "'unsafe-inline'" in csp and "object-src 'none'" in csp, csp)
+
 # --- stato e configurazione guidata ---
 st, s = call("/api/status")
 check("stato: piattaforma Windows", st == 200 and s.get("platform") == "windows" and s.get("setup") is True, s)

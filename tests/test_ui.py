@@ -289,6 +289,18 @@ with sync_playwright() as p:
     check("rimozione pacchetti importati", page.evaluate("PD.packs.list.filter(x => x.origine === 'utente').length") == 0)
     page.evaluate("PD.settings.theme='light'; PD.settings.fontSize=20; PD.settings.aiEnabled=true; PD.saveSettings()")
 
+    # --- configurazione guidata (solo versione Windows) ---
+    if not standalone and page.evaluate("!!(PD.status && PD.status.setup)"):
+        page.goto(ROOT + "#/setup"); page.wait_for_selector("#setup-body dl.kv", timeout=20000)
+        check("configurazione guidata: computer e piano", page.is_visible('.nav-btn[data-view="setup"]') and "Memoria" in page.inner_text("#setup-body"))
+        check("configurazione guidata: modelli o spiegazione", page.locator("#models .model").count() >= 2 or "guida interna" in page.inner_text("#setup-body"))
+        page.screenshot(path=SHOTS + "/15-configura.png", full_page=True)
+        page.evaluate("PD.settings.theme='dark'; PD.saveSettings()"); page.wait_for_timeout(300)
+        page.screenshot(path=SHOTS + "/16-configura-scuro.png", full_page=True)
+        page.evaluate("PD.settings.theme='light'; PD.saveSettings()")
+    elif not standalone:
+        check("menu di configurazione nascosto dove non serve", not page.is_visible('.nav-btn[data-view="setup"]'))
+
     # --- telefono / schermo stretto ---
     m = b.new_context(viewport={"width": 390, "height": 800}).new_page()
     m.on("pageerror", lambda e: errors.append("mobile pageerror: " + str(e)))
@@ -296,6 +308,10 @@ with sync_playwright() as p:
     over = m.evaluate("document.documentElement.scrollWidth > window.innerWidth + 1")
     check("nessuno scorrimento orizzontale su telefono", not over)
     m.screenshot(path=SHOTS + "/13-telefono.png", full_page=False)
+    if not standalone and page.evaluate("!!(PD.status && PD.status.setup)"):
+        m.goto(ROOT + "#/setup"); m.wait_for_selector("#setup-body dl.kv", timeout=20000)
+        check("configurazione leggibile su schermo stretto", not m.evaluate("document.documentElement.scrollWidth > window.innerWidth + 1"))
+        m.screenshot(path=SHOTS + "/17-configura-telefono.png", full_page=True)
 
     errs = [e for e in errors if "favicon" not in e and "api/stt" not in e and "503" not in e]
     check("nessun errore JavaScript", not errs, errs)

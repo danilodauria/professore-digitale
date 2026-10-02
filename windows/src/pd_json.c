@@ -163,7 +163,7 @@ jv *json_parse(const char *s, size_t n, char *err, size_t errn) {
     jv *v = parse_value(&p);
     if (!v) return NULL;
     ws(&p);
-    if (p.p != p.e) { jerr(&p, "testo in piu' dopo il JSON"); json_free(v); return NULL; }
+    if (p.p != p.e) { jerr(&p, "testo in più dopo il JSON"); json_free(v); return NULL; }
     return v;
 }
 

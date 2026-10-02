@@ -97,7 +97,7 @@ int unzip_to(const wchar_t *zip, const wchar_t *dest, volatile LONG *cancel, cha
         } else fail = 1;
         CloseHandle(o);
         if (fail) { snprintf(err, errn, "estrazione non riuscita (%s)", name); goto out2; }
-        if (c2 != crc || (method == 0 && csize != usize)) { snprintf(err, errn, "controllo di integrita' fallito: %s", name); goto out2; }
+        if (c2 != crc || (method == 0 && csize != usize)) { snprintf(err, errn, "controllo di integrità fallito: %s", name); goto out2; }
     }
     ok = 1;
 out2:
