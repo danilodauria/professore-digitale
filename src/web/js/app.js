@@ -21,7 +21,7 @@
     voice: true, autoReadAnswers: true, autoReadLessons: false, rate: 0.95,
     ttsMode: "auto", browserVoice: "",
     aiEnabled: true, model: "", useKbContext: true, autoSendVoice: true,
-    updateUrl: "", teacherName: ""
+    updateUrl: "", teacherName: "", eyesFollow: true
   };
   PD.server = false;
   PD.status = null;
@@ -633,7 +633,11 @@
     if (!m) return { text: text.trim(), diagram: "" };
     return { text: (text.slice(0, m.index) + text.slice(m.index + m[0].length)).trim(), diagram: PD.cleanDiagram(m[1]) };
   }
+  /* alcuni modelli recenti "ragionano ad alta voce" tra <think> e </think>: quel testo non va mostrato */
+  function stripThink(text) { return String(text || "").replace(/<think>[\s\S]*?(<\/think>|$)/gi, "").replace(/^\s+/, ""); }
+  PD.stripThink = stripThink;
   function visibleWhileStreaming(text) {
+    text = stripThink(text);
     var i = text.search(/\[DIAGR|```mermaid/i);
     return i >= 0 ? text.slice(0, i) : text;
   }
@@ -722,6 +726,7 @@
       })
       .then(function () {
         cleanup();
+        full = stripThink(full);
         if (!full.trim()) throw new Error("risposta vuota");
         var parts = splitDiagram(full);
         finishAnswer({ role: "assistant", source: "ai", model: model, content: parts.text || "Ecco lo schema sulla lavagna.", diagram: parts.diagram });
@@ -730,6 +735,7 @@
         var aborted = err && err.name === "AbortError";
         cleanup();
         if (aborted) {
+          full = stripThink(full);
           if (full.trim()) { var p = splitDiagram(full); finishAnswer({ role: "assistant", source: "ai", model: model, content: p.text + "\n\n*(risposta interrotta)*", diagram: p.diagram }); }
           else PD.setProf("riposo");
           return;
@@ -822,6 +828,7 @@
       field("Dimensione del testo: <b id='fs-val'>" + s.fontSize + "px</b>", '<input type="range" min="14" max="34" step="1" id="s-font" value="' + s.fontSize + '">') +
       field("Colori", select("s-theme", [["light", "Chiaro"], ["dark", "Scuro"], ["contrast", "Alto contrasto"]], s.theme)) +
       sw("s-projector", "Modalità proiettore (testo grande, menu nascosto)", s.projector) +
+      sw("s-eyes", "Gli occhi del Professore seguono il mouse", s.eyesFollow) +
       field("Nome dell'insegnante o del corso (facoltativo)", '<input type="text" id="s-teacher" maxlength="60" value="' + esc(s.teacherName) + '">') + "</div>" +
 
       '<div class="card"><h2 style="margin-top:0">🔊 Voce</h2>' +
@@ -880,7 +887,7 @@
 
     bind("s-font", "input", function () { s.fontSize = +this.value; $("#fs-val").textContent = s.fontSize + "px"; PD.saveSettings(); });
     bind("s-theme", "change", function () { s.theme = this.value; PD.saveSettings(); });
-    chk("s-projector", "projector"); chk("s-voice", "voice"); chk("s-autoread", "autoReadAnswers"); chk("s-autolessons", "autoReadLessons");
+    chk("s-projector", "projector"); chk("s-eyes", "eyesFollow"); chk("s-voice", "voice"); chk("s-autoread", "autoReadAnswers"); chk("s-autolessons", "autoReadLessons");
     chk("s-ai", "aiEnabled"); chk("s-kbctx", "useKbContext"); chk("s-autosend", "autoSendVoice");
     bind("s-teacher", "change", function () { s.teacherName = this.value.trim(); PD.saveSettings(); });
     bind("s-rate", "input", function () { s.rate = +this.value; $("#rate-val").textContent = s.rate.toFixed(2); PD.saveSettings(); });

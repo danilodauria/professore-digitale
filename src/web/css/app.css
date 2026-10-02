@@ -106,22 +106,35 @@ main { padding: 1.4rem clamp(1rem, 3vw, 2.4rem) 3rem; min-width: 0; }
 .hero h1 { font-size: 1.9rem; margin: 0 0 .3rem; }
 
 /* ---------- avatar del professore ---------- */
+/* Il disegno e' un <symbol> usato con <use>: i suoi elementi vivono in un albero "ombra" che i selettori
+ * come ".prof.pensiero .bubbles" non raggiungono. Per questo lo stato passa con variabili CSS (ereditate)
+ * impostate sull'<svg>; gli occhi le ricevono da js/eyes.js. */
 .prof { width: 9rem; height: 9rem; }
-.prof .mouth { transform-origin: 100px 139px; }
-.prof .lid { transform-origin: center; transform-box: fill-box; transform: scaleY(0); animation: blink 5s infinite; }
-.prof .bubbles { opacity: 0; }
-.prof.pensiero .bubbles { opacity: 1; }
-.prof.pensiero .bubbles circle { animation: bob 1.2s infinite ease-in-out; }
-.prof.pensiero .bubbles circle:nth-child(2) { animation-delay: .2s; }
-.prof.pensiero .bubbles circle:nth-child(3) { animation-delay: .4s; }
-.prof.spiegazione .mouth { animation: talk .28s infinite alternate; }
-.prof.ascolto .ear-wave { opacity: 1; animation: pulse 1s infinite; }
-.prof .ear-wave { opacity: 0; }
+.prof.pensiero { --pd-bub-vis: visible; --pd-bob: bob; --pd-brow-s: -1.6px; }
+.prof.spiegazione { --pd-talk: talk; }
+.prof.ascolto { --pd-ear-vis: visible; --pd-pulse: pulse; --pd-brow-s: -2.6px; }
+.mouth { transform-origin: 100px 139px; animation: var(--pd-talk, none) .28s infinite alternate; }
+.bubbles { visibility: var(--pd-bub-vis, hidden); }
+.bubbles circle { animation: var(--pd-bob, none) 1.2s infinite ease-in-out; }
+.bubbles circle:nth-child(2) { animation-delay: .2s; }
+.bubbles circle:nth-child(3) { animation-delay: .4s; }
+.ear-wave { visibility: var(--pd-ear-vis, hidden); animation: var(--pd-pulse, none) 1s infinite; }
+/* occhi: le variabili --pd-* sono scritte da js/eyes.js sull'elemento <svg> ed ereditate dal disegno */
+.lid { transform-box: fill-box; transform-origin: 50% 0; transform: scaleY(var(--pd-lid, 0)); animation: var(--pd-blink, blink) 5s infinite; }
+html.eyes-js { --pd-blink: none; }
+.eye-l { transform: translate(var(--pd-lx, 0px), var(--pd-ly, 0px)); }
+.eye-r { transform: translate(var(--pd-rx, 0px), var(--pd-ry, 0px)); }
+.pupil { transform-box: fill-box; transform-origin: center; transform: scale(var(--pd-pupil, 1)); }
+.glint { transform: translate(var(--pd-gx, 0px), var(--pd-gy, 0px)); }
+.brows { transform: translateY(calc(var(--pd-brow, 0px) + var(--pd-brow-s, 0px))); transition: transform .35s ease; }
 @keyframes blink { 0%, 94%, 100% { transform: scaleY(0); } 96% { transform: scaleY(1); } }
 @keyframes talk { from { transform: scaleY(.35); } to { transform: scaleY(1.25); } }
 @keyframes bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
 @keyframes pulse { 0% { opacity: .2; } 50% { opacity: 1; } 100% { opacity: .2; } }
-@media (prefers-reduced-motion: reduce) { .prof * { animation: none !important; } }
+@media (prefers-reduced-motion: reduce) {
+  :root, .prof.prof { --pd-talk: none; --pd-bob: none; --pd-pulse: none; --pd-blink: none; }
+  .brows { transition: none; }
+}
 .prof-state { font-weight: 700; color: var(--brand); text-align: center; font-size: .9rem; }
 
 /* ---------- lezioni ---------- */

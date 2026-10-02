@@ -35,6 +35,20 @@ with sync_playwright() as p:
         check("IA rilevata", "qwen2.5:1.5b" in chips, chips)
     page.screenshot(path=SHOTS + "/01-home.png")
 
+    # --- occhi del Professore che seguono il mouse ---
+    def eye_x():
+        v = page.evaluate("getComputedStyle(document.querySelector('#view-home svg.prof')).getPropertyValue('--pd-lx')")
+        return float((v or "0").replace("px", "") or 0)
+    pb = page.locator("#view-home svg.prof").bounding_box()
+    page.mouse.move(pb["x"] + pb["width"] + 500, pb["y"] + pb["height"] / 2, steps=4); page.wait_for_timeout(700)
+    right = eye_x()
+    page.mouse.move(3, pb["y"] + pb["height"] / 2, steps=4); page.wait_for_timeout(700)
+    left = eye_x()
+    check("occhi seguono il mouse", right > 2 and left < -2, (right, left))
+    page.evaluate("PD.settings.eyesFollow = false"); page.mouse.move(pb["x"] + pb["width"] + 400, pb["y"]); page.wait_for_timeout(1200)
+    check("occhi fermi se disattivati", abs(eye_x()) < 0.3, eye_x())
+    page.evaluate("PD.settings.eyesFollow = true")
+
     # --- lezioni ---
     page.click("text=Lezioni >> nth=0")
     page.wait_for_selector("#view-lessons .tile")
