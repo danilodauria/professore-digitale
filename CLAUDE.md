@@ -1,7 +1,8 @@
 # Professore Digitale — istruzioni per chi mantiene il progetto (persone e assistenti IA)
 
 Progetto di **Danilo D'Auria** (licenza MIT). App didattica offline per l'alfabetizzazione digitale su Linux
-Debian/Ubuntu/Mint/FeniceOS: server locale Python (solo libreria standard) + interfaccia web in JS puro.
+Debian/Ubuntu/Mint/FeniceOS (server locale Python, solo libreria standard) **e su Windows da XP SP3 a 11**
+(server nativo in C, `windows/`), con la stessa interfaccia web in JS puro (`src/web/`).
 Leggere questo file per intero prima di modificare qualunque cosa.
 
 ## Regole del progetto (non negoziabili)
@@ -32,6 +33,12 @@ Leggere questo file per intero prima di modificare qualunque cosa.
 | `tools/` | `rilascio.sh`, `pubblica-contenuti.sh`, `pubblica-sito.sh`, `pubblica-tutto.sh`, `pubblica-locale.sh`, `server-aggiornamenti.sh`, `backup-locale.sh`, `verifica_pubblicazione.py`, `repo-apt.sh`, `make_standalone.py`, `metainfo.py`, `prepara-ambiente.sh` |
 | `tests/` | `esegui_test.sh` (tutto), `test_packs.py`, `test_ui.py` (Playwright), `mock_ollama.py` |
 | `docs/` | Vademecum e Guida agli aggiornamenti (PDF); il vademecum entra nel .deb |
+| `windows/src/` | **Versione Windows**: server nativo C (API Win32, compatibile XP SP3). `pd_main.c` avvio/istanza unica/icona/browser, `pd_http.c` server, `pd_api.c` API (stesse risposte di `pd_server.py`), `pd_ai.c` Ollama e motore compatibile KoboldCpp (API OpenAI), `pd_voice.c` voce SAPI/Piper e microfono, `pd_setup.c` configurazione automatica e chiavetta, `pd_hw.c` hardware, `pd_net.c` WinHTTP, `pd_json.c`, `pd_zip.c`, `pd_util.c`; `pd_stt_main.c` = `pd-stt.exe` (64 bit, Vosk) |
+| `windows/catalogo-ia.json` | Catalogo dei modelli di IA per Windows (fasce di RAM/VRAM). Si pubblica anche da solo (`catalogo_ia` in `aggiornamenti.json`) |
+| `windows/contenuti/` | Pacchetti solo per Windows (es. `windows-primi-passi`): inclusi nell'installatore, nascosti su Linux |
+| `windows/installer/`, `windows/res/` | Installatore NSIS (per tutti gli utenti o solo per me, `/S` silenzioso), icona, manifest, immagini |
+| `windows/build-windows.sh` | Compila da Linux con mingw-w64 + NSIS → `dist/windows/` (lo chiama `build.sh`) |
+| `src/web/js/eyes.js`, `setup.js`, `compat.js` | Occhi che seguono il mouse; pagina «Configura IA e voce» (solo Windows); avviso per browser troppo vecchi |
 | `archivio/` | .deb prodotti in questa copia (ignorato da git, escluso dall'archivio sorgenti). I .deb pubblicati si conservano sul PC di Danilo in `$ARCHIVIO` (`~/professore-digitale-archivio`, vedi `rilascio.conf`) |
 
 ## Comandi
@@ -46,6 +53,28 @@ tools/pubblica-sito.sh             # carica dist/pubblica/ su GitHub Pages (lo e
 tools/pubblica-tutto.sh ZIP        # per Danilo: verifica + firma APT + sito + sorgenti in un solo comando
 PD_SHARE_DIR=src python3 packaging/professore-digitale-contenuti valida src/contenuti/*.json
 ```
+
+## Versione per Windows (regole in più)
+- **Compatibilità XP SP3 → Windows 11**: il programma principale è a 32 bit (`-D_WIN32_WINNT=0x0501`) e usa solo
+  funzioni presenti in XP; quelle recenti (DXGI, RtlGetVersion, SHGetKnownFolderPath, IsWow64Process2) si caricano con
+  `GetProcAddress`. `windows/tools/controlla_xp.py` controlla le importazioni a ogni compilazione: se fallisce, non rilasciare.
+- **Stesse API del server Python**: ogni nuova API o campo di `/api/status` va aggiunta in **entrambi** `pd_server.py` e
+  `windows/src/pd_api.c`. Il server Windows valida i pacchetti in modo essenziale; la validazione completa la fa
+  `packs.js` nel browser (anche per gli elenchi del server).
+- **IA**: Windows 10 22H2+/11 → Ollama; Windows 7/8/8.1 64 bit → KoboldCpp (`compatibile`, porta 5001, API OpenAI);
+  XP/Vista/32 bit → solo guida interna. Il modello si sceglie da `windows/catalogo-ia.json` (l'ultimo adatto, saltando
+  `solo_manuale`). Per proporre modelli nuovi basta aggiornare il catalogo (alzare `versione`) e pubblicarlo:
+  non serve una nuova versione del programma. Tenere allineate le fasce di `recommended_model()` in `pd_server.py`
+  e di `professore-digitale-setup-ia`.
+- **Download**: solo dopo un clic dell'utente; impronta SHA-256 presa da GitHub (campo `digest`) o Hugging Face (`lfs.oid`)
+  quando pubblicata, sempre calcolata e mostrata; la chiavetta (`kit.json`) contiene l'impronta di ogni file.
+- **Dati** in `%APPDATA%\ProfessoreDigitale` (progressi) e `%LOCALAPPDATA%\ProfessoreDigitale` (modelli, registro
+  `server.log`, `ia.json`); con `portatile.txt` accanto all'exe restano nella cartella `dati` (chiavetta).
+- **Test**: `tests/test_windows.sh` (chiamato da `esegui_test.sh`) compila, avvia l'exe con **Wine** e ripete tutti i test
+  dell'interfaccia più `tests/test_windows_api.py`. Microfono, Ollama vero, SAPI e download reali non si provano in Wine:
+  dichiararlo nella consegna. Attenzione: `pkill -f` o `pgrep -f` con il nome dell'exe nella stessa riga di comando
+  colpiscono la propria shell; per fermare Wine usare `wineserver -k`.
+- Variabili utili ai test: `PD_DATA_DIR`, `PD_LOCAL_DIR`, `PD_DOWNLOAD_DIR`, `PD_NO_TRAY`, `PD_NO_ENGINE_START`, `OLLAMA_HOST`, `PD_DEBUG`.
 
 ## Pubblicazione: con GitHub oppure tutto in locale
 - **GitHub** (predefinito): `tools/pubblica-tutto.sh ZIP` → GitHub Pages + sorgenti.
@@ -92,7 +121,8 @@ PD_SHARE_DIR=src python3 packaging/professore-digitale-contenuti valida src/cont
 3. Fare le modifiche richieste; aggiungere test per ogni correzione e per le nuove domande.
 4. `tests/esegui_test.sh` finché è tutto verde; per l'interfaccia, controllare anche gli screenshot (`test_ui.py` li salva).
 5. Scegliere il tipo di versione e lanciare `tools/rilascio.sh TIPO "note…"` (senza `--apt`: la chiave di firma è solo di Danilo).
-6. Consegnare: `dist/pubblica/` (zip, senza `apt/`), il nuovo .deb, la versione portatile e un **nuovo archivio sorgenti
+6. Consegnare: `dist/pubblica/` (zip, senza `apt/`), il nuovo .deb, l'installatore Windows `ProfessoreDigitale-Setup-X.Y.Z.exe`
+   (e lo zip da chiavetta), la versione portatile, i vademecum aggiornati e un **nuovo archivio sorgenti
    completo di `.git`** (senza i .deb):
    `tar --exclude=./build --exclude=./dist --exclude=./archivio --exclude='__pycache__' --transform 's,^\.,professore-digitale,' -czf professore-digitale-X.Y.Z-sorgenti.tar.gz .`
    (deve restare sotto 30 MB: se cresce, `git gc --aggressive` e niente file binari pesanti in git)
@@ -101,7 +131,8 @@ PD_SHARE_DIR=src python3 packaging/professore-digitale-contenuti valida src/cont
    (verifica le impronte, firma il repository APT con la sua chiave se presente, carica il sito su GitHub Pages
    e invia sorgenti e tag). Con `--prova` fa solo i controlli. Nel messaggio finale riportare il comando esatto
    con il nome dello zip consegnato. Il suo manuale di riferimento è `docs/Manuale_Aggiornamenti_con_Claude.pdf`.
-8. Se è cambiato il comportamento visibile, aggiornare il Vademecum (`docs/`) e/o la Guida agli aggiornamenti.
+8. Se è cambiato il comportamento visibile, aggiornare i Vademecum (`docs/`, Linux e Windows) e/o la Guida agli aggiornamenti.
+   Le sorgenti HTML dei PDF stanno in `docs/sorgenti/` (si stampano in PDF con `tools/pdf-da-html.py`).
 
 ## Prova dell'aggiornamento dalla versione precedente
 Il .deb precedente non è nell'archivio sorgenti: ricostruirlo dal tag git, es.

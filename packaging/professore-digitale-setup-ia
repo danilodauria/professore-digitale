@@ -34,10 +34,12 @@ echo "${B}Professore Digitale — Configurazione dell'intelligenza artificiale l
 echo "L'IA gira interamente su questo computer grazie a Ollama. Le domande non vengono inviate su Internet."
 
 RAM_MB=$(awk '/MemTotal/ {print int($2/1024)}' /proc/meminfo 2>/dev/null || echo 0)
-if   [ "$RAM_MB" -lt 3500 ];  then CONSIGLIATO="qwen2.5:0.5b"
-elif [ "$RAM_MB" -lt 6000 ];  then CONSIGLIATO="qwen2.5:1.5b"
-elif [ "$RAM_MB" -lt 12000 ]; then CONSIGLIATO="llama3.2:3b"
-else CONSIGLIATO="gemma3:4b"; fi
+# stesse fasce del catalogo della versione Windows (windows/catalogo-ia.json)
+if   [ "$RAM_MB" -lt 6000 ];  then CONSIGLIATO="qwen3.5:0.8b"
+elif [ "$RAM_MB" -lt 8000 ];  then CONSIGLIATO="qwen3.5:2b"
+elif [ "$RAM_MB" -lt 16000 ]; then CONSIGLIATO="qwen3.5:4b"
+elif [ "$RAM_MB" -lt 24000 ]; then CONSIGLIATO="qwen3.5:9b"
+else CONSIGLIATO="gemma4:12b"; fi
 
 titolo "1. Controllo del computer"
 echo "Memoria RAM: $((RAM_MB / 1024)) GB circa — Processore: $(nproc 2>/dev/null || echo ?) core — Architettura: $(uname -m)"
@@ -46,6 +48,7 @@ case "$(uname -m)" in
   *) errore "Ollama non è disponibile per l'architettura $(uname -m) (serve 64 bit)."
      echo "Il Professore Digitale funziona comunque con la sua guida interna."; fine 1 ;;
 esac
+[ "$RAM_MB" -lt 3500 ] && CONSIGLIATO="qwen2.5:0.5b"
 if [ "$RAM_MB" -lt 2500 ]; then
   attenzione "Con meno di 3 GB di RAM l'IA sarà molto lenta. Il Professore funziona comunque con la guida interna."
   chiedi "Volete proseguire lo stesso?" || fine 0
@@ -83,16 +86,18 @@ fi
 titolo "4. Scelta del modello"
 if [ -z "$MODELLO" ]; then
   echo "Modelli adatti alla didattica (più grande = risposte migliori ma più lente):"
-  echo "  1) qwen2.5:0.5b   ~0.4 GB  — PC molto datati (2 GB di RAM)"
-  echo "  2) qwen2.5:1.5b   ~1.0 GB  — PC datati (4 GB di RAM)"
-  echo "  3) llama3.2:3b    ~2.0 GB  — PC normali (8 GB di RAM)"
-  echo "  4) gemma3:4b      ~3.3 GB  — PC recenti (16 GB di RAM), ottimo italiano"
-  echo "  5) llama3.1:8b    ~4.7 GB  — PC potenti"
+  echo "  1) qwen3.5:0.8b   ~1.0 GB  — PC datati (3-4 GB di RAM)"
+  echo "  2) qwen3.5:2b     ~2.7 GB  — PC con 6-8 GB di RAM"
+  echo "  3) qwen3.5:4b     ~3.4 GB  — PC con 8-16 GB di RAM (consigliato)"
+  echo "  4) gemma3:4b      ~3.3 GB  — alternativa con ottimo italiano"
+  echo "  5) qwen3.5:9b     ~6.6 GB  — PC recenti (16 GB di RAM o scheda video)"
+  echo "  6) gemma4:12b     ~8 GB    — PC potenti (24 GB di RAM o scheda video da 12 GB)"
+  echo "  (con meno di 3 GB di RAM: qwen2.5:0.5b, ~0.4 GB)"
   echo "Consigliato per questo computer: ${B}${CONSIGLIATO}${N}"
   if [ "$AUTO_SI" = 1 ]; then MODELLO="$CONSIGLIATO"; else
     read -r -p "Scegliete un numero (Invio = consigliato): " scelta
-    case "$scelta" in 1) MODELLO="qwen2.5:0.5b" ;; 2) MODELLO="qwen2.5:1.5b" ;; 3) MODELLO="llama3.2:3b" ;;
-      4) MODELLO="gemma3:4b" ;; 5) MODELLO="llama3.1:8b" ;; *) MODELLO="$CONSIGLIATO" ;; esac
+    case "$scelta" in 1) MODELLO="qwen3.5:0.8b" ;; 2) MODELLO="qwen3.5:2b" ;; 3) MODELLO="qwen3.5:4b" ;;
+      4) MODELLO="gemma3:4b" ;; 5) MODELLO="qwen3.5:9b" ;; 6) MODELLO="gemma4:12b" ;; *) MODELLO="$CONSIGLIATO" ;; esac
   fi
 fi
 echo "Scarico il modello ${B}${MODELLO}${N} (può richiedere diversi minuti)…"

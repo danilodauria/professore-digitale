@@ -152,13 +152,16 @@ def mem_total_mb():
 
 
 def recommended_model(ram_mb):
-    if ram_mb and ram_mb < 3500:
-        return "qwen2.5:0.5b"
+    """Stesse fasce del catalogo della versione Windows (windows/catalogo-ia.json)."""
     if ram_mb and ram_mb < 6000:
-        return "qwen2.5:1.5b"
-    if ram_mb and ram_mb < 12000:
-        return "llama3.2:3b"
-    return "gemma3:4b"
+        return "qwen3.5:0.8b"
+    if ram_mb and ram_mb < 8000:
+        return "qwen3.5:2b"
+    if ram_mb and ram_mb < 16000:
+        return "qwen3.5:4b"
+    if ram_mb and ram_mb < 24000:
+        return "qwen3.5:9b"
+    return "gemma4:12b"
 
 
 # ------------------------------------------------------------------------------
@@ -717,21 +720,28 @@ class Handler(BaseHTTPRequestHandler):
             if not ok or not models:
                 return self._error(503, "IA locale non disponibile")
             model = models[0]
-        payload = json.dumps({
-            "model": model, "messages": clean, "stream": True,
-            "options": {"temperature": float(req.get("temperature", 0.4)),
-                        "num_ctx": int(req.get("num_ctx", 2048))},
-            "keep_alive": "15m",
-        }).encode("utf-8")
-        upstream = urllib.request.Request(OLLAMA_HOST + "/api/chat", data=payload,
-                                          headers={"Content-Type": "application/json"})
-        try:
-            resp = urllib.request.urlopen(upstream, timeout=600)
-        except urllib.error.HTTPError as e:
-            detail = e.read().decode("utf-8", "replace")[:300]
-            return self._error(502, "Ollama ha risposto %s: %s" % (e.code, detail))
-        except Exception as e:
-            return self._error(503, "IA locale non raggiungibile: %s" % e)
+        resp = None
+        for think in (False, None):
+            body = {
+                "model": model, "messages": clean, "stream": True,
+                "options": {"temperature": float(req.get("temperature", 0.4)),
+                            "num_ctx": int(req.get("num_ctx", 2048))},
+                "keep_alive": "15m",
+            }
+            if think is not None:
+                body["think"] = think   # i modelli che "ragionano" (es. qwen3.5) rispondono prima senza ragionamento esteso
+            upstream = urllib.request.Request(OLLAMA_HOST + "/api/chat", data=json.dumps(body).encode("utf-8"),
+                                              headers={"Content-Type": "application/json"})
+            try:
+                resp = urllib.request.urlopen(upstream, timeout=600)
+                break
+            except urllib.error.HTTPError as e:
+                detail = e.read().decode("utf-8", "replace")[:300]
+                if think is not None and "think" in detail:
+                    continue    # modello o versione di Ollama che non accetta "think": si riprova senza
+                return self._error(502, "Ollama ha risposto %s: %s" % (e.code, detail))
+            except Exception as e:
+                return self._error(503, "IA locale non raggiungibile: %s" % e)
 
         self.send_response(200)
         self.send_header("Content-Type", "application/x-ndjson; charset=utf-8")

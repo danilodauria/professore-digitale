@@ -21,9 +21,31 @@ biblioteche e associazioni. Pensata per girare anche su **computer ricondizionat
 1. **Pacchetto `.deb`** (consigliato) — `professore-digitale_<versione>_all.deb`, circa 1 MB.
    Un solo pacchetto per PC moderni **e** datati: non crea ambienti virtuali, non scarica nulla
    all'installazione, `Architecture: all` (funziona su amd64, i386, arm64, armhf).
-2. **Versione portatile** — `professore-digitale-portatile.html`: un unico file da aprire con doppio clic
+2. **Installatore per Windows** — vedi la sezione dedicata più sotto.
+3. **Versione portatile** — `professore-digitale-portatile.html`: un unico file da aprire con doppio clic
    in qualsiasi browser, anche da chiavetta USB e su Windows/macOS. Include lezioni, guida interna,
    lavagna, palestra e voce del browser (senza IA e senza microfono).
+
+## Versione per Windows (da XP a Windows 11)
+
+`ProfessoreDigitale-Setup-<versione>.exe` — un solo installatore per **Windows XP SP3, Vista, 7, 8, 8.1, 10 e 11**,
+a 32 e 64 bit. Si installa per tutti gli utenti oppure solo per sé (senza password); per le aule:
+`ProfessoreDigitale-Setup-<versione>.exe /S /AllUsers`. Esiste anche lo zip **da chiavetta**, senza installazione.
+
+* **Server nativo in C** (nessun Python, nessuna libreria da installare): stesse lezioni, guida, lavagna, palestra,
+  stessi pacchetti di contenuti e aggiornamenti del pacchetto Linux. Icona accanto all'orologio, finestra "da applicazione"
+  in Edge/Chrome (Supermium su XP e Vista), voce italiana di Windows (SAPI).
+* **Configurazione automatica dell'IA** (*Configura IA e voce*): riconosce sistema, processore (AVX/AVX2), RAM,
+  scheda video e memoria video, spazio libero; sceglie dal catalogo il modello migliore per quel PC e installa tutto:
+  **Ollama** su Windows 10 22H2/11, **KoboldCpp** (motore compatibile) su Windows 7/8/8.1 a 64 bit.
+  XP, Vista e i sistemi a 32 bit usano la guida interna. Il catalogo (`windows/catalogo-ia.json`) si aggiorna online.
+* **Microfono offline** (Vosk, 64 bit) e **voce naturale** Piper «Paola», facoltativi.
+* **Chiavetta per le aule senza Internet**: si prepara su un PC collegato e si installa sugli altri; ogni file è verificato
+  con SHA-256.
+* Vademecum dedicato: `docs/Vademecum_Professore_Digitale_Windows.pdf`.
+
+Compilazione (da Linux): `windows/build-windows.sh` (servono `mingw-w64`, `nsis`, `libz-mingw-w64-dev`; li installa
+`tools/prepara-ambiente.sh`). I test girano con Wine: `tests/esegui_test.sh`.
 
 ## Installazione del .deb
 
