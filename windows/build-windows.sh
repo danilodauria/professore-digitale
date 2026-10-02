@@ -82,9 +82,10 @@ cp windows/res/professore.ico "$A/professore.ico"
 if [ "$SOLO_APP" = 1 ]; then echo "✔ Applicazione pronta in $A"; exit 0; fi
 echo "» Installatore"
 makensis -V2 -DVERSIONE="$VERSION" -DV1="$V1" -DV2="$V2" -DV3="$V3" -DSORGENTE="$ROOT/$A" -DUSCITA="$ROOT/$OUT/ProfessoreDigitale-Setup-$VERSION.exe" \
-  -DICONA="$ROOT/windows/res/professore.ico" windows/installer/professore-digitale.nsi
+  -DICONA="$ROOT/windows/res/professore.ico" -DRISORSE="$ROOT/windows/res" windows/installer/professore-digitale.nsi
 echo "» Versione da chiavetta (zip)"
 rm -f "$OUT/professore-digitale-windows-$VERSION.zip"
-(cd "$W" && cp -r app ProfessoreDigitale && zip -qr9 "$ROOT/$OUT/professore-digitale-windows-$VERSION.zip" ProfessoreDigitale && rm -rf ProfessoreDigitale)
+(cd "$W" && cp -r app ProfessoreDigitale && printf 'Versione da chiavetta: i progressi restano nella cartella "dati" accanto al programma.\r\nCancellate questo file per salvarli invece nel profilo di Windows.\r\n' > ProfessoreDigitale/portatile.txt \
+  && zip -qr9 "$ROOT/$OUT/professore-digitale-windows-$VERSION.zip" ProfessoreDigitale && rm -rf ProfessoreDigitale)
 ls -la "$OUT"
 echo "✔ Windows: $OUT/"

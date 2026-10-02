@@ -107,14 +107,15 @@ echo "Server attivo (Ctrl+C per chiudere)…"
 exec python3 -m http.server "$PORTA" --bind 0.0.0.0
 EOS
 chmod 755 "$DEST/avvia-server-aggiornamenti.sh"
-( cd "$DEST" && sha256sum -- *.deb *.html *.json contenuti/*.json 2>/dev/null > SHA256SUMS )
+( cd "$DEST" && sha256sum -- *.deb *.exe *.zip *.html *.json contenuti/*.json 2>/dev/null > SHA256SUMS )
 
 cat > "$DEST/LEGGIMI.txt" <<EOS
 PROFESSORE DIGITALE $VER - AGGIORNAMENTO IN LOCALE (senza Internet)
 
 A) CON QUESTA CARTELLA SU CHIAVETTA
-   Su ogni PC: aprire un terminale in questa cartella e scrivere
+   Su ogni PC Linux: aprire un terminale in questa cartella e scrivere
        sh installa-da-chiavetta.sh
+   Su ogni PC Windows: doppio clic su ProfessoreDigitale-Setup-$VER.exe
    Installa o aggiorna il programma e i contenuti. Progressi e impostazioni restano.
 
 B) IN RETE LOCALE (un PC dell'aula fa da "server degli aggiornamenti")

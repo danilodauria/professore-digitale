@@ -938,6 +938,21 @@ static void info_json(buf_t *b) {
     }
     buf_adds(b, "]}");
     buf_adds(b, ", \"catalogo\": "); json_str(b, g_cat_ver);
+    /* elenco completo per motore: serve a preparare la chiavetta per PC diversi da questo */
+    buf_adds(b, ", \"modelli_per_motore\": {");
+    const char *mot[2] = { "ollama", "compatibile" };
+    for (int k = 0; k < 2; k++) {
+        jv *l2 = engine_list(mot[k]);
+        buf_addf(b, "%s\"%s\": [", k ? ", " : "", mot[k]);
+        for (size_t i = 0; l2 && i < l2->n; i++) {
+            if (i) buf_adds(b, ", ");
+            buf_adds(b, "{\"nome\": "); json_str(b, jstr(l2->items[i], "nome", ""));
+            buf_adds(b, ", \"titolo\": "); json_str(b, jstr(l2->items[i], "titolo", ""));
+            buf_addf(b, ", \"gb\": %.1f}", jnum(l2->items[i], "gb", 0));
+        }
+        buf_adds(b, "]");
+    }
+    buf_adds(b, "}");
     LeaveCriticalSection(&G.lock);
     /* cosa c'e' gia' */
     wchar_t oexe[MAX_PATH];

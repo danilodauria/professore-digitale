@@ -14,7 +14,8 @@
 #    --apt          genera anche il repository APT firmato (serve una chiave GPG)
 #
 #  Risultato: cartella dist/pubblica/ pronta da caricare sul sito (GitHub Pages):
-#    aggiornamenti.json, pacchetto .deb, versione portatile, contenuti, note, SHA256SUMS
+#    aggiornamenti.json, pacchetto .deb, installatore Windows (.exe) e versione da chiavetta (.zip),
+#    versione portatile, contenuti, catalogo dei modelli di IA, note, vademecum, SHA256SUMS
 # ==============================================================================
 set -euo pipefail
 cd "$(dirname "$0")/.."
@@ -80,7 +81,15 @@ cp "dist/professore-digitale_${NUOVA}_all.deb" dist/professore-digitale-portatil
 cp "dist/professore-digitale_${NUOVA}_all.deb" archivio/
 mkdir -p "$ARCHIVIO" 2>/dev/null && cp "dist/professore-digitale_${NUOVA}_all.deb" "$ARCHIVIO/" 2>/dev/null || true
 [ -d dist/contenuti ] && cp dist/contenuti/*.json "$PUB/contenuti/" 2>/dev/null || true
+cp windows/contenuti/*.json "$PUB/contenuti/" 2>/dev/null || true
 [ -f docs/Vademecum_Professore_Digitale.pdf ] && cp docs/Vademecum_Professore_Digitale.pdf "$PUB/"
+[ -f docs/Vademecum_Professore_Digitale_Windows.pdf ] && cp docs/Vademecum_Professore_Digitale_Windows.pdf "$PUB/"
+if [ -f "dist/windows/ProfessoreDigitale-Setup-${NUOVA}.exe" ]; then
+  cp "dist/windows/ProfessoreDigitale-Setup-${NUOVA}.exe" "dist/windows/professore-digitale-windows-${NUOVA}.zip" "$PUB/"
+  cp "dist/windows/ProfessoreDigitale-Setup-${NUOVA}.exe" archivio/
+  cp "dist/windows/ProfessoreDigitale-Setup-${NUOVA}.exe" "$ARCHIVIO/" 2>/dev/null || true
+fi
+cp windows/catalogo-ia.json "$PUB/catalogo-ia.json"
 python3 - "$NUOVA" "$DATA_ISO" "$PAGINA_PROGETTO" "$PUB" "${NOTE[@]}" <<'PY'
 import hashlib, json, os, sys, glob
 ver, data, pagina, pub, note = sys.argv[1], sys.argv[2], sys.argv[3], sys.argv[4], sys.argv[5:]
@@ -93,14 +102,22 @@ for f in sorted(glob.glob(os.path.join(pub, "contenuti", "*.json"))):
                       "descrizione": p.get("descrizione", ""), "url": "contenuti/" + os.path.basename(f), "sha256": sha(f)})
 info = {"versione": ver, "data": data, "note": note, "pacchetto": deb, "sha256": sha(os.path.join(pub, deb)),
         "portatile": "professore-digitale-portatile.html", "pagina": pagina, "contenuti": contenuti}
+exe, wzip = "ProfessoreDigitale-Setup-%s.exe" % ver, "professore-digitale-windows-%s.zip" % ver
+if os.path.isfile(os.path.join(pub, exe)):          # versione per Windows (installatore e chiavetta)
+    info["windows"] = {"pacchetto": exe, "sha256": sha(os.path.join(pub, exe)), "zip": wzip, "zip_sha256": sha(os.path.join(pub, wzip))}
+cat = os.path.join(pub, "catalogo-ia.json")          # modelli di IA consigliati: si aggiornano anche senza nuova versione
+if os.path.isfile(cat):
+    info["catalogo_ia"] = {"url": "catalogo-ia.json", "sha256": sha(cat), "versione": json.load(open(cat, encoding="utf-8"))["versione"]}
 json.dump(info, open(os.path.join(pub, "aggiornamenti.json"), "w", encoding="utf-8"), ensure_ascii=False, indent=1)
 with open(os.path.join(pub, "version.txt"), "w") as f:     # compatibilita' con la versione 2.0.0
     f.write(ver + "\n")
 with open(os.path.join(pub, "NOTE-%s.md" % ver), "w", encoding="utf-8") as f:
     f.write("# Professore Digitale %s (%s)\n\n" % (ver, data) + "".join("- %s\n" % n for n in note) +
-            "\n## Installazione o aggiornamento\n\n```\nsudo apt install ./%s\n```\n\nImpostazioni e progressi degli allievi vengono conservati.\n" % deb)
+            "\n## Installazione o aggiornamento\n\n**Linux** (Debian, Ubuntu, Mint, FeniceOS):\n\n```\nsudo apt install ./%s\n```\n\n" % deb +
+            ("**Windows** (da XP a 11): doppio clic su `%s`, oppure dal Professore: Impostazioni → Aggiornamenti.\n\n" % exe if "windows" in info else "") +
+            "Impostazioni e progressi degli allievi vengono conservati.\n")
 PY
-(cd "$PUB" && sha256sum -- *.deb *.html *.json contenuti/*.json 2>/dev/null > SHA256SUMS)
+(cd "$PUB" && sha256sum -- *.deb *.exe *.zip *.html *.json contenuti/*.json 2>/dev/null > SHA256SUMS)
 
 # ---- 5. repository APT (facoltativo) ----
 [ "$APT" = 1 ] && tools/repo-apt.sh "$PUB/apt"
@@ -121,6 +138,7 @@ ls -1 "$PUB"
 echo
 echo "Prossimi passi:"
 echo "  1. Provate il pacchetto su un PC di prova:  sudo apt install ./$PUB/professore-digitale_${NUOVA}_all.deb"
+echo "     e su Windows:  $PUB/ProfessoreDigitale-Setup-${NUOVA}.exe"
 echo "  2. Pubblicate:  tools/pubblica-tutto.sh   (GitHub)   oppure   tools/pubblica-locale.sh --cartella DEST   (senza GitHub)"
 echo "     Copia di sicurezza senza GitHub:  tools/backup-locale.sh /media/\$USER/CHIAVETTA"
 echo "  3. Dagli altri PC: Impostazioni → Aggiornamenti → «Controlla aggiornamenti»."

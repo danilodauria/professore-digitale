@@ -114,8 +114,18 @@ with sync_playwright() as p:
         probe.update({"come stampo una lettera": "Come stampo un documento?", "posso usare il wifi del bar": "Posso usare il Wi-Fi pubblico?",
                       "come passo le foto dal telefono al computer": "Come trasferisco le foto dal telefono al computer?",
                       "comprare su internet in sicurezza": "Come compro online in sicurezza?", "cos'è il bluetooth": "Cos'è il Bluetooth?"})
+    if page.evaluate("PD_KB.some(e => e.pack === 'windows-primi-passi')"):
+        probe.update({"il programma non risponde": "Cosa faccio se un programma di Windows non risponde?",
+                      "dov'è il menu start": "Cos'è il menu Start di Windows?",
+                      "mi è comparso un messaggio che dice di chiamare l'assistenza microsoft": "Cosa fare se sullo schermo compare un messaggio che dice di chiamare l'assistenza Microsoft?",
+                      "la tastiera scrive simboli strani": "Come si cambia la lingua della tastiera se escono simboli strani?",
+                      "come faccio una foto dello schermo su windows": "Come faccio uno screenshot su Windows?",
+                      "come tolgo la chiavetta": "Come si toglie in sicurezza una chiavetta USB su Windows?",
+                      "serve l'antivirus": "Cos'è Windows Defender, l'antivirus di Windows?",
+                      "dove sono i file scaricati": ("Dove trovo i file scaricati?", "Dove finiscono i file scaricati su Windows?")})
     got = page.evaluate("(qs) => Object.fromEntries(qs.map(q => { const r = PD.search(q, 1)[0]; return [q, r ? [r.doc.title, r.score] : null]; }))", list(probe))
-    wrong = {q: got[q] for q in probe if not got[q] or got[q][0] != probe[q] or got[q][1] < 3.2}
+    ok_title = lambda q: probe[q] if isinstance(probe[q], tuple) else (probe[q],)
+    wrong = {q: got[q] for q in probe if not got[q] or got[q][0] not in ok_title(q) or got[q][1] < 3.2}
     check("ricerca guida interna (%d domande)" % len(probe), not wrong, wrong)
     nonsense = page.evaluate("(PD.search('ricetta della carbonara con guanciale', 1)[0] || {score: 0}).score")
     check("domanda fuori tema sotto soglia", nonsense < 3.2, nonsense)
@@ -234,7 +244,8 @@ with sync_playwright() as p:
     page.goto(ROOT + "#/settings"); page.wait_for_selector("#packs-list")
     page.wait_for_timeout(300)
     expected = page.evaluate("""(files) => files.filter(f => !f.richiede_app || PD.cmpVersion(f.richiede_app, PD.version) <= 0).length""",
-        [json.load(open(f, encoding="utf-8")) for f in __import__("glob").glob(os.path.join(here, "..", "src", "contenuti", "*.json"))])
+        [json.load(open(f, encoding="utf-8")) for f in __import__("glob").glob(os.path.join(here, "..", "src", "contenuti", "*.json")) +
+         (__import__("glob").glob(os.path.join(here, "..", "windows", "contenuti", "*.json")) if os.environ.get("PD_TEST_WINDOWS") else [])])
     check("pacchetti inclusi caricati (%d, gli altri rifiutati per versione)" % expected, page.evaluate("PD.packs.list.length") == expected and
           page.evaluate("PD.packs.errors.every(e => e.errori.every(x => x.indexOf('richiede_app') === 0))"),
           page.evaluate("[PD.packs.list.length, PD.packs.errors]"))

@@ -8,7 +8,7 @@
 set -uo pipefail
 cd "$(dirname "$0")/.."
 SUDO=""; [ "$(id -u)" -ne 0 ] && SUDO="sudo"
-PACCHETTI="git python3 python3-venv python3-pip nodejs dpkg-dev apt-utils gnupg lintian curl zip espeak-ng poppler-utils"
+PACCHETTI="git python3 python3-venv python3-pip nodejs dpkg-dev apt-utils gnupg lintian curl zip espeak-ng poppler-utils mingw-w64 nsis libz-mingw-w64-dev"
 MANCANTI=""
 for p in $PACCHETTI; do
   [ "$p" = nodejs ] && command -v node >/dev/null && continue
@@ -30,6 +30,12 @@ else
   "$VENV/bin/pip" install -q playwright vermin && "$VENV/bin/playwright" install --with-deps chromium >/dev/null \
     && echo "✔ Playwright installato in $VENV — prima dei test:  source $VENV/bin/activate" \
     || echo "! Playwright non installato: i test dell'interfaccia non potranno girare"
+fi
+# Wine (facoltativo): permette di provare la versione Windows con tests/esegui_test.sh
+if ! command -v wine >/dev/null; then
+  echo "» Installo Wine per i test della versione Windows (facoltativo)"
+  { $SUDO dpkg --add-architecture i386 && $SUDO apt-get update -q >/dev/null && $SUDO apt-get install -y -q --no-install-recommends wine wine32:i386 wine64 >/dev/null; } \
+    || echo "! Wine non installato: i test della versione Windows verranno saltati"
 fi
 python3 -m pip show vermin >/dev/null 2>&1 || python3 -m pip install -q vermin 2>/dev/null || \
   python3 -m pip install -q --break-system-packages vermin 2>/dev/null || true

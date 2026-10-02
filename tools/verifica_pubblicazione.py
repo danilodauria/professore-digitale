@@ -25,6 +25,11 @@ def chk(rel, h):
     if not os.path.isfile(p) or sha(p) != h:
         sys.exit("✘ %s non corrisponde ad aggiornamenti.json" % rel)
 chk(info["pacchetto"], info["sha256"])
+if "windows" in info:
+    chk(info["windows"]["pacchetto"], info["windows"]["sha256"])
+    chk(info["windows"]["zip"], info["windows"]["zip_sha256"])
+if "catalogo_ia" in info:
+    chk(info["catalogo_ia"]["url"], info["catalogo_ia"]["sha256"])
 for c in info.get("contenuti", []):
     chk(c["url"], c["sha256"])
 print(info["versione"])

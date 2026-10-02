@@ -1,0 +1,280 @@
+{
+ "formato": "professore-digitale-contenuti",
+ "formato_versione": 1,
+ "id": "windows-primi-passi",
+ "titolo": "Windows: primi passi e sicurezza",
+ "versione": "1.0.0",
+ "autore": "Danilo D'Auria",
+ "descrizione": "Domande frequenti su Windows (da XP a Windows 11): menu Start, Esplora file, programmi bloccati, aggiornamenti, sicurezza, voce italiana.",
+ "richiede_app": "2.3.0",
+ "suggerimenti": [
+  "Cos'è il menu Start di Windows?",
+  "Cosa faccio se un programma di Windows non risponde?",
+  "Come faccio uno screenshot su Windows?"
+ ],
+ "domande": [
+  {
+   "domanda": "Cos'è il menu Start di Windows?",
+   "parole_chiave": [
+    "menu start",
+    "start",
+    "pulsante start",
+    "logo di windows",
+    "tasto windows",
+    "dove trovo i programmi"
+   ],
+   "risposta": "Il **menu Start** è la porta d'ingresso di Windows: da lì si aprono tutti i programmi.\n\n1. Fate clic sul **logo di Windows** in basso (a sinistra o al centro della barra), oppure premete il tasto con il logo sulla tastiera.\n2. Compare l'elenco dei programmi: fate clic su quello che vi serve.\n3. Potete anche **scrivere subito** il nome del programma, per esempio *Word* o *Foto*, e premere **Invio**.\n\nPer chiudere il menu senza aprire nulla premete **Esc**.",
+   "schema": "flowchart LR\n  A[\"Logo di Windows\"] --> B[\"Elenco programmi\"] --> C[\"Clic sul programma\"]",
+   "lezione": ""
+  },
+  {
+   "domanda": "Come apro Esplora file per vedere le mie cartelle?",
+   "parole_chiave": [
+    "esplora file",
+    "esplora risorse",
+    "cartelle",
+    "i miei file",
+    "risorse del computer",
+    "questo pc",
+    "cartella gialla"
+   ],
+   "risposta": "**Esplora file** è l'armadio di Windows: mostra cartelle e documenti.\n\n1. Fate clic sull'icona della **cartella gialla** nella barra in basso, oppure premete insieme **Windows + E**.\n2. A sinistra trovate i cassetti principali: *Desktop, Download, Documenti, Immagini*.\n3. Fate doppio clic su una cartella per aprirla; con la freccia **←** in alto tornate indietro.\n\nSu Windows XP si chiama *Risorse del computer*.",
+   "schema": "flowchart LR\n  A[\"Windows + E\"] --> B[\"Cartelle a sinistra\"] --> C[\"Doppio clic per aprire\"]",
+   "lezione": ""
+  },
+  {
+   "domanda": "Cosa faccio se un programma di Windows non risponde?",
+   "parole_chiave": [
+    "non risponde",
+    "programma bloccato",
+    "finestra bloccata",
+    "ctrl alt canc",
+    "gestione attivita",
+    "task manager",
+    "si è piantato",
+    "chiudere un programma bloccato"
+   ],
+   "risposta": "Niente paura: si può chiudere solo il programma bloccato, senza spegnere il computer.\n\n1. Aspettate un minuto: a volte il computer sta solo lavorando.\n2. Premete insieme **Ctrl + Alt + Canc** e scegliete **Gestione attività**.\n3. Selezionate il programma che *non risponde* e premete **Termina attività**.\n4. Riaprite il programma: spesso ritrova il lavoro salvato.\n\nSe è tutto fermo, tenete premuto il pulsante di accensione per qualche secondo: è l'ultima risorsa.",
+   "schema": "flowchart TD\n  A[\"Aspetto un minuto\"] --> B[\"Ctrl + Alt + Canc\"] --> C[\"Gestione attività\"] --> D[\"Termina attività\"]",
+   "lezione": ""
+  },
+  {
+   "domanda": "Come si spegne correttamente un computer con Windows?",
+   "parole_chiave": [
+    "spegnere windows",
+    "arresta il sistema",
+    "spegnimento windows",
+    "chiudi sessione",
+    "riavviare windows",
+    "riavvia"
+   ],
+   "risposta": "Spegnere bene evita di perdere il lavoro.\n\n1. Salvate e chiudete i documenti aperti.\n2. Fate clic sul **logo di Windows** in basso.\n3. Fate clic sul simbolo di **accensione** (un cerchio con una linea).\n4. Scegliete **Arresta il sistema**. Per risolvere piccoli problemi scegliete invece **Riavvia il sistema**.\n\nSe compare «Aggiorna e arresta», va bene: Windows installa gli aggiornamenti e poi si spegne da solo. Non staccate la spina mentre lo fa.",
+   "schema": "flowchart LR\n  A[\"Salvo il lavoro\"] --> B[\"Logo di Windows\"] --> C[\"Accensione\"] --> D[\"Arresta il sistema\"]",
+   "lezione": ""
+  },
+  {
+   "domanda": "Cos'è Windows Update e devo fare gli aggiornamenti?",
+   "parole_chiave": [
+    "windows update",
+    "aggiornamenti di windows",
+    "aggiornare windows",
+    "aggiornamento in corso",
+    "non spegnere il computer"
+   ],
+   "risposta": "**Windows Update** scarica le correzioni di sicurezza di Microsoft: sono come le revisioni dell'auto e vanno fatte.\n\n1. Lasciate il computer acceso e collegato alla corrente quando dice *Aggiornamento in corso*.\n2. Non spegnetelo durante l'operazione, anche se sembra lenta.\n3. Per controllare: **Start → Impostazioni → Windows Update → Verifica disponibilità aggiornamenti**.\n\nAttenzione: Windows XP, Vista e 7 non ricevono più aggiornamenti. Su quei computer evitate banca e pagamenti online.",
+   "schema": "",
+   "lezione": ""
+  },
+  {
+   "domanda": "Il mio Windows è vecchio e non più aggiornato: è pericoloso?",
+   "parole_chiave": [
+    "windows xp",
+    "windows 7",
+    "windows vecchio",
+    "non più supportato",
+    "senza aggiornamenti",
+    "computer vecchio sicuro"
+   ],
+   "risposta": "Un Windows che non riceve più aggiornamenti (XP, Vista, 7, 8.1 e presto anche 10) **può ancora servire**, ma con prudenza.\n\n- Va benissimo per imparare, scrivere, guardare foto e usare il Professore senza Internet.\n- **Evitate** banca online, pagamenti e documenti importanti su Internet.\n- Tenete un antivirus aggiornato, se disponibile.\n\nUn'ottima alternativa gratuita è installare un sistema **Linux leggero**: il computer torna sicuro e veloce. Chiedete al facilitatore.",
+   "schema": "flowchart LR\n  A[\"Windows vecchio\"] --> B[\"Uso senza Internet: va bene\"]\n  A --> C[\"Banca e pagamenti: no\"]\n  A --> D[\"Linux leggero: torna sicuro\"]",
+   "lezione": ""
+  },
+  {
+   "domanda": "Cos'è Windows Defender, l'antivirus di Windows?",
+   "parole_chiave": [
+    "antivirus",
+    "windows defender",
+    "sicurezza di windows",
+    "virus",
+    "protezione",
+    "scansione"
+   ],
+   "risposta": "Windows 10 e 11 hanno già un antivirus gratuito: **Sicurezza di Windows** (Microsoft Defender). Non serve comprarne altri.\n\n1. Aprite **Start** e scrivete *Sicurezza di Windows*.\n2. Se vedete segni di spunta **verdi**, è tutto a posto.\n3. Per un controllo: **Protezione da virus e minacce → Analisi veloce**.\n\nDiffidate delle finestre che compaiono mentre navigate e dicono «Il tuo PC è infetto, chiama questo numero»: sono **truffe**. Chiudete il browser.",
+   "schema": "",
+   "lezione": ""
+  },
+  {
+   "domanda": "Come faccio uno screenshot su Windows?",
+   "parole_chiave": [
+    "screenshot windows",
+    "cattura schermo",
+    "stamp",
+    "strumento di cattura",
+    "windows shift s",
+    "foto dello schermo windows"
+   ],
+   "risposta": "Uno **screenshot** è una foto di quello che si vede sullo schermo.\n\n- **Windows 10 e 11**: premete insieme **Windows + Maiusc + S**, poi trascinate il mouse sulla parte da fotografare. L'immagine si può incollare con **Ctrl + V** in un'email o in un documento.\n- **Tutto lo schermo**: premete **Stamp** (o *PrtSc*) e poi incollate con **Ctrl + V**.\n- Su **Windows 7** cercate nel menu Start lo **Strumento di cattura**.",
+   "schema": "flowchart LR\n  A[\"Windows + Maiusc + S\"] --> B[\"Scelgo la zona\"] --> C[\"Ctrl + V per incollare\"]",
+   "lezione": ""
+  },
+  {
+   "domanda": "Dove finiscono i file scaricati su Windows?",
+   "parole_chiave": [
+    "download windows",
+    "cartella download",
+    "file scaricati windows",
+    "dove sono i download"
+   ],
+   "risposta": "Su Windows i file presi da Internet finiscono nella cartella **Download**.\n\n1. Aprite **Esplora file** (cartella gialla in basso, oppure **Windows + E**).\n2. A sinistra fate clic su **Download**.\n3. In alto a destra potete scrivere nel riquadro di **ricerca** una parte del nome del file.\n\nNel browser, premendo **Ctrl + J** si vede l'elenco degli ultimi download: un clic sul file lo apre.",
+   "schema": "",
+   "lezione": ""
+  },
+  {
+   "domanda": "Come si toglie in sicurezza una chiavetta USB su Windows?",
+   "parole_chiave": [
+    "chiavetta windows",
+    "rimozione sicura",
+    "espelli",
+    "togliere la chiavetta",
+    "usb windows"
+   ],
+   "risposta": "Prima di staccare la chiavetta, conviene «avvisare» Windows: così i file non si rovinano.\n\n1. Chiudete i documenti aperti dalla chiavetta.\n2. In basso a destra, vicino all'orologio, fate clic sulla piccola **freccia ^** e poi sull'icona della **chiavetta**.\n3. Scegliete **Espelli** con il nome della chiavetta.\n4. Quando compare *È possibile rimuovere l'hardware*, staccatela.\n\nIn alternativa: in **Esplora file**, tasto destro sulla chiavetta → **Espelli**.",
+   "schema": "",
+   "lezione": ""
+  },
+  {
+   "domanda": "Come mi collego al Wi-Fi da Windows?",
+   "parole_chiave": [
+    "wifi windows",
+    "collegarsi al wifi",
+    "rete wireless",
+    "icona wifi",
+    "password del wifi",
+    "connessione internet windows"
+   ],
+   "risposta": "1. In basso a destra, vicino all'orologio, fate clic sull'icona della **rete** (le tacchette del Wi-Fi o un mappamondo).\n2. Compare l'elenco delle reti: fate clic sul **nome della vostra rete**, scritto anche sotto il router.\n3. Premete **Connetti** e scrivete la **password del Wi-Fi** (si trova spesso sull'etichetta del router).\n4. Mettete la spunta su *Connetti automaticamente*, così la prossima volta fa da solo.\n\nSulle reti pubbliche (bar, stazioni) evitate banca e acquisti.",
+   "schema": "flowchart LR\n  A[\"Icona della rete\"] --> B[\"Scelgo la mia rete\"] --> C[\"Password\"] --> D[\"Connesso\"]",
+   "lezione": ""
+  },
+  {
+   "domanda": "Come ingrandisco il testo su Windows se leggo male?",
+   "parole_chiave": [
+    "ingrandire testo windows",
+    "caratteri grandi",
+    "leggo male",
+    "lente di ingrandimento",
+    "zoom windows",
+    "scritte piccole"
+   ],
+   "risposta": "Windows aiuta chi vede poco in tre modi.\n\n1. **Lente di ingrandimento**: premete **Windows e +** (il tasto più) per ingrandire; **Windows + Esc** per chiuderla.\n2. **Testo più grande per sempre**: **Start → Impostazioni → Accessibilità → Dimensioni del testo**, spostate il cursore e premete **Applica**.\n3. **Solo nel browser**: **Ctrl e +** ingrandisce la pagina, **Ctrl e 0** la riporta normale.\n\nNel Professore usate anche i pulsanti **A+** e **A−** in alto.",
+   "schema": "",
+   "lezione": ""
+  },
+  {
+   "domanda": "Cos'è un account Microsoft e mi serve?",
+   "parole_chiave": [
+    "account microsoft",
+    "accedere a windows",
+    "outlook",
+    "hotmail",
+    "password di windows",
+    "pin di windows"
+   ],
+   "risposta": "L'**account Microsoft** è un indirizzo email (per esempio Outlook o Hotmail) con la sua password, che Windows usa per salvare impostazioni e documenti su Internet.\n\n- Non è obbligatorio per usare il computer: esiste anche l'**account locale**.\n- Il **PIN** di Windows serve solo per entrare in quel computer: è diverso dalla password.\n- Scrivete password e PIN su un foglio tenuto in un posto sicuro di casa.\n\nMicrosoft **non telefona mai** per chiedere password o per dire che il PC ha un virus.",
+   "schema": "",
+   "lezione": ""
+  },
+  {
+   "domanda": "Cosa fare se sullo schermo compare un messaggio che dice di chiamare l'assistenza Microsoft?",
+   "parole_chiave": [
+    "finto tecnico",
+    "assistenza microsoft",
+    "il tuo pc è bloccato",
+    "virus chiama",
+    "schermo bloccato numero",
+    "truffa tecnico"
+   ],
+   "risposta": "È una **truffa**: il messaggio è falso e Microsoft non mostra mai numeri da chiamare.\n\n1. **Non telefonate** e non installate nulla.\n2. Premete **Ctrl + Alt + Canc**, aprite **Gestione attività** e chiudete il browser con **Termina attività**.\n3. Riaprite il browser: se la pagina ritorna, non accettate di «ripristinare la sessione».\n4. Se avete già dato soldi o accessi, chiamate subito la vostra banca e chiedete aiuto a una persona di fiducia.",
+   "schema": "flowchart TD\n  A[\"Messaggio: chiama il tecnico\"] --> B[\"Non telefono\"] --> C[\"Chiudo il browser\"] --> D[\"Chiedo a una persona di fiducia\"]",
+   "lezione": ""
+  },
+  {
+   "domanda": "Come si cambia la lingua della tastiera se escono simboli strani?",
+   "parole_chiave": [
+    "tastiera sbagliata",
+    "lingua tastiera",
+    "simboli strani",
+    "ita",
+    "eng",
+    "alt shift",
+    "layout tastiera"
+   ],
+   "risposta": "Se premendo un tasto escono simboli diversi da quelli disegnati, forse la tastiera è passata in un'altra lingua.\n\n1. Guardate in basso a destra, vicino all'orologio: se c'è scritto **ENG** invece di **ITA**, è quello il motivo.\n2. Fate clic su **ENG** e scegliete **Italiano (ITA)**.\n3. In alternativa premete insieme **Windows + barra spaziatrice** (o **Alt + Maiusc** sui Windows più vecchi).\n\nIl cambio avviene spesso per sbaglio premendo quei tasti insieme.",
+   "schema": "",
+   "lezione": ""
+  },
+  {
+   "domanda": "Cos'è il Cestino di Windows e come recupero un file?",
+   "parole_chiave": [
+    "cestino windows",
+    "recuperare file cancellato windows",
+    "ripristina",
+    "svuota cestino"
+   ],
+   "risposta": "Il **Cestino** è sul desktop: quando eliminate un file, Windows lo mette lì e non lo cancella subito.\n\n1. Fate doppio clic sul **Cestino**.\n2. Trovate il file, fate clic con il **tasto destro** e scegliete **Ripristina**: torna dov'era.\n3. **Svuota cestino** cancella tutto per sempre: fatelo solo quando siete sicuri.\n\nI file eliminati da una **chiavetta** invece non passano dal Cestino: attenzione.",
+   "schema": "",
+   "lezione": ""
+  },
+  {
+   "domanda": "Come installo un programma su Windows in sicurezza?",
+   "parole_chiave": [
+    "installare un programma",
+    "scaricare un programma",
+    "programma sicuro",
+    "microsoft store",
+    "setup exe"
+   ],
+   "risposta": "Installare va bene, ma solo da **fonti affidabili**.\n\n1. Preferite il **Microsoft Store** (nel menu Start): i programmi sono controllati.\n2. Altrimenti scaricate solo dal **sito ufficiale** del programma, non da siti pieni di pubblicità.\n3. Durante l'installazione leggete ogni finestra e **togliete le spunte** che propongono programmi in più.\n4. Se Windows chiede «Consentire a questa app di apportare modifiche?», rispondete **Sì** solo se avete appena avviato voi l'installazione.",
+   "schema": "",
+   "lezione": ""
+  },
+  {
+   "domanda": "Come apro il Professore Digitale e la sua configurazione su Windows?",
+   "parole_chiave": [
+    "aprire il professore",
+    "icona del professore",
+    "configura ia",
+    "professore digitale windows",
+    "vicino all'orologio"
+   ],
+   "risposta": "1. Fate doppio clic sull'icona **Professore Digitale** sul desktop, oppure cercatela nel menu **Start**.\n2. Il Professore si apre in una finestra dedicata e funziona **senza Internet**.\n3. Accanto all'orologio compare la sua icona: un clic lo riapre, il **tasto destro** offre *Configura IA e voce*, il *Vademecum* e *Chiudi*.\n4. Per attivare l'intelligenza artificiale e il microfono andate nella sezione **Configura IA e voce**: il programma sceglie da solo il modello adatto al computer.",
+   "schema": "",
+   "lezione": ""
+  },
+  {
+   "domanda": "Come si installa la voce italiana di Windows?",
+   "parole_chiave": [
+    "voce italiana windows",
+    "sintesi vocale windows",
+    "il professore non parla windows",
+    "voce di windows",
+    "elsa",
+    "lettura ad alta voce windows"
+   ],
+   "risposta": "Il Professore usa la **voce italiana di Windows**. Se non parla, forse manca.\n\n1. **Windows 10 e 11**: **Start → Impostazioni → Ora e lingua → Voce**.\n2. Premete **Aggiungi voci**, scegliete **Italiano** e confermate.\n3. Riaprite il Professore e in **Impostazioni** premete **▶ Prova la voce**.\n\nIn alternativa, in **Configura IA e voce** potete installare la **voce naturale «Paola»**, che funziona senza Internet. Controllate anche il volume, in basso a destra.",
+   "schema": "",
+   "lezione": ""
+  }
+ ],
+ "lezioni": []
+}

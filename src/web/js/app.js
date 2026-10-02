@@ -95,13 +95,16 @@
   };
   PD.sttReady = function () { return PD.server && PD.status && !!PD.status.stt.engine; };
 
+  var TTS_NAME = { sapi: "voce di Windows", piper: "voce naturale", pico: "pico", "espeak-ng": "espeak-ng", espeak: "espeak" };
+  PD.isWindows = function () { return !!(PD.status && PD.status.platform === "windows"); };
   function renderChips() {
+    var nb = $('.nav-btn[data-view="setup"]'); if (nb) nb.hidden = !(PD.server && PD.status && PD.status.setup);
     var c = $("#chips"); if (!c) return;
     var html = [];
     if (PD.server) {
       html.push(PD.aiReady() ? chip(true, "🤖 " + PD.currentModel()) : chip(false, "🤖 Guida interna"));
       var tts = PD.status.tts.engines;
-      html.push(chip(tts.length > 0, "🔊 " + (tts[0] || "voce browser")));
+      html.push(chip(tts.length > 0, "🔊 " + (TTS_NAME[tts[0]] || tts[0] || "voce browser")));
       html.push(chip(PD.sttReady(), "🎤 " + (PD.status.stt.engine || "microfono spento")));
     } else {
       html.push(chip(false, "📄 Versione portatile (solo browser)"));
@@ -372,6 +375,7 @@
     (window.PD_KB || []).forEach(function (e, i) {
       var qt = terms(e.q);
       docs.push({ kind: "kb", id: "kb" + i, title: e.q, answer: e.a, diagram: e.d, lesson: e.l,
+        platform: e.pack === "windows-primi-passi" ? "windows" : /\blinux\b/i.test(e.q) ? "linux" : "",
         f: [[terms(e.k.join(" ")), 3], [qt, 3.2 / Math.sqrt(Math.max(1, qt.length))], [terms(e.a), 0.6]], phrases: e.k.map(norm) });
     });
     (window.PD_LESSONS || []).forEach(function (L) {
@@ -391,7 +395,7 @@
   }
   PD.search = function (query, n) {
     if (!INDEX) buildIndex();
-    var q = terms(query), nq = " " + norm(query) + " ";
+    var q = terms(query), nq = " " + norm(query) + " ", win = PD.isWindows && PD.isWindows();
     if (!q.length) return [];
     var res = INDEX.docs.map(function (d) {
       var score = 0;
@@ -401,6 +405,8 @@
         d.f.forEach(function (f) { if (f[0].indexOf(t) >= 0) score += f[1] * idf; });
       });
       d.phrases.forEach(function (p) { if (p.indexOf(" ") > 0 && nq.indexOf(" " + p + " ") >= 0) score += 6; });
+      // su Windows le risposte pensate per Windows passano davanti a quelle scritte per Linux
+      if (win && d.platform) score *= d.platform === "windows" ? 1.1 : 0.6;
       return { doc: d, score: score / Math.sqrt(q.length) };
     }).filter(function (r) { return r.score > 0; });
     res.sort(function (a, b) { return b.score - a.score || (a.doc.kind === "kb" ? -1 : 1); });
@@ -462,7 +468,9 @@
       tile("🖊️", "Lavagna", "Schemi pronti da proiettare e un foglio per disegnare.", "#/board") +
       tile("🎯", "Palestra", "Esercizi per allenare mouse e tastiera, divertendosi.", "#/practice") +
       "</div>" + (!PD.server ? '<p class="notice info small">Questa è la <b>versione portatile</b>: lezioni, guida, lavagna e palestra funzionano ovunque. ' +
-      "Per l'intelligenza artificiale locale e il microfono installate il pacchetto <b>.deb</b>.</p>" : "");
+      "Per l'intelligenza artificiale locale e il microfono installate il programma completo (<b>.exe</b> per Windows, <b>.deb</b> per Linux).</p>" : "") +
+      (PD.isWindows() && !PD.aiReady() && PD.status.ai.recommended && !PD.status.ai.engine ? '<p class="notice info small">💡 Su questo computer può funzionare anche l\'<b>intelligenza artificiale locale</b> ' +
+      '(consigliata: ' + esc(PD.status.ai.recommended) + '). <a href="#/setup" data-go="#/setup">Configuratela con un clic</a>.</p>' : "");
     function tile(ico, t, d, go) {
       return '<button class="card tile" data-go="' + go + '"><span class="big-ico">' + ico + "</span><h3>" + t + "</h3><p>" + d + "</p></button>";
     }
@@ -841,9 +849,11 @@
 
       '<div class="card"><h2 style="margin-top:0">🤖 Intelligenza artificiale locale</h2>' +
       (PD.server ? (S.ai.available
-        ? (models.length ? '<p class="notice ok small">Ollama è attivo. Modelli installati: ' + models.length + ".</p>" : '<p class="notice small">Ollama è attivo ma non ha modelli. Installate un modello con <code>professore-digitale-setup-ia</code>.</p>')
-        : '<p class="notice small">Ollama non è in esecuzione: il Professore risponde con la <b>guida interna</b>. Per attivare l\'IA aprite un terminale e date il comando <code>professore-digitale-setup-ia</code>.</p>')
-        : '<p class="notice info small">Nella versione portatile l\'IA non è disponibile: installate il pacchetto .deb.</p>') +
+        ? (models.length ? '<p class="notice ok small">' + esc(S.ai.engine_title || "Ollama") + " è attivo. Modelli installati: " + models.length + ".</p>"
+          : '<p class="notice small">Ollama è attivo ma non ha modelli. ' + (PD.isWindows() ? 'Andate in <a href="#/setup" data-go="#/setup">Configura IA e voce</a>.' : "Installate un modello con <code>professore-digitale-setup-ia</code>.") + "</p>")
+        : (PD.isWindows() ? '<p class="notice small">L\'IA locale non è attiva: il Professore risponde con la <b>guida interna</b>. <a href="#/setup" data-go="#/setup">Configurate l\'IA con un clic</a> (il programma sceglie il modello adatto a questo computer).</p>'
+          : '<p class="notice small">Ollama non è in esecuzione: il Professore risponde con la <b>guida interna</b>. Per attivare l\'IA aprite un terminale e date il comando <code>professore-digitale-setup-ia</code>.</p>'))
+        : '<p class="notice info small">Nella versione portatile l\'IA non è disponibile: installate il programma completo (.exe o .deb).</p>') +
       sw("s-ai", "Usa l'IA quando disponibile", s.aiEnabled) +
       (models.length ? field("Modello", select("s-model", models.map(function (m) { return [m, m]; }), PD.currentModel())) : "") +
       sw("s-kbctx", "Suggerisci all'IA le informazioni della guida (risposte più precise)", s.useKbContext) +
@@ -851,7 +861,8 @@
 
       '<div class="card"><h2 style="margin-top:0">🎤 Microfono</h2>' +
       (PD.sttReady() ? '<p class="notice ok small">Riconoscimento vocale attivo: <b>' + esc(S.stt.engine) + "</b>.</p>"
-        : '<p class="notice small">Riconoscimento vocale non installato. Per attivarlo (circa 50 MB, una sola volta con Internet) aprite un terminale e date il comando <code>professore-digitale-setup-voce</code>.</p>') +
+        : (PD.isWindows() ? '<p class="notice small">Riconoscimento vocale non installato. Attivatelo da <a href="#/setup" data-go="#/setup">Configura IA e voce</a> (circa 50 MB, una sola volta con Internet, oppure dalla chiavetta).</p>'
+          : '<p class="notice small">Riconoscimento vocale non installato. Per attivarlo (circa 50 MB, una sola volta con Internet) aprite un terminale e date il comando <code>professore-digitale-setup-voce</code>.</p>')) +
       sw("s-autosend", "Invia subito la domanda dopo aver parlato", s.autoSendVoice) +
       (PD.server ? '<button class="btn ghost" id="reprobe">🔄 Ricontrolla i componenti</button>' : "") + "</div>" +
 
@@ -873,8 +884,9 @@
       '<div class="card"><h2 style="margin-top:0">ℹ️ Informazioni</h2><dl class="kv"><dt>Programma</dt><dd>Professore Digitale – Cattedra Digitale Portatile</dd>' +
       "<dt>Versione</dt><dd>" + PD.version + "</dd><dt>Ideazione e sviluppo</dt><dd>Danilo D'Auria – Tecnico IT &amp; Divulgatore Digitale per il Sociale</dd>" +
       "<dt>Contatti</dt><dd>danilodauria.site@gmail.com</dd><dt>Licenza</dt><dd>MIT (software libero)</dd>" +
-      "<dt>Componenti</dt><dd>Mermaid (MIT) per gli schemi; Ollama, espeak-ng, Vosk (facoltativi)</dd></dl>" +
-      (PD.server ? '<p><a class="btn ghost" href="docs/Vademecum_Professore_Digitale.pdf" target="_blank" rel="noopener">📖 Apri il vademecum (PDF)</a></p>' : "") + "</div>" +
+      "<dt>Componenti</dt><dd>" + (PD.isWindows() ? "Mermaid (MIT) per gli schemi; voce di Windows; Ollama o KoboldCpp, Vosk, Piper (facoltativi)" : "Mermaid (MIT) per gli schemi; Ollama, espeak-ng, Vosk (facoltativi)") + "</dd></dl>" +
+      (PD.server ? '<p class="row"><a class="btn ghost" href="docs/' + (PD.isWindows() ? "Vademecum_Professore_Digitale_Windows.pdf" : "Vademecum_Professore_Digitale.pdf") + '" target="_blank" rel="noopener">📖 Apri il vademecum (PDF)</a>' +
+        (PD.isWindows() ? '<button class="btn ghost" id="open-data">📂 Cartella dei progressi</button>' : "") + "</p>" : "") + "</div>" +
       "</div>";
 
     function field(label, ctrl) { return '<div class="field"><label>' + label + "</label>" + ctrl + "</div>"; }
@@ -896,6 +908,7 @@
     bind("s-model", "change", function () { s.model = this.value; PD.saveSettings(); renderChips(); });
     bind("s-upd", "change", function () { s.updateUrl = this.value.trim(); PD.saveSettings(); });
     bind("test-voice", "click", function () { PD.speak("Buongiorno! Sono il Professore Digitale. Questa è la mia voce.", true); });
+    bind("open-data", "click", function () { api("/api/open", { what: "data" }); });
     bind("reprobe", "click", function () {
       api("/api/stt-reprobe", {}).then(PD.detect).then(function () { PD.toast("Componenti ricontrollati."); route(); });
     });
@@ -974,6 +987,8 @@
     } else {
       h += '<div class="notice ok">✅ Avete già la versione più recente del programma (' + esc(r.current) + ").</div>";
     }
+    // i contenuti pensati per un solo sistema (es. "windows-...") si mostrano solo li'
+    r.contenuti = r.contenuti.filter(function (c) { return PD.isWindows() || !/^windows-/.test(c.id); });
     if (r.contenuti.length) {
       h += "<p><b>Contenuti disponibili</b></p>" + r.contenuti.map(function (c, i) {
         var lab = c.stato === "nuovo" ? "➕ Aggiungi" : c.stato === "aggiornamento" ? "🔄 Aggiorna (" + esc(c.installata) + " → " + esc(c.versione) + ")" : "";
@@ -986,6 +1001,12 @@
     if (b) b.onclick = function () {
       var o = $("#upd-deb-res"); o.textContent = "Scaricamento e verifica in corso…"; b.disabled = true;
       api("/api/update-download", { url: r.pacchetto, sha256: r.sha256 }).then(function (x) {
+        if (x.installabile) {
+          o.innerHTML = '<div class="notice ok">✅ Aggiornamento scaricato e verificato:<br><code>' + esc(x.file) + '</code><br>Impostazioni e progressi verranno conservati.' +
+            '<div class="row" style="margin-top:.6rem"><button class="btn" id="upd-run">▶ Installa adesso</button></div><span class="small muted">Il Professore si chiude e si riapre al termine dell\'installazione.</span></div>';
+          $("#upd-run").onclick = function () { api("/api/update-install", { file: x.file }).then(function () { PD.toast("Avvio dell'installazione…", 5000); }).catch(function (e) { PD.toast("Non riuscito: " + e.message); }); };
+          return;
+        }
         o.innerHTML = '<div class="notice ok">✅ Pacchetto scaricato e verificato:<br><code>' + esc(x.file) + "</code><br>Per installarlo aprite un terminale e date:<br><code>sudo apt install " +
           esc(x.file.replace(/'/g, "")) + "</code><br>Impostazioni e progressi verranno conservati.</div>";
       }).catch(function (e) { b.disabled = false; o.innerHTML = '<div class="notice">Download non riuscito: ' + esc(e.message) + "</div>"; });

@@ -2,7 +2,8 @@
 # ==============================================================================
 #  Professore Digitale - script di compilazione
 #  Produce in dist/: pacchetto .deb (Architecture: all), versione HTML portatile,
-#  pacchetti di contenuti, archivio sorgenti e SHA256SUMS.    Uso:  ./build.sh
+#  pacchetti di contenuti, archivio sorgenti e SHA256SUMS; in dist/windows/ l'installatore
+#  per Windows (se ci sono mingw-w64 e NSIS, vedi windows/build-windows.sh).    Uso:  ./build.sh
 #  La versione si legge dal file VERSION (unica fonte). Per un rilascio usate
 #  tools/rilascio.sh, che aggiorna VERSION e changelog e poi chiama questo script.
 #  Autore: Danilo D'Auria - Licenza MIT
@@ -26,6 +27,8 @@ find src -name '__pycache__' -prune -exec rm -rf {} +
 if ls src/contenuti/*.json >/dev/null 2>&1; then
   PD_SHARE_DIR=src python3 packaging/professore-digitale-contenuti valida src/contenuti/*.json
 fi
+PD_SHARE_DIR=src python3 packaging/professore-digitale-contenuti valida windows/contenuti/*.json
+python3 -c "import json,sys; c=json.load(open(sys.argv[1])); assert c['formato']=='professore-digitale-catalogo-ia'" windows/catalogo-ia.json
 
 echo "» Albero del pacchetto ($VERSION)"
 S=$BUILD/usr/share
@@ -103,7 +106,14 @@ echo "» Archivio sorgenti"
 git archive --format=tar.gz --prefix="${PKG}-${VERSION}/" -o "$DIST/${PKG}-${VERSION}-sorgenti.tar.gz" HEAD 2>/dev/null || \
   tar --exclude=build --exclude=dist --exclude=.git --exclude='__pycache__' -czf "$DIST/${PKG}-${VERSION}-sorgenti.tar.gz" \
       --transform "s,^\.,${PKG}-${VERSION}," .
-(cd "$DIST" && sha256sum *.deb *.html *.tar.gz > SHA256SUMS)
+echo "» Versione per Windows"
+if command -v i686-w64-mingw32-gcc >/dev/null && command -v makensis >/dev/null; then
+  windows/build-windows.sh
+  cp dist/windows/*.exe dist/windows/*.zip "$DIST/"
+else
+  echo "! mingw-w64 o NSIS mancanti: versione Windows non compilata (tools/prepara-ambiente.sh li installa)"
+fi
+(cd "$DIST" && sha256sum *.deb *.html *.tar.gz $(ls *.exe *.zip 2>/dev/null) > SHA256SUMS)
 
 if command -v lintian >/dev/null; then
   echo "» Lintian"
