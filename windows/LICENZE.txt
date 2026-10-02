@@ -1,0 +1,51 @@
+PROFESSORE DIGITALE - Cattedra Digitale Portatile
+Ideato e sviluppato da Danilo D'Auria - Tecnico IT & Divulgatore Digitale per il Sociale
+danilodauria.site@gmail.com
+
+Licenza: MIT
+
+Copyright (c) 2026 Danilo D'Auria
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+----------------------------------------------------------------------------
+COMPONENTI DI TERZE PARTI INCLUSI
+----------------------------------------------------------------------------
+* Mermaid (web\vendor\mermaid.min.js) - Copyright 2014-2022 Knut Sveidqvist
+  e contributori - Licenza MIT.
+* zlib (inclusa nel programma) - Copyright 1995-2024 Jean-loup Gailly e
+  Mark Adler - Licenza zlib.
+* Vosk (stt\libvosk.dll) - Alpha Cephei Inc. - Licenza Apache 2.0.
+  https://github.com/alphacep/vosk-api
+* Runtime GCC/MinGW (stt\libgcc_s_seh-1.dll, libstdc++-6.dll,
+  libwinpthread-1.dll) - Licenza GPL con eccezione per le librerie di runtime
+  (GCC Runtime Library Exception) e licenza MIT/BSD per winpthreads.
+
+----------------------------------------------------------------------------
+COMPONENTI FACOLTATIVI SCARICATI SOLO SU RICHIESTA DELL'UTENTE
+----------------------------------------------------------------------------
+Non sono inclusi nell'installatore: la configurazione guidata li scarica dalle
+fonti ufficiali soltanto dopo il consenso dell'utente. Ognuno ha la propria licenza:
+* Ollama - Licenza MIT - https://ollama.com
+* KoboldCpp - Licenza AGPL v3 - https://github.com/LostRuins/koboldcpp
+* Modelli di IA (Qwen: Apache 2.0; Gemma: Gemma Terms of Use; Ministral:
+  Apache 2.0) - le condizioni sono pubblicate sulle pagine dei modelli.
+* Modello vocale italiano Vosk - Licenza Apache 2.0.
+* Piper e la voce "Paola" - Licenza MIT (voce: vedi la scheda del modello).
+* Supermium (solo per Windows XP e Vista) - Licenza BSD.

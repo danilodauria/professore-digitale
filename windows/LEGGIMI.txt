@@ -1,0 +1,27 @@
+Cattedra digitale offline per l'alfabetizzazione informatica.
+Ideato e sviluppato da Danilo D'Auria - Licenza MIT.
+
+COME SI USA
+- Fate doppio clic su "Professore Digitale" sul desktop o nel menu Start.
+- Il Professore si apre in una finestra dedicata e lavora SENZA Internet.
+- Accanto all'orologio compare l'icona del Professore: clic per riaprirlo,
+  tasto destro per "Configura IA e voce", il vademecum e "Chiudi".
+
+INTELLIGENZA ARTIFICIALE E VOCE (facoltative)
+Menu Start -> Professore Digitale -> "Configura IA e voce".
+Il programma controlla il computer, propone il modello piu' adatto e lo
+scarica (serve Internet solo in quel momento). Per i PC senza rete esiste la
+"chiavetta": vedi il vademecum, capitolo 10.
+
+COMPATIBILITA'
+- Windows 10 22H2 e Windows 11: tutto, IA con Ollama.
+- Windows 7, 8, 8.1 (64 bit): tutto, IA con il motore compatibile.
+- Windows XP SP3 e Vista, e i sistemi a 32 bit: lezioni, guida, voce,
+  lavagna e palestra (l'IA locale non e' disponibile). Su XP e Vista serve un
+  browser moderno: Supermium (vedi il vademecum, capitolo 2).
+
+VERSIONE DA CHIAVETTA
+Se questa cartella contiene il file portatile.txt, i progressi vengono
+salvati nella sottocartella "dati", accanto al programma.
+
+Vademecum completo: Vademecum_Professore_Digitale_Windows.pdf

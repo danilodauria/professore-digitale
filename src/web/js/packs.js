@@ -122,7 +122,15 @@
       var self = this;
       var done = function (entries, errors) { self.list = entries; self.errors = errors || []; apply(entries); return entries; };
       if (PD.server) {
-        return PD.api("/api/packs").then(function (r) { return done(r.packs || [], r.errori); })
+        // il server di Windows fa solo un controllo essenziale: la validazione completa si ripete qui
+        return PD.api("/api/packs").then(function (r) {
+          var ok = [], errs = (r.errori || []).slice();
+          (r.packs || []).forEach(function (en) {
+            var er = validate(en.pacchetto);
+            if (er.length) errs.push({ file: en.file || en.pacchetto.id, errori: er.slice(0, 10) }); else ok.push(en);
+          });
+          return done(ok, errs);
+        })
           .catch(function () { return done([], []); });
       }
       var byId = {}, order = [], errors = [];

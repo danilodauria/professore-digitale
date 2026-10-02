@@ -18,6 +18,8 @@ import hashlib, json, os, sys
 d = sys.argv[1]
 deb = b"finto pacchetto per i test" * 100
 open(os.path.join(d, "professore-digitale_9.9.9_all.deb"), "wb").write(deb)
+exe = b"finto installatore per Windows" * 100
+open(os.path.join(d, "ProfessoreDigitale-Setup-9.9.9.exe"), "wb").write(exe)
 p = json.load(open("tests/dati/pacchetto-prova.json", encoding="utf-8"))
 p["id"] = "prova-remota"; p["titolo"] = "Contenuti remoti di prova"; p["versione"] = "2.0.0"
 p["domande"][0]["domanda"] = "Domanda remota di prova"; p["domande"][0]["parole_chiave"] = ["remota di prova"]
@@ -26,6 +28,7 @@ raw = json.dumps(p, ensure_ascii=False).encode()
 open(os.path.join(d, "contenuti", "prova-remota.json"), "wb").write(raw)
 info = {"versione": "9.9.9", "data": "2030-01-01", "note": ["Nota di prova 1", "Nota di prova 2"],
         "pacchetto": "professore-digitale_9.9.9_all.deb", "sha256": hashlib.sha256(deb).hexdigest(),
+        "windows": {"pacchetto": "ProfessoreDigitale-Setup-9.9.9.exe", "sha256": hashlib.sha256(exe).hexdigest()},
         "contenuti": [{"id": "prova-remota", "titolo": p["titolo"], "versione": "2.0.0", "url": "contenuti/prova-remota.json",
                        "sha256": hashlib.sha256(raw).hexdigest()}]}
 json.dump(info, open(os.path.join(d, "aggiornamenti.json"), "w"), ensure_ascii=False)
@@ -43,6 +46,13 @@ PD_TEST_SITO=http://127.0.0.1:18991 PD_TEST_HOME="$T/home" \
 echo "== 4. Versione portatile"
 python3 tools/make_standalone.py src/web "$T/portatile.html" >/dev/null
 timeout 900 python3 tests/test_ui.py "file://$T/portatile.html" "$T/shots2" || ESITO=1
+
+echo "== 5. Versione per Windows (server nativo in Wine)"
+if command -v wine >/dev/null && command -v i686-w64-mingw32-gcc >/dev/null; then
+  tests/test_windows.sh "$T" || ESITO=1
+else
+  echo "  (saltato: servono wine e mingw-w64, vedi tools/prepara-ambiente.sh)"
+fi
 
 [ "$ESITO" = 0 ] && echo "✔ TUTTI I TEST SUPERATI" || { echo "✘ ALCUNI TEST NON SONO PASSATI"; tail -20 "$T/server.log"; }
 exit $ESITO

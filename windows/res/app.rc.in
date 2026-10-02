@@ -1,0 +1,28 @@
+#include <windows.h>
+1 ICON "professore.ico"
+CREATEPROCESS_MANIFEST_RESOURCE_ID RT_MANIFEST "app.manifest"
+VS_VERSION_INFO VERSIONINFO
+FILEVERSION @V1@,@V2@,@V3@,0
+PRODUCTVERSION @V1@,@V2@,@V3@,0
+FILEOS VOS_NT_WINDOWS32
+FILETYPE VFT_APP
+BEGIN
+  BLOCK "StringFileInfo"
+  BEGIN
+    BLOCK "041004B0"
+    BEGIN
+      VALUE "CompanyName", "Danilo D'Auria"
+      VALUE "FileDescription", "@DESC@"
+      VALUE "FileVersion", "@VERSION@"
+      VALUE "InternalName", "@NAME@"
+      VALUE "LegalCopyright", "Danilo D'Auria - Licenza MIT"
+      VALUE "OriginalFilename", "@NAME@.exe"
+      VALUE "ProductName", "Professore Digitale"
+      VALUE "ProductVersion", "@VERSION@"
+    END
+  END
+  BLOCK "VarFileInfo"
+  BEGIN
+    VALUE "Translation", 0x0410, 1200
+  END
+END

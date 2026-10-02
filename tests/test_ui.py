@@ -61,7 +61,7 @@ with sync_playwright() as p:
     page.screenshot(path=SHOTS + "/03-lezione.png")
     page.click("#read-step")
     page.wait_for_timeout(1500)
-    if not standalone:
+    if not standalone and page.evaluate("PD.status.tts.engines.length > 0"):
         check("voce richiesta al server", len(tts_calls) > 0, tts_calls)
         page.click("#btn-stop") if page.is_visible("#btn-stop") else None
 
@@ -264,7 +264,10 @@ with sync_playwright() as p:
         txt = page.inner_text("#upd-res")
         check("controllo aggiornamenti con note", "Nota di prova 1" in txt and "Contenuti remoti di prova" in txt, txt[:300])
         page.click("#upd-deb"); page.wait_for_selector("#upd-deb-res .notice.ok", timeout=15000)
-        dl = os.path.join(os.environ["PD_TEST_HOME"], "Scaricati", "professore-digitale_9.9.9_all.deb")
+        if os.environ.get("PD_TEST_WINDOWS"):
+            dl = os.path.join(os.environ["PD_TEST_DOWNLOADS"], "ProfessoreDigitale-Setup-9.9.9.exe")
+        else:
+            dl = os.path.join(os.environ["PD_TEST_HOME"], "Scaricati", "professore-digitale_9.9.9_all.deb")
         check("pacchetto scaricato e verificato (SHA-256)", os.path.isfile(dl), page.inner_text("#upd-deb-res"))
         page.click("[data-pack-dl]"); page.wait_for_selector("#upd-res >> text=✔ installato", timeout=15000)
         check("contenuti scaricati dal sito", "prova-remota" in page.evaluate("PD.packs.list.map(x => x.pacchetto.id).join(',')"))

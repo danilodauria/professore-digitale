@@ -1,0 +1,60 @@
+{
+ "formato": "professore-digitale-catalogo-ia",
+ "versione": "2026.10.1",
+ "nota": "Catalogo dei motori e dei modelli di IA locale per la versione Windows. Ordine: dal piu' leggero al piu' capace. La configurazione automatica sceglie l'ultimo modello adatto al computer, saltando quelli 'solo_manuale'. Si aggiorna senza reinstallare: pubblicatelo con aggiornamenti.json (campo catalogo_ia).",
+ "ollama": {
+  "descrizione": "Ollama, per Windows 10 22H2 e Windows 11 (64 bit e ARM64). Usa la scheda video NVIDIA o AMD se adatta.",
+  "github": "ollama/ollama",
+  "asset": "OllamaSetup.exe",
+  "setup_url": "https://ollama.com/download/OllamaSetup.exe",
+  "modelli": [
+   {"nome": "qwen3.5:0.8b", "titolo": "Qwen 3.5 · 0,8 miliardi", "gb": 1.0, "ram_mb": 3000, "vram_mb": 0, "pc_lenti": true,
+    "descrizione": "Leggerissimo e veloce: per PC con 4 GB di RAM. Risposte semplici."},
+   {"nome": "gemma3:1b", "titolo": "Gemma 3 · 1 miliardo", "gb": 0.8, "ram_mb": 3000, "vram_mb": 0, "pc_lenti": true, "solo_manuale": true,
+    "descrizione": "Alternativa leggera di Google, buon italiano di base."},
+   {"nome": "qwen3.5:2b", "titolo": "Qwen 3.5 · 2 miliardi", "gb": 2.7, "ram_mb": 6000, "vram_mb": 3000, "pc_lenti": true,
+    "descrizione": "Equilibrato: per PC con 6-8 GB di RAM anche senza scheda video."},
+   {"nome": "ministral-3:3b", "titolo": "Ministral 3 · 3 miliardi", "gb": 3.0, "ram_mb": 8000, "vram_mb": 4000, "solo_manuale": true,
+    "descrizione": "Alternativa europea (Mistral), italiano molto naturale."},
+   {"nome": "gemma3:4b", "titolo": "Gemma 3 · 4 miliardi", "gb": 3.3, "ram_mb": 8000, "vram_mb": 4500, "solo_manuale": true,
+    "descrizione": "Alternativa di Google, ottimo italiano, un po' piu' lenta."},
+   {"nome": "qwen3.5:4b", "titolo": "Qwen 3.5 · 4 miliardi", "gb": 3.4, "ram_mb": 8000, "vram_mb": 5000,
+    "descrizione": "Consigliato per PC con 8-16 GB di RAM: risposte complete e precise."},
+   {"nome": "qwen3.5:9b", "titolo": "Qwen 3.5 · 9 miliardi", "gb": 6.6, "ram_mb": 16000, "vram_mb": 8000,
+    "descrizione": "Per PC recenti con 16 GB di RAM o scheda video da 8 GB."},
+   {"nome": "gemma4:12b", "titolo": "Gemma 4 · 12 miliardi", "gb": 8.0, "ram_mb": 24000, "vram_mb": 10000,
+    "descrizione": "Il piu' capace: per PC potenti (24-32 GB di RAM o scheda video da 12 GB)."}
+  ]
+ },
+ "compatibile": {
+  "descrizione": "KoboldCpp (licenza AGPL), motore compatibile per Windows 7, 8 e 8.1 a 64 bit e per Windows 10 non aggiornato.",
+  "github": "LostRuins/koboldcpp",
+  "tag": "v1.112.2",
+  "asset": "koboldcpp-nocuda.exe",
+  "porta": 5001,
+  "modelli": [
+   {"nome": "qwen2.5-0.5b", "titolo": "Qwen 2.5 · 0,5 miliardi", "gb": 0.5, "ram_mb": 2500, "pc_lenti": true,
+    "hf": "Qwen/Qwen2.5-0.5B-Instruct-GGUF", "file": "qwen2.5-0.5b-instruct-q4_k_m.gguf",
+    "descrizione": "Per PC con 3-4 GB di RAM: risposte brevi e semplici."},
+   {"nome": "gemma-3-1b", "titolo": "Gemma 3 · 1 miliardo", "gb": 0.8, "ram_mb": 3500, "pc_lenti": true,
+    "hf": "unsloth/gemma-3-1b-it-GGUF", "file": "gemma-3-1b-it-Q4_K_M.gguf",
+    "descrizione": "Per PC con 4 GB di RAM: buon italiano di base."},
+   {"nome": "qwen2.5-1.5b", "titolo": "Qwen 2.5 · 1,5 miliardi", "gb": 1.1, "ram_mb": 5500, "pc_lenti": true,
+    "hf": "Qwen/Qwen2.5-1.5B-Instruct-GGUF", "file": "qwen2.5-1.5b-instruct-q4_k_m.gguf",
+    "descrizione": "Per PC con 6-8 GB di RAM."},
+   {"nome": "gemma-3-4b", "titolo": "Gemma 3 · 4 miliardi", "gb": 2.5, "ram_mb": 8000,
+    "hf": "unsloth/gemma-3-4b-it-GGUF", "file": "gemma-3-4b-it-Q4_K_M.gguf",
+    "descrizione": "Per PC con 8 GB di RAM o piu': ottimo italiano."}
+  ]
+ },
+ "voce": {
+  "vosk": {"url": "https://alphacephei.com/vosk/models/vosk-model-small-it-0.22.zip", "mb": 48,
+           "descrizione": "Modello italiano per il riconoscimento vocale offline (Vosk, licenza Apache 2.0)."},
+  "piper": {"github": "rhasspy/piper", "tag": "2023.11.14-2", "asset": "piper_windows_amd64.zip",
+            "hf": "rhasspy/piper-voices",
+            "file": ["it/it_IT/paola/medium/it_IT-paola-medium.onnx", "it/it_IT/paola/medium/it_IT-paola-medium.onnx.json"],
+            "descrizione": "Voce naturale \"Paola\" (Piper, licenza MIT)."}
+ },
+ "browser": {"github": "win32ss/supermium", "suffisso_32": "_32_setup.exe", "suffisso_64": "_64_setup.exe",
+             "descrizione": "Supermium: browser moderno che funziona su Windows XP e Vista."}
+}
