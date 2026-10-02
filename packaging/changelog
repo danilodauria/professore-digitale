@@ -1,3 +1,22 @@
+professore-digitale (2.3.0) stable; urgency=medium
+
+  * Nuova versione per Windows, da Windows XP a Windows 11: un solo
+    installatore, anche per le aule (installazione silenziosa per tutti gli
+    utenti).
+  * Configurazione automatica dell'intelligenza artificiale su Windows: il
+    Professore esamina il computer e installa da solo il modello più
+    adatto.
+  * Chiavetta per installare IA, microfono e voce sui computer Windows
+    senza Internet, con ogni file verificato.
+  * Gli occhi del Professore seguono il mouse in modo naturale (si possono
+    spegnere in Impostazioni → Vista).
+  * 19 nuove risposte dedicate a Windows; modelli di IA più recenti
+    consigliati anche su Linux.
+  * Si vedono di nuovo bene gli stati del Professore (nuvolette, onde e
+    bocca che parla) nei browser recenti.
+
+ -- Danilo D'Auria <danilodauria.site@gmail.com>  Fri, 02 Oct 2026 13:26:26 +0200
+
 professore-digitale (2.2.0) stable; urgency=medium
 
   * Aggiornamenti anche senza Internet: il Professore accetta un indirizzo
