@@ -50,6 +50,7 @@ Leggere questo file per intero prima di modificare qualunque cosa.
 | `src/web/js/aree.js`, `data-fenice.js` | Percorsi tematici: Cultura generale (pacchetti `cultura-*`), FeniceOS (`feniceos` + dati della pagina), libro Tecnologia Gentile (`tecnologia-gentile`) |
 | `src/web/js/aula.js`, `src/server/pd_aula.py`, `windows/src/pd_aula.c` | Quadro dell'aula in rete locale (facilitatore/allievo), messaggi a tutti, stato della connessione |
 | `src/web/js/stampa.js`, `presenza.js` | Stampa della pagina o dell'argomento intero; saluti all'avvio, consigli quando è inattivo, attesa, uscita con promemoria |
+| `src/web/js/sostieni.js`, `data-sostieni.js` | Pagina «❤️ Sostieni il progetto» (PayPal, bonifico, QR già pronti, pulsanti Copia). `data-sostieni.js` si rigenera con `tools/genera-sostieni.py` (serve `segno`) se cambiano IBAN o PayPal: mai pubblicare il numero della carta, solo l'IBAN |
 | `tools/voci.sh` | Scarica e verifica (SHA-256) le **voci naturali incluse**: Piper Linux x86_64/aarch64 e Windows x64, voci Paola (f) e Riccardo (m). Cache in `~/.cache/professore-digitale/voci` |
 | `archivio/` | .deb prodotti in questa copia (ignorato da git, escluso dall'archivio sorgenti). I .deb pubblicati si conservano sul PC di Danilo in `$ARCHIVIO` (`~/professore-digitale-archivio`, vedi `rilascio.conf`) |
 

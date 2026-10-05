@@ -1,3 +1,13 @@
+professore-digitale (3.1.0) stable; urgency=medium
+
+  * Nuova pagina «❤️ Sostieni il progetto» (Impostazioni e pagina
+    Inizio): contributo libero con PayPal o bonifico, codici QR pronti da
+    inquadrare e pulsanti per copiare l'IBAN e il collegamento. Funziona
+    anche senza Internet.
+  * Vademecum per Windows e per Linux aggiornati con il nuovo capitolo.
+
+ -- Danilo D'Auria <danilodauria.site@gmail.com>  Tue, 06 Oct 2026 00:27:54 +0200
+
 professore-digitale (3.0.0) stable; urgency=medium
 
   * Voci italiane maschili e femminili già incluse: Riccardo e Paola (voci

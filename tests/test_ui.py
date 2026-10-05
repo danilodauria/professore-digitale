@@ -239,6 +239,17 @@ with sync_playwright() as p:
     page.reload()
     page.wait_for_selector("#s-theme")
     check("impostazioni persistenti", page.evaluate("document.documentElement.dataset.theme") == "dark" and page.evaluate("PD.settings.fontSize") == 22)
+    # --- sostieni il progetto (3.1) ---
+    check("riquadro Sostieni nelle impostazioni", page.locator("#sostieni-card").count() == 1)
+    page.click("#sostieni-card [data-go='#/sostieni']")
+    page.wait_for_selector("#view-sostieni .sostieni-qr svg")
+    txt = page.inner_text("#view-sostieni")
+    check("pagina Sostieni con IBAN, PayPal e 2 QR", "IT82 F360 8105 1382 6570 4265 952" in txt and "paypal.me/DDauria" in txt
+          and page.locator("#view-sostieni .sostieni-qr svg").count() == 2, txt[:200])
+    page.click("#view-sostieni [data-cosa='IBAN']")
+    page.wait_for_timeout(300)
+    check("copia IBAN con messaggio", "copiato" in page.inner_text("#view-sostieni") or "selezionatelo" in page.inner_text("#view-sostieni"))
+    page.screenshot(path=SHOTS + "/10b-sostieni.png", full_page=True)
     page.goto(ROOT + "#/lessons/truffe/1")
     page.wait_for_selector("#lesson-board .diagram svg", timeout=20000)
     page.screenshot(path=SHOTS + "/11-lezione-scuro.png")

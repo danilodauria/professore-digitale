@@ -466,3 +466,14 @@ h2.sez { font-size: 1.25rem; margin: 1.6rem 0 .6rem; }
   .topbar .tools { flex: 1 1 100%; }
   #btn-stop { font-size: 0; } #btn-stop::before { content: "■"; font-size: .9rem; }
 }
+
+/* ---------- Sostieni il progetto (3.1) ---------- */
+.sostieni-riga { text-align: center; margin: 1rem 0 0; }
+.sostieni-grid { display: grid; grid-template-columns: 1fr; grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr)); gap: 1rem; margin: 1rem 0; }
+.sostieni-modo h2 { margin-top: 0; }
+.sostieni-qr { width: 12rem; max-width: 100%; margin: .4rem auto .8rem; background: #fff; padding: .4rem; border-radius: 8px; border: 1px solid var(--line); }
+.sostieni-qr svg { display: block; width: 100%; height: auto; }
+.sostieni-dato code { font-size: 1.05em; word-break: break-all; }
+.sostieni-iban { font-size: 1.05em; word-break: normal; }
+.sostieni-iban { letter-spacing: .03em; font-weight: 600; }
+@media print { .sostieni-modo .row { display: none; } }

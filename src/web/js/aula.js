@@ -10,7 +10,7 @@
   var PD = window.PD, $ = PD.$, $$ = PD.$$, esc = PD.esc;
   var timer = 0, ultimoStato = null;
   var NOMI_VISTA = { home: "Inizio", lessons: "Lezioni", ask: "Chiedi al Professore", board: "Lavagna", practice: "Palestra", quiz: "Quiz",
-    attestato: "Attestato", cultura: "Cultura generale", fenice: "FeniceOS", libro: "Tecnologia Gentile", aula: "Aula", settings: "Impostazioni", setup: "Configura IA e voce" };
+    attestato: "Attestato", cultura: "Cultura generale", fenice: "FeniceOS", libro: "Tecnologia Gentile", aula: "Aula", settings: "Impostazioni", sostieni: "Sostieni il progetto", setup: "Configura IA e voce" };
 
   function fa(s) {
     if (s == null) return "mai";

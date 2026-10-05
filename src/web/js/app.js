@@ -543,6 +543,7 @@
       (PD.server ? tile("🏫", "Aula", "Il quadro dell'aula: PC collegati, progressi degli allievi, messaggi.", "#/aula") : "") +
       "</div>" +
       '<div class="card promemoria" id="home-promemoria"></div>' +
+      '<p class="sostieni-riga small muted">Il Professore Digitale è gratuito e libero. <a href="#/sostieni" data-go="#/sostieni">❤️ Sostieni il progetto</a></p>' +
       (!PD.server ? '<p class="notice info small">Questa è la <b>versione portatile</b>: lezioni, guida, lavagna, palestra e quiz funzionano ovunque. ' +
       "Per l'intelligenza artificiale locale, le voci naturali, il microfono e l'aula installate il programma completo (<b>.exe</b> per Windows, <b>.deb</b> per Linux).</p>" : "") +
       (PD.isWindows() && !PD.aiReady() && PD.status.ai.recommended && !PD.status.ai.engine ? '<p class="notice info small">💡 Su questo computer può funzionare anche l\'<b>intelligenza artificiale locale</b> ' +
@@ -971,6 +972,8 @@
       '<button class="btn ghost" id="check-upd"' + (PD.server ? "" : " disabled") + '>🌐 Controlla aggiornamenti</button><div id="upd-res" class="small" style="margin-top:.6rem"></div></div>' +
 
       '<div class="card"><h2 style="margin-top:0">🩺 Diagnostica</h2><div class="diag" id="diag"></div></div>' +
+
+      (PD.sostieniHTML ? PD.sostieniHTML(true) : "") +
 
       '<div class="card"><h2 style="margin-top:0">ℹ️ Informazioni</h2><dl class="kv"><dt>Programma</dt><dd>Professore Digitale – Cattedra Digitale Portatile</dd>' +
       "<dt>Versione</dt><dd>" + PD.version + "</dd><dt>Ideazione e sviluppo</dt><dd>Danilo D'Auria – Tecnico IT &amp; Divulgatore Digitale per il Sociale</dd>" +
