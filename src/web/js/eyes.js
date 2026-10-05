@@ -49,6 +49,7 @@
   /* Bersaglio dello sguardo per lo stato attuale del Professore */
   function gazeTarget(t) {
     var st = PD.profState || "riposo";
+    if (st === "attesa") return { mode: "fixed", ox: 0, oy: RY * 0.7 };   // in attesa: sguardo basso, occhi socchiusi
     if (st === "pensiero") {                       // guarda in alto, come chi riflette
       return { mode: "fixed", ox: -RX * 0.55 + Math.sin(t / 700) * 0.5, oy: -RY * 0.95 };
     }
@@ -88,7 +89,7 @@
     var svgs = document.querySelectorAll(SELECTOR);
     var on = enabled();
     var tgt = on ? gazeTarget(t) : { mode: "fixed", ox: 0, oy: 0 };
-    var lid = on ? lidValue(t) : 0;
+    var lid = PD.profState === "attesa" ? 0.8 : on ? lidValue(t) : 0;
     var dark = document.documentElement.getAttribute("data-theme") !== "light";
     var ease = 1 - Math.pow(1 - (PD.profState === "spiegazione" ? 0.12 : 0.2), dt / 16.7);
     var busy = lid > 0 || blink.start >= 0;

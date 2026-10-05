@@ -1,5 +1,5 @@
 /* Professore Digitale per Windows - voce (sintesi) e microfono (riconoscimento), entrambi offline
- *  Sintesi:  Piper "Paola" (64 bit, facoltativa)  >  voce italiana di Windows (SAPI 5, da XP in poi)
+ *  Sintesi:  voci naturali Piper Riccardo e Paola (64 bit, incluse)  >  voci italiane di Windows (SAPI 5, da XP in poi)
  *  Microfono: Vosk con modello italiano, tramite pd-stt.exe (64 bit, processo separato)
  * Ideato e sviluppato da Danilo D'Auria - Licenza MIT */
 #define COBJMACROS
@@ -14,91 +14,163 @@ DEFINE_GUID(PD_SPDFID_WaveFormatEx, 0xC31ADBAE, 0x527F, 0x4ff5, 0xA2, 0x30, 0xF6
 #define MAX_TTS_CHARS 6000
 
 static CRITICAL_SECTION vlock; static LONG vinit = 0;
-static DWORD sapi_checked = 0; static int sapi_ok = 0;
-static wchar_t sapi_cat[160];                 /* categoria in cui si trova la voce italiana */
-static wchar_t sapi_name[160];
 
 static void vl(void) { if (InterlockedCompareExchange(&vinit, 1, 0) == 0) InitializeCriticalSection(&vlock); EnterCriticalSection(&vlock); }
 static void vu(void) { LeaveCriticalSection(&vlock); }
 
-void tts_invalidate(void) { vl(); sapi_checked = 0; vu(); }
 
-/* ------------------------------------------------------------------ Piper */
-static int piper_paths(wchar_t *exe, wchar_t *model) {
-    _snwprintf(exe, MAX_PATH, L"%ls\\piper\\piper.exe", G.local_dir); exe[MAX_PATH - 1] = 0;
-    if (!file_exists(exe)) return 0;
-    wchar_t pat[MAX_PATH]; _snwprintf(pat, MAX_PATH, L"%ls\\piper\\*.onnx", G.models_dir); pat[MAX_PATH - 1] = 0;
-    WIN32_FIND_DATAW fd; HANDLE h = FindFirstFileW(pat, &fd);
-    if (h == INVALID_HANDLE_VALUE) return 0;
-    _snwprintf(model, MAX_PATH, L"%ls\\piper\\%ls", G.models_dir, fd.cFileName); model[MAX_PATH - 1] = 0;
-    FindClose(h);
-    return 1;
+/* ------------------------------------------------------------------ elenco delle voci
+ * Voci naturali Piper (incluse nell'installatore: Paola, donna, e Riccardo, uomo; solo Windows a 64 bit)
+ * e tutte le voci italiane di Windows (SAPI 5 e OneCore), maschili e femminili. */
+typedef struct { char id[320]; char nome[200]; char genere[2]; int piper; wchar_t rif[MAX_PATH]; } voce_t;
+#define MAX_VOCI 32
+static voce_t g_voci[MAX_VOCI]; static int g_nvoci = 0; static DWORD g_voci_t = 0;
+static wchar_t g_piper_exe[MAX_PATH];
+
+static int is64os(void) {
+    SYSTEM_INFO si; GetNativeSystemInfo(&si);
+    return si.wProcessorArchitecture == PROCESSOR_ARCHITECTURE_AMD64 || si.wProcessorArchitecture == 12;
 }
 
-/* ------------------------------------------------------------------ SAPI */
-static int find_italian(ISpObjectTokenCategory **pcat, ISpObjectToken **ptok, const wchar_t *catid) {
-    ISpObjectTokenCategory *cat = NULL; IEnumSpObjectTokens *en = NULL; ISpObjectToken *tok = NULL;
-    if (FAILED(CoCreateInstance(&CLSID_SpObjectTokenCategory, NULL, CLSCTX_ALL, &IID_ISpObjectTokenCategory, (void **)&cat)) || !cat) return 0;
-    if (FAILED(ISpObjectTokenCategory_SetId(cat, catid, FALSE))) { ISpObjectTokenCategory_Release(cat); return 0; }
-    /* 410 = italiano (Italia), 810 = italiano (Svizzera) */
-    if (SUCCEEDED(ISpObjectTokenCategory_EnumTokens(cat, L"Language=410", NULL, &en)) && en) {
-        ULONG got = 0;
-        IEnumSpObjectTokens_Next(en, 1, &tok, &got);
-        if (!got) tok = NULL;
-        IEnumSpObjectTokens_Release(en); en = NULL;
-    }
-    if (!tok && SUCCEEDED(ISpObjectTokenCategory_EnumTokens(cat, L"Language=810", NULL, &en)) && en) {
-        ULONG got = 0; IEnumSpObjectTokens_Next(en, 1, &tok, &got); if (!got) tok = NULL;
+static void aggiungi_piper(const wchar_t *dir, voce_t *v, int *n) {
+    wchar_t pat[MAX_PATH]; _snwprintf(pat, MAX_PATH, L"%ls\\*.onnx", dir); pat[MAX_PATH - 1] = 0;
+    WIN32_FIND_DATAW fd; HANDLE h = FindFirstFileW(pat, &fd);
+    if (h == INVALID_HANDLE_VALUE) return;
+    do {
+        wchar_t full[MAX_PATH], js[MAX_PATH];
+        _snwprintf(full, MAX_PATH, L"%ls\\%ls", dir, fd.cFileName); full[MAX_PATH - 1] = 0;
+        _snwprintf(js, MAX_PATH, L"%ls.json", full); js[MAX_PATH - 1] = 0;
+        if (!file_exists(js)) continue;
+        char *b8 = u16to8(fd.cFileName); size_t L = strlen(b8); if (L > 5) b8[L - 5] = 0;   /* senza .onnx */
+        int k; for (k = 0; k < *n; k++) if (v[k].piper && !strcmp(v[k].id + 6, b8)) break;
+        if (k == *n) { if (*n >= MAX_VOCI) { free(b8); break; } (*n)++; }
+        voce_t *x = &v[k]; memset(x, 0, sizeof *x);
+        x->piper = 1; snprintf(x->id, sizeof x->id, "piper:%s", b8); wcsncpy(x->rif, full, MAX_PATH - 1);
+        const char *chi = strchr(b8, '-'); char nome[64] = "";
+        if (chi) { const char *f = strchr(chi + 1, '-'); size_t l = f ? (size_t)(f - chi - 1) : strlen(chi + 1); if (l > 60) l = 60; memcpy(nome, chi + 1, l); nome[l] = 0; }
+        if (!strcmp(nome, "paola") || !strcmp(nome, "serena")) x->genere[0] = 'f';
+        else if (!strcmp(nome, "riccardo")) x->genere[0] = 'm';
+        if (nome[0]) nome[0] = (char)toupper((unsigned char)nome[0]);
+        snprintf(x->nome, sizeof x->nome, "%s (%s, voce naturale)", nome[0] ? nome : b8, x->genere[0] == 'm' ? "uomo" : x->genere[0] == 'f' ? "donna" : "voce");
+        free(b8);
+    } while (FindNextFileW(h, &fd));
+    FindClose(h);
+}
+
+static void aggiungi_sapi(const wchar_t *catid, voce_t *v, int *n) {
+    ISpObjectTokenCategory *cat = NULL;
+    if (FAILED(CoCreateInstance(&CLSID_SpObjectTokenCategory, NULL, CLSCTX_ALL, &IID_ISpObjectTokenCategory, (void **)&cat)) || !cat) return;
+    if (FAILED(ISpObjectTokenCategory_SetId(cat, catid, FALSE))) { ISpObjectTokenCategory_Release(cat); return; }
+    const wchar_t *lingue[2] = { L"Language=410", L"Language=810" };   /* italiano (Italia), italiano (Svizzera) */
+    for (int l = 0; l < 2; l++) {
+        IEnumSpObjectTokens *en = NULL;
+        if (FAILED(ISpObjectTokenCategory_EnumTokens(cat, lingue[l], NULL, &en)) || !en) continue;
+        ISpObjectToken *tok = NULL; ULONG got = 0;
+        while (*n < MAX_VOCI && SUCCEEDED(IEnumSpObjectTokens_Next(en, 1, &tok, &got)) && got == 1 && tok) {
+            WCHAR *id = NULL, *nm = NULL, *gen = NULL; ISpDataKey *attr = NULL;
+            ISpObjectToken_GetId(tok, &id);
+            ISpObjectToken_GetStringValue(tok, NULL, &nm);
+            if (SUCCEEDED(ISpObjectToken_OpenKey(tok, L"Attributes", &attr)) && attr) { ISpDataKey_GetStringValue(attr, L"Gender", &gen); ISpDataKey_Release(attr); }
+            if (id && nm) {
+                char *n8 = u16to8(nm), *i8 = u16to8(id);
+                int dup = 0; for (int k = 0; k < *n; k++) if (!v[k].piper && !strcmp(v[k].nome, n8)) dup = 1;   /* stessa voce in SAPI e OneCore */
+                if (!dup) {
+                    voce_t *x = &v[(*n)++]; memset(x, 0, sizeof *x);
+                    snprintf(x->id, sizeof x->id, "sapi:%s", i8); snprintf(x->nome, sizeof x->nome, "%s", n8);
+                    wcsncpy(x->rif, catid, MAX_PATH - 1);
+                    if (gen && !_wcsicmp(gen, L"Male")) x->genere[0] = 'm'; else if (gen && !_wcsicmp(gen, L"Female")) x->genere[0] = 'f';
+                }
+                free(n8); free(i8);
+            }
+            if (id) CoTaskMemFree(id);
+            if (nm) CoTaskMemFree(nm);
+            if (gen) CoTaskMemFree(gen);
+            ISpObjectToken_Release(tok); tok = NULL;
+        }
         IEnumSpObjectTokens_Release(en);
     }
-    if (!tok) { ISpObjectTokenCategory_Release(cat); return 0; }
-    *pcat = cat; *ptok = tok;
-    return 1;
+    ISpObjectTokenCategory_Release(cat);
 }
 
-static int sapi_available(void) {
+static void scan_voci(int force) {
     vl();
-    if (sapi_checked && GetTickCount() - sapi_checked < 300000) { int r = sapi_ok; vu(); return r; }
+    if (!force && g_voci_t && GetTickCount() - g_voci_t < 300000) { vu(); return; }
     vu();
-    int ok = 0; wchar_t catid[160] = L"", name[160] = L"";
-    HRESULT ci = CoInitializeEx(NULL, COINIT_MULTITHREADED);
-    const wchar_t *cats[2] = { PD_VOICES_SAPI, PD_VOICES_ONECORE };
-    for (int i = 0; i < 2 && !ok; i++) {
-        ISpObjectTokenCategory *cat; ISpObjectToken *tok;
-        if (find_italian(&cat, &tok, cats[i])) {
-            WCHAR *nm = NULL;
-            if (SUCCEEDED(ISpObjectToken_GetStringValue(tok, NULL, &nm)) && nm) { wcsncpy(name, nm, 159); CoTaskMemFree(nm); }
-            wcsncpy(catid, cats[i], 159);
-            ISpObjectToken_Release(tok); ISpObjectTokenCategory_Release(cat);
-            ok = 1;
+    voce_t v[MAX_VOCI]; int n = 0; wchar_t exe[MAX_PATH] = L"";
+    if (is64os()) {
+        wchar_t cand[2][MAX_PATH];
+        _snwprintf(cand[0], MAX_PATH, L"%ls\\piper\\piper.exe", G.local_dir); cand[0][MAX_PATH - 1] = 0;
+        _snwprintf(cand[1], MAX_PATH, L"%ls\\piper\\piper.exe", G.install_dir); cand[1][MAX_PATH - 1] = 0;
+        for (int i = 0; i < 2 && !exe[0]; i++) {
+            if (!file_exists(cand[i])) continue;
+            wchar_t *q = quote_arg(cand[i]), *cl = wcsdup_printf(L"%ls --version", q);
+            wchar_t dir[MAX_PATH]; wcsncpy(dir, cand[i], MAX_PATH - 1); dir[MAX_PATH - 1] = 0; wchar_t *sl = wcsrchr(dir, L'\\'); if (sl) *sl = 0;
+            DWORD code = 1; buf_t out;
+            if (run_process(cl, dir, "", 0, &out, 20000, &code, 1) && code == 0) wcsncpy(exe, cand[i], MAX_PATH - 1);
+            else pd_log("Piper non avviabile su questo computer");
+            buf_free(&out); free(q); free(cl);
+        }
+        if (exe[0]) {
+            wchar_t *inc = path_join(G.install_dir, L"voci"), *usr = path_join(G.models_dir, L"piper");
+            aggiungi_piper(inc, v, &n); aggiungi_piper(usr, v, &n);
+            free(inc); free(usr);
         }
     }
+    /* in cima Riccardo (il Professore e' un uomo), poi Paola, poi le altre voci naturali */
+    for (int i = 0; i < n; i++) for (int j = i + 1; j < n; j++) {
+        int ri = strstr(v[i].id, "riccardo") ? 0 : strstr(v[i].id, "paola") ? 1 : 2, rj = strstr(v[j].id, "riccardo") ? 0 : strstr(v[j].id, "paola") ? 1 : 2;
+        if (rj < ri) { voce_t t = v[i]; v[i] = v[j]; v[j] = t; }
+    }
+    HRESULT ci = CoInitializeEx(NULL, COINIT_MULTITHREADED);
+    aggiungi_sapi(PD_VOICES_SAPI, v, &n);
+    aggiungi_sapi(PD_VOICES_ONECORE, v, &n);
     if (SUCCEEDED(ci)) CoUninitialize();
     vl();
-    sapi_ok = ok; sapi_checked = GetTickCount(); if (!sapi_checked) sapi_checked = 1;
-    wcsncpy(sapi_cat, catid, 159); wcsncpy(sapi_name, name, 159);
+    memcpy(g_voci, v, sizeof v); g_nvoci = n; wcsncpy(g_piper_exe, exe, MAX_PATH - 1); g_piper_exe[MAX_PATH - 1] = 0;
+    g_voci_t = GetTickCount(); if (!g_voci_t) g_voci_t = 1;
     vu();
-    return ok;
 }
+
+void tts_invalidate(void) { vl(); g_voci_t = 0; vu(); }
+static unsigned __stdcall preriscalda(void *a) { (void)a; scan_voci(1); return 0; }
+void tts_init(void) { HANDLE t = (HANDLE)_beginthreadex(NULL, 0, preriscalda, NULL, 0, NULL); if (t) CloseHandle(t); }
+
+static int conta(int piper) { scan_voci(0); vl(); int k = 0; for (int i = 0; i < g_nvoci; i++) if (g_voci[i].piper == piper) k++; vu(); return k; }
+static int sapi_available(void) { return conta(0) > 0; }
+int tts_has_piper(void) { return conta(1) > 0; }
 
 int sapi_italian_voices(buf_t *out) {
-    int ok = sapi_available();
+    scan_voci(0);
     vl();
-    char *n = u16to8(sapi_name);
-    if (ok) json_str(out, n); else buf_adds(out, "null");
-    free(n);
+    int ok = 0;
+    for (int i = 0; i < g_nvoci; i++) if (!g_voci[i].piper) { json_str(out, g_voci[i].nome); ok = 1; break; }
+    if (!ok) buf_adds(out, "null");
     vu();
     return ok;
 }
 
-static int sapi_speak(const wchar_t *text, double rate, const wchar_t *wavpath, char *err, size_t errn) {
+void tts_voices_json(buf_t *b) {
+    scan_voci(0);
+    vl();
+    buf_adds(b, "[");
+    for (int i = 0; i < g_nvoci; i++) {
+        voce_t *x = &g_voci[i];
+        if (i) buf_adds(b, ", ");
+        buf_adds(b, "{\"id\": "); json_str(b, x->id); buf_adds(b, ", \"nome\": "); json_str(b, x->nome);
+        buf_adds(b, ", \"genere\": "); json_str(b, x->genere); buf_addf(b, ", \"motore\": \"%s\", \"naturale\": %s}", x->piper ? "piper" : "sapi", x->piper ? "true" : "false");
+    }
+    buf_adds(b, "]");
+    vu();
+}
+
+static int sapi_speak(const wchar_t *text, double rate, const wchar_t *wavpath, const char *token_id8, char *err, size_t errn) {
     HRESULT ci = CoInitializeEx(NULL, COINIT_MULTITHREADED);
-    ISpVoice *v = NULL; ISpStream *st = NULL; ISpObjectTokenCategory *cat = NULL; ISpObjectToken *tok = NULL;
+    ISpVoice *v = NULL; ISpStream *st = NULL; ISpObjectToken *tok = NULL;
     int ok = 0;
-    wchar_t catid[160];
-    vl(); wcsncpy(catid, sapi_cat, 159); catid[159] = 0; vu();
+    wchar_t *tid = u8to16(token_id8);
     if (FAILED(CoCreateInstance(&CLSID_SpVoice, NULL, CLSCTX_ALL, &IID_ISpVoice, (void **)&v)) || !v) { snprintf(err, errn, "voce di Windows non disponibile"); goto out; }
-    if (!catid[0] || !find_italian(&cat, &tok, catid)) { snprintf(err, errn, "nessuna voce italiana installata in Windows"); goto out; }
+    if (FAILED(CoCreateInstance(&CLSID_SpObjectToken, NULL, CLSCTX_ALL, &IID_ISpObjectToken, (void **)&tok)) || !tok ||
+        FAILED(ISpObjectToken_SetId(tok, NULL, tid, FALSE))) { snprintf(err, errn, "voce italiana di Windows non trovata"); goto out; }
     ISpVoice_SetVoice(v, tok);
     long r = (long)((rate - 1.0) * 12.0 + (rate >= 1.0 ? 0.5 : -0.5));
     if (r < -10) r = -10;
@@ -116,26 +188,22 @@ static int sapi_speak(const wchar_t *text, double rate, const wchar_t *wavpath, 
     ok = 1;
 out:
     if (tok) ISpObjectToken_Release(tok);
-    if (cat) ISpObjectTokenCategory_Release(cat);
     if (st) ISpStream_Release(st);
     if (v) ISpVoice_Release(v);
     if (SUCCEEDED(ci)) CoUninitialize();
+    free(tid);
     return ok;
 }
 
 /* ------------------------------------------------------------------ elenco motori */
-int tts_engine_count(void) {
-    wchar_t e[MAX_PATH], m[MAX_PATH];
-    return piper_paths(e, m) + sapi_available();
-}
+int tts_engine_count(void) { return (tts_has_piper() ? 1 : 0) + (sapi_available() ? 1 : 0); }
 void tts_engines_json(buf_t *b) {
-    wchar_t e[MAX_PATH], m[MAX_PATH]; int k = 0;
+    int k = 0;
     buf_adds(b, "[");
-    if (piper_paths(e, m)) { buf_adds(b, "\"piper\""); k++; }
+    if (tts_has_piper()) { buf_adds(b, "\"piper\""); k++; }
     if (sapi_available()) { if (k) buf_adds(b, ", "); buf_adds(b, "\"sapi\""); }
     buf_adds(b, "]");
 }
-
 /* ------------------------------------------------------------------ pulizia del testo */
 static wchar_t *clean_for_speech(const char *text8) {
     wchar_t *t = u8to16(text8);
@@ -170,30 +238,33 @@ static wchar_t *clean_for_speech(const char *text8) {
     return o;
 }
 
-int tts_synthesize(const char *text, double rate, const char *engine, buf_t *wav, char *used, size_t usedn, char *err, size_t errn) {
+int tts_synthesize(const char *text, double rate, const char *engine, const char *voice, buf_t *wav, char *used, size_t usedn, char *err, size_t errn) {
     wchar_t *clean = clean_for_speech(text);
     if (!clean[0]) { free(clean); snprintf(err, errn, "testo vuoto"); return 0; }
     if (rate < 0.5) rate = 0.5;
     if (rate > 1.6) rate = 1.6;
-    wchar_t pe[MAX_PATH], pm[MAX_PATH];
-    int has_piper = piper_paths(pe, pm), has_sapi = sapi_available();
-    if (!has_piper && !has_sapi) {
+    scan_voci(0);
+    voce_t v[MAX_VOCI]; int n; wchar_t pe[MAX_PATH];
+    vl(); memcpy(v, g_voci, sizeof v); n = g_nvoci; wcsncpy(pe, g_piper_exe, MAX_PATH); vu();
+    if (!n) {
         free(clean);
-        snprintf(err, errn, "nessuna voce italiana installata (Impostazioni di Windows -> Ora e lingua -> Voce, oppure la voce naturale dalla configurazione guidata)");
+        snprintf(err, errn, "nessuna voce italiana installata (Impostazioni di Windows -> Ora e lingua -> Voce, oppure le voci naturali dall'installatore)");
         return 0;
     }
-    const char *order[2]; int no = 0;
-    if (engine && !strcmp(engine, "sapi") && has_sapi) order[no++] = "sapi";
-    if (has_piper) order[no++] = "piper";
-    if (has_sapi && !(no && !strcmp(order[0], "sapi"))) order[no++] = "sapi";
+    /* ordine: la voce scelta; altrimenti (compatibilita') il motore chiesto; poi le predefinite */
+    int ord[MAX_VOCI], no = 0;
+    for (int i = 0; i < n && voice && *voice; i++) if (!strcmp(v[i].id, voice)) ord[no++] = i;
+    if (!no && engine && !strcmp(engine, "sapi")) for (int i = 0; i < n && !no; i++) if (!v[i].piper) ord[no++] = i;
+    for (int i = 0; i < n; i++) { int dup = 0; for (int k = 0; k < no; k++) if (ord[k] == i) dup = 1; if (!dup) ord[no++] = i; }
     wchar_t tmpdir[MAX_PATH], tmpf[MAX_PATH];
     GetTempPathW(MAX_PATH, tmpdir);
     GetTempFileNameW(tmpdir, L"pdv", 0, tmpf);
     int ok = 0;
-    for (int i = 0; i < no && !ok; i++) {
-        if (!strcmp(order[i], "piper")) {
+    for (int t = 0; t < no && t < 3 && !ok; t++) {
+        voce_t *x = &v[ord[t]];
+        if (x->piper) {
             char *t8 = u16to8(clean);
-            wchar_t *qe = quote_arg(pe), *qm = quote_arg(pm), *qo = quote_arg(tmpf);
+            wchar_t *qe = quote_arg(pe), *qm = quote_arg(x->rif), *qo = quote_arg(tmpf);
             wchar_t *cl = wcsdup_printf(L"%ls --model %ls --output_file %ls --length_scale %.2f", qe, qm, qo, 1.0 / rate);
             wchar_t dir[MAX_PATH]; wcsncpy(dir, pe, MAX_PATH - 1); dir[MAX_PATH - 1] = 0; wchar_t *sl = wcsrchr(dir, L'\\'); if (sl) *sl = 0;
             DWORD code = 1;
@@ -202,10 +273,10 @@ int tts_synthesize(const char *text, double rate, const char *engine, buf_t *wav
             free(t8); free(qe); free(qm); free(qo); free(cl);
         } else {
             char e2[200] = "";
-            if (sapi_speak(clean, rate, tmpf, e2, sizeof e2) && file_size(tmpf) > 44) ok = 1;
+            if (sapi_speak(clean, rate, tmpf, x->id + 5, e2, sizeof e2) && file_size(tmpf) > 44) ok = 1;
             else { snprintf(err, errn, "%s", e2[0] ? e2 : "sintesi vocale non riuscita"); pd_log("SAPI: %s", err); }
         }
-        if (ok) snprintf(used, usedn, "%s", order[i]);
+        if (ok) snprintf(used, usedn, "%s", x->piper ? "piper" : "sapi");
     }
     if (ok) ok = file_read(tmpf, wav, 64u * 1024u * 1024u);
     if (!ok && !err[0]) snprintf(err, errn, "sintesi vocale non riuscita");

@@ -46,8 +46,8 @@ def valida(files):
             for e in err:
                 print("   - " + e)
         else:
-            print("✔ %s — «%s» v%s: %d domande, %d lezioni" % (f, pack["titolo"], pack["versione"],
-                  len(pack.get("domande", [])), len(pack.get("lezioni", []))))
+            print("✔ %s — «%s» v%s: %d domande, %d lezioni, %d prove" % (f, pack["titolo"], pack["versione"],
+                  len(pack.get("domande", [])), len(pack.get("lezioni", [])), len(pack.get("prove", []))))
     return 0 if tutto_ok else 1
 
 

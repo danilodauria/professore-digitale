@@ -11,6 +11,24 @@ Files: usr/share/professore-digitale/web/vendor/mermaid.min.js
 Copyright: 2014-2022 Knut Sveidqvist and Mermaid contributors
 License: MIT
 
+Files: usr/lib/professore-digitale/piper/*
+Copyright: 2022-2023 Michael Hansen (Piper, piper-phonemize); Microsoft Corporation (ONNX Runtime)
+License: MIT
+Comment: Piper 2023.11.14-2, binari ufficiali (https://github.com/rhasspy/piper).
+ Nella stessa cartella ci sono anche libespeak-ng ed espeak-ng-data (eSpeak NG,
+ licenza GPL-3.0-or-later, sorgenti su https://github.com/rhasspy/espeak-ng),
+ distribuiti come programmi separati usati da Piper.
+
+Files: usr/share/professore-digitale/voci/it_IT-paola-medium.*
+Copyright: modello Piper "paola" (rhasspy/piper-voices); dati: paolapersico1/Voice-Dataset-Italian
+License: MIT
+Comment: modello rilasciato con Piper; il dataset di addestramento e' CC0-1.0.
+
+Files: usr/share/professore-digitale/voci/it_IT-riccardo-x_low.*
+Copyright: modello Piper "riccardo" (rhasspy/piper-voices); dati: M-AILABS Speech Dataset
+License: MIT
+Comment: modello rilasciato con Piper; il dataset M-AILABS e' distribuito con licenza permissiva (stile BSD).
+
 License: MIT
  Permission is hereby granted, free of charge, to any person obtaining a copy
  of this software and associated documentation files (the "Software"), to deal

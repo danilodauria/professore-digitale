@@ -138,7 +138,7 @@ static unsigned __stdcall conn_thread(void *arg) {
     if (nl) *nl = 0;
     char target[2048] = "";
     if (sscanf(line, "%7s %2047s", r.method, target) != 2) { free(hdr); closesocket(s); return 0; }
-    char *q = strchr(target, '?'); if (q) *q = 0;
+    char *q = strchr(target, '?'); if (q) { if (strstr(q, "forza=1")) r.forza = 1; *q = 0; }
     snprintf(r.path, sizeof r.path, "%s", target);
     /* intestazioni */
     char *h = nl ? nl + 2 : NULL;

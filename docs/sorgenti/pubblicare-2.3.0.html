@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<title>Professore Digitale – Come pubblicare la versione 2.3.0</title>
+<meta name="author" content="Danilo D'Auria">
+<link rel="stylesheet" href="stile-manuale.css">
+<style>
+.cover .sopra { height: 150mm; }
+.cover .sotto2 { height: 147mm; }
+.cover .prof { top: 52mm; width: 66mm; height: 66mm; }
+.indice-rapido { margin-top: 8mm; font-size: 10pt; }
+.indice-rapido li { margin: 1.6mm 0; }
+pre { font-size: 9pt; }
+.dove { display: inline-block; font: 700 7pt "Noto Sans"; letter-spacing: .12em; padding: .15em .6em; border-radius: 99px; margin-right: .4em; vertical-align: middle; }
+.dove.lin { background: #e8f6ec; color: #15803d; }
+.dove.win { background: #e3eef8; color: #1d5c8f; }
+</style>
+</head>
+<body>
+
+<section class="cover">
+  <div class="sopra">
+    <div class="ka">CATTEDRA DIGITALE PORTATILE</div>
+    <h1>Professore Digitale</h1>
+    <div class="sotto">Come pubblicare la versione 2.3.0<br>i comandi da seguire, passo dopo passo</div>
+    <img class="prof" src="professore.svg" alt="">
+  </div>
+  <div class="sotto2">
+    <ol class="indice-rapido">
+      <li><b>Preparare</b> i file sul PC Linux</li>
+      <li><b>Riunire</b> lo zip e controllare le impronte</li>
+      <li><b>Sostituire</b> la cartella dei sorgenti</li>
+      <li><b>Pubblicare</b> con un solo comando (GitHub)</li>
+      <li><b>Controllare</b> che gli aggiornamenti arrivino</li>
+      <li>In alternativa: <b>senza GitHub</b> (chiavetta e rete dell'aula)</li>
+      <li>Avvisare i facilitatori · Se qualcosa va storto</li>
+    </ol>
+    <div class="firma">
+      <div><b>Danilo D'Auria</b><small>Promemoria personale per la pubblicazione</small></div>
+      <div class="v">v2.3.0<small>Ottobre 2026</small></div>
+    </div>
+  </div>
+</section>
+<div class="segnaposto"></div>
+
+<div class="pagina">
+<h2 style="margin-top:2mm">Prima di cominciare</h2>
+<p>La pubblicazione si fa dal <b>computer Linux</b> dove tenete la cartella del progetto e dove avete l'accesso a GitHub
+(lo stesso usato per le versioni precedenti). I file della 2.3.0 sono sul PC Windows, nella cartella
+<code>Download\ProfessoreDigitale-2.3.0</code>.</p>
+<table><thead><tr><th>File</th><th>Serve per</th></tr></thead><tbody>
+<tr><td><code>professore-digitale-2.3.0-da-pubblicare.zip.00.parte</code><br><code>professore-digitale-2.3.0-da-pubblicare.zip.01.parte</code></td><td>Lo zip con tutto ciò che va sul sito, diviso in due parti (era troppo grande per essere inviato in un pezzo solo).</td></tr>
+<tr><td><code>professore-digitale-2.3.0-sorgenti.tar.gz</code></td><td>I nuovi sorgenti, con la cronologia git e il tag <code>v2.3.0</code>.</td></tr>
+<tr><td><code>SHA256SUMS</code></td><td>Le impronte per controllare che nulla si sia rovinato nel trasferimento.</td></tr>
+<tr><td>Gli altri file (<code>.exe</code>, <code>.deb</code>, <code>.zip</code> Windows, PDF, <code>.html</code>)</td><td>Copie già comprese nello zip da pubblicare: servono per provare il programma, non per pubblicare.</td></tr>
+</tbody></table>
+<div class="box"><span class="t">Legenda</span>
+<span class="dove lin">LINUX</span> comandi da scrivere nel <b>Terminale</b> del PC Linux ·
+<span class="dove win">WINDOWS</span> comandi da scrivere nel <b>Prompt dei comandi</b> di Windows. Le righe che iniziano con <code>#</code> sono commenti: non vanno scritte.</div>
+
+<h2>1 · Portare i file sul PC Linux</h2>
+<p>Copiate con una chiavetta (o con la rete di casa) i tre file che servono — le due <code>.parte</code>, i sorgenti e <code>SHA256SUMS</code> — nella cartella
+<b>Scaricati</b> del PC Linux. Il resto dei comandi presuppone che siano lì.</p>
+<div class="box consiglio"><span class="t">Se preferite riunire lo zip già su Windows</span>
+<span class="dove win">WINDOWS</span> Aprite la cartella <code>Download\ProfessoreDigitale-2.3.0</code>, scrivete <code>cmd</code> nella barra degli indirizzi in alto e premete <kbd>Invio</kbd>, poi:
+<pre>copy /b professore-digitale-2.3.0-da-pubblicare.zip.00.parte + professore-digitale-2.3.0-da-pubblicare.zip.01.parte professore-digitale-2.3.0-da-pubblicare.zip</pre>
+e copiate sul PC Linux lo zip intero al posto delle due parti (saltate allora il passo 2a).</div>
+
+<h2>2 · Riunire lo zip e controllare le impronte</h2>
+<p><span class="dove lin">LINUX</span> Aprite il Terminale ed entrate nella cartella Scaricati:</p>
+<pre>cd ~/Scaricati</pre>
+<h3>2a · Riunire le due parti</h3>
+<pre>cat professore-digitale-2.3.0-da-pubblicare.zip.00.parte \
+    professore-digitale-2.3.0-da-pubblicare.zip.01.parte \
+    > professore-digitale-2.3.0-da-pubblicare.zip</pre>
+<h3>2b · Controllare che i file siano integri</h3>
+<pre>sha256sum -c SHA256SUMS --ignore-missing</pre>
+<p>Devono comparire <b>OK</b> accanto a <code>professore-digitale-2.3.0-da-pubblicare.zip</code> e a <code>professore-digitale-2.3.0-sorgenti.tar.gz</code>.
+Se compare un errore (per esempio <i>FAILED</i> o <i>non corretto</i>), ricopiate quel file: si è rovinato nel trasferimento.</p>
+<p class="small">Gli altri file elencati in SHA256SUMS che non avete copiato vengono ignorati: è normale.</p>
+
+<h2>3 · Sostituire la cartella dei sorgenti</h2>
+<p>I nuovi sorgenti contengono già tutto (anche la cronologia git e il tag della versione). La vecchia cartella si mette da parte, non si cancella:</p>
+<pre><span class="c"># 1. si mette da parte la cartella della 2.2.0 (si potrà cancellare più avanti)</span>
+cd ~
+mv professore-digitale professore-digitale-2.2.0-vecchia
+
+<span class="c"># 2. si estraggono i nuovi sorgenti: si crea di nuovo la cartella professore-digitale</span>
+tar xzf ~/Scaricati/professore-digitale-2.3.0-sorgenti.tar.gz
+
+<span class="c"># 3. si entra e si controlla la versione</span>
+cd ~/professore-digitale
+cat VERSION                 <span class="c"># deve rispondere: 2.3.0</span>
+git log --oneline -1        <span class="c"># deve rispondere: ... Versione 2.3.0</span></pre>
+<div class="box attenzione"><span class="t">Cartella in un altro posto?</span>Se la vostra cartella del progetto non è <code>~/professore-digitale</code>,
+usate il vostro percorso al posto di <code>~</code> nei comandi qui sopra. La cartella dei <code>.deb</code> già pubblicati
+(<code>~/professore-digitale-archivio</code>) resta dov'è: non va toccata.</div>
+<p class="small">Facoltativo, per sviluppare in futuro anche la versione Windows su questo PC: <code>tools/prepara-ambiente.sh</code>
+(installa mingw-w64, NSIS e Wine). Per pubblicare non serve.</p>
+
+<h2>4 · Pubblicare con un solo comando (GitHub)</h2>
+<h3>4a · Prima la prova (non carica nulla)</h3>
+<pre>cd ~/professore-digitale
+tools/pubblica-tutto.sh ~/Scaricati/professore-digitale-2.3.0-da-pubblicare.zip --prova</pre>
+<p>Controlla le impronte di tutti i file, firma il repository APT se sul computer c'è la vostra chiave, ed elenca cosa verrebbe caricato.
+Deve finire con <b>✔ Prova completata: nessun file caricato.</b> Nell'elenco devono comparire anche
+<code>ProfessoreDigitale-Setup-2.3.0.exe</code>, <code>professore-digitale-windows-2.3.0.zip</code> e <code>catalogo-ia.json</code>.</p>
+<h3>4b · Poi la pubblicazione vera</h3>
+<pre>tools/pubblica-tutto.sh ~/Scaricati/professore-digitale-2.3.0-da-pubblicare.zip</pre>
+<p>In ordine, il comando:</p>
+<ol class="passi">
+<li>verifica di nuovo le impronte;</li>
+<li>firma e rigenera il repository APT, se trova la vostra chiave (altrimenti lo dice e prosegue);</li>
+<li>carica il sito su <b>GitHub Pages</b> (ramo <code>gh-pages</code>): aggiornamenti, installatore Windows, pacchetto Linux, vademecum, contenuti e catalogo dei modelli di IA;</li>
+<li>invia i sorgenti e i tag su GitHub (ramo <code>main</code>, tag <code>v2.3.0</code>).</li>
+</ol>
+<p>Deve finire con <b>✔ Fatto!</b>. Se GitHub chiede nome utente e password, come password va incollato il <b>token</b> personale
+(GitHub → Settings → Developer settings → Personal access tokens), non la password del sito.</p>
+<div class="box"><span class="t">Se i sorgenti non partono</span>Se il sito viene caricato ma compare «Invio dei sorgenti non riuscito», ripetete solo quella parte:
+<pre>cd ~/professore-digitale
+git push https://github.com/danilodauria/professore-digitale.git main --tags</pre></div>
+
+<h2>5 · Controllare che gli aggiornamenti arrivino</h2>
+<ol class="passi">
+<li>Aspettate 1–2 minuti (GitHub Pages ha bisogno di un attimo).</li>
+<li>Aprite nel browser <code>https://danilodauria.github.io/professore-digitale/aggiornamenti.json</code>: deve comparire <code>"versione": "2.3.0"</code>
+e una sezione <code>"windows"</code>.</li>
+<li>Su un PC con la 2.2.0: <b>Professore Digitale → Impostazioni → Aggiornamenti → 🌐 Controlla aggiornamenti</b>. Deve annunciare la 2.3.0 con le note;
+<b>⬇️ Scarica il nuovo pacchetto</b> e poi <code>sudo apt install</code> del file scaricato (il comando esatto lo mostra il Professore).</li>
+<li>Su un PC Windows potete installare direttamente <code>ProfessoreDigitale-Setup-2.3.0.exe</code>. Dalle versioni successive alla 2.3.0, anche Windows
+si aggiornerà da <b>Impostazioni → Aggiornamenti</b> con il pulsante <b>▶ Installa adesso</b>.</li>
+</ol>
+
+<h2>6 · In alternativa: tutto in locale, senza GitHub</h2>
+<p>Per le aule senza Internet, o se preferite non usare GitHub. <span class="dove lin">LINUX</span></p>
+<h3>Con una chiavetta</h3>
+<pre>cd ~/professore-digitale
+tools/pubblica-locale.sh ~/Scaricati/professore-digitale-2.3.0-da-pubblicare.zip \
+    --cartella /media/$USER/CHIAVETTA/professore-digitale</pre>
+<p>Sulla chiavetta trovate le istruzioni in <code>LEGGIMI.txt</code>: sui PC Linux <code>sh installa-da-chiavetta.sh</code>,
+sui PC Windows doppio clic su <code>ProfessoreDigitale-Setup-2.3.0.exe</code>.</p>
+<h3>Con un PC dell'aula che fa da «server degli aggiornamenti»</h3>
+<pre><span class="c"># sul PC server (sostituite l'indirizzo con quello vero del PC)</span>
+tools/pubblica-locale.sh ~/Scaricati/professore-digitale-2.3.0-da-pubblicare.zip \
+    --cartella ~/aggiornamenti-professore --indirizzo http://192.168.1.10:8080
+tools/server-aggiornamenti.sh ~/aggiornamenti-professore --servizio</pre>
+<p>Sugli altri PC: <b>Impostazioni → Aggiornamenti</b>, indirizzo <code>http://192.168.1.10:8080/aggiornamenti.json</code>, poi <b>Controlla aggiornamenti</b>.
+Copia di sicurezza senza GitHub: <code>tools/backup-locale.sh /media/$USER/CHIAVETTA</code>.</p>
+
+<h2>7 · Avvisare i facilitatori</h2>
+<p>Un messaggio pronto da copiare:</p>
+<div class="box consiglio" style="font-size:9.4pt">Ciao a tutti! È disponibile il <b>Professore Digitale 2.3.0</b>.<br>
+Novità: ora c'è anche la <b>versione per Windows</b>, da Windows XP a Windows 11, con un solo installatore; su Windows il Professore controlla il computer e
+<b>installa da solo l'intelligenza artificiale più adatta</b>; per i PC senza Internet si può preparare una <b>chiavetta</b>; gli <b>occhi del Professore seguono il mouse</b>;
+19 nuove risposte su Windows.<br>
+Come aggiornare: su Linux aprite il Professore → Impostazioni → Aggiornamenti → «Controlla aggiornamenti»; su Windows installate
+ProfessoreDigitale-Setup-2.3.0.exe (lo trovate sul sito o sulla chiavetta). Nelle aule senza rete porto io la chiavetta.<br>
+I progressi degli allievi restano al loro posto. Il vademecum per Windows è sul sito. Buon lavoro!<br>Danilo</div>
+
+<h2>Se qualcosa va storto</h2>
+<table><thead><tr><th style="width:34%">Messaggio</th><th>Cosa fare</th></tr></thead><tbody>
+<tr><td>«Verifica non riuscita: file danneggiati»</td><td>Una parte dello zip si è rovinata: ricopiatela e ripetete i passi 2a e 2b.</td></tr>
+<tr><td>«Lo zip è della versione 2.3.0 ma i sorgenti… sono 2.2.0»</td><td>State lanciando il comando dalla vecchia cartella: ripetete il passo 3 ed entrate in <code>~/professore-digitale</code>.</td></tr>
+<tr><td>«Caricamento del sito non riuscito»</td><td>Controllate la connessione e il token di GitHub; poi ripetete il passo 4b (si può ripetere senza problemi).</td></tr>
+<tr><td>«Nessuna chiave di firma… salto il repository APT»</td><td>Solo un avviso: gli aggiornamenti dall'app funzionano lo stesso. Il repository APT si firma solo sul PC che ha la vostra chiave.</td></tr>
+<tr><td>Il Professore non vede la 2.3.0</td><td>Aspettate qualche minuto e riprovate; controllate in Impostazioni che l'indirizzo degli aggiornamenti sia quello del sito.</td></tr>
+<tr><td><code>cat: … Nessun file o directory</code></td><td>Non siete nella cartella giusta: <code>cd ~/Scaricati</code> e controllate i nomi con <code>ls</code>.</td></tr>
+</tbody></table>
+<div class="box"><span class="t">Riepilogo in 6 righe</span>
+<pre>cd ~/Scaricati
+cat professore-digitale-2.3.0-da-pubblicare.zip.0*.parte > professore-digitale-2.3.0-da-pubblicare.zip
+sha256sum -c SHA256SUMS --ignore-missing
+cd ~ &amp;&amp; mv professore-digitale professore-digitale-2.2.0-vecchia &amp;&amp; tar xzf ~/Scaricati/professore-digitale-2.3.0-sorgenti.tar.gz
+cd ~/professore-digitale &amp;&amp; tools/pubblica-tutto.sh ~/Scaricati/professore-digitale-2.3.0-da-pubblicare.zip --prova
+tools/pubblica-tutto.sh ~/Scaricati/professore-digitale-2.3.0-da-pubblicare.zip</pre></div>
+</div>
+
+<div class="segnaposto fine"></div>
+<section class="back">
+  <img class="prof" src="professore.svg" alt="">
+  <div class="dentro">
+    <h1>Tecnologia gentile,<br>per tutti.</h1>
+    <p>Professore Digitale 2.3.0 · Linux e Windows, da XP a Windows 11.</p>
+  </div>
+  <div class="piede"><div><b>Danilo D'Auria</b><br>Tecnico IT &amp; Divulgatore Digitale per il Sociale<br>danilodauria.site@gmail.com</div>
+  <div style="text-align:right">Software libero · Licenza MIT<br>Ottobre 2026</div></div>
+</section>
+</body>
+</html>

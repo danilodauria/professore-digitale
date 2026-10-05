@@ -1,0 +1,1823 @@
+{
+ "formato": "professore-digitale-contenuti",
+ "formato_versione": 1,
+ "id": "cultura-attualita",
+ "titolo": "Cultura generale · Attualità e cittadinanza",
+ "versione": "1.0.0",
+ "autore": "Danilo D'Auria",
+ "descrizione": "Educazione civica e grandi temi del nostro tempo spiegati in modo semplice: la Costituzione, come funziona lo Stato, l'Unione europea e l'ONU, come informarsi bene e riconoscere le notizie false, sostenibilità, clima e intelligenza artificiale. 5 lezioni, 30 risposte e il Grande Quiz di Cittadinanza e Attualità con attestato.",
+ "richiede_app": "3.0.0",
+ "suggerimenti": [
+  "Che cos'è la Costituzione italiana?",
+  "Cosa fa il Presidente della Repubblica?",
+  "Che cos'è un referendum?",
+  "Come riconosco una notizia falsa?",
+  "Che cos'è l'Agenda 2030?"
+ ],
+ "domande": [
+  {
+   "domanda": "Che cos'è la Costituzione italiana?",
+   "parole_chiave": [
+    "costituzione",
+    "carta costituzionale",
+    "legge fondamentale",
+    "costituzione italiana"
+   ],
+   "risposta": "La **Costituzione** è la **legge fondamentale** della Repubblica: tutte le altre leggi devono rispettarla. È come le **fondamenta di una casa**.\n\nÈ stata scritta dall'**Assemblea Costituente**, eletta dai cittadini nel 1946, ed è **entrata in vigore il 1° gennaio 1948**. Contiene **139 articoli**, divisi in principi fondamentali, diritti e doveri dei cittadini e organizzazione dello Stato.\n\nSe una legge la contraddice, la **Corte costituzionale** può annullarla.",
+   "lezione": "costituzione"
+  },
+  {
+   "domanda": "Perché il 2 giugno è la Festa della Repubblica?",
+   "parole_chiave": [
+    "2 giugno",
+    "festa della repubblica",
+    "referendum 1946",
+    "monarchia",
+    "repubblica"
+   ],
+   "risposta": "Il **2 giugno 1946** gli italiani votarono in un **referendum** per scegliere tra **monarchia e repubblica**: vinse la **Repubblica**.\n\nFu un giorno storico anche perché per la prima volta le **donne** votarono in un voto nazionale. Lo stesso giorno fu eletta l'**Assemblea Costituente**, che scrisse la Costituzione.\n\nPer questo il 2 giugno è la **Festa della Repubblica**, celebrata ogni anno a Roma e in tutta Italia.",
+   "schema": "flowchart LR\n  A[\"🗳️ 2 giugno 1946\"] --> B[\"🇮🇹 Vince la Repubblica\"]\n  A --> C[\"🏛️ Eletta la Costituente\"]",
+   "lezione": "costituzione"
+  },
+  {
+   "domanda": "Cosa dice l'articolo 1 della Costituzione?",
+   "parole_chiave": [
+    "articolo 1",
+    "art 1",
+    "fondata sul lavoro",
+    "sovranità",
+    "repubblica democratica"
+   ],
+   "risposta": "L'**articolo 1** dice che *«L'Italia è una Repubblica democratica, fondata sul lavoro»* e che la **sovranità appartiene al popolo**, che la esercita nelle forme e nei limiti della Costituzione.\n\nIn parole semplici: il potere viene dai **cittadini**, che lo esercitano soprattutto con il **voto**, ma sempre rispettando le regole della Costituzione. Il **lavoro** è indicato come base della convivenza e della dignità delle persone.",
+   "lezione": "costituzione"
+  },
+  {
+   "domanda": "Cosa significa che siamo tutti uguali davanti alla legge?",
+   "parole_chiave": [
+    "uguaglianza",
+    "articolo 3",
+    "art 3",
+    "pari dignità",
+    "discriminazione"
+   ],
+   "risposta": "Lo dice l'**articolo 3**: tutti i cittadini hanno **pari dignità sociale** e sono **uguali davanti alla legge**, *senza distinzione di sesso, di razza, di lingua, di religione, di opinioni politiche, di condizioni personali e sociali*.\n\nLa seconda parte dell'articolo aggiunge un compito importante: la Repubblica deve **rimuovere gli ostacoli** economici e sociali che impediscono il pieno sviluppo della persona. Non basta dire che siamo uguali: bisogna anche aiutare chi parte svantaggiato.",
+   "lezione": "costituzione"
+  },
+  {
+   "domanda": "Come si può cambiare la Costituzione?",
+   "parole_chiave": [
+    "cambiare costituzione",
+    "modificare costituzione",
+    "articolo 138",
+    "revisione costituzionale",
+    "riforma costituzionale"
+   ],
+   "risposta": "La Costituzione è **rigida**: non si cambia come una legge normale. Secondo l'**articolo 138**, ogni Camera deve approvare la modifica **due volte**, a distanza di almeno **tre mesi**.\n\nSe nella seconda votazione non si raggiungono i **due terzi** dei voti, si può chiedere un **referendum costituzionale**, che non ha quorum: decidono i cittadini che votano.\n\nSecondo l'**articolo 139**, però, la **forma repubblicana** non si può cambiare mai.",
+   "lezione": "costituzione"
+  },
+  {
+   "domanda": "Quali sono i simboli della Repubblica italiana?",
+   "parole_chiave": [
+    "bandiera",
+    "tricolore",
+    "inno",
+    "inno di mameli",
+    "simboli"
+   ],
+   "risposta": "- La **bandiera** è il **tricolore** verde, bianco e rosso, a tre bande verticali di uguali dimensioni: lo dice l'articolo 12 della Costituzione.\n- L'**inno nazionale** è il *Canto degli Italiani*, conosciuto come **Inno di Mameli**: le parole sono di **Goffredo Mameli** e la musica di **Michele Novaro**, del 1847.\n- C'è poi l'**emblema** della Repubblica, con la stella, la ruota dentata e i rami di ulivo e di quercia.\n\nLa capitale, come dice la Costituzione, è **Roma**.",
+   "lezione": "costituzione"
+  },
+  {
+   "domanda": "Cosa fa il Parlamento?",
+   "parole_chiave": [
+    "parlamento",
+    "camera dei deputati",
+    "senato",
+    "deputati",
+    "senatori",
+    "fare le leggi"
+   ],
+   "risposta": "Il **Parlamento** ha il potere di **fare le leggi**. È formato da due Camere con gli stessi poteri: la **Camera dei deputati** e il **Senato della Repubblica**.\n\nI parlamentari sono eletti dai cittadini e restano in carica **cinque anni**. Oltre ad approvare le leggi, il Parlamento concede o toglie la **fiducia** al Governo, approva il **bilancio** dello Stato e, riunito in seduta comune con i delegati delle Regioni, **elegge il Presidente della Repubblica**.",
+   "schema": "flowchart LR\n  C[\"👥 Cittadini\"] -- \"votano\" --> P[\"🏛️ Camera e Senato\"] --> L[\"📜 Leggi\"]",
+   "lezione": "stato"
+  },
+  {
+   "domanda": "Cosa fa il Governo?",
+   "parole_chiave": [
+    "governo",
+    "presidente del consiglio",
+    "ministri",
+    "consiglio dei ministri",
+    "palazzo chigi"
+   ],
+   "risposta": "Il **Governo** ha il **potere esecutivo**: guida l'amministrazione pubblica, applica le leggi e propone il bilancio.\n\nÈ formato dal **Presidente del Consiglio dei ministri** e dai **ministri**. Il Presidente della Repubblica nomina il Presidente del Consiglio e, su sua proposta, i ministri.\n\nPer restare in carica il Governo deve avere la **fiducia di entrambe le Camere**: se la perde, deve dimettersi. Ha sede a **Palazzo Chigi**, a Roma.",
+   "lezione": "stato"
+  },
+  {
+   "domanda": "Che compiti ha il Presidente della Repubblica?",
+   "parole_chiave": [
+    "presidente della repubblica",
+    "capo dello stato",
+    "quirinale",
+    "sette anni",
+    "mandato"
+   ],
+   "risposta": "Il **Presidente della Repubblica** è il **capo dello Stato** e rappresenta l'**unità nazionale**. È un garante: non governa, ma veglia sul rispetto della Costituzione.\n\nTra i suoi compiti: **promulgare le leggi** (può rinviarle una volta alle Camere), **nominare il Presidente del Consiglio**, **sciogliere le Camere**, comandare le Forze armate e presiedere il Consiglio superiore della magistratura.\n\nViene eletto dal Parlamento con i delegati delle Regioni, resta in carica **sette anni** e ha sede al **Quirinale**.",
+   "lezione": "stato"
+  },
+  {
+   "domanda": "Come nasce una legge?",
+   "parole_chiave": [
+    "legge",
+    "nasce una legge",
+    "approvare una legge",
+    "gazzetta ufficiale",
+    "promulgazione"
+   ],
+   "risposta": "1. Qualcuno **propone** la legge: il Governo, un parlamentare, un Consiglio regionale o almeno **50.000 cittadini** con le loro firme.\n2. La **Camera** e il **Senato** la discutono e la approvano nello **stesso identico testo**.\n3. Il **Presidente della Repubblica** la **promulga**, cioè la firma.\n4. Viene pubblicata nella **Gazzetta Ufficiale**.\n5. Di norma entra in vigore **15 giorni dopo** la pubblicazione, se la legge stessa non stabilisce un termine diverso.",
+   "schema": "flowchart LR\n  A[\"📝 Proposta\"] --> B[\"🏛️ Camera e Senato\"] --> C[\"✍️ Presidente\"] --> D[\"📰 Gazzetta Ufficiale\"]",
+   "lezione": "stato"
+  },
+  {
+   "domanda": "Che cos'è un decreto-legge?",
+   "parole_chiave": [
+    "decreto legge",
+    "decreto",
+    "urgenza",
+    "conversione",
+    "60 giorni"
+   ],
+   "risposta": "Il **decreto-legge** è un atto che il **Governo** può adottare solo in **casi straordinari di necessità e urgenza**. Ha subito la forza di una legge.\n\nPerò è **provvisorio**: il **Parlamento** deve **convertirlo in legge** entro **60 giorni** dalla pubblicazione. Se non lo fa, il decreto **perde efficacia fin dall'inizio**, come se non fosse mai esistito.\n\nÈ un modo per agire in fretta, lasciando comunque l'ultima parola al Parlamento.",
+   "lezione": "stato"
+  },
+  {
+   "domanda": "Cosa fa la magistratura?",
+   "parole_chiave": [
+    "magistratura",
+    "giudici",
+    "tribunale",
+    "csm",
+    "giustizia",
+    "processo"
+   ],
+   "risposta": "La **magistratura** ha il **potere giudiziario**: i giudici applicano le leggi nei casi concreti e risolvono le controversie. La giustizia è amministrata **in nome del popolo**.\n\nLa Costituzione dice che la magistratura è **autonoma e indipendente** da ogni altro potere: i giudici sono *soggetti soltanto alla legge*.\n\nIl suo organo di autogoverno è il **Consiglio superiore della magistratura** (CSM), presieduto dal Presidente della Repubblica. Di norma un processo può passare per tre gradi: **primo grado**, **appello** e **Cassazione**.",
+   "lezione": "stato"
+  },
+  {
+   "domanda": "Che cos'è la Corte costituzionale?",
+   "parole_chiave": [
+    "corte costituzionale",
+    "consulta",
+    "incostituzionale",
+    "giudici costituzionali"
+   ],
+   "risposta": "La **Corte costituzionale**, detta anche **Consulta**, è il **giudice delle leggi**: controlla che le leggi rispettino la Costituzione. Se una legge la contraddice, la Corte può dichiararla **incostituzionale** e quella norma smette di avere effetto.\n\nÈ formata da **15 giudici**: un terzo nominati dal Presidente della Repubblica, un terzo eletti dal Parlamento e un terzo dalle supreme magistrature. Restano in carica **nove anni**. Insieme al Presidente della Repubblica è uno dei **garanti** della Costituzione.",
+   "lezione": "stato"
+  },
+  {
+   "domanda": "A cosa servono le Regioni?",
+   "parole_chiave": [
+    "regioni",
+    "regione",
+    "statuto speciale",
+    "presidente della regione",
+    "consiglio regionale"
+   ],
+   "risposta": "Le **Regioni** sono **20** e hanno poteri propri: fanno leggi regionali in diverse materie e organizzano servizi importanti, prima di tutto la **sanità**.\n\nCinque Regioni hanno uno **statuto speciale**, cioè più autonomia, per ragioni storiche, geografiche o linguistiche: **Valle d'Aosta, Trentino-Alto Adige, Friuli-Venezia Giulia, Sicilia e Sardegna**.\n\nOgni Regione ha un **Consiglio regionale**, una **Giunta** e un **Presidente**, che di norma è eletto direttamente dai cittadini.",
+   "lezione": "stato"
+  },
+  {
+   "domanda": "Cosa fa il Comune?",
+   "parole_chiave": [
+    "comune",
+    "sindaco",
+    "consiglio comunale",
+    "giunta",
+    "anagrafe",
+    "municipio"
+   ],
+   "risposta": "Il **Comune** è l'ente pubblico più **vicino ai cittadini**. Si occupa, tra l'altro, di **anagrafe** e **carta d'identità**, servizi sociali, scuole dell'infanzia, strade, illuminazione, raccolta dei **rifiuti** e trasporti locali.\n\nÈ guidato dal **sindaco**, eletto **direttamente dai cittadini**, insieme alla **giunta** (gli assessori) e al **consiglio comunale**, che approva le decisioni più importanti.\n\nPer molti problemi di tutti i giorni, il primo sportello a cui rivolgersi è quello del vostro Comune.",
+   "lezione": "stato"
+  },
+  {
+   "domanda": "Come si vota alle elezioni?",
+   "parole_chiave": [
+    "votare",
+    "elezioni",
+    "seggio",
+    "tessera elettorale",
+    "scheda",
+    "voto"
+   ],
+   "risposta": "Secondo l'**articolo 48** della Costituzione votano tutti i cittadini **maggiorenni**. Il voto è **personale, eguale, libero e segreto** ed è un **dovere civico**.\n\n1. Andate al **seggio** indicato sulla vostra **tessera elettorale**.\n2. Portate un **documento d'identità** valido e la tessera.\n3. Nella cabina, da soli, segnate la scheda con la **matita** che vi danno.\n4. Piegate la scheda e riconsegnatela.\n\nSe avete perso la tessera, rivolgetevi all'**ufficio elettorale del Comune**.",
+   "lezione": "stato"
+  },
+  {
+   "domanda": "Che cos'è un referendum?",
+   "parole_chiave": [
+    "referendum",
+    "quorum",
+    "abrogativo",
+    "referendum costituzionale",
+    "consultazione"
+   ],
+   "risposta": "Il **referendum** è un voto con cui i cittadini decidono **direttamente** su una questione.\n\n- Il **referendum abrogativo** chiede se **cancellare** in tutto o in parte una legge. Può essere chiesto da **500.000 elettori** o da cinque Consigli regionali. È valido solo se vota la **maggioranza degli aventi diritto**: è il **quorum**.\n- Il **referendum costituzionale** conferma o respinge una **modifica della Costituzione** e **non ha quorum**.\n\nNon si possono sottoporre a referendum abrogativo, per esempio, le leggi tributarie e di bilancio.",
+   "lezione": "stato"
+  },
+  {
+   "domanda": "Che cos'è l'Unione europea?",
+   "parole_chiave": [
+    "unione europea",
+    "ue",
+    "europa",
+    "trattati di roma",
+    "maastricht"
+   ],
+   "risposta": "L'**Unione europea** è un'unione di Paesi europei che hanno deciso di **collaborare** e di prendere insieme molte decisioni, per garantire **pace**, benessere e diritti.\n\nLe sue radici risalgono ai **Trattati di Roma** del **1957**, firmati da sei Paesi fondatori, tra cui l'**Italia**. L'Unione europea vera e propria è nata con il **Trattato di Maastricht** del **1992**.\n\nI cittadini dei Paesi membri sono anche **cittadini europei**: possono vivere, studiare e lavorare negli altri Paesi dell'Unione.",
+   "lezione": "europa-mondo"
+  },
+  {
+   "domanda": "Quali sono le istituzioni dell'Unione europea?",
+   "parole_chiave": [
+    "istituzioni europee",
+    "parlamento europeo",
+    "commissione europea",
+    "consiglio europeo",
+    "bruxelles",
+    "strasburgo"
+   ],
+   "risposta": "- **Parlamento europeo**: eletto direttamente dai cittadini ogni cinque anni, approva le leggi e il bilancio.\n- **Consiglio europeo**: riunisce i **capi di Stato o di governo** e indica le grandi linee.\n- **Consiglio dell'Unione europea**: riunisce i **ministri** e approva le leggi insieme al Parlamento.\n- **Commissione europea**: **propone** le leggi e controlla che vengano rispettate.\n- **Corte di giustizia**: a Lussemburgo, garantisce l'applicazione uguale del diritto europeo.\n- **Banca centrale europea**: a Francoforte, gestisce l'euro.",
+   "schema": "flowchart LR\n  CO[\"📝 Commissione\"] --> PE[\"🗳️ Parlamento europeo\"]\n  CO --> CU[\"🤝 Consiglio dell'UE\"]\n  PE --> L[\"📜 Legge europea\"]\n  CU --> L",
+   "lezione": "europa-mondo"
+  },
+  {
+   "domanda": "Chi gestisce l'euro?",
+   "parole_chiave": [
+    "euro",
+    "moneta unica",
+    "bce",
+    "banca centrale europea",
+    "banconote"
+   ],
+   "risposta": "L'**euro** è la moneta comune di molti Paesi dell'Unione europea, ma non di tutti. È nato nel **1999** per i conti e i pagamenti elettronici, mentre **monete e banconote** sono in circolazione dal **1° gennaio 2002**.\n\nLo gestisce la **Banca centrale europea** (BCE), con sede a **Francoforte**, insieme alle banche centrali nazionali, come la **Banca d'Italia**. Il suo compito principale è mantenere **stabili i prezzi**, cioè tenere sotto controllo l'inflazione.",
+   "lezione": "europa-mondo"
+  },
+  {
+   "domanda": "Che cos'è l'ONU?",
+   "parole_chiave": [
+    "onu",
+    "nazioni unite",
+    "consiglio di sicurezza",
+    "new york",
+    "assemblea generale"
+   ],
+   "risposta": "L'**Organizzazione delle Nazioni Unite** (ONU) è nata nel **1945**, alla fine della Seconda guerra mondiale, per **mantenere la pace** e favorire la collaborazione tra i popoli. Ha sede a **New York**; l'Italia ne fa parte dal **1955**.\n\n- Nell'**Assemblea generale** ogni Stato membro ha un voto.\n- Il **Consiglio di sicurezza** si occupa della pace e ha **cinque membri permanenti** con diritto di veto.\n- Il **Segretario generale** guida l'organizzazione.\n\nCollegate all'ONU ci sono agenzie come **FAO**, **OMS**, **UNESCO** e **UNICEF**.",
+   "lezione": "europa-mondo"
+  },
+  {
+   "domanda": "Il Consiglio d'Europa è la stessa cosa dell'Unione europea?",
+   "parole_chiave": [
+    "consiglio d'europa",
+    "corte europea dei diritti dell'uomo",
+    "cedu",
+    "strasburgo",
+    "diritti umani"
+   ],
+   "risposta": "**No**, e la confusione è comprensibile perché i nomi si somigliano.\n\n- Il **Consiglio d'Europa** è un'organizzazione nata nel **1949**, con sede a **Strasburgo**, che si occupa di **diritti umani**, democrazia e Stato di diritto. Da esso dipende la **Corte europea dei diritti dell'uomo**.\n- Il **Consiglio europeo** e il **Consiglio dell'Unione europea** sono invece istituzioni **dell'Unione europea**.\n\nL'Italia fa parte di entrambe le organizzazioni.",
+   "lezione": "europa-mondo"
+  },
+  {
+   "domanda": "Cos'è la Dichiarazione universale dei diritti umani?",
+   "parole_chiave": [
+    "diritti umani",
+    "dichiarazione universale",
+    "10 dicembre",
+    "1948",
+    "diritti dell'uomo"
+   ],
+   "risposta": "È un documento approvato dall'**Assemblea generale dell'ONU** a Parigi il **10 dicembre 1948**, dopo gli orrori della Seconda guerra mondiale.\n\nIl suo primo articolo dice che tutti gli esseri umani nascono **liberi ed eguali in dignità e diritti**. Elenca diritti come la vita, la libertà, l'istruzione, il lavoro, la libertà di pensiero e di religione.\n\nOgni anno il **10 dicembre** si celebra la **Giornata dei diritti umani**.",
+   "lezione": "europa-mondo"
+  },
+  {
+   "domanda": "Come riconosco una notizia falsa?",
+   "parole_chiave": [
+    "notizia falsa",
+    "fake news",
+    "bufala",
+    "disinformazione",
+    "verificare notizie",
+    "fonti"
+   ],
+   "risposta": "Prima di credere e di **inoltrare** una notizia, fatevi qualche domanda:\n\n1. **Chi lo dice?** C'è una fonte riconoscibile e un autore?\n2. **Quando?** Controllate la data: potrebbe essere vecchia.\n3. **Ne parlano altre fonti serie?** Se è importante e vera, sì.\n4. **Mi fa arrabbiare o paura?** Le emozioni forti sono un'esca tipica.\n5. **Mi chiede di cliccare, pagare o condividere a tutti?** Attenzione.\n\nNel dubbio, **non condividete**.",
+   "schema": "flowchart TD\n  A[\"📩 Notizia\"] --> B{\"Fonte e data chiare?\"}\n  B -- \"No\" --> C[\"✋ Non la inoltro\"]\n  B -- \"Sì\" --> D[\"🔎 Controllo altre fonti\"]",
+   "lezione": "informarsi"
+  },
+  {
+   "domanda": "Che cos'è un deepfake?",
+   "parole_chiave": [
+    "deepfake",
+    "video falso",
+    "voce clonata",
+    "foto falsa",
+    "intelligenza artificiale video"
+   ],
+   "risposta": "Un **deepfake** è una **foto, un video o una voce** creati o modificati con l'**intelligenza artificiale** per far sembrare che una persona abbia detto o fatto cose che non ha mai detto o fatto.\n\nCome difendersi:\n\n- cercate **dettagli strani**: occhi, mani, labbra non sincronizzate;\n- controllate se la notizia è presente su **fonti ufficiali**;\n- se al telefono una voce che sembra di un parente vi chiede soldi, **riattaccate e richiamatelo** al numero che conoscete.",
+   "lezione": "informarsi"
+  },
+  {
+   "domanda": "Come controllo se una foto è vera?",
+   "parole_chiave": [
+    "foto vera",
+    "foto falsa",
+    "ricerca per immagini",
+    "immagine",
+    "verificare foto"
+   ],
+   "risposta": "Molte foto che girano sui social sono **vere ma vecchie**, oppure scattate in un altro luogo.\n\n1. Usate la **ricerca per immagini** dei motori di ricerca: caricate la foto e vedrete dove e quando è già apparsa.\n2. Leggete la **didascalia** e chiedetevi se corrisponde davvero.\n3. Cercate la stessa notizia su **giornali affidabili** o su siti di **verifica dei fatti** (*fact-checking*).\n4. Guardate i dettagli: scritte, cartelli, stagione, vestiti.\n\nSe non riuscite a verificarla, non condividetela.",
+   "lezione": "informarsi"
+  },
+  {
+   "domanda": "Ho visto un articolo con un personaggio famoso che consiglia un investimento: è vero?",
+   "parole_chiave": [
+    "investimento",
+    "vip",
+    "personaggio famoso",
+    "criptovalute",
+    "guadagno facile",
+    "trading"
+   ],
+   "risposta": "Quasi certamente è una **truffa**. Sono **finti articoli** che imitano i giornali veri e usano senza permesso foto e nomi di persone famose per promettere **guadagni facili**.\n\n- **Non lasciate** i vostri dati né il numero di telefono.\n- **Non versate** soldi e non installate programmi.\n- Se vi chiamano dopo, **riattaccate**.\n\nIn Italia chi offre investimenti deve essere **autorizzato**: vigilano la **Consob** e la **Banca d'Italia**. Prima di qualsiasi investimento parlatene con la vostra banca o con una persona di fiducia.",
+   "lezione": "informarsi"
+  },
+  {
+   "domanda": "Che cos'è l'Agenda 2030?",
+   "parole_chiave": [
+    "agenda 2030",
+    "obiettivi sviluppo sostenibile",
+    "sostenibilità",
+    "17 obiettivi",
+    "onu"
+   ],
+   "risposta": "L'**Agenda 2030 per lo sviluppo sostenibile** è un programma adottato dagli Stati membri dell'**ONU** nel **settembre 2015**.\n\nContiene **17 Obiettivi** da raggiungere entro il 2030, che riguardano **tutti i Paesi**. Tra questi: sconfiggere **povertà e fame**, garantire **salute** e **istruzione di qualità**, la **parità di genere**, **acqua pulita** ed **energia pulita**, città sostenibili, la **lotta al cambiamento climatico** e la **pace**.\n\nL'idea è che ambiente, società ed economia vadano migliorati **insieme**.",
+   "lezione": "sostenibilita"
+  },
+  {
+   "domanda": "Che cos'è il cambiamento climatico?",
+   "parole_chiave": [
+    "cambiamento climatico",
+    "riscaldamento globale",
+    "effetto serra",
+    "clima",
+    "anidride carbonica",
+    "accordo di parigi"
+   ],
+   "risposta": "Il **cambiamento climatico** è il riscaldamento della Terra e le modifiche del clima che ne derivano. Il **consenso scientifico**, espresso dall'**IPCC** dell'ONU, è chiaro: la causa principale sono le **attività umane**, soprattutto bruciare **carbone, petrolio e gas**, che aumenta i **gas serra** come l'anidride carbonica.\n\nLe conseguenze includono **ondate di calore**, ghiacciai che si ritirano, mari che si alzano ed eventi estremi.\n\nCon l'**Accordo di Parigi** del **2015** i Paesi si sono impegnati a mantenere il riscaldamento **ben al di sotto di 2 °C**.",
+   "schema": "flowchart LR\n  A[\"🏭 Combustibili fossili\"] --> B[\"☁️ Gas serra\"] --> C[\"🌡️ Riscaldamento\"]",
+   "lezione": "sostenibilita"
+  },
+  {
+   "domanda": "Come cambierà la società con l'intelligenza artificiale?",
+   "parole_chiave": [
+    "intelligenza artificiale società",
+    "ia lavoro",
+    "regole ia",
+    "regolamento ia",
+    "ai act",
+    "futuro"
+   ],
+   "risposta": "L'**intelligenza artificiale** porta **opportunità**: aiuta i medici ad analizzare gli esami, traduce testi, legge ad alta voce per chi vede poco.\n\nPorta anche **rischi**: errori detti con sicurezza, **deepfake**, uso scorretto dei **dati personali**, cambiamenti nel **lavoro**.\n\nPer questo l'**Unione europea** ha approvato nel **2024** un **regolamento sull'intelligenza artificiale** basato sul **livello di rischio**: vieta alcuni usi, regola severamente quelli più delicati e chiede trasparenza. Le decisioni importanti devono restare alle **persone**.",
+   "lezione": "sostenibilita"
+  }
+ ],
+ "lezioni": [
+  {
+   "id": "costituzione",
+   "icona": "📜",
+   "titolo": "La Costituzione italiana e i suoi principi",
+   "livello": "Attualità",
+   "minuti": 20,
+   "obiettivo": "Sapere come è nata la Costituzione, com'è organizzata e quali sono i principi fondamentali su cui si regge la Repubblica.",
+   "palestra": "",
+   "passi": [
+    {
+     "titolo": "Dal referendum alla Costituzione",
+     "testo": "Il **2 giugno 1946** gli italiani furono chiamati a scegliere tra **monarchia e repubblica**: vinse la **Repubblica**. Per la prima volta le **donne** votarono in un voto nazionale.\n\nLo stesso giorno fu eletta l'**Assemblea Costituente**, che aveva il compito di scrivere la nuova legge fondamentale. Ne fecero parte anche 21 donne.\n\nLa **Costituzione** fu approvata il **22 dicembre 1947** ed **entrò in vigore il 1° gennaio 1948**. Da allora il 2 giugno è la **Festa della Repubblica**.",
+     "schema": "flowchart LR\n  A[\"🗳️ 2 giugno 1946: referendum\"] --> B[\"🏛️ Assemblea Costituente\"] --> C[\"📜 Approvata a dicembre 1947\"] --> D[\"✅ In vigore dal 1° gennaio 1948\"]",
+     "consiglio": "Il 2 giugno si festeggia la nascita della Repubblica, non della Costituzione: sono due date diverse."
+    },
+    {
+     "titolo": "Com'è fatta la Costituzione",
+     "testo": "La Costituzione è la **legge più importante** dello Stato: tutte le altre leggi devono rispettarla. È come le **fondamenta di una casa**: non si vedono ogni giorno, ma reggono tutto.\n\nÈ composta da **139 articoli**, più alcune disposizioni transitorie e finali, ed è divisa così:\n\n- **Principi fondamentali** (articoli 1-12);\n- **Parte prima**: diritti e doveri dei cittadini;\n- **Parte seconda**: come è organizzata la Repubblica (Parlamento, Governo, Presidente, magistratura, Regioni e Comuni).\n\nSe una legge la contraddice, la **Corte costituzionale** può annullarla.",
+     "schema": "flowchart TD\n  C[\"📜 Costituzione\"] --> P[\"⭐ Principi fondamentali\"]\n  C --> D[\"🤝 Diritti e doveri\"]\n  C --> O[\"🏛️ Organizzazione dello Stato\"]"
+    },
+    {
+     "titolo": "I principi fondamentali",
+     "testo": "I primi dodici articoli sono il **cuore** della Costituzione. Eccone alcuni:\n\n- **Art. 1**: l'Italia è una Repubblica **democratica, fondata sul lavoro**; la sovranità appartiene al **popolo**.\n- **Art. 2**: la Repubblica riconosce i **diritti inviolabili** della persona e chiede a tutti **solidarietà**.\n- **Art. 3**: tutti i cittadini hanno **pari dignità** e sono **uguali davanti alla legge**, *senza distinzione di sesso, di razza, di lingua, di religione, di opinioni politiche, di condizioni personali e sociali*.\n- **Art. 9**: la Repubblica promuove la cultura e la ricerca e tutela il **paesaggio**, il patrimonio storico e artistico e l'**ambiente**.\n- **Art. 11**: l'Italia **ripudia la guerra** come strumento di offesa.\n- **Art. 12**: la bandiera è il **tricolore** verde, bianco e rosso."
+    },
+    {
+     "titolo": "Diritti e doveri",
+     "testo": "La Costituzione protegge le nostre **libertà**, tra cui:\n\n- la **libertà personale** e l'inviolabilità del domicilio;\n- la **segretezza della corrispondenza**, cioè delle lettere e di ogni altra comunicazione;\n- la libertà di **riunione**, di **associazione** e di **religione**;\n- la libertà di **pensiero e di stampa** (art. 21);\n- il diritto alla **salute** (art. 32) e all'**istruzione** (art. 34).\n\nAccanto ai diritti ci sono i **doveri**: votare è un **dovere civico** (art. 48), tutti contribuiscono alle spese pubbliche secondo le proprie possibilità (art. 53), tutti devono essere fedeli alla Repubblica e rispettare Costituzione e leggi (art. 54).",
+     "consiglio": "Diritti e doveri sono come le due facce di una moneta: vanno sempre insieme."
+    },
+    {
+     "titolo": "Una Costituzione che si può aggiornare, con prudenza",
+     "testo": "La nostra Costituzione è **rigida**: non si cambia come una legge qualsiasi. Secondo l'**articolo 138** ogni Camera deve approvare la modifica **due volte**, a distanza di almeno tre mesi, e a certe condizioni i cittadini possono chiedere un **referendum** per confermarla o respingerla.\n\nUna cosa però **non si può cambiare mai**: secondo l'**articolo 139** la **forma repubblicana** non può essere oggetto di revisione.\n\nNel tempo alcune parti sono state aggiornate. Per esempio, nel **2022** la tutela dell'**ambiente**, della biodiversità e degli ecosistemi, *anche nell'interesse delle future generazioni*, è stata inserita nell'articolo 9.",
+     "schema": "flowchart LR\n  A[\"📝 Proposta di modifica\"] --> B[\"🏛️ Doppia approvazione delle Camere\"] --> C{\"🗳️ Referendum se richiesto\"} --> D[\"📜 Costituzione aggiornata\"]",
+     "consiglio": "La Costituzione è breve e scritta in un italiano chiaro: si trova gratis in biblioteca e sui siti delle istituzioni. Vale la pena leggerla!"
+    }
+   ],
+   "quiz": [
+    {
+     "domanda": "In quale giorno la Costituzione è entrata in vigore?",
+     "opzioni": [
+      "Il 1° gennaio 1948",
+      "Il 25 aprile 1945",
+      "Il 2 giugno 1946"
+     ],
+     "corretta": 0,
+     "spiegazione": "La Costituzione fu approvata a fine 1947 ed entrò in vigore il 1° gennaio 1948."
+    },
+    {
+     "domanda": "Che cosa decisero gli italiani con il referendum del 2 giugno 1946?",
+     "opzioni": [
+      "L'adozione della lira al posto dell'euro",
+      "La scelta tra monarchia e repubblica",
+      "L'ingresso dell'Italia nell'Unione europea"
+     ],
+     "corretta": 1,
+     "spiegazione": "Con quel referendum vinse la Repubblica; lo stesso giorno fu eletta l'Assemblea Costituente."
+    },
+    {
+     "domanda": "Secondo l'articolo 1, a chi appartiene la sovranità?",
+     "opzioni": [
+      "Al Presidente della Repubblica",
+      "Al Governo",
+      "Al popolo"
+     ],
+     "corretta": 2,
+     "spiegazione": "L'art. 1 dice che la sovranità appartiene al popolo, che la esercita nelle forme e nei limiti della Costituzione."
+    },
+    {
+     "domanda": "Che cosa non si può modificare nemmeno con una revisione della Costituzione?",
+     "opzioni": [
+      "Il numero delle Regioni",
+      "Il nome dei ministeri",
+      "La forma repubblicana"
+     ],
+     "corretta": 2,
+     "spiegazione": "L'articolo 139 stabilisce che la forma repubblicana non può essere oggetto di revisione costituzionale."
+    },
+    {
+     "domanda": "Quale articolo dice che tutti i cittadini sono uguali davanti alla legge?",
+     "opzioni": [
+      "L'articolo 139",
+      "L'articolo 3",
+      "L'articolo 12"
+     ],
+     "corretta": 1,
+     "spiegazione": "L'articolo 3 afferma la pari dignità sociale e l'uguaglianza di tutti davanti alla legge."
+    }
+   ]
+  },
+  {
+   "id": "stato",
+   "icona": "🏛️",
+   "titolo": "Come funziona lo Stato",
+   "livello": "Attualità",
+   "minuti": 25,
+   "obiettivo": "Conoscere i tre poteri dello Stato, il ruolo di Parlamento, Governo, Presidente della Repubblica e magistratura, il compito di Regioni e Comuni e come si partecipa con il voto.",
+   "palestra": "",
+   "passi": [
+    {
+     "titolo": "Tre poteri, separati e in equilibrio",
+     "testo": "Per evitare che qualcuno abbia troppo potere, le democrazie lo **dividono in tre**, un'idea resa celebre dal filosofo francese **Montesquieu**:\n\n- il potere **legislativo** (fare le leggi) spetta al **Parlamento**;\n- il potere **esecutivo** (governare e applicare le leggi) spetta al **Governo**;\n- il potere **giudiziario** (giudicare chi non rispetta le leggi) spetta alla **magistratura**.\n\nSopra le parti vegliano due **garanti**: il **Presidente della Repubblica** e la **Corte costituzionale**.",
+     "schema": "flowchart TD\n  C[\"📜 Costituzione\"] --> P[\"🏛️ Parlamento: fa le leggi\"]\n  C --> G[\"🧭 Governo: governa\"]\n  C --> M[\"⚖️ Magistratura: giudica\"]",
+     "consiglio": "È come una squadra in cui ognuno ha il suo ruolo e controlla gli altri: nessuno decide da solo."
+    },
+    {
+     "titolo": "Il Parlamento",
+     "testo": "Il Parlamento italiano ha **due Camere** con gli stessi poteri: la **Camera dei deputati**, a Palazzo Montecitorio, e il **Senato della Repubblica**, a Palazzo Madama, entrambe a Roma.\n\nI parlamentari sono **eletti dai cittadini** e restano in carica **cinque anni** (una *legislatura*).\n\nIl Parlamento:\n\n- **approva le leggi**: ogni legge deve essere votata nello **stesso testo** da entrambe le Camere;\n- concede o toglie la **fiducia** al Governo;\n- approva ogni anno il **bilancio** dello Stato.\n\nDopo l'approvazione, il Presidente della Repubblica **promulga** la legge, che viene pubblicata nella **Gazzetta Ufficiale**.",
+     "schema": "flowchart LR\n  A[\"📝 Proposta di legge\"] --> B[\"🏛️ Camera\"] --> C[\"🏛️ Senato\"] --> D[\"✍️ Promulgazione\"] --> E[\"📰 Gazzetta Ufficiale\"]"
+    },
+    {
+     "titolo": "Il Governo",
+     "testo": "Il **Governo** è formato dal **Presidente del Consiglio dei ministri** e dai **ministri**: insieme formano il **Consiglio dei ministri**. Ha sede a **Palazzo Chigi**.\n\nIl Presidente della Repubblica nomina il Presidente del Consiglio e, su sua proposta, i ministri. Per governare, il Governo deve avere la **fiducia di entrambe le Camere**.\n\nIl Governo guida l'amministrazione pubblica, applica le leggi e propone il bilancio. In **casi straordinari di necessità e urgenza** può adottare un **decreto-legge**, che vale subito ma deve essere **convertito in legge** dal Parlamento entro **60 giorni**, altrimenti perde efficacia fin dall'inizio.",
+     "consiglio": "Il Governo agisce, il Parlamento controlla: se viene meno la fiducia, il Governo deve dimettersi."
+    },
+    {
+     "titolo": "Il Presidente della Repubblica e la magistratura",
+     "testo": "Il **Presidente della Repubblica** è il **capo dello Stato** e rappresenta l'**unità nazionale**. Lo eleggono i parlamentari riuniti in seduta comune insieme ai **delegati delle Regioni**; resta in carica **sette anni** e deve avere almeno **50 anni**. Ha sede al **Quirinale**.\n\nTra i suoi compiti: promulgare le leggi (può rinviarle una volta alle Camere), nominare il Presidente del Consiglio, sciogliere le Camere, comandare le Forze armate.\n\nLa **magistratura** è **autonoma e indipendente** da ogni altro potere: i giudici sono *soggetti soltanto alla legge*. Il suo organo di autogoverno è il **Consiglio superiore della magistratura**, presieduto dal Presidente della Repubblica."
+    },
+    {
+     "titolo": "Regioni e Comuni",
+     "testo": "La Repubblica non è solo Roma: secondo la Costituzione è formata da **Comuni, Province, Città metropolitane, Regioni e Stato**.\n\n- Le **Regioni** sono **20**. Cinque hanno uno **statuto speciale**, cioè più autonomia: Valle d'Aosta, Trentino-Alto Adige, Friuli-Venezia Giulia, Sicilia e Sardegna. Le Regioni si occupano, tra l'altro, dell'organizzazione della **sanità**.\n- Il **Comune** è l'ente più vicino a noi: anagrafe, carta d'identità, scuole dell'infanzia, strade, rifiuti. È guidato dal **sindaco**, eletto direttamente dai cittadini, con la **giunta** e il **consiglio comunale**.",
+     "schema": "flowchart TD\n  S[\"🇮🇹 Stato\"] --> R[\"🗺️ Regioni\"] --> C[\"🏘️ Comuni\"]",
+     "consiglio": "Per molti servizi quotidiani il primo sportello a cui rivolgersi è quello del vostro Comune."
+    },
+    {
+     "titolo": "Votare: elezioni e referendum",
+     "testo": "Secondo l'articolo 48, sono elettori tutti i cittadini **maggiorenni**. Il voto è **personale, eguale, libero e segreto** ed è un **dovere civico**. Al seggio si va con un **documento d'identità** e la **tessera elettorale**.\n\nSi vota per il Parlamento, per il Parlamento europeo, per la Regione e per il Comune. Esistono poi i **referendum**:\n\n- **abrogativo**: chiede ai cittadini se cancellare una legge; è valido solo se vota la **maggioranza degli aventi diritto** (il *quorum*);\n- **costituzionale**: conferma o respinge una modifica della Costituzione e **non ha quorum**.\n\nI cittadini possono anche proporre una legge raccogliendo almeno **50.000 firme**.",
+     "consiglio": "Se il giorno del voto vi accorgete di aver perso la tessera elettorale, rivolgetevi all'ufficio elettorale del vostro Comune."
+    }
+   ],
+   "quiz": [
+    {
+     "domanda": "Quale organo ha il compito di approvare le leggi?",
+     "opzioni": [
+      "Il Parlamento",
+      "Il Comune",
+      "La magistratura"
+     ],
+     "corretta": 0,
+     "spiegazione": "Il potere legislativo spetta al Parlamento, formato da Camera dei deputati e Senato."
+    },
+    {
+     "domanda": "Entro quanto tempo un decreto-legge deve essere convertito in legge dal Parlamento?",
+     "opzioni": [
+      "Una settimana",
+      "Un anno",
+      "60 giorni"
+     ],
+     "corretta": 2,
+     "spiegazione": "Se non è convertito entro 60 giorni dalla pubblicazione, il decreto-legge perde efficacia fin dall'inizio."
+    },
+    {
+     "domanda": "Per quanti anni resta in carica il Presidente della Repubblica?",
+     "opzioni": [
+      "Sette anni",
+      "Cinque anni",
+      "Dieci anni"
+     ],
+     "corretta": 0,
+     "spiegazione": "Il mandato del Presidente della Repubblica dura sette anni."
+    },
+    {
+     "domanda": "Quale di queste Regioni ha uno statuto speciale?",
+     "opzioni": [
+      "Il Lazio",
+      "La Sardegna",
+      "La Toscana"
+     ],
+     "corretta": 1,
+     "spiegazione": "Le Regioni a statuto speciale sono Valle d'Aosta, Trentino-Alto Adige, Friuli-Venezia Giulia, Sicilia e Sardegna."
+    },
+    {
+     "domanda": "Quando è valido un referendum abrogativo?",
+     "opzioni": [
+      "Sempre, qualunque sia il numero dei votanti",
+      "Se vota la maggioranza degli aventi diritto",
+      "Solo se lo approva il Governo"
+     ],
+     "corretta": 1,
+     "spiegazione": "Il referendum abrogativo ha un quorum: deve votare più della metà degli aventi diritto."
+    }
+   ]
+  },
+  {
+   "id": "europa-mondo",
+   "icona": "🇪🇺",
+   "titolo": "L'Unione europea e le organizzazioni internazionali",
+   "livello": "Attualità",
+   "minuti": 25,
+   "obiettivo": "Capire come è nata l'Unione europea, come funzionano le sue istituzioni e l'euro, e a cosa servono l'ONU e le altre organizzazioni internazionali.",
+   "palestra": "",
+   "passi": [
+    {
+     "titolo": "Dalla guerra alla pace: nasce l'Europa unita",
+     "testo": "Dopo la **Seconda guerra mondiale** alcuni europei pensarono che, per non combattersi più, i Paesi dovessero **unire i propri interessi**. Già nel 1941, al confino sull'isola di Ventotene, **Altiero Spinelli** ed **Ernesto Rossi** avevano scritto il *Manifesto di Ventotene* per un'Europa libera e unita.\n\n- **9 maggio 1950**: la **Dichiarazione Schuman** propone di mettere in comune carbone e acciaio. Oggi il 9 maggio è la **Festa dell'Europa**.\n- **1951**: nasce la **CECA**, la Comunità europea del carbone e dell'acciaio.\n- **25 marzo 1957**: con i **Trattati di Roma** nasce la **Comunità economica europea**. I sei fondatori sono Belgio, Francia, Germania, Italia, Lussemburgo e Paesi Bassi.\n- **1992**: con il **Trattato di Maastricht** nasce l'**Unione europea**.",
+     "schema": "flowchart LR\n  A[\"🕊️ 1950 Dichiarazione Schuman\"] --> B[\"⚒️ 1951 CECA\"] --> C[\"🇮🇹 1957 Trattati di Roma\"] --> D[\"🇪🇺 1992 Maastricht\"]"
+    },
+    {
+     "titolo": "Le istituzioni dell'Unione",
+     "testo": "L'Unione europea funziona grazie a diverse istituzioni:\n\n- il **Parlamento europeo**, eletto **direttamente dai cittadini** ogni cinque anni (dal 1979), che approva le leggi europee e il bilancio; si riunisce a **Strasburgo** e a Bruxelles;\n- il **Consiglio europeo**, dove si incontrano i **capi di Stato o di governo** per decidere le grandi linee;\n- il **Consiglio dell'Unione europea**, formato dai **ministri** dei governi, che approva le leggi insieme al Parlamento;\n- la **Commissione europea**, con sede a **Bruxelles**, che **propone le leggi** e controlla che siano rispettate;\n- la **Corte di giustizia**, a **Lussemburgo**, che garantisce che il diritto europeo sia applicato in modo uguale ovunque.",
+     "schema": "flowchart LR\n  CO[\"📝 Commissione: propone\"] --> PE[\"🗳️ Parlamento europeo\"]\n  CO --> CU[\"🤝 Consiglio dell'UE\"]\n  PE --> L[\"📜 Legge europea\"]\n  CU --> L",
+     "consiglio": "Non confondete Consiglio europeo e Consiglio dell'Unione europea: il primo riunisce i capi di Stato o di governo, il secondo i ministri."
+    },
+    {
+     "titolo": "L'euro e i cittadini europei",
+     "testo": "L'**euro** è la moneta comune di molti Paesi dell'Unione, ma **non di tutti**. È nato nel **1999** per i conti e i pagamenti elettronici; le **monete e le banconote** sono arrivate nelle nostre tasche il **1° gennaio 2002**. Lo gestisce la **Banca centrale europea**, con sede a **Francoforte**, che ha il compito principale di mantenere **stabili i prezzi**.\n\nOgni cittadino italiano è anche **cittadino europeo**. Questo significa, tra l'altro, poter **circolare, vivere, studiare e lavorare** negli altri Paesi dell'Unione e votare alle elezioni europee e comunali nel Paese in cui si risiede.\n\nI simboli dell'Unione sono la **bandiera blu con 12 stelle** dorate, l'**Inno alla gioia** di Beethoven e il motto **«Unita nella diversità»**.",
+     "consiglio": "Le 12 stelle della bandiera non indicano il numero dei Paesi: sono un simbolo di unità e completezza e restano sempre 12."
+    },
+    {
+     "titolo": "L'Organizzazione delle Nazioni Unite",
+     "testo": "L'**ONU** è nata nel **1945**, alla fine della Seconda guerra mondiale, per **mantenere la pace** e la sicurezza e favorire la collaborazione tra i popoli. Ha sede a **New York**. L'Italia ne fa parte dal **1955**.\n\n- Nell'**Assemblea generale** siedono tutti gli Stati membri, ognuno con **un voto**.\n- Il **Consiglio di sicurezza** si occupa della pace: ha **cinque membri permanenti** con diritto di **veto** (Stati Uniti, Russia, Cina, Francia e Regno Unito).\n- Il **Segretario generale** guida l'organizzazione.\n\nIl **10 dicembre 1948** l'Assemblea generale ha approvato la **Dichiarazione universale dei diritti umani**.",
+     "schema": "flowchart TD\n  O[\"🌐 ONU\"] --> A[\"🗣️ Assemblea generale\"]\n  O --> C[\"🛡️ Consiglio di sicurezza\"]\n  O --> S[\"👤 Segretario generale\"]"
+    },
+    {
+     "titolo": "Agenzie e altre organizzazioni",
+     "testo": "Intorno all'ONU lavorano molte **agenzie specializzate**:\n\n- **FAO**: alimentazione e agricoltura, con sede a **Roma**;\n- **OMS**: salute, con sede a **Ginevra**;\n- **UNESCO**: educazione, scienza e cultura; tiene la lista del **Patrimonio dell'umanità**;\n- **UNICEF**: protezione dell'**infanzia**.\n\nAltre organizzazioni importanti:\n\n- la **NATO**, alleanza **difensiva** nata nel **1949**, di cui l'Italia è tra i fondatori;\n- il **Consiglio d'Europa**, con sede a **Strasburgo**, che **non è** un'istituzione dell'Unione europea: si occupa di diritti umani e democrazia, e da esso dipende la **Corte europea dei diritti dell'uomo**.",
+     "consiglio": "Tre nomi che si somigliano: Consiglio europeo e Consiglio dell'UE fanno parte dell'Unione europea; il Consiglio d'Europa è un'organizzazione diversa."
+    }
+   ],
+   "quiz": [
+    {
+     "domanda": "Con quale trattato è nata l'Unione europea?",
+     "opzioni": [
+      "Il Trattato di Maastricht",
+      "I Patti Lateranensi",
+      "Il Trattato di Versailles"
+     ],
+     "corretta": 0,
+     "spiegazione": "Il Trattato di Maastricht del 1992 ha dato vita all'Unione europea."
+    },
+    {
+     "domanda": "Quale istituzione europea propone le nuove leggi?",
+     "opzioni": [
+      "La Banca centrale europea",
+      "La Corte di giustizia",
+      "La Commissione europea"
+     ],
+     "corretta": 2,
+     "spiegazione": "La Commissione propone le leggi, che poi vengono approvate da Parlamento e Consiglio dell'UE."
+    },
+    {
+     "domanda": "Da quando monete e banconote in euro sono usate in Italia?",
+     "opzioni": [
+      "Dal 1° gennaio 1948",
+      "Dal 1° gennaio 2002",
+      "Dal 9 maggio 1950"
+     ],
+     "corretta": 1,
+     "spiegazione": "L'euro esisteva dal 1999 per i conti; monete e banconote sono arrivate il 1° gennaio 2002."
+    },
+    {
+     "domanda": "Dove ha sede l'ONU?",
+     "opzioni": [
+      "A Roma",
+      "A Bruxelles",
+      "A New York"
+     ],
+     "corretta": 2,
+     "spiegazione": "La sede principale delle Nazioni Unite è a New York; a Roma ha sede invece la FAO."
+    },
+    {
+     "domanda": "Il Consiglio d'Europa fa parte dell'Unione europea?",
+     "opzioni": [
+      "No, è un'organizzazione diversa",
+      "Sì, è il governo dell'Unione",
+      "Sì, è la banca dell'euro"
+     ],
+     "corretta": 0,
+     "spiegazione": "Il Consiglio d'Europa, con sede a Strasburgo, è distinto dall'Unione europea; da esso dipende la Corte europea dei diritti dell'uomo."
+    }
+   ]
+  },
+  {
+   "id": "informarsi",
+   "icona": "📰",
+   "titolo": "Informarsi bene e riconoscere le notizie false",
+   "livello": "Attualità",
+   "minuti": 20,
+   "obiettivo": "Scegliere fonti affidabili, riconoscere notizie false, foto manipolate e truffe travestite da notizia, e verificare prima di condividere.",
+   "palestra": "",
+   "passi": [
+    {
+     "titolo": "Le fonti dell'informazione",
+     "testo": "Oggi le notizie arrivano da tante parti: **giornali**, **televisione**, **radio**, **siti** e **social network**, ma anche dai messaggi che ci inoltrano amici e parenti.\n\nNon tutte le fonti sono uguali:\n\n- nel **giornalismo professionale** gli articoli hanno una **firma**, le notizie dovrebbero essere verificate e gli errori possono essere **corretti** con una rettifica;\n- sui **social** chiunque può pubblicare qualsiasi cosa, e nessuno controlla prima.\n\nLa Costituzione, all'**articolo 21**, protegge la **libertà di stampa**. Proprio per questo è utile **confrontare più fonti** diverse, invece di fidarsi di una sola.",
+     "schema": "flowchart LR\n  N[\"📣 Notizia\"] --> F1[\"📰 Giornale\"]\n  N --> F2[\"📺 TV e radio\"]\n  N --> F3[\"📱 Social e messaggi\"]",
+     "consiglio": "Un'abitudine sana: leggere la stessa notizia su almeno due fonti diverse e affidabili."
+    },
+    {
+     "titolo": "Che cosa sono le notizie false",
+     "testo": "Le **notizie false** (in inglese *fake news*) possono avere forme diverse:\n\n- notizie **inventate** di sana pianta;\n- notizie **vere ma vecchie**, fatte girare come se fossero di oggi;\n- **foto vere** usate per raccontare un fatto diverso;\n- **titoli acchiappa-clic**, che esagerano per farci aprire l'articolo;\n- pezzi di **satira** scambiati per notizie vere.\n\nChi le diffonde può volere **guadagnare** con i clic e la pubblicità, **convincere** le persone di qualcosa, oppure **truffarle**. Spesso puntano sulle **emozioni forti**: paura, rabbia, indignazione."
+    },
+    {
+     "titolo": "Le domande da farsi prima di credere e condividere",
+     "testo": "Prima di credere a una notizia, e soprattutto prima di **inoltrarla**, fermatevi e chiedetevi:\n\n1. **Chi lo dice?** C'è un giornale, un autore, un ente riconoscibile?\n2. **Quando?** Controllate la **data**: forse è una notizia di anni fa.\n3. **Dove altro lo trovo?** Se è vera e importante, ne parlano anche altre fonti serie.\n4. **Che effetto mi fa?** Se suscita molta rabbia o paura, è un motivo in più per controllare.\n5. **Cosa mi chiede?** Se chiede di cliccare, pagare o inoltrare *a tutti*, attenzione.",
+     "schema": "flowchart TD\n  A[\"📩 Ricevo una notizia\"] --> B{\"Fonte e data chiare?\"}\n  B -- \"Sì\" --> C[\"🔎 La trovo su altre fonti serie?\"]\n  B -- \"No\" --> D[\"✋ Non la inoltro\"]\n  C -- \"Sì\" --> E[\"✅ Posso fidarmi di più\"]",
+     "consiglio": "Nel dubbio, non condividete: una notizia falsa inoltrata da voi sembra più credibile ai vostri amici."
+    },
+    {
+     "titolo": "Foto, video e voci falsi",
+     "testo": "Con l'intelligenza artificiale oggi si possono creare **foto, video e voci** molto realistici di persone che non hanno mai detto o fatto quelle cose: si chiamano **deepfake**.\n\nAlcuni consigli:\n\n- guardate i **dettagli strani**: mani, occhi, scritte, ombre, labbra non sincronizzate;\n- usate la **ricerca per immagini** dei motori di ricerca: caricando la foto, vedrete dove è già apparsa, magari anni prima;\n- controllate se la notizia compare sui **siti ufficiali** o su siti di **verifica dei fatti** (*fact-checking*);\n- se una voce al telefono che sembra di un parente chiede soldi, **richiamatelo** al numero che conoscete."
+    },
+    {
+     "titolo": "Le truffe travestite da notizia",
+     "testo": "Molte truffe si presentano come **articoli di giornale**. I casi più comuni:\n\n- finti articoli in cui un **personaggio famoso** \"rivela\" un investimento che rende moltissimo;\n- **cure miracolose** che i medici \"non vogliono farvi conoscere\";\n- finti **bonus o rimborsi** dello Stato da richiedere tramite un link;\n- catene che dicono **\"condividi prima che lo cancellino\"**.\n\nRegola d'oro: per **soldi, salute e leggi** informatevi solo da **fonti ufficiali** e chiedete a un **professionista** o a una persona di fiducia. Per gli investimenti, in Italia vigilano la **Consob** e la **Banca d'Italia**: chi vende investimenti deve essere autorizzato.",
+     "consiglio": "Nessun personaggio famoso vi regalerà ricchezze con un investimento \"segreto\": è sempre una truffa."
+    }
+   ],
+   "quiz": [
+    {
+     "domanda": "Una notizia vi fa molta rabbia e invita a inoltrarla a tutti. Cosa conviene fare?",
+     "opzioni": [
+      "Inoltrarla subito a tutti i contatti della rubrica",
+      "Crederci, perché l'ha mandata un amico fidato",
+      "Controllare fonte e data prima di condividerla"
+     ],
+     "corretta": 2,
+     "spiegazione": "Le emozioni forti e la spinta a condividere sono tipiche delle notizie false: prima si verifica."
+    },
+    {
+     "domanda": "Che cos'è un deepfake?",
+     "opzioni": [
+      "Un video, una foto o una voce falsi creati con l'intelligenza artificiale",
+      "Un archivio di giornali antichi consultabile online",
+      "Un programma antivirus che protegge il computer dai siti falsi"
+     ],
+     "corretta": 0,
+     "spiegazione": "I deepfake imitano in modo realistico volti e voci di persone vere."
+    },
+    {
+     "domanda": "A cosa serve la ricerca per immagini?",
+     "opzioni": [
+      "A rendere più luminose e colorate le foto",
+      "A scoprire dove una foto è già apparsa in passato",
+      "A stampare le foto in formato più grande"
+     ],
+     "corretta": 1,
+     "spiegazione": "Così si scopre se una foto vecchia viene usata per raccontare un fatto nuovo."
+    },
+    {
+     "domanda": "Un articolo dice che un famoso attore è diventato ricco con un investimento segreto online. È…",
+     "opzioni": [
+      "Una notizia ufficiale del Governo",
+      "Quasi certamente una truffa",
+      "Un'occasione da non perdere"
+     ],
+     "corretta": 1,
+     "spiegazione": "I finti articoli con personaggi famosi sono una truffa molto diffusa per rubare soldi e dati."
+    }
+   ]
+  },
+  {
+   "id": "sostenibilita",
+   "icona": "🌍",
+   "titolo": "Sostenibilità e futuro",
+   "livello": "Attualità",
+   "minuti": 25,
+   "obiettivo": "Capire cos'è lo sviluppo sostenibile, l'Agenda 2030, che cosa dice la scienza sul cambiamento climatico e come la transizione digitale e l'intelligenza artificiale stanno cambiando la società.",
+   "palestra": "",
+   "passi": [
+    {
+     "titolo": "Che cos'è lo sviluppo sostenibile",
+     "testo": "Una definizione famosa viene dal **Rapporto Brundtland** delle Nazioni Unite, del **1987**: lo sviluppo sostenibile è quello che **soddisfa i bisogni del presente senza compromettere** la possibilità delle **generazioni future** di soddisfare i propri.\n\nÈ come gestire un orto di famiglia: si raccoglie quello che serve, ma si lascia la terra fertile per i nipoti.\n\nLa sostenibilità ha **tre dimensioni** che vanno insieme:\n\n- **ambientale**: rispettare la natura e le risorse;\n- **sociale**: non lasciare indietro nessuno;\n- **economica**: creare lavoro e benessere che durino nel tempo.",
+     "schema": "flowchart LR\n  A[\"🌳 Ambiente\"] --> S[\"♻️ Sviluppo sostenibile\"]\n  B[\"🤝 Società\"] --> S\n  C[\"💼 Economia\"] --> S"
+    },
+    {
+     "titolo": "L'Agenda 2030",
+     "testo": "Nel **settembre 2015** gli Stati membri dell'ONU hanno adottato l'**Agenda 2030 per lo sviluppo sostenibile**. Contiene **17 Obiettivi** da raggiungere entro il 2030, che riguardano **tutti i Paesi**, ricchi e poveri.\n\nAlcuni esempi:\n\n- **sconfiggere la povertà** e la fame;\n- **salute e benessere** per tutti;\n- **istruzione di qualità**;\n- **parità di genere**;\n- **acqua pulita** ed **energia pulita**;\n- **città sostenibili**;\n- **lotta al cambiamento climatico**;\n- **pace e giustizia**.\n\nOgni obiettivo è diviso in traguardi più precisi, e i progressi vengono controllati nel tempo.",
+     "consiglio": "Molti obiettivi si possono sostenere anche nel piccolo: sprecare meno cibo, risparmiare energia, aiutare chi è in difficoltà."
+    },
+    {
+     "titolo": "Il cambiamento climatico: cosa dice la scienza",
+     "testo": "Alcuni gas nell'aria, come l'**anidride carbonica**, trattengono il calore del Sole come il vetro di una **serra**: è l'**effetto serra** naturale, che rende la Terra abitabile.\n\nBruciando **carbone, petrolio e gas** e abbattendo le foreste, l'umanità ha aumentato molto questi gas. Il **consenso scientifico** è chiaro: l'**IPCC**, il gruppo intergovernativo di esperti sul clima delle Nazioni Unite, afferma che è **inequivocabile** che le attività umane hanno riscaldato l'atmosfera, gli oceani e le terre.\n\nLe conseguenze includono **ondate di calore** più frequenti, **ghiacciai che si ritirano**, **innalzamento del livello del mare** ed **eventi meteo estremi**.\n\nCon l'**Accordo di Parigi** del **2015** i Paesi si sono impegnati a mantenere il riscaldamento globale **ben al di sotto di 2 °C** rispetto all'epoca preindustriale, cercando di limitarlo a **1,5 °C**.",
+     "schema": "flowchart LR\n  A[\"🏭 Combustibili fossili\"] --> B[\"☁️ Più gas serra\"] --> C[\"🌡️ Terra più calda\"] --> D[\"🌊 Clima che cambia\"]",
+     "consiglio": "Meteo e clima non sono la stessa cosa: il meteo è il tempo di oggi, il clima è l'andamento medio su molti anni. Un inverno freddo non smentisce il riscaldamento globale."
+    },
+    {
+     "titolo": "Cosa possiamo fare ogni giorno",
+     "testo": "Contro il cambiamento climatico si lavora in due modi: **ridurre** le emissioni di gas serra (*mitigazione*) e **prepararsi** alle conseguenze (*adattamento*).\n\nAnche i piccoli gesti contano:\n\n- **risparmiare energia**: spegnere le luci, non lasciare gli apparecchi in standby;\n- **sprecare meno cibo** e fare bene la **raccolta differenziata**;\n- portare i **rifiuti elettronici** (i *RAEE*: vecchi telefoni, computer, pile) all'isola ecologica o nei negozi che li ritirano;\n- **riparare e riusare** prima di ricomprare;\n- quando si può, usare **mezzi pubblici**, bicicletta o le proprie gambe.\n\nAnche un **computer vecchio** può tornare utile con un sistema leggero come Linux: meno rifiuti, più persone connesse."
+    },
+    {
+     "titolo": "La transizione digitale",
+     "testo": "La **transizione digitale** è il passaggio di tanti servizi dalla carta e dallo sportello allo **schermo**: pagamenti, certificati, prenotazioni, comunicazioni con gli enti pubblici.\n\nPorta vantaggi, come meno code e servizi disponibili a ogni ora, ma rischia di lasciare indietro chi non ha un dispositivo o non sa usarlo: è il **divario digitale**. Per questo esistono corsi e **punti di facilitazione digitale**, dove farsi aiutare.\n\nIn Europa i dati personali sono protetti dal **GDPR**, il Regolamento generale sulla protezione dei dati, applicato dal **2018**. In Italia vigila il **Garante per la protezione dei dati personali**.\n\nAnche il digitale ha un costo per l'ambiente: i grandi **centri dati** consumano molta energia.",
+     "consiglio": "Imparare il digitale non ha età: chiedere aiuto è il primo passo, non una vergogna."
+    },
+    {
+     "titolo": "L'intelligenza artificiale nella società",
+     "testo": "L'**intelligenza artificiale** sta entrando in molti campi:\n\n- **medicina**: aiuta i medici ad analizzare esami e immagini, ma la decisione resta al medico;\n- **traduzioni** e **sottotitoli** automatici;\n- **accessibilità**: legge i testi ad alta voce a chi vede poco, trascrive la voce per chi sente poco.\n\nCi sono anche **rischi**: errori detti con sicurezza, **deepfake**, uso scorretto dei **dati personali**, pregiudizi presenti nei dati, cambiamenti nel mondo del **lavoro**.\n\nPer questo l'Unione europea ha approvato nel **2024** un **regolamento sull'intelligenza artificiale**, che segue un **approccio basato sul rischio**: vieta alcuni usi considerati inaccettabili, pone regole severe sugli usi ad alto rischio e chiede **trasparenza**, per esempio sui contenuti generati dall'IA.",
+     "schema": "flowchart LR\n  IA[\"🤖 Intelligenza artificiale\"] --> O[\"✅ Opportunità\"]\n  IA --> R[\"⚠️ Rischi\"]\n  R --> N[\"📜 Regole europee\"]",
+     "consiglio": "Usate l'IA come un aiutante, non come un oracolo: per salute, soldi e leggi verificate sempre con un professionista."
+    }
+   ],
+   "quiz": [
+    {
+     "domanda": "Quanti sono gli Obiettivi dell'Agenda 2030?",
+     "opzioni": [
+      "5",
+      "100",
+      "17"
+     ],
+     "corretta": 2,
+     "spiegazione": "L'Agenda 2030 dell'ONU contiene 17 Obiettivi di sviluppo sostenibile."
+    },
+    {
+     "domanda": "Secondo il consenso scientifico, qual è la causa principale del riscaldamento globale attuale?",
+     "opzioni": [
+      "Le attività umane che aumentano i gas serra",
+      "Le variazioni della distanza tra Terra e Luna",
+      "I normali cambi di stagione durante l'anno"
+     ],
+     "corretta": 0,
+     "spiegazione": "L'IPCC afferma che è inequivocabile che l'influenza umana ha riscaldato atmosfera, oceani e terre."
+    },
+    {
+     "domanda": "Che cosa sono i RAEE?",
+     "opzioni": [
+      "Le centrali che producono energia rinnovabile",
+      "I francobolli usati per la posta europea",
+      "I rifiuti di apparecchiature elettriche ed elettroniche"
+     ],
+     "corretta": 2,
+     "spiegazione": "Vecchi telefoni, computer e pile vanno portati all'isola ecologica o nei negozi che li ritirano."
+    },
+    {
+     "domanda": "Che cos'è il divario digitale?",
+     "opzioni": [
+      "La differenza di prezzo tra un computer nuovo e uno usato",
+      "La distanza tra chi sa usare le tecnologie digitali e chi ne resta escluso",
+      "Lo spazio vuoto che resta sullo schermo di un televisore"
+     ],
+     "corretta": 1,
+     "spiegazione": "Ridurre il divario digitale significa aiutare tutti a usare i servizi online, per esempio con i punti di facilitazione."
+    },
+    {
+     "domanda": "Che cosa prevede il regolamento europeo sull'intelligenza artificiale?",
+     "opzioni": [
+      "Regole diverse secondo il livello di rischio",
+      "Il divieto totale di ogni intelligenza artificiale",
+      "Nessuna regola: ogni azienda decide da sola"
+     ],
+     "corretta": 0,
+     "spiegazione": "Il regolamento europeo del 2024 vieta alcuni usi, regola severamente quelli ad alto rischio e chiede trasparenza."
+    }
+   ]
+  }
+ ],
+ "prove": [
+  {
+   "id": "attualita",
+   "titolo": "Il Grande Quiz di Cittadinanza e Attualità",
+   "icona": "📰",
+   "descrizione": "20 domande pescate a caso su Costituzione, istituzioni italiane ed europee, ONU, informazione, sostenibilità e società digitale. Rispondete con calma: con almeno il 70% di risposte giuste ottenete l'attestato.",
+   "attestato": "Cittadinanza e attualità",
+   "domande_per_prova": 20,
+   "soglia": 0.7,
+   "domande": [
+    {
+     "domanda": "Chi ha scritto la Costituzione italiana?",
+     "opzioni": [
+      "L'Assemblea Costituente eletta nel 1946",
+      "Una commissione di sindaci dei capoluoghi",
+      "Il Parlamento europeo appena nato",
+      "Il re d'Italia insieme ai suoi ministri"
+     ],
+     "corretta": 0,
+     "spiegazione": "L'Assemblea Costituente, eletta il 2 giugno 1946, approvò la Costituzione il 22 dicembre 1947.",
+     "categoria": "Costituzione"
+    },
+    {
+     "domanda": "Come inizia l'articolo 1 della Costituzione?",
+     "opzioni": [
+      "L'Italia è una monarchia costituzionale, fondata sulla legge",
+      "L'Italia è una Repubblica democratica, fondata sul lavoro",
+      "L'Italia è una federazione di Regioni, fondata sul commercio",
+      "L'Italia è uno Stato indipendente, fondato sulla moneta"
+     ],
+     "corretta": 1,
+     "spiegazione": "È la frase più famosa della Costituzione: indica la democrazia e il lavoro come basi della Repubblica.",
+     "categoria": "Costituzione"
+    },
+    {
+     "domanda": "Quanti articoli contiene la Costituzione italiana?",
+     "opzioni": [
+      "12",
+      "45",
+      "139",
+      "1.000"
+     ],
+     "corretta": 2,
+     "spiegazione": "La Costituzione ha 139 articoli, più alcune disposizioni transitorie e finali.",
+     "categoria": "Costituzione"
+    },
+    {
+     "domanda": "Quali articoli formano i Principi fondamentali?",
+     "opzioni": [
+      "Gli articoli da 100 a 139",
+      "Gli articoli da 50 a 60",
+      "Solo l'articolo 1",
+      "Gli articoli da 1 a 12"
+     ],
+     "corretta": 3,
+     "spiegazione": "I primi 12 articoli sono il cuore della Costituzione e ne indicano i valori di base.",
+     "categoria": "Costituzione"
+    },
+    {
+     "domanda": "Come descrive la bandiera l'articolo 12?",
+     "opzioni": [
+      "Tricolore verde, bianco e rosso, a tre bande verticali uguali",
+      "Bianca con una croce rossa al centro, come uno stemma",
+      "Blu con dodici stelle dorate disposte in cerchio",
+      "Tricolore verde, bianco e rosso, a tre bande orizzontali uguali"
+     ],
+     "corretta": 0,
+     "spiegazione": "La bandiera della Repubblica è il tricolore a tre bande verticali di uguali dimensioni.",
+     "categoria": "Costituzione"
+    },
+    {
+     "domanda": "Quale principio è scritto nell'articolo 11?",
+     "opzioni": [
+      "L'Italia adotta l'euro come moneta nazionale",
+      "Il Presidente della Repubblica resta in carica sette anni",
+      "L'Italia ripudia la guerra come strumento di offesa",
+      "Il voto è facoltativo e si può delegare a un parente"
+     ],
+     "corretta": 2,
+     "spiegazione": "L'art. 11 ripudia la guerra e consente di aderire a organizzazioni che assicurano pace e giustizia.",
+     "categoria": "Costituzione"
+    },
+    {
+     "domanda": "Secondo l'articolo 139, che cosa non può essere modificato?",
+     "opzioni": [
+      "Il numero dei ministri",
+      "I confini dei Comuni",
+      "La durata dei mandati dei sindaci",
+      "La forma repubblicana"
+     ],
+     "corretta": 3,
+     "spiegazione": "La forma repubblicana è l'unico limite scritto espressamente alla revisione costituzionale.",
+     "categoria": "Costituzione"
+    },
+    {
+     "domanda": "Perché si dice che la Costituzione italiana è rigida?",
+     "opzioni": [
+      "Perché non si può leggere ad alta voce in pubblico",
+      "Perché per cambiarla serve una procedura speciale",
+      "Perché vale soltanto in tempo di guerra e di crisi",
+      "Perché il testo originale è stampato su carta spessa"
+     ],
+     "corretta": 1,
+     "spiegazione": "L'articolo 138 prevede una doppia approvazione delle Camere e un possibile referendum.",
+     "categoria": "Costituzione"
+    },
+    {
+     "domanda": "Quale tema è stato inserito nell'articolo 9 con la riforma del 2022?",
+     "opzioni": [
+      "L'obbligo per ogni famiglia di avere un computer",
+      "La scelta di Milano come seconda capitale",
+      "Il ritorno del servizio militare obbligatorio",
+      "La tutela dell'ambiente, della biodiversità e degli ecosistemi"
+     ],
+     "corretta": 3,
+     "spiegazione": "Dal 2022 l'articolo 9 tutela anche l'ambiente, anche nell'interesse delle future generazioni.",
+     "categoria": "Costituzione"
+    },
+    {
+     "domanda": "Quale diritto protegge l'articolo 21?",
+     "opzioni": [
+      "La libertà di manifestare il proprio pensiero, anche con la stampa",
+      "Il diritto di votare a partire dai sedici anni di età",
+      "Il diritto di andare in pensione a una certa età",
+      "Il diritto di guidare l'auto senza patente"
+     ],
+     "corretta": 0,
+     "spiegazione": "L'art. 21 garantisce la libertà di pensiero, di parola e di stampa.",
+     "categoria": "Costituzione"
+    },
+    {
+     "domanda": "Da quali due Camere è formato il Parlamento italiano?",
+     "opzioni": [
+      "Senato e Consiglio dei ministri",
+      "Camera dei deputati e Corte costituzionale",
+      "Camera dei deputati e Senato della Repubblica",
+      "Consiglio regionale e consiglio comunale"
+     ],
+     "corretta": 2,
+     "spiegazione": "Il Parlamento è bicamerale: Camera e Senato hanno gli stessi poteri.",
+     "categoria": "Parlamento e Governo"
+    },
+    {
+     "domanda": "Quanto dura di norma una legislatura del Parlamento?",
+     "opzioni": [
+      "Sette anni",
+      "Cinque anni",
+      "Due anni",
+      "Dieci anni"
+     ],
+     "corretta": 1,
+     "spiegazione": "Camera e Senato sono eletti per cinque anni.",
+     "categoria": "Parlamento e Governo"
+    },
+    {
+     "domanda": "Chi deve dare la fiducia al Governo?",
+     "opzioni": [
+      "Solo il Presidente della Repubblica",
+      "I sindaci",
+      "Entrambe le Camere",
+      "La Corte costituzionale"
+     ],
+     "corretta": 2,
+     "spiegazione": "Il Governo deve avere la fiducia sia della Camera sia del Senato.",
+     "categoria": "Parlamento e Governo"
+    },
+    {
+     "domanda": "Da chi è formato il Consiglio dei ministri?",
+     "opzioni": [
+      "Da tutti i deputati e i senatori",
+      "Dai presidenti di tutte le Regioni",
+      "Dai giudici della Corte di Cassazione",
+      "Dal Presidente del Consiglio e dai ministri"
+     ],
+     "corretta": 3,
+     "spiegazione": "Il Consiglio dei ministri è l'organo collegiale del Governo.",
+     "categoria": "Parlamento e Governo"
+    },
+    {
+     "domanda": "In quale palazzo ha sede il Governo?",
+     "opzioni": [
+      "Montecitorio",
+      "Palazzo Chigi",
+      "Il Quirinale",
+      "Palazzo Madama"
+     ],
+     "corretta": 1,
+     "spiegazione": "Palazzo Chigi è la sede della Presidenza del Consiglio; Montecitorio ospita la Camera e Palazzo Madama il Senato.",
+     "categoria": "Parlamento e Governo"
+    },
+    {
+     "domanda": "Quando può il Governo adottare un decreto-legge?",
+     "opzioni": [
+      "In casi straordinari di necessità e urgenza",
+      "Solo durante le ferie estive del Parlamento",
+      "Solo dopo aver avuto il permesso dei Comuni",
+      "Ogni volta che vuole, senza alcun limite"
+     ],
+     "corretta": 0,
+     "spiegazione": "Il decreto-legge è previsto per casi straordinari e deve essere convertito dal Parlamento entro 60 giorni.",
+     "categoria": "Parlamento e Governo"
+    },
+    {
+     "domanda": "Dove viene pubblicata una legge prima di entrare in vigore?",
+     "opzioni": [
+      "Nell'albo dei giornalisti",
+      "Sui manifesti del Comune",
+      "Sul sito della Banca d'Italia",
+      "Nella Gazzetta Ufficiale"
+     ],
+     "corretta": 3,
+     "spiegazione": "La pubblicazione in Gazzetta Ufficiale rende la legge conoscibile a tutti; di norma entra in vigore dopo 15 giorni.",
+     "categoria": "Parlamento e Governo"
+    },
+    {
+     "domanda": "Quante firme di cittadini servono per proporre una legge di iniziativa popolare?",
+     "opzioni": [
+      "Almeno 500",
+      "Ne basta una",
+      "Almeno 50.000",
+      "Almeno 5 milioni"
+     ],
+     "corretta": 2,
+     "spiegazione": "L'articolo 71 della Costituzione richiede almeno 50.000 elettori.",
+     "categoria": "Parlamento e Governo"
+    },
+    {
+     "domanda": "Chi elegge il Presidente della Repubblica?",
+     "opzioni": [
+      "Direttamente tutti i cittadini maggiorenni con il loro voto",
+      "Il Parlamento in seduta comune con i delegati delle Regioni",
+      "La Corte costituzionale, scegliendo tra i suoi giudici",
+      "Il Governo, su proposta del Presidente del Consiglio"
+     ],
+     "corretta": 1,
+     "spiegazione": "In Italia il Presidente della Repubblica non è eletto direttamente dal popolo, ma dal Parlamento con i delegati regionali.",
+     "categoria": "Garanti e giustizia"
+    },
+    {
+     "domanda": "Quale età minima serve per essere eletti Presidente della Repubblica?",
+     "opzioni": [
+      "50 anni",
+      "70 anni",
+      "18 anni",
+      "30 anni"
+     ],
+     "corretta": 0,
+     "spiegazione": "La Costituzione richiede almeno 50 anni di età.",
+     "categoria": "Garanti e giustizia"
+    },
+    {
+     "domanda": "In quale palazzo ha sede la Presidenza della Repubblica?",
+     "opzioni": [
+      "A Palazzo Madama",
+      "A Montecitorio",
+      "Al Quirinale",
+      "A Palazzo Chigi"
+     ],
+     "corretta": 2,
+     "spiegazione": "Il Palazzo del Quirinale, a Roma, è la sede della Presidenza della Repubblica.",
+     "categoria": "Garanti e giustizia"
+    },
+    {
+     "domanda": "Quale di questi è un compito del Presidente della Repubblica?",
+     "opzioni": [
+      "Scrivere le sentenze dei tribunali",
+      "Promulgare le leggi",
+      "Approvare il bilancio comunale",
+      "Eleggere i sindaci"
+     ],
+     "corretta": 1,
+     "spiegazione": "Il Presidente promulga le leggi e può rinviarle una volta alle Camere chiedendo una nuova deliberazione.",
+     "categoria": "Garanti e giustizia"
+    },
+    {
+     "domanda": "Che cosa fa la Corte costituzionale?",
+     "opzioni": [
+      "Stampa e gestisce le banconote in euro",
+      "Riscuote le tasse per conto dello Stato",
+      "Elegge ogni cinque anni il Parlamento",
+      "Controlla che le leggi rispettino la Costituzione"
+     ],
+     "corretta": 3,
+     "spiegazione": "La Corte costituzionale, detta Consulta, può dichiarare incostituzionale una legge.",
+     "categoria": "Garanti e giustizia"
+    },
+    {
+     "domanda": "Quanti giudici compongono la Corte costituzionale?",
+     "opzioni": [
+      "15",
+      "3",
+      "7",
+      "100"
+     ],
+     "corretta": 0,
+     "spiegazione": "I 15 giudici sono nominati per un terzo dal Presidente, per un terzo dal Parlamento e per un terzo dalle supreme magistrature.",
+     "categoria": "Garanti e giustizia"
+    },
+    {
+     "domanda": "Secondo la Costituzione, a che cosa sono soggetti i giudici?",
+     "opzioni": [
+      "Soltanto alla legge",
+      "Al Governo",
+      "Ai giornali",
+      "Al partito che ha vinto le elezioni"
+     ],
+     "corretta": 0,
+     "spiegazione": "L'indipendenza dei giudici è una garanzia per tutti i cittadini.",
+     "categoria": "Garanti e giustizia"
+    },
+    {
+     "domanda": "Chi presiede il Consiglio superiore della magistratura?",
+     "opzioni": [
+      "Il sindaco di Roma",
+      "Il Presidente della Camera",
+      "Il Presidente della Repubblica",
+      "Il Presidente del Consiglio"
+     ],
+     "corretta": 2,
+     "spiegazione": "Il CSM è l'organo di autogoverno dei magistrati ed è presieduto dal capo dello Stato.",
+     "categoria": "Garanti e giustizia"
+    },
+    {
+     "domanda": "Quante sono le Regioni italiane?",
+     "opzioni": [
+      "12",
+      "20",
+      "27",
+      "8"
+     ],
+     "corretta": 1,
+     "spiegazione": "Le Regioni italiane sono 20, di cui 5 a statuto speciale.",
+     "categoria": "Regioni e Comuni"
+    },
+    {
+     "domanda": "Quale Regione, tra queste, gode di uno statuto speciale?",
+     "opzioni": [
+      "L'Emilia-Romagna",
+      "La Campania",
+      "La Lombardia",
+      "La Valle d'Aosta"
+     ],
+     "corretta": 3,
+     "spiegazione": "Hanno statuto speciale Valle d'Aosta, Trentino-Alto Adige, Friuli-Venezia Giulia, Sicilia e Sardegna.",
+     "categoria": "Regioni e Comuni"
+    },
+    {
+     "domanda": "Di quale servizio si occupano soprattutto le Regioni?",
+     "opzioni": [
+      "L'organizzazione della sanità",
+      "La stampa delle monete",
+      "La difesa nazionale e l'esercito",
+      "La politica estera e le ambasciate"
+     ],
+     "corretta": 0,
+     "spiegazione": "L'organizzazione dei servizi sanitari è uno dei principali compiti delle Regioni.",
+     "categoria": "Regioni e Comuni"
+    },
+    {
+     "domanda": "Come viene scelto il sindaco?",
+     "opzioni": [
+      "Lo sceglie la Regione tra i suoi consiglieri",
+      "Lo nomina il Presidente della Repubblica ogni anno",
+      "Diventa sindaco il cittadino più anziano del Comune",
+      "È eletto direttamente dai cittadini del Comune"
+     ],
+     "corretta": 3,
+     "spiegazione": "Il sindaco è eletto direttamente dai cittadini e guida il Comune con la giunta e il consiglio comunale.",
+     "categoria": "Regioni e Comuni"
+    },
+    {
+     "domanda": "A quale ufficio vi rivolgete per la carta d'identità?",
+     "opzioni": [
+      "Al Parlamento europeo",
+      "Alla Banca centrale europea",
+      "Al Comune",
+      "Alla Corte costituzionale"
+     ],
+     "corretta": 2,
+     "spiegazione": "Anagrafe e carta d'identità sono servizi del Comune.",
+     "categoria": "Regioni e Comuni"
+    },
+    {
+     "domanda": "Secondo la Costituzione, qual è la capitale della Repubblica?",
+     "opzioni": [
+      "Torino",
+      "Roma",
+      "Milano",
+      "Firenze"
+     ],
+     "corretta": 1,
+     "spiegazione": "L'articolo 114 stabilisce che Roma è la capitale della Repubblica.",
+     "categoria": "Regioni e Comuni"
+    },
+    {
+     "domanda": "Chi approva le decisioni più importanti di un Comune?",
+     "opzioni": [
+      "La Commissione europea",
+      "Il Consiglio di sicurezza dell'ONU",
+      "Il consiglio comunale",
+      "Il Senato"
+     ],
+     "corretta": 2,
+     "spiegazione": "Il consiglio comunale, eletto dai cittadini, approva per esempio il bilancio del Comune.",
+     "categoria": "Regioni e Comuni"
+    },
+    {
+     "domanda": "Come deve essere il voto secondo l'articolo 48?",
+     "opzioni": [
+      "Pubblico, con voto per alzata di mano",
+      "Delegabile a un parente di fiducia",
+      "Riservato a chi paga più tasse",
+      "Personale, eguale, libero e segreto"
+     ],
+     "corretta": 3,
+     "spiegazione": "Il voto è personale, eguale, libero e segreto, e il suo esercizio è un dovere civico.",
+     "categoria": "Voto e partecipazione"
+    },
+    {
+     "domanda": "Che cosa bisogna portare al seggio per votare?",
+     "opzioni": [
+      "Il libretto della pensione e una fototessera",
+      "Un documento d'identità e la tessera elettorale",
+      "Il codice fiscale e l'ultima bolletta della luce",
+      "La tessera sanitaria e il certificato di residenza"
+     ],
+     "corretta": 1,
+     "spiegazione": "Senza documento e tessera elettorale non si può votare; la tessera si chiede al Comune.",
+     "categoria": "Voto e partecipazione"
+    },
+    {
+     "domanda": "A che cosa serve un referendum abrogativo?",
+     "opzioni": [
+      "A decidere se cancellare una legge o una sua parte",
+      "A scegliere chi farà parte del Governo",
+      "A eleggere direttamente il sindaco della città",
+      "A nominare i giudici della Corte costituzionale"
+     ],
+     "corretta": 0,
+     "spiegazione": "Con il referendum abrogativo i cittadini possono eliminare norme già esistenti.",
+     "categoria": "Voto e partecipazione"
+    },
+    {
+     "domanda": "Che cos'è il quorum nel referendum abrogativo?",
+     "opzioni": [
+      "Il seggio elettorale assegnato a ciascun cittadino",
+      "Il nome ufficiale della scheda su cui si vota",
+      "Il giorno fissato dalla legge per andare a votare",
+      "Il numero minimo di votanti perché il risultato sia valido"
+     ],
+     "corretta": 3,
+     "spiegazione": "Il referendum abrogativo è valido solo se vota la maggioranza degli aventi diritto.",
+     "categoria": "Voto e partecipazione"
+    },
+    {
+     "domanda": "Il referendum costituzionale ha un quorum?",
+     "opzioni": [
+      "Non esiste un referendum costituzionale",
+      "Sì, deve votare almeno metà degli aventi diritto",
+      "No, decidono i voti validi espressi",
+      "Sì, deve votare il 90%"
+     ],
+     "corretta": 2,
+     "spiegazione": "A differenza di quello abrogativo, il referendum costituzionale è valido qualunque sia l'affluenza.",
+     "categoria": "Voto e partecipazione"
+    },
+    {
+     "domanda": "Quanti elettori possono chiedere un referendum abrogativo?",
+     "opzioni": [
+      "500.000",
+      "5.000",
+      "50",
+      "10 milioni"
+     ],
+     "corretta": 0,
+     "spiegazione": "Possono chiederlo 500.000 elettori oppure cinque Consigli regionali.",
+     "categoria": "Voto e partecipazione"
+    },
+    {
+     "domanda": "Qual è l'età minima per essere eletti al Senato?",
+     "opzioni": [
+      "65 anni",
+      "40 anni",
+      "25 anni",
+      "18 anni"
+     ],
+     "corretta": 1,
+     "spiegazione": "Per il Senato servono 40 anni; per la Camera dei deputati 25 anni.",
+     "categoria": "Voto e partecipazione"
+    },
+    {
+     "domanda": "In quale anno furono firmati i Trattati di Roma?",
+     "opzioni": [
+      "1992",
+      "1946",
+      "2002",
+      "1957"
+     ],
+     "corretta": 3,
+     "spiegazione": "Il 25 marzo 1957 nacquero la Comunità economica europea e l'Euratom.",
+     "categoria": "Europa"
+    },
+    {
+     "domanda": "Quale di questi Paesi è tra i sei fondatori delle Comunità europee?",
+     "opzioni": [
+      "La Grecia",
+      "L'Italia",
+      "La Spagna",
+      "Il Portogallo"
+     ],
+     "corretta": 1,
+     "spiegazione": "I fondatori sono Belgio, Francia, Germania, Italia, Lussemburgo e Paesi Bassi.",
+     "categoria": "Europa"
+    },
+    {
+     "domanda": "Chi elegge il Parlamento europeo?",
+     "opzioni": [
+      "Direttamente i cittadini dei Paesi dell'Unione",
+      "L'Assemblea generale delle Nazioni Unite",
+      "La Commissione europea, ogni due anni",
+      "I governi dei Paesi, scegliendo tra i ministri"
+     ],
+     "corretta": 0,
+     "spiegazione": "Dal 1979 il Parlamento europeo è eletto a suffragio universale diretto, ogni cinque anni.",
+     "categoria": "Europa"
+    },
+    {
+     "domanda": "Quale istituzione riunisce i capi di Stato o di governo dei Paesi dell'Unione?",
+     "opzioni": [
+      "Il Consiglio d'Europa",
+      "La Banca centrale europea",
+      "Il Consiglio europeo",
+      "La Corte di giustizia"
+     ],
+     "corretta": 2,
+     "spiegazione": "Il Consiglio europeo indica le grandi linee politiche dell'Unione.",
+     "categoria": "Europa"
+    },
+    {
+     "domanda": "Dove ha sede la Banca centrale europea?",
+     "opzioni": [
+      "A Lisbona",
+      "A Roma",
+      "A Francoforte",
+      "A Bruxelles"
+     ],
+     "corretta": 2,
+     "spiegazione": "La BCE, che gestisce l'euro, ha sede a Francoforte sul Meno, in Germania.",
+     "categoria": "Europa"
+    },
+    {
+     "domanda": "Che cosa rappresentano le 12 stelle della bandiera europea?",
+     "opzioni": [
+      "Il numero dei Paesi che hanno adottato per primi l'euro",
+      "I dodici mesi dell'anno, uno per ogni presidenza",
+      "I dodici Paesi che hanno fondato le Comunità europee",
+      "Un simbolo di unità e completezza, non il numero dei Paesi"
+     ],
+     "corretta": 3,
+     "spiegazione": "Le stelle sono sempre 12, qualunque sia il numero degli Stati membri.",
+     "categoria": "Europa"
+    },
+    {
+     "domanda": "Quale musica è l'inno dell'Unione europea?",
+     "opzioni": [
+      "Il Canto degli Italiani di Novaro",
+      "L'Inno alla gioia di Beethoven",
+      "Il Va' pensiero dal Nabucco di Verdi",
+      "La Marsigliese, inno della Francia"
+     ],
+     "corretta": 1,
+     "spiegazione": "L'inno europeo è tratto dalla Nona sinfonia di Ludwig van Beethoven.",
+     "categoria": "Europa"
+    },
+    {
+     "domanda": "Perché il 9 maggio è la Festa dell'Europa?",
+     "opzioni": [
+      "Ricorda la Dichiarazione Schuman del 1950",
+      "È il giorno di nascita dell'euro",
+      "È il giorno delle elezioni europee",
+      "Ricorda la fine dell'Impero romano"
+     ],
+     "corretta": 0,
+     "spiegazione": "La Dichiarazione Schuman propose di mettere in comune carbone e acciaio: fu il primo passo dell'integrazione europea.",
+     "categoria": "Europa"
+    },
+    {
+     "domanda": "Chi scrisse il Manifesto di Ventotene per un'Europa libera e unita?",
+     "opzioni": [
+      "Altiero Spinelli ed Ernesto Rossi",
+      "Dante e Petrarca",
+      "Giuseppe Garibaldi e Giuseppe Mazzini",
+      "Cavour e Vittorio Emanuele II"
+     ],
+     "corretta": 0,
+     "spiegazione": "Il Manifesto fu scritto nel 1941, mentre gli autori erano al confino sull'isola di Ventotene.",
+     "categoria": "Europa"
+    },
+    {
+     "domanda": "In quale anno è nata l'ONU?",
+     "opzioni": [
+      "1989",
+      "1945",
+      "2000",
+      "1918"
+     ],
+     "corretta": 1,
+     "spiegazione": "Le Nazioni Unite nacquero nel 1945, alla fine della Seconda guerra mondiale, per mantenere la pace.",
+     "categoria": "Mondo e ONU"
+    },
+    {
+     "domanda": "Quale organo dell'ONU ha cinque membri permanenti con diritto di veto?",
+     "opzioni": [
+      "L'Assemblea generale",
+      "La FAO",
+      "Il Consiglio di sicurezza",
+      "L'UNESCO"
+     ],
+     "corretta": 2,
+     "spiegazione": "I membri permanenti sono Stati Uniti, Russia, Cina, Francia e Regno Unito.",
+     "categoria": "Mondo e ONU"
+    },
+    {
+     "domanda": "Quando è stata approvata la Dichiarazione universale dei diritti umani?",
+     "opzioni": [
+      "Il 1° gennaio 2002",
+      "Il 2 giugno 1946",
+      "Il 25 marzo 1957",
+      "Il 10 dicembre 1948"
+     ],
+     "corretta": 3,
+     "spiegazione": "Il 10 dicembre si celebra ogni anno la Giornata dei diritti umani.",
+     "categoria": "Mondo e ONU"
+    },
+    {
+     "domanda": "Quale agenzia dell'ONU ha sede a Roma?",
+     "opzioni": [
+      "La FAO",
+      "L'UNICEF",
+      "La NATO",
+      "L'OMS"
+     ],
+     "corretta": 0,
+     "spiegazione": "La FAO, l'organizzazione per l'alimentazione e l'agricoltura, ha sede a Roma.",
+     "categoria": "Mondo e ONU"
+    },
+    {
+     "domanda": "Di che cosa si occupa l'OMS?",
+     "opzioni": [
+      "Del calcio",
+      "Della moneta",
+      "Della salute",
+      "Delle telecomunicazioni"
+     ],
+     "corretta": 2,
+     "spiegazione": "L'Organizzazione mondiale della sanità ha sede a Ginevra.",
+     "categoria": "Mondo e ONU"
+    },
+    {
+     "domanda": "Quale agenzia dell'ONU tiene la lista del Patrimonio dell'umanità?",
+     "opzioni": [
+      "La BCE",
+      "L'UNESCO",
+      "Il Consiglio europeo",
+      "La FAO"
+     ],
+     "corretta": 1,
+     "spiegazione": "L'UNESCO si occupa di educazione, scienza e cultura.",
+     "categoria": "Mondo e ONU"
+    },
+    {
+     "domanda": "Di chi si occupa l'UNICEF?",
+     "opzioni": [
+      "Delle elezioni",
+      "Delle banche",
+      "Degli aeroporti",
+      "Dei bambini"
+     ],
+     "corretta": 3,
+     "spiegazione": "L'UNICEF lavora per i diritti e il benessere dei bambini in tutto il mondo.",
+     "categoria": "Mondo e ONU"
+    },
+    {
+     "domanda": "Che cos'è la NATO?",
+     "opzioni": [
+      "Un'istituzione dell'Unione europea",
+      "Una moneta",
+      "Un'agenzia dell'ONU per la salute",
+      "Un'alleanza difensiva nata nel 1949"
+     ],
+     "corretta": 3,
+     "spiegazione": "La NATO è un'alleanza politico-militare; l'Italia è tra i Paesi fondatori.",
+     "categoria": "Mondo e ONU"
+    },
+    {
+     "domanda": "Dove ha sede la Corte europea dei diritti dell'uomo?",
+     "opzioni": [
+      "A Roma",
+      "A New York",
+      "A Strasburgo",
+      "A Francoforte"
+     ],
+     "corretta": 2,
+     "spiegazione": "La Corte dipende dal Consiglio d'Europa, che è un'organizzazione diversa dall'Unione europea.",
+     "categoria": "Mondo e ONU"
+    },
+    {
+     "domanda": "Qual è il primo passo per verificare una notizia?",
+     "opzioni": [
+      "Controllare chi l'ha pubblicata e quando",
+      "Guardare se il messaggio contiene tante emoji",
+      "Inoltrarla agli amici e aspettare le risposte",
+      "Contare quanti \"mi piace\" ha ricevuto"
+     ],
+     "corretta": 0,
+     "spiegazione": "Fonte e data sono le prime cose da controllare: molte bufale sono notizie vecchie o senza autore.",
+     "categoria": "Informazione"
+    },
+    {
+     "domanda": "Che cosa si intende per titolo acchiappa-clic?",
+     "opzioni": [
+      "Il titolo ufficiale di una legge pubblicata in Gazzetta",
+      "Un titolo esagerato fatto apposta per far aprire l'articolo",
+      "Il titolo di un libro che si trova in biblioteca",
+      "Un titolo scritto da un'agenzia di stampa internazionale"
+     ],
+     "corretta": 1,
+     "spiegazione": "Spesso il contenuto non corrisponde al titolo: il vero scopo è guadagnare con i clic.",
+     "categoria": "Informazione"
+    },
+    {
+     "domanda": "Che cosa fanno i siti di fact-checking?",
+     "opzioni": [
+      "Vendono abbonamenti ai giornali di carta",
+      "Pubblicano di proposito notizie inventate",
+      "Organizzano le elezioni e contano i voti",
+      "Verificano se le notizie che circolano sono vere"
+     ],
+     "corretta": 3,
+     "spiegazione": "Fact-checking significa verifica dei fatti: utile per controllare le notizie dubbie.",
+     "categoria": "Informazione"
+    },
+    {
+     "domanda": "Un messaggio dice \"condividi prima che lo cancellino\". Che cosa fate?",
+     "opzioni": [
+      "Rispondo al mittente lasciando nome e telefono",
+      "Lo inoltro subito a tutti, prima che sparisca",
+      "Non lo inoltro: è un segnale tipico di disinformazione",
+      "Lo stampo e lo appendo in bacheca al circolo"
+     ],
+     "corretta": 2,
+     "spiegazione": "La fretta di condividere è una tecnica per diffondere notizie false prima che vengano verificate.",
+     "categoria": "Informazione"
+    },
+    {
+     "domanda": "Un sito pubblica articoli divertenti e inventati per prendere in giro i politici. Si tratta di…",
+     "opzioni": [
+      "Pubblicità legale",
+      "Satira",
+      "Giornalismo d'inchiesta",
+      "Comunicazione ufficiale"
+     ],
+     "corretta": 1,
+     "spiegazione": "La satira è legittima, ma le sue invenzioni vengono talvolta condivise come se fossero vere.",
+     "categoria": "Informazione"
+    },
+    {
+     "domanda": "Perché è utile confrontare più fonti?",
+     "opzioni": [
+      "Per avere un quadro più completo e scoprire eventuali errori",
+      "Perché la legge vieta di leggere un solo giornale",
+      "Perché così il telefono si aggiorna più in fretta",
+      "Perché le notizie sono vere solo se sono lunghe"
+     ],
+     "corretta": 0,
+     "spiegazione": "Una notizia vera e importante viene riportata da più fonti serie e indipendenti.",
+     "categoria": "Informazione"
+    },
+    {
+     "domanda": "Una foto drammatica gira sui social come \"di oggi\". Come potete controllare?",
+     "opzioni": [
+      "Chiedendo a chi l'ha inoltrata se la foto gli è piaciuta",
+      "Ingrandendola: se si vede bene, allora è sicuramente recente",
+      "Contando quante persone l'hanno già condivisa sui social",
+      "Con la ricerca per immagini, per vedere se è già apparsa in passato"
+     ],
+     "corretta": 3,
+     "spiegazione": "Molte foto vere vengono riciclate per raccontare fatti diversi o recenti.",
+     "categoria": "Informazione"
+    },
+    {
+     "domanda": "Per notizie su salute, soldi e leggi, a chi conviene affidarsi?",
+     "opzioni": [
+      "Alle catene che girano sui social",
+      "A fonti ufficiali e a professionisti",
+      "Al primo video che si trova online",
+      "Ai commenti anonimi sotto gli articoli"
+     ],
+     "corretta": 1,
+     "spiegazione": "Su temi delicati serve un'informazione verificata: siti istituzionali, medico, avvocato, banca.",
+     "categoria": "Informazione"
+    },
+    {
+     "domanda": "Che cosa significa sviluppo sostenibile?",
+     "opzioni": [
+      "Comprare solo prodotti costosi perché durano di più",
+      "Produrre e consumare sempre di più, il più in fretta possibile",
+      "Soddisfare i bisogni di oggi senza togliere possibilità alle generazioni future",
+      "Rinunciare a ogni tecnologia e tornare a vivere come un tempo"
+     ],
+     "corretta": 2,
+     "spiegazione": "È la definizione del Rapporto Brundtland delle Nazioni Unite del 1987.",
+     "categoria": "Sostenibilità e clima"
+    },
+    {
+     "domanda": "In quale anno è stata adottata l'Agenda 2030?",
+     "opzioni": [
+      "Nel 2015",
+      "Nel 1957",
+      "Nel 1990",
+      "Nel 2030"
+     ],
+     "corretta": 0,
+     "spiegazione": "Gli Stati membri dell'ONU l'hanno adottata nel settembre 2015, con obiettivi da raggiungere entro il 2030.",
+     "categoria": "Sostenibilità e clima"
+    },
+    {
+     "domanda": "Quale gas è il principale responsabile del riscaldamento globale causato dall'uomo?",
+     "opzioni": [
+      "L'anidride carbonica",
+      "L'elio",
+      "L'idrogeno",
+      "L'ossigeno"
+     ],
+     "corretta": 0,
+     "spiegazione": "L'anidride carbonica viene liberata soprattutto bruciando carbone, petrolio e gas.",
+     "categoria": "Sostenibilità e clima"
+    },
+    {
+     "domanda": "Che cos'è l'IPCC?",
+     "opzioni": [
+      "Un'agenzia europea che organizza viaggi e scambi culturali per studenti",
+      "Il comitato che riunisce i sindaci delle città costiere",
+      "Un'azienda che costruisce pannelli solari e pale eoliche",
+      "Il gruppo di esperti dell'ONU che valuta le conoscenze scientifiche sul clima"
+     ],
+     "corretta": 3,
+     "spiegazione": "L'IPCC raccoglie e valuta le ricerche di scienziati di tutto il mondo sul cambiamento climatico.",
+     "categoria": "Sostenibilità e clima"
+    },
+    {
+     "domanda": "Quale obiettivo indica l'Accordo di Parigi del 2015?",
+     "opzioni": [
+      "Vietare in tutto il mondo l'uso dell'automobile",
+      "Aumentare la produzione di carbone per avere più energia",
+      "Tenere il riscaldamento ben al di sotto di 2 °C, puntando a 1,5 °C",
+      "Riportare la temperatura media a quella dell'Ottocento entro un anno"
+     ],
+     "corretta": 2,
+     "spiegazione": "L'obiettivo si misura rispetto ai livelli dell'epoca preindustriale.",
+     "categoria": "Sostenibilità e clima"
+    },
+    {
+     "domanda": "Che differenza c'è tra meteo e clima?",
+     "opzioni": [
+      "Non c'è differenza: sono due parole per la stessa cosa",
+      "Il meteo è il tempo di questi giorni, il clima è la media su molti anni",
+      "Il meteo è la media di trent'anni, il clima è il tempo di oggi",
+      "Il meteo riguarda le città, il clima riguarda solo i mari"
+     ],
+     "corretta": 1,
+     "spiegazione": "Per questo un singolo inverno freddo non smentisce il riscaldamento globale.",
+     "categoria": "Sostenibilità e clima"
+    },
+    {
+     "domanda": "Quale di queste è una fonte di energia rinnovabile?",
+     "opzioni": [
+      "Il gas naturale",
+      "Il Sole",
+      "Il petrolio",
+      "Il carbone"
+     ],
+     "corretta": 1,
+     "spiegazione": "Sole, vento, acqua e calore della Terra si rinnovano; i combustibili fossili invece si esauriscono.",
+     "categoria": "Sostenibilità e clima"
+    },
+    {
+     "domanda": "Dove si porta un vecchio telefono che non funziona più?",
+     "opzioni": [
+      "Nel contenitore della carta e del cartone",
+      "Nel bidone dell'indifferenziata sotto casa",
+      "Nel bidone della plastica, insieme alle bottiglie",
+      "All'isola ecologica o in un negozio che ritira i RAEE"
+     ],
+     "corretta": 3,
+     "spiegazione": "I rifiuti elettronici contengono materiali preziosi e sostanze da trattare con cura.",
+     "categoria": "Sostenibilità e clima"
+    },
+    {
+     "domanda": "Che cos'è il GDPR?",
+     "opzioni": [
+      "Il regolamento europeo sulla protezione dei dati personali",
+      "Un programma gratuito per scrivere lettere e documenti",
+      "La moneta digitale ufficiale dell'Unione europea",
+      "Un social network creato dai governi europei"
+     ],
+     "corretta": 0,
+     "spiegazione": "Il GDPR si applica dal 2018 in tutta l'Unione europea.",
+     "categoria": "Società digitale"
+    },
+    {
+     "domanda": "Quale autorità vigila in Italia sulla protezione dei dati personali?",
+     "opzioni": [
+      "La Corte dei conti europea",
+      "L'Organizzazione per l'alimentazione e l'agricoltura",
+      "Il Garante per la protezione dei dati personali",
+      "Il consiglio comunale di ciascuna città"
+     ],
+     "corretta": 2,
+     "spiegazione": "Al Garante ci si può rivolgere se si ritiene che i propri dati siano trattati in modo scorretto.",
+     "categoria": "Società digitale"
+    },
+    {
+     "domanda": "Su quale principio si basa il regolamento europeo sull'intelligenza artificiale?",
+     "opzioni": [
+      "Nessuna regola, per non frenare le aziende",
+      "Regole più severe per gli usi più rischiosi",
+      "Divieto totale di ogni intelligenza artificiale",
+      "Regole valide soltanto per i videogiochi"
+     ],
+     "corretta": 1,
+     "spiegazione": "Il regolamento del 2024 vieta alcuni usi, regola severamente quelli ad alto rischio e chiede trasparenza.",
+     "categoria": "Società digitale"
+    },
+    {
+     "domanda": "Che cosa sono i punti di facilitazione digitale?",
+     "opzioni": [
+      "Luoghi dove ricevere aiuto per usare i servizi digitali",
+      "Uffici dove si pagano le tasse in contanti",
+      "Antenne che rendono più veloce il Wi-Fi di casa",
+      "Negozi dove si comprano computer a prezzo scontato"
+     ],
+     "corretta": 0,
+     "spiegazione": "Servono a ridurre il divario digitale aiutando chi ha meno dimestichezza con la tecnologia.",
+     "categoria": "Società digitale"
+    },
+    {
+     "domanda": "Il digitale ha un impatto sull'ambiente?",
+     "opzioni": [
+      "Solo i televisori, mentre computer e telefoni non consumano nulla",
+      "No: tutto ciò che è digitale non consuma energia né materiali",
+      "Solo quando si stampa, perché si usa la carta",
+      "Sì: i centri dati consumano molta energia e i dispositivi diventano rifiuti"
+     ],
+     "corretta": 3,
+     "spiegazione": "Usare a lungo i dispositivi e riciclarli bene riduce l'impatto ambientale del digitale.",
+     "categoria": "Società digitale"
+    },
+    {
+     "domanda": "In medicina, che ruolo ha l'intelligenza artificiale?",
+     "opzioni": [
+      "Nessuno: in medicina non viene mai utilizzata",
+      "Sostituisce del tutto i medici negli ospedali",
+      "Può aiutare i medici, ma la decisione resta al professionista",
+      "Prescrive i farmaci da sola, senza alcun controllo"
+     ],
+     "corretta": 2,
+     "spiegazione": "L'IA è uno strumento di supporto: la responsabilità resta alle persone.",
+     "categoria": "Società digitale"
+    },
+    {
+     "domanda": "Che cosa significa transizione digitale?",
+     "opzioni": [
+      "Il passaggio di molti servizi dalla carta ai sistemi digitali",
+      "Lo spegnimento di Internet durante la notte per risparmiare",
+      "Il trasferimento degli uffici pubblici in un'altra città",
+      "Il passaggio dalla televisione in bianco e nero a quella a colori"
+     ],
+     "corretta": 0,
+     "spiegazione": "Pagamenti, certificati e prenotazioni si fanno sempre più spesso online.",
+     "categoria": "Società digitale"
+    }
+   ]
+  }
+ ]
+}

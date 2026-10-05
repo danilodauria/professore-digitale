@@ -19,7 +19,7 @@ FORMATO_VERSIONE = 1
 MAX_BYTES = 2 * 1024 * 1024
 RE_ID = re.compile(r"^[a-z0-9][a-z0-9-]{1,48}$")
 RE_VER = re.compile(r"^\d+\.\d+(\.\d+)?$")
-PALESTRA = ("click", "dblclick", "drag", "typing")
+PALESTRA = ("click", "dblclick", "drag", "typing", "scroll", "rightclick", "copypaste", "select", "keys", "memory", "scam")
 
 MODELLO = {
     "formato": FORMATO,
@@ -123,8 +123,13 @@ def valida(pack, versione_app=None):
         e.add("domande", "deve essere un elenco"); domande = []
     if not isinstance(lezioni, list):
         e.add("lezioni", "deve essere un elenco"); lezioni = []
-    if not domande and not lezioni:
-        e.add("pacchetto", "serve almeno una domanda o una lezione")
+    prove = pack.get("prove", [])
+    if not isinstance(prove, list):
+        e.add("prove", "deve essere un elenco"); prove = []
+    if not domande and not lezioni and not prove:
+        e.add("pacchetto", "serve almeno una domanda, una lezione o una prova")
+    if len(prove) > 20:
+        e.add("prove", "troppe (max 20)")
     if len(domande) > 2000:
         e.add("domande", "troppe (max 2000)")
     if len(lezioni) > 200:
@@ -182,6 +187,43 @@ def valida(pack, versione_app=None):
                 e.add(dq, "deve essere un oggetto"); continue
             _testo(e, q, "domanda", dq, True, 300)
             _testo(e, q, "spiegazione", dq, True, 600)
+            op = q.get("opzioni")
+            if not isinstance(op, list) or not 2 <= len(op) <= 6 or not all(isinstance(x, str) and x for x in op):
+                e.add(dq + ".opzioni", "elenco di 2-6 risposte"); op = []
+            c = q.get("corretta")
+            if not isinstance(c, int) or isinstance(c, bool) or not (0 <= c < max(1, len(op))):
+                e.add(dq + ".corretta", "numero della risposta giusta, contando da 0")
+    pids = set()
+    for i, P in enumerate(prove[:20]):
+        dove = "prove[%d]" % i
+        if not isinstance(P, dict):
+            e.add(dove, "deve essere un oggetto"); continue
+        pid_ = P.get("id")
+        if not isinstance(pid_, str) or not RE_ID.match(pid_):
+            e.add(dove + ".id", "solo lettere minuscole, cifre e trattini")
+        elif pid_ in pids:
+            e.add(dove + ".id", "ripetuto")
+        pids.add(pid_)
+        _testo(e, P, "titolo", dove, True, 120)
+        _testo(e, P, "icona", dove, False, 16)
+        _testo(e, P, "descrizione", dove, False, 600)
+        _testo(e, P, "attestato", dove, False, 120)
+        n = P.get("domande_per_prova", 20)
+        if not isinstance(n, int) or isinstance(n, bool) or not 5 <= n <= 100:
+            e.add(dove + ".domande_per_prova", "numero intero tra 5 e 100")
+        sg = P.get("soglia", 0.7)
+        if not isinstance(sg, (int, float)) or isinstance(sg, bool) or not 0.5 <= sg <= 1:
+            e.add(dove + ".soglia", "numero tra 0.5 e 1 (es. 0.7 = 70%)")
+        dd = P.get("domande")
+        if not isinstance(dd, list) or not 5 <= len(dd) <= 1000:
+            e.add(dove + ".domande", "elenco di 5-1000 domande"); dd = []
+        for j, q in enumerate(dd):
+            dq = "%s.domande[%d]" % (dove, j)
+            if not isinstance(q, dict):
+                e.add(dq, "deve essere un oggetto"); continue
+            _testo(e, q, "domanda", dq, True, 300)
+            _testo(e, q, "spiegazione", dq, True, 600)
+            _testo(e, q, "categoria", dq, False, 60)
             op = q.get("opzioni")
             if not isinstance(op, list) or not 2 <= len(op) <= 6 or not all(isinstance(x, str) and x for x in op):
                 e.add(dq + ".opzioni", "elenco di 2-6 risposte"); op = []

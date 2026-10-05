@@ -1,0 +1,1861 @@
+{
+ "formato": "professore-digitale-contenuti",
+ "formato_versione": 1,
+ "id": "cultura-geografia",
+ "titolo": "Cultura generale · Geografia",
+ "versione": "1.0.0",
+ "autore": "Danilo D'Auria",
+ "descrizione": "Un viaggio nella geografia per tutti: la Terra e le stagioni, l'Italia fisica, le 20 regioni con i capoluoghi, l'Europa e i suoi Paesi, e come leggere una mappa, anche sul telefono. Cinque lezioni, trenta risposte nella guida e il Grande Quiz di Geografia con attestato.",
+ "richiede_app": "3.0.0",
+ "suggerimenti": [
+  "Perché ci sono le stagioni?",
+  "Qual è il fiume più lungo d'Italia?",
+  "Quali sono i capoluoghi di regione?",
+  "Cos'è l'Unione Europea?",
+  "Come trovo il nord senza bussola?"
+ ],
+ "domande": [
+  {
+   "domanda": "Perché ci sono le stagioni?",
+   "parole_chiave": [
+    "stagioni",
+    "estate",
+    "inverno",
+    "perché fa caldo d'estate",
+    "asse terrestre",
+    "inclinazione"
+   ],
+   "risposta": "Le stagioni dipendono dall'**inclinazione dell'asse terrestre**, di circa 23 gradi e mezzo, e non dalla distanza dal Sole: anzi, la Terra è più vicina al Sole all'inizio di gennaio.\n\nDurante il viaggio attorno al Sole, ora l'emisfero nord ora quello sud riceve raggi più diretti e giornate più lunghe: lì è **estate**. Per questo, quando in Italia è estate, in Australia è **inverno**.",
+   "schema": "flowchart LR\n  A[\"🌍 Asse inclinato\"] --> B[\"☀️ Raggi più diretti\"] --> C[\"🏖️ Estate\"]",
+   "lezione": "terra"
+  },
+  {
+   "domanda": "Perché esiste l'anno bisestile?",
+   "parole_chiave": [
+    "anno bisestile",
+    "bisestile",
+    "29 febbraio",
+    "febbraio 29 giorni"
+   ],
+   "risposta": "La Terra impiega **circa 365 giorni e 6 ore** per fare il giro completo attorno al Sole. Il calendario però conta 365 giorni.\n\nQuelle 6 ore in più, dopo quattro anni, diventano quasi un giorno intero. Per rimettere in pari il calendario con il Sole, **ogni quattro anni** si aggiunge il **29 febbraio**: è l'anno bisestile. Ci sono rare eccezioni negli anni che chiudono un secolo, decise per correggere un piccolo avanzo.",
+   "lezione": "terra"
+  },
+  {
+   "domanda": "Quanti sono i continenti?",
+   "parole_chiave": [
+    "continenti",
+    "quanti continenti",
+    "cinque continenti",
+    "sette continenti"
+   ],
+   "risposta": "Dipende da come si contano. Di solito si dice **cinque continenti abitati**: **Europa, Asia, Africa, America e Oceania**, gli stessi ricordati dai cinque cerchi olimpici.\n\nA questi si aggiunge l'**Antartide**, il continente ghiacciato del Polo Sud. Se poi si divide l'America in **America del Nord** e **America del Sud**, si arriva a **sette**.\n\nIl continente più grande è l'**Asia**, il più piccolo l'**Oceania**.",
+   "lezione": "terra"
+  },
+  {
+   "domanda": "Quali sono gli oceani?",
+   "parole_chiave": [
+    "oceani",
+    "oceano più grande",
+    "pacifico",
+    "atlantico",
+    "oceano indiano"
+   ],
+   "risposta": "Gli oceani sono cinque:\n\n1. **Pacifico**, il più grande e profondo;\n2. **Atlantico**, tra Europa, Africa e America;\n3. **Indiano**, tra Africa, Asia e Oceania;\n4. **Glaciale Artico**, attorno al Polo Nord;\n5. **Antartico**, attorno all'Antartide.\n\nIn tutto le acque coprono circa il **71%** della superficie terrestre: per questo la Terra è chiamata il pianeta blu.",
+   "lezione": "terra"
+  },
+  {
+   "domanda": "Perché c'è il giorno e la notte?",
+   "parole_chiave": [
+    "giorno e notte",
+    "rotazione",
+    "perché fa buio",
+    "terra gira"
+   ],
+   "risposta": "La Terra gira su se stessa come una trottola, da ovest verso est, e compie un giro in **circa 24 ore**: è la **rotazione**.\n\nIn ogni momento metà del pianeta è rivolta verso il Sole e lì è **giorno**; l'altra metà è al buio e lì è **notte**. Girando, ogni luogo passa dalla luce al buio e poi di nuovo alla luce. Per questo vediamo il Sole sorgere a est e tramontare a ovest.",
+   "lezione": "terra"
+  },
+  {
+   "domanda": "Cos'è l'equatore?",
+   "parole_chiave": [
+    "equatore",
+    "emisfero",
+    "emisfero nord",
+    "emisfero sud",
+    "linea immaginaria"
+   ],
+   "risposta": "L'**equatore** è una linea immaginaria che fa il giro della Terra a metà strada tra il Polo Nord e il Polo Sud. È lungo **circa 40.000 chilometri**.\n\nDivide la Terra in due metà: l'**emisfero nord**, o boreale, dove si trova l'Italia, e l'**emisfero sud**, o australe. Nei Paesi vicino all'equatore fa caldo tutto l'anno e le giornate durano quasi sempre circa dodici ore.",
+   "lezione": "terra"
+  },
+  {
+   "domanda": "Cosa sono i fusi orari?",
+   "parole_chiave": [
+    "fuso orario",
+    "fusi orari",
+    "ora diversa",
+    "orario estero",
+    "differenza di ora"
+   ],
+   "risposta": "Poiché la Terra gira, il mezzogiorno non arriva ovunque nello stesso momento. Per questo il mondo è diviso in **24 fusi orari**, uno per ogni ora del giorno.\n\nQuando si viaggia verso **est** le lancette vanno spostate **avanti**, verso **ovest** vanno spostate **indietro**. L'Italia usa l'**ora dell'Europa centrale**, la stessa di Francia e Germania. Il telefono di solito aggiorna l'ora da solo quando cambiate Paese.",
+   "lezione": "terra"
+  },
+  {
+   "domanda": "Qual è la montagna più alta d'Italia?",
+   "parole_chiave": [
+    "montagna più alta",
+    "monte bianco",
+    "vetta più alta",
+    "cima più alta"
+   ],
+   "risposta": "È il **Monte Bianco**, che supera i **4.800 metri**. Si trova sulle Alpi, in **Valle d'Aosta**, al confine con la Francia, ed è la vetta più alta di tutte le Alpi.\n\nAltre grandi montagne italiane sono il **Monte Rosa**, il **Cervino** e il **Gran Paradiso**. Negli Appennini, invece, la cima più alta è il **Corno Grande** del Gran Sasso, in Abruzzo, di circa 2.900 metri.",
+   "lezione": "italia-fisica"
+  },
+  {
+   "domanda": "Qual è il fiume più lungo d'Italia?",
+   "parole_chiave": [
+    "fiume più lungo",
+    "po",
+    "fiumi italiani",
+    "fiume po"
+   ],
+   "risposta": "È il **Po**, lungo **circa 650 km**. Nasce dal **Monviso**, in Piemonte, attraversa tutta la **Pianura Padana** e sfocia nel **Mar Adriatico** con un grande **delta**, tra Veneto ed Emilia-Romagna.\n\nGli altri fiumi principali sono l'**Adige**, che passa per Trento e Verona, il **Tevere**, che attraversa Roma, e l'**Arno**, che bagna Firenze e Pisa.",
+   "schema": "flowchart LR\n  A[\"⛰️ Monviso\"] --> B[\"🌾 Pianura Padana\"] --> C[\"🌊 Delta sull'Adriatico\"]",
+   "lezione": "italia-fisica"
+  },
+  {
+   "domanda": "Qual è il lago più grande d'Italia?",
+   "parole_chiave": [
+    "lago più grande",
+    "lago di garda",
+    "laghi italiani",
+    "garda",
+    "lago maggiore"
+   ],
+   "risposta": "È il **Lago di Garda**, tra **Lombardia, Veneto e Trentino**. Seguono il **Lago Maggiore** e il **Lago di Como**.\n\nQuesti grandi laghi del nord sono stati scavati dagli antichi **ghiacciai** e hanno un clima mite, tanto che sulle loro rive crescono ulivi e limoni.\n\nNell'Italia centrale ci sono il **Trasimeno**, in Umbria, e laghi nati dentro antichi vulcani, come **Bolsena** e **Bracciano** nel Lazio.",
+   "lezione": "italia-fisica"
+  },
+  {
+   "domanda": "Quali sono i vulcani attivi in Italia?",
+   "parole_chiave": [
+    "vulcani",
+    "vulcani attivi",
+    "etna",
+    "vesuvio",
+    "stromboli",
+    "eruzione"
+   ],
+   "risposta": "I vulcani più conosciuti sono:\n\n- l'**Etna**, in Sicilia, il vulcano attivo più alto d'Italia;\n- lo **Stromboli**, nelle Eolie, con piccole eruzioni quasi continue;\n- il **Vesuvio**, vicino a Napoli, famoso per l'eruzione del **79 dopo Cristo** che seppellì Pompei ed Ercolano;\n- **Vulcano**, nelle isole Eolie;\n- i **Campi Flegrei**, vicino a Pozzuoli.\n\nQueste zone sono sorvegliate giorno e notte dagli scienziati. Chi vive lì segua sempre le indicazioni della Protezione civile.",
+   "lezione": "italia-fisica"
+  },
+  {
+   "domanda": "Quali sono le isole più grandi d'Italia?",
+   "parole_chiave": [
+    "isole",
+    "isole italiane",
+    "sicilia",
+    "sardegna",
+    "isola più grande",
+    "elba"
+   ],
+   "risposta": "La più grande è la **Sicilia**, che è anche l'isola più grande di tutto il Mar Mediterraneo. Al secondo posto c'è la **Sardegna** e al terzo l'**Elba**, in Toscana, famosa anche perché vi fu esiliato Napoleone.\n\nTra le isole minori più note ci sono **Capri** e **Ischia** in Campania, le **isole Eolie** e le **Egadi** vicino alla Sicilia, e l'arcipelago della **Maddalena** in Sardegna.",
+   "lezione": "italia-fisica"
+  },
+  {
+   "domanda": "Cosa sono gli Appennini?",
+   "parole_chiave": [
+    "appennini",
+    "catena montuosa",
+    "gran sasso",
+    "montagne italiane"
+   ],
+   "risposta": "Gli **Appennini** sono la catena di montagne che percorre l'Italia da nord a sud, dalla **Liguria** alla **Calabria**, e prosegue in **Sicilia**: sono come la spina dorsale dello stivale.\n\nSono più bassi delle Alpi e spesso hanno forme arrotondate. La vetta più alta è il **Corno Grande**, nel massiccio del **Gran Sasso**, in Abruzzo, di circa **2.900 metri**. Dagli Appennini nascono fiumi come il Tevere e l'Arno.",
+   "lezione": "italia-fisica"
+  },
+  {
+   "domanda": "Quali Stati confinano con l'Italia?",
+   "parole_chiave": [
+    "confini",
+    "confina",
+    "stati confinanti",
+    "frontiera",
+    "paesi vicini"
+   ],
+   "risposta": "Lungo le Alpi l'Italia confina con quattro Stati: **Francia**, **Svizzera**, **Austria** e **Slovenia**.\n\nInoltre, dentro il territorio italiano si trovano due piccoli Stati indipendenti: la **Repubblica di San Marino**, tra Emilia-Romagna e Marche, e la **Città del Vaticano**, dentro Roma.\n\nIl resto dei confini è fatto dal mare: Ligure, Tirreno, Ionio e Adriatico.",
+   "lezione": "italia-fisica"
+  },
+  {
+   "domanda": "Quante sono le regioni italiane?",
+   "parole_chiave": [
+    "regioni",
+    "quante regioni",
+    "regioni italiane",
+    "elenco regioni"
+   ],
+   "risposta": "Le regioni italiane sono **20**.\n\n- **Nord**: Valle d'Aosta, Piemonte, Liguria, Lombardia, Trentino-Alto Adige, Veneto, Friuli-Venezia Giulia, Emilia-Romagna.\n- **Centro**: Toscana, Umbria, Marche, Lazio.\n- **Sud e isole**: Abruzzo, Molise, Campania, Puglia, Basilicata, Calabria, Sicilia, Sardegna.\n\nCinque di loro sono a **statuto speciale**.",
+   "lezione": "italia-regioni"
+  },
+  {
+   "domanda": "Quali sono le regioni a statuto speciale?",
+   "parole_chiave": [
+    "statuto speciale",
+    "regioni autonome",
+    "autonomia",
+    "regione speciale"
+   ],
+   "risposta": "Le regioni a statuto speciale sono cinque: **Valle d'Aosta**, **Trentino-Alto Adige**, **Friuli-Venezia Giulia**, **Sicilia** e **Sardegna**.\n\nHanno più **autonomia** delle altre per ragioni storiche, geografiche o di lingua: per esempio in Valle d'Aosta si parla anche il francese, in Alto Adige anche il tedesco, e Sicilia e Sardegna sono isole con una lunga storia propria. La loro autonomia è prevista dalla Costituzione.",
+   "lezione": "italia-regioni"
+  },
+  {
+   "domanda": "Quali sono i capoluoghi di regione?",
+   "parole_chiave": [
+    "capoluoghi",
+    "capoluogo",
+    "capoluoghi di regione",
+    "capitale della regione"
+   ],
+   "risposta": "Eccoli, da nord a sud:\n\nAosta, Torino, Genova, Milano, Trento, Venezia, Trieste, Bologna, Firenze, Perugia, Ancona, Roma, L'Aquila, Campobasso, Napoli, Bari, Potenza, Catanzaro, Palermo e Cagliari.\n\nI più spesso confusi: in **Calabria** è **Catanzaro**, non Reggio; in **Basilicata** è **Potenza**, non Matera; in **Abruzzo** è **L'Aquila**, non Pescara. **Roma** è sia capoluogo del Lazio sia capitale d'Italia.",
+   "lezione": "italia-regioni"
+  },
+  {
+   "domanda": "Che differenza c'è tra regione, provincia e comune?",
+   "parole_chiave": [
+    "regione provincia comune",
+    "provincia",
+    "comune",
+    "città metropolitana",
+    "enti locali"
+   ],
+   "risposta": "Pensate a delle scatole una dentro l'altra.\n\n- Lo **Stato** è la scatola più grande.\n- Dentro ci sono le **20 regioni**, che si occupano per esempio di sanità e trasporti locali.\n- Le regioni sono divise in **province** e **città metropolitane**.\n- Il **comune** è l'ente più vicino ai cittadini: anagrafe, carta d'identità, scuole, strade del paese.\n\nPer i servizi di tutti i giorni, il primo ufficio a cui rivolgersi è di solito il proprio comune.",
+   "schema": "flowchart TD\n  S[\"🇮🇹 Stato\"] --> R[\"Regione\"] --> P[\"Provincia\"] --> C[\"🏠 Comune\"]",
+   "lezione": "italia-regioni"
+  },
+  {
+   "domanda": "Quali regioni italiane non hanno il mare?",
+   "parole_chiave": [
+    "regioni senza mare",
+    "senza mare",
+    "senza sbocco sul mare",
+    "regioni interne"
+   ],
+   "risposta": "Le regioni senza sbocco sul mare sono cinque:\n\n1. **Valle d'Aosta**\n2. **Piemonte**\n3. **Lombardia**\n4. **Trentino-Alto Adige**\n5. **Umbria**\n\nLe prime quattro sono al nord, tra le Alpi e la pianura. L'**Umbria** è l'unica dell'Italia centrale e peninsulare senza mare, ed è chiamata il «cuore verde d'Italia». In compenso, molte di queste regioni hanno grandi laghi, come il Garda o il Trasimeno.",
+   "lezione": "italia-regioni"
+  },
+  {
+   "domanda": "Qual è la regione più grande d'Italia?",
+   "parole_chiave": [
+    "regione più grande",
+    "regione più piccola",
+    "sicilia più grande",
+    "valle d'aosta più piccola"
+   ],
+   "risposta": "Per estensione la regione più grande è la **Sicilia**, seguita di poco dal **Piemonte**. La più piccola è la **Valle d'Aosta**, tra le montagne più alte delle Alpi.\n\nUn'altra curiosità: la regione più «giovane» è il **Molise**, che si è separato dall'Abruzzo nel **1963**. Prima esisteva un'unica regione chiamata Abruzzi e Molise.",
+   "lezione": "italia-regioni"
+  },
+  {
+   "domanda": "Dove finisce l'Europa?",
+   "parole_chiave": [
+    "confini europa",
+    "dove finisce l'europa",
+    "urali",
+    "eurasia",
+    "europa e asia"
+   ],
+   "risposta": "L'Europa è unita all'Asia in un'unica massa di terra, l'**Eurasia**. Il confine tra i due continenti è stabilito per **convenzione**: si fa passare per i **Monti Urali**, il fiume Ural, il **Mar Caspio** e i **monti del Caucaso**.\n\nGli altri confini sono di mare: il **Mar Glaciale Artico** a nord, l'**Oceano Atlantico** a ovest e il **Mar Mediterraneo** a sud. A Istanbul lo stretto del **Bosforo** separa la parte europea della città da quella asiatica.",
+   "lezione": "europa"
+  },
+  {
+   "domanda": "Qual è il fiume più lungo d'Europa?",
+   "parole_chiave": [
+    "fiume più lungo d'europa",
+    "volga",
+    "danubio",
+    "fiumi europei",
+    "reno"
+   ],
+   "risposta": "Il fiume più lungo d'Europa è il **Volga**, in Russia, che sfocia nel **Mar Caspio**.\n\nAl secondo posto c'è il **Danubio**: nasce in Germania, attraversa molti Paesi e bagna quattro capitali, **Vienna, Bratislava, Budapest e Belgrado**, prima di sfociare nel Mar Nero.\n\nAltri fiumi famosi sono il **Reno**, la **Senna** che attraversa Parigi e il **Tamigi** che attraversa Londra.",
+   "lezione": "europa"
+  },
+  {
+   "domanda": "Cos'è l'Unione Europea?",
+   "parole_chiave": [
+    "unione europea",
+    "ue",
+    "europa unita",
+    "trattati di roma",
+    "parlamento europeo"
+   ],
+   "risposta": "L'**Unione Europea** è un'unione di Paesi europei che hanno deciso di collaborare su economia, commercio, ambiente, diritti dei cittadini e molto altro.\n\nTutto inizia con i **Trattati di Roma** del **1957**, firmati da sei Paesi fondatori, tra cui l'**Italia**. Il nome Unione Europea arriva con il **Trattato di Maastricht** del 1992.\n\nIl **Parlamento europeo** è eletto dai cittadini ogni cinque anni. La bandiera ha **12 stelle dorate** su fondo blu.",
+   "schema": "flowchart LR\n  A[\"📜 1957 Trattati di Roma\"] --> B[\"🤝 1992 Maastricht\"] --> C[\"💶 2002 Euro\"]",
+   "lezione": "europa"
+  },
+  {
+   "domanda": "Quando è nato l'euro?",
+   "parole_chiave": [
+    "euro",
+    "lira",
+    "moneta unica",
+    "quando è arrivato l'euro"
+   ],
+   "risposta": "L'euro è nato come moneta per i conti tra banche nel **1999**. Le **monete e le banconote** in euro sono entrate nelle nostre tasche il **1° gennaio 2002**, prendendo il posto della **lira**.\n\nPer il cambio si usava un valore fisso: **1 euro valeva 1.936,27 lire**.\n\nNon tutti i Paesi dell'Unione Europea usano l'euro, e alcuni piccoli Stati che non fanno parte dell'Unione, come San Marino e il Vaticano, lo usano per accordo.",
+   "lezione": "europa"
+  },
+  {
+   "domanda": "Cos'è lo spazio Schengen?",
+   "parole_chiave": [
+    "schengen",
+    "frontiere",
+    "viaggiare in europa",
+    "controlli alla frontiera",
+    "passaporto europa"
+   ],
+   "risposta": "Lo **spazio Schengen** prende il nome da un paesino del **Lussemburgo** dove nel **1985** fu firmato il primo accordo. Tra i Paesi che ne fanno parte si viaggia **senza controlli fissi alle frontiere**.\n\nNe fanno parte molti Paesi dell'Unione Europea e anche alcuni che non ne fanno parte, come la **Svizzera** e la **Norvegia**.\n\nAttenzione: anche senza controlli fissi, dovete sempre avere con voi una **carta d'identità valida per l'espatrio** o il passaporto.",
+   "lezione": "europa"
+  },
+  {
+   "domanda": "Quali sono gli Stati più piccoli d'Europa?",
+   "parole_chiave": [
+    "stati piccoli",
+    "vaticano",
+    "san marino",
+    "monaco",
+    "liechtenstein",
+    "andorra"
+   ],
+   "risposta": "L'Europa ha alcuni Stati piccolissimi:\n\n- la **Città del Vaticano**, dentro Roma, lo Stato più piccolo del mondo;\n- il **Principato di Monaco**, sulla Costa Azzurra;\n- la **Repubblica di San Marino**, tra Emilia-Romagna e Marche, una delle repubbliche più antiche del mondo;\n- il **Liechtenstein**, tra Svizzera e Austria;\n- **Malta**, isola nel Mediterraneo, e **Andorra**, tra Francia e Spagna, sui Pirenei.",
+   "lezione": "europa"
+  },
+  {
+   "domanda": "Come trovo il nord senza bussola?",
+   "parole_chiave": [
+    "trovare il nord",
+    "orientarsi",
+    "senza bussola",
+    "stella polare",
+    "sole"
+   ],
+   "risposta": "Ci sono due metodi affidabili.\n\n- **Di giorno, con il Sole**: sorge più o meno a **est** e tramonta più o meno a **ovest**. In Italia verso mezzogiorno, o verso l'una con l'ora legale, il Sole è a **sud**: voltandogli le spalle, avete davanti il **nord**.\n- **Di notte, con le stelle**: cercate il **Grande Carro** e prolungate di circa cinque volte il suo lato posteriore: arrivate alla **Stella Polare**, che indica il nord.\n\nIl muschio sugli alberi, invece, non è un indicatore sicuro.",
+   "lezione": "mappe-orientarsi"
+  },
+  {
+   "domanda": "Cosa sono latitudine e longitudine?",
+   "parole_chiave": [
+    "latitudine",
+    "longitudine",
+    "coordinate",
+    "paralleli",
+    "meridiani",
+    "greenwich"
+   ],
+   "risposta": "Sono le **coordinate geografiche**, una specie di indirizzo di ogni punto della Terra.\n\n- La **latitudine** dice quanto siete a **nord o a sud dell'equatore**, da 0 a 90 gradi. Si legge sui **paralleli**.\n- La **longitudine** dice quanto siete a **est o a ovest del meridiano di Greenwich**, vicino a Londra. Si legge sui **meridiani**.\n\nRoma si trova a circa **42 gradi nord** e **12 gradi est**. Le mappe del telefono usano proprio questi numeri.",
+   "lezione": "mappe-orientarsi"
+  },
+  {
+   "domanda": "Cosa vuol dire la scala di una carta geografica?",
+   "parole_chiave": [
+    "scala",
+    "scala della carta",
+    "1:25000",
+    "1:100000",
+    "legenda",
+    "cartina"
+   ],
+   "risposta": "La **scala** dice quante volte la realtà è stata **rimpicciolita** sulla carta.\n\nPer esempio **1:100.000** significa che 1 centimetro sulla carta corrisponde a 100.000 centimetri nella realtà, cioè **1 chilometro**. Con **1:25.000**, 1 centimetro vale **250 metri**: è la scala tipica delle carte per escursioni.\n\nAccanto alla scala c'è la **legenda**, che spiega simboli e colori: verde per la pianura, marrone per i monti, azzurro per le acque.",
+   "lezione": "mappe-orientarsi"
+  },
+  {
+   "domanda": "Come si usa una mappa sul telefono?",
+   "parole_chiave": [
+    "mappa telefono",
+    "navigatore",
+    "gps",
+    "mappe digitali",
+    "percorso",
+    "come arrivare"
+   ],
+   "risposta": "1. Aprite l'app delle **mappe** e permettetele di usare la **posizione**.\n2. Il **pallino** sulla mappa siete voi: lo calcola il **GPS** con l'aiuto dei satelliti.\n3. Scrivete l'**indirizzo** nella casella di ricerca.\n4. Scegliete **percorso** e mezzo: a piedi, in auto o con i mezzi pubblici.\n5. Seguite le indicazioni, ma ricordate che la **segnaletica stradale** ha sempre la precedenza.\n\nPrima di partire, controllate di avere la batteria carica.",
+   "schema": "flowchart LR\n  A[\"📍 Attivo la posizione\"] --> B[\"🔎 Scrivo l'indirizzo\"] --> C[\"🗺️ Scelgo il percorso\"] --> D[\"🚶 Parto\"]",
+   "lezione": "mappe-orientarsi"
+  }
+ ],
+ "lezioni": [
+  {
+   "id": "terra",
+   "icona": "🌍",
+   "titolo": "La Terra: forma, movimenti e stagioni",
+   "livello": "Geografia",
+   "minuti": 20,
+   "obiettivo": "Capire com'è fatta la Terra, perché ci sono il giorno, la notte e le stagioni, e conoscere continenti e oceani.",
+   "palestra": "",
+   "passi": [
+    {
+     "titolo": "Una grande palla un po' schiacciata",
+     "testo": "La Terra ha la forma di una **sfera leggermente schiacciata ai poli**, un po' come un'arancia. Il giro completo all'altezza dell'equatore misura **circa 40.000 chilometri**.\n\nImmaginate un grande spiedo che la attraversa da nord a sud: è l'**asse terrestre**. Le due estremità sono il **Polo Nord** e il **Polo Sud**.\n\nA metà strada fra i due poli passa una linea immaginaria, l'**equatore**, che divide la Terra in due metà: l'**emisfero nord** (o boreale), dove si trova l'Italia, e l'**emisfero sud** (o australe), dove si trovano per esempio l'Argentina e l'Australia.",
+     "schema": "flowchart TD\n  A[\"🧊 Polo Nord\"] --> B[\"Emisfero nord\"] --> C[\"〰️ Equatore\"] --> D[\"Emisfero sud\"] --> E[\"🧊 Polo Sud\"]"
+    },
+    {
+     "titolo": "La rotazione: il giorno e la notte",
+     "testo": "La Terra gira su se stessa come una trottola, da **ovest verso est**. Un giro completo dura **circa 24 ore**: questo movimento si chiama **rotazione**.\n\nMentre gira, una metà della Terra è illuminata dal Sole (lì è **giorno**) e l'altra metà è al buio (lì è **notte**).\n\nPoiché la Terra gira verso est, a noi sembra che sia il Sole a muoversi: lo vediamo **sorgere a est** e **tramontare a ovest**. In realtà siamo noi, sulla Terra, a girare.",
+     "consiglio": "Quando in Italia è mezzogiorno, dall'altra parte del mondo, per esempio in Nuova Zelanda, è già notte."
+    },
+    {
+     "titolo": "La rivoluzione: l'anno",
+     "testo": "Oltre a girare su se stessa, la Terra compie un lungo viaggio **intorno al Sole**. Questo movimento si chiama **rivoluzione** e dura **circa 365 giorni e 6 ore**: è il nostro **anno**.\n\nQuelle 6 ore in più, sommate per quattro anni, fanno quasi un giorno intero. Per questo, **ogni quattro anni** (con qualche rara eccezione) il calendario aggiunge un giorno a febbraio: è l'**anno bisestile**, con il **29 febbraio**.\n\nLa strada che la Terra percorre attorno al Sole si chiama **orbita** ed è quasi circolare, appena un po' allungata."
+    },
+    {
+     "titolo": "Perché ci sono le stagioni",
+     "testo": "Molti pensano che l'estate arrivi quando la Terra è più vicina al Sole. **Non è così**: anzi, la Terra è più vicina al Sole proprio all'inizio di gennaio!\n\nLe stagioni dipendono dall'**inclinazione dell'asse terrestre**, di circa **23 gradi e mezzo**. Durante l'anno, ora l'emisfero nord ora quello sud è rivolto di più verso il Sole: riceve raggi più diretti e giornate più lunghe, e lì è **estate**.\n\nPer questo, quando da noi è estate, in Australia e in Argentina è **inverno**, e viceversa.\n\n- **Solstizio d'estate** (intorno al 21 giugno): il giorno più lungo dell'anno da noi.\n- **Solstizio d'inverno** (intorno al 21 dicembre): il giorno più corto.\n- **Equinozi** (intorno al 20 marzo e al 22 settembre): giorno e notte durano quasi uguali.",
+     "consiglio": "Un modo semplice per ricordarlo: le stagioni sono una questione di **inclinazione**, non di distanza."
+    },
+    {
+     "titolo": "Continenti e oceani",
+     "testo": "Circa il **71%** della superficie terrestre è coperto dall'acqua: per questo la Terra è chiamata il **pianeta blu**.\n\nI grandi **oceani** sono cinque: **Pacifico** (il più grande), **Atlantico**, **Indiano**, **Glaciale Artico** e **Antartico**.\n\nLe terre emerse formano i **continenti**: **Europa, Asia, Africa, America, Oceania** e **Antartide**, il continente ghiacciato del Polo Sud. Spesso l'America si divide in **America del Nord** e **America del Sud**, e così i continenti diventano sette: dipende dall'abitudine di chi li conta.\n\nIl continente più grande è l'**Asia**; il più piccolo è l'**Oceania**.",
+     "schema": "flowchart LR\n  T[\"🌍 Terra\"] --> A[\"🌊 Circa 71% acqua\"]\n  T --> B[\"🏔️ Circa 29% terre emerse\"]",
+     "consiglio": "I cinque cerchi della bandiera olimpica ricordano i cinque continenti abitati uniti dallo sport."
+    }
+   ],
+   "quiz": [
+    {
+     "domanda": "Quanto dura un giro completo della Terra su se stessa?",
+     "opzioni": [
+      "Circa una settimana",
+      "Circa 24 ore",
+      "Circa 365 giorni"
+     ],
+     "corretta": 1,
+     "spiegazione": "Il giro su se stessa, la rotazione, dura circa 24 ore e dà il giorno e la notte."
+    },
+    {
+     "domanda": "Da cosa dipendono le stagioni?",
+     "opzioni": [
+      "Dalle fasi della Luna",
+      "Dalla distanza tra la Terra e il Sole",
+      "Dall'inclinazione dell'asse terrestre"
+     ],
+     "corretta": 2,
+     "spiegazione": "L'asse inclinato fa sì che ogni emisfero riceva più o meno luce durante l'anno. La distanza dal Sole non c'entra."
+    },
+    {
+     "domanda": "Perché esiste il 29 febbraio?",
+     "opzioni": [
+      "Perché febbraio era troppo corto per gli antichi Romani",
+      "Perché l'anno dura circa 365 giorni e 6 ore",
+      "Per festeggiare una ricorrenza"
+     ],
+     "corretta": 1,
+     "spiegazione": "Le 6 ore in più ogni anno, dopo quattro anni, formano quasi un giorno intero: si aggiunge il 29 febbraio."
+    },
+    {
+     "domanda": "Qual è l'oceano più grande?",
+     "opzioni": [
+      "Il Pacifico",
+      "L'Atlantico",
+      "L'Indiano"
+     ],
+     "corretta": 0,
+     "spiegazione": "Il Pacifico è il più grande e il più profondo degli oceani."
+    },
+    {
+     "domanda": "Quando in Italia è estate, in Australia è…",
+     "opzioni": [
+      "Sempre primavera",
+      "Inverno",
+      "Anche lì estate"
+     ],
+     "corretta": 1,
+     "spiegazione": "L'Australia è nell'emisfero sud: le stagioni sono rovesciate rispetto alle nostre."
+    }
+   ]
+  },
+  {
+   "id": "italia-fisica",
+   "icona": "⛰️",
+   "titolo": "L'Italia fisica: monti, fiumi, laghi e isole",
+   "livello": "Geografia",
+   "minuti": 20,
+   "obiettivo": "Conoscere il paesaggio dell'Italia: le Alpi e gli Appennini, i fiumi e i laghi principali, le isole e i vulcani.",
+   "palestra": "",
+   "passi": [
+    {
+     "titolo": "Uno stivale nel Mediterraneo",
+     "testo": "L'Italia è una **penisola**, cioè una terra circondata dal mare su tre lati, con la famosa forma a **stivale**. Si allunga nel **Mar Mediterraneo**.\n\nI mari che bagnano le coste italiane sono: il **Mar Ligure**, il **Mar Tirreno**, il **Mar Ionio** e il **Mar Adriatico**. A sud, il **Canale di Sicilia** separa la Sicilia dall'Africa.\n\nA nord l'Italia confina con quattro Stati: **Francia, Svizzera, Austria e Slovenia**. Dentro il territorio italiano si trovano inoltre due piccoli Stati indipendenti: la **Repubblica di San Marino** e la **Città del Vaticano**.",
+     "schema": "flowchart TD\n  I[\"🇮🇹 Italia\"] --> F[\"Francia\"]\n  I --> S[\"Svizzera\"]\n  I --> A[\"Austria\"]\n  I --> L[\"Slovenia\"]"
+    },
+    {
+     "titolo": "Le Alpi: il grande arco del nord",
+     "testo": "A nord l'Italia è protetta da un grande arco di montagne: le **Alpi**. Vanno dalla Liguria fino al Friuli-Venezia Giulia e fanno da confine naturale con gli Stati vicini.\n\nLa vetta più alta è il **Monte Bianco**, che supera i **4.800 metri**, al confine con la Francia, in Valle d'Aosta. È la cima più alta delle Alpi.\n\nAltre montagne famose sono il **Monte Rosa**, il **Cervino**, con la sua punta a piramide, e il **Gran Paradiso**. Nelle Alpi orientali si trovano le **Dolomiti**, dalle pareti chiare che al tramonto si colorano di rosa.\n\nIn gran parte dell'Italia il paesaggio è fatto di **montagne e colline**: le pianure sono meno di un quarto del territorio.",
+     "consiglio": "Sotto il Monte Bianco passa un lungo traforo stradale che collega l'Italia e la Francia."
+    },
+    {
+     "titolo": "Gli Appennini: la spina dorsale",
+     "testo": "Gli **Appennini** sono la catena di montagne che percorre tutta la penisola, dalla **Liguria** fino alla **Calabria**, e prosegue in **Sicilia**. Sono come la spina dorsale dello stivale.\n\nSono montagne più basse delle Alpi, spesso dalle forme arrotondate. La vetta più alta è il **Corno Grande**, nel massiccio del **Gran Sasso**, in Abruzzo: circa **2.900 metri**.\n\nTra le Alpi e gli Appennini si stende la **Pianura Padana**, la pianura più grande d'Italia, attraversata dal fiume Po. È una terra fertile, ricca di campi e città.",
+     "schema": "flowchart LR\n  A[\"🏔️ Alpi a nord\"] --> P[\"🌾 Pianura Padana\"] --> B[\"⛰️ Appennini lungo la penisola\"]"
+    },
+    {
+     "titolo": "Fiumi e laghi",
+     "testo": "Il fiume più lungo d'Italia è il **Po**, circa **650 km**. Nasce dal **Monviso**, in Piemonte, attraversa la Pianura Padana e sfocia nel **Mar Adriatico** con un ampio **delta**.\n\nSeguono l'**Adige**, che passa per Trento e Verona, e il **Tevere**, il fiume di **Roma**. L'**Arno** attraversa **Firenze** e **Pisa**.\n\nI fiumi degli Appennini sono di solito più brevi e d'estate possono avere poca acqua.\n\nI laghi più grandi sono al nord, ai piedi delle Alpi, scavati dagli antichi ghiacciai: il **Lago di Garda**, il più grande d'Italia, il **Lago Maggiore** e il **Lago di Como**. Nell'Italia centrale ci sono il **Trasimeno**, in Umbria, e laghi nati dentro antichi vulcani, come quelli di **Bolsena** e **Bracciano**."
+    },
+    {
+     "titolo": "Isole e vulcani",
+     "testo": "Le due isole più grandi d'Italia sono la **Sicilia**, che è anche l'isola più grande del Mediterraneo, e la **Sardegna**. Tra le isole minori ricordiamo l'**Elba**, in Toscana, **Capri** e **Ischia** in Campania, e le **isole Eolie** vicino alla Sicilia.\n\nL'Italia è una terra di **vulcani**:\n\n- l'**Etna**, in Sicilia, il vulcano attivo più alto d'Italia, oltre 3.300 metri, un'altezza che cambia con le eruzioni;\n- il **Vesuvio**, vicino a Napoli, che nel **79 dopo Cristo** seppellì **Pompei** ed **Ercolano**;\n- lo **Stromboli**, con piccole eruzioni continue, chiamato il «faro del Mediterraneo»;\n- **Vulcano**, nelle Eolie, e i **Campi Flegrei**, vicino a Pozzuoli.",
+     "consiglio": "La parola «vulcano» viene proprio dall'isola di Vulcano, che gli antichi immaginavano come la fucina del dio del fuoco."
+    }
+   ],
+   "quiz": [
+    {
+     "domanda": "Qual è la montagna più alta delle Alpi?",
+     "opzioni": [
+      "Il Monte Bianco",
+      "L'Etna",
+      "Il Gran Sasso"
+     ],
+     "corretta": 0,
+     "spiegazione": "Il Monte Bianco supera i 4.800 metri ed è la vetta più alta delle Alpi."
+    },
+    {
+     "domanda": "Qual è il fiume più lungo d'Italia?",
+     "opzioni": [
+      "L'Arno",
+      "Il Tevere",
+      "Il Po"
+     ],
+     "corretta": 2,
+     "spiegazione": "Il Po è lungo circa 650 km e sfocia nell'Adriatico."
+    },
+    {
+     "domanda": "Qual è il lago più grande d'Italia?",
+     "opzioni": [
+      "Il Lago di Garda",
+      "Il Lago Trasimeno",
+      "Il Lago di Bolsena"
+     ],
+     "corretta": 0,
+     "spiegazione": "Il Garda, ai piedi delle Alpi, è il lago più esteso d'Italia."
+    },
+    {
+     "domanda": "Quale vulcano seppellì Pompei nel 79 dopo Cristo?",
+     "opzioni": [
+      "L'Etna",
+      "Il Vesuvio",
+      "Lo Stromboli"
+     ],
+     "corretta": 1,
+     "spiegazione": "L'eruzione del Vesuvio del 79 dopo Cristo seppellì Pompei ed Ercolano sotto metri di materiale vulcanico."
+    },
+    {
+     "domanda": "Con quali Stati confina l'Italia a nord?",
+     "opzioni": [
+      "Francia, Svizzera, Austria e Slovenia",
+      "Spagna, Germania e Grecia",
+      "Francia, Germania e Croazia"
+     ],
+     "corretta": 0,
+     "spiegazione": "Lungo l'arco alpino l'Italia confina con Francia, Svizzera, Austria e Slovenia."
+    }
+   ]
+  },
+  {
+   "id": "italia-regioni",
+   "icona": "🗺️",
+   "titolo": "L'Italia delle regioni e dei capoluoghi",
+   "livello": "Geografia",
+   "minuti": 20,
+   "obiettivo": "Conoscere le 20 regioni italiane, i loro capoluoghi e qualche curiosità utile per orientarsi.",
+   "palestra": "",
+   "passi": [
+    {
+     "titolo": "Regioni, province e comuni",
+     "testo": "L'Italia è divisa in **20 regioni**. Ogni regione ha un **capoluogo**, cioè la città dove hanno sede i suoi uffici principali. La capitale d'Italia è **Roma**.\n\nLe regioni sono divise in **province** e **città metropolitane**, e queste a loro volta in **comuni**. Il comune è l'ente più vicino a noi: è lì che si va per la carta d'identità o per i servizi del paese.\n\nCinque regioni hanno uno **statuto speciale**, cioè più autonomia, per ragioni storiche, geografiche o di lingua: **Valle d'Aosta, Trentino-Alto Adige, Friuli-Venezia Giulia, Sicilia e Sardegna**.",
+     "schema": "flowchart TD\n  S[\"🇮🇹 Stato\"] --> R[\"Regioni\"] --> P[\"Province e città metropolitane\"] --> C[\"🏠 Comuni\"]"
+    },
+    {
+     "titolo": "Le regioni del Nord",
+     "testo": "Ecco le regioni del Nord con il loro capoluogo:\n\n- **Valle d'Aosta** → Aosta\n- **Piemonte** → Torino\n- **Liguria** → Genova\n- **Lombardia** → Milano\n- **Trentino-Alto Adige** → Trento\n- **Veneto** → Venezia\n- **Friuli-Venezia Giulia** → Trieste\n- **Emilia-Romagna** → Bologna\n\nIl Trentino-Alto Adige è formato da due province autonome, **Trento** e **Bolzano**, e in molte zone si parlano sia l'italiano sia il tedesco. Anche in **Valle d'Aosta** accanto all'italiano si parla il francese.\n\nIl Nord comprende sia le grandi montagne delle Alpi sia la vasta Pianura Padana.",
+     "consiglio": "Un trucco: in quasi tutte le regioni del Nord il capoluogo è la città più conosciuta della regione."
+    },
+    {
+     "titolo": "Le regioni del Centro",
+     "testo": "Le regioni del Centro sono quattro:\n\n- **Toscana** → Firenze\n- **Umbria** → Perugia\n- **Marche** → Ancona\n- **Lazio** → Roma\n\nL'**Umbria** è l'unica regione dell'Italia peninsulare che non tocca il mare: per questo è chiamata il «cuore verde d'Italia».\n\nNel **Lazio** si trova **Roma**, che è insieme capoluogo di regione e **capitale d'Italia**. Dentro Roma c'è la **Città del Vaticano**, uno Stato indipendente.\n\nLe **Marche** si affacciano sull'Adriatico, mentre Toscana e Lazio si affacciano sul Tirreno."
+    },
+    {
+     "titolo": "Le regioni del Sud e delle isole",
+     "testo": "Ecco le regioni del Sud e le due grandi isole:\n\n- **Abruzzo** → L'Aquila\n- **Molise** → Campobasso\n- **Campania** → Napoli\n- **Puglia** → Bari\n- **Basilicata** → Potenza\n- **Calabria** → Catanzaro\n- **Sicilia** → Palermo\n- **Sardegna** → Cagliari\n\nAttenzione ai capoluoghi meno noti: per la **Calabria** è **Catanzaro**, non Reggio Calabria; per la **Basilicata** è **Potenza**, non Matera; per l'**Abruzzo** è **L'Aquila**, non Pescara.\n\nIl Sud è ricco di coste, colline e antiche città: alcune, come Napoli e Taranto, furono fondate dagli antichi Greci.",
+     "consiglio": "Il Molise è la regione più giovane: si è separato dall'Abruzzo nel 1963."
+    },
+    {
+     "titolo": "Qualche curiosità per ricordarle",
+     "testo": "- La regione **più grande** è la **Sicilia**; la **più piccola** è la **Valle d'Aosta**.\n- Le regioni **senza mare** sono cinque: **Valle d'Aosta, Piemonte, Lombardia, Trentino-Alto Adige e Umbria**.\n- La **Basilicata** ha due coste: una sul Tirreno e una sullo Ionio.\n- La **Puglia** forma il «tacco» dello stivale e si affaccia sia sull'Adriatico sia sullo Ionio.\n- La **Calabria** è la «punta» dello stivale, di fronte alla Sicilia: le separa lo **Stretto di Messina**.\n\nPer imparare i capoluoghi, provate a ripeterli ad alta voce viaggiando con la fantasia da nord a sud, come su un treno che si ferma in ogni regione.",
+     "consiglio": "Prendete una cartina d'Italia e colorate una regione al giorno scrivendo accanto il capoluogo: in tre settimane le saprete tutte."
+    }
+   ],
+   "quiz": [
+    {
+     "domanda": "Quante sono le regioni italiane?",
+     "opzioni": [
+      "25",
+      "15",
+      "20"
+     ],
+     "corretta": 2,
+     "spiegazione": "Le regioni italiane sono 20, di cui 5 a statuto speciale."
+    },
+    {
+     "domanda": "Qual è il capoluogo della Calabria?",
+     "opzioni": [
+      "Catanzaro",
+      "Reggio Calabria",
+      "Cosenza"
+     ],
+     "corretta": 0,
+     "spiegazione": "Il capoluogo della Calabria è Catanzaro, anche se Reggio Calabria è la città più popolosa."
+    },
+    {
+     "domanda": "Quale di queste regioni NON ha il mare?",
+     "opzioni": [
+      "Molise",
+      "Umbria",
+      "Marche"
+     ],
+     "corretta": 1,
+     "spiegazione": "L'Umbria è l'unica regione dell'Italia peninsulare senza sbocco sul mare."
+    },
+    {
+     "domanda": "Quale regione è a statuto speciale?",
+     "opzioni": [
+      "Toscana",
+      "Puglia",
+      "Sardegna"
+     ],
+     "corretta": 2,
+     "spiegazione": "Sono a statuto speciale Valle d'Aosta, Trentino-Alto Adige, Friuli-Venezia Giulia, Sicilia e Sardegna."
+    },
+    {
+     "domanda": "Qual è la regione più piccola d'Italia?",
+     "opzioni": [
+      "Molise",
+      "Valle d'Aosta",
+      "Liguria"
+     ],
+     "corretta": 1,
+     "spiegazione": "La Valle d'Aosta è la regione più piccola; la più grande è la Sicilia."
+    }
+   ]
+  },
+  {
+   "id": "europa",
+   "icona": "🇪🇺",
+   "titolo": "L'Europa e i suoi Paesi",
+   "livello": "Geografia",
+   "minuti": 20,
+   "obiettivo": "Conoscere i confini dell'Europa, le sue montagne e i suoi fiumi, i principali Paesi con le capitali e che cos'è l'Unione Europea.",
+   "palestra": "",
+   "passi": [
+    {
+     "titolo": "Dove inizia e dove finisce l'Europa",
+     "testo": "L'Europa è uno dei continenti più piccoli, ma anche uno dei più ricchi di storia. In realtà è attaccata all'Asia: insieme formano un'unica grande massa di terra chiamata **Eurasia**.\n\nI suoi confini sono:\n\n- a **nord** il Mar Glaciale Artico;\n- a **ovest** l'Oceano Atlantico;\n- a **sud** il Mar Mediterraneo;\n- a **est**, per convenzione, i **Monti Urali**, il fiume Ural, il **Mar Caspio** e i **monti del Caucaso**.\n\nA sud, lo **Stretto di Gibilterra**, largo solo una quindicina di chilometri, separa l'Europa dall'Africa. A Istanbul, lo stretto del **Bosforo** separa l'Europa dall'Asia.",
+     "schema": "flowchart TD\n  N[\"❄️ Nord: Mar Glaciale Artico\"] --> E[\"🇪🇺 Europa\"]\n  O[\"🌊 Ovest: Oceano Atlantico\"] --> E\n  S[\"☀️ Sud: Mar Mediterraneo\"] --> E\n  U[\"⛰️ Est: Monti Urali\"] --> E"
+    },
+    {
+     "titolo": "Montagne e fiumi d'Europa",
+     "testo": "Le catene montuose più importanti sono le **Alpi**, i **Pirenei** tra Francia e Spagna, i **Carpazi** nell'Europa orientale, i **monti Scandinavi** e gli **Urali**.\n\nI grandi fiumi:\n\n- il **Volga**, in Russia, è il fiume più lungo d'Europa e sfocia nel Mar Caspio;\n- il **Danubio** nasce in Germania, attraversa molti Paesi, bagna quattro capitali (**Vienna, Bratislava, Budapest e Belgrado**) e sfocia nel **Mar Nero**;\n- il **Reno** nasce in Svizzera e sfocia nel Mare del Nord;\n- la **Senna** attraversa **Parigi** e il **Tamigi** attraversa **Londra**.\n\nIn **Norvegia** il mare entra profondamente tra le montagne formando i **fiordi**."
+    },
+    {
+     "titolo": "Paesi e capitali dell'Europa occidentale e del sud",
+     "testo": "Ecco alcuni Paesi con la loro capitale:\n\n- **Francia** → Parigi\n- **Spagna** → Madrid\n- **Portogallo** → Lisbona\n- **Regno Unito** → Londra\n- **Irlanda** → Dublino\n- **Germania** → Berlino\n- **Paesi Bassi**, chiamati spesso Olanda → Amsterdam\n- **Belgio** → Bruxelles\n- **Svizzera** → Berna\n- **Austria** → Vienna\n- **Grecia** → Atene\n- **Malta** → La Valletta\n\nAttenzione: la capitale della Svizzera è **Berna**, non Zurigo né Ginevra. E per i Paesi Bassi la capitale è **Amsterdam**, anche se il governo ha sede all'**Aia**.\n\nMolti di questi Paesi sono mete di viaggio frequenti: conoscere la capitale aiuta a orientarsi sulla carta."
+    },
+    {
+     "titolo": "Paesi e capitali del nord e dell'est",
+     "testo": "Proseguiamo il viaggio:\n\n- **Norvegia** → Oslo\n- **Svezia** → Stoccolma\n- **Finlandia** → Helsinki\n- **Danimarca** → Copenaghen\n- **Islanda** → Reykjavík\n- **Polonia** → Varsavia\n- **Repubblica Ceca** → Praga\n- **Ungheria** → Budapest\n- **Romania** → Bucarest\n- **Croazia** → Zagabria\n- **Slovenia** → Lubiana\n- **Russia** → Mosca\n\nLa **Russia** è il Paese più esteso del mondo: una parte sta in Europa e la parte più grande in Asia.\n\nL'Europa ha anche Stati piccolissimi: **Città del Vaticano**, il più piccolo del mondo, **San Marino**, **Monaco**, **Liechtenstein** e **Andorra**.",
+     "consiglio": "Un aiuto per la memoria: Budapest è nata dall'unione di più città, tra cui Buda e Pest, divise dal Danubio."
+    },
+    {
+     "titolo": "L'Unione Europea",
+     "testo": "L'**Unione Europea** è un'unione di Paesi europei che collaborano su economia, commercio, ambiente, diritti e molto altro.\n\nTutto comincia con i **Trattati di Roma** del **1957**, firmati da sei Paesi fondatori: **Italia, Francia, Germania Ovest, Belgio, Paesi Bassi e Lussemburgo**. Il nome **Unione Europea** nasce con il **Trattato di Maastricht** del **1992**.\n\n- L'**euro** è entrato nelle nostre tasche il **1° gennaio 2002**, ma non tutti i Paesi dell'Unione lo usano.\n- Il **Parlamento europeo** è eletto dai cittadini ogni **cinque anni**.\n- La bandiera ha **12 stelle dorate** su fondo blu: il numero non indica i Paesi, ma è un simbolo di unità e perfezione.\n- L'inno è l'**Inno alla gioia** di Beethoven e la Festa dell'Europa è il **9 maggio**.",
+     "schema": "flowchart LR\n  A[\"📜 1957 Trattati di Roma\"] --> B[\"🤝 1992 Maastricht\"] --> C[\"💶 2002 Euro in tasca\"]",
+     "consiglio": "Lo spazio Schengen permette di viaggiare tra molti Paesi senza controlli fissi alle frontiere, ma portate sempre con voi un documento valido."
+    }
+   ],
+   "quiz": [
+    {
+     "domanda": "Qual è la capitale della Svizzera?",
+     "opzioni": [
+      "Ginevra",
+      "Berna",
+      "Zurigo"
+     ],
+     "corretta": 1,
+     "spiegazione": "Berna è la città federale, sede del governo svizzero."
+    },
+    {
+     "domanda": "Quale fiume attraversa Vienna, Budapest e Belgrado?",
+     "opzioni": [
+      "Il Danubio",
+      "Il Reno",
+      "Il Volga"
+     ],
+     "corretta": 0,
+     "spiegazione": "Il Danubio bagna quattro capitali: Vienna, Bratislava, Budapest e Belgrado."
+    },
+    {
+     "domanda": "Quali catene montuose segnano, per convenzione, il confine orientale dell'Europa?",
+     "opzioni": [
+      "Le Alpi",
+      "I Pirenei",
+      "I Monti Urali"
+     ],
+     "corretta": 2,
+     "spiegazione": "Il confine orientale dell'Europa si fa passare per i Monti Urali, il fiume Ural, il Mar Caspio e il Caucaso."
+    },
+    {
+     "domanda": "In che anno l'euro è arrivato nelle nostre tasche?",
+     "opzioni": [
+      "Nel 2002",
+      "Nel 1992",
+      "Nel 1957"
+     ],
+     "corretta": 0,
+     "spiegazione": "Monete e banconote in euro sono entrate in circolazione il 1° gennaio 2002."
+    },
+    {
+     "domanda": "Qual è lo Stato più piccolo del mondo?",
+     "opzioni": [
+      "Malta",
+      "San Marino",
+      "La Città del Vaticano"
+     ],
+     "corretta": 2,
+     "spiegazione": "La Città del Vaticano, dentro Roma, è lo Stato più piccolo del mondo."
+    }
+   ]
+  },
+  {
+   "id": "mappe-orientarsi",
+   "icona": "🧭",
+   "titolo": "Leggere una mappa e orientarsi",
+   "livello": "Geografia",
+   "minuti": 20,
+   "obiettivo": "Imparare a trovare i punti cardinali, capire latitudine, longitudine e scala, e usare con fiducia una mappa di carta o sul telefono.",
+   "palestra": "",
+   "passi": [
+    {
+     "titolo": "I punti cardinali",
+     "testo": "I quattro **punti cardinali** sono **Nord, Est, Sud e Ovest**. Sulle carte geografiche il **Nord è quasi sempre in alto**.\n\nAnticamente avevano anche altri nomi, che sentiamo ancora oggi:\n\n- **Nord** = settentrione\n- **Sud** = meridione, mezzogiorno\n- **Est** = oriente, levante (dove il Sole «si leva»)\n- **Ovest** = occidente, ponente (dove il Sole «si pone»)\n\nTra un punto e l'altro ci sono le direzioni intermedie: Nord-Est, Sud-Est, Sud-Ovest, Nord-Ovest. Il disegno che le mostra tutte si chiama **rosa dei venti**, perché ogni direzione ha il nome di un vento: per esempio la **tramontana** soffia da nord e lo **scirocco** da sud-est.",
+     "schema": "flowchart TD\n  N[\"⬆️ Nord\"] --> C[\"🧭 Io sono qui\"]\n  O[\"⬅️ Ovest\"] --> C\n  E[\"➡️ Est\"] --> C\n  S[\"⬇️ Sud\"] --> C"
+    },
+    {
+     "titolo": "Orientarsi con il Sole, le stelle e la bussola",
+     "testo": "- **Con il Sole**: sorge più o meno a **est** e tramonta più o meno a **ovest**. In Italia, verso mezzogiorno (verso l'una con l'ora legale), il Sole si trova a **sud**.\n- **Con le stelle**: di notte la **Stella Polare** indica il **nord**. Per trovarla, cercate il **Grande Carro** e prolungate di circa cinque volte la distanza tra le due stelle del suo lato posteriore.\n- **Con la bussola**: il suo ago è una piccola calamita che punta verso il **nord magnetico**, molto vicino al nord geografico.\n\nAttenzione alle «regole della nonna» poco affidabili, come il muschio sugli alberi: cresce dove c'è umidità e ombra, non sempre a nord.",
+     "consiglio": "Il telefono ha spesso una bussola incorporata: la trovate nelle mappe, quando la freccia della vostra posizione ruota insieme a voi."
+    },
+    {
+     "titolo": "Paralleli, meridiani e coordinate",
+     "testo": "Per indicare con precisione un punto sulla Terra si usa una rete di linee immaginarie.\n\n- I **paralleli** sono cerchi paralleli all'equatore. Indicano la **latitudine**: quanto siamo a nord o a sud dell'equatore, da 0 a 90 gradi.\n- I **meridiani** vanno da un polo all'altro. Indicano la **longitudine**: quanto siamo a est o a ovest del meridiano di **Greenwich**, vicino a Londra, che vale 0 gradi.\n\nLatitudine e longitudine insieme sono le **coordinate geografiche**, come l'indirizzo di un punto sul pianeta. Roma, per esempio, si trova a circa **42 gradi di latitudine nord** e **12 gradi di longitudine est**.\n\nLe mappe del telefono usano proprio le coordinate per mostrare dove siete.",
+     "schema": "flowchart LR\n  A[\"〰️ Paralleli\"] --> B[\"Latitudine nord o sud\"]\n  C[\"🌐 Meridiani\"] --> D[\"Longitudine est o ovest\"]"
+    },
+    {
+     "titolo": "La scala e la legenda",
+     "testo": "Una carta geografica è un disegno della realtà **rimpicciolita**. La **scala** dice di quanto.\n\nPer esempio, **1:100.000** significa che **1 centimetro** sulla carta corrisponde a **100.000 centimetri** nella realtà, cioè **1 chilometro**. Con una scala **1:25.000**, 1 centimetro vale **250 metri**.\n\n- Carte a **grande scala** (come 1:25.000): mostrano una zona piccola con molti dettagli, utili per le passeggiate.\n- Carte a **piccola scala** (come 1:1.000.000): mostrano territori grandi con pochi dettagli, come le carte d'Italia.\n\nLa **legenda** è il riquadro che spiega simboli e colori: di solito il **verde** indica la pianura, il **marrone** le montagne e l'**azzurro** mari, laghi e fiumi.",
+     "consiglio": "Sulle mappe digitali la scala è la piccola barretta in un angolo dello schermo: cambia quando ingrandite o rimpicciolite."
+    },
+    {
+     "titolo": "Le mappe digitali",
+     "testo": "Sul telefono o sul computer le mappe sono come una carta che si può **ingrandire con due dita**.\n\n- Il **pallino** o la **freccia** indica dove siete: il telefono lo calcola con il **GPS**, ascoltando i segnali di alcuni **satelliti**.\n- Potete scrivere un **indirizzo** e chiedere il **percorso** a piedi, in auto o con i mezzi pubblici.\n- Il GPS funziona anche senza Internet, ma per **scaricare la mappa** serve la connessione, a meno di averla **salvata prima** per l'uso offline.\n\nRegole di buon senso:\n\n1. Il navigatore aiuta, ma **la segnaletica stradale ha sempre la precedenza**.\n2. Il GPS consuma batteria: partite con il telefono carico.\n3. Decidete voi a quali app permettere di conoscere la vostra **posizione**.",
+     "schema": "flowchart LR\n  A[\"🛰️ Satelliti\"] --> B[\"📱 Telefono con GPS\"] --> C[\"📍 Posizione sulla mappa\"] --> D[\"🚶 Percorso\"]",
+     "consiglio": "Prima di un viaggio, guardate il percorso con calma a casa: in strada sarete più tranquilli."
+    }
+   ],
+   "quiz": [
+    {
+     "domanda": "Su una carta geografica, dove si trova di solito il Nord?",
+     "opzioni": [
+      "In alto",
+      "A destra",
+      "In basso"
+     ],
+     "corretta": 0,
+     "spiegazione": "Per abitudine le carte mettono il Nord in alto, il Sud in basso, l'Est a destra e l'Ovest a sinistra."
+    },
+    {
+     "domanda": "Da che parte sorge il Sole?",
+     "opzioni": [
+      "Sempre esattamente a nord",
+      "Più o meno a ovest",
+      "Più o meno a est"
+     ],
+     "corretta": 2,
+     "spiegazione": "Il Sole sorge più o meno a est, cioè a levante, e tramonta più o meno a ovest."
+    },
+    {
+     "domanda": "Su una carta in scala 1:100.000, a quanto corrisponde 1 centimetro?",
+     "opzioni": [
+      "A 1 chilometro",
+      "A 100 metri",
+      "A 10 chilometri"
+     ],
+     "corretta": 0,
+     "spiegazione": "100.000 centimetri sono 1.000 metri, cioè 1 chilometro."
+    },
+    {
+     "domanda": "Che cosa indica la latitudine?",
+     "opzioni": [
+      "Quanto un luogo è alto sul mare",
+      "Quanti abitanti ha un luogo",
+      "Quanto un luogo è a nord o a sud dell'equatore"
+     ],
+     "corretta": 2,
+     "spiegazione": "La latitudine si misura in gradi dall'equatore, da 0 fino a 90 ai poli."
+    },
+    {
+     "domanda": "Il GPS del telefono come capisce dove siete?",
+     "opzioni": [
+      "Chiedendolo ai passanti",
+      "Grazie ai segnali dei satelliti",
+      "Leggendo i cartelli stradali"
+     ],
+     "corretta": 1,
+     "spiegazione": "Il ricevitore GPS calcola la posizione ascoltando i segnali di diversi satelliti in orbita."
+    }
+   ]
+  }
+ ],
+ "prove": [
+  {
+   "id": "geografia",
+   "titolo": "Il Grande Quiz di Geografia",
+   "icona": "🌍",
+   "descrizione": "Venti domande pescate a caso su Terra, Italia fisica, regioni e capoluoghi, Europa, mondo e mappe. Rispondete con calma: con almeno 14 risposte giuste su 20 ottenete l'attestato. Potete riprovare quante volte volete, le domande cambiano ogni volta.",
+   "attestato": "Geografia d'Italia e del mondo",
+   "domande_per_prova": 20,
+   "soglia": 0.7,
+   "domande": [
+    {
+     "domanda": "Che forma ha la Terra?",
+     "opzioni": [
+      "Un disco piatto",
+      "Una sfera leggermente schiacciata ai poli",
+      "Un cilindro",
+      "Un cubo arrotondato"
+     ],
+     "corretta": 1,
+     "spiegazione": "La Terra è quasi una sfera, appena schiacciata ai poli per effetto della rotazione.",
+     "categoria": "La Terra"
+    },
+    {
+     "domanda": "Come si chiama il movimento della Terra su se stessa?",
+     "opzioni": [
+      "Rivoluzione",
+      "Traslazione lunare",
+      "Rotazione",
+      "Eclissi"
+     ],
+     "corretta": 2,
+     "spiegazione": "La rotazione dura circa 24 ore e produce l'alternarsi del giorno e della notte.",
+     "categoria": "La Terra"
+    },
+    {
+     "domanda": "Come si chiama il movimento della Terra intorno al Sole?",
+     "opzioni": [
+      "Marea",
+      "Rivoluzione",
+      "Precipitazione",
+      "Rotazione"
+     ],
+     "corretta": 1,
+     "spiegazione": "La rivoluzione dura circa 365 giorni e 6 ore: è l'anno.",
+     "categoria": "La Terra"
+    },
+    {
+     "domanda": "In quale emisfero si trova l'Italia?",
+     "opzioni": [
+      "Nell'emisfero sud",
+      "Proprio sull'equatore",
+      "Nell'emisfero nord"
+     ],
+     "corretta": 2,
+     "spiegazione": "L'Italia è nell'emisfero nord, detto anche boreale.",
+     "categoria": "La Terra"
+    },
+    {
+     "domanda": "Quanto misura, più o meno, il giro della Terra all'equatore?",
+     "opzioni": [
+      "Circa 400.000 km",
+      "Circa 40.000 km",
+      "Circa 4.000 km"
+     ],
+     "corretta": 1,
+     "spiegazione": "La circonferenza all'equatore è di circa 40.000 chilometri.",
+     "categoria": "La Terra"
+    },
+    {
+     "domanda": "Che cosa succede intorno al 21 giugno nel nostro emisfero?",
+     "opzioni": [
+      "È il giorno più lungo dell'anno",
+      "Giorno e notte durano uguali",
+      "È il giorno più corto dell'anno",
+      "Il Sole non tramonta in Italia"
+     ],
+     "corretta": 0,
+     "spiegazione": "Il solstizio d'estate, intorno al 21 giugno, è il giorno con più ore di luce.",
+     "categoria": "La Terra"
+    },
+    {
+     "domanda": "Che cosa sono gli equinozi?",
+     "opzioni": [
+      "Le notti di luna piena",
+      "I giorni più lunghi dell'anno",
+      "Giorni in cui giorno e notte durano quasi uguali",
+      "I giorni più caldi dell'anno"
+     ],
+     "corretta": 2,
+     "spiegazione": "Agli equinozi di marzo e settembre il giorno e la notte durano circa dodici ore ciascuno.",
+     "categoria": "La Terra"
+    },
+    {
+     "domanda": "In che periodo dell'anno la Terra è più vicina al Sole?",
+     "opzioni": [
+      "A metà agosto",
+      "All'inizio di gennaio",
+      "A fine giugno"
+     ],
+     "corretta": 1,
+     "spiegazione": "Sembra strano, ma la Terra è più vicina al Sole a gennaio: le stagioni dipendono dall'inclinazione dell'asse.",
+     "categoria": "La Terra"
+    },
+    {
+     "domanda": "Qual è il continente più grande?",
+     "opzioni": [
+      "L'Europa",
+      "L'America",
+      "L'Asia",
+      "L'Africa"
+     ],
+     "corretta": 2,
+     "spiegazione": "L'Asia è il continente più esteso e quello con più abitanti.",
+     "categoria": "La Terra"
+    },
+    {
+     "domanda": "Qual è il continente ghiacciato del Polo Sud?",
+     "opzioni": [
+      "La Groenlandia",
+      "L'Antartide",
+      "L'Artide"
+     ],
+     "corretta": 1,
+     "spiegazione": "L'Antartide è un continente coperto da uno spesso strato di ghiaccio. L'Artide, al Polo Nord, è invece soprattutto mare ghiacciato.",
+     "categoria": "La Terra"
+    },
+    {
+     "domanda": "Quale parte della superficie terrestre è coperta dalle acque?",
+     "opzioni": [
+      "Circa la metà",
+      "Circa il 30%",
+      "Circa il 95%",
+      "Circa il 71%"
+     ],
+     "corretta": 3,
+     "spiegazione": "Circa il 71% della superficie è acqua: per questo la Terra è chiamata il pianeta blu.",
+     "categoria": "La Terra"
+    },
+    {
+     "domanda": "Di quanti gradi è inclinato, più o meno, l'asse terrestre?",
+     "opzioni": [
+      "Non è inclinato",
+      "Circa 90 gradi",
+      "Circa 23 gradi e mezzo",
+      "Circa 45 gradi"
+     ],
+     "corretta": 2,
+     "spiegazione": "Questa inclinazione di circa 23 gradi e mezzo è la causa delle stagioni.",
+     "categoria": "La Terra"
+    },
+    {
+     "domanda": "Quale mare bagna Venezia?",
+     "opzioni": [
+      "Il Mar Adriatico",
+      "Il Mar Tirreno",
+      "Il Mar Ligure",
+      "Il Mar Ionio"
+     ],
+     "corretta": 0,
+     "spiegazione": "Venezia si affaccia sul Mar Adriatico, ad est della penisola.",
+     "categoria": "Italia fisica"
+    },
+    {
+     "domanda": "Quale mare bagna Napoli?",
+     "opzioni": [
+      "Il Mar Adriatico",
+      "Il Mar Ionio",
+      "Il Mar Tirreno"
+     ],
+     "corretta": 2,
+     "spiegazione": "Il Golfo di Napoli si apre sul Mar Tirreno.",
+     "categoria": "Italia fisica"
+    },
+    {
+     "domanda": "Quale mare bagna Genova?",
+     "opzioni": [
+      "Il Mar Ligure",
+      "Il Mar Adriatico",
+      "Il Mar Ionio"
+     ],
+     "corretta": 0,
+     "spiegazione": "Genova si affaccia sul Mar Ligure, che prende il nome dalla Liguria.",
+     "categoria": "Italia fisica"
+    },
+    {
+     "domanda": "Dove nasce il Po?",
+     "opzioni": [
+      "Dal Lago di Garda",
+      "Dal Monviso, in Piemonte",
+      "Dal Monte Bianco, in Valle d'Aosta",
+      "Dal Gran Sasso, in Abruzzo"
+     ],
+     "corretta": 1,
+     "spiegazione": "Il Po nasce dal Monviso e sfocia nell'Adriatico dopo circa 650 km.",
+     "categoria": "Italia fisica"
+    },
+    {
+     "domanda": "In quale mare sfocia il Po?",
+     "opzioni": [
+      "Nel Mar Tirreno",
+      "Nel Mar Ligure",
+      "Nel Mar Adriatico"
+     ],
+     "corretta": 2,
+     "spiegazione": "Il Po sfocia nell'Adriatico con un grande delta tra Veneto ed Emilia-Romagna.",
+     "categoria": "Italia fisica"
+    },
+    {
+     "domanda": "Quale fiume attraversa Roma?",
+     "opzioni": [
+      "Il Tevere",
+      "Il Po",
+      "L'Arno",
+      "L'Adige"
+     ],
+     "corretta": 0,
+     "spiegazione": "Il Tevere attraversa Roma e sfocia nel Mar Tirreno.",
+     "categoria": "Italia fisica"
+    },
+    {
+     "domanda": "Quale fiume attraversa Firenze?",
+     "opzioni": [
+      "Il Piave",
+      "L'Arno",
+      "Il Tevere"
+     ],
+     "corretta": 1,
+     "spiegazione": "L'Arno attraversa Firenze e Pisa prima di sfociare nel Tirreno.",
+     "categoria": "Italia fisica"
+    },
+    {
+     "domanda": "Quale fiume attraversa Verona?",
+     "opzioni": [
+      "Il Po",
+      "L'Arno",
+      "L'Adige"
+     ],
+     "corretta": 2,
+     "spiegazione": "L'Adige, secondo fiume d'Italia per lunghezza, passa per Trento e Verona.",
+     "categoria": "Italia fisica"
+    },
+    {
+     "domanda": "Qual è la vetta più alta degli Appennini?",
+     "opzioni": [
+      "Il Corno Grande, nel Gran Sasso",
+      "Il Vesuvio",
+      "Il Cervino",
+      "Il Monte Bianco"
+     ],
+     "corretta": 0,
+     "spiegazione": "Il Corno Grande, in Abruzzo, raggiunge circa 2.900 metri.",
+     "categoria": "Italia fisica"
+    },
+    {
+     "domanda": "Come si chiama la grande pianura tra le Alpi e gli Appennini?",
+     "opzioni": [
+      "Maremma",
+      "Pianura Padana",
+      "Tavoliere delle Puglie"
+     ],
+     "corretta": 1,
+     "spiegazione": "La Pianura Padana, attraversata dal Po, è la pianura più grande d'Italia.",
+     "categoria": "Italia fisica"
+    },
+    {
+     "domanda": "Su quale isola si trova l'Etna?",
+     "opzioni": [
+      "In Sicilia",
+      "In Sardegna",
+      "All'Elba",
+      "A Ischia"
+     ],
+     "corretta": 0,
+     "spiegazione": "L'Etna, in Sicilia, è il vulcano attivo più alto d'Italia.",
+     "categoria": "Italia fisica"
+    },
+    {
+     "domanda": "Quale vulcano è chiamato il «faro del Mediterraneo»?",
+     "opzioni": [
+      "Il Vesuvio",
+      "L'Etna",
+      "Lo Stromboli"
+     ],
+     "corretta": 2,
+     "spiegazione": "Lo Stromboli ha piccole eruzioni quasi continue, visibili di notte dal mare.",
+     "categoria": "Italia fisica"
+    },
+    {
+     "domanda": "Qual è l'isola più grande del Mar Mediterraneo?",
+     "opzioni": [
+      "La Sicilia",
+      "Creta",
+      "Cipro",
+      "La Sardegna"
+     ],
+     "corretta": 0,
+     "spiegazione": "La Sicilia è l'isola più grande del Mediterraneo; la Sardegna è la seconda.",
+     "categoria": "Italia fisica"
+    },
+    {
+     "domanda": "Come si chiamano le montagne dalle pareti chiare delle Alpi orientali, che al tramonto diventano rosa?",
+     "opzioni": [
+      "Le Madonie",
+      "Le Murge",
+      "Le Dolomiti"
+     ],
+     "corretta": 2,
+     "spiegazione": "Le Dolomiti si trovano tra Veneto, Trentino-Alto Adige e Friuli-Venezia Giulia.",
+     "categoria": "Italia fisica"
+    },
+    {
+     "domanda": "Quale braccio di mare separa la Calabria dalla Sicilia?",
+     "opzioni": [
+      "Il Canale d'Otranto",
+      "Lo Stretto di Messina",
+      "Lo Stretto di Gibilterra"
+     ],
+     "corretta": 1,
+     "spiegazione": "Lo Stretto di Messina separa la punta dello stivale dalla Sicilia.",
+     "categoria": "Italia fisica"
+    },
+    {
+     "domanda": "A quale arcipelago appartengono Lipari, Vulcano e Stromboli?",
+     "opzioni": [
+      "Alle isole Egadi",
+      "Alle isole Tremiti",
+      "All'arcipelago Toscano",
+      "Alle isole Eolie"
+     ],
+     "corretta": 3,
+     "spiegazione": "Le Eolie sono isole vulcaniche a nord della Sicilia.",
+     "categoria": "Italia fisica"
+    },
+    {
+     "domanda": "Come si sono formati i grandi laghi del nord, come Garda, Maggiore e Como?",
+     "opzioni": [
+      "Dentro crateri di vulcani",
+      "Grazie all'azione degli antichi ghiacciai",
+      "Scavati dall'uomo"
+     ],
+     "corretta": 1,
+     "spiegazione": "I laghi prealpini occupano valli scavate dai ghiacciai.",
+     "categoria": "Italia fisica"
+    },
+    {
+     "domanda": "Su quale isola fu esiliato Napoleone nel 1814?",
+     "opzioni": [
+      "All'Elba",
+      "A Capri",
+      "In Sardegna"
+     ],
+     "corretta": 0,
+     "spiegazione": "Napoleone fu esiliato all'isola d'Elba, in Toscana, nel 1814.",
+     "categoria": "Italia fisica"
+    },
+    {
+     "domanda": "Qual è il capoluogo della Basilicata?",
+     "opzioni": [
+      "Matera",
+      "Salerno",
+      "Potenza",
+      "Bari"
+     ],
+     "corretta": 2,
+     "spiegazione": "Il capoluogo della Basilicata è Potenza; Matera è famosa per i suoi Sassi.",
+     "categoria": "Regioni e capoluoghi"
+    },
+    {
+     "domanda": "Qual è il capoluogo dell'Abruzzo?",
+     "opzioni": [
+      "Pescara",
+      "L'Aquila",
+      "Chieti",
+      "Teramo"
+     ],
+     "corretta": 1,
+     "spiegazione": "L'Aquila è il capoluogo dell'Abruzzo.",
+     "categoria": "Regioni e capoluoghi"
+    },
+    {
+     "domanda": "Qual è il capoluogo del Molise?",
+     "opzioni": [
+      "Isernia",
+      "Termoli",
+      "Campobasso"
+     ],
+     "corretta": 2,
+     "spiegazione": "Campobasso è il capoluogo del Molise.",
+     "categoria": "Regioni e capoluoghi"
+    },
+    {
+     "domanda": "Qual è il capoluogo delle Marche?",
+     "opzioni": [
+      "Urbino",
+      "Macerata",
+      "Pesaro",
+      "Ancona"
+     ],
+     "corretta": 3,
+     "spiegazione": "Ancona, sull'Adriatico, è il capoluogo delle Marche.",
+     "categoria": "Regioni e capoluoghi"
+    },
+    {
+     "domanda": "Qual è il capoluogo dell'Umbria?",
+     "opzioni": [
+      "Terni",
+      "Perugia",
+      "Assisi"
+     ],
+     "corretta": 1,
+     "spiegazione": "Perugia è il capoluogo dell'Umbria.",
+     "categoria": "Regioni e capoluoghi"
+    },
+    {
+     "domanda": "Qual è il capoluogo del Friuli-Venezia Giulia?",
+     "opzioni": [
+      "Pordenone",
+      "Gorizia",
+      "Udine",
+      "Trieste"
+     ],
+     "corretta": 3,
+     "spiegazione": "Trieste, sul mare, è il capoluogo del Friuli-Venezia Giulia.",
+     "categoria": "Regioni e capoluoghi"
+    },
+    {
+     "domanda": "Qual è il capoluogo del Veneto?",
+     "opzioni": [
+      "Vicenza",
+      "Padova",
+      "Venezia",
+      "Verona"
+     ],
+     "corretta": 2,
+     "spiegazione": "Il capoluogo del Veneto è Venezia, la città costruita sull'acqua.",
+     "categoria": "Regioni e capoluoghi"
+    },
+    {
+     "domanda": "Qual è il capoluogo della Sardegna?",
+     "opzioni": [
+      "Sassari",
+      "Cagliari",
+      "Olbia"
+     ],
+     "corretta": 1,
+     "spiegazione": "Cagliari, nel sud dell'isola, è il capoluogo della Sardegna.",
+     "categoria": "Regioni e capoluoghi"
+    },
+    {
+     "domanda": "Qual è il capoluogo della Puglia?",
+     "opzioni": [
+      "Taranto",
+      "Foggia",
+      "Lecce",
+      "Bari"
+     ],
+     "corretta": 3,
+     "spiegazione": "Bari è il capoluogo della Puglia.",
+     "categoria": "Regioni e capoluoghi"
+    },
+    {
+     "domanda": "Qual è il capoluogo dell'Emilia-Romagna?",
+     "opzioni": [
+      "Ravenna",
+      "Bologna",
+      "Parma",
+      "Modena"
+     ],
+     "corretta": 1,
+     "spiegazione": "Bologna è il capoluogo dell'Emilia-Romagna.",
+     "categoria": "Regioni e capoluoghi"
+    },
+    {
+     "domanda": "Qual è il capoluogo del Trentino-Alto Adige?",
+     "opzioni": [
+      "Trento",
+      "Bolzano",
+      "Merano"
+     ],
+     "corretta": 0,
+     "spiegazione": "Il capoluogo è Trento; la regione comprende le due province autonome di Trento e Bolzano.",
+     "categoria": "Regioni e capoluoghi"
+    },
+    {
+     "domanda": "Quale regione ha come capoluogo Genova?",
+     "opzioni": [
+      "Toscana",
+      "Piemonte",
+      "Liguria"
+     ],
+     "corretta": 2,
+     "spiegazione": "Genova è il capoluogo della Liguria.",
+     "categoria": "Regioni e capoluoghi"
+    },
+    {
+     "domanda": "Quale regione ha come capoluogo Palermo?",
+     "opzioni": [
+      "Sicilia",
+      "Campania",
+      "Calabria"
+     ],
+     "corretta": 0,
+     "spiegazione": "Palermo è il capoluogo della Sicilia.",
+     "categoria": "Regioni e capoluoghi"
+    },
+    {
+     "domanda": "Quante sono le regioni a statuto speciale?",
+     "opzioni": [
+      "2",
+      "20",
+      "5",
+      "10"
+     ],
+     "corretta": 2,
+     "spiegazione": "Sono cinque: Valle d'Aosta, Trentino-Alto Adige, Friuli-Venezia Giulia, Sicilia e Sardegna.",
+     "categoria": "Regioni e capoluoghi"
+    },
+    {
+     "domanda": "Qual è la regione più grande d'Italia per estensione?",
+     "opzioni": [
+      "Lazio",
+      "Toscana",
+      "Lombardia",
+      "Sicilia"
+     ],
+     "corretta": 3,
+     "spiegazione": "La Sicilia è la regione più estesa, seguita dal Piemonte.",
+     "categoria": "Regioni e capoluoghi"
+    },
+    {
+     "domanda": "Quale di queste regioni non tocca il mare?",
+     "opzioni": [
+      "Campania",
+      "Lombardia",
+      "Veneto",
+      "Liguria"
+     ],
+     "corretta": 1,
+     "spiegazione": "La Lombardia non ha sbocco sul mare, ma ha grandi laghi.",
+     "categoria": "Regioni e capoluoghi"
+    },
+    {
+     "domanda": "Quale regione ha due coste, una sul Tirreno e una sullo Ionio?",
+     "opzioni": [
+      "Basilicata",
+      "Umbria",
+      "Marche"
+     ],
+     "corretta": 0,
+     "spiegazione": "La Basilicata si affaccia sia sul Tirreno sia sul Mar Ionio.",
+     "categoria": "Regioni e capoluoghi"
+    },
+    {
+     "domanda": "Quale regione si trova nel «tacco» dello stivale?",
+     "opzioni": [
+      "Calabria",
+      "Puglia",
+      "Liguria"
+     ],
+     "corretta": 1,
+     "spiegazione": "La Puglia forma il tacco; la Calabria forma la punta.",
+     "categoria": "Regioni e capoluoghi"
+    },
+    {
+     "domanda": "Tra quali regioni si trova la Repubblica di San Marino?",
+     "opzioni": [
+      "In Toscana",
+      "In Piemonte",
+      "Tra Emilia-Romagna e Marche"
+     ],
+     "corretta": 2,
+     "spiegazione": "San Marino è circondata dall'Emilia-Romagna e dalle Marche.",
+     "categoria": "Regioni e capoluoghi"
+    },
+    {
+     "domanda": "Quale regione è stata creata separandola dall'Abruzzo nel 1963?",
+     "opzioni": [
+      "Basilicata",
+      "Molise",
+      "Umbria"
+     ],
+     "corretta": 1,
+     "spiegazione": "Il Molise è la regione italiana più giovane.",
+     "categoria": "Regioni e capoluoghi"
+    },
+    {
+     "domanda": "Qual è la capitale della Spagna?",
+     "opzioni": [
+      "Madrid",
+      "Valencia",
+      "Barcellona",
+      "Siviglia"
+     ],
+     "corretta": 0,
+     "spiegazione": "Madrid, al centro della Spagna, è la capitale.",
+     "categoria": "Europa"
+    },
+    {
+     "domanda": "Qual è la capitale del Portogallo?",
+     "opzioni": [
+      "Porto",
+      "Madrid",
+      "Lisbona"
+     ],
+     "corretta": 2,
+     "spiegazione": "Lisbona si affaccia sull'Oceano Atlantico, alla foce del fiume Tago.",
+     "categoria": "Europa"
+    },
+    {
+     "domanda": "Qual è la capitale della Germania?",
+     "opzioni": [
+      "Berlino",
+      "Francoforte",
+      "Amburgo",
+      "Monaco di Baviera"
+     ],
+     "corretta": 0,
+     "spiegazione": "Berlino è la capitale della Germania.",
+     "categoria": "Europa"
+    },
+    {
+     "domanda": "Qual è la capitale dei Paesi Bassi, chiamati spesso Olanda?",
+     "opzioni": [
+      "Rotterdam",
+      "Amsterdam",
+      "Bruxelles"
+     ],
+     "corretta": 1,
+     "spiegazione": "La capitale è Amsterdam, famosa per i suoi canali.",
+     "categoria": "Europa"
+    },
+    {
+     "domanda": "Qual è la capitale della Polonia?",
+     "opzioni": [
+      "Cracovia",
+      "Praga",
+      "Varsavia"
+     ],
+     "corretta": 2,
+     "spiegazione": "Varsavia, sul fiume Vistola, è la capitale della Polonia.",
+     "categoria": "Europa"
+    },
+    {
+     "domanda": "Qual è la capitale della Norvegia?",
+     "opzioni": [
+      "Copenaghen",
+      "Helsinki",
+      "Stoccolma",
+      "Oslo"
+     ],
+     "corretta": 3,
+     "spiegazione": "Oslo è la capitale della Norvegia; Stoccolma è quella della Svezia.",
+     "categoria": "Europa"
+    },
+    {
+     "domanda": "Qual è la capitale dell'Austria?",
+     "opzioni": [
+      "Vienna",
+      "Salisburgo",
+      "Innsbruck"
+     ],
+     "corretta": 0,
+     "spiegazione": "Vienna, sul Danubio, è la capitale dell'Austria.",
+     "categoria": "Europa"
+    },
+    {
+     "domanda": "Qual è la capitale della Grecia?",
+     "opzioni": [
+      "Sparta",
+      "Salonicco",
+      "Atene"
+     ],
+     "corretta": 2,
+     "spiegazione": "Atene, con la sua Acropoli, è la capitale della Grecia.",
+     "categoria": "Europa"
+    },
+    {
+     "domanda": "Qual è la capitale della Slovenia?",
+     "opzioni": [
+      "Lubiana",
+      "Zagabria",
+      "Trieste"
+     ],
+     "corretta": 0,
+     "spiegazione": "Lubiana è la capitale della Slovenia, Paese confinante con l'Italia.",
+     "categoria": "Europa"
+    },
+    {
+     "domanda": "Quale fiume attraversa Parigi?",
+     "opzioni": [
+      "Il Tamigi",
+      "Il Reno",
+      "La Loira",
+      "La Senna"
+     ],
+     "corretta": 3,
+     "spiegazione": "La Senna attraversa Parigi e sfocia nella Manica.",
+     "categoria": "Europa"
+    },
+    {
+     "domanda": "Quale fiume attraversa Londra?",
+     "opzioni": [
+      "La Senna",
+      "Il Tamigi",
+      "Il Danubio"
+     ],
+     "corretta": 1,
+     "spiegazione": "Il Tamigi attraversa Londra e sfocia nel Mare del Nord.",
+     "categoria": "Europa"
+    },
+    {
+     "domanda": "Qual è il fiume più lungo d'Europa?",
+     "opzioni": [
+      "Il Po",
+      "Il Danubio",
+      "Il Volga",
+      "Il Reno"
+     ],
+     "corretta": 2,
+     "spiegazione": "Il Volga, in Russia, sfocia nel Mar Caspio ed è il più lungo d'Europa.",
+     "categoria": "Europa"
+    },
+    {
+     "domanda": "Quale catena montuosa separa la Francia dalla Spagna?",
+     "opzioni": [
+      "I Carpazi",
+      "I Pirenei",
+      "Le Alpi",
+      "Gli Urali"
+     ],
+     "corretta": 1,
+     "spiegazione": "I Pirenei vanno dall'Atlantico al Mediterraneo; tra le loro montagne c'è il piccolo Stato di Andorra.",
+     "categoria": "Europa"
+    },
+    {
+     "domanda": "Quale stretto separa l'Europa dall'Africa, tra Spagna e Marocco?",
+     "opzioni": [
+      "Lo Stretto di Gibilterra",
+      "Il Bosforo",
+      "Lo Stretto di Messina"
+     ],
+     "corretta": 0,
+     "spiegazione": "Lo Stretto di Gibilterra collega il Mediterraneo all'Oceano Atlantico.",
+     "categoria": "Europa"
+    },
+    {
+     "domanda": "Come si chiamano le profonde insenature tra le montagne lungo le coste della Norvegia?",
+     "opzioni": [
+      "Delta",
+      "Fiordi",
+      "Lagune"
+     ],
+     "corretta": 1,
+     "spiegazione": "I fiordi sono antiche valli scavate dai ghiacciai e poi invase dal mare.",
+     "categoria": "Europa"
+    },
+    {
+     "domanda": "In quale città furono firmati nel 1957 i trattati che diedero inizio all'Europa unita?",
+     "opzioni": [
+      "Maastricht",
+      "Bruxelles",
+      "Parigi",
+      "Roma"
+     ],
+     "corretta": 3,
+     "spiegazione": "I Trattati di Roma del 1957 furono firmati da sei Paesi, tra cui l'Italia.",
+     "categoria": "Europa"
+    },
+    {
+     "domanda": "Quante stelle ci sono sulla bandiera europea?",
+     "opzioni": [
+      "50",
+      "12",
+      "27",
+      "6"
+     ],
+     "corretta": 1,
+     "spiegazione": "Le 12 stelle sono un simbolo di unità e perfezione, non il numero dei Paesi.",
+     "categoria": "Europa"
+    },
+    {
+     "domanda": "Qual è l'inno dell'Europa?",
+     "opzioni": [
+      "L'Inno alla gioia di Beethoven",
+      "Il Va' pensiero di Verdi",
+      "Le Quattro stagioni di Vivaldi"
+     ],
+     "corretta": 0,
+     "spiegazione": "L'inno europeo è la melodia dell'Inno alla gioia, dalla Nona Sinfonia di Beethoven.",
+     "categoria": "Europa"
+    },
+    {
+     "domanda": "Quale moneta usava l'Italia prima dell'euro?",
+     "opzioni": [
+      "Il marco",
+      "La peseta",
+      "Il franco",
+      "La lira"
+     ],
+     "corretta": 3,
+     "spiegazione": "La lira è stata sostituita dall'euro: 1 euro valeva 1.936,27 lire.",
+     "categoria": "Europa"
+    },
+    {
+     "domanda": "Quale città è divisa in due parti, Buda e Pest, dal Danubio?",
+     "opzioni": [
+      "Belgrado",
+      "Budapest",
+      "Bucarest"
+     ],
+     "corretta": 1,
+     "spiegazione": "Budapest, capitale dell'Ungheria, nacque dall'unione di più città, tra cui Buda e Pest.",
+     "categoria": "Europa"
+    },
+    {
+     "domanda": "Quale altro nome ha il punto cardinale Est?",
+     "opzioni": [
+      "Levante",
+      "Ponente",
+      "Meridione",
+      "Settentrione"
+     ],
+     "corretta": 0,
+     "spiegazione": "Est si chiama anche levante o oriente: lì il Sole «si leva».",
+     "categoria": "Mappe e orientamento"
+    },
+    {
+     "domanda": "Quale altro nome ha il punto cardinale Ovest?",
+     "opzioni": [
+      "Levante",
+      "Mezzogiorno",
+      "Ponente"
+     ],
+     "corretta": 2,
+     "spiegazione": "Ovest si chiama anche ponente o occidente: lì il Sole «si pone», cioè tramonta.",
+     "categoria": "Mappe e orientamento"
+    },
+    {
+     "domanda": "Quale stella indica il nord di notte?",
+     "opzioni": [
+      "La stella Sirio",
+      "La Stella Polare",
+      "La stella del mattino"
+     ],
+     "corretta": 1,
+     "spiegazione": "La Stella Polare si trova prolungando il lato posteriore del Grande Carro.",
+     "categoria": "Mappe e orientamento"
+    },
+    {
+     "domanda": "Verso dove punta l'ago della bussola?",
+     "opzioni": [
+      "Verso il mare più vicino",
+      "Verso il Sole",
+      "Verso il nord magnetico"
+     ],
+     "corretta": 2,
+     "spiegazione": "L'ago è una piccola calamita attirata verso il nord magnetico, vicino al nord geografico.",
+     "categoria": "Mappe e orientamento"
+    },
+    {
+     "domanda": "Da quale direzione soffia la tramontana?",
+     "opzioni": [
+      "Da nord",
+      "Da sud",
+      "Da est"
+     ],
+     "corretta": 0,
+     "spiegazione": "La tramontana è il vento freddo che arriva da nord.",
+     "categoria": "Mappe e orientamento"
+    },
+    {
+     "domanda": "Come si chiama il meridiano da cui si contano le longitudini?",
+     "opzioni": [
+      "Il meridiano di Roma",
+      "L'equatore",
+      "Il meridiano di Greenwich"
+     ],
+     "corretta": 2,
+     "spiegazione": "Il meridiano di Greenwich, vicino a Londra, vale 0 gradi di longitudine.",
+     "categoria": "Mappe e orientamento"
+    },
+    {
+     "domanda": "Quanto vale la latitudine all'equatore?",
+     "opzioni": [
+      "180 gradi",
+      "0 gradi",
+      "90 gradi"
+     ],
+     "corretta": 1,
+     "spiegazione": "All'equatore la latitudine è 0; ai poli arriva a 90 gradi.",
+     "categoria": "Mappe e orientamento"
+    },
+    {
+     "domanda": "Con una carta in scala 1:25.000, a quanto corrisponde 1 cm?",
+     "opzioni": [
+      "A 25 metri",
+      "A 2,5 chilometri",
+      "A 25 chilometri",
+      "A 250 metri"
+     ],
+     "corretta": 3,
+     "spiegazione": "25.000 centimetri sono 250 metri.",
+     "categoria": "Mappe e orientamento"
+    },
+    {
+     "domanda": "Su una carta geografica, cosa indica di solito il colore marrone?",
+     "opzioni": [
+      "I boschi di pianura",
+      "Le città",
+      "Le montagne",
+      "Il mare"
+     ],
+     "corretta": 2,
+     "spiegazione": "Il marrone indica i rilievi: più è scuro, più la montagna è alta.",
+     "categoria": "Mappe e orientamento"
+    },
+    {
+     "domanda": "Che cos'è la legenda di una carta?",
+     "opzioni": [
+      "Il riquadro che spiega simboli e colori",
+      "Il titolo della carta",
+      "Il nome di chi l'ha disegnata"
+     ],
+     "corretta": 0,
+     "spiegazione": "La legenda è la chiave per leggere la carta: spiega cosa significa ogni segno.",
+     "categoria": "Mappe e orientamento"
+    },
+    {
+     "domanda": "Per usare il GPS del telefono serve per forza Internet?",
+     "opzioni": [
+      "Sì, sempre",
+      "Serve solo il Bluetooth",
+      "No: la posizione arriva dai satelliti, ma per scaricare la mappa serve la connessione"
+     ],
+     "corretta": 2,
+     "spiegazione": "Il GPS ascolta i satelliti; senza Internet funziona se la mappa è stata salvata prima.",
+     "categoria": "Mappe e orientamento"
+    },
+    {
+     "domanda": "Il navigatore indica di svoltare, ma un cartello lo vieta. Cosa fate?",
+     "opzioni": [
+      "Seguo il navigatore",
+      "Rispetto il cartello",
+      "Mi fermo in mezzo alla strada"
+     ],
+     "corretta": 1,
+     "spiegazione": "La segnaletica stradale ha sempre la precedenza sulle indicazioni del navigatore.",
+     "categoria": "Mappe e orientamento"
+    },
+    {
+     "domanda": "Qual è la montagna più alta del mondo?",
+     "opzioni": [
+      "L'Aconcagua",
+      "Il Kilimangiaro",
+      "L'Everest",
+      "Il Monte Bianco"
+     ],
+     "corretta": 2,
+     "spiegazione": "L'Everest, nell'Himalaya, supera gli 8.800 metri.",
+     "categoria": "Il mondo"
+    },
+    {
+     "domanda": "Qual è il deserto caldo più grande del mondo?",
+     "opzioni": [
+      "Il Sahara",
+      "Il deserto di Atacama",
+      "Il Gobi"
+     ],
+     "corretta": 0,
+     "spiegazione": "Il Sahara occupa gran parte dell'Africa del nord.",
+     "categoria": "Il mondo"
+    },
+    {
+     "domanda": "Qual è il Paese più esteso del mondo?",
+     "opzioni": [
+      "Il Brasile",
+      "L'Australia",
+      "La Cina",
+      "La Russia"
+     ],
+     "corretta": 3,
+     "spiegazione": "La Russia si estende tra Europa e Asia ed è il Paese più grande del mondo.",
+     "categoria": "Il mondo"
+    },
+    {
+     "domanda": "Qual è la capitale dell'Australia?",
+     "opzioni": [
+      "Canberra",
+      "Melbourne",
+      "Sydney"
+     ],
+     "corretta": 0,
+     "spiegazione": "Molti pensano a Sydney, ma la capitale è Canberra.",
+     "categoria": "Il mondo"
+    },
+    {
+     "domanda": "Quale fiume attraversa l'Egitto?",
+     "opzioni": [
+      "Il Rio delle Amazzoni",
+      "Il Gange",
+      "Il Nilo"
+     ],
+     "corretta": 2,
+     "spiegazione": "Il Nilo è uno dei fiumi più lunghi del mondo e ha permesso la civiltà degli antichi Egizi.",
+     "categoria": "Il mondo"
+    },
+    {
+     "domanda": "Quale fiume è il più ricco d'acqua del mondo?",
+     "opzioni": [
+      "Il Tevere",
+      "Il Rio delle Amazzoni",
+      "Il Danubio"
+     ],
+     "corretta": 1,
+     "spiegazione": "Il Rio delle Amazzoni, in Sud America, porta al mare più acqua di qualunque altro fiume.",
+     "categoria": "Il mondo"
+    },
+    {
+     "domanda": "Quale canale collega il Mar Mediterraneo al Mar Rosso?",
+     "opzioni": [
+      "Il Canale della Manica",
+      "Il Canale di Panama",
+      "Il Canale di Suez"
+     ],
+     "corretta": 2,
+     "spiegazione": "Il Canale di Suez, in Egitto, evita alle navi il giro attorno all'Africa.",
+     "categoria": "Il mondo"
+    },
+    {
+     "domanda": "In quale continente si trova il Brasile?",
+     "opzioni": [
+      "In Asia",
+      "In America del Sud",
+      "In Africa"
+     ],
+     "corretta": 1,
+     "spiegazione": "Il Brasile è il Paese più grande dell'America del Sud.",
+     "categoria": "Il mondo"
+    }
+   ]
+  }
+ ]
+}

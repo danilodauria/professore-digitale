@@ -1,0 +1,1761 @@
+{
+ "formato": "professore-digitale-contenuti",
+ "formato_versione": 1,
+ "id": "cultura-arte",
+ "titolo": "Cultura generale · Arte",
+ "versione": "1.0.0",
+ "autore": "Danilo D'Auria",
+ "descrizione": "Un viaggio nella storia dell'arte, dai templi greci alle avanguardie: 5 lezioni (arte antica, Medioevo e Giotto, Rinascimento, dal Barocco all'Impressionismo, arte moderna e musei), 25 risposte su artisti e opere e il Grande Quiz dell'Arte con attestato.",
+ "richiede_app": "3.0.0",
+ "suggerimenti": [
+  "Dove si trova il Cenacolo di Leonardo?",
+  "Chi ha dipinto la Cappella Sistina?",
+  "Chi era Caravaggio?",
+  "Cos'è l'Impressionismo?",
+  "Si può visitare un museo da casa?"
+ ],
+ "domande": [
+  {
+   "domanda": "Chi era Giotto?",
+   "parole_chiave": [
+    "giotto",
+    "scrovegni",
+    "cappella degli scrovegni",
+    "padova",
+    "pittore medievale"
+   ],
+   "risposta": "**Giotto di Bondone** (circa 1267 - 1337) è il pittore che, alla fine del Medioevo, rinnovò la pittura italiana. Le sue figure hanno un **corpo solido**, stanno in uno **spazio** credibile e mostrano **emozioni** umane.\n\nIl suo capolavoro è il ciclo di affreschi della **Cappella degli Scrovegni a Padova**, con il celebre cielo blu stellato e le storie di Maria e di Gesù. A Firenze progettò il **campanile** del Duomo, detto appunto campanile di Giotto.",
+   "lezione": "arte-medievale"
+  },
+  {
+   "domanda": "Dove si trova il Cenacolo di Leonardo?",
+   "parole_chiave": [
+    "cenacolo",
+    "ultima cena",
+    "santa maria delle grazie",
+    "leonardo milano",
+    "refettorio"
+   ],
+   "risposta": "Il **Cenacolo**, cioè l'**Ultima Cena** di Leonardo da Vinci, si trova a **Milano**, sulla parete del refettorio del convento di **Santa Maria delle Grazie**. Leonardo lo dipinse tra il **1495 e il 1498** per Ludovico il Moro.\n\nMostra il momento in cui Gesù annuncia che uno degli apostoli lo tradirà. Leonardo usò una tecnica sperimentale, che si rovinò presto: l'opera è stata restaurata molte volte. La chiesa con il Cenacolo è **patrimonio dell'umanità UNESCO**.",
+   "lezione": "arte-rinascimento"
+  },
+  {
+   "domanda": "Dove si trova la Gioconda?",
+   "parole_chiave": [
+    "gioconda",
+    "monna lisa",
+    "louvre",
+    "sorriso",
+    "parigi"
+   ],
+   "risposta": "La **Gioconda**, detta anche **Monna Lisa**, il ritratto di Leonardo da Vinci dal sorriso misterioso, si trova al **Museo del Louvre a Parigi**.\n\nLeonardo la portò con sé in Francia, dove passò gli ultimi anni della sua vita ospite del re Francesco I; il quadro entrò poi nelle collezioni dei re francesi. È dipinta con lo **sfumato**, la tecnica di Leonardo che rende i contorni morbidi e il volto vivo. È piccola: circa 77 centimetri di altezza.",
+   "lezione": "arte-rinascimento"
+  },
+  {
+   "domanda": "Chi ha dipinto la Cappella Sistina?",
+   "parole_chiave": [
+    "cappella sistina",
+    "sistina",
+    "michelangelo",
+    "giudizio universale",
+    "creazione di adamo"
+   ],
+   "risposta": "La **volta** della **Cappella Sistina**, in Vaticano, fu affrescata da **Michelangelo** tra il **1508 e il 1512**, su richiesta di papa Giulio II. Racconta storie della Genesi: la più famosa è la **Creazione di Adamo**, con le due dita che quasi si toccano.\n\nAnni dopo, tra il 1536 e il 1541, Michelangelo dipinse sulla parete dell'altare il **Giudizio universale**. Le pareti laterali erano già state affrescate da altri maestri del Quattrocento, tra cui **Botticelli** e il **Perugino**.",
+   "lezione": "arte-rinascimento"
+  },
+  {
+   "domanda": "Dove si trova il David di Michelangelo?",
+   "parole_chiave": [
+    "david",
+    "david di michelangelo",
+    "galleria dell'accademia",
+    "firenze",
+    "statua"
+   ],
+   "risposta": "Il **David** originale di **Michelangelo**, scolpito tra il **1501 e il 1504** in un unico blocco di marmo, si trova alla **Galleria dell'Accademia** di **Firenze**. La statua è alta più di quattro metri, e con il basamento supera i cinque.\n\nPer secoli rimase all'aperto in **piazza della Signoria**, davanti a Palazzo Vecchio; nel **1873** fu spostato al chiuso per proteggerlo. Oggi in piazza della Signoria c'è una **copia**. Il David rappresenta il giovane che affronta Golia: concentrato, un attimo prima della sfida.",
+   "lezione": "arte-rinascimento"
+  },
+  {
+   "domanda": "Chi era Raffaello?",
+   "parole_chiave": [
+    "raffaello",
+    "raffaello sanzio",
+    "scuola di atene",
+    "urbino",
+    "madonne"
+   ],
+   "risposta": "**Raffaello Sanzio** (Urbino 1483 - Roma 1520) è uno dei tre grandi maestri del Rinascimento, con Leonardo e Michelangelo. È il pittore dell'**armonia**: figure serene, colori dolci, composizioni perfettamente equilibrate.\n\nA Roma affrescò le **Stanze** dei **Musei Vaticani**, tra cui la **Scuola di Atene**. Dipinse molte **Madonne** e ritratti; lo **Sposalizio della Vergine** è alla Pinacoteca di **Brera**, a Milano. Morì a soli 37 anni ed è sepolto nel **Pantheon**.",
+   "lezione": "arte-rinascimento"
+  },
+  {
+   "domanda": "Chi era Caravaggio?",
+   "parole_chiave": [
+    "caravaggio",
+    "merisi",
+    "chiaroscuro",
+    "luce e ombra",
+    "vocazione di san matteo"
+   ],
+   "risposta": "**Michelangelo Merisi**, detto **Caravaggio** (Milano 1571 - Porto Ercole 1610), fu un pittore rivoluzionario. Nei quadri sacri usava come modelli **persone comuni**, con volti, mani e piedi veri.\n\nLa sua caratteristica è la **luce**: un fascio luminoso che esce dal buio e colpisce i personaggi, creando un forte **chiaroscuro**. A Roma, in **San Luigi dei Francesi**, si vede la **Vocazione di san Matteo**; a Milano, alla **Pinacoteca Ambrosiana**, la **Canestra di frutta**. Ebbe una vita difficile e morì a 38 anni.",
+   "lezione": "arte-barocco-impressionismo"
+  },
+  {
+   "domanda": "Cos'è il Barocco?",
+   "parole_chiave": [
+    "barocco",
+    "seicento",
+    "stile barocco",
+    "meraviglia",
+    "roma barocca"
+   ],
+   "risposta": "Il **Barocco** è lo stile dell'arte del **Seicento**, nato a **Roma** e diffuso in tutta Europa. Vuole **stupire** e **commuovere** chi guarda.\n\nSi riconosce da: linee **curve** e movimento, effetti teatrali di luce, decorazioni ricche, sculture che sembrano vive. I protagonisti a Roma furono lo scultore e architetto **Gian Lorenzo Bernini** e l'architetto **Francesco Borromini**. Piazza San Pietro con il suo colonnato e piazza Navona con la Fontana dei Quattro Fiumi sono esempi celebri.",
+   "lezione": "arte-barocco-impressionismo"
+  },
+  {
+   "domanda": "Chi era Gian Lorenzo Bernini?",
+   "parole_chiave": [
+    "bernini",
+    "colonnato",
+    "apollo e dafne",
+    "piazza navona",
+    "fontana dei quattro fiumi"
+   ],
+   "risposta": "**Gian Lorenzo Bernini** (Napoli 1598 - Roma 1680) fu il genio del **Barocco** romano: scultore, architetto e scenografo.\n\nNel marmo sapeva rendere la morbidezza della pelle e il movimento: lo si vede in **Apollo e Dafne**, alla **Galleria Borghese**, e nell'**Estasi di santa Teresa**. Per la basilica di San Pietro realizzò il **baldacchino** e il grande **colonnato** della piazza, che abbraccia i fedeli. In **piazza Navona** creò la **Fontana dei Quattro Fiumi**.",
+   "lezione": "arte-barocco-impressionismo"
+  },
+  {
+   "domanda": "Chi era Antonio Canova?",
+   "parole_chiave": [
+    "canova",
+    "neoclassicismo",
+    "amore e psiche",
+    "paolina borghese",
+    "possagno"
+   ],
+   "risposta": "**Antonio Canova** (Possagno 1757 - Venezia 1822) fu il più grande scultore del **Neoclassicismo**, lo stile che si ispirava all'arte greca e romana.\n\nLe sue statue in marmo sono levigatissime ed eleganti. Tra le più famose: **Amore e Psiche**, conservata al **Louvre**, e **Paolina Borghese**, sorella di Napoleone, ritratta come Venere, alla **Galleria Borghese** di Roma. Dopo la caduta di Napoleone si impegnò per far tornare in Italia molte opere d'arte portate in Francia.",
+   "lezione": "arte-barocco-impressionismo"
+  },
+  {
+   "domanda": "Cos'è l'Impressionismo?",
+   "parole_chiave": [
+    "impressionismo",
+    "impressionisti",
+    "monet",
+    "renoir",
+    "degas",
+    "ninfee"
+   ],
+   "risposta": "L'**Impressionismo** è un movimento di pittori nato a **Parigi** nella seconda metà dell'Ottocento. La loro prima mostra comune si tenne nel **1874**, e il nome venne da un quadro di **Monet**, *Impressione, levar del sole*.\n\nGli impressionisti dipingevano **all'aria aperta**, con pennellate veloci e colori chiari, per catturare la **luce** di un momento. I più famosi sono **Claude Monet**, con le sue ninfee, **Pierre-Auguste Renoir** e **Edgar Degas**, con le ballerine.",
+   "lezione": "arte-barocco-impressionismo"
+  },
+  {
+   "domanda": "Chi era Van Gogh?",
+   "parole_chiave": [
+    "van gogh",
+    "vincent van gogh",
+    "girasoli",
+    "notte stellata",
+    "orecchio"
+   ],
+   "risposta": "**Vincent van Gogh** (1853 - 1890) era un pittore **olandese** che visse gli ultimi anni in **Francia**. Dipinse in appena una decina d'anni centinaia di quadri, con **colori intensi** e pennellate vorticose, piene di energia.\n\nTra le opere più famose ci sono i **Girasoli** e la **Notte stellata**. In vita vendette pochissimo ed ebbe una vita difficile; le lettere al fratello **Theo** raccontano le sue idee sull'arte. Dopo la morte divenne uno dei pittori più amati al mondo.",
+   "lezione": "arte-barocco-impressionismo"
+  },
+  {
+   "domanda": "Cos'è il Futurismo?",
+   "parole_chiave": [
+    "futurismo",
+    "futuristi",
+    "marinetti",
+    "boccioni",
+    "velocità"
+   ],
+   "risposta": "Il **Futurismo** è un movimento artistico **italiano** nato nel **1909**, con il manifesto del poeta **Filippo Tommaso Marinetti**. I futuristi volevano rompere con il passato ed esaltavano la **velocità**, le **macchine**, l'elettricità e la città moderna.\n\nTra gli artisti ci sono **Umberto Boccioni**, **Giacomo Balla** e **Gino Severini**. La scultura di Boccioni *Forme uniche della continuità nello spazio*, una figura che avanza, è raffigurata sulle **monete italiane da 20 centesimi**.",
+   "lezione": "arte-moderna-musei"
+  },
+  {
+   "domanda": "Chi era Picasso?",
+   "parole_chiave": [
+    "picasso",
+    "pablo picasso",
+    "cubismo",
+    "guernica",
+    "periodo blu"
+   ],
+   "risposta": "**Pablo Picasso** (1881 - 1973) era un artista **spagnolo**, vissuto a lungo in **Francia**. È uno dei più importanti artisti del Novecento.\n\nCon **Georges Braque** inventò il **Cubismo**: gli oggetti e i volti sono scomposti in forme geometriche e mostrati da più punti di vista insieme. Prima aveva attraversato il **periodo blu** e il **periodo rosa**. La sua opera più famosa è **Guernica** (1937), un grande quadro in bianco, nero e grigio contro gli orrori della guerra, oggi a **Madrid**.",
+   "lezione": "arte-moderna-musei"
+  },
+  {
+   "domanda": "Cos'è il Colosseo?",
+   "parole_chiave": [
+    "colosseo",
+    "anfiteatro flavio",
+    "gladiatori",
+    "roma antica",
+    "anfiteatro"
+   ],
+   "risposta": "Il **Colosseo**, il cui vero nome è **Anfiteatro Flavio**, è il più grande anfiteatro costruito dai Romani. Fu iniziato dall'imperatore **Vespasiano** e inaugurato da suo figlio **Tito** nell'**80 dopo Cristo**.\n\nOspitava i combattimenti dei **gladiatori** e le cacce agli animali davanti a decine di migliaia di spettatori, protetti dal sole da un grande telo. Il nome \"Colosseo\" viene probabilmente da una statua colossale di Nerone che si trovava lì vicino. Fa parte del centro storico di Roma, patrimonio UNESCO.",
+   "lezione": "arte-antica"
+  },
+  {
+   "domanda": "Cos'è il Pantheon?",
+   "parole_chiave": [
+    "pantheon",
+    "cupola",
+    "oculo",
+    "tempio romano",
+    "adriano"
+   ],
+   "risposta": "Il **Pantheon** è un tempio romano dedicato a **tutti gli dèi**, ricostruito sotto l'imperatore **Adriano** nel II secolo dopo Cristo. Sulla facciata si legge ancora il nome di **Agrippa**, che aveva costruito il primo tempio.\n\nLa sua **cupola** è un capolavoro di ingegneria: al centro ha un'apertura rotonda, l'**oculo**, unica fonte di luce. Dal VII secolo è una **chiesa**, e per questo si è conservato così bene. Vi sono sepolti il pittore **Raffaello** e i primi re d'Italia.",
+   "lezione": "arte-antica"
+  },
+  {
+   "domanda": "Cosa sono i Bronzi di Riace?",
+   "parole_chiave": [
+    "bronzi di riace",
+    "riace",
+    "statue greche",
+    "reggio calabria",
+    "guerrieri"
+   ],
+   "risposta": "I **Bronzi di Riace** sono due grandi statue greche in **bronzo** che raffigurano due **guerrieri**, realizzate nel **V secolo avanti Cristo**. Sono tra i pochissimi originali greci in bronzo arrivati fino a noi.\n\nFurono ritrovati nel **1972** sul fondo del mare, vicino a **Riace**, in Calabria, da un appassionato di immersioni. Dopo un lungo restauro sono esposti al **Museo archeologico nazionale di Reggio Calabria**. Colpiscono per i muscoli perfetti, la barba ricciuta e gli occhi in materiali diversi.",
+   "lezione": "arte-antica"
+  },
+  {
+   "domanda": "Cos'è Pompei?",
+   "parole_chiave": [
+    "pompei",
+    "scavi di pompei",
+    "vesuvio",
+    "ercolano",
+    "79 dopo cristo"
+   ],
+   "risposta": "**Pompei** era una città romana della Campania, sepolta nel **79 dopo Cristo** dall'eruzione del **Vesuvio**, insieme a **Ercolano** e ad altri centri vicini. Cenere e lapilli la coprirono e la conservarono per secoli.\n\nGli scavi, iniziati nel Settecento, mostrano strade, case, botteghe, terme e teatri, con **affreschi** e **mosaici** bellissimi. Molti reperti sono conservati al **Museo archeologico nazionale di Napoli**. L'area archeologica è **patrimonio dell'umanità UNESCO**.",
+   "lezione": "arte-antica"
+  },
+  {
+   "domanda": "Che differenza c'è tra romanico e gotico?",
+   "parole_chiave": [
+    "romanico",
+    "gotico",
+    "chiese medievali",
+    "cattedrali",
+    "arco a sesto acuto"
+   ],
+   "risposta": "Sono due stili delle chiese medievali.\n\n- **Romanico** (dopo l'anno Mille): muri spessi, archi **tondi** a tutto sesto, poche finestre piccole, interni in penombra. Dà un'idea di forza. Esempio: Sant'Ambrogio a Milano.\n- **Gotico** (dal XII secolo, nato in Francia): archi **appuntiti** a sesto acuto, pareti più leggere, grandi **vetrate colorate**, guglie che salgono verso il cielo. Esempio: il Duomo di Milano.\n\nPer riconoscerli, guardate gli archi: tondi o a punta?",
+   "schema": "flowchart LR\n  R[\"🏰 Romanico: archi tondi\"] --> G[\"⛪ Gotico: archi a punta\"]",
+   "lezione": "arte-medievale"
+  },
+  {
+   "domanda": "Cos'è un affresco?",
+   "parole_chiave": [
+    "affresco",
+    "affreschi",
+    "pittura murale",
+    "intonaco",
+    "a fresco"
+   ],
+   "risposta": "L'**affresco** è una tecnica di pittura sui **muri**. Il pittore stende i colori, sciolti in acqua, sull'**intonaco ancora fresco**, cioè umido: da qui il nome \"a fresco\". Asciugando, il colore si lega all'intonaco e diventa parte del muro, durando secoli.\n\nBisogna lavorare in fretta, una porzione al giorno, detta **giornata**. Sono affreschi la Cappella degli Scrovegni di Giotto e la volta della Cappella Sistina di Michelangelo. Il Cenacolo di Leonardo, invece, non è un vero affresco.",
+   "lezione": "arte-medievale"
+  },
+  {
+   "domanda": "Cos'è la prospettiva in pittura?",
+   "parole_chiave": [
+    "prospettiva",
+    "punto di fuga",
+    "profondità",
+    "brunelleschi",
+    "tridimensionale"
+   ],
+   "risposta": "La **prospettiva** è un metodo per disegnare su una superficie piatta lo **spazio in profondità**, come lo vede l'occhio. Le linee parallele che si allontanano, come i bordi di una strada, sembrano unirsi in un punto lontano, il **punto di fuga**; le cose lontane appaiono più piccole.\n\nLe regole della prospettiva furono studiate a **Firenze** all'inizio del **Quattrocento** da **Filippo Brunelleschi** e applicate in pittura da **Masaccio**. Divennero una delle grandi conquiste del Rinascimento.",
+   "lezione": "arte-rinascimento"
+  },
+  {
+   "domanda": "Cos'è il patrimonio UNESCO?",
+   "parole_chiave": [
+    "unesco",
+    "patrimonio dell'umanità",
+    "patrimonio mondiale",
+    "siti unesco",
+    "val camonica"
+   ],
+   "risposta": "L'**UNESCO** è un'organizzazione delle Nazioni Unite per l'educazione, la scienza e la cultura. Con una convenzione del **1972** ha creato l'elenco del **Patrimonio mondiale**: luoghi culturali e naturali di valore eccezionale per tutta l'umanità, da proteggere.\n\nL'Italia è tra i Paesi con il **maggior numero di siti**. Il primo sito italiano fu l'**arte rupestre della Val Camonica**, nel **1979**. Tra gli altri ci sono i centri storici di Roma, Firenze e Venezia, Pompei e le Dolomiti.",
+   "lezione": "arte-moderna-musei"
+  },
+  {
+   "domanda": "Come visito un museo senza stancarmi?",
+   "parole_chiave": [
+    "visitare un museo",
+    "museo",
+    "stancarmi",
+    "visita al museo",
+    "audioguida"
+   ],
+   "risposta": "Qualche consiglio pratico:\n\n1. **Scegliete prima** poche opere o una sola sala: non serve vedere tutto.\n2. Andate negli **orari meno affollati**, di solito il mattino nei giorni feriali.\n3. Chiedete **audioguida**, **visita guidata** o percorsi accessibili, e se ci sono sedie pieghevoli o ascensori.\n4. Fate **pause** e sedetevi davanti alle opere.\n5. Lasciate borse ingombranti al **guardaroba**.\n\nPer orari, biglietti e riduzioni consultate il **sito ufficiale** del museo o telefonate.",
+   "lezione": "arte-moderna-musei"
+  },
+  {
+   "domanda": "Si può visitare un museo da casa?",
+   "parole_chiave": [
+    "museo virtuale",
+    "visita virtuale",
+    "museo da casa",
+    "museo online",
+    "tour virtuale"
+   ],
+   "risposta": "Sì. Molti musei offrono **visite virtuali** e immagini ad altissima definizione delle loro opere: potete ingrandire un quadro fino a vedere le pennellate.\n\n1. Aprite il browser e cercate il **nome del museo** seguito da \"**visita virtuale**\".\n2. Preferite il **sito ufficiale** del museo.\n3. Usate lo **schermo intero** e lo **zoom**.\n\nÈ un bel modo per preparare una visita vera, ripassare ciò che avete visto o viaggiare restando comodi a casa.",
+   "lezione": "arte-moderna-musei"
+  },
+  {
+   "domanda": "Chi era Botticelli?",
+   "parole_chiave": [
+    "botticelli",
+    "nascita di venere",
+    "primavera",
+    "uffizi",
+    "venere"
+   ],
+   "risposta": "**Sandro Botticelli** (Firenze, circa 1445 - 1510) fu uno dei grandi pittori del **Rinascimento** fiorentino, legato alla corte dei **Medici** e di Lorenzo il Magnifico.\n\nI suoi quadri più famosi sono la **Nascita di Venere**, con la dea che arriva dal mare su una conchiglia, e la **Primavera**, un giardino fiorito pieno di figure mitologiche. Sono entrambi alla **Galleria degli Uffizi** a Firenze. Riconoscerete Botticelli dalle linee eleganti e dai volti delicati, con lunghi capelli mossi.",
+   "lezione": "arte-rinascimento"
+  }
+ ],
+ "lezioni": [
+  {
+   "id": "arte-antica",
+   "icona": "🏺",
+   "titolo": "L'arte antica: Grecia e Roma",
+   "livello": "Arte",
+   "minuti": 20,
+   "obiettivo": "Riconoscere i templi e le statue dei Greci e le grandi costruzioni dei Romani, con esempi che si possono vedere in Italia.",
+   "palestra": "",
+   "passi": [
+    {
+     "titolo": "I templi greci e le colonne",
+     "testo": "I Greci costruivano i **templi** come case per gli dèi, con file di **colonne** tutto intorno. Le colonne seguono tre stili, detti **ordini**:\n\n- **dorico**: semplice e robusto, senza base;\n- **ionico**: più slanciato, con il capitello a riccioli, le **volute**;\n- **corinzio**: elegante, con il capitello decorato da **foglie d'acanto**.\n\nIl tempio più celebre è il **Partenone** di Atene, sull'**Acropoli**, dedicato alla dea **Atena** nel V secolo avanti Cristo. Templi greci bellissimi si trovano anche in Italia: a **Paestum**, in Campania, e nella **Valle dei Templi di Agrigento**, in Sicilia.",
+     "consiglio": "Per ricordarli: dorico = semplice, ionico = riccioli, corinzio = foglie."
+    },
+    {
+     "titolo": "La scultura greca",
+     "testo": "I Greci cercavano la **bellezza ideale**: corpi armoniosi, proporzionati, in equilibrio. Lo scultore **Policleto** scrisse un **canone**, cioè una regola sulle proporzioni perfette del corpo, e la mise in pratica nel **Doriforo**, il portatore di lancia. **Mirone** scolpì il **Discobolo**, l'atleta che lancia il disco.\n\nMolti originali in bronzo sono andati perduti: li conosciamo grazie alle **copie romane** in marmo.\n\nUn'eccezione straordinaria sono i **Bronzi di Riace**: due guerrieri originali del V secolo avanti Cristo, ritrovati in mare in Calabria nel **1972** e oggi esposti al **Museo archeologico nazionale di Reggio Calabria**."
+    },
+    {
+     "titolo": "I Romani, grandi costruttori",
+     "testo": "I Romani impararono molto dai Greci, ma furono soprattutto **ingegneri geniali**. Usarono l'**arco**, la **volta** e la **cupola**, e un materiale robustissimo, una specie di **calcestruzzo**.\n\n- Il **Colosseo**, il cui vero nome è **Anfiteatro Flavio**, fu inaugurato nell'**80 dopo Cristo** dall'imperatore Tito: ospitava i combattimenti dei gladiatori davanti a decine di migliaia di spettatori.\n- Il **Pantheon**, tempio di tutti gli dèi, ricostruito sotto l'imperatore **Adriano**, ha una grandiosa **cupola** con un'apertura al centro, l'**oculo**.\n- **Acquedotti**, ponti e strade collegavano tutto l'Impero.",
+     "consiglio": "Nel Pantheon riposano il pittore Raffaello e i primi re d'Italia."
+    },
+    {
+     "titolo": "Racconti nella pietra",
+     "testo": "I Romani amavano celebrare le vittorie. Costruivano **archi di trionfo**, come l'**Arco di Tito** e l'**Arco di Costantino** vicino al Colosseo, e colonne decorate.\n\nLa **Colonna Traiana**, a Roma, inaugurata nel **113 dopo Cristo**, è avvolta da un lungo **fregio a spirale** che racconta, come un fumetto di pietra, le guerre dell'imperatore **Traiano** contro i Daci.\n\nI Romani erano bravissimi anche nel **ritratto**: i volti delle statue mostrano rughe, nasi importanti, espressioni vere. Non volevano solo la bellezza ideale, ma la persona reale."
+    },
+    {
+     "titolo": "Pompei: una città fermata nel tempo",
+     "testo": "Nel **79 dopo Cristo** l'eruzione del **Vesuvio** seppellì sotto cenere e lapilli **Pompei**, **Ercolano** e altre località vicine. Riscoperte a partire dal Settecento, ci mostrano come vivevano i Romani: case, botteghe, forni, terme, scritte sui muri.\n\nLe pareti delle case erano decorate da **affreschi** dai colori vivaci, come quelli della **Villa dei Misteri**. I pavimenti erano coperti di **mosaici**, fatti con migliaia di tessere colorate. Il celebre **Mosaico di Alessandro**, che mostra Alessandro Magno in battaglia, viene da Pompei ed è conservato al **Museo archeologico nazionale di Napoli**.",
+     "consiglio": "Pompei, Ercolano e Torre Annunziata sono insieme patrimonio dell'umanità UNESCO."
+    }
+   ],
+   "quiz": [
+    {
+     "domanda": "Quale ordine di colonne ha il capitello decorato con foglie d'acanto?",
+     "opzioni": [
+      "Dorico",
+      "Ionico",
+      "Corinzio"
+     ],
+     "corretta": 2,
+     "spiegazione": "Il dorico è il più semplice, lo ionico ha le volute a ricciolo."
+    },
+    {
+     "domanda": "Dove sono esposti i Bronzi di Riace?",
+     "opzioni": [
+      "Al Museo archeologico nazionale di Reggio Calabria",
+      "Ai Musei Vaticani",
+      "Al Museo archeologico di Atene"
+     ],
+     "corretta": 0,
+     "spiegazione": "Furono ritrovati in mare, vicino a Riace, nel 1972."
+    },
+    {
+     "domanda": "Qual è il vero nome del Colosseo?",
+     "opzioni": [
+      "Circo Massimo",
+      "Anfiteatro Flavio",
+      "Pantheon"
+     ],
+     "corretta": 1,
+     "spiegazione": "Si chiama Flavio dalla famiglia degli imperatori Vespasiano e Tito."
+    },
+    {
+     "domanda": "Come si chiama l'apertura al centro della cupola del Pantheon?",
+     "opzioni": [
+      "Rosone",
+      "Oculo",
+      "Abside"
+     ],
+     "corretta": 1,
+     "spiegazione": "L'oculo è l'unica fonte di luce naturale dell'edificio."
+    },
+    {
+     "domanda": "Quale evento ha conservato Pompei fino a noi?",
+     "opzioni": [
+      "L'eruzione del Vesuvio nel 79 d.C.",
+      "Un terremoto nel Medioevo",
+      "Un'alluvione del Tevere"
+     ],
+     "corretta": 0,
+     "spiegazione": "Cenere e lapilli seppellirono la città, proteggendola nei secoli."
+    }
+   ]
+  },
+  {
+   "id": "arte-medievale",
+   "icona": "⛪",
+   "titolo": "L'arte medievale e Giotto",
+   "livello": "Arte",
+   "minuti": 20,
+   "obiettivo": "Riconoscere i mosaici bizantini, le chiese romaniche e gotiche, e capire perché Giotto ha cambiato la pittura.",
+   "palestra": "",
+   "passi": [
+    {
+     "titolo": "I mosaici d'oro di Ravenna",
+     "testo": "Dopo la fine dell'Impero d'Occidente, l'arte cristiana usò molto il **mosaico**: piccole tessere di pietra e vetro che brillano alla luce. Lo stile **bizantino**, venuto da Costantinopoli, preferisce figure **frontali**, solenni, su **fondo d'oro**, che fa pensare a un mondo spirituale.\n\nIl luogo migliore per ammirarlo in Italia è **Ravenna**. Nella basilica di **San Vitale** ci sono i mosaici dell'imperatore **Giustiniano** e dell'imperatrice **Teodora** con la loro corte, del VI secolo. Il piccolo **Mausoleo di Galla Placidia** ha un cielo blu pieno di stelle d'oro.",
+     "consiglio": "Anche la basilica di San Marco a Venezia è ricoperta di mosaici su fondo d'oro."
+    },
+    {
+     "titolo": "Il Romanico",
+     "testo": "Dopo l'anno Mille in Europa si costruirono moltissime chiese. Lo stile di questo periodo si chiama **romanico**:\n\n- muri **spessi** e robusti;\n- archi **a tutto sesto**, cioè a mezzo cerchio, come quelli romani;\n- **poche finestre** piccole, quindi interni raccolti e in penombra.\n\nEsempi in Italia: la basilica di **Sant'Ambrogio** a Milano, il **Duomo di Modena**, con le sculture di **Wiligelmo**, e la **Piazza dei Miracoli** a Pisa, con il Duomo, il Battistero e la famosa **Torre pendente**.",
+     "consiglio": "Una chiesa romanica dà un'impressione di forza e solidità, come una fortezza della fede."
+    },
+    {
+     "titolo": "Il Gotico",
+     "testo": "Il **gotico** nacque in **Francia** nel XII secolo e si diffuse in tutta Europa. Le chiese gotiche vogliono salire verso il cielo:\n\n- archi **a sesto acuto**, cioè appuntiti;\n- pareti più sottili, sostenute da pilastri e contrafforti;\n- grandi **vetrate colorate** e **rosoni** che riempiono la chiesa di luce;\n- **guglie** e pinnacoli.\n\nIn Italia il gotico ha forme proprie. Esempi famosi: il **Duomo di Milano**, iniziato nel 1386, il **Duomo di Siena**, il **Duomo di Orvieto** e la **Basilica di San Francesco** ad Assisi.",
+     "schema": "flowchart LR\n  R[\"🏰 Romanico: archi tondi, muri spessi\"] --> G[\"⛪ Gotico: archi a punta, vetrate\"]"
+    },
+    {
+     "titolo": "Giotto e la Cappella degli Scrovegni",
+     "testo": "**Giotto di Bondone** (circa 1267 - 1337) fu il grande rinnovatore della pittura. Prima di lui le figure erano spesso piatte e rigide; Giotto dipinse persone con un **corpo vero**, che occupano uno **spazio**, e soprattutto con **emozioni**: dolore, tenerezza, stupore.\n\nIl suo capolavoro è la **Cappella degli Scrovegni** a **Padova**, affrescata nei primi anni del Trecento: sotto un cielo **blu intenso** stellato, racconta le storie di Maria e di Gesù. Nel **Compianto sul Cristo morto** gli angeli piangono disperati.\n\nGiotto progettò anche il **campanile** del Duomo di Firenze.",
+     "consiglio": "Dante scrisse di lui nel Purgatorio: \"e ora ha Giotto il grido\", cioè ora è Giotto il più famoso."
+    },
+    {
+     "titolo": "Siena e la pittura gotica",
+     "testo": "Mentre Firenze aveva Giotto, **Siena** ebbe una scuola di pittura raffinatissima, con colori preziosi e linee eleganti.\n\n- **Duccio di Buoninsegna** dipinse la grande **Maestà**, la Madonna in trono con santi e angeli, per il Duomo di Siena.\n- **Simone Martini** affrescò un'altra celebre **Maestà** nel **Palazzo Pubblico** di Siena.\n- **Ambrogio Lorenzetti**, sempre nel Palazzo Pubblico, dipinse gli affreschi del **Buono e Cattivo Governo**: mostrano come vive una città ben governata e una mal governata.\n\nEra un messaggio rivolto proprio a chi governava la città."
+    }
+   ],
+   "quiz": [
+    {
+     "domanda": "Quale città è famosa per i mosaici bizantini di San Vitale?",
+     "opzioni": [
+      "Pisa",
+      "Padova",
+      "Ravenna"
+     ],
+     "corretta": 2,
+     "spiegazione": "A San Vitale si vedono Giustiniano e Teodora con la loro corte."
+    },
+    {
+     "domanda": "Come sono gli archi delle chiese romaniche?",
+     "opzioni": [
+      "A tutto sesto, cioè a mezzo cerchio",
+      "A sesto acuto, cioè appuntiti",
+      "Non hanno archi"
+     ],
+     "corretta": 0,
+     "spiegazione": "Gli archi appuntiti sono tipici del gotico."
+    },
+    {
+     "domanda": "Dove nacque lo stile gotico?",
+     "opzioni": [
+      "In Grecia",
+      "In Francia",
+      "In Egitto"
+     ],
+     "corretta": 1,
+     "spiegazione": "Nacque nel XII secolo in Francia e poi si diffuse in Europa."
+    },
+    {
+     "domanda": "Dove si trova la Cappella degli Scrovegni affrescata da Giotto?",
+     "opzioni": [
+      "A Siena",
+      "A Ravenna",
+      "A Padova"
+     ],
+     "corretta": 2,
+     "spiegazione": "La cappella si trova a Padova ed è famosa per il suo cielo blu."
+    },
+    {
+     "domanda": "Che cosa rappresentano gli affreschi di Ambrogio Lorenzetti a Siena?",
+     "opzioni": [
+      "La vita di San Francesco",
+      "La battaglia di Alessandro",
+      "Gli effetti del Buono e del Cattivo Governo"
+     ],
+     "corretta": 2,
+     "spiegazione": "Si trovano nel Palazzo Pubblico di Siena."
+    }
+   ]
+  },
+  {
+   "id": "arte-rinascimento",
+   "icona": "🖌️",
+   "titolo": "Il Rinascimento: Leonardo, Michelangelo, Raffaello",
+   "livello": "Arte",
+   "minuti": 25,
+   "obiettivo": "Conoscere la prospettiva, i maestri del primo Rinascimento a Firenze e i capolavori di Leonardo, Michelangelo e Raffaello.",
+   "palestra": "",
+   "passi": [
+    {
+     "titolo": "Firenze e la prospettiva",
+     "testo": "All'inizio del Quattrocento, a **Firenze**, un gruppo di artisti cambiò il modo di vedere.\n\n- **Filippo Brunelleschi** costruì la grande **cupola di Santa Maria del Fiore**, il Duomo di Firenze, e studiò la **prospettiva**: un metodo per disegnare lo spazio in profondità, come lo vede l'occhio.\n- **Masaccio** applicò la prospettiva alla pittura, per esempio nella **Trinità** in Santa Maria Novella.\n- **Donatello** rinnovò la scultura.\n\nPiù tardi **Sandro Botticelli** dipinse la **Nascita di Venere** e la **Primavera**, conservate agli **Uffizi**.",
+     "consiglio": "Guardate una strada dritta: i bordi sembrano unirsi in un punto lontano. È il punto di fuga della prospettiva."
+    },
+    {
+     "titolo": "Leonardo da Vinci",
+     "testo": "**Leonardo** (Vinci 1452 - Amboise, Francia, 1519) fu pittore, ingegnere e scienziato. Usava lo **sfumato**: contorni morbidi, quasi avvolti nella nebbia, che rendono i volti vivi.\n\n- Il **Cenacolo**, l'Ultima Cena, si trova nel refettorio di **Santa Maria delle Grazie a Milano**: Gesù ha appena detto \"uno di voi mi tradirà\" e gli apostoli reagiscono ciascuno a suo modo.\n- La **Gioconda**, il ritratto dal sorriso misterioso, è conservata al **Louvre di Parigi**.\n\nI suoi quaderni sono pieni di macchine, studi di anatomia, piante e fiumi.",
+     "consiglio": "Leonardo non dipinse il Cenacolo ad affresco ma con una tecnica sperimentale: per questo si è rovinato presto ed è stato restaurato molte volte."
+    },
+    {
+     "titolo": "Michelangelo",
+     "testo": "**Michelangelo Buonarroti** (Caprese 1475 - Roma 1564) si sentiva prima di tutto **scultore**: diceva di \"liberare\" la figura dal blocco di marmo.\n\n- La **Pietà**, nella **basilica di San Pietro**, è l'unica opera che firmò.\n- Il **David**, alto più di quattro metri, si trova alla **Galleria dell'Accademia di Firenze**; in piazza della Signoria c'è una copia.\n- Tra il **1508 e il 1512** dipinse la **volta della Cappella Sistina**, con la **Creazione di Adamo**; anni dopo vi aggiunse il **Giudizio universale**.\n\nFu anche architetto: progettò la **cupola di San Pietro**.",
+     "schema": "flowchart LR\n  A[\"🗿 Pietà\"] --> B[\"🗿 David\"] --> C[\"🎨 Volta Sistina\"] --> D[\"🎨 Giudizio universale\"] --> E[\"🏛️ Cupola di San Pietro\"]"
+    },
+    {
+     "titolo": "Raffaello",
+     "testo": "**Raffaello Sanzio** (Urbino 1483 - Roma 1520) è il pittore dell'**armonia** e della grazia. Le sue Madonne sono dolci e serene, le sue composizioni perfettamente equilibrate.\n\nA Roma, per il papa, affrescò le **Stanze** oggi nei **Musei Vaticani**. La più famosa è la **Scuola di Atene**, dove i grandi filosofi antichi, con al centro **Platone** e **Aristotele**, discutono sotto grandiose architetture.\n\nTra le sue opere ci sono anche lo **Sposalizio della Vergine**, alla **Pinacoteca di Brera** a Milano. Morì a soli 37 anni ed è sepolto nel **Pantheon**.",
+     "consiglio": "Nella Scuola di Atene, secondo una tradizione, Platone avrebbe il volto di Leonardo."
+    },
+    {
+     "titolo": "Venezia e il colore",
+     "testo": "Mentre a Firenze si dava importanza al **disegno**, a **Venezia** i pittori costruivano le immagini con il **colore** e la **luce**.\n\n- **Giorgione** dipinse **La tempesta**, un paesaggio misterioso sotto un lampo, oggi alle **Gallerie dell'Accademia** di Venezia.\n- **Tiziano** fu il grande maestro del colore: la sua **Assunta** splende sull'altare della basilica dei **Frari** a Venezia.\n- Dopo di loro vennero **Tintoretto** e **Veronese**.\n\nAnche in altre corti il Rinascimento fiorì: **Andrea Mantegna** affrescò la **Camera degli Sposi** a Mantova, **Piero della Francesca** lavorò ad Arezzo e Urbino."
+    }
+   ],
+   "quiz": [
+    {
+     "domanda": "Chi costruì la cupola del Duomo di Firenze?",
+     "opzioni": [
+      "Michelangelo",
+      "Filippo Brunelleschi",
+      "Giotto"
+     ],
+     "corretta": 1,
+     "spiegazione": "Brunelleschi realizzò la cupola di Santa Maria del Fiore nel Quattrocento."
+    },
+    {
+     "domanda": "In quale luogo Leonardo dipinse il Cenacolo?",
+     "opzioni": [
+      "A Milano, in Santa Maria delle Grazie",
+      "A Firenze, agli Uffizi",
+      "A Parigi, al Louvre"
+     ],
+     "corretta": 0,
+     "spiegazione": "Il Cenacolo è dipinto sulla parete del refettorio del convento."
+    },
+    {
+     "domanda": "Qual è l'unica opera firmata da Michelangelo?",
+     "opzioni": [
+      "Il David",
+      "La Pietà di San Pietro",
+      "Il Mosè"
+     ],
+     "corretta": 1,
+     "spiegazione": "Michelangelo incise il suo nome sulla fascia che attraversa il petto della Madonna."
+    },
+    {
+     "domanda": "In quale museo si trova la Scuola di Atene di Raffaello?",
+     "opzioni": [
+      "Alla Galleria Borghese",
+      "Al Louvre",
+      "Ai Musei Vaticani"
+     ],
+     "corretta": 2,
+     "spiegazione": "Si trova nelle Stanze di Raffaello, in Vaticano."
+    },
+    {
+     "domanda": "Su che cosa puntavano soprattutto i pittori veneziani?",
+     "opzioni": [
+      "Sul colore e sulla luce",
+      "Solo sul disegno",
+      "Sul fondo d'oro"
+     ],
+     "corretta": 0,
+     "spiegazione": "Giorgione e Tiziano costruivano le figure con il colore."
+    }
+   ]
+  },
+  {
+   "id": "arte-barocco-impressionismo",
+   "icona": "🎭",
+   "titolo": "Dal Barocco all'Impressionismo",
+   "livello": "Arte",
+   "minuti": 25,
+   "obiettivo": "Seguire l'arte dal Seicento all'Ottocento: la luce di Caravaggio, la meraviglia di Bernini, l'eleganza di Canova e la rivoluzione degli impressionisti.",
+   "palestra": "",
+   "passi": [
+    {
+     "titolo": "Caravaggio, la luce e il buio",
+     "testo": "**Michelangelo Merisi**, detto **Caravaggio** (Milano 1571 - Porto Ercole 1610), portò nella pittura sacra la **gente comune**: mani sporche, piedi nudi, volti veri.\n\nLa sua firma è la **luce**: un fascio luminoso che taglia il buio e illumina i protagonisti come un riflettore a teatro. È il **chiaroscuro** drammatico.\n\nA Roma, nella chiesa di **San Luigi dei Francesi**, si può vedere la **Vocazione di san Matteo**: un raggio di luce segue il gesto di Cristo verso Matteo. A Milano, alla **Pinacoteca Ambrosiana**, c'è la sua **Canestra di frutta**.",
+     "consiglio": "Caravaggio ebbe una vita tormentata e morì a soli 38 anni."
+    },
+    {
+     "titolo": "Il Barocco e Bernini",
+     "testo": "Il **Barocco**, nel Seicento, vuole **stupire** e **commuovere**: movimento, curve, effetti teatrali. La sua capitale è **Roma**.\n\n**Gian Lorenzo Bernini** (Napoli 1598 - Roma 1680) fu scultore e architetto. Faceva sembrare il marmo morbido come la carne:\n\n- **Apollo e Dafne**, alla **Galleria Borghese**: Dafne si trasforma in alloro;\n- l'**Estasi di santa Teresa**, in Santa Maria della Vittoria;\n- il **colonnato di piazza San Pietro**, che accoglie i fedeli come due braccia aperte;\n- la **Fontana dei Quattro Fiumi** in **piazza Navona**.\n\nIl suo grande rivale fu l'architetto **Francesco Borromini**."
+    },
+    {
+     "titolo": "Il Settecento: vedute e regge",
+     "testo": "Nel Settecento l'arte diventa più leggera e luminosa.\n\n- **Canaletto** dipinse le **vedute di Venezia** con una precisione quasi fotografica: canali, palazzi, gondole.\n- **Giambattista Tiepolo** riempì soffitti e palazzi di cieli luminosi e figure che volano.\n- A Roma fu completata la **Fontana di Trevi**, progettata da **Nicola Salvi**.\n- Vicino a Napoli, l'architetto **Luigi Vanvitelli** progettò per i Borbone la **Reggia di Caserta**, con un parco immenso e cascate.\n\nI viaggiatori stranieri del **Grand Tour** venivano in Italia per ammirare le sue bellezze e riportavano a casa le vedute come ricordo."
+    },
+    {
+     "titolo": "Canova e il Neoclassicismo",
+     "testo": "Alla fine del Settecento, dopo le scoperte di Pompei ed Ercolano, gli artisti tornarono all'**arte antica**: è il **Neoclassicismo**, che cerca calma, equilibrio e bellezza ideale.\n\nIl suo più grande scultore fu **Antonio Canova** (Possagno 1757 - Venezia 1822). Il suo marmo è levigatissimo, quasi luminoso:\n\n- **Amore e Psiche**, conservato al **Louvre**;\n- **Paolina Borghese**, sorella di Napoleone, ritratta come Venere, alla **Galleria Borghese** di Roma.\n\nDopo la caduta di Napoleone, Canova si impegnò per riportare in Italia molte opere d'arte portate in Francia.",
+     "consiglio": "Nel suo paese natale, Possagno, si visita la Gipsoteca con i modelli in gesso delle sue opere."
+    },
+    {
+     "titolo": "L'Ottocento italiano",
+     "testo": "Nell'Ottocento la pittura racconta la **storia** e la **vita vera**.\n\n- **Francesco Hayez** dipinse **Il bacio** (1859), oggi alla **Pinacoteca di Brera**: per molti fu un simbolo del Risorgimento.\n- In Toscana i **Macchiaioli**, come **Giovanni Fattori** e Silvestro Lega, dipingevano all'aperto con **macchie** di colore, cogliendo luce e ombra: soldati, campagne, scene di vita quotidiana.\n\nAll'inizio del Novecento **Giuseppe Pellizza da Volpedo** dipinse **Il Quarto Stato**, con i lavoratori che avanzano in marcia."
+    },
+    {
+     "titolo": "L'Impressionismo",
+     "testo": "A **Parigi**, nel **1874**, un gruppo di giovani pittori organizzò una mostra nello studio del fotografo **Nadar**. Un critico, prendendo in giro il quadro di **Claude Monet** *Impressione, levar del sole*, li chiamò \"**impressionisti**\". Il nome rimase.\n\nGli impressionisti dipingevano **all'aria aperta**, con pennellate rapide, per catturare la **luce** che cambia: **Monet** con le **ninfee** del suo giardino di Giverny, **Renoir** con le feste popolari, **Degas** con le **ballerine**.\n\nDopo di loro **Van Gogh** e **Cézanne** aprirono la strada all'arte moderna.",
+     "schema": "flowchart LR\n  A[\"🖼️ Barocco 1600\"] --> B[\"🏛️ Neoclassicismo 1800\"] --> C[\"🌳 Macchiaioli\"] --> D[\"🌅 Impressionismo 1874\"]"
+    }
+   ],
+   "quiz": [
+    {
+     "domanda": "Qual è la caratteristica più famosa della pittura di Caravaggio?",
+     "opzioni": [
+      "Il fondo d'oro",
+      "Le pennellate a puntini",
+      "Il forte contrasto tra luce e buio"
+     ],
+     "corretta": 2,
+     "spiegazione": "Il fascio di luce illumina i protagonisti come un riflettore."
+    },
+    {
+     "domanda": "Chi scolpì Apollo e Dafne?",
+     "opzioni": [
+      "Antonio Canova",
+      "Gian Lorenzo Bernini",
+      "Michelangelo"
+     ],
+     "corretta": 1,
+     "spiegazione": "Il gruppo si trova alla Galleria Borghese di Roma."
+    },
+    {
+     "domanda": "Chi progettò la Reggia di Caserta?",
+     "opzioni": [
+      "Luigi Vanvitelli",
+      "Francesco Borromini",
+      "Filippo Brunelleschi"
+     ],
+     "corretta": 0,
+     "spiegazione": "Vanvitelli la progettò per i re Borbone di Napoli."
+    },
+    {
+     "domanda": "A quale arte si ispirava Canova?",
+     "opzioni": [
+      "All'arte antica greca e romana",
+      "All'arte bizantina",
+      "Alle avanguardie del Novecento"
+     ],
+     "corretta": 0,
+     "spiegazione": "Il Neoclassicismo voleva ritrovare l'equilibrio dell'arte antica."
+    },
+    {
+     "domanda": "Da quale quadro prende il nome l'Impressionismo?",
+     "opzioni": [
+      "Il bacio di Hayez",
+      "Le ninfee di Renoir",
+      "Impressione, levar del sole di Monet"
+     ],
+     "corretta": 2,
+     "spiegazione": "Il quadro di Monet fu esposto nella mostra del 1874."
+    }
+   ]
+  },
+  {
+   "id": "arte-moderna-musei",
+   "icona": "🏛️",
+   "titolo": "Arte moderna, musei e patrimonio UNESCO",
+   "livello": "Arte",
+   "minuti": 20,
+   "obiettivo": "Conoscere le avanguardie del Novecento, i grandi musei italiani e il patrimonio dell'umanità, e imparare a visitare un museo con piacere, anche da casa.",
+   "palestra": "",
+   "passi": [
+    {
+     "titolo": "Le avanguardie del Novecento",
+     "testo": "All'inizio del Novecento gli artisti vollero rompere con il passato. Nacquero le **avanguardie**:\n\n- Il **Futurismo**, italiano: il manifesto di **Filippo Tommaso Marinetti** uscì nel **1909**. Esaltava la **velocità**, le macchine, la città moderna. **Umberto Boccioni** scolpì *Forme uniche della continuità nello spazio*, la figura in movimento che vediamo sulle **monete italiane da 20 centesimi**.\n- Il **Cubismo**, con **Pablo Picasso** e Georges Braque: gli oggetti sono scomposti e mostrati da più punti di vista insieme.\n- L'**Astrattismo**, con **Kandinsky**: solo forme e colori, senza rappresentare oggetti riconoscibili.",
+     "schema": "flowchart LR\n  A[\"🚗 Futurismo\"] --> B[\"🧊 Cubismo\"] --> C[\"🔵 Astrattismo\"] --> D[\"🌙 Surrealismo\"]"
+    },
+    {
+     "titolo": "Artisti italiani del Novecento",
+     "testo": "Alcuni nomi da conoscere:\n\n- **Giorgio de Chirico** creò la pittura **metafisica**: piazze silenziose, ombre lunghe, manichini, un'atmosfera di sogno e di attesa.\n- **Amedeo Modigliani**, livornese vissuto a Parigi, dipinse ritratti con **volti e colli allungati** e occhi a mandorla.\n- **Giorgio Morandi**, bolognese, dipinse per tutta la vita **bottiglie e vasetti**, con colori delicati e grande poesia.\n- **Lucio Fontana** fece dei **tagli** sulla tela per aprire lo spazio oltre il quadro.\n\nL'arte moderna a volte sorprende: guardatela con curiosità, senza fretta di giudicare."
+    },
+    {
+     "titolo": "I grandi musei italiani",
+     "testo": "L'Italia custodisce musei straordinari. Ecco alcuni dei più celebri:\n\n- **Galleria degli Uffizi**, a **Firenze**: Botticelli, Leonardo, Raffaello, Caravaggio.\n- **Musei Vaticani**, nella **Città del Vaticano**: le Stanze di Raffaello e la **Cappella Sistina**.\n- **Pinacoteca di Brera**, a **Milano**: Raffaello, Mantegna, Hayez.\n- **Galleria Borghese**, a **Roma**: Bernini, Canova, Caravaggio.\n- **Museo Egizio**, a **Torino**: una delle collezioni di arte egizia più importanti al mondo.\n- **Museo archeologico nazionale di Napoli**: i tesori di Pompei ed Ercolano."
+    },
+    {
+     "titolo": "Il patrimonio dell'umanità UNESCO",
+     "testo": "L'**UNESCO** è un'organizzazione delle Nazioni Unite che, dal **1972**, tiene un elenco dei luoghi di **valore eccezionale per tutta l'umanità**: è il **Patrimonio mondiale**.\n\nL'Italia è tra i Paesi con il **maggior numero di siti** al mondo. Il primo sito italiano, nel **1979**, fu l'**arte rupestre della Val Camonica**, migliaia di incisioni preistoriche sulla roccia. Subito dopo arrivò la chiesa di **Santa Maria delle Grazie con il Cenacolo** di Leonardo.\n\nTra i siti ci sono centri storici come **Roma**, **Firenze** e **Venezia e la sua laguna**, ma anche paesaggi naturali come le **Dolomiti**.",
+     "consiglio": "Esiste anche un patrimonio immateriale: tradizioni, saperi e feste, come la dieta mediterranea."
+    },
+    {
+     "titolo": "Come visitare un museo senza stancarsi",
+     "testo": "Un museo non va \"finito\": va **gustato**. Qualche consiglio:\n\n1. **Scegliete prima** poche opere che vi interessano davvero.\n2. Preferite gli **orari meno affollati**, di solito il mattino presto nei giorni feriali.\n3. Chiedete se ci sono **audioguide**, **visite guidate** o percorsi accessibili.\n4. Fate **pause**: sedetevi davanti a un quadro e guardatelo con calma.\n5. Lasciate borse grandi al **guardaroba** e niente flash nelle fotografie, se non è permesso.\n\nPer orari, prenotazioni e agevolazioni informatevi sul **sito ufficiale** del museo o telefonando.",
+     "consiglio": "Meglio guardare bene dieci opere che di corsa cento."
+    },
+    {
+     "titolo": "Visitare un museo da casa",
+     "testo": "Molti musei offrono **visite virtuali**: dal computer o dal tablet si possono vedere le sale e ingrandire le opere fino ai dettagli più piccoli, a volte più da vicino che dal vero.\n\nPer trovarle:\n\n1. Aprite il browser e cercate il **nome del museo** seguito da \"**visita virtuale**\".\n2. Preferite sempre il **sito ufficiale** del museo.\n3. Usate lo **schermo intero** e lo **zoom** per osservare i particolari.\n\nÈ un ottimo modo per preparare una visita, ripassare ciò che avete visto o viaggiare quando uscire è difficile.",
+     "schema": "flowchart LR\n  A[\"🔎 Cerco il museo\"] --> B[\"✅ Sito ufficiale\"] --> C[\"🖼️ Visita virtuale\"] --> D[\"🔍 Zoom sui dettagli\"]"
+    }
+   ],
+   "quiz": [
+    {
+     "domanda": "Quale movimento italiano esaltava la velocità e le macchine?",
+     "opzioni": [
+      "Il Cubismo",
+      "Il Futurismo",
+      "Il Neoclassicismo"
+     ],
+     "corretta": 1,
+     "spiegazione": "Il manifesto del Futurismo fu pubblicato da Marinetti nel 1909."
+    },
+    {
+     "domanda": "Che cosa dipinse per tutta la vita Giorgio Morandi?",
+     "opzioni": [
+      "Bottiglie e vasetti",
+      "Ballerine",
+      "Vedute di Venezia"
+     ],
+     "corretta": 0,
+     "spiegazione": "Le sue nature morte sono semplici e piene di poesia."
+    },
+    {
+     "domanda": "In quale città si trova il Museo Egizio?",
+     "opzioni": [
+      "Napoli",
+      "Firenze",
+      "Torino"
+     ],
+     "corretta": 2,
+     "spiegazione": "Il Museo Egizio di Torino è uno dei più importanti al mondo per l'arte egizia."
+    },
+    {
+     "domanda": "Qual è stato il primo sito italiano nel Patrimonio mondiale UNESCO?",
+     "opzioni": [
+      "Il Colosseo",
+      "L'arte rupestre della Val Camonica",
+      "La Torre di Pisa"
+     ],
+     "corretta": 1,
+     "spiegazione": "Fu iscritto nel 1979."
+    },
+    {
+     "domanda": "Qual è un buon consiglio per visitare un museo?",
+     "opzioni": [
+      "Vedere tutto il più in fretta possibile",
+      "Usare sempre il flash",
+      "Scegliere poche opere e guardarle con calma"
+     ],
+     "corretta": 2,
+     "spiegazione": "Un museo si gusta meglio con pause e senza fretta."
+    }
+   ]
+  }
+ ],
+ "prove": [
+  {
+   "id": "arte",
+   "titolo": "Il Grande Quiz dell'Arte",
+   "icona": "🎨",
+   "descrizione": "Venti domande pescate a caso tra oltre settanta, dall'arte antica ai musei di oggi. Prendetevi il vostro tempo: con il 70% di risposte giuste ottenete l'attestato.",
+   "attestato": "Storia dell'arte",
+   "domande_per_prova": 20,
+   "soglia": 0.7,
+   "domande": [
+    {
+     "domanda": "Su quale collina di Atene sorge il Partenone?",
+     "opzioni": [
+      "L'Acropoli",
+      "Il Campidoglio",
+      "Il Palatino",
+      "L'Olimpo"
+     ],
+     "corretta": 0,
+     "spiegazione": "Il Partenone fu costruito nel V secolo a.C. in onore della dea Atena.",
+     "categoria": "Arte antica"
+    },
+    {
+     "domanda": "A quale divinità era dedicato il Partenone?",
+     "opzioni": [
+      "Zeus",
+      "Apollo",
+      "Afrodite",
+      "Atena"
+     ],
+     "corretta": 3,
+     "spiegazione": "Atena era la protettrice della città di Atene.",
+     "categoria": "Arte antica"
+    },
+    {
+     "domanda": "Qual è l'ordine di colonne greco più semplice e robusto, senza base?",
+     "opzioni": [
+      "Ionico",
+      "Corinzio",
+      "Dorico",
+      "Composito"
+     ],
+     "corretta": 2,
+     "spiegazione": "I templi di Paestum sono un bell'esempio di ordine dorico.",
+     "categoria": "Arte antica"
+    },
+    {
+     "domanda": "Quale ordine di colonne ha il capitello a riccioli, detti volute?",
+     "opzioni": [
+      "Dorico",
+      "Ionico",
+      "Corinzio",
+      "Tuscanico"
+     ],
+     "corretta": 1,
+     "spiegazione": "Le volute ricordano due riccioli arrotolati.",
+     "categoria": "Arte antica"
+    },
+    {
+     "domanda": "In quale regione si trova la Valle dei Templi?",
+     "opzioni": [
+      "Campania",
+      "Puglia",
+      "Sicilia",
+      "Calabria"
+     ],
+     "corretta": 2,
+     "spiegazione": "La Valle dei Templi si trova ad Agrigento.",
+     "categoria": "Arte antica"
+    },
+    {
+     "domanda": "In quale regione si trovano i templi greci di Paestum?",
+     "opzioni": [
+      "Sicilia",
+      "Campania",
+      "Lazio",
+      "Basilicata"
+     ],
+     "corretta": 1,
+     "spiegazione": "Paestum, l'antica Poseidonia, si trova in provincia di Salerno.",
+     "categoria": "Arte antica"
+    },
+    {
+     "domanda": "Chi scolpì il Discobolo, l'atleta che lancia il disco?",
+     "opzioni": [
+      "Mirone",
+      "Fidia",
+      "Policleto",
+      "Prassitele"
+     ],
+     "corretta": 0,
+     "spiegazione": "L'originale in bronzo è perduto; lo conosciamo da copie romane in marmo.",
+     "categoria": "Arte antica"
+    },
+    {
+     "domanda": "Come si chiama la regola sulle proporzioni ideali del corpo scritta da Policleto?",
+     "opzioni": [
+      "Codice",
+      "Ordine",
+      "Modulo",
+      "Canone"
+     ],
+     "corretta": 3,
+     "spiegazione": "Policleto la applicò nella statua del Doriforo.",
+     "categoria": "Arte antica"
+    },
+    {
+     "domanda": "In che anno furono ritrovati i Bronzi di Riace?",
+     "opzioni": [
+      "1972",
+      "1872",
+      "1945",
+      "1992"
+     ],
+     "corretta": 0,
+     "spiegazione": "Furono scoperti in mare da un appassionato di immersioni.",
+     "categoria": "Arte antica"
+    },
+    {
+     "domanda": "Quale imperatore inaugurò il Colosseo nell'80 d.C.?",
+     "opzioni": [
+      "Augusto",
+      "Nerone",
+      "Costantino",
+      "Tito"
+     ],
+     "corretta": 3,
+     "spiegazione": "Il Colosseo fu iniziato da Vespasiano e inaugurato da suo figlio Tito.",
+     "categoria": "Arte antica"
+    },
+    {
+     "domanda": "Sotto quale imperatore fu ricostruito il Pantheon con la sua grande cupola?",
+     "opzioni": [
+      "Traiano",
+      "Adriano",
+      "Caligola",
+      "Diocleziano"
+     ],
+     "corretta": 1,
+     "spiegazione": "Sulla facciata resta però il nome di Agrippa, autore del primo tempio.",
+     "categoria": "Arte antica"
+    },
+    {
+     "domanda": "Che cosa racconta il fregio a spirale della Colonna Traiana?",
+     "opzioni": [
+      "La fondazione di Roma",
+      "La vita di Giulio Cesare",
+      "Le guerre di Traiano contro i Daci",
+      "L'eruzione del Vesuvio"
+     ],
+     "corretta": 2,
+     "spiegazione": "È un racconto per immagini lungo circa duecento metri.",
+     "categoria": "Arte antica"
+    },
+    {
+     "domanda": "Quale grande mosaico, proveniente da Pompei, raffigura una battaglia di un re macedone?",
+     "opzioni": [
+      "Il Mosaico di Teodora",
+      "Il Mosaico di Alessandro",
+      "Il Mosaico di Cesare",
+      "Il Mosaico di Annibale"
+     ],
+     "corretta": 1,
+     "spiegazione": "È conservato al Museo archeologico nazionale di Napoli.",
+     "categoria": "Arte antica"
+    },
+    {
+     "domanda": "Quale celebre gruppo scultoreo antico, ritrovato a Roma nel 1506, si trova ai Musei Vaticani?",
+     "opzioni": [
+      "Il Laocoonte",
+      "Il David",
+      "Il Discobolo",
+      "La Pietà"
+     ],
+     "corretta": 0,
+     "spiegazione": "Mostra il sacerdote troiano Laocoonte e i figli stretti dai serpenti.",
+     "categoria": "Arte antica"
+    },
+    {
+     "domanda": "Quale villa di Pompei è famosa per un grande ciclo di affreschi con sfondo rosso?",
+     "opzioni": [
+      "La Villa Borghese",
+      "La Villa Adriana",
+      "La Villa dei Misteri",
+      "La Villa d'Este"
+     ],
+     "corretta": 2,
+     "spiegazione": "Gli affreschi rappresentano probabilmente un rito religioso.",
+     "categoria": "Arte antica"
+    },
+    {
+     "domanda": "Quale imperatrice bizantina è raffigurata nei mosaici di San Vitale a Ravenna?",
+     "opzioni": [
+      "Galla Placidia",
+      "Cleopatra",
+      "Matilde di Canossa",
+      "Teodora"
+     ],
+     "corretta": 3,
+     "spiegazione": "Di fronte a lei c'è il marito, l'imperatore Giustiniano.",
+     "categoria": "Medioevo"
+    },
+    {
+     "domanda": "Che colore ha di solito lo sfondo dei mosaici bizantini?",
+     "opzioni": [
+      "Oro",
+      "Bianco",
+      "Verde",
+      "Nero"
+     ],
+     "corretta": 0,
+     "spiegazione": "Il fondo d'oro suggerisce una luce spirituale, fuori dal tempo.",
+     "categoria": "Medioevo"
+    },
+    {
+     "domanda": "Quale scultore realizzò i rilievi della facciata del Duomo di Modena?",
+     "opzioni": [
+      "Donatello",
+      "Bernini",
+      "Canova",
+      "Wiligelmo"
+     ],
+     "corretta": 3,
+     "spiegazione": "Wiligelmo è uno dei primi grandi scultori romanici in Italia.",
+     "categoria": "Medioevo"
+    },
+    {
+     "domanda": "In quale piazza si trova la Torre pendente di Pisa?",
+     "opzioni": [
+      "Piazza del Campo",
+      "Piazza dei Miracoli",
+      "Piazza Navona",
+      "Piazza della Signoria"
+     ],
+     "corretta": 1,
+     "spiegazione": "La piazza, detta anche Piazza del Duomo, è patrimonio UNESCO.",
+     "categoria": "Medioevo"
+    },
+    {
+     "domanda": "Quale di questi elementi è tipico del gotico?",
+     "opzioni": [
+      "I muri spessi con poche finestre",
+      "Il fondo d'oro",
+      "Le grandi vetrate colorate",
+      "Le cupole con oculo"
+     ],
+     "corretta": 2,
+     "spiegazione": "Le vetrate riempiono di luce le cattedrali gotiche.",
+     "categoria": "Medioevo"
+    },
+    {
+     "domanda": "In che anno fu iniziato il Duomo di Milano?",
+     "opzioni": [
+      "1066",
+      "1386",
+      "1492",
+      "1600"
+     ],
+     "corretta": 1,
+     "spiegazione": "Il Duomo di Milano fu costruito nel corso di secoli e ha moltissime guglie.",
+     "categoria": "Medioevo"
+    },
+    {
+     "domanda": "Quale dettaglio colpisce entrando nella Cappella degli Scrovegni?",
+     "opzioni": [
+      "Il cielo blu intenso con le stelle",
+      "Le vetrate gotiche",
+      "Le pareti dorate",
+      "Il pavimento a mosaico"
+     ],
+     "corretta": 0,
+     "spiegazione": "Giotto dipinse la volta come un cielo stellato.",
+     "categoria": "Medioevo"
+    },
+    {
+     "domanda": "Quale poeta citò Giotto nella Divina Commedia?",
+     "opzioni": [
+      "Francesco Petrarca",
+      "Giovanni Boccaccio",
+      "Dante Alighieri",
+      "Ludovico Ariosto"
+     ],
+     "corretta": 2,
+     "spiegazione": "Nel Purgatorio Dante scrive che Giotto aveva superato in fama Cimabue.",
+     "categoria": "Medioevo"
+    },
+    {
+     "domanda": "Chi dipinse la grande Maestà per il Duomo di Siena?",
+     "opzioni": [
+      "Giotto",
+      "Masaccio",
+      "Raffaello",
+      "Duccio di Buoninsegna"
+     ],
+     "corretta": 3,
+     "spiegazione": "Oggi la Maestà di Duccio è nel Museo dell'Opera del Duomo di Siena.",
+     "categoria": "Medioevo"
+    },
+    {
+     "domanda": "Dove si trovano gli affreschi del Buono e Cattivo Governo?",
+     "opzioni": [
+      "Nel Palazzo Ducale di Venezia",
+      "In Palazzo Vecchio a Firenze",
+      "Nel Castello Sforzesco di Milano",
+      "Nel Palazzo Pubblico di Siena"
+     ],
+     "corretta": 3,
+     "spiegazione": "Li dipinse Ambrogio Lorenzetti nel Trecento.",
+     "categoria": "Medioevo"
+    },
+    {
+     "domanda": "In quale città si trova la basilica dedicata a San Francesco, iniziata nel 1228?",
+     "opzioni": [
+      "Assisi",
+      "Padova",
+      "Siena",
+      "Ravenna"
+     ],
+     "corretta": 0,
+     "spiegazione": "La basilica è decorata da affreschi di grandi pittori del Duecento e del Trecento.",
+     "categoria": "Medioevo"
+    },
+    {
+     "domanda": "Chi dipinse la Trinità in Santa Maria Novella, uno dei primi esempi di prospettiva in pittura?",
+     "opzioni": [
+      "Giotto",
+      "Tiziano",
+      "Masaccio",
+      "Caravaggio"
+     ],
+     "corretta": 2,
+     "spiegazione": "Masaccio morì giovanissimo, a 26 anni, ma cambiò la pittura.",
+     "categoria": "Rinascimento"
+    },
+    {
+     "domanda": "Dove si trovano la Nascita di Venere e la Primavera di Botticelli?",
+     "opzioni": [
+      "Al Louvre di Parigi",
+      "Agli Uffizi di Firenze",
+      "Alla Pinacoteca di Brera",
+      "Ai Musei Vaticani"
+     ],
+     "corretta": 1,
+     "spiegazione": "Sono tra le opere più amate della Galleria degli Uffizi.",
+     "categoria": "Rinascimento"
+    },
+    {
+     "domanda": "Come si chiama la tecnica di Leonardo che rende i contorni morbidi e velati?",
+     "opzioni": [
+      "Chiaroscuro",
+      "Sfumato",
+      "Puntinismo",
+      "Mosaico"
+     ],
+     "corretta": 1,
+     "spiegazione": "Lo sfumato dà ai volti un'aria viva e misteriosa.",
+     "categoria": "Rinascimento"
+    },
+    {
+     "domanda": "In quale paese toscano nacque Leonardo?",
+     "opzioni": [
+      "Caprese",
+      "Urbino",
+      "Vinci",
+      "Arezzo"
+     ],
+     "corretta": 2,
+     "spiegazione": "Da qui il suo nome: Leonardo da Vinci.",
+     "categoria": "Rinascimento"
+    },
+    {
+     "domanda": "In quale Paese morì Leonardo da Vinci?",
+     "opzioni": [
+      "In Francia",
+      "In Spagna",
+      "In Germania",
+      "In Inghilterra"
+     ],
+     "corretta": 0,
+     "spiegazione": "Morì ad Amboise nel 1519, ospite del re Francesco I.",
+     "categoria": "Rinascimento"
+    },
+    {
+     "domanda": "Quale scena della volta della Cappella Sistina mostra due dita che quasi si toccano?",
+     "opzioni": [
+      "Il Giudizio universale",
+      "Il Diluvio universale",
+      "La Scuola di Atene",
+      "La Creazione di Adamo"
+     ],
+     "corretta": 3,
+     "spiegazione": "È uno dei dettagli più famosi della storia dell'arte.",
+     "categoria": "Rinascimento"
+    },
+    {
+     "domanda": "Quale papa commissionò a Michelangelo la volta della Cappella Sistina?",
+     "opzioni": [
+      "Leone X",
+      "Sisto IV",
+      "Giulio II",
+      "Gregorio Magno"
+     ],
+     "corretta": 2,
+     "spiegazione": "Michelangelo vi lavorò tra il 1508 e il 1512.",
+     "categoria": "Rinascimento"
+    },
+    {
+     "domanda": "Dove si trova il Mosè di Michelangelo?",
+     "opzioni": [
+      "Agli Uffizi di Firenze",
+      "Nella chiesa di San Pietro in Vincoli, a Roma",
+      "Al Louvre di Parigi",
+      "A Venezia, ai Frari"
+     ],
+     "corretta": 1,
+     "spiegazione": "Il Mosè fa parte della tomba di papa Giulio II.",
+     "categoria": "Rinascimento"
+    },
+    {
+     "domanda": "Quale grande cupola progettò Michelangelo?",
+     "opzioni": [
+      "Quella di Santa Maria del Fiore",
+      "Quella del Pantheon",
+      "Quella di San Marco",
+      "Quella di San Pietro in Vaticano"
+     ],
+     "corretta": 3,
+     "spiegazione": "La cupola fu completata dopo la sua morte, seguendo il suo progetto.",
+     "categoria": "Rinascimento"
+    },
+    {
+     "domanda": "In quale città nacque Raffaello?",
+     "opzioni": [
+      "Urbino",
+      "Firenze",
+      "Roma",
+      "Perugia"
+     ],
+     "corretta": 0,
+     "spiegazione": "Urbino era una raffinata corte rinascimentale.",
+     "categoria": "Rinascimento"
+    },
+    {
+     "domanda": "Chi sono i due filosofi al centro della Scuola di Atene?",
+     "opzioni": [
+      "Socrate e Seneca",
+      "Dante e Virgilio",
+      "Platone e Aristotele",
+      "Cicerone e Cesare"
+     ],
+     "corretta": 2,
+     "spiegazione": "Platone indica il cielo, Aristotele la terra.",
+     "categoria": "Rinascimento"
+    },
+    {
+     "domanda": "Dove è sepolto Raffaello?",
+     "opzioni": [
+      "A Urbino",
+      "Nella basilica di San Pietro",
+      "A Firenze, in Santa Croce",
+      "Nel Pantheon di Roma"
+     ],
+     "corretta": 3,
+     "spiegazione": "Raffaello stesso chiese di essere sepolto nel Pantheon.",
+     "categoria": "Rinascimento"
+    },
+    {
+     "domanda": "Chi dipinse La tempesta, oggi alle Gallerie dell'Accademia di Venezia?",
+     "opzioni": [
+      "Giorgione",
+      "Tiziano",
+      "Leonardo",
+      "Botticelli"
+     ],
+     "corretta": 0,
+     "spiegazione": "È uno dei quadri più misteriosi del Rinascimento.",
+     "categoria": "Rinascimento"
+    },
+    {
+     "domanda": "Chi dipinse l'Assunta per la basilica dei Frari a Venezia?",
+     "opzioni": [
+      "Raffaello",
+      "Tiziano",
+      "Caravaggio",
+      "Canaletto"
+     ],
+     "corretta": 1,
+     "spiegazione": "Tiziano fu il grande maestro veneziano del colore.",
+     "categoria": "Rinascimento"
+    },
+    {
+     "domanda": "Chi affrescò la Camera degli Sposi a Mantova?",
+     "opzioni": [
+      "Piero della Francesca",
+      "Giotto",
+      "Andrea Mantegna",
+      "Tiepolo"
+     ],
+     "corretta": 2,
+     "spiegazione": "Al centro del soffitto c'è un finto oculo aperto verso il cielo.",
+     "categoria": "Rinascimento"
+    },
+    {
+     "domanda": "Qual era il vero nome di Caravaggio?",
+     "opzioni": [
+      "Michelangelo Merisi",
+      "Michelangelo Buonarroti",
+      "Gian Lorenzo Bernini",
+      "Francesco Borromini"
+     ],
+     "corretta": 0,
+     "spiegazione": "Caravaggio è il nome del paese lombardo della sua famiglia.",
+     "categoria": "Barocco e Settecento"
+    },
+    {
+     "domanda": "In quale chiesa di Roma si trova la Vocazione di san Matteo di Caravaggio?",
+     "opzioni": [
+      "San Pietro in Vincoli",
+      "Santa Maria della Vittoria",
+      "San Giovanni in Laterano",
+      "San Luigi dei Francesi"
+     ],
+     "corretta": 3,
+     "spiegazione": "Si trova nella cappella Contarelli, insieme ad altre due tele su san Matteo.",
+     "categoria": "Barocco e Settecento"
+    },
+    {
+     "domanda": "Dove si trova la Canestra di frutta di Caravaggio?",
+     "opzioni": [
+      "Agli Uffizi di Firenze",
+      "Alla Pinacoteca Ambrosiana di Milano",
+      "Al Museo Egizio di Torino",
+      "Alla Reggia di Caserta"
+     ],
+     "corretta": 1,
+     "spiegazione": "È una delle prime nature morte autonome della pittura italiana.",
+     "categoria": "Barocco e Settecento"
+    },
+    {
+     "domanda": "Chi progettò il colonnato di piazza San Pietro?",
+     "opzioni": [
+      "Michelangelo",
+      "Francesco Borromini",
+      "Gian Lorenzo Bernini",
+      "Luigi Vanvitelli"
+     ],
+     "corretta": 2,
+     "spiegazione": "Il colonnato abbraccia la piazza come due grandi braccia.",
+     "categoria": "Barocco e Settecento"
+    },
+    {
+     "domanda": "In quale piazza di Roma si trova la Fontana dei Quattro Fiumi di Bernini?",
+     "opzioni": [
+      "Piazza di Spagna",
+      "Piazza Venezia",
+      "Piazza del Popolo",
+      "Piazza Navona"
+     ],
+     "corretta": 3,
+     "spiegazione": "I quattro fiumi rappresentano i continenti allora conosciuti.",
+     "categoria": "Barocco e Settecento"
+    },
+    {
+     "domanda": "Quale architetto barocco fu il grande rivale di Bernini?",
+     "opzioni": [
+      "Andrea Palladio",
+      "Francesco Borromini",
+      "Filippo Brunelleschi",
+      "Luigi Vanvitelli"
+     ],
+     "corretta": 1,
+     "spiegazione": "Borromini progettò San Carlo alle Quattro Fontane e Sant'Ivo alla Sapienza.",
+     "categoria": "Barocco e Settecento"
+    },
+    {
+     "domanda": "Quale città dipinse soprattutto Canaletto nelle sue vedute?",
+     "opzioni": [
+      "Venezia",
+      "Napoli",
+      "Firenze",
+      "Torino"
+     ],
+     "corretta": 0,
+     "spiegazione": "Le vedute di Canaletto erano amatissime dai viaggiatori del Grand Tour.",
+     "categoria": "Barocco e Settecento"
+    },
+    {
+     "domanda": "Chi progettò la Fontana di Trevi?",
+     "opzioni": [
+      "Gian Lorenzo Bernini",
+      "Nicola Salvi",
+      "Michelangelo",
+      "Antonio Canova"
+     ],
+     "corretta": 1,
+     "spiegazione": "La fontana fu completata nel 1762, dopo la morte di Salvi.",
+     "categoria": "Barocco e Settecento"
+    },
+    {
+     "domanda": "Per quale famiglia reale fu costruita la Reggia di Caserta?",
+     "opzioni": [
+      "I Borbone",
+      "I Savoia",
+      "I Medici",
+      "Gli Asburgo"
+     ],
+     "corretta": 0,
+     "spiegazione": "La progettò l'architetto Luigi Vanvitelli.",
+     "categoria": "Barocco e Settecento"
+    },
+    {
+     "domanda": "Che cosa voleva soprattutto l'arte barocca?",
+     "opzioni": [
+      "Imitare il fondo d'oro bizantino",
+      "Rappresentare solo forme geometriche",
+      "Ritrarre solo paesaggi",
+      "Stupire e commuovere"
+     ],
+     "corretta": 3,
+     "spiegazione": "Movimento, curve ed effetti teatrali sono tipici del Barocco.",
+     "categoria": "Barocco e Settecento"
+    },
+    {
+     "domanda": "In quale paese veneto nacque Antonio Canova?",
+     "opzioni": [
+      "Bassano",
+      "Asolo",
+      "Possagno",
+      "Castelfranco"
+     ],
+     "corretta": 2,
+     "spiegazione": "A Possagno si trovano la sua casa e la Gipsoteca.",
+     "categoria": "Ottocento"
+    },
+    {
+     "domanda": "Dove si trova la statua di Paolina Borghese di Canova?",
+     "opzioni": [
+      "Al Louvre di Parigi",
+      "Agli Uffizi di Firenze",
+      "Alla Pinacoteca di Brera",
+      "Alla Galleria Borghese di Roma"
+     ],
+     "corretta": 3,
+     "spiegazione": "Paolina, sorella di Napoleone, è ritratta come Venere.",
+     "categoria": "Ottocento"
+    },
+    {
+     "domanda": "Come si chiama lo stile di fine Settecento che si ispirava all'arte greca e romana?",
+     "opzioni": [
+      "Neoclassicismo",
+      "Barocco",
+      "Gotico",
+      "Futurismo"
+     ],
+     "corretta": 0,
+     "spiegazione": "Canova è il più grande scultore neoclassico.",
+     "categoria": "Ottocento"
+    },
+    {
+     "domanda": "Chi dipinse Il bacio, conservato alla Pinacoteca di Brera?",
+     "opzioni": [
+      "Giovanni Fattori",
+      "Francesco Hayez",
+      "Claude Monet",
+      "Amedeo Modigliani"
+     ],
+     "corretta": 1,
+     "spiegazione": "Il quadro fu dipinto nel 1859 ed è diventato un simbolo romantico.",
+     "categoria": "Ottocento"
+    },
+    {
+     "domanda": "Come si chiamavano i pittori toscani dell'Ottocento che dipingevano a macchie di colore?",
+     "opzioni": [
+      "Impressionisti",
+      "Futuristi",
+      "Macchiaioli",
+      "Cubisti"
+     ],
+     "corretta": 2,
+     "spiegazione": "Tra loro c'erano Giovanni Fattori e Silvestro Lega.",
+     "categoria": "Ottocento"
+    },
+    {
+     "domanda": "In quale città si tenne la prima mostra degli impressionisti, nel 1874?",
+     "opzioni": [
+      "Parigi",
+      "Londra",
+      "Roma",
+      "Vienna"
+     ],
+     "corretta": 0,
+     "spiegazione": "La mostra si tenne nello studio del fotografo Nadar.",
+     "categoria": "Ottocento"
+    },
+    {
+     "domanda": "Quale pittore impressionista dipinse molte ninfee nel suo giardino di Giverny?",
+     "opzioni": [
+      "Edgar Degas",
+      "Claude Monet",
+      "Paul Cézanne",
+      "Francesco Hayez"
+     ],
+     "corretta": 1,
+     "spiegazione": "Monet dipinse le ninfee per molti anni, con luci diverse.",
+     "categoria": "Ottocento"
+    },
+    {
+     "domanda": "Quale soggetto è tipico dei quadri di Edgar Degas?",
+     "opzioni": [
+      "Le ninfee",
+      "Le vedute di Venezia",
+      "Le bottiglie",
+      "Le ballerine"
+     ],
+     "corretta": 3,
+     "spiegazione": "Degas amava ritrarre le ballerine durante le prove e dietro le quinte.",
+     "categoria": "Ottocento"
+    },
+    {
+     "domanda": "Di quale nazionalità era Vincent van Gogh?",
+     "opzioni": [
+      "Francese",
+      "Belga",
+      "Olandese",
+      "Tedesca"
+     ],
+     "corretta": 2,
+     "spiegazione": "Era nato nei Paesi Bassi, ma visse gli ultimi anni in Francia.",
+     "categoria": "Ottocento"
+    },
+    {
+     "domanda": "Quale grande quadro di Pellizza da Volpedo mostra lavoratori in marcia?",
+     "opzioni": [
+      "Il Quarto Stato",
+      "Il bacio",
+      "La tempesta",
+      "Guernica"
+     ],
+     "corretta": 0,
+     "spiegazione": "Fu terminato all'inizio del Novecento.",
+     "categoria": "Ottocento"
+    },
+    {
+     "domanda": "Chi scrisse il Manifesto del Futurismo, pubblicato nel 1909?",
+     "opzioni": [
+      "Umberto Boccioni",
+      "Giorgio de Chirico",
+      "Filippo Tommaso Marinetti",
+      "Pablo Picasso"
+     ],
+     "corretta": 2,
+     "spiegazione": "Marinetti era poeta e fu il fondatore del movimento.",
+     "categoria": "Novecento"
+    },
+    {
+     "domanda": "Quale opera di Boccioni compare sulla moneta italiana da 20 centesimi?",
+     "opzioni": [
+      "La città che sale",
+      "Il Quarto Stato",
+      "La persistenza della memoria",
+      "Forme uniche della continuità nello spazio"
+     ],
+     "corretta": 3,
+     "spiegazione": "È una figura in movimento, simbolo del Futurismo.",
+     "categoria": "Novecento"
+    },
+    {
+     "domanda": "Quale movimento scompone gli oggetti in forme geometriche viste da più punti di vista?",
+     "opzioni": [
+      "Impressionismo",
+      "Cubismo",
+      "Neoclassicismo",
+      "Barocco"
+     ],
+     "corretta": 1,
+     "spiegazione": "Lo crearono Pablo Picasso e Georges Braque.",
+     "categoria": "Novecento"
+    },
+    {
+     "domanda": "Quale quadro di Picasso denuncia il bombardamento di una cittadina spagnola nel 1937?",
+     "opzioni": [
+      "Guernica",
+      "Les Demoiselles d'Avignon",
+      "La notte stellata",
+      "Il grido"
+     ],
+     "corretta": 0,
+     "spiegazione": "È un grande dipinto in bianco, nero e grigio.",
+     "categoria": "Novecento"
+    },
+    {
+     "domanda": "Quale pittore italiano creò la pittura metafisica, con piazze silenziose e manichini?",
+     "opzioni": [
+      "Giorgio Morandi",
+      "Giorgio de Chirico",
+      "Amedeo Modigliani",
+      "Lucio Fontana"
+     ],
+     "corretta": 1,
+     "spiegazione": "Le sue piazze deserte hanno un'atmosfera di sogno.",
+     "categoria": "Novecento"
+    },
+    {
+     "domanda": "Quale pittore livornese dipinse volti e colli allungati?",
+     "opzioni": [
+      "Giovanni Fattori",
+      "Giorgio de Chirico",
+      "Amedeo Modigliani",
+      "Umberto Boccioni"
+     ],
+     "corretta": 2,
+     "spiegazione": "Modigliani visse e lavorò soprattutto a Parigi.",
+     "categoria": "Novecento"
+    },
+    {
+     "domanda": "Quale artista italiano è famoso per i tagli sulla tela?",
+     "opzioni": [
+      "Giorgio Morandi",
+      "Gino Severini",
+      "Francesco Hayez",
+      "Lucio Fontana"
+     ],
+     "corretta": 3,
+     "spiegazione": "Con i tagli voleva aprire lo spazio oltre la superficie del quadro.",
+     "categoria": "Novecento"
+    },
+    {
+     "domanda": "Quale pittore è considerato tra i padri dell'arte astratta?",
+     "opzioni": [
+      "Vasilij Kandinsky",
+      "Claude Monet",
+      "Antonio Canova",
+      "Canaletto"
+     ],
+     "corretta": 0,
+     "spiegazione": "Kandinsky dipingeva forme e colori, senza oggetti riconoscibili.",
+     "categoria": "Novecento"
+    },
+    {
+     "domanda": "Quale pittore surrealista dipinse gli orologi molli?",
+     "opzioni": [
+      "Pablo Picasso",
+      "Vincent van Gogh",
+      "Salvador Dalí",
+      "Giorgio Morandi"
+     ],
+     "corretta": 2,
+     "spiegazione": "Il quadro si intitola La persistenza della memoria.",
+     "categoria": "Novecento"
+    },
+    {
+     "domanda": "In quale città si trova la Pinacoteca di Brera?",
+     "opzioni": [
+      "Torino",
+      "Bologna",
+      "Venezia",
+      "Milano"
+     ],
+     "corretta": 3,
+     "spiegazione": "Brera custodisce opere di Raffaello, Mantegna, Caravaggio e Hayez.",
+     "categoria": "Musei e patrimonio"
+    },
+    {
+     "domanda": "In quale città si trova la Galleria degli Uffizi?",
+     "opzioni": [
+      "Roma",
+      "Firenze",
+      "Siena",
+      "Napoli"
+     ],
+     "corretta": 1,
+     "spiegazione": "Agli Uffizi si ammirano Botticelli, Leonardo, Raffaello e molti altri.",
+     "categoria": "Musei e patrimonio"
+    },
+    {
+     "domanda": "Quale museo romano custodisce Apollo e Dafne di Bernini e Paolina Borghese di Canova?",
+     "opzioni": [
+      "I Musei Capitolini",
+      "Il Museo Egizio",
+      "Le Gallerie dell'Accademia",
+      "La Galleria Borghese"
+     ],
+     "corretta": 3,
+     "spiegazione": "La Galleria Borghese si trova nel parco di Villa Borghese.",
+     "categoria": "Musei e patrimonio"
+    },
+    {
+     "domanda": "All'interno di quale percorso di visita si trova la Cappella Sistina?",
+     "opzioni": [
+      "I Musei Vaticani",
+      "La Galleria Borghese",
+      "Gli Uffizi",
+      "Il Museo Egizio"
+     ],
+     "corretta": 0,
+     "spiegazione": "La Cappella Sistina si trova nella Città del Vaticano.",
+     "categoria": "Musei e patrimonio"
+    },
+    {
+     "domanda": "Quale museo di Torino è famoso per la sua collezione di antichità egizie?",
+     "opzioni": [
+      "La Pinacoteca Ambrosiana",
+      "Il Museo Egizio",
+      "Il Museo del Novecento",
+      "La Galleria Borghese"
+     ],
+     "corretta": 1,
+     "spiegazione": "È uno dei musei di arte egizia più importanti al mondo.",
+     "categoria": "Musei e patrimonio"
+    },
+    {
+     "domanda": "Dove si trovano molti reperti di Pompei ed Ercolano, come il Mosaico di Alessandro?",
+     "opzioni": [
+      "Al Louvre di Parigi",
+      "Agli Uffizi di Firenze",
+      "Al Museo archeologico nazionale di Napoli",
+      "Al Museo Egizio di Torino"
+     ],
+     "corretta": 2,
+     "spiegazione": "Il museo napoletano conserva affreschi, mosaici e statue delle città vesuviane.",
+     "categoria": "Musei e patrimonio"
+    },
+    {
+     "domanda": "Qual è stato il primo sito italiano inserito nel Patrimonio mondiale UNESCO, nel 1979?",
+     "opzioni": [
+      "Il centro storico di Firenze",
+      "Venezia e la sua laguna",
+      "L'arte rupestre della Val Camonica",
+      "Le Dolomiti"
+     ],
+     "corretta": 2,
+     "spiegazione": "Sono migliaia di incisioni preistoriche sulle rocce, in Lombardia.",
+     "categoria": "Musei e patrimonio"
+    },
+    {
+     "domanda": "Quale di questi è un sito naturale italiano del Patrimonio mondiale UNESCO?",
+     "opzioni": [
+      "Il Cenacolo",
+      "Il Colosseo",
+      "La Galleria Borghese",
+      "Le Dolomiti"
+     ],
+     "corretta": 3,
+     "spiegazione": "Le Dolomiti sono state iscritte nel 2009.",
+     "categoria": "Musei e patrimonio"
+    },
+    {
+     "domanda": "In quale anno l'UNESCO adottò la Convenzione sul Patrimonio mondiale?",
+     "opzioni": [
+      "1972",
+      "1946",
+      "1861",
+      "2002"
+     ],
+     "corretta": 0,
+     "spiegazione": "Da allora l'elenco dei siti si è arricchito in tutto il mondo.",
+     "categoria": "Musei e patrimonio"
+    },
+    {
+     "domanda": "Qual è il modo più sicuro per conoscere orari e prezzi di un museo?",
+     "opzioni": [
+      "Fidarsi di un volantino vecchio",
+      "Consultare il sito ufficiale o telefonare al museo",
+      "Chiedere a uno sconosciuto per strada",
+      "Andare senza informarsi"
+     ],
+     "corretta": 1,
+     "spiegazione": "Orari e biglietti possono cambiare: meglio controllare alla fonte.",
+     "categoria": "Musei e patrimonio"
+    },
+    {
+     "domanda": "Che cosa permette di fare una visita virtuale di un museo?",
+     "opzioni": [
+      "Vedere sale e opere dal computer, ingrandendo i dettagli",
+      "Portare a casa le opere",
+      "Entrare gratis nel museo vero",
+      "Toccare le statue"
+     ],
+     "corretta": 0,
+     "spiegazione": "È utile per preparare una visita o ripassarla.",
+     "categoria": "Musei e patrimonio"
+    },
+    {
+     "domanda": "Qual è un buon consiglio per non stancarsi in un museo?",
+     "opzioni": [
+      "Vedere tutte le sale di corsa",
+      "Non sedersi mai",
+      "Andare nelle ore più affollate",
+      "Scegliere poche opere e fare pause"
+     ],
+     "corretta": 3,
+     "spiegazione": "Meglio guardare bene poche opere che di corsa tante.",
+     "categoria": "Musei e patrimonio"
+    }
+   ]
+  }
+ ]
+}

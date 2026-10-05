@@ -1,0 +1,2021 @@
+{
+ "formato": "professore-digitale-contenuti",
+ "formato_versione": 1,
+ "id": "cultura-storia",
+ "titolo": "Cultura generale · Storia",
+ "versione": "1.0.0",
+ "autore": "Danilo D'Auria",
+ "descrizione": "Un viaggio nella storia, dalla Preistoria all'Europa unita: 6 lezioni (prime civiltà, Grecia e Roma, Medioevo, età moderna, Risorgimento, Novecento), 30 risposte su personaggi ed eventi e il Grande Quiz di Storia con attestato.",
+ "richiede_app": "3.0.0",
+ "suggerimenti": [
+  "Chi era Giuseppe Garibaldi?",
+  "Perché il 2 giugno è festa?",
+  "Cos'è il 25 aprile?",
+  "Quando è caduto l'Impero romano d'Occidente?",
+  "Cos'è la Costituzione italiana?"
+ ],
+ "domande": [
+  {
+   "domanda": "Chi era Giuseppe Garibaldi?",
+   "parole_chiave": [
+    "garibaldi",
+    "eroe dei due mondi",
+    "spedizione dei mille",
+    "mille",
+    "camicie rosse"
+   ],
+   "risposta": "**Giuseppe Garibaldi** (Nizza 1807 - Caprera 1882) è il più famoso eroe del Risorgimento. È detto l'**Eroe dei due mondi** perché combatté sia in Sud America sia in Europa.\n\nNel **1860** guidò la **spedizione dei Mille**: partì da Quarto, vicino a Genova, con circa mille volontari in camicia rossa, sbarcò a Marsala e conquistò il Regno delle Due Sicilie. A **Teano** consegnò le terre conquistate al re Vittorio Emanuele II, contribuendo in modo decisivo all'**Unità d'Italia**.",
+   "lezione": "storia-risorgimento"
+  },
+  {
+   "domanda": "Cos'è la Costituzione italiana?",
+   "parole_chiave": [
+    "costituzione",
+    "carta costituzionale",
+    "legge fondamentale",
+    "articolo 1",
+    "costituente"
+   ],
+   "risposta": "La **Costituzione** è la **legge fondamentale** della Repubblica: tutte le altre leggi devono rispettarla. Fu scritta dall'**Assemblea Costituente**, eletta il 2 giugno 1946, approvata il **22 dicembre 1947** ed entrata in vigore il **1° gennaio 1948**.\n\nStabilisce i **diritti e doveri** dei cittadini e come funzionano lo Stato e i suoi poteri. Il primo articolo dice: *\"L'Italia è una Repubblica democratica, fondata sul lavoro\"*.",
+   "lezione": "storia-novecento"
+  },
+  {
+   "domanda": "Quando è caduto l'Impero romano d'Occidente?",
+   "parole_chiave": [
+    "caduta impero romano",
+    "impero romano",
+    "476",
+    "romolo augustolo",
+    "odoacre",
+    "fine di roma"
+   ],
+   "risposta": "L'Impero romano d'Occidente finì nel **476 dopo Cristo**, quando il capo germanico **Odoacre** depose l'ultimo imperatore, il giovanissimo **Romolo Augustolo**, e rimandò le insegne imperiali a Costantinopoli.\n\nL'Impero era già diviso in due dal 395. La parte d'**Oriente**, detta **Impero bizantino**, sopravvisse ancora per quasi mille anni, fino alla conquista di **Costantinopoli** da parte dei Turchi nel **1453**. Il 476 è la data usata per indicare l'inizio del **Medioevo**.",
+   "schema": "flowchart LR\n  A[\"🏛️ 395 divisione\"] --> B[\"🏚️ 476 fine dell'Occidente\"] --> C[\"🕌 1453 fine dell'Oriente\"]",
+   "lezione": "storia-grecia-roma"
+  },
+  {
+   "domanda": "Chi era Leonardo da Vinci?",
+   "parole_chiave": [
+    "leonardo",
+    "leonardo da vinci",
+    "gioconda",
+    "cenacolo",
+    "genio"
+   ],
+   "risposta": "**Leonardo da Vinci** (Vinci 1452 - Amboise, Francia, 1519) è il simbolo del **genio del Rinascimento**. Fu pittore, ingegnere, scienziato e inventore.\n\nDipinse il **Cenacolo**, l'Ultima Cena, nel refettorio di **Santa Maria delle Grazie a Milano**, e la **Gioconda**, conservata al **Louvre di Parigi**. Nei suoi quaderni disegnò macchine volanti, studi di anatomia, fiumi e piante, sempre osservando la natura con grande curiosità. Passò gli ultimi anni in Francia, ospite del re Francesco I.",
+   "lezione": "storia-eta-moderna"
+  },
+  {
+   "domanda": "Cos'è il Rinascimento?",
+   "parole_chiave": [
+    "rinascimento",
+    "umanesimo",
+    "medici",
+    "quattrocento",
+    "cinquecento"
+   ],
+   "risposta": "Il **Rinascimento** è il periodo, tra **Quattrocento e Cinquecento**, in cui in Italia rifiorirono l'arte, la scienza e la cultura. Il nome indica una \"rinascita\" dopo il Medioevo, ispirata ai Greci e ai Romani.\n\nAl centro c'era l'**essere umano**, con la sua intelligenza: è l'idea dell'**Umanesimo**. Il cuore fu **Firenze**, con la famiglia dei **Medici**, ma il Rinascimento fiorì anche a Roma, Venezia, Milano e Urbino. È l'epoca di Leonardo, Michelangelo e Raffaello.",
+   "lezione": "storia-eta-moderna"
+  },
+  {
+   "domanda": "Perché il 2 giugno è festa?",
+   "parole_chiave": [
+    "2 giugno",
+    "festa della repubblica",
+    "referendum",
+    "repubblica",
+    "monarchia"
+   ],
+   "risposta": "Il **2 giugno** è la **Festa della Repubblica**. Il **2 giugno 1946** gli italiani votarono con un **referendum** per scegliere tra **monarchia** e **repubblica**: vinse la Repubblica e la famiglia reale dei Savoia lasciò l'Italia.\n\nFu un voto storico anche perché, per la prima volta in un voto nazionale, votarono anche le **donne**. Lo stesso giorno fu eletta l'Assemblea Costituente, che scrisse la Costituzione.",
+   "lezione": "storia-novecento"
+  },
+  {
+   "domanda": "Cos'è il 25 aprile?",
+   "parole_chiave": [
+    "25 aprile",
+    "liberazione",
+    "festa della liberazione",
+    "resistenza",
+    "partigiani"
+   ],
+   "risposta": "Il **25 aprile** è la **Festa della Liberazione**. Ricorda il **25 aprile 1945**, quando il Comitato di Liberazione Nazionale proclamò l'**insurrezione generale** nel Nord Italia contro l'occupazione tedesca e il fascismo.\n\nFu il momento decisivo della **Resistenza**, a cui parteciparono partigiani di idee diverse, insieme agli eserciti alleati. Pochi giorni dopo la guerra in Italia finì. Dalla Liberazione nacque il percorso che portò alla Repubblica e alla Costituzione.",
+   "lezione": "storia-novecento"
+  },
+  {
+   "domanda": "Quando è caduto il muro di Berlino?",
+   "parole_chiave": [
+    "muro di berlino",
+    "berlino",
+    "1989",
+    "guerra fredda",
+    "germania divisa"
+   ],
+   "risposta": "Il **Muro di Berlino** fu costruito nel **1961** dalla Germania Est per impedire ai suoi cittadini di fuggire verso Berlino Ovest. Divise famiglie e amici per 28 anni ed era il simbolo della **Guerra fredda** tra Est e Ovest.\n\nLa sera del **9 novembre 1989** i confini furono aperti e migliaia di persone attraversarono il Muro in festa, cominciando a demolirlo. Il **3 ottobre 1990** la Germania tornò a essere un unico Stato.",
+   "schema": "flowchart LR\n  A[\"🧱 1961 costruzione\"] --> B[\"🔓 9 novembre 1989 caduta\"] --> C[\"🇩🇪 3 ottobre 1990 riunificazione\"]",
+   "lezione": "storia-novecento"
+  },
+  {
+   "domanda": "Chi era Giulio Cesare?",
+   "parole_chiave": [
+    "giulio cesare",
+    "cesare",
+    "idi di marzo",
+    "rubicone",
+    "gallia"
+   ],
+   "risposta": "**Giulio Cesare** fu un generale e politico romano. Conquistò la **Gallia**, l'attuale Francia, e raccontò le sue imprese nel *De bello Gallico*.\n\nNel **49 avanti Cristo** attraversò con l'esercito il fiume **Rubicone**, sfidando il Senato: da qui il detto \"il dado è tratto\". Ottenne un potere enorme, ma fu ucciso da un gruppo di senatori, tra cui **Bruto**, alle **Idi di marzo**, il 15 marzo del **44 avanti Cristo**. Non fu imperatore: il primo fu suo figlio adottivo, Augusto.",
+   "lezione": "storia-grecia-roma"
+  },
+  {
+   "domanda": "Cosa sono le piramidi d'Egitto?",
+   "parole_chiave": [
+    "piramidi",
+    "egitto",
+    "faraoni",
+    "cheope",
+    "giza",
+    "mummie"
+   ],
+   "risposta": "Le **piramidi** erano le **tombe dei faraoni**, i re dell'antico Egitto. Gli Egiziani credevano nella vita dopo la morte e volevano proteggere il corpo del re, che veniva **mummificato**.\n\nLe più famose sono quelle di **Giza**, vicino al Cairo. La più grande è la piramide di **Cheope**, costruita circa **4.500 anni fa**: per migliaia di anni è stata la costruzione più alta del mondo. È l'unica delle sette meraviglie del mondo antico ancora in piedi.",
+   "lezione": "storia-prime-civilta"
+  },
+  {
+   "domanda": "Chi ha inventato la scrittura?",
+   "parole_chiave": [
+    "scrittura",
+    "sumeri",
+    "cuneiforme",
+    "geroglifici",
+    "inizio della storia"
+   ],
+   "risposta": "Una delle prime forme di scrittura nacque in **Mesopotamia**, tra i fiumi Tigri ed Eufrate, intorno al **3200 avanti Cristo**. La usavano i **Sumeri**: incidevano segni a forma di cuneo su tavolette d'argilla, la **scrittura cuneiforme**. Serviva all'inizio per tenere i conti di raccolti e animali.\n\nPoco dopo anche gli **Egiziani** svilupparono i **geroglifici**. Più tardi i **Fenici** diffusero un **alfabeto**, da cui derivano l'alfabeto greco e quello latino che usiamo noi.",
+   "lezione": "storia-prime-civilta"
+  },
+  {
+   "domanda": "Chi era Cristoforo Colombo?",
+   "parole_chiave": [
+    "colombo",
+    "cristoforo colombo",
+    "scoperta dell'america",
+    "1492",
+    "caravelle"
+   ],
+   "risposta": "**Cristoforo Colombo** era un navigatore **genovese**. Voleva raggiungere le **Indie** navigando verso ovest, convinto che la Terra fosse più piccola di quanto è.\n\nCon l'aiuto dei re di Spagna partì con tre navi, la **Niña**, la **Pinta** e la **Santa María**, e il **12 ottobre 1492** arrivò su un'isola delle **Bahamas**. Morì convinto di aver raggiunto l'Asia. Il nuovo continente prese poi il nome dal fiorentino **Amerigo Vespucci**.",
+   "lezione": "storia-eta-moderna"
+  },
+  {
+   "domanda": "Quando è nata l'Italia unita?",
+   "parole_chiave": [
+    "unità d'italia",
+    "1861",
+    "17 marzo",
+    "regno d'italia",
+    "italia unita"
+   ],
+   "risposta": "Il **Regno d'Italia** fu proclamato il **17 marzo 1861**, con re **Vittorio Emanuele II**. La prima capitale fu **Torino**.\n\nMancavano ancora alcune terre: il **Veneto** arrivò nel **1866**, **Roma** nel **1870**, con la breccia di Porta Pia, e divenne capitale nel 1871. **Trento** e **Trieste** si unirono dopo la Prima guerra mondiale. Il 17 marzo si celebra la Giornata dell'Unità nazionale, della Costituzione, dell'inno e della bandiera.",
+   "schema": "flowchart LR\n  A[\"🇮🇹 1861 Regno d'Italia\"] --> B[\"🦁 1866 Veneto\"] --> C[\"🏛️ 1870 Roma\"] --> D[\"⛰️ 1918 Trento e Trieste\"]",
+   "lezione": "storia-risorgimento"
+  },
+  {
+   "domanda": "Chi era Cavour?",
+   "parole_chiave": [
+    "cavour",
+    "camillo benso",
+    "conte di cavour",
+    "primo ministro",
+    "piemonte"
+   ],
+   "risposta": "**Camillo Benso, conte di Cavour** (1810-1861), fu primo ministro del **Regno di Sardegna** ed è considerato l'**architetto diplomatico** dell'Unità d'Italia.\n\nModernizzò il Piemonte con ferrovie e riforme e capì che serviva l'aiuto di una grande potenza: si alleò con la **Francia** di Napoleone III, con cui vinse la seconda guerra d'indipendenza nel 1859. Fu il primo presidente del Consiglio del Regno d'Italia, ma morì pochi mesi dopo la proclamazione, nel giugno 1861.",
+   "lezione": "storia-risorgimento"
+  },
+  {
+   "domanda": "Chi era Giuseppe Mazzini?",
+   "parole_chiave": [
+    "mazzini",
+    "giovine italia",
+    "repubblica",
+    "risorgimento",
+    "pensatore"
+   ],
+   "risposta": "**Giuseppe Mazzini** (Genova 1805 - Pisa 1872) fu il grande **pensatore** del Risorgimento. Sognava un'Italia **unita, libera e repubblicana**, costruita dal popolo stesso.\n\nNel **1831** fondò la **Giovine Italia**, un'associazione di giovani patrioti. Organizzò molti tentativi di insurrezione e nel **1849** guidò, con altri, la breve **Repubblica Romana**. Passò gran parte della vita in **esilio**, soprattutto a Londra. Il suo motto era \"Dio e popolo\".",
+   "lezione": "storia-risorgimento"
+  },
+  {
+   "domanda": "Chi era Carlo Magno?",
+   "parole_chiave": [
+    "carlo magno",
+    "franchi",
+    "sacro romano impero",
+    "anno 800",
+    "imperatore"
+   ],
+   "risposta": "**Carlo Magno** fu re dei **Franchi** e il sovrano più potente dell'Alto Medioevo. Unì sotto il suo governo gran parte dell'Europa occidentale, compresa l'Italia del Nord, dopo aver sconfitto i **Longobardi**.\n\nLa notte di **Natale dell'anno 800**, a Roma, papa **Leone III** lo incoronò **imperatore**. Favorì la cultura e le scuole e organizzò il territorio affidandolo a conti e marchesi fedeli. Per questo è spesso chiamato \"padre dell'Europa\".",
+   "lezione": "storia-medioevo"
+  },
+  {
+   "domanda": "Perché si chiama Medioevo?",
+   "parole_chiave": [
+    "medioevo",
+    "età di mezzo",
+    "anno mille",
+    "castelli",
+    "periodo medievale"
+   ],
+   "risposta": "**Medioevo** significa \"**età di mezzo**\": il nome fu dato dagli studiosi del Rinascimento, che lo consideravano un periodo di passaggio tra l'antichità e la loro epoca.\n\nPer convenzione va dal **476**, caduta dell'Impero romano d'Occidente, al **1492**, scoperta dell'America. Si divide in **Alto** e **Basso Medioevo**, con il confine intorno all'**anno Mille**. Fu l'epoca di castelli e monasteri, ma anche di cattedrali, Comuni e prime università.",
+   "lezione": "storia-medioevo"
+  },
+  {
+   "domanda": "Chi era Dante Alighieri?",
+   "parole_chiave": [
+    "dante",
+    "divina commedia",
+    "inferno",
+    "padre della lingua",
+    "beatrice"
+   ],
+   "risposta": "**Dante Alighieri** (Firenze 1265 - Ravenna 1321) è il più grande poeta italiano, chiamato il **padre della lingua italiana**.\n\nScrisse la **Divina Commedia**, un viaggio immaginario attraverso **Inferno**, **Purgatorio** e **Paradiso**, guidato dal poeta latino Virgilio e poi dall'amata **Beatrice**. Scelse di scrivere in **volgare** fiorentino e non in latino, così che molti potessero capirlo. Esiliato da Firenze per motivi politici, morì a **Ravenna**, dove si trova la sua tomba.",
+   "lezione": "storia-medioevo"
+  },
+  {
+   "domanda": "Cos'è stata la Rivoluzione francese?",
+   "parole_chiave": [
+    "rivoluzione francese",
+    "bastiglia",
+    "1789",
+    "libertà uguaglianza fraternità",
+    "luigi xvi"
+   ],
+   "risposta": "La **Rivoluzione francese** iniziò il **14 luglio 1789** con la presa della **Bastiglia**, a Parigi. Il popolo si ribellò ai privilegi del re e della nobiltà.\n\nFu approvata la **Dichiarazione dei diritti dell'uomo e del cittadino**, la monarchia fu abolita e il re **Luigi XVI** fu giustiziato nel 1793. Ci fu anche un periodo di violenze, detto il Terrore. Il suo motto, \"**Libertà, uguaglianza, fraternità**\", ha ispirato le democrazie moderne.",
+   "lezione": "storia-eta-moderna"
+  },
+  {
+   "domanda": "Chi era Napoleone Bonaparte?",
+   "parole_chiave": [
+    "napoleone",
+    "bonaparte",
+    "waterloo",
+    "imperatore dei francesi",
+    "sant'elena"
+   ],
+   "risposta": "**Napoleone Bonaparte** (Ajaccio 1769 - Sant'Elena 1821) fu un generale francese che, dopo la Rivoluzione, prese il potere e nel **1804** si incoronò **imperatore dei Francesi**.\n\nConquistò gran parte dell'Europa, compresa l'Italia, e diffuse il **Codice civile**, che ha influenzato le leggi di molti Paesi. Fu esiliato all'**isola d'Elba**, tornò al potere per cento giorni e fu sconfitto definitivamente a **Waterloo** nel **1815**. Morì in esilio sull'isola di **Sant'Elena**.",
+   "lezione": "storia-eta-moderna"
+  },
+  {
+   "domanda": "Quando è iniziata e finita la Prima guerra mondiale?",
+   "parole_chiave": [
+    "prima guerra mondiale",
+    "grande guerra",
+    "1915",
+    "4 novembre",
+    "piave",
+    "trincee"
+   ],
+   "risposta": "La **Prima guerra mondiale** iniziò nell'estate del **1914**, dopo l'uccisione a Sarajevo dell'arciduca austriaco Francesco Ferdinando, e terminò nel **novembre 1918**.\n\nL'**Italia** entrò in guerra il **24 maggio 1915** contro l'Austria-Ungheria. Fu una guerra di trincea, sulle Alpi e sull'Isonzo. Dopo la sconfitta di Caporetto, l'esercito resistette sul **Piave** e vinse a **Vittorio Veneto**. Per l'Italia la guerra finì il **4 novembre 1918**: con la vittoria si unirono all'Italia Trento e Trieste.",
+   "lezione": "storia-novecento"
+  },
+  {
+   "domanda": "Cos'è stata la Seconda guerra mondiale?",
+   "parole_chiave": [
+    "seconda guerra mondiale",
+    "1939",
+    "1945",
+    "hitler",
+    "armistizio",
+    "8 settembre"
+   ],
+   "risposta": "La **Seconda guerra mondiale** fu il conflitto più distruttivo della storia. Iniziò il **1° settembre 1939** con l'invasione tedesca della **Polonia** e finì nel **1945**: in Europa l'8 maggio, in Asia a settembre, dopo le bombe atomiche su Hiroshima e Nagasaki.\n\nL'**Italia** entrò in guerra nel **1940** accanto alla Germania nazista. Dopo l'armistizio dell'**8 settembre 1943** il Paese fu diviso e occupato; la **Resistenza** e gli Alleati lo liberarono nel 1945.",
+   "lezione": "storia-novecento"
+  },
+  {
+   "domanda": "Cos'è la Shoah e perché si ricorda il 27 gennaio?",
+   "parole_chiave": [
+    "shoah",
+    "olocausto",
+    "giorno della memoria",
+    "27 gennaio",
+    "auschwitz",
+    "deportazione"
+   ],
+   "risposta": "La **Shoah**, parola ebraica che significa \"catastrofe\", è lo **sterminio** di circa **sei milioni di ebrei** d'Europa compiuto dalla Germania nazista e dai suoi alleati. Furono perseguitati e uccisi anche rom e sinti, disabili, oppositori politici e altri gruppi.\n\nIl **27 gennaio** è il **Giorno della Memoria**: ricorda il 27 gennaio 1945, quando le truppe sovietiche entrarono nel campo di **Auschwitz**. Ricordare serve perché non accada mai più.",
+   "lezione": "storia-novecento"
+  },
+  {
+   "domanda": "Come è nata l'Unione europea?",
+   "parole_chiave": [
+    "unione europea",
+    "europa",
+    "trattati di roma",
+    "maastricht",
+    "cee",
+    "paesi fondatori"
+   ],
+   "risposta": "Dopo la Seconda guerra mondiale alcuni Paesi decisero di collaborare per non farsi più la guerra. Nel **1951** nacque la Comunità del carbone e dell'acciaio; il **25 marzo 1957** furono firmati i **Trattati di Roma**, che crearono la **Comunità economica europea**.\n\nI sei Paesi fondatori furono **Italia, Francia, Germania Ovest, Belgio, Paesi Bassi e Lussemburgo**. Con il **Trattato di Maastricht** del **1992** nacque l'**Unione europea**, che negli anni si è allargata a molti altri Paesi.",
+   "schema": "flowchart LR\n  A[\"🤝 1951 carbone e acciaio\"] --> B[\"🇮🇹 1957 Trattati di Roma\"] --> C[\"🇪🇺 1992 Maastricht\"] --> D[\"💶 2002 euro\"]",
+   "lezione": "storia-novecento"
+  },
+  {
+   "domanda": "Quando è arrivato l'euro?",
+   "parole_chiave": [
+    "euro",
+    "lira",
+    "moneta unica",
+    "2002",
+    "banconote"
+   ],
+   "risposta": "L'**euro** è la moneta comune di molti Paesi dell'Unione europea. Fu introdotto nel **1999** per i pagamenti elettronici e bancari, mentre **monete e banconote** entrarono nelle tasche degli italiani il **1° gennaio 2002**, al posto della **lira**.\n\nIl cambio era fissato: **un euro valeva 1.936,27 lire**. Per alcune settimane circolarono entrambe le monete. Ogni Paese conia monete con un proprio disegno su un lato, ma valgono in tutta l'area dell'euro.",
+   "lezione": "storia-novecento"
+  },
+  {
+   "domanda": "Chi era l'imperatore Augusto?",
+   "parole_chiave": [
+    "augusto",
+    "ottaviano",
+    "primo imperatore",
+    "pace romana",
+    "agosto"
+   ],
+   "risposta": "**Ottaviano**, figlio adottivo di Giulio Cesare, dopo l'uccisione di Cesare sconfisse i suoi rivali, tra cui **Marco Antonio** e **Cleopatra**, nella battaglia di **Azio** (31 a.C.).\n\nNel **27 avanti Cristo** il Senato gli diede il titolo di **Augusto**: fu il **primo imperatore romano**. Governò a lungo, fino alla morte nel 14 dopo Cristo, e diede a Roma un periodo di stabilità, la **pace romana**. Al suo nome è dedicato il mese di **agosto**. Durante il suo regno, secondo la tradizione, nacque Gesù.",
+   "lezione": "storia-grecia-roma"
+  },
+  {
+   "domanda": "Chi era Ötzi?",
+   "parole_chiave": [
+    "otzi",
+    "ötzi",
+    "uomo del ghiaccio",
+    "mummia del similaun",
+    "similaun",
+    "bolzano"
+   ],
+   "risposta": "**Ötzi** è un uomo vissuto **circa 5.300 anni fa**, nell'età del rame, il cui corpo è stato conservato dal ghiaccio delle Alpi. Fu ritrovato per caso nel **1991** da due escursionisti in **Val Senales**, vicino al confine tra Italia e Austria. Per questo è chiamato anche \"uomo del Similaun\", dal nome di un monte vicino.\n\nCon lui c'erano vestiti, un'ascia di rame, un arco e frecce. Oggi è conservato nel **Museo archeologico dell'Alto Adige**, a **Bolzano**.",
+   "lezione": "storia-prime-civilta"
+  },
+  {
+   "domanda": "Da dove viene il tricolore italiano?",
+   "parole_chiave": [
+    "tricolore",
+    "bandiera",
+    "bandiera italiana",
+    "verde bianco rosso",
+    "reggio emilia"
+   ],
+   "risposta": "Il **tricolore** verde, bianco e rosso fu adottato per la prima volta come bandiera di uno Stato il **7 gennaio 1797** a **Reggio Emilia**, dalla **Repubblica Cispadana**, nata durante le campagne di Napoleone in Italia. Si ispirava alla bandiera francese.\n\nDivenne il simbolo del **Risorgimento** e dell'Unità. La Costituzione, all'articolo 12, dice che la bandiera della Repubblica è il tricolore italiano. Il **7 gennaio** si celebra la **Festa del Tricolore**.",
+   "lezione": "storia-risorgimento"
+  },
+  {
+   "domanda": "Chi ha scritto l'Inno di Mameli?",
+   "parole_chiave": [
+    "inno di mameli",
+    "inno nazionale",
+    "fratelli d'italia",
+    "mameli",
+    "canto degli italiani"
+   ],
+   "risposta": "L'inno nazionale si chiama **Il Canto degli Italiani**, ma tutti lo conoscono come **Inno di Mameli**. Il testo fu scritto nel **1847** dal giovane poeta genovese **Goffredo Mameli**, la musica è del compositore genovese **Michele Novaro**.\n\nMameli morì nel **1849**, a soli 21 anni, combattendo per la Repubblica Romana. L'inno, che comincia con *\"Fratelli d'Italia\"*, fu scelto come inno nazionale nel 1946, subito dopo la nascita della Repubblica.",
+   "lezione": "storia-risorgimento"
+  },
+  {
+   "domanda": "Chi era Galileo Galilei?",
+   "parole_chiave": [
+    "galileo",
+    "galilei",
+    "cannocchiale",
+    "metodo scientifico",
+    "eppur si muove"
+   ],
+   "risposta": "**Galileo Galilei** (Pisa 1564 - Arcetri, Firenze, 1642) è considerato il **padre della scienza moderna**. Insegnò che le idee vanno verificate con l'**esperimento** e la matematica: è il **metodo scientifico**.\n\nPerfezionò il **cannocchiale** e lo puntò verso il cielo: scoprì i **satelliti di Giove**, le montagne della Luna e le fasi di Venere. Sostenne che la **Terra gira intorno al Sole**, come aveva proposto Copernico. Per questo nel **1633** fu processato e costretto a ritrattare.",
+   "lezione": "storia-eta-moderna"
+  }
+ ],
+ "lezioni": [
+  {
+   "id": "storia-prime-civilta",
+   "icona": "🏺",
+   "titolo": "Preistoria e prime civiltà",
+   "livello": "Storia",
+   "minuti": 15,
+   "obiettivo": "Capire come vivevano i primi esseri umani e conoscere le grandi civiltà nate lungo i fiumi: Mesopotamia ed Egitto.",
+   "palestra": "",
+   "passi": [
+    {
+     "titolo": "Che cos'è la Preistoria",
+     "testo": "Chiamiamo **Preistoria** il lunghissimo periodo della vita umana **prima dell'invenzione della scrittura**. Non abbiamo documenti scritti: tutto ciò che sappiamo viene da ossa, utensili, pitture nelle grotte e resti di villaggi, studiati dagli archeologi.\n\nGli studiosi la dividono in grandi età, dal nome dei materiali usati per fabbricare gli attrezzi:\n\n- **Paleolitico**, l'età della pietra antica: pietra scheggiata;\n- **Neolitico**, l'età della pietra nuova: pietra levigata;\n- **Età dei metalli**: prima il rame, poi il bronzo, infine il ferro.",
+     "schema": "flowchart LR\n  A[\"🪨 Paleolitico\"] --> B[\"🌾 Neolitico\"] --> C[\"⚒️ Età dei metalli\"] --> D[\"✍️ Scrittura\"]"
+    },
+    {
+     "titolo": "Dai cacciatori ai contadini",
+     "testo": "Nel **Paleolitico** gli esseri umani erano **nomadi**: si spostavano per seguire gli animali da cacciare e raccogliere frutti e radici. Impararono a usare il **fuoco** e dipinsero animali sulle pareti delle grotte.\n\nCirca **diecimila anni fa**, nel Vicino Oriente, accadde una grande svolta: la **rivoluzione neolitica**. Le persone impararono a **coltivare** i campi e ad **allevare** gli animali. Smisero di spostarsi, costruirono **villaggi**, inventarono la ceramica e la tessitura.\n\nÈ un po' come passare dalla vita in tenda a quella in una casa con l'orto: cambia tutto.",
+     "consiglio": "Pensate alla vostra cucina: pane, formaggio e lana sono tutte \"invenzioni\" nate dal Neolitico."
+    },
+    {
+     "titolo": "Ötzi, l'uomo venuto dal ghiaccio",
+     "testo": "Nel **1991**, sulle Alpi della **Val Senales**, al confine tra Italia e Austria, due escursionisti trovarono un corpo nel ghiaccio. Non era un alpinista sfortunato: era un uomo vissuto **circa 5.300 anni fa**, nell'**età del rame**.\n\nGli hanno dato il nome di **Ötzi**. Il ghiaccio ha conservato il suo corpo, i vestiti di pelle, le scarpe imbottite di fieno, un'ascia di rame, un arco e le frecce. Grazie a lui sappiamo moltissimo sulla vita quotidiana di quei tempi.\n\nOggi Ötzi è custodito nel **Museo archeologico dell'Alto Adige**, a **Bolzano**."
+    },
+    {
+     "titolo": "La Mesopotamia, terra tra i fiumi",
+     "testo": "**Mesopotamia** significa \"terra **tra i fiumi**\": i fiumi sono il **Tigri** e l'**Eufrate**, nell'attuale Iraq. Qui nacquero alcune delle prime città della storia.\n\nI **Sumeri** inventarono, intorno al **3200 avanti Cristo**, una delle prime forme di **scrittura**: segni a forma di cuneo incisi su tavolette d'argilla, la **scrittura cuneiforme**. Furono anche tra i primi a usare la **ruota**.\n\nPiù tardi i **Babilonesi**, con il re **Hammurabi**, scrissero il **Codice di Hammurabi**, una delle più antiche raccolte di leggi scritte: le regole erano incise sulla pietra, perché tutti potessero conoscerle.",
+     "consiglio": "Con la scrittura finisce la Preistoria e comincia la Storia."
+    },
+    {
+     "titolo": "L'Egitto, dono del Nilo",
+     "testo": "L'antico Egitto viveva grazie al **Nilo**. Ogni anno il fiume straripava e lasciava sui campi il **limo**, un fango fertilissimo. Per questo lo storico greco Erodoto chiamò l'Egitto \"dono del Nilo\".\n\nIl re era il **faraone**, considerato di natura divina. Gli Egiziani scrivevano con i **geroglifici**, piccoli disegni dal significato preciso, su pietra e su **papiro**.\n\nCredevano nella vita dopo la morte: per questo **mummificavano** i corpi e costruivano tombe grandiose. Le più famose sono le **piramidi di Giza**: la più grande, quella del faraone **Cheope**, ha circa 4.500 anni.",
+     "consiglio": "I geroglifici furono decifrati nel 1822 dal francese Champollion, grazie alla Stele di Rosetta, che riportava lo stesso testo in tre scritture."
+    }
+   ],
+   "quiz": [
+    {
+     "domanda": "Che cosa segna la fine della Preistoria?",
+     "opzioni": [
+      "L'invenzione della scrittura",
+      "La scoperta del fuoco",
+      "La costruzione delle piramidi"
+     ],
+     "corretta": 0,
+     "spiegazione": "La Storia comincia quando abbiamo i primi documenti scritti."
+    },
+    {
+     "domanda": "Che cosa cambiò con la rivoluzione neolitica?",
+     "opzioni": [
+      "Si inventò la stampa",
+      "Nacquero agricoltura e allevamento",
+      "Si scoprì l'America"
+     ],
+     "corretta": 1,
+     "spiegazione": "Coltivando i campi le persone smisero di essere nomadi e costruirono villaggi."
+    },
+    {
+     "domanda": "Tra quali fiumi si trovava la Mesopotamia?",
+     "opzioni": [
+      "Nilo e Giordano",
+      "Danubio e Reno",
+      "Tigri ed Eufrate"
+     ],
+     "corretta": 2,
+     "spiegazione": "Mesopotamia significa proprio \"terra tra i fiumi\"."
+    },
+    {
+     "domanda": "Come si chiama la scrittura dei Sumeri?",
+     "opzioni": [
+      "Geroglifica",
+      "Latina",
+      "Cuneiforme"
+     ],
+     "corretta": 2,
+     "spiegazione": "I segni a forma di cuneo venivano incisi sull'argilla fresca."
+    },
+    {
+     "domanda": "Dove è custodita la mummia di Ötzi?",
+     "opzioni": [
+      "A Bolzano",
+      "Al Cairo",
+      "A Roma"
+     ],
+     "corretta": 0,
+     "spiegazione": "Ötzi si trova nel Museo archeologico dell'Alto Adige, a Bolzano."
+    }
+   ]
+  },
+  {
+   "id": "storia-grecia-roma",
+   "icona": "🏛️",
+   "titolo": "Grecia antica e Roma",
+   "livello": "Storia",
+   "minuti": 20,
+   "obiettivo": "Conoscere le idee nate nella Grecia antica e la lunga storia di Roma, dalla fondazione alla caduta dell'Impero d'Occidente.",
+   "palestra": "",
+   "passi": [
+    {
+     "titolo": "Le città greche e la democrazia",
+     "testo": "La Grecia antica non era un unico Stato, ma un insieme di **città indipendenti**, le **pòleis**. Le più famose erano **Atene** e **Sparta**.\n\nAd **Atene**, nel **V secolo avanti Cristo**, nacque la **democrazia**, parola che significa \"governo del popolo\": i cittadini maschi liberi discutevano e votavano le leggi in assemblea. Donne e schiavi però erano esclusi.\n\nI Greci ci hanno lasciato il **teatro**, la **filosofia** con **Socrate**, **Platone** e **Aristotele**, e le **Olimpiadi**, che secondo la tradizione cominciarono a **Olimpia** nel **776 avanti Cristo**, in onore di Zeus.",
+     "consiglio": "Molte parole che usiamo ogni giorno vengono dal greco: democrazia, teatro, politica, telefono."
+    },
+    {
+     "titolo": "Alessandro Magno",
+     "testo": "Nel IV secolo avanti Cristo il re di **Macedonia**, **Alessandro Magno**, allievo di Aristotele, conquistò in pochi anni un impero immenso: dalla Grecia all'Egitto, fino all'**India**.\n\nMorì giovanissimo, nel **323 avanti Cristo**, a soli 32 anni. Il suo impero si divise tra i suoi generali, ma la lingua e la cultura greca si diffusero in tutto il Mediterraneo orientale. Questo periodo si chiama **età ellenistica**.\n\nIn Egitto Alessandro fondò la città di **Alessandria**, famosa per la sua grande **biblioteca** e per il **faro**, una delle sette meraviglie del mondo antico."
+    },
+    {
+     "titolo": "Roma: dai re alla Repubblica",
+     "testo": "Secondo la leggenda, **Roma** fu fondata da **Romolo** il **21 aprile del 753 avanti Cristo**. Il 21 aprile si festeggia ancora oggi il \"Natale di Roma\".\n\nRoma ebbe prima **sette re**. Nel **509 avanti Cristo** l'ultimo re fu cacciato e nacque la **Repubblica**: il potere passò a due **consoli**, eletti ogni anno, e al **Senato**.\n\nRoma conquistò l'Italia e poi combatté contro **Cartagine** le tre **guerre puniche**. Il cartaginese **Annibale** attraversò perfino le Alpi con gli elefanti, ma alla fine vinse Roma, che diventò padrona del Mediterraneo.",
+     "schema": "flowchart LR\n  A[\"👑 Re\"] --> B[\"🏛️ Repubblica 509 a.C.\"] --> C[\"🦅 Impero 27 a.C.\"] --> D[\"🏚️ Fine dell'Occidente 476\"]"
+    },
+    {
+     "titolo": "Giulio Cesare e Augusto",
+     "testo": "**Giulio Cesare** fu un grande generale: conquistò la **Gallia**, l'attuale Francia. Nel **49 avanti Cristo** attraversò in armi il fiume **Rubicone** e si impadronì del potere a Roma. Fu ucciso in Senato nelle **Idi di marzo**, il **15 marzo del 44 avanti Cristo**.\n\nIl suo figlio adottivo **Ottaviano** sconfisse i rivali e nel **27 avanti Cristo** ricevette il titolo di **Augusto**: fu il **primo imperatore**. Iniziò un lungo periodo di pace, la **pace romana**.\n\nRoma ci ha lasciato strade, acquedotti, il **diritto romano** e il **latino**, da cui nasce la nostra lingua.",
+     "consiglio": "Il mese di luglio prende il nome da Giulio Cesare, il mese di agosto da Augusto."
+    },
+    {
+     "titolo": "Cristianesimo e caduta dell'Impero d'Occidente",
+     "testo": "Durante l'Impero si diffuse il **Cristianesimo**. Dopo anni di persecuzioni, nel **313** l'imperatore **Costantino** concesse ai cristiani la libertà di culto con l'**Editto di Milano**. Costantino fondò anche una nuova capitale, **Costantinopoli**.\n\nNel **395**, alla morte dell'imperatore **Teodosio**, l'Impero fu diviso in due: **Occidente** e **Oriente**.\n\nL'Impero d'Occidente, indebolito e invaso da popoli germanici, finì nel **476**, quando il capo barbaro **Odoacre** depose l'ultimo imperatore, il giovane **Romolo Augustolo**. L'Impero d'Oriente, detto **bizantino**, durò invece fino al **1453**.",
+     "consiglio": "Il 476 è la data che i libri di scuola usano per separare l'Età antica dal Medioevo."
+    }
+   ],
+   "quiz": [
+    {
+     "domanda": "In quale città greca nacque la democrazia?",
+     "opzioni": [
+      "Sparta",
+      "Atene",
+      "Alessandria"
+     ],
+     "corretta": 1,
+     "spiegazione": "Ad Atene, nel V secolo a.C., i cittadini votavano le leggi in assemblea."
+    },
+    {
+     "domanda": "Chi fu il primo imperatore romano?",
+     "opzioni": [
+      "Ottaviano Augusto",
+      "Giulio Cesare",
+      "Romolo"
+     ],
+     "corretta": 0,
+     "spiegazione": "Cesare ebbe un enorme potere ma non fu imperatore: il primo fu Augusto, nel 27 a.C."
+    },
+    {
+     "domanda": "Contro quale città Roma combatté le guerre puniche?",
+     "opzioni": [
+      "Atene",
+      "Cartagine",
+      "Babilonia"
+     ],
+     "corretta": 1,
+     "spiegazione": "Cartagine si trovava nell'attuale Tunisia; il suo generale più famoso fu Annibale."
+    },
+    {
+     "domanda": "Che cosa fece Costantino nel 313?",
+     "opzioni": [
+      "Divise l'Impero in due",
+      "Fondò Roma",
+      "Concesse libertà di culto ai cristiani"
+     ],
+     "corretta": 2,
+     "spiegazione": "Con l'Editto di Milano i cristiani poterono praticare liberamente la loro fede."
+    },
+    {
+     "domanda": "In che anno cadde l'Impero romano d'Occidente?",
+     "opzioni": [
+      "313",
+      "1453",
+      "476"
+     ],
+     "corretta": 2,
+     "spiegazione": "Nel 476 Odoacre depose Romolo Augustolo; il 1453 è la caduta di Costantinopoli."
+    }
+   ]
+  },
+  {
+   "id": "storia-medioevo",
+   "icona": "🏰",
+   "titolo": "Il Medioevo",
+   "livello": "Storia",
+   "minuti": 20,
+   "obiettivo": "Scoprire i mille anni del Medioevo: Carlo Magno, i monasteri, i castelli, i Comuni e i grandi personaggi italiani come San Francesco e Dante.",
+   "palestra": "",
+   "passi": [
+    {
+     "titolo": "Mille anni \"di mezzo\"",
+     "testo": "**Medioevo** significa \"età di mezzo\": è il periodo tra l'antichità e l'età moderna. Per convenzione va dal **476**, caduta dell'Impero romano d'Occidente, al **1492**, scoperta dell'America.\n\nGli storici lo dividono in due parti, con il confine intorno all'**anno Mille**:\n\n- **Alto Medioevo**: invasioni, regni dei popoli germanici, città che si svuotano. In Italia arrivarono i **Longobardi**, nel **568**.\n- **Basso Medioevo**: ripresa dei commerci, crescita delle città, nascita delle università.\n\nNon fu un'epoca \"buia\" come a volte si dice: nacquero cattedrali, ospedali e università.",
+     "schema": "flowchart LR\n  A[\"🏚️ 476 caduta di Roma\"] --> B[\"👑 800 Carlo Magno\"] --> C[\"🏙️ Anno Mille\"] --> D[\"⛵ 1492 America\"]"
+    },
+    {
+     "titolo": "Carlo Magno e il feudalesimo",
+     "testo": "**Carlo Magno**, re dei **Franchi**, unì gran parte dell'Europa occidentale. La notte di **Natale dell'anno 800**, a Roma, papa **Leone III** lo incoronò **imperatore**.\n\nPer governare territori così grandi si diffuse il **feudalesimo**: il re affidava una terra, il **feudo**, a un nobile fedele, il **vassallo**, che in cambio gli giurava fedeltà e lo aiutava in guerra. Il vassallo, a sua volta, poteva affidare parte delle terre ad altri.\n\nAlla base c'erano i **contadini**, i servi della gleba, che lavoravano la terra e non potevano lasciarla.",
+     "consiglio": "Immaginate una piramide: in cima il re, poi i grandi nobili, poi i cavalieri, alla base i contadini."
+    },
+    {
+     "titolo": "I monasteri, custodi del sapere",
+     "testo": "Nel VI secolo **San Benedetto da Norcia** fondò il monastero di **Montecassino** e scrisse una regola riassunta nel motto **\"ora et labora\"**: prega e lavora.\n\nI monasteri benedettini si diffusero in tutta Europa. I monaci bonificavano terre, coltivavano, curavano i malati e soprattutto **copiavano a mano i libri** antichi: erano i **monaci amanuensi**. Senza il loro lavoro paziente avremmo perso molte opere dei Greci e dei Romani.\n\nSan Benedetto è uno dei **patroni d'Europa**.",
+     "consiglio": "Copiare un libro intero a mano poteva richiedere mesi: per questo i libri erano rari e preziosi."
+    },
+    {
+     "titolo": "Dopo il Mille: Comuni e Repubbliche marinare",
+     "testo": "Dopo l'anno Mille la popolazione crebbe e i commerci ripresero. In Italia molte città si governarono da sole: nacquero i **Comuni**, guidati da cittadini, mercanti e artigiani.\n\nSul mare si affermarono le **Repubbliche marinare**: **Amalfi**, **Pisa**, **Genova** e **Venezia**, che commerciavano con l'Oriente.\n\nIn questo periodo nacquero le **università**: quella di **Bologna** è considerata la più antica del mondo occidentale. Ci furono anche le **crociate**, spedizioni militari verso la Terra Santa, la prima alla fine dell'XI secolo.\n\nIl veneziano **Marco Polo** viaggiò fino alla Cina e raccontò il viaggio nel **Milione**."
+    },
+    {
+     "titolo": "Francesco, Dante e la peste",
+     "testo": "**San Francesco d'Assisi** lasciò le ricchezze di famiglia per vivere in povertà e fondò l'ordine dei **frati minori**. Il suo **Cantico delle creature** è uno dei primi testi della letteratura italiana. È **patrono d'Italia**, insieme a Santa Caterina da Siena.\n\n**Dante Alighieri**, fiorentino, scrisse la **Divina Commedia**, il viaggio immaginario attraverso Inferno, Purgatorio e Paradiso. Con **Petrarca** e **Boccaccio** è tra i padri della lingua italiana.\n\nA metà del Trecento, dal **1347**, la **peste nera** colpì l'Europa e uccise circa un terzo della popolazione.",
+     "consiglio": "Boccaccio ambientò il suo Decameron proprio durante la peste del 1348: dieci giovani fuggono da Firenze e si raccontano novelle."
+    }
+   ],
+   "quiz": [
+    {
+     "domanda": "Chi incoronò Carlo Magno imperatore nell'anno 800?",
+     "opzioni": [
+      "Il re dei Longobardi",
+      "Papa Leone III",
+      "L'imperatore di Costantinopoli"
+     ],
+     "corretta": 1,
+     "spiegazione": "La cerimonia avvenne a Roma, la notte di Natale dell'800."
+    },
+    {
+     "domanda": "Nel feudalesimo, chi era il vassallo?",
+     "opzioni": [
+      "Un nobile che riceveva una terra e giurava fedeltà",
+      "Un contadino libero di andare dove voleva",
+      "Un mercante delle Repubbliche marinare"
+     ],
+     "corretta": 0,
+     "spiegazione": "Il vassallo riceveva il feudo e in cambio aiutava il signore, soprattutto in guerra."
+    },
+    {
+     "domanda": "Qual è il motto della regola di San Benedetto?",
+     "opzioni": [
+      "Veni, vidi, vici",
+      "Libertà, uguaglianza, fraternità",
+      "Ora et labora"
+     ],
+     "corretta": 2,
+     "spiegazione": "Significa \"prega e lavora\"."
+    },
+    {
+     "domanda": "Quale di queste NON era una Repubblica marinara?",
+     "opzioni": [
+      "Genova",
+      "Firenze",
+      "Amalfi"
+     ],
+     "corretta": 1,
+     "spiegazione": "Le quattro Repubbliche marinare sono Amalfi, Pisa, Genova e Venezia. Firenze non ha il mare."
+    },
+    {
+     "domanda": "Chi scrisse la Divina Commedia?",
+     "opzioni": [
+      "Dante Alighieri",
+      "Francesco Petrarca",
+      "Giovanni Boccaccio"
+     ],
+     "corretta": 0,
+     "spiegazione": "Petrarca è famoso per il Canzoniere, Boccaccio per il Decameron."
+    }
+   ]
+  },
+  {
+   "id": "storia-eta-moderna",
+   "icona": "🧭",
+   "titolo": "Rinascimento, scoperte ed età moderna",
+   "livello": "Storia",
+   "minuti": 20,
+   "obiettivo": "Conoscere il Rinascimento italiano, le grandi esplorazioni, la nascita della scienza moderna e le rivoluzioni che hanno cambiato l'Europa.",
+   "palestra": "",
+   "passi": [
+    {
+     "titolo": "Il Rinascimento",
+     "testo": "Tra il **Quattrocento** e il **Cinquecento**, in Italia, si sentì il bisogno di \"rinascere\" dopo il Medioevo, riscoprendo la cultura dei Greci e dei Romani. Al centro c'era l'**essere umano**, con la sua intelligenza e la sua dignità: è l'**Umanesimo**.\n\nIl cuore del Rinascimento fu **Firenze**, dove la famiglia dei **Medici**, con **Lorenzo il Magnifico**, protesse artisti e studiosi. Ma il Rinascimento fiorì anche a Roma, Venezia, Milano, Urbino, Mantova.\n\nÈ l'epoca di **Leonardo**, **Michelangelo** e **Raffaello**.",
+     "consiglio": "Leonardo da Vinci è l'esempio perfetto dell'uomo del Rinascimento: pittore, scienziato, ingegnere e inventore."
+    },
+    {
+     "titolo": "La stampa e le scoperte geografiche",
+     "testo": "Verso la metà del Quattrocento il tedesco **Johannes Gutenberg**, a Magonza, introdusse la **stampa a caratteri mobili**. I libri divennero più economici e le idee viaggiarono veloci.\n\nIl **12 ottobre 1492** il genovese **Cristoforo Colombo**, partito con tre navi al servizio dei re di Spagna, toccò un'isola delle Bahamas: credeva di essere arrivato nelle Indie. Fu il fiorentino **Amerigo Vespucci** a capire che era un **nuovo continente**, che da lui prese il nome di **America**.\n\nNel **1498** il portoghese **Vasco da Gama** arrivò in India circumnavigando l'Africa. La spedizione di **Magellano** compì il primo **giro del mondo** (1519-1522).",
+     "schema": "flowchart LR\n  A[\"🖨️ Stampa\"] --> B[\"⛵ Colombo 1492\"] --> C[\"🧭 Vasco da Gama 1498\"] --> D[\"🌍 Giro del mondo 1522\"]"
+    },
+    {
+     "titolo": "Riforma e Controriforma",
+     "testo": "Nel **1517** il monaco tedesco **Martin Lutero** rese pubbliche le sue **95 tesi**, criticando alcune pratiche della Chiesa del tempo, come la vendita delle indulgenze. Da qui nacque la **Riforma protestante**, che divise i cristiani d'Europa.\n\nLa Chiesa cattolica rispose con il **Concilio di Trento** (1545-1563), che riorganizzò la vita della Chiesa: è la cosiddetta **Controriforma** o Riforma cattolica.\n\nPer molti anni l'Europa conobbe guerre legate anche alla religione.",
+     "consiglio": "Questi fatti si studiano per capire la storia d'Europa, rispettando le convinzioni di ciascuno."
+    },
+    {
+     "titolo": "La rivoluzione scientifica",
+     "testo": "Nel **1543** il polacco **Niccolò Copernico** sostenne che è la **Terra a girare intorno al Sole**, e non il contrario.\n\nL'italiano **Galileo Galilei** puntò il **cannocchiale** verso il cielo: vide le montagne della Luna e i satelliti di Giove. Galileo insegnò a verificare le idee con l'**esperimento**: è l'inizio del **metodo scientifico**. Nel **1633** fu processato e costretto ad abiurare.\n\nPiù tardi l'inglese **Isaac Newton** spiegò la **gravitazione universale**: la stessa forza fa cadere una mela e tiene la Luna attorno alla Terra."
+    },
+    {
+     "titolo": "L'età delle rivoluzioni",
+     "testo": "Nel Settecento l'**Illuminismo** volle illuminare il mondo con la **ragione**. Nacquero idee nuove: diritti dell'uomo, separazione dei poteri, tolleranza.\n\n- Il **4 luglio 1776** le colonie americane dichiararono l'**indipendenza** dall'Inghilterra: nascevano gli Stati Uniti.\n- Il **14 luglio 1789**, a Parigi, il popolo assaltò la **Bastiglia**: iniziava la **Rivoluzione francese**, con il motto \"Libertà, uguaglianza, fraternità\".\n- In Inghilterra, con la **macchina a vapore**, cominciò la **rivoluzione industriale**: nascevano le fabbriche."
+    },
+    {
+     "titolo": "Napoleone",
+     "testo": "Dalla Rivoluzione emerse un giovane generale corso, **Napoleone Bonaparte**. Vinse molte battaglie, anche in **Italia**, e nel **1804** si incoronò **imperatore dei Francesi**.\n\nConquistò gran parte dell'Europa e diffuse il **Codice civile** e nuove leggi. Fu sconfitto definitivamente nel **1815** a **Waterloo**, in Belgio, e morì in esilio sull'isola di **Sant'Elena**.\n\nDopo di lui, il **Congresso di Vienna** (1814-1815) cercò di riportare l'Europa com'era prima della Rivoluzione. Ma le idee di libertà ormai circolavano: da qui partirà il Risorgimento italiano.",
+     "consiglio": "Prima di Sant'Elena, Napoleone era già stato esiliato all'isola d'Elba, in Toscana."
+    }
+   ],
+   "quiz": [
+    {
+     "domanda": "Quale famiglia governò Firenze nel Rinascimento e protesse gli artisti?",
+     "opzioni": [
+      "I Medici",
+      "I Savoia",
+      "Gli Sforza di Napoli"
+     ],
+     "corretta": 0,
+     "spiegazione": "Lorenzo de' Medici, detto il Magnifico, fu un grande protettore di artisti."
+    },
+    {
+     "domanda": "In che anno Colombo arrivò in America?",
+     "opzioni": [
+      "1498",
+      "1517",
+      "1492"
+     ],
+     "corretta": 2,
+     "spiegazione": "Il 12 ottobre 1492. Il 1498 è l'arrivo di Vasco da Gama in India, il 1517 l'inizio della Riforma."
+    },
+    {
+     "domanda": "Da chi prende il nome l'America?",
+     "opzioni": [
+      "Da Cristoforo Colombo",
+      "Da Amerigo Vespucci",
+      "Da Ferdinando Magellano"
+     ],
+     "corretta": 1,
+     "spiegazione": "Vespucci capì che le terre raggiunte erano un nuovo continente."
+    },
+    {
+     "domanda": "Quale strumento usò Galileo per osservare il cielo?",
+     "opzioni": [
+      "Il microscopio",
+      "La bussola",
+      "Il cannocchiale"
+     ],
+     "corretta": 2,
+     "spiegazione": "Con il cannocchiale Galileo scoprì i satelliti di Giove."
+    },
+    {
+     "domanda": "Quale evento segna l'inizio della Rivoluzione francese?",
+     "opzioni": [
+      "La presa della Bastiglia, il 14 luglio 1789",
+      "La battaglia di Waterloo",
+      "La Dichiarazione d'indipendenza americana"
+     ],
+     "corretta": 0,
+     "spiegazione": "Il 14 luglio è ancora oggi la festa nazionale francese."
+    }
+   ]
+  },
+  {
+   "id": "storia-risorgimento",
+   "icona": "🇮🇹",
+   "titolo": "Il Risorgimento e l'Unità d'Italia",
+   "livello": "Storia",
+   "minuti": 20,
+   "obiettivo": "Capire come l'Italia, divisa in tanti Stati, divenne un unico Regno nel 1861, e conoscere i protagonisti del Risorgimento.",
+   "palestra": "",
+   "passi": [
+    {
+     "titolo": "Un'Italia divisa",
+     "testo": "Dopo il **Congresso di Vienna** (1815) l'Italia era divisa in **diversi Stati**, molti dei quali controllati o influenzati dall'**Austria**:\n\n- il **Regno di Sardegna** (Piemonte, Sardegna, Liguria), dei Savoia;\n- il **Regno Lombardo-Veneto**, sotto l'Austria;\n- lo **Stato della Chiesa**, governato dal papa;\n- il **Regno delle Due Sicilie**, dei Borbone;\n- il Granducato di Toscana e alcuni ducati.\n\nIl **Risorgimento** è il movimento politico e culturale che, nell'Ottocento, portò all'**unità** e all'**indipendenza** dell'Italia.",
+     "consiglio": "Risorgimento vuol dire \"risorgere\": l'idea era che l'Italia tornasse a essere una nazione libera."
+    },
+    {
+     "titolo": "I protagonisti",
+     "testo": "Quattro nomi da ricordare:\n\n- **Giuseppe Mazzini**, genovese, fondò nel **1831** la **Giovine Italia**: sognava un'Italia unita e **repubblicana**, fatta dal popolo.\n- **Camillo Benso, conte di Cavour**, primo ministro del Regno di Sardegna: un abile **diplomatico**, che cercò l'aiuto della Francia.\n- **Giuseppe Garibaldi**, nato a Nizza, l'\"**Eroe dei due mondi**\", che aveva combattuto anche in Sud America.\n- **Vittorio Emanuele II**, re di Sardegna e poi **primo re d'Italia**.\n\nAvevano idee diverse, ma ognuno a suo modo contribuì all'Unità."
+    },
+    {
+     "titolo": "Il 1848 e le guerre d'indipendenza",
+     "testo": "Il **1848** fu l'anno delle rivolte in tutta Europa. A Milano, nelle **Cinque giornate**, la popolazione cacciò per breve tempo gli Austriaci. Il re **Carlo Alberto** concesse lo **Statuto Albertino** e dichiarò guerra all'Austria: è la **prima guerra d'indipendenza**, che fu persa.\n\nNel **1859**, nella **seconda guerra d'indipendenza**, il Piemonte con l'alleata **Francia** vinse a **Magenta**, **Solferino** e **San Martino**, e ottenne la **Lombardia**.\n\nGli orrori di Solferino colpirono lo svizzero Henry Dunant, che da lì ebbe l'idea della **Croce Rossa**."
+    },
+    {
+     "titolo": "La spedizione dei Mille",
+     "testo": "Nel **maggio 1860** **Garibaldi** partì da **Quarto**, vicino a Genova, con circa mille volontari, le **camicie rosse**. Sbarcò a **Marsala**, in Sicilia, e in pochi mesi conquistò il **Regno delle Due Sicilie**, risalendo fino a Napoli.\n\nIl **26 ottobre 1860**, a **Teano**, incontrò il re **Vittorio Emanuele II** e gli consegnò le terre conquistate.\n\nCon i **plebisciti** le popolazioni votarono l'annessione al Regno di Sardegna.",
+     "schema": "flowchart LR\n  A[\"⛵ Quarto\"] --> B[\"🏖️ Marsala\"] --> C[\"🏙️ Napoli\"] --> D[\"🤝 Teano\"]",
+     "consiglio": "Garibaldi passò gli ultimi anni della sua vita sull'isola di Caprera, in Sardegna."
+    },
+    {
+     "titolo": "Il Regno d'Italia e Roma capitale",
+     "testo": "Il **17 marzo 1861** fu proclamato il **Regno d'Italia**, con re **Vittorio Emanuele II**. La prima capitale fu **Torino**, poi **Firenze**.\n\nMancavano ancora il **Veneto**, ottenuto nel **1866** con la terza guerra d'indipendenza, e **Roma**. Il **20 settembre 1870** i bersaglieri entrarono a Roma dalla **breccia di Porta Pia**: l'anno dopo Roma divenne **capitale**.\n\n**Trento** e **Trieste** si unirono all'Italia solo dopo la **Prima guerra mondiale**.",
+     "schema": "flowchart LR\n  A[\"🇮🇹 1861 Regno d'Italia\"] --> B[\"🦁 1866 Veneto\"] --> C[\"🏛️ 1870 Roma\"] --> D[\"⛰️ 1918 Trento e Trieste\"]"
+    },
+    {
+     "titolo": "I simboli: tricolore e inno",
+     "testo": "Il **tricolore** verde, bianco e rosso nacque come bandiera di uno Stato il **7 gennaio 1797** a **Reggio Emilia**, adottato dalla Repubblica Cispadana. Il 7 gennaio si celebra la **Festa del Tricolore**.\n\nL'inno nazionale è il **Canto degli Italiani**, detto **Inno di Mameli**: il testo è del giovane genovese **Goffredo Mameli**, la musica di **Michele Novaro**, nel **1847**. Mameli morì a soli 21 anni, combattendo per la Repubblica Romana del 1849.\n\nComincia con le parole: *\"Fratelli d'Italia, l'Italia s'è desta\"*.",
+     "consiglio": "Il 17 marzo, anniversario dell'Unità, è la Giornata dell'Unità nazionale, della Costituzione, dell'inno e della bandiera."
+    }
+   ],
+   "quiz": [
+    {
+     "domanda": "Quale ideale aveva Giuseppe Mazzini?",
+     "opzioni": [
+      "Un'Italia divisa in tanti regni",
+      "Un'Italia unita e repubblicana",
+      "Un'Italia sotto l'Austria"
+     ],
+     "corretta": 1,
+     "spiegazione": "Mazzini fondò la Giovine Italia nel 1831 con questo obiettivo."
+    },
+    {
+     "domanda": "Da dove partì la spedizione dei Mille?",
+     "opzioni": [
+      "Da Quarto, vicino a Genova",
+      "Da Marsala",
+      "Da Napoli"
+     ],
+     "corretta": 0,
+     "spiegazione": "A Marsala, in Sicilia, i Mille sbarcarono l'11 maggio 1860."
+    },
+    {
+     "domanda": "Quando fu proclamato il Regno d'Italia?",
+     "opzioni": [
+      "20 settembre 1870",
+      "17 marzo 1861",
+      "2 giugno 1946"
+     ],
+     "corretta": 1,
+     "spiegazione": "Il 1870 è la presa di Roma, il 1946 la nascita della Repubblica."
+    },
+    {
+     "domanda": "Quale fu la prima capitale del Regno d'Italia?",
+     "opzioni": [
+      "Roma",
+      "Milano",
+      "Torino"
+     ],
+     "corretta": 2,
+     "spiegazione": "Torino fu capitale fino al 1865, poi Firenze, e dal 1871 Roma."
+    },
+    {
+     "domanda": "Chi scrisse il testo dell'inno nazionale italiano?",
+     "opzioni": [
+      "Goffredo Mameli",
+      "Giuseppe Verdi",
+      "Giuseppe Garibaldi"
+     ],
+     "corretta": 0,
+     "spiegazione": "La musica è di Michele Novaro."
+    }
+   ]
+  },
+  {
+   "id": "storia-novecento",
+   "icona": "🕊️",
+   "titolo": "Il Novecento: guerre, Repubblica ed Europa",
+   "livello": "Storia",
+   "minuti": 25,
+   "obiettivo": "Ripercorrere il Novecento: le due guerre mondiali, la dittatura e la Liberazione, la nascita della Repubblica e della Costituzione, l'Europa unita.",
+   "palestra": "",
+   "passi": [
+    {
+     "titolo": "La Prima guerra mondiale",
+     "testo": "La scintilla fu l'uccisione dell'arciduca d'Austria **Francesco Ferdinando** a **Sarajevo**, il **28 giugno 1914**. In poche settimane l'Europa intera era in guerra.\n\nL'**Italia** entrò in guerra il **24 maggio 1915** contro l'Austria-Ungheria. Fu una guerra di **trincea**, durissima, combattuta soprattutto sulle Alpi e sul fiume **Isonzo**. Dopo la sconfitta di **Caporetto** (1917), l'esercito resistette sul **Piave** e vinse a **Vittorio Veneto**.\n\nPer l'Italia la guerra finì il **4 novembre 1918**: oggi è la Giornata dell'Unità nazionale e delle Forze armate.",
+     "consiglio": "Quasi ogni paese italiano ha un monumento ai caduti della Grande Guerra: provate a leggerne i nomi."
+    },
+    {
+     "titolo": "Il fascismo",
+     "testo": "Dopo la guerra l'Italia viveva una grave crisi. Il **28 ottobre 1922**, con la **marcia su Roma**, **Benito Mussolini** ottenne l'incarico di capo del governo dal re **Vittorio Emanuele III**.\n\nIn pochi anni il **fascismo** divenne una **dittatura**: furono sciolti i partiti, chiusi i giornali liberi, perseguitati gli oppositori. Nel **1938** furono approvate le **leggi razziali** contro gli ebrei.\n\nIn **Germania**, nel **1933**, salì al potere **Adolf Hitler** con il nazismo. In Russia, dopo la rivoluzione del **1917**, era nato lo Stato comunista guidato poi da Stalin."
+    },
+    {
+     "titolo": "La Seconda guerra mondiale e la Liberazione",
+     "testo": "Il **1° settembre 1939** la Germania invase la **Polonia**: iniziò la **Seconda guerra mondiale**. L'Italia entrò in guerra il **10 giugno 1940**, alleata di Hitler.\n\nIl **25 luglio 1943** Mussolini fu destituito; l'**8 settembre** fu annunciato l'**armistizio**. Il Centro-Nord fu occupato dai tedeschi e nacque la **Resistenza** dei partigiani.\n\nIl **25 aprile 1945** è la **Festa della Liberazione**. La guerra in Europa finì l'**8 maggio 1945**, nel mondo nel settembre 1945, dopo le bombe atomiche su **Hiroshima** e **Nagasaki**.\n\nLa **Shoah** fu lo sterminio di circa **sei milioni di ebrei**: lo ricordiamo il **27 gennaio**, Giorno della Memoria.",
+     "schema": "flowchart LR\n  A[\"⚔️ 1939 inizio\"] --> B[\"🇮🇹 1940 Italia in guerra\"] --> C[\"📜 8 settembre 1943\"] --> D[\"🕊️ 25 aprile 1945\"]"
+    },
+    {
+     "titolo": "La Repubblica e la Costituzione",
+     "testo": "Il **2 giugno 1946** gli italiani scelsero con un **referendum** tra **monarchia** e **repubblica**: vinse la **Repubblica**. Per la prima volta in un voto nazionale votarono anche le **donne**.\n\nLo stesso giorno fu eletta l'**Assemblea Costituente**, che scrisse la **Costituzione**. Fu approvata il **22 dicembre 1947** ed entrò in vigore il **1° gennaio 1948**.\n\nIl primo articolo dice: *\"L'Italia è una Repubblica democratica, fondata sul lavoro\"*. La Costituzione garantisce i diritti di tutti e divide i poteri tra **Parlamento**, **Governo** e **magistratura**.",
+     "schema": "flowchart LR\n  A[\"🗳️ 2 giugno 1946\"] --> B[\"✍️ Assemblea Costituente\"] --> C[\"📜 22 dicembre 1947\"] --> D[\"✅ 1° gennaio 1948\"]",
+     "consiglio": "Il 2 giugno è la Festa della Repubblica."
+    },
+    {
+     "titolo": "Ricostruzione e Guerra fredda",
+     "testo": "Dopo la guerra l'Italia si **ricostruì**. Tra gli anni Cinquanta e Sessanta ci fu il **miracolo economico**: arrivarono automobili, elettrodomestici e la **televisione**, che in Italia iniziò a trasmettere regolarmente nel **1954**.\n\nIntanto il mondo era diviso in due blocchi, quello guidato dagli **Stati Uniti** e quello guidato dall'**Unione Sovietica**: era la **Guerra fredda**. Il suo simbolo fu il **Muro di Berlino**, costruito nel **1961** per dividere la città.\n\nIl Muro cadde il **9 novembre 1989**; la Germania si riunì il **3 ottobre 1990**."
+    },
+    {
+     "titolo": "L'Europa unita",
+     "testo": "Dopo due guerre terribili, alcuni statisti vollero unire i popoli europei. Il **9 maggio 1950** il ministro francese **Robert Schuman** propose di mettere in comune carbone e acciaio: il 9 maggio è la **Festa dell'Europa**.\n\nIl **25 marzo 1957** furono firmati i **Trattati di Roma**, che crearono la **Comunità economica europea**. I sei Paesi fondatori furono **Italia, Francia, Germania Ovest, Belgio, Paesi Bassi e Lussemburgo**.\n\nCon il **Trattato di Maastricht** (1992) nacque l'**Unione europea**. Le monete e le banconote in **euro** arrivarono nelle nostre tasche il **1° gennaio 2002**.\n\nTra i \"padri\" dell'Europa ci sono gli italiani **Alcide De Gasperi** e **Altiero Spinelli**.",
+     "schema": "flowchart LR\n  A[\"🤝 1950 Schuman\"] --> B[\"🇮🇹 1957 Trattati di Roma\"] --> C[\"🇪🇺 1992 Maastricht\"] --> D[\"💶 2002 euro\"]"
+    }
+   ],
+   "quiz": [
+    {
+     "domanda": "Quando finì la Prima guerra mondiale per l'Italia?",
+     "opzioni": [
+      "24 maggio 1915",
+      "4 novembre 1918",
+      "25 aprile 1945"
+     ],
+     "corretta": 1,
+     "spiegazione": "Il 24 maggio 1915 l'Italia entrò in guerra; il 25 aprile 1945 è la Liberazione."
+    },
+    {
+     "domanda": "Che cosa ricordiamo il 25 aprile?",
+     "opzioni": [
+      "La nascita della Repubblica",
+      "La fine della Prima guerra mondiale",
+      "La Liberazione dell'Italia nel 1945"
+     ],
+     "corretta": 2,
+     "spiegazione": "Il 25 aprile 1945 iniziò l'insurrezione generale contro l'occupazione nazifascista."
+    },
+    {
+     "domanda": "Che cosa decisero gli italiani il 2 giugno 1946?",
+     "opzioni": [
+      "Di diventare una Repubblica",
+      "Di entrare nell'Unione europea",
+      "Di adottare l'euro"
+     ],
+     "corretta": 0,
+     "spiegazione": "Con il referendum istituzionale vinse la Repubblica sulla monarchia."
+    },
+    {
+     "domanda": "Quando entrò in vigore la Costituzione?",
+     "opzioni": [
+      "2 giugno 1946",
+      "1° gennaio 1948",
+      "17 marzo 1861"
+     ],
+     "corretta": 1,
+     "spiegazione": "Fu approvata il 22 dicembre 1947 ed entrò in vigore all'inizio del 1948."
+    },
+    {
+     "domanda": "In quale città furono firmati nel 1957 i trattati che crearono la Comunità economica europea?",
+     "opzioni": [
+      "Bruxelles",
+      "Maastricht",
+      "Roma"
+     ],
+     "corretta": 2,
+     "spiegazione": "I Trattati di Roma furono firmati il 25 marzo 1957."
+    }
+   ]
+  }
+ ],
+ "prove": [
+  {
+   "id": "storia",
+   "titolo": "Il Grande Quiz di Storia",
+   "icona": "🏛️",
+   "descrizione": "Venti domande pescate a caso tra oltre settanta, dall'Antichità all'Italia repubblicana. Rispondete con calma: con il 70% di risposte giuste ottenete l'attestato.",
+   "attestato": "Storia d'Italia e del mondo",
+   "domande_per_prova": 20,
+   "soglia": 0.7,
+   "domande": [
+    {
+     "domanda": "Come si chiama il periodo della storia umana prima dell'invenzione della scrittura?",
+     "opzioni": [
+      "Medioevo",
+      "Età moderna",
+      "Preistoria",
+      "Rinascimento"
+     ],
+     "corretta": 2,
+     "spiegazione": "La Preistoria finisce quando compaiono i primi documenti scritti.",
+     "categoria": "Antichità"
+    },
+    {
+     "domanda": "Che cosa si iniziò a fare con la rivoluzione neolitica?",
+     "opzioni": [
+      "Coltivare la terra e allevare animali",
+      "Navigare oltre l'oceano",
+      "Scrivere sulla carta",
+      "Costruire castelli"
+     ],
+     "corretta": 0,
+     "spiegazione": "Con l'agricoltura nacquero i primi villaggi stabili.",
+     "categoria": "Antichità"
+    },
+    {
+     "domanda": "In quale età visse Ötzi, l'uomo trovato nel ghiaccio delle Alpi?",
+     "opzioni": [
+      "Età romana",
+      "Età del rame",
+      "Medioevo",
+      "Età del ferro"
+     ],
+     "corretta": 1,
+     "spiegazione": "Ötzi visse circa 5.300 anni fa e portava con sé un'ascia di rame.",
+     "categoria": "Antichità"
+    },
+    {
+     "domanda": "Quale popolo inventò la scrittura cuneiforme?",
+     "opzioni": [
+      "Gli Egiziani",
+      "I Romani",
+      "I Greci",
+      "I Sumeri"
+     ],
+     "corretta": 3,
+     "spiegazione": "Incidevano segni a forma di cuneo su tavolette d'argilla.",
+     "categoria": "Antichità"
+    },
+    {
+     "domanda": "Quale fiume era la fonte di vita dell'antico Egitto?",
+     "opzioni": [
+      "Il Tigri",
+      "Il Giordano",
+      "Il Nilo",
+      "Il Danubio"
+     ],
+     "corretta": 2,
+     "spiegazione": "Le piene del Nilo rendevano fertili i campi con il limo.",
+     "categoria": "Antichità"
+    },
+    {
+     "domanda": "Come si chiamava il re dell'antico Egitto?",
+     "opzioni": [
+      "Console",
+      "Faraone",
+      "Imperatore",
+      "Doge"
+     ],
+     "corretta": 1,
+     "spiegazione": "Il faraone era considerato di natura divina.",
+     "categoria": "Antichità"
+    },
+    {
+     "domanda": "A chi era destinata la grande piramide di Giza?",
+     "opzioni": [
+      "A Giulio Cesare",
+      "Ad Alessandro Magno",
+      "Alla regina Cleopatra",
+      "Al faraone Cheope"
+     ],
+     "corretta": 3,
+     "spiegazione": "La piramide di Cheope ha circa 4.500 anni ed è la più grande di Giza.",
+     "categoria": "Antichità"
+    },
+    {
+     "domanda": "Che cos'è il Codice di Hammurabi?",
+     "opzioni": [
+      "Una delle più antiche raccolte di leggi scritte",
+      "Un poema greco",
+      "Il calendario degli Egiziani",
+      "Una mappa dei Fenici"
+     ],
+     "corretta": 0,
+     "spiegazione": "Fu fatto incidere dal re babilonese Hammurabi.",
+     "categoria": "Antichità"
+    },
+    {
+     "domanda": "Che cosa significa la parola \"democrazia\"?",
+     "opzioni": [
+      "Governo di uno solo",
+      "Governo dei ricchi",
+      "Governo dei sacerdoti",
+      "Governo del popolo"
+     ],
+     "corretta": 3,
+     "spiegazione": "È una parola greca: demos significa popolo.",
+     "categoria": "Antichità"
+    },
+    {
+     "domanda": "In onore di quale divinità si svolgevano le Olimpiadi antiche?",
+     "opzioni": [
+      "Giove Capitolino a Roma",
+      "Osiride",
+      "Zeus",
+      "Poseidone a Delfi"
+     ],
+     "corretta": 2,
+     "spiegazione": "Si tenevano a Olimpia, nel santuario di Zeus, ogni quattro anni.",
+     "categoria": "Antichità"
+    },
+    {
+     "domanda": "Quale di questi era un filosofo greco?",
+     "opzioni": [
+      "Aristotele",
+      "Annibale",
+      "Cicerone",
+      "Odoacre"
+     ],
+     "corretta": 0,
+     "spiegazione": "Aristotele fu allievo di Platone e maestro di Alessandro Magno.",
+     "categoria": "Antichità"
+    },
+    {
+     "domanda": "Fino a dove arrivò l'impero di Alessandro Magno?",
+     "opzioni": [
+      "Fino all'America",
+      "Fino all'India",
+      "Fino alla Scandinavia",
+      "Fino al Giappone"
+     ],
+     "corretta": 1,
+     "spiegazione": "In pochi anni Alessandro conquistò un impero dalla Grecia all'India.",
+     "categoria": "Antichità"
+    },
+    {
+     "domanda": "Secondo la tradizione, in che anno fu fondata Roma?",
+     "opzioni": [
+      "476 dopo Cristo",
+      "27 avanti Cristo",
+      "753 avanti Cristo",
+      "1000 avanti Cristo"
+     ],
+     "corretta": 2,
+     "spiegazione": "La data tradizionale è il 21 aprile del 753 a.C.",
+     "categoria": "Antichità"
+    },
+    {
+     "domanda": "Chi guidava la Repubblica romana ogni anno?",
+     "opzioni": [
+      "Due consoli",
+      "Un faraone",
+      "Un re ereditario",
+      "Il papa"
+     ],
+     "corretta": 0,
+     "spiegazione": "I consoli erano due e restavano in carica un anno.",
+     "categoria": "Antichità"
+    },
+    {
+     "domanda": "Quale generale cartaginese attraversò le Alpi con gli elefanti?",
+     "opzioni": [
+      "Spartaco",
+      "Annibale",
+      "Attila",
+      "Alessandro Magno"
+     ],
+     "corretta": 1,
+     "spiegazione": "Annibale invase l'Italia durante la seconda guerra punica.",
+     "categoria": "Antichità"
+    },
+    {
+     "domanda": "Quale fiume attraversò Giulio Cesare nel 49 a.C., sfidando il Senato?",
+     "opzioni": [
+      "Il Tevere",
+      "Il Po",
+      "L'Arno",
+      "Il Rubicone"
+     ],
+     "corretta": 3,
+     "spiegazione": "Da qui l'espressione \"passare il Rubicone\": prendere una decisione senza ritorno.",
+     "categoria": "Antichità"
+    },
+    {
+     "domanda": "Che cosa accadde alle Idi di marzo del 44 a.C.?",
+     "opzioni": [
+      "Fu fondata Roma",
+      "Cadde l'Impero d'Occidente",
+      "Fu ucciso Giulio Cesare",
+      "Nacque Augusto"
+     ],
+     "corretta": 2,
+     "spiegazione": "Cesare fu pugnalato in Senato da un gruppo di congiurati.",
+     "categoria": "Antichità"
+    },
+    {
+     "domanda": "Quale mese prende il nome dal primo imperatore romano?",
+     "opzioni": [
+      "Luglio",
+      "Agosto",
+      "Marzo",
+      "Giugno"
+     ],
+     "corretta": 1,
+     "spiegazione": "Agosto viene da Augusto; luglio invece da Giulio Cesare.",
+     "categoria": "Antichità"
+    },
+    {
+     "domanda": "Che cosa stabilì l'Editto di Milano del 313?",
+     "opzioni": [
+      "La libertà di culto per i cristiani",
+      "La divisione dell'Impero",
+      "La fondazione di Venezia",
+      "La fine delle Olimpiadi"
+     ],
+     "corretta": 0,
+     "spiegazione": "Lo emanò l'imperatore Costantino.",
+     "categoria": "Antichità"
+    },
+    {
+     "domanda": "Chi depose l'ultimo imperatore romano d'Occidente nel 476?",
+     "opzioni": [
+      "Carlo Magno",
+      "Attila",
+      "Teodosio",
+      "Odoacre"
+     ],
+     "corretta": 3,
+     "spiegazione": "Odoacre depose il giovane Romolo Augustolo.",
+     "categoria": "Antichità"
+    },
+    {
+     "domanda": "Fino a quando durò l'Impero romano d'Oriente?",
+     "opzioni": [
+      "Fino al 476",
+      "Fino all'800",
+      "Fino al 1453",
+      "Fino al 1861"
+     ],
+     "corretta": 2,
+     "spiegazione": "Nel 1453 Costantinopoli fu conquistata dai Turchi ottomani.",
+     "categoria": "Antichità"
+    },
+    {
+     "domanda": "Quale eruzione seppellì Pompei ed Ercolano?",
+     "opzioni": [
+      "Quella del Vesuvio nel 79 d.C.",
+      "Quella dell'Etna nel 1669",
+      "Quella dello Stromboli nel 476",
+      "Quella del Vesuvio nel 1944"
+     ],
+     "corretta": 0,
+     "spiegazione": "Cenere e lapilli conservarono le città fino a oggi.",
+     "categoria": "Antichità"
+    },
+    {
+     "domanda": "Con quale data, per convenzione, inizia il Medioevo?",
+     "opzioni": [
+      "1492",
+      "476",
+      "800",
+      "313"
+     ],
+     "corretta": 1,
+     "spiegazione": "È l'anno della caduta dell'Impero romano d'Occidente.",
+     "categoria": "Medioevo"
+    },
+    {
+     "domanda": "Quale popolo germanico arrivò in Italia nel 568?",
+     "opzioni": [
+      "I Vichinghi",
+      "Gli Unni",
+      "I Normanni",
+      "I Longobardi"
+     ],
+     "corretta": 3,
+     "spiegazione": "Dai Longobardi prende il nome la Lombardia.",
+     "categoria": "Medioevo"
+    },
+    {
+     "domanda": "In quale notte Carlo Magno fu incoronato imperatore?",
+     "opzioni": [
+      "La notte di Capodanno del 1000",
+      "La notte di Pasqua del 476",
+      "La notte di Natale dell'800",
+      "La notte di Natale del 1492"
+     ],
+     "corretta": 2,
+     "spiegazione": "Fu incoronato a Roma da papa Leone III.",
+     "categoria": "Medioevo"
+    },
+    {
+     "domanda": "Come si chiamava la terra concessa dal signore al vassallo?",
+     "opzioni": [
+      "Comune",
+      "Feudo",
+      "Provincia",
+      "Colonia"
+     ],
+     "corretta": 1,
+     "spiegazione": "Da \"feudo\" deriva la parola feudalesimo.",
+     "categoria": "Medioevo"
+    },
+    {
+     "domanda": "Quale monastero fondò San Benedetto?",
+     "opzioni": [
+      "Monte Athos",
+      "Assisi",
+      "Cluny",
+      "Montecassino"
+     ],
+     "corretta": 3,
+     "spiegazione": "San Benedetto da Norcia fondò Montecassino nel VI secolo.",
+     "categoria": "Medioevo"
+    },
+    {
+     "domanda": "Chi erano i monaci amanuensi?",
+     "opzioni": [
+      "Monaci che copiavano libri a mano",
+      "Monaci guerrieri",
+      "Monaci che coltivavano la vite",
+      "Monaci che costruivano ponti"
+     ],
+     "corretta": 0,
+     "spiegazione": "Grazie a loro molti testi antichi sono arrivati fino a noi.",
+     "categoria": "Medioevo"
+    },
+    {
+     "domanda": "Quale città NON era una Repubblica marinara?",
+     "opzioni": [
+      "Napoli",
+      "Venezia",
+      "Pisa",
+      "Amalfi"
+     ],
+     "corretta": 0,
+     "spiegazione": "Le quattro Repubbliche marinare sono Amalfi, Pisa, Genova e Venezia.",
+     "categoria": "Medioevo"
+    },
+    {
+     "domanda": "Quale università è considerata la più antica del mondo occidentale?",
+     "opzioni": [
+      "Oxford",
+      "Bologna",
+      "Parigi",
+      "Padova"
+     ],
+     "corretta": 1,
+     "spiegazione": "La tradizione ne fissa la nascita alla fine dell'XI secolo.",
+     "categoria": "Medioevo"
+    },
+    {
+     "domanda": "Che cosa erano i Comuni medievali?",
+     "opzioni": [
+      "Monasteri di campagna",
+      "Eserciti di mercenari",
+      "Città che si governavano da sole",
+      "Regni dei Longobardi"
+     ],
+     "corretta": 2,
+     "spiegazione": "Erano guidati da cittadini, mercanti e artigiani.",
+     "categoria": "Medioevo"
+    },
+    {
+     "domanda": "Come si intitola il libro in cui Marco Polo racconta il suo viaggio in Cina?",
+     "opzioni": [
+      "Il Decameron",
+      "Il Canzoniere",
+      "Il Principe",
+      "Il Milione"
+     ],
+     "corretta": 3,
+     "spiegazione": "Marco Polo era un mercante veneziano del Duecento.",
+     "categoria": "Medioevo"
+    },
+    {
+     "domanda": "Quale testo scrisse San Francesco d'Assisi?",
+     "opzioni": [
+      "Il Cantico delle creature",
+      "La Divina Commedia",
+      "Il Decameron",
+      "Il Milione"
+     ],
+     "corretta": 0,
+     "spiegazione": "È uno dei primi testi della letteratura italiana.",
+     "categoria": "Medioevo"
+    },
+    {
+     "domanda": "Chi guida Dante nell'Inferno e nel Purgatorio?",
+     "opzioni": [
+      "Beatrice",
+      "Il poeta Virgilio",
+      "San Francesco",
+      "Petrarca"
+     ],
+     "corretta": 1,
+     "spiegazione": "Nel Paradiso la guida diventa Beatrice.",
+     "categoria": "Medioevo"
+    },
+    {
+     "domanda": "Chi scrisse il Decameron?",
+     "opzioni": [
+      "Dante Alighieri",
+      "Francesco Petrarca",
+      "Giovanni Boccaccio",
+      "Niccolò Machiavelli"
+     ],
+     "corretta": 2,
+     "spiegazione": "Il Decameron è una raccolta di cento novelle.",
+     "categoria": "Medioevo"
+    },
+    {
+     "domanda": "Quale epidemia colpì l'Europa a partire dal 1347?",
+     "opzioni": [
+      "Il vaiolo",
+      "La spagnola",
+      "La malaria",
+      "La peste nera"
+     ],
+     "corretta": 3,
+     "spiegazione": "La peste nera uccise circa un terzo della popolazione europea.",
+     "categoria": "Medioevo"
+    },
+    {
+     "domanda": "Che cosa erano le crociate?",
+     "opzioni": [
+      "Viaggi di esplorazione in America",
+      "Feste religiose cittadine",
+      "Trattati di pace tra Comuni",
+      "Spedizioni militari verso la Terra Santa"
+     ],
+     "corretta": 3,
+     "spiegazione": "La prima crociata si svolse alla fine dell'XI secolo.",
+     "categoria": "Medioevo"
+    },
+    {
+     "domanda": "Quale famiglia fiorentina sostenne gli artisti del Rinascimento?",
+     "opzioni": [
+      "I Borbone",
+      "Gli Asburgo",
+      "I Medici",
+      "I Savoia"
+     ],
+     "corretta": 2,
+     "spiegazione": "Il più celebre fu Lorenzo il Magnifico.",
+     "categoria": "Età moderna"
+    },
+    {
+     "domanda": "Chi introdusse in Europa la stampa a caratteri mobili?",
+     "opzioni": [
+      "Leonardo da Vinci",
+      "Johannes Gutenberg",
+      "Galileo Galilei",
+      "Martin Lutero"
+     ],
+     "corretta": 1,
+     "spiegazione": "Gutenberg lavorava a Magonza, in Germania, verso la metà del Quattrocento.",
+     "categoria": "Età moderna"
+    },
+    {
+     "domanda": "Come si chiamavano le tre navi di Colombo?",
+     "opzioni": [
+      "Niña, Pinta e Santa María",
+      "Vittoria, Trinità e Concezione",
+      "Genova, Pisa e Venezia",
+      "Fede, Speranza e Carità"
+     ],
+     "corretta": 0,
+     "spiegazione": "Partirono dal porto spagnolo di Palos nell'agosto 1492.",
+     "categoria": "Età moderna"
+    },
+    {
+     "domanda": "Quale navigatore raggiunse l'India circumnavigando l'Africa nel 1498?",
+     "opzioni": [
+      "Cristoforo Colombo",
+      "Amerigo Vespucci",
+      "Marco Polo",
+      "Vasco da Gama"
+     ],
+     "corretta": 3,
+     "spiegazione": "Vasco da Gama era portoghese.",
+     "categoria": "Età moderna"
+    },
+    {
+     "domanda": "Quale spedizione compì il primo giro del mondo?",
+     "opzioni": [
+      "Quella di Colombo",
+      "Quella di Marco Polo",
+      "Quella di Magellano",
+      "Quella di Vespucci"
+     ],
+     "corretta": 2,
+     "spiegazione": "Magellano morì durante il viaggio; la nave rientrò in Spagna nel 1522.",
+     "categoria": "Età moderna"
+    },
+    {
+     "domanda": "In che anno Martin Lutero diffuse le sue 95 tesi?",
+     "opzioni": [
+      "1492",
+      "1517",
+      "1789",
+      "1648"
+     ],
+     "corretta": 1,
+     "spiegazione": "Da qui ebbe inizio la Riforma protestante.",
+     "categoria": "Età moderna"
+    },
+    {
+     "domanda": "In quale città si tenne il Concilio che avviò la Riforma cattolica?",
+     "opzioni": [
+      "Trento",
+      "Milano",
+      "Firenze",
+      "Napoli"
+     ],
+     "corretta": 0,
+     "spiegazione": "Il Concilio di Trento si svolse tra il 1545 e il 1563.",
+     "categoria": "Età moderna"
+    },
+    {
+     "domanda": "Chi sostenne nel 1543 che la Terra gira intorno al Sole?",
+     "opzioni": [
+      "Niccolò Copernico",
+      "Isaac Newton",
+      "Aristotele",
+      "Tolomeo"
+     ],
+     "corretta": 0,
+     "spiegazione": "Galileo difese poi questa teoria con le sue osservazioni.",
+     "categoria": "Età moderna"
+    },
+    {
+     "domanda": "Che cosa scoprì Galileo intorno a Giove?",
+     "opzioni": [
+      "I suoi anelli",
+      "Che è più piccolo della Luna",
+      "Alcuni suoi satelliti",
+      "Che è una stella"
+     ],
+     "corretta": 2,
+     "spiegazione": "Scoprì i quattro satelliti maggiori di Giove nel 1610.",
+     "categoria": "Età moderna"
+    },
+    {
+     "domanda": "Quale scienziato inglese formulò la legge di gravitazione universale?",
+     "opzioni": [
+      "Charles Darwin",
+      "Galileo Galilei",
+      "James Watt",
+      "Isaac Newton"
+     ],
+     "corretta": 3,
+     "spiegazione": "La stessa forza fa cadere i corpi e muove i pianeti.",
+     "categoria": "Età moderna"
+    },
+    {
+     "domanda": "Che cosa celebrano gli Stati Uniti il 4 luglio?",
+     "opzioni": [
+      "La scoperta dell'America",
+      "La Dichiarazione d'indipendenza del 1776",
+      "La fine della guerra civile",
+      "La presa della Bastiglia"
+     ],
+     "corretta": 1,
+     "spiegazione": "Le tredici colonie si dichiararono indipendenti dall'Inghilterra.",
+     "categoria": "Età moderna"
+    },
+    {
+     "domanda": "Qual era il motto della Rivoluzione francese?",
+     "opzioni": [
+      "Dio, patria e famiglia",
+      "Libertà, uguaglianza, fraternità",
+      "Pane e pace",
+      "Ora et labora"
+     ],
+     "corretta": 1,
+     "spiegazione": "Il motto è ancora oggi quello della Repubblica francese.",
+     "categoria": "Età moderna"
+    },
+    {
+     "domanda": "Dove fu sconfitto definitivamente Napoleone nel 1815?",
+     "opzioni": [
+      "A Waterloo",
+      "A Marengo",
+      "A Solferino",
+      "Ad Austerlitz"
+     ],
+     "corretta": 0,
+     "spiegazione": "Waterloo si trova in Belgio. Austerlitz e Marengo furono invece vittorie di Napoleone.",
+     "categoria": "Età moderna"
+    },
+    {
+     "domanda": "Su quale isola morì Napoleone in esilio?",
+     "opzioni": [
+      "Elba",
+      "Corsica",
+      "Sant'Elena",
+      "Caprera"
+     ],
+     "corretta": 2,
+     "spiegazione": "Sull'Elba fu esiliato prima, ma riuscì a fuggire.",
+     "categoria": "Età moderna"
+    },
+    {
+     "domanda": "In quale Paese iniziò la rivoluzione industriale?",
+     "opzioni": [
+      "Italia",
+      "Spagna",
+      "Russia",
+      "Inghilterra"
+     ],
+     "corretta": 3,
+     "spiegazione": "Le prime fabbriche moderne nacquero in Inghilterra nel Settecento, con la macchina a vapore.",
+     "categoria": "Età moderna"
+    },
+    {
+     "domanda": "Che cosa stabilì il Congresso di Vienna del 1814-1815?",
+     "opzioni": [
+      "L'Unità d'Italia",
+      "La nascita dell'Unione europea",
+      "La fine della Prima guerra mondiale",
+      "Il ritorno dei vecchi sovrani dopo Napoleone"
+     ],
+     "corretta": 3,
+     "spiegazione": "Si cercò di riportare l'Europa a com'era prima della Rivoluzione.",
+     "categoria": "Risorgimento"
+    },
+    {
+     "domanda": "Quale associazione fondò Giuseppe Mazzini nel 1831?",
+     "opzioni": [
+      "La Croce Rossa",
+      "La Giovine Italia",
+      "La Carboneria",
+      "Il Partito d'Azione"
+     ],
+     "corretta": 1,
+     "spiegazione": "Voleva un'Italia unita, libera e repubblicana.",
+     "categoria": "Risorgimento"
+    },
+    {
+     "domanda": "Di quale Stato fu primo ministro Cavour?",
+     "opzioni": [
+      "Del Regno di Sardegna",
+      "Del Regno delle Due Sicilie",
+      "Dello Stato della Chiesa",
+      "Del Lombardo-Veneto"
+     ],
+     "corretta": 0,
+     "spiegazione": "Il Regno di Sardegna aveva la capitale a Torino.",
+     "categoria": "Risorgimento"
+    },
+    {
+     "domanda": "Perché Garibaldi è chiamato \"Eroe dei due mondi\"?",
+     "opzioni": [
+      "Perché era nato in America",
+      "Perché fece il giro del mondo",
+      "Perché combatté in Sud America e in Europa",
+      "Perché fu re di due Stati"
+     ],
+     "corretta": 2,
+     "spiegazione": "In Sud America combatté in Brasile e in Uruguay.",
+     "categoria": "Risorgimento"
+    },
+    {
+     "domanda": "Che cosa furono le Cinque giornate di Milano del 1848?",
+     "opzioni": [
+      "Una fiera commerciale",
+      "Un congresso di pace",
+      "Un'alluvione",
+      "Una rivolta che cacciò temporaneamente gli Austriaci"
+     ],
+     "corretta": 3,
+     "spiegazione": "Dal 18 al 22 marzo 1848 i milanesi insorsero contro gli Austriaci.",
+     "categoria": "Risorgimento"
+    },
+    {
+     "domanda": "Quale re concesse lo Statuto nel 1848?",
+     "opzioni": [
+      "Carlo Alberto",
+      "Vittorio Emanuele III",
+      "Umberto I",
+      "Ferdinando II"
+     ],
+     "corretta": 0,
+     "spiegazione": "Lo Statuto Albertino rimase in vigore, con modifiche, fino alla Costituzione repubblicana.",
+     "categoria": "Risorgimento"
+    },
+    {
+     "domanda": "Quale regione ottenne il Piemonte dopo la seconda guerra d'indipendenza del 1859?",
+     "opzioni": [
+      "Il Veneto",
+      "La Sicilia",
+      "La Lombardia",
+      "Il Lazio"
+     ],
+     "corretta": 2,
+     "spiegazione": "Dopo le vittorie di Magenta, Solferino e San Martino.",
+     "categoria": "Risorgimento"
+    },
+    {
+     "domanda": "Dove sbarcarono i Mille di Garibaldi nel 1860?",
+     "opzioni": [
+      "A Napoli",
+      "A Marsala",
+      "A Genova",
+      "A Palermo"
+     ],
+     "corretta": 1,
+     "spiegazione": "Erano partiti da Quarto, vicino a Genova.",
+     "categoria": "Risorgimento"
+    },
+    {
+     "domanda": "Dove si incontrarono Garibaldi e Vittorio Emanuele II nel 1860?",
+     "opzioni": [
+      "A Torino",
+      "A Caprera",
+      "A Roma",
+      "A Teano"
+     ],
+     "corretta": 3,
+     "spiegazione": "Garibaldi consegnò al re le terre conquistate nel Sud.",
+     "categoria": "Risorgimento"
+    },
+    {
+     "domanda": "Quale terra entrò nel Regno d'Italia nel 1866?",
+     "opzioni": [
+      "La Lombardia",
+      "Roma",
+      "Il Veneto",
+      "Trieste"
+     ],
+     "corretta": 2,
+     "spiegazione": "Il Veneto fu ottenuto con la terza guerra d'indipendenza.",
+     "categoria": "Risorgimento"
+    },
+    {
+     "domanda": "Che cosa accadde il 20 settembre 1870?",
+     "opzioni": [
+      "Fu proclamato il Regno d'Italia",
+      "I bersaglieri entrarono a Roma da Porta Pia",
+      "Nacque la Repubblica",
+      "Garibaldi partì da Quarto"
+     ],
+     "corretta": 1,
+     "spiegazione": "Roma divenne capitale l'anno seguente.",
+     "categoria": "Risorgimento"
+    },
+    {
+     "domanda": "In quale città nacque come bandiera il tricolore, nel 1797?",
+     "opzioni": [
+      "Reggio Emilia",
+      "Torino",
+      "Roma",
+      "Milano"
+     ],
+     "corretta": 0,
+     "spiegazione": "Lo adottò la Repubblica Cispadana il 7 gennaio 1797.",
+     "categoria": "Risorgimento"
+    },
+    {
+     "domanda": "Chi compose la musica dell'Inno di Mameli?",
+     "opzioni": [
+      "Giuseppe Verdi",
+      "Gioachino Rossini",
+      "Michele Novaro",
+      "Giacomo Puccini"
+     ],
+     "corretta": 2,
+     "spiegazione": "Il testo è di Goffredo Mameli, la musica di Novaro, entrambi genovesi.",
+     "categoria": "Risorgimento"
+    },
+    {
+     "domanda": "Quale battaglia del 1859 ispirò la nascita della Croce Rossa?",
+     "opzioni": [
+      "Waterloo",
+      "Caporetto",
+      "Lepanto",
+      "Solferino"
+     ],
+     "corretta": 3,
+     "spiegazione": "Lo svizzero Henry Dunant vide i feriti abbandonati e propose un soccorso neutrale.",
+     "categoria": "Risorgimento"
+    },
+    {
+     "domanda": "Quale evento fu la scintilla della Prima guerra mondiale?",
+     "opzioni": [
+      "La caduta del Muro di Berlino",
+      "L'uccisione dell'arciduca Francesco Ferdinando a Sarajevo",
+      "L'invasione della Polonia",
+      "La presa della Bastiglia"
+     ],
+     "corretta": 1,
+     "spiegazione": "L'attentato avvenne il 28 giugno 1914.",
+     "categoria": "Novecento"
+    },
+    {
+     "domanda": "In quale giorno l'Italia entrò nella Prima guerra mondiale?",
+     "opzioni": [
+      "24 maggio 1915",
+      "1° settembre 1939",
+      "4 novembre 1918",
+      "10 giugno 1940"
+     ],
+     "corretta": 0,
+     "spiegazione": "La guerra contro l'Austria-Ungheria durò fino al 4 novembre 1918.",
+     "categoria": "Novecento"
+    },
+    {
+     "domanda": "Dopo la sconfitta di Caporetto, su quale fiume resistette l'esercito italiano?",
+     "opzioni": [
+      "Tevere",
+      "Volturno",
+      "Piave",
+      "Adige"
+     ],
+     "corretta": 2,
+     "spiegazione": "Sul Piave l'esercito fermò l'avanzata nemica tra il 1917 e il 1918.",
+     "categoria": "Novecento"
+    },
+    {
+     "domanda": "Che cosa avvenne il 28 ottobre 1922?",
+     "opzioni": [
+      "La Liberazione",
+      "La nascita della Repubblica",
+      "La firma dei Trattati di Roma",
+      "La marcia su Roma"
+     ],
+     "corretta": 3,
+     "spiegazione": "Dopo la marcia su Roma il re affidò il governo a Mussolini.",
+     "categoria": "Novecento"
+    },
+    {
+     "domanda": "In che anno furono approvate in Italia le leggi razziali contro gli ebrei?",
+     "opzioni": [
+      "1922",
+      "1938",
+      "1946",
+      "1915"
+     ],
+     "corretta": 1,
+     "spiegazione": "Le leggi razziali esclusero gli ebrei dalle scuole, dal lavoro pubblico e da molte attività.",
+     "categoria": "Novecento"
+    },
+    {
+     "domanda": "Con quale invasione iniziò la Seconda guerra mondiale?",
+     "opzioni": [
+      "L'invasione tedesca della Polonia",
+      "L'invasione italiana della Francia",
+      "L'attacco a Pearl Harbor",
+      "Lo sbarco in Normandia"
+     ],
+     "corretta": 0,
+     "spiegazione": "Era il 1° settembre 1939.",
+     "categoria": "Novecento"
+    },
+    {
+     "domanda": "Che cosa fu annunciato l'8 settembre 1943?",
+     "opzioni": [
+      "L'entrata in guerra dell'Italia",
+      "La fine della guerra in Europa",
+      "La caduta del fascismo in Germania",
+      "L'armistizio dell'Italia con gli Alleati"
+     ],
+     "corretta": 3,
+     "spiegazione": "Dopo l'armistizio il Centro-Nord fu occupato dai tedeschi.",
+     "categoria": "Novecento"
+    },
+    {
+     "domanda": "Che cosa si ricorda il 27 gennaio?",
+     "opzioni": [
+      "La nascita della Costituzione",
+      "Le vittime della Shoah",
+      "La fine della Prima guerra mondiale",
+      "La caduta del Muro di Berlino"
+     ],
+     "corretta": 1,
+     "spiegazione": "Il 27 gennaio 1945 fu liberato il campo di Auschwitz.",
+     "categoria": "Novecento"
+    },
+    {
+     "domanda": "Su quali città giapponesi furono sganciate le bombe atomiche nel 1945?",
+     "opzioni": [
+      "Hiroshima e Nagasaki",
+      "Tokyo e Osaka",
+      "Kyoto e Kobe",
+      "Pechino e Shanghai"
+     ],
+     "corretta": 0,
+     "spiegazione": "Le bombe furono sganciate il 6 e il 9 agosto 1945.",
+     "categoria": "Novecento"
+    },
+    {
+     "domanda": "Quale città fu divisa da un muro dal 1961 al 1989?",
+     "opzioni": [
+      "Vienna",
+      "Varsavia",
+      "Berlino",
+      "Praga"
+     ],
+     "corretta": 2,
+     "spiegazione": "Il Muro di Berlino era il simbolo della Guerra fredda.",
+     "categoria": "Novecento"
+    },
+    {
+     "domanda": "Quando la Germania tornò a essere un unico Stato?",
+     "opzioni": [
+      "9 novembre 1989",
+      "8 maggio 1945",
+      "3 ottobre 1990",
+      "1° gennaio 2002"
+     ],
+     "corretta": 2,
+     "spiegazione": "Il 9 novembre 1989 cadde il Muro; la riunificazione arrivò l'anno dopo.",
+     "categoria": "Novecento"
+    },
+    {
+     "domanda": "Come si chiamava la contrapposizione tra Stati Uniti e Unione Sovietica dopo il 1945?",
+     "opzioni": [
+      "Guerra dei cent'anni",
+      "Guerra fredda",
+      "Grande Guerra",
+      "Guerra lampo"
+     ],
+     "corretta": 1,
+     "spiegazione": "Si chiama \"fredda\" perché le due potenze non si combatterono mai direttamente.",
+     "categoria": "Novecento"
+    },
+    {
+     "domanda": "Quali furono le due possibilità del referendum del 2 giugno 1946?",
+     "opzioni": [
+      "Monarchia o repubblica",
+      "Euro o lira",
+      "Guerra o pace",
+      "Divorzio o matrimonio"
+     ],
+     "corretta": 0,
+     "spiegazione": "Vinse la repubblica e nacque la Repubblica Italiana.",
+     "categoria": "Italia repubblicana"
+    },
+    {
+     "domanda": "Quale novità ebbe il voto del 2 giugno 1946?",
+     "opzioni": [
+      "Si votò per la prima volta per posta",
+      "Votarono solo i soldati",
+      "Si votò per l'Unione europea",
+      "Votarono anche le donne in un voto nazionale"
+     ],
+     "corretta": 3,
+     "spiegazione": "Le donne avevano votato per la prima volta pochi mesi prima, alle elezioni comunali.",
+     "categoria": "Italia repubblicana"
+    },
+    {
+     "domanda": "Chi scrisse la Costituzione italiana?",
+     "opzioni": [
+      "L'Assemblea Costituente",
+      "Il re Vittorio Emanuele III",
+      "Il Senato del Regno",
+      "Il Parlamento europeo"
+     ],
+     "corretta": 0,
+     "spiegazione": "L'Assemblea Costituente fu eletta il 2 giugno 1946.",
+     "categoria": "Italia repubblicana"
+    },
+    {
+     "domanda": "Come comincia l'articolo 1 della Costituzione?",
+     "opzioni": [
+      "Tutti gli uomini nascono liberi",
+      "Il re è il capo dello Stato",
+      "L'Italia è una e indivisibile",
+      "L'Italia è una Repubblica democratica, fondata sul lavoro"
+     ],
+     "corretta": 3,
+     "spiegazione": "È il primo principio fondamentale della Costituzione.",
+     "categoria": "Italia repubblicana"
+    },
+    {
+     "domanda": "Qual è il simbolo che, secondo l'articolo 12 della Costituzione, rappresenta la Repubblica?",
+     "opzioni": [
+      "L'aquila romana",
+      "Il tricolore italiano",
+      "Lo stemma dei Savoia",
+      "La lupa capitolina"
+     ],
+     "corretta": 1,
+     "spiegazione": "L'articolo 12 descrive la bandiera: verde, bianco e rosso a tre bande verticali.",
+     "categoria": "Italia repubblicana"
+    },
+    {
+     "domanda": "Quali Paesi firmarono i Trattati di Roma del 1957 insieme all'Italia?",
+     "opzioni": [
+      "Spagna, Portogallo, Grecia, Austria e Svezia",
+      "Regno Unito, Irlanda, Danimarca, Norvegia e Svizzera",
+      "Francia, Germania Ovest, Belgio, Paesi Bassi e Lussemburgo",
+      "Stati Uniti, Canada, Francia, Spagna e Grecia"
+     ],
+     "corretta": 2,
+     "spiegazione": "Sono i sei Paesi fondatori della Comunità economica europea.",
+     "categoria": "Italia repubblicana"
+    },
+    {
+     "domanda": "Perché il 9 maggio è la Festa dell'Europa?",
+     "opzioni": [
+      "Ricorda la nascita dell'euro",
+      "Ricorda la caduta del Muro di Berlino",
+      "Ricorda la fine della Prima guerra mondiale",
+      "Ricorda la proposta di Robert Schuman del 1950"
+     ],
+     "corretta": 3,
+     "spiegazione": "Schuman propose di mettere in comune carbone e acciaio tra Paesi un tempo nemici.",
+     "categoria": "Italia repubblicana"
+    },
+    {
+     "domanda": "In che anno fu firmato il Trattato di Maastricht, da cui nacque l'Unione europea?",
+     "opzioni": [
+      "1957",
+      "1992",
+      "1946",
+      "2002"
+     ],
+     "corretta": 1,
+     "spiegazione": "Il Trattato entrò in vigore il 1° novembre 1993.",
+     "categoria": "Italia repubblicana"
+    },
+    {
+     "domanda": "Da quale giorno monete e banconote in euro sostituirono la lira?",
+     "opzioni": [
+      "1° gennaio 2002",
+      "1° gennaio 1999",
+      "2 giugno 1946",
+      "25 marzo 1957"
+     ],
+     "corretta": 0,
+     "spiegazione": "Dal 1999 l'euro esisteva già, ma solo per pagamenti elettronici e bancari.",
+     "categoria": "Italia repubblicana"
+    },
+    {
+     "domanda": "Quale statista italiano è considerato uno dei padri fondatori dell'Europa unita?",
+     "opzioni": [
+      "Giuseppe Garibaldi",
+      "Camillo Cavour",
+      "Alcide De Gasperi",
+      "Giuseppe Mazzini"
+     ],
+     "corretta": 2,
+     "spiegazione": "De Gasperi guidò il governo italiano negli anni della ricostruzione.",
+     "categoria": "Italia repubblicana"
+    },
+    {
+     "domanda": "In quale periodo l'Italia visse il cosiddetto \"miracolo economico\"?",
+     "opzioni": [
+      "Tra le due guerre mondiali",
+      "Subito dopo l'Unità",
+      "Tra gli anni Cinquanta e Sessanta",
+      "Durante la Prima guerra mondiale"
+     ],
+     "corretta": 2,
+     "spiegazione": "Arrivarono automobili, elettrodomestici e televisione in molte case.",
+     "categoria": "Italia repubblicana"
+    },
+    {
+     "domanda": "In che anno la televisione iniziò a trasmettere regolarmente in Italia?",
+     "opzioni": [
+      "1924",
+      "1975",
+      "1946",
+      "1954"
+     ],
+     "corretta": 3,
+     "spiegazione": "Le trasmissioni regolari della RAI cominciarono il 3 gennaio 1954.",
+     "categoria": "Italia repubblicana"
+    }
+   ]
+  }
+ ]
+}

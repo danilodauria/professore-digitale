@@ -78,6 +78,18 @@ python3 -c 'import json,sys; json.dump({"aggiornamenti_url": sys.argv[1], "pagin
 sed 's/$/\r/' windows/LICENZE.txt > "$A/LICENZE.txt"
 { echo "Professore Digitale $VERSION per Windows"; echo; sed -n '1,200p' windows/LEGGIMI.txt; } | sed 's/$/\r/' > "$A/LEGGIMI.txt"
 cp windows/res/professore.ico "$A/professore.ico"
+echo "» Voci naturali (Piper per Windows a 64 bit: Paola e Riccardo)"
+source tools/voci.sh; prepara_voci
+python3 - "$VOCI_CACHE/piper_windows_amd64.zip" "$A" <<'PY'
+import sys, zipfile, os
+z = zipfile.ZipFile(sys.argv[1]); dest = os.path.realpath(sys.argv[2])
+for n in z.namelist():
+    if not os.path.realpath(os.path.join(dest, n)).startswith(dest + os.sep): sys.exit("percorso non valido: " + n)
+z.extractall(dest)
+PY
+rm -rf "$A/piper/pkgconfig"
+mkdir -p "$A/voci"
+cp "$VOCI_CACHE"/it_IT-paola-medium.onnx "$VOCI_CACHE"/it_IT-paola-medium.onnx.json "$VOCI_CACHE"/it_IT-riccardo-x_low.onnx "$VOCI_CACHE"/it_IT-riccardo-x_low.onnx.json "$A/voci/"
 
 if [ "$SOLO_APP" = 1 ]; then echo "✔ Applicazione pronta in $A"; exit 0; fi
 echo "» Installatore"

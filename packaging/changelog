@@ -1,3 +1,25 @@
+professore-digitale (3.0.0) stable; urgency=medium
+
+  * Voci italiane maschili e femminili già incluse: Riccardo e Paola (voci
+    naturali) e voci leggere; si scelgono in Impostazioni → Voce.
+  * Il Grande Quiz dell'Informatica (264 domande) e altri grandi quiz, con
+    attestato con il vostro nome da stampare o salvare in PDF.
+  * Nuova sezione Cultura generale: 26 lezioni di storia, geografia,
+    scienze, arte e attualità, con domande, risposte e quiz.
+  * Nuove pagine dedicate al libro Tecnologia Gentile e a FeniceOS, il
+    sistema che fa rinascere i vecchi computer.
+  * La Palestra ha 11 esercizi: tasti speciali, scorrere, clic destro,
+    selezionare, copia e incolla, memory e riconosci la truffa.
+  * Quadro dell'aula: il PC del facilitatore vede in rete locale gli
+    allievi collegati e i loro progressi, e può mandare messaggi a tutti.
+  * Pulsante Stampa per la pagina o per l'argomento intero e indicatore
+    Online che si illumina quando Internet funziona.
+  * Il Professore vi saluta all'avvio, dà qualche consiglio quando resta
+    inattivo e all'uscita ricorda i promemoria (e la buona notte se è
+    tardi).
+
+ -- Danilo D'Auria <danilodauria.site@gmail.com>  Mon, 05 Oct 2026 18:56:52 +0200
+
 professore-digitale (2.3.0) stable; urgency=medium
 
   * Nuova versione per Windows, da Windows XP a Windows 11: un solo

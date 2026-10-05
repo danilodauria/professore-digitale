@@ -1,6 +1,6 @@
 {
  "formato": "professore-digitale-catalogo-ia",
- "versione": "2026.10.1",
+ "versione": "2026.10.2",
  "nota": "Catalogo dei motori e dei modelli di IA locale per la versione Windows. Ordine: dal più leggero al più capace. La configurazione automatica sceglie l'ultimo modello adatto al computer, saltando quelli 'solo_manuale'. Si aggiorna senza reinstallare: pubblicatelo con aggiornamenti.json (campo catalogo_ia).",
  "ollama": {
   "descrizione": "Ollama, per Windows 10 22H2 e Windows 11 (64 bit e ARM64). Usa la scheda video NVIDIA o AMD se adatta.",
@@ -52,8 +52,9 @@
            "descrizione": "Modello italiano per il riconoscimento vocale offline (Vosk, licenza Apache 2.0)."},
   "piper": {"github": "rhasspy/piper", "tag": "2023.11.14-2", "asset": "piper_windows_amd64.zip",
             "hf": "rhasspy/piper-voices",
-            "file": ["it/it_IT/paola/medium/it_IT-paola-medium.onnx", "it/it_IT/paola/medium/it_IT-paola-medium.onnx.json"],
-            "descrizione": "Voce naturale \"Paola\" (Piper, licenza MIT)."}
+            "file": ["it/it_IT/paola/medium/it_IT-paola-medium.onnx", "it/it_IT/paola/medium/it_IT-paola-medium.onnx.json",
+                     "it/it_IT/riccardo/x_low/it_IT-riccardo-x_low.onnx", "it/it_IT/riccardo/x_low/it_IT-riccardo-x_low.onnx.json"],
+            "descrizione": "Voci naturali \"Paola\" (donna) e \"Riccardo\" (uomo), Piper, licenza MIT."}
  },
  "browser": {"github": "win32ss/supermium", "suffisso_32": "_32_setup.exe", "suffisso_64": "_64_setup.exe",
              "descrizione": "Supermium: browser moderno che funziona su Windows XP e Vista."}

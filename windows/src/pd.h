@@ -160,6 +160,7 @@ typedef struct {
     char *body; size_t body_len;
     int head_only;
     int sent;
+    int forza;                       /* ?forza=1 nella richiesta */
 } req_t;
 int  http_server_start(int port_from);
 void send_raw(req_t *r, const char *data, size_t n);
@@ -202,11 +203,20 @@ void ai_reload_config(void);
 /* voce */
 void tts_engines_json(buf_t *b);
 int  tts_engine_count(void);
-int  tts_synthesize(const char *text, double rate, const char *engine, buf_t *wav, char *used, size_t usedn, char *err, size_t errn);
+int  tts_synthesize(const char *text, double rate, const char *engine, const char *voice, buf_t *wav, char *used, size_t usedn, char *err, size_t errn);
+void tts_voices_json(buf_t *b);
+void tts_init(void);
+int  tts_has_piper(void);
 void tts_invalidate(void);
 int  sapi_italian_voices(buf_t *names_json);
 void stt_status(char *engine, size_t en, char *detail, size_t dn, int force);
 int  stt_transcribe(const char *wav, size_t n, buf_t *text_json, char *err, size_t errn);
+
+/* aula (rete locale) e connessione */
+void aula_init(void);
+int  aula_facilitatore(void);
+void aula_api(req_t *r, const char *azione, jv *req);
+void aula_rete_json(buf_t *b, int forza);
 
 /* configurazione guidata */
 void setup_api(req_t *r, const char *path);

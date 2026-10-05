@@ -21,6 +21,7 @@ grep -q "^$PKG ($VERSION)" packaging/changelog || { echo "Manca la voce $VERSION
 
 echo "» Verifica sintassi e contenuti"
 python3 -m py_compile src/server/*.py packaging/professore-digitale packaging/professore-digitale-contenuti
+bash -n tools/voci.sh
 for f in packaging/professore-digitale-setup-ia packaging/professore-digitale-setup-voce packaging/professore-digitale-pulizia packaging/prerm packaging/postrm; do bash -n "$f"; done
 command -v node >/dev/null && for f in src/web/js/*.js; do node --check "$f"; done
 find src -name '__pycache__' -prune -exec rm -rf {} +
@@ -36,12 +37,23 @@ install -d "$BUILD/usr/bin" "$S/$PKG/server" "$S/$PKG/contenuti" "$S/application
            "$S/doc/$PKG" "$S/man/man1" "$S/metainfo"
 install -m 0755 packaging/professore-digitale packaging/professore-digitale-setup-ia packaging/professore-digitale-setup-voce \
                 packaging/professore-digitale-pulizia packaging/professore-digitale-contenuti "$BUILD/usr/bin/"
-install -m 0644 src/server/pd_server.py src/server/pd_stt_worker.py src/server/pd_packs.py "$S/$PKG/server/"
+install -m 0644 src/server/pd_server.py src/server/pd_stt_worker.py src/server/pd_packs.py src/server/pd_aula.py "$S/$PKG/server/"
 install -m 0644 VERSION "$S/$PKG/VERSION"
 python3 -c 'import json,sys; json.dump({"aggiornamenti_url": sys.argv[1], "pagina": sys.argv[2]}, open(sys.argv[3],"w"), indent=1)' \
         "$AGGIORNAMENTI_URL" "$PAGINA_PROGETTO" "$S/$PKG/distribuzione.json"
 chmod 0644 "$S/$PKG/distribuzione.json"
 cp -r src/web "$S/$PKG/web"
+echo "» Voci naturali incluse (Piper: Paola e Riccardo; motore per PC a 64 bit x86 e ARM)"
+source tools/voci.sh; prepara_voci
+install -d "$BUILD/usr/lib/$PKG/piper" "$S/$PKG/voci"
+for a in x86_64 aarch64; do
+  tar -xzf "$VOCI_CACHE/piper_linux_$a.tar.gz" -C "$BUILD/usr/lib/$PKG/piper" --no-same-owner
+  mv "$BUILD/usr/lib/$PKG/piper/piper" "$BUILD/usr/lib/$PKG/piper/$a"
+done
+rm -rf "$BUILD/usr/lib/$PKG/piper/"*/pkgconfig
+find "$BUILD/usr/lib/$PKG" -type d -exec chmod 0755 {} +
+install -m 0644 "$VOCI_CACHE"/it_IT-paola-medium.onnx "$VOCI_CACHE"/it_IT-paola-medium.onnx.json \
+                "$VOCI_CACHE"/it_IT-riccardo-x_low.onnx "$VOCI_CACHE"/it_IT-riccardo-x_low.onnx.json "$S/$PKG/voci/"
 if ls src/contenuti/*.json >/dev/null 2>&1; then install -m 0644 src/contenuti/*.json "$S/$PKG/contenuti/"; fi
 find "$S/$PKG/web" -type d -exec chmod 0755 {} +; find "$S/$PKG/web" -type f -exec chmod 0644 {} +
 rm -f "$S/$PKG/web/vendor/mermaid.LICENSE"
@@ -83,8 +95,10 @@ Description: cattedra digitale portatile per l'alfabetizzazione informatica
  anziani, scuole, biblioteche e associazioni. Offre lezioni guidate con
  schemi alla lavagna e quiz, un assistente che risponde a voce (guida interna
  sempre disponibile, IA locale facoltativa tramite Ollama), una lavagna per
- disegnare e una palestra di esercizi per mouse e tastiera. Domande e lezioni
- si ampliano con pacchetti di contenuti.
+ disegnare, una palestra di esercizi, grandi quiz con attestato da stampare,
+ lezioni di cultura generale, le pagine di FeniceOS e del libro Tecnologia
+ Gentile e un quadro dell'aula per il facilitatore in rete locale. Include le
+ voci naturali italiane Paola e Riccardo (Piper).
  .
  Funziona senza Internet anche su computer ricondizionati: nessun dato
  lascia il computer. Ideato e sviluppato da Danilo D'Auria.

@@ -49,6 +49,7 @@ APP_ID = "professore-digitale"
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
 import pd_packs  # noqa: E402  (pacchetti di contenuti)
+import pd_aula   # noqa: E402  (quadro dell'aula in rete locale, stato della connessione)
 
 SHARE_DIR = os.path.normpath(os.path.join(HERE, ".."))
 WEB_DIR = os.path.normpath(os.environ.get("PD_WEB_DIR") or os.path.join(SHARE_DIR, "web"))
@@ -105,6 +106,7 @@ MAX_JSON = 2 * 1024 * 1024
 MAX_TTS_CHARS = 6000
 
 LAST_SEEN = [time.time()]
+AULA = [None]
 STATE = {"port": None, "idle_timeout": 240, "stt_probe": None, "stt_probe_time": 0}
 LOCK = threading.Lock()
 
@@ -151,6 +153,19 @@ def mem_total_mb():
     return 0
 
 
+def nome_sistema():
+    info = {}
+    try:
+        with open("/etc/os-release") as f:
+            for line in f:
+                if "=" in line:
+                    k, v = line.rstrip("\n").split("=", 1)
+                    info[k] = v.strip('"')
+    except OSError:
+        pass
+    return info.get("PRETTY_NAME") or "Linux"
+
+
 def recommended_model(ram_mb):
     """Stesse fasce del catalogo della versione Windows (windows/catalogo-ia.json)."""
     if ram_mb and ram_mb < 6000:
@@ -177,29 +192,91 @@ def ollama_models(timeout=1.5):
 
 
 # ------------------------------------------------------------------------------
-#  Sintesi vocale (TTS) - piper > pico2wave > espeak-ng
+#  Sintesi vocale (TTS): voci naturali Piper (incluse nel pacchetto: Paola e Riccardo),
+#  Pico (femminile) ed espeak-ng (varianti maschili e femminili). L'utente sceglie la voce.
 # ------------------------------------------------------------------------------
-def piper_model():
-    d = os.path.join(MODELS_DIR, "piper")
-    try:
-        for name in sorted(os.listdir(d)):
-            if name.endswith(".onnx"):
-                return os.path.join(d, name)
-    except OSError:
-        pass
-    return None
+LIB_DIR = os.environ.get("PD_LIB_DIR") or "/usr/lib/professore-digitale"
+VOICES_DIR = os.environ.get("PD_VOICES_DIR") or os.path.join(SHARE_DIR, "voci")
+PIPER_NOMI = {"paola": ("Paola", "f"), "riccardo": ("Riccardo", "m"), "serena": ("Serena", "f")}
+ESPEAK_VARIANTI = (("m3", "Voce leggera maschile", "m"), ("m1", "Voce leggera maschile, grave", "m"),
+                   ("f2", "Voce leggera femminile", "f"), ("f4", "Voce leggera femminile, morbida", "f"))
+VOCE_PREDEFINITA = ("piper:it_IT-riccardo-x_low", "piper:it_IT-paola-medium", "espeak:m3", "pico")
+
+
+def _arch_piper():
+    import platform
+    m = platform.machine().lower()
+    return {"x86_64": "x86_64", "amd64": "x86_64", "aarch64": "aarch64", "arm64": "aarch64"}.get(m, m)
 
 
 def piper_bin():
-    for c in (os.path.join(DATA_DIR, "piper", "piper"), shutil.which("piper")):
+    """Primo eseguibile Piper che funziona davvero (alcuni sistemi molto vecchi non lo possono avviare)."""
+    with LOCK:
+        if STATE.get("piper_t") and time.time() - STATE["piper_t"] < 300:
+            return STATE.get("piper_bin")
+    trovato = None
+    for c in (os.path.join(DATA_DIR, "piper", "piper"), os.path.join(LIB_DIR, "piper", _arch_piper(), "piper"),
+              shutil.which("piper")):
         if c and os.path.isfile(c) and os.access(c, os.X_OK):
-            return c
-    return None
+            try:
+                p = subprocess.run([c, "--version"], stdout=subprocess.PIPE, stderr=subprocess.DEVNULL, timeout=20)
+                if p.returncode == 0:
+                    trovato = c
+                    break
+            except (OSError, subprocess.SubprocessError):
+                pass
+            log("Piper non avviabile:", c)
+    with LOCK:
+        STATE["piper_bin"], STATE["piper_t"] = trovato, time.time()
+    return trovato
+
+
+def piper_models():
+    """{nome_file_senza_estensione: percorso}: le voci scaricate dall'utente prevalgono su quelle incluse."""
+    out = {}
+    for d in (VOICES_DIR, os.path.join(MODELS_DIR, "piper")):
+        try:
+            for name in sorted(os.listdir(d)):
+                if name.endswith(".onnx") and os.path.isfile(os.path.join(d, name + ".json")):
+                    out[name[:-5]] = os.path.join(d, name)
+        except OSError:
+            pass
+    return out
+
+
+def piper_model():
+    m = piper_models()
+    return next(iter(m.values()), None)
+
+
+def _espeak():
+    return shutil.which("espeak-ng") or shutil.which("espeak")
+
+
+def tts_voices():
+    """Elenco delle voci disponibili: [{"id", "nome", "genere": "m"/"f", "motore", "naturale"}]."""
+    voci = []
+    if piper_bin():
+        for base in sorted(piper_models(), key=lambda b: (0 if "riccardo" in b else 1 if "paola" in b else 2, b)):
+            parti = base.split("-")
+            chi = parti[1] if len(parti) > 1 else base
+            nome, genere = PIPER_NOMI.get(chi, (chi.capitalize(), ""))
+            descr = {"m": "uomo", "f": "donna"}.get(genere, "voce")
+            voci.append({"id": "piper:" + base, "nome": "%s (%s, voce naturale)" % (nome, descr),
+                         "genere": genere, "motore": "piper", "naturale": True})
+    if shutil.which("pico2wave"):
+        voci.append({"id": "pico", "nome": "Pico (donna, voce chiara)", "genere": "f", "motore": "pico", "naturale": False})
+    es = _espeak()
+    if es:
+        eng = os.path.basename(es)
+        for var, nome, genere in ESPEAK_VARIANTI:
+            voci.append({"id": "espeak:" + var, "nome": nome, "genere": genere, "motore": eng, "naturale": False})
+    return voci
 
 
 def tts_engines():
     engines = []
-    if piper_bin() and piper_model():
+    if piper_bin() and piper_models():
         engines.append("piper")
     if shutil.which("pico2wave"):
         engines.append("pico")
@@ -221,45 +298,63 @@ def clean_for_speech(text):
     return text[:MAX_TTS_CHARS]
 
 
-def synthesize(text, rate=1.0, engine=None):
+def _ordine_voci(voice, engine):
+    voci = tts_voices()
+    ids = [v["id"] for v in voci]
+    ordine = []
+    if voice and voice in ids:
+        ordine.append(voice)
+    elif engine:      # compatibilita' con le versioni precedenti: si chiedeva un motore
+        ordine += [v["id"] for v in voci if v["motore"] == engine or (engine == "espeak-ng" and v["id"].startswith("espeak:"))][:1]
+    ordine += [v for v in VOCE_PREDEFINITA if v in ids and v not in ordine]
+    ordine += [v for v in ids if v not in ordine]
+    return ordine
+
+
+def synthesize(text, rate=1.0, engine=None, voice=None):
     """Restituisce (bytes_wav, nome_motore) oppure solleva RuntimeError."""
     text = clean_for_speech(text)
     if not text:
         raise RuntimeError("testo vuoto")
     rate = max(0.5, min(1.6, float(rate or 1.0)))
-    available = tts_engines()
-    if not available:
+    ordine = _ordine_voci(voice, engine)
+    if not ordine:
         raise RuntimeError("nessun motore vocale installato (installare espeak-ng)")
-    order = [engine] + available if engine in available else available
     last_err = None
-    for eng in order:
+    for vid in ordine[:3]:
         try:
             with tempfile.TemporaryDirectory(prefix="pd-tts-") as tmp:
                 out = os.path.join(tmp, "voce.wav")
-                if eng == "piper":
-                    subprocess.run([piper_bin(), "--model", piper_model(), "--output_file", out,
+                if vid.startswith("piper:"):
+                    eng = "piper"
+                    model = piper_models().get(vid[6:])
+                    subprocess.run([piper_bin(), "--model", model, "--output_file", out,
                                     "--length_scale", "%.2f" % (1.0 / rate)],
                                    input=text.encode("utf-8"), stdout=subprocess.DEVNULL,
                                    stderr=subprocess.DEVNULL, timeout=120, check=True)
-                elif eng == "pico":
+                elif vid == "pico":
+                    eng = "pico"
                     level = int(max(50, min(160, rate * 90)))
                     safe = text.replace("<", " ").replace(">", " ")
                     subprocess.run(["pico2wave", "-l", "it-IT", "-w", out,
                                     '<speed level="%d">%s</speed>' % (level, safe)],
                                    stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
                                    timeout=120, check=True)
-                else:  # espeak-ng / espeak
+                else:  # espeak-ng / espeak con variante maschile o femminile
+                    es = _espeak()
+                    eng = os.path.basename(es)
+                    var = vid.split(":", 1)[1] if ":" in vid else "m3"
                     wpm = int(150 * rate)
-                    subprocess.run([shutil.which(eng), "-v", "it", "-s", str(wpm), "-w", out, "--stdin"],
+                    subprocess.run([es, "-v", "it+" + var, "-s", str(wpm), "-w", out, "--stdin"],
                                    input=text.encode("utf-8"), stdout=subprocess.DEVNULL,
                                    stderr=subprocess.DEVNULL, timeout=120, check=True)
                 with open(out, "rb") as f:
                     data = f.read()
                 if len(data) > 44:
                     return data, eng
-        except Exception as e:  # prova il motore successivo
+        except Exception as e:  # prova la voce successiva
             last_err = e
-            log("TTS", eng, "fallito:", e)
+            log("TTS", vid, "fallito:", e)
     raise RuntimeError("sintesi vocale non riuscita: %s" % last_err)
 
 
@@ -586,12 +681,19 @@ class Handler(BaseHTTPRequestHandler):
                 "ok": True, "version": VERSION, "mode": "server",
                 "ai": {"available": ok, "host": OLLAMA_HOST, "models": models,
                        "recommended": recommended_model(ram)},
-                "tts": {"engines": tts_engines()},
+                "tts": {"engines": tts_engines(), "voices": tts_voices()},
                 "stt": {"engine": stt.get("engine"), "detail": stt.get("model")},
                 "system": {"ram_mb": ram, "python": sys.version.split()[0],
-                           "data_dir": DATA_DIR, "cpus": os.cpu_count()},
+                           "data_dir": DATA_DIR, "cpus": os.cpu_count(), "os": nome_sistema(),
+                           "pc": pd_aula.nome_pc()},
                 "update_url": settings.get("updateUrl") or UPDATE_URL_DEFAULT,
             })
+        if path == "/api/rete":
+            forza = "forza=1" in (self.path.split("?", 1) + [""])[1]
+            r = pd_aula.stato_rete(forza)
+            return self._send(200, {"ok": True, "online": r["online"], "via": r["via"], "eta_s": int(time.time() - r["t"])})
+        if path == "/api/aula":
+            return self._send(200, AULA[0].stato() if AULA[0] else {"ok": True, "ruolo": ""})
         if path == "/api/packs":
             packs, errori = pacchetti_installati()
             return self._send(200, {"ok": True, "packs": packs, "errori": errori})
@@ -615,7 +717,8 @@ class Handler(BaseHTTPRequestHandler):
         if path == "/api/tts":
             req = self._read_json()
             try:
-                wav, eng = synthesize(str(req.get("text", "")), req.get("rate", 1.0), req.get("engine"))
+                wav, eng = synthesize(str(req.get("text", "")), req.get("rate", 1.0), req.get("engine"),
+                                      str(req.get("voice") or "") or None)
             except RuntimeError as e:
                 return self._error(503, str(e))
             return self._send(200, wav, "audio/wav", {"X-TTS-Engine": eng})
@@ -691,6 +794,40 @@ class Handler(BaseHTTPRequestHandler):
             except (RuntimeError, OSError) as e:
                 return self._error(502, str(e))
             return self._send(200, {"ok": True, "file": dest})
+
+        if path.startswith("/api/aula/") and AULA[0]:
+            req = self._read_json()
+            aula = AULA[0]
+            azione = path[len("/api/aula/"):]
+            if azione == "presenza":
+                aula.aggiorna_presenza(req)
+                st = aula.stato()
+                return self._send(200, {"ok": True, "ruolo": st["ruolo"], "annuncio": st.get("annuncio"),
+                                        "invio": st.get("invio"), "server": st.get("server")})
+            if azione == "applica":
+                aula.applica()
+                return self._send(200, aula.stato())
+            if azione == "cerca":
+                trovati = aula.cerca(2.0)
+                agg = None
+                url = (read_json_file(os.path.join(DATA_DIR, "settings.json"), {}) or {}).get("updateUrl") or ""
+                m = re.match(r"^http://([^/:]+)", url)
+                if m and indirizzo_locale(m.group(1)):
+                    try:
+                        opener = urllib.request.build_opener(urllib.request.ProxyHandler({}))
+                        with opener.open(url, timeout=3) as r:
+                            r.read(1024)
+                        agg = {"url": url, "raggiungibile": True}
+                    except Exception:
+                        agg = {"url": url, "raggiungibile": False}
+                return self._send(200, {"ok": True, "trovati": trovati, "aggiornamenti": agg,
+                                        "ips": pd_aula.indirizzi_locali(), "pc": pd_aula.nome_pc()})
+            if azione == "annuncio":
+                return self._send(200, {"ok": True, "annuncio": aula.imposta_annuncio(req.get("testo", ""))})
+            if azione == "rimuovi":
+                aula.rimuovi(str(req.get("id", "")))
+                return self._send(200, {"ok": True})
+            return self._error(404, "API sconosciuta")
 
         if path == "/api/stt-reprobe":
             self._read_body(1024)
@@ -788,7 +925,8 @@ class Server(ThreadingHTTPServer):
 def idle_watchdog(server):
     while True:
         time.sleep(10)
-        if STATE["idle_timeout"] > 0 and time.time() - LAST_SEEN[0] > STATE["idle_timeout"]:
+        facilitatore = AULA[0] is not None and AULA[0].ruolo == "facilitatore"
+        if STATE["idle_timeout"] > 0 and not facilitatore and time.time() - LAST_SEEN[0] > STATE["idle_timeout"]:
             log("inattivo: spegnimento automatico")
             server.shutdown()
             return
@@ -840,6 +978,15 @@ def main(argv=None):
     signal.signal(signal.SIGTERM, lambda *a: threading.Thread(target=server.shutdown, daemon=True).start())
     threading.Thread(target=idle_watchdog, args=(server,), daemon=True).start()
     threading.Thread(target=stt_probe, daemon=True).start()  # pre-riscaldamento
+    threading.Thread(target=piper_bin, daemon=True).start()
+    try:
+        aula = pd_aula.Aula(DATA_DIR, VERSION, lambda: read_json_file(os.path.join(DATA_DIR, "settings.json"), {}), log)
+        aula.sistema = {"os": nome_sistema(), "ram_mb": mem_total_mb(), "cpus": os.cpu_count() or 0,
+                        "arch": os.uname().machine}
+        aula.avvia()
+        AULA[0] = aula
+    except Exception as e:   # l'aula e' facoltativa: il Professore funziona comunque
+        log("aula non disponibile:", repr(e))
     print("Professore Digitale %s in ascolto su http://127.0.0.1:%d/" % (VERSION, port), flush=True)
     try:
         server.serve_forever(poll_interval=0.5)

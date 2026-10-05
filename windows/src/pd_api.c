@@ -50,10 +50,12 @@ static int pack_check(const jv *p, buf_t *errs) {
             ERR(m);
         }
     }
-    jv *d = jget(p, "domande"), *l = jget(p, "lezioni");
+    jv *d = jget(p, "domande"), *l = jget(p, "lezioni"), *pr = jget(p, "prove");
     if (d && d->t != J_ARR) ERR("domande: deve essere un elenco");
     if (l && l->t != J_ARR) ERR("lezioni: deve essere un elenco");
-    if ((!d || d->t != J_ARR || !d->n) && (!l || l->t != J_ARR || !l->n)) ERR("pacchetto: serve almeno una domanda o una lezione");
+    if (pr && pr->t != J_ARR) ERR("prove: deve essere un elenco");
+    if ((!d || d->t != J_ARR || !d->n) && (!l || l->t != J_ARR || !l->n) && (!pr || pr->t != J_ARR || !pr->n))
+        ERR("pacchetto: serve almeno una domanda, una lezione o una prova");
 #undef ERR
     return n;
 }
@@ -351,7 +353,7 @@ static void api_status(req_t *r) {
     buf_adds(&b, "{\"ok\": true, \"version\": "); json_str(&b, G.version);
     buf_adds(&b, ", \"mode\": \"server\", \"platform\": \"windows\", \"setup\": true, ");
     ai_status_json(&b);
-    buf_adds(&b, ", \"tts\": {\"engines\": "); tts_engines_json(&b); buf_adds(&b, "}");
+    buf_adds(&b, ", \"tts\": {\"engines\": "); tts_engines_json(&b); buf_adds(&b, ", \"voices\": "); tts_voices_json(&b); buf_adds(&b, "}");
     char se[32] = "", sd[512] = "";
     stt_status(se, sizeof se, sd, sizeof sd, 0);
     buf_adds(&b, ", \"stt\": {\"engine\": "); if (se[0]) json_str(&b, se); else buf_adds(&b, "null");
@@ -383,6 +385,8 @@ void handle_api(req_t *r) {
     if (!post) {
         if (!strcmp(path, "/api/status")) { api_status(r); return; }
         if (!strcmp(path, "/api/packs")) { api_packs(r); return; }
+        if (!strcmp(path, "/api/aula")) { aula_api(r, NULL, NULL); return; }
+        if (!strcmp(path, "/api/rete")) { buf_t b; buf_init(&b); aula_rete_json(&b, r->forza); send_json(r, 200, &b); buf_free(&b); return; }
         if (!strncmp(path, "/api/data/", 10)) {
             const char *key = path + 10;
             if (!data_key_ok(key)) { send_error(r, 404, "chiave sconosciuta"); return; }
@@ -425,11 +429,12 @@ void handle_api(req_t *r) {
     if (!req) { send_error(r, 400, err[0] ? err : "JSON non valido"); return; }
 
     if (!strcmp(path, "/api/chat")) { ai_chat(r, req); }
+    else if (!strncmp(path, "/api/aula/", 10)) aula_api(r, path + 10, req);
     else if (!strcmp(path, "/api/tts")) {
         buf_t wav; buf_init(&wav);
         char used[32] = "";
         jv *rate = jget(req, "rate");
-        if (!tts_synthesize(jstr(req, "text", ""), rate && rate->t == J_NUM ? rate->num : 1.0, jstr(req, "engine", NULL),
+        if (!tts_synthesize(jstr(req, "text", ""), rate && rate->t == J_NUM ? rate->num : 1.0, jstr(req, "engine", NULL), jstr(req, "voice", NULL),
                             &wav, used, sizeof used, err, sizeof err)) send_error(r, 503, err);
         else {
             char extra[64]; snprintf(extra, sizeof extra, "X-TTS-Engine: %s\r\n", used);

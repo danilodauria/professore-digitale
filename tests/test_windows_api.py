@@ -4,7 +4,7 @@ Uso: python3 tests/test_windows_api.py <url_base> <cartella_di_lavoro> <cartella
 Controlla: sicurezza Host/Origin, configurazione guidata (hardware, piano, catalogo), chiavetta offline
 (verifica SHA-256, estrazione zip, file rovinati), motore compatibile in stile OpenAI (streaming),
 programma del microfono, chiusura pulita. Autore: Danilo D'Auria - Licenza MIT"""
-import hashlib, http.server, io, json, os, socketserver, subprocess, sys, threading, time, urllib.request, zipfile
+import hashlib, http.server, io, json, os, socketserver, subprocess, sys, threading, time, urllib.request, urllib.error, zipfile
 
 BASE = sys.argv[1].rstrip("/"); WORK = sys.argv[2]; APP = sys.argv[3]
 results = []
@@ -82,7 +82,11 @@ st, s2 = call("/api/status")
 check("microfono risulta configurato", s2["stt"]["engine"] == "vosk", s2["stt"])
 # kit rovinato: l'impronta non torna
 open(os.path.join(kit, "vosk.zip"), "ab").write(b"rovinato")
-st, r = call("/api/setup/kit-install", {"cartella": winpath(kit)})
+for _ in range(40):   # se il lavoro precedente sta ancora chiudendo, si riprova
+    st, r = call("/api/setup/kit-install", {"cartella": winpath(kit)})
+    if st != 409: break
+    time.sleep(0.5)
+time.sleep(0.5)
 p = wait_job()
 check("chiavetta rovinata rifiutata", p.get("riuscito") is False and "rovinato" in p.get("errore", ""), p.get("errore"))
 st, r = call("/api/setup/kit-install", {"cartella": winpath(WORK)})
@@ -163,6 +167,44 @@ st, d = call("/api/data/board")
 check("salvataggio dati", d["value"] == {"tratti": [1, 2, 3]}, d)
 st, e = call("/api/data/segreti", {"value": 1})
 check("chiave di dati sconosciuta rifiutata", st == 404, e)
+
+# --- 3.0: voci, connessione, aula ---
+st, s7 = call("/api/status")
+voci = s7["tts"].get("voices", [])
+check("voci: elenco con genere (voci naturali incluse)", isinstance(voci, list) and all("genere" in v for v in voci) and
+      (not os.path.isdir(os.path.join(APP, "piper")) or {"m", "f"} <= set(v["genere"] for v in voci if v["motore"] == "piper")), voci)
+if voci:
+    st, wav = call("/api/tts", {"text": "Buongiorno", "voice": voci[-1]["id"]}, raw=True)
+    check("sintesi con la voce scelta", st == 200 and wav[:4] == b"RIFF", st)
+st, rete = call("/api/rete")
+check("stato della connessione", st == 200 and isinstance(rete.get("online"), bool), rete)
+st, a0 = call("/api/aula")
+check("aula: stato iniziale", st == 200 and a0.get("ruolo") == "" and isinstance(a0.get("ips"), list), a0)
+_, sett = call("/api/data/settings")
+nuove = dict(sett.get("value") or {}, aulaRuolo="facilitatore", aulaCodice="2468", aulaNome="Aula di prova")
+call("/api/data/settings", {"value": nuove})
+st, a1 = call("/api/aula/applica", {})
+check("aula: facilitatore in ascolto", a1.get("ruolo") == "facilitatore" and a1.get("in_ascolto") is True, a1)
+def ciao(codice):
+    req = urllib.request.Request("http://127.0.0.1:%d/aula/ciao" % a1.get("porta", 8766), headers={"Content-Type": "application/json"},
+        data=json.dumps({"id": "pc-wine-1", "codice": codice, "pc": "PC-3", "utente": "Anna Bianchi", "versione": "3.0.0",
+                         "progressi": {"lezioni_fatte": 2, "lezioni_totali": 15, "quiz": [{"titolo": "Quiz", "migliore": 90, "superata": True}]}}).encode())
+    try:
+        with urllib.request.build_opener(urllib.request.ProxyHandler({})).open(req, timeout=10) as r: return r.status, json.loads(r.read().decode())
+    except urllib.error.HTTPError as e: return e.code, None
+    except OSError as e: return 0, str(e)
+check("aula: codice sbagliato rifiutato", ciao("1111")[0] == 403)
+code, risp = ciao("2468")
+check("aula: allievo ricevuto", code == 200 and risp.get("nome") == "Aula di prova", (code, risp))
+st, a2 = call("/api/aula")
+cl = a2.get("clienti") or []
+check("aula: allievo nel quadro", len(cl) == 1 and cl[0]["utente"] == "Anna Bianchi" and cl[0]["online"] and cl[0]["progressi"]["lezioni_fatte"] == 2, a2)
+st, ann = call("/api/aula/annuncio", {"testo": "Pausa caffè"})
+check("aula: messaggio a tutti", ann.get("annuncio", {}).get("testo") == "Pausa caffè", ann)
+code, risp = ciao("2468")
+check("aula: l'allievo riceve il messaggio", risp and risp.get("annuncio", {}).get("testo") == "Pausa caffè", risp)
+call("/api/aula/rimuovi", {"id": "*"})
+call("/api/data/settings", {"value": dict(nuove, aulaRuolo="")}); call("/api/aula/applica", {})
 
 # --- chiusura ---
 rt = os.path.join(WORK, "dati", "locale", "runtime.json")

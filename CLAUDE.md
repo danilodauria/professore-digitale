@@ -8,6 +8,13 @@ Leggere questo file per intero prima di modificare qualunque cosa.
 ## Regole del progetto (non negoziabili)
 - **Offline e privato**: il programma non si collega a Internet da solo e non invia dati. Il server ascolta
   solo su 127.0.0.1 e controlla Host/Origin. Nessuna telemetria, nessuna libreria da CDN.
+  Due sole eccezioni, dalla 3.0, entrambe disattivabili e documentate nel vademecum:
+  1. **Indicatore «Online»** (`/api/rete`, impostazione `netCheck`): al massimo una volta al minuto il server *apre e chiude*
+     una connessione TCP verso un server pubblico neutrale (1.1.1.1, 9.9.9.9…) per sapere se Internet funziona. Nessun dato inviato.
+  2. **Quadro dell'aula** (`pd_aula.py` / `pd_aula.c`), solo se l'utente sceglie un ruolo in Aula: il PC del facilitatore ascolta
+     in rete locale SOLO `/aula/info` e `/aula/ciao` (TCP 8766) e risponde alla ricerca `PD-AULA?` (UDP 8767); il PC dell'allievo
+     invia ogni 20 s nome, pagina in uso, lezioni completate, risultati dei quiz e attestati (mai le conversazioni).
+     Solo indirizzi IP privati; un codice dell'aula facoltativo blocca i PC estranei. L'interfaccia resta su 127.0.0.1.
 - **Server senza dipendenze**: `src/server/*.py` usa solo la libreria standard, compatibile **Python 3.7+**
   (verificare con `vermin -t=3.7- --no-tips --violations src/server/*.py packaging/professore-digitale`).
 - **Interfaccia leggera**: JavaScript puro in stile ES5 (`var`, funzioni), niente framework né build step.
@@ -39,6 +46,11 @@ Leggere questo file per intero prima di modificare qualunque cosa.
 | `windows/installer/`, `windows/res/` | Installatore NSIS (per tutti gli utenti o solo per me, `/S` silenzioso), icona, manifest, immagini |
 | `windows/build-windows.sh` | Compila da Linux con mingw-w64 + NSIS → `dist/windows/` (lo chiama `build.sh`) |
 | `src/web/js/eyes.js`, `setup.js`, `compat.js` | Occhi che seguono il mouse; pagina «Configura IA e voce» (solo Windows); avviso per browser troppo vecchi |
+| `src/web/js/quiz.js` | Grandi quiz (chiave `prove` dei pacchetti) e **attestato** (SVG → stampa, oppure PDF generato in JS senza librerie) |
+| `src/web/js/aree.js`, `data-fenice.js` | Percorsi tematici: Cultura generale (pacchetti `cultura-*`), FeniceOS (`feniceos` + dati della pagina), libro Tecnologia Gentile (`tecnologia-gentile`) |
+| `src/web/js/aula.js`, `src/server/pd_aula.py`, `windows/src/pd_aula.c` | Quadro dell'aula in rete locale (facilitatore/allievo), messaggi a tutti, stato della connessione |
+| `src/web/js/stampa.js`, `presenza.js` | Stampa della pagina o dell'argomento intero; saluti all'avvio, consigli quando è inattivo, attesa, uscita con promemoria |
+| `tools/voci.sh` | Scarica e verifica (SHA-256) le **voci naturali incluse**: Piper Linux x86_64/aarch64 e Windows x64, voci Paola (f) e Riccardo (m). Cache in `~/.cache/professore-digitale/voci` |
 | `archivio/` | .deb prodotti in questa copia (ignorato da git, escluso dall'archivio sorgenti). I .deb pubblicati si conservano sul PC di Danilo in `$ARCHIVIO` (`~/professore-digitale-archivio`, vedi `rilascio.conf`) |
 
 ## Comandi
@@ -53,6 +65,24 @@ tools/pubblica-sito.sh             # carica dist/pubblica/ su GitHub Pages (lo e
 tools/pubblica-tutto.sh ZIP        # per Danilo: verifica + firma APT + sito + sorgenti in un solo comando
 PD_SHARE_DIR=src python3 packaging/professore-digitale-contenuti valida src/contenuti/*.json
 ```
+
+## Voci, quiz e percorsi (dalla 3.0)
+- **Voci**: `/api/status` → `tts.voices` = `[{id, nome, genere: "m"|"f", motore, naturale}]`; `/api/tts` accetta `voice`.
+  Linux: Piper incluso nel .deb (`/usr/lib/professore-digitale/piper/<arch>/`, voci in `/usr/share/professore-digitale/voci/`,
+  avviabile solo se glibc ≥ 2.29: altrimenti si usano le varianti espeak-ng `it+m3`, `it+m1`, `it+f2`, `it+f4`), poi Pico.
+  Windows: Piper (solo 64 bit, `piper\` e `voci\` nella cartella del programma) e tutte le voci italiane SAPI/OneCore con il genere.
+  Voce predefinita: Riccardo (il Professore è un uomo), poi Paola. Le voci si scelgono in Impostazioni → Voce.
+- **Pacchetti**: oltre a `domande` e `lezioni` possono avere `prove` (grandi quiz: `id, titolo, icona, descrizione, attestato,
+  domande_per_prova 5-100, soglia 0.5-1, domande[{domanda, opzioni, corretta, spiegazione, categoria}]`). Validatori in
+  `pd_packs.py` e `packs.js` (stesse regole). Palestra: `click, dblclick, drag, typing, scroll, rightclick, copypaste, select, keys, memory, scam`.
+- **Percorsi**: le lezioni dei pacchetti `cultura-*` stanno in «Cultura generale», quelle di `feniceos` nella pagina FeniceOS,
+  quelle di `tecnologia-gentile` nella pagina del libro; tutte le altre nel corso (pagina Lezioni e conteggio dell'Inizio).
+- I contenuti di FeniceOS e del libro derivano dai materiali di Danilo (manuali, vademecum, script di build, libro): restare fedeli.
+  Il «Grande Quiz dell'Informatica» (prova `informatica`, 264 domande) è il manuale di Danilo: non alterarne domande e risposte.
+- Dati nuovi in `progress.json`: `quiz` (risultati per prova), `attestati`, `promemoria`, `ultimoAnnuncio`.
+  Impostazioni nuove: `voiceId, netCheck, idleTips, greet, goodbye, studentName, aulaRuolo, aulaNome, aulaCodice, aulaServer`.
+- Test: il saluto all'avvio si salta con `sessionStorage['pd.salutato']='1'` (test_ui.py) o con `?nosaluto`; i tempi dei consigli
+  con `PD.idleConfig`. L'aula del server Python nei test usa `PD_AULA_PORT`/`PD_AULA_UDP`.
 
 ## Versione per Windows (regole in più)
 - **Compatibilità XP SP3 → Windows 11**: il programma principale è a 32 bit (`-D_WIN32_WINNT=0x0501`) e usa solo

@@ -2,7 +2,7 @@
 """Test end-to-end del Professore Digitale con Chromium (Playwright).
 Uso: python3 tests/test_ui.py <url_base> <cartella_screenshot> [mock_ollama_url]
 """
-import json, os, sys, time, urllib.request
+import json, os, sys, time, urllib.request, urllib.error
 from playwright.sync_api import sync_playwright
 
 BASE = sys.argv[1].rstrip("/")
@@ -18,7 +18,9 @@ def check(name, cond, detail=""):
 
 with sync_playwright() as p:
     b = p.chromium.launch(args=["--autoplay-policy=no-user-gesture-required", "--use-fake-ui-for-media-stream", "--use-fake-device-for-media-stream"])
-    ctx = b.new_context(viewport={"width": 1366, "height": 800})
+    ctx = b.new_context(viewport={"width": 1366, "height": 800}, accept_downloads=True)
+    # il saluto all'avvio si prova a parte: qui la nuvoletta non deve coprire i pulsanti
+    ctx.add_init_script("try { sessionStorage.setItem('pd.salutato', '1') } catch (e) {}")
     page = ctx.new_page()
     errors, tts_calls = [], []
     page.on("pageerror", lambda e: errors.append("pageerror: " + str(e)))
@@ -53,7 +55,7 @@ with sync_playwright() as p:
     page.click("text=Lezioni >> nth=0")
     page.wait_for_selector("#view-lessons .tile")
     n = page.locator("#view-lessons .tile").count()
-    check("elenco lezioni (%d)" % n, n == page.evaluate("PD_LESSONS.length"), n)
+    check("elenco lezioni (%d)" % n, n == page.evaluate("PD.lessonsOf('corso').length"), n)
     page.screenshot(path=SHOTS + "/02-lezioni.png")
     page.goto(ROOT + "#/lessons/computer/1")
     page.wait_for_selector("#lesson-board .diagram svg", timeout=20000)
@@ -114,6 +116,12 @@ with sync_playwright() as p:
         probe.update({"come stampo una lettera": "Come stampo un documento?", "posso usare il wifi del bar": "Posso usare il Wi-Fi pubblico?",
                       "come passo le foto dal telefono al computer": "Come trasferisco le foto dal telefono al computer?",
                       "comprare su internet in sicurezza": "Come compro online in sicurezza?", "cos'è il bluetooth": "Cos'è il Bluetooth?"})
+    if page.evaluate("PD_KB.some(e => e.pack === 'cultura-storia')"):
+        probe.update({"chi era garibaldi": "Chi era Giuseppe Garibaldi?", "quando è caduto l'impero romano": "Quando è caduto l'Impero romano d'Occidente?",
+                      "perché ci sono le stagioni": "Perché ci sono le stagioni?", "quante ossa abbiamo": "Quante ossa ha il corpo umano?",
+                      "dove si trova la gioconda": "Dove si trova la Gioconda?", "cosa dice l'articolo 1": "Cosa dice l'articolo 1 della Costituzione?",
+                      "che cos'è feniceos": "Cos'è FeniceOS?", "perché si chiama fenice": "Perché si chiama FeniceOS?",
+                      "che cos'è la tecnologia gentile": "Che cos'è la Tecnologia Gentile?"})
     if page.evaluate("PD_KB.some(e => e.pack === 'windows-primi-passi')"):
         probe.update({"il programma non risponde": "Cosa faccio se un programma di Windows non risponde?",
                       "dov'è il menu start": "Cos'è il menu Start di Windows?",
@@ -301,6 +309,124 @@ with sync_playwright() as p:
     elif not standalone:
         check("menu di configurazione nascosto dove non serve", not page.is_visible('.nav-btn[data-view="setup"]'))
 
+    # --- 3.0: percorsi, grandi quiz, attestato, palestra nuova, stampa, presenza ---
+    for v, sel in (("quiz", "#view-quiz .tile"), ("cultura", "#view-cultura .materia"), ("cultura/cultura-storia", "#view-cultura .qa"),
+                   ("fenice", "#view-fenice .sezione-fenice"), ("libro", "#view-libro .qa"), ("aula", "#view-aula h1")):
+        page.goto(ROOT + "#/" + v); page.wait_for_selector(sel, timeout=15000)
+        check("pagina " + v, page.is_visible(sel))
+    page.screenshot(path=SHOTS + "/20-aula.png", full_page=True)
+    page.goto(ROOT + "#/fenice"); page.wait_for_selector("#view-fenice .chalkboard .diagram svg", timeout=20000)
+    page.screenshot(path=SHOTS + "/21-fenice.png", full_page=False)
+    page.goto(ROOT + "#/cultura/cultura-storia"); page.wait_for_selector(".qa-cerca")
+    page.fill(".qa-cerca", "garibaldi"); page.wait_for_timeout(200)
+    vis = page.evaluate("[...document.querySelectorAll('#view-cultura .qa')].filter(d => !d.hidden).length")
+    check("ricerca tra le domande di storia", 1 <= vis <= 4, vis)
+    page.screenshot(path=SHOTS + "/22-storia.png", full_page=False)
+    nprove = page.evaluate("PD.prove().length")
+    check("grandi quiz caricati (informatica, corso, 5 culture, riuso, libro)", nprove >= 9, nprove)
+    check("Grande Quiz dell'Informatica: 264 domande", page.evaluate("PD.prove().filter(p => p.id === 'informatica')[0].domande.length") == 264)
+    page.goto(ROOT + "#/quiz/informatica"); page.wait_for_selector("#q-via")
+    page.fill("#q-nome", "Maria Rossi"); page.click("#q-via")
+    for i in range(30):
+        page.wait_for_selector(".quiz-opt:not([disabled])"); page.locator(".quiz-opt").first.click(); page.click("#q-avanti")
+    page.wait_for_selector("#q-ancora")
+    r = page.evaluate("PD.progress.quiz.informatica")
+    check("quiz completato e registrato", r and r["tentativi"] == 1 and r["totale"] == 30, r)
+    page.screenshot(path=SHOTS + "/23-quiz-fine.png", full_page=False)
+    page.evaluate("""() => { (PD.progress.attestati = PD.progress.attestati || []).push({ codice: 'PD-TEST-INF-1', prova: 'informatica', titolo: "Il Grande Quiz dell'Informatica",
+        attestato: 'Alfabetizzazione digitale e informatica di base', nome: 'Maria Rossi', punteggio: 27, totale: 30, perc: 90, giudizio: 'Ottimo',
+        data: new Date().toISOString(), facilitatore: 'Danilo D\\'Auria' }); PD.saveProgress(); PD.go('#/attestato/PD-TEST-INF-1'); }""")
+    page.wait_for_selector("#att-box svg")
+    check("attestato con il nome", "Maria Rossi" in page.inner_html("#att-box"))
+    page.screenshot(path=SHOTS + "/24-attestato.png", full_page=False)
+    with page.expect_download(timeout=30000) as dl:
+        page.click("#att-pdf")
+    pdf = dl.value.path(); data = open(pdf, "rb").read()
+    check("attestato in PDF (A4 orizzontale)", data[:5] == b"%PDF-" and b"/MediaBox [0 0 842 595]" in data and len(data) > 100000, len(data))
+    page.evaluate("window.print = function () { window.__stampato = (window.__stampato || 0) + 1; }")
+    page.goto(ROOT + "#/lessons/computer/1"); page.wait_for_selector("#lesson-board .diagram svg", timeout=20000)
+    page.evaluate("PD.printTopic()"); page.wait_for_function("window.__stampato >= 1", timeout=20000)
+    passi = page.evaluate("document.querySelectorAll('#print-area .p-passo').length")
+    check("stampa della lezione intera", passi == page.evaluate("PD_LESSONS.filter(l => l.id === 'computer')[0].steps.length"), passi)
+    page.evaluate("document.body.classList.remove('printing')")
+    # palestra nuova
+    page.goto(ROOT + "#/practice"); n_ex = page.evaluate("document.querySelectorAll('#view-practice .tile').length")
+    check("palestra: 11 esercizi", n_ex == 11, n_ex)
+    page.goto(ROOT + "#/practice/keys"); page.wait_for_selector("#tk")
+    page.keyboard.press("Enter"); page.wait_for_timeout(700)
+    check("tasti speciali: Invio riconosciuto", "2 di" in page.inner_text("#sc"), page.inner_text("#sc"))
+    page.goto(ROOT + "#/practice/copypaste"); page.wait_for_selector("#dst")
+    frase = page.input_value("#src"); page.evaluate("(v) => { const d = document.querySelector('#dst'); d.value = v; d.dispatchEvent(new Event('input')); }", frase)
+    page.wait_for_timeout(800)
+    check("copia e incolla: frase riconosciuta", "2 di" in page.inner_text("#sc"), page.inner_text("#sc"))
+    page.goto(ROOT + "#/practice/memory"); page.wait_for_selector(".carta")
+    check("memory: 12 carte", page.evaluate("document.querySelectorAll('.carta').length") == 12)
+    page.goto(ROOT + "#/practice/scam"); page.wait_for_selector("#scelte button"); page.click("#scelte button >> nth=0"); page.wait_for_selector("#avanti")
+    check("riconosci la truffa: spiegazione", page.is_visible("#exp .notice"))
+    page.goto(ROOT + "#/practice/rightclick"); page.wait_for_selector(".file-ico")
+    page.click('.file-ico[data-f="0"]', button="right"); page.wait_for_selector(".ctx-menu"); page.click('.ctx-menu [data-c="Copia"]'); page.wait_for_timeout(300)
+    check("clic destro: menu e comando", "2 di" in page.inner_text("#sc"), page.inner_text("#sc"))
+    page.screenshot(path=SHOTS + "/25-clic-destro.png", full_page=False)
+    # saluti, congedo, inattivita'
+    t = page.evaluate("[9, 15, 20, 23].map(h => PD.testoSaluto(new Date(2026, 0, 5, h)))")
+    check("saluto secondo l'ora", t[0].startswith("Buongiorno") and t[1].startswith("Buon pomeriggio") and t[2].startswith("Buonasera") and "tardi" in t[3], t)
+    page.evaluate("PD.progress.promemoria = [{ t: 'Chiamare il medico' }]")
+    c = page.evaluate("PD.testoCongedo(new Date(2026, 0, 5, 23)).join(' ')")
+    check("congedo: promemoria e buona notte", "Chiamare il medico" in c and "Buona notte" in c, c)
+    page.goto(ROOT + "#/home"); page.wait_for_selector("#home-promemoria li")
+    page.click("#btn-exit"); page.wait_for_selector(".uscita")
+    check("finestra di uscita con i promemoria", "Chiamare il medico" in page.inner_text(".uscita"))
+    page.screenshot(path=SHOTS + "/26-uscita.png", full_page=False)
+    page.click("#u-resta")
+    page.evaluate("PD.progress.promemoria = []; PD.saveProgress(); PD.settings.voice = false; PD.idleConfig = { primo: 1, secondo: 2, attesa: 3 }; PD.idleReset()")
+    page.wait_for_function("PD.idleState().fase >= 1", timeout=20000)
+    check("consiglio quando il Professore è inattivo", page.is_visible("#pd-bubble"))
+    page.wait_for_function("PD.profState === 'attesa'", timeout=30000)
+    check("poi si mette in attesa", page.evaluate("PD.profState") == "attesa")
+    page.screenshot(path=SHOTS + "/27-attesa.png", full_page=False)
+    page.mouse.move(200, 300); page.mouse.move(260, 320); page.wait_for_timeout(400)
+    check("si risveglia muovendo il mouse", page.evaluate("PD.profState") != "attesa")
+    page.evaluate("PD.idleConfig = { primo: 99999, secondo: 99999, attesa: 99999 }; PD.settings.voice = true; PD.bubbleClose()")
+    page.wait_for_function("!document.querySelector('#net').classList.contains('attesa')", timeout=20000)
+    check("indicatore Online presente", page.is_visible("#net"), page.get_attribute("#net", "class"))
+    if not standalone:
+        voci = page.evaluate("PD.status.tts.voices || []")
+        generi = set(v["genere"] for v in voci)
+        if not os.environ.get("PD_TEST_WINDOWS"):   # in Wine non ci sono voci italiane di Windows
+            check("voci maschili e femminili disponibili", {"m", "f"} <= generi, voci)
+    if not standalone and [v for v in page.evaluate("PD.status.tts.voices || []") if v["genere"] == "f"]:
+        st = page.evaluate("""async () => { const r = await fetch('/api/tts', {method: 'POST', headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({text: 'Prova', voice: %s})}); return [r.status, r.headers.get('X-TTS-Engine')]; }""" % json.dumps([v for v in voci if v["genere"] == "f"][0]["id"]))
+        check("sintesi con la voce scelta", st[0] == 200, st)
+    if not standalone:
+        page.goto(ROOT + "#/settings"); page.wait_for_selector("#test-voice")
+        check("scelta della voce in Impostazioni", not voci or page.evaluate("document.querySelectorAll('#s-voiceid option').length") == len(voci) + 1)
+        # aula: questo PC diventa il facilitatore e riceve un allievo simulato
+        aula = page.evaluate("""async () => { PD.settings.aulaRuolo = 'facilitatore'; PD.settings.aulaCodice = '4321';
+            await PD.api('/api/data/settings', {value: PD.settings}); return await PD.api('/api/aula/applica', {}); }""")
+        check("aula: PC del facilitatore in ascolto", aula.get("ruolo") == "facilitatore" and aula.get("in_ascolto"), aula)
+        porta = aula.get("porta")
+        ip = (aula.get("ips") or ["127.0.0.1"])[0]
+        def ciao(codice):
+            req = urllib.request.Request("http://%s:%d/aula/ciao" % (ip, porta), headers={"Content-Type": "application/json"},
+                data=json.dumps({"id": "test-pc-1", "codice": codice, "pc": "PC-AULA-3", "utente": "Giuseppe Verdi", "versione": "3.0.0",
+                                 "sistema": {"os": "Linux Mint 22", "ram_mb": 4096}, "attivita": {"vista": "lessons", "titolo": "Lezione: Il mouse"},
+                                 "progressi": {"lezioni_fatte": 4, "lezioni_totali": 15, "quiz": [{"titolo": "Il Grande Quiz di Storia", "migliore": 85, "superata": True}]}}).encode())
+            try:
+                with urllib.request.build_opener(urllib.request.ProxyHandler({})).open(req, timeout=8) as r: return r.status
+            except urllib.error.HTTPError as e: return e.code
+        check("aula: codice sbagliato rifiutato", ciao("0000") == 403)
+        check("aula: allievo ricevuto", ciao("4321") == 200)
+        page.goto(ROOT + "#/aula"); page.wait_for_selector(".tab-aula td", timeout=15000)
+        check("quadro dell'aula con l'allievo", "Giuseppe Verdi" in page.inner_text(".tab-aula"))
+        page.screenshot(path=SHOTS + "/28-aula-facilitatore.png", full_page=True)
+        page.evaluate("""async () => { PD.settings.aulaRuolo = ''; await PD.api('/api/data/settings', {value: PD.settings}); await PD.api('/api/aula/rimuovi', {id: '*'}); return PD.api('/api/aula/applica', {}); }""")
+    # saluto vocale all'avvio (nuova finestra senza il segno "gia' salutato")
+    g = b.new_context(viewport={"width": 1366, "height": 800}).new_page()
+    g.goto(ROOT + "#/home"); g.wait_for_selector("#pd-bubble", timeout=15000)
+    check("saluto all'avvio", any(w in g.inner_text("#pd-bubble") for w in ("Buongiorno", "Buon pomeriggio", "Buonasera")))
+    g.close()
+
     # --- telefono / schermo stretto ---
     m = b.new_context(viewport={"width": 390, "height": 800}).new_page()
     m.on("pageerror", lambda e: errors.append("mobile pageerror: " + str(e)))
@@ -309,7 +435,7 @@ with sync_playwright() as p:
     check("nessuno scorrimento orizzontale su telefono", not over)
     m.screenshot(path=SHOTS + "/13-telefono.png", full_page=False)
     if not standalone and page.evaluate("!!(PD.status && PD.status.setup)"):
-        m.goto(ROOT + "#/setup"); m.wait_for_selector("#setup-body dl.kv", timeout=20000)
+        m.goto(ROOT + "#/setup"); m.wait_for_selector("#setup-body dl.kv", timeout=20000); m.wait_for_timeout(1500)
         check("configurazione leggibile su schermo stretto", not m.evaluate("document.documentElement.scrollWidth > window.innerWidth + 1"))
         m.screenshot(path=SHOTS + "/17-configura-telefono.png", full_page=True)
 

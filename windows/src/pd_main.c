@@ -395,6 +395,8 @@ int WINAPI wWinMain(HINSTANCE inst, HINSTANCE prev, PWSTR cmdline, int show) {
     if (getenv("PD_DEBUG") || no_browser) { say("Professore Digitale %s in ascolto su http://127.0.0.1:%d/\n", G.version, G.port); }
     g_quit = CreateEventW(NULL, TRUE, FALSE, NULL);
     ai_init();
+    aula_init();
+    tts_init();
     create_window(inst, tray && !getenv("PD_NO_TRAY"));
     if (!no_browser) open_app_window(hash);
     /* ciclo principale: messaggi dell'icona, richiesta di chiusura, spegnimento quando nessuno usa il Professore */
@@ -405,7 +407,7 @@ int WINAPI wWinMain(HINSTANCE inst, HINSTANCE prev, PWSTR cmdline, int show) {
         while (PeekMessageW(&msg, NULL, 0, 0, PM_REMOVE)) { if (msg.message == WM_QUIT) quit = 1; TranslateMessage(&msg); DispatchMessageW(&msg); }
         if (quit) break;
         DWORD idle = GetTickCount() - (DWORD)G.last_seen;
-        if (G.idle_timeout > 0 && idle > (DWORD)G.idle_timeout * 1000u && !setup_busy()) { pd_log("inattivo: spegnimento automatico"); break; }
+        if (G.idle_timeout > 0 && idle > (DWORD)G.idle_timeout * 1000u && !setup_busy() && !aula_facilitatore()) { pd_log("inattivo: spegnimento automatico"); break; }
     }
     pd_log("chiusura del Professore Digitale");
     if (g_nid.hWnd) Shell_NotifyIconW(NIM_DELETE, &g_nid);

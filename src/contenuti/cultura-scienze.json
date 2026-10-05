@@ -1,0 +1,1740 @@
+{
+ "formato": "professore-digitale-contenuti",
+ "formato_versione": 1,
+ "id": "cultura-scienze",
+ "titolo": "Cultura generale · Scienze",
+ "versione": "1.0.0",
+ "autore": "Danilo D'Auria",
+ "descrizione": "Le scienze spiegate con parole semplici: il corpo umano e la prevenzione, il sistema solare, la materia e l'energia con le regole di sicurezza per corrente e gas, la natura e la biodiversità, il clima e la raccolta differenziata. Cinque lezioni, trenta risposte nella guida e il Grande Quiz di Scienze con attestato.",
+ "richiede_app": "3.0.0",
+ "suggerimenti": [
+  "Come funziona il cuore?",
+  "Quanti sono i pianeti del sistema solare?",
+  "Cosa faccio se sento odore di gas?",
+  "Cos'è l'effetto serra?",
+  "Come si fa la raccolta differenziata?"
+ ],
+ "domande": [
+  {
+   "domanda": "Quante ossa ha il corpo umano?",
+   "parole_chiave": [
+    "ossa",
+    "scheletro",
+    "quante ossa",
+    "femore",
+    "osso più lungo"
+   ],
+   "risposta": "Lo scheletro di un adulto è formato da **206 ossa**. Alla nascita le ossa sono di più, perché alcune si saldano tra loro durante la crescita.\n\nL'osso più lungo è il **femore**, nella coscia; il più piccolo è la **staffa**, un ossicino dentro l'orecchio più piccolo di un chicco di riso.\n\nLo scheletro sostiene il corpo, protegge gli organi delicati, come il cervello dentro il cranio, e insieme ai muscoli ci permette di muoverci.",
+   "lezione": "corpo-umano"
+  },
+  {
+   "domanda": "Come funziona il cuore?",
+   "parole_chiave": [
+    "cuore",
+    "battito",
+    "circolazione",
+    "arterie",
+    "vene",
+    "sangue"
+   ],
+   "risposta": "Il **cuore** è un muscolo grande più o meno come un pugno, che funziona da **pompa**. Ha quattro cavità: due **atri** e due **ventricoli**.\n\nLe **arterie** portano il sangue ricco di ossigeno **dal cuore** a tutto il corpo; le **vene** lo riportano **al cuore**, che lo manda ai polmoni a ricaricarsi di ossigeno. Il cuore batte più di **100.000 volte al giorno**.\n\nPer ogni dubbio sul vostro cuore, rivolgetevi al medico.",
+   "schema": "flowchart LR\n  C[\"🫀 Cuore\"] --> A[\"Arterie\"] --> K[\"Corpo\"] --> V[\"Vene\"] --> C",
+   "lezione": "corpo-umano"
+  },
+  {
+   "domanda": "Cos'è la pressione del sangue?",
+   "parole_chiave": [
+    "pressione",
+    "pressione del sangue",
+    "massima e minima",
+    "misurare la pressione"
+   ],
+   "risposta": "La **pressione arteriosa** è la forza con cui il sangue spinge sulle pareti delle arterie mentre il cuore pompa.\n\nSi indica con due numeri:\n\n- la **massima**, o sistolica, quando il cuore si contrae;\n- la **minima**, o diastolica, quando il cuore si rilassa tra un battito e l'altro.\n\nQuali valori vanno bene per voi, ogni quanto misurarla e se servono cure lo decide **il vostro medico**: chiedete a lui come e quando controllarla.",
+   "lezione": "corpo-umano"
+  },
+  {
+   "domanda": "A cosa serve il fegato?",
+   "parole_chiave": [
+    "fegato",
+    "bile",
+    "reni",
+    "organi interni",
+    "digestione"
+   ],
+   "risposta": "Il **fegato** è l'**organo interno più grande** del corpo e si trova in alto a destra nella pancia. È una vera fabbrica:\n\n- produce la **bile**, che aiuta a digerire i grassi;\n- conserva riserve di energia;\n- trasforma ed elimina molte sostanze, comprese quelle delle medicine e dell'alcol.\n\nI **reni**, invece, sono due e si trovano nella parte posteriore dell'addome, ai lati della colonna vertebrale: filtrano il sangue e producono l'urina.",
+   "lezione": "corpo-umano"
+  },
+  {
+   "domanda": "Come si digerisce il cibo?",
+   "parole_chiave": [
+    "digestione",
+    "stomaco",
+    "intestino",
+    "apparato digerente",
+    "esofago"
+   ],
+   "risposta": "La digestione è un viaggio a tappe:\n\n1. **Bocca**: i denti masticano e la saliva inizia a trasformare il cibo.\n2. **Esofago**: un tubo porta il boccone allo stomaco.\n3. **Stomaco**: il cibo viene rimescolato con i succhi gastrici.\n4. **Intestino tenue**: le sostanze nutritive passano nel sangue.\n5. **Intestino crasso**: si recupera l'acqua e si eliminano gli scarti.\n\nFegato e pancreas aiutano con i loro succhi. Masticare con calma rende il lavoro più facile.",
+   "schema": "flowchart LR\n  A[\"👄 Bocca\"] --> B[\"Esofago\"] --> C[\"Stomaco\"] --> D[\"Intestino\"]",
+   "lezione": "corpo-umano"
+  },
+  {
+   "domanda": "Perché è importante lavarsi le mani?",
+   "parole_chiave": [
+    "lavarsi le mani",
+    "mani",
+    "igiene",
+    "microbi",
+    "germi",
+    "sapone"
+   ],
+   "risposta": "Le mani toccano di tutto e portano facilmente **microbi** a bocca, naso e occhi. Lavarle bene è uno dei modi più semplici ed efficaci per prevenire molte infezioni.\n\nCome fare: acqua e **sapone**, strofinando **palmi, dorso, tra le dita e sotto le unghie** per almeno **20 secondi**, il tempo di canticchiare due volte «Tanti auguri a te». Poi sciacquate e asciugate bene.\n\nLavatele sempre prima di mangiare, dopo il bagno e quando rientrate a casa.",
+   "lezione": "corpo-umano"
+  },
+  {
+   "domanda": "Cosa sono i vaccini?",
+   "parole_chiave": [
+    "vaccini",
+    "vaccinazione",
+    "vaccino",
+    "difese immunitarie",
+    "jenner"
+   ],
+   "risposta": "Un **vaccino** insegna al **sistema immunitario**, le difese del nostro corpo, a riconoscere un microbo senza dover prendere la malattia. Così, se il microbo arriva davvero, il corpo è pronto a difendersi.\n\nIl primo vaccino fu sviluppato dal medico inglese **Edward Jenner** alla fine del Settecento contro il **vaiolo**, una malattia che grazie alle vaccinazioni è stata eliminata da tutto il mondo.\n\nQuali vaccini fare e quando lo valutate insieme al vostro **medico**.",
+   "lezione": "corpo-umano"
+  },
+  {
+   "domanda": "Qual è il numero per le emergenze?",
+   "parole_chiave": [
+    "emergenza",
+    "112",
+    "118",
+    "ambulanza",
+    "numero emergenza",
+    "pronto soccorso"
+   ],
+   "risposta": "Il **112** è il **numero unico di emergenza europeo**: è gratuito, funziona anche da cellulare e vi mette in contatto con ambulanza, vigili del fuoco o forze dell'ordine.\n\nQuando chiamate, mantenete la calma e dite con chiarezza:\n\n1. **dove** vi trovate, con indirizzo e comune;\n2. **cosa** è successo;\n3. **quante persone** sono coinvolte.\n\nNon riattaccate finché non ve lo dice l'operatore. Per problemi non urgenti rivolgetevi al vostro medico o alla guardia medica.",
+   "lezione": "corpo-umano"
+  },
+  {
+   "domanda": "Quanti sono i pianeti del sistema solare?",
+   "parole_chiave": [
+    "pianeti",
+    "sistema solare",
+    "quanti pianeti",
+    "ordine dei pianeti"
+   ],
+   "risposta": "I pianeti sono **otto**. In ordine dal Sole: **Mercurio, Venere, Terra, Marte, Giove, Saturno, Urano e Nettuno**.\n\nI primi quattro sono **rocciosi** e piccoli; gli altri quattro sono **giganti** fatti soprattutto di gas e ghiacci. Il più grande è **Giove**, il più piccolo è **Mercurio**, il più caldo è **Venere**.\n\nPlutone, che un tempo era il nono, dal 2006 è considerato un **pianeta nano**.",
+   "lezione": "sistema-solare"
+  },
+  {
+   "domanda": "Perché la Luna cambia forma?",
+   "parole_chiave": [
+    "fasi lunari",
+    "luna",
+    "luna piena",
+    "luna nuova",
+    "quarto di luna"
+   ],
+   "risposta": "La Luna **non cambia forma**: è sempre una sfera. Cambia la parte illuminata dal Sole che vediamo dalla Terra.\n\nMentre la Luna gira attorno alla Terra, la vediamo da angolazioni diverse: sono le **fasi lunari**, cioè **luna nuova**, **primo quarto**, **luna piena** e **ultimo quarto**. Il ciclo completo dura circa **29 giorni e mezzo**.\n\nLa Luna, inoltre, ci mostra **sempre la stessa faccia**.",
+   "schema": "flowchart LR\n  A[\"🌑 Nuova\"] --> B[\"🌓 Primo quarto\"] --> C[\"🌕 Piena\"] --> D[\"🌗 Ultimo quarto\"]",
+   "lezione": "sistema-solare"
+  },
+  {
+   "domanda": "Cos'è un'eclissi?",
+   "parole_chiave": [
+    "eclissi",
+    "eclissi di sole",
+    "eclissi di luna",
+    "eclisse"
+   ],
+   "risposta": "Un'**eclissi** avviene quando Sole, Terra e Luna si allineano.\n\n- **Eclissi di Sole**: la **Luna** passa davanti al Sole e lo copre, in tutto o in parte. Può avvenire solo con la luna nuova.\n- **Eclissi di Luna**: la **Terra** si mette tra il Sole e la Luna, e la sua ombra oscura la Luna, che spesso diventa rossastra. Può avvenire solo con la luna piena.\n\n**Attenzione**: un'eclissi di Sole si osserva solo con gli **appositi occhialini certificati**, mai a occhio nudo.",
+   "lezione": "sistema-solare"
+  },
+  {
+   "domanda": "Cosa sono le stelle cadenti?",
+   "parole_chiave": [
+    "stelle cadenti",
+    "san lorenzo",
+    "10 agosto",
+    "meteore",
+    "desiderio"
+   ],
+   "risposta": "Le **stelle cadenti** non sono stelle. Sono piccolissimi granelli di polvere, spesso lasciati da una **cometa**, che entrano nell'atmosfera a grande velocità e **bruciano**, lasciando una scia luminosa. Gli scienziati le chiamano **meteore**.\n\nLe più famose sono quelle delle notti intorno al **10 agosto**, la **notte di San Lorenzo**. Per vederle bene allontanatevi dalle luci della città e guardate il cielo con pazienza.",
+   "lezione": "sistema-solare"
+  },
+  {
+   "domanda": "Cos'è un anno luce?",
+   "parole_chiave": [
+    "anno luce",
+    "anni luce",
+    "distanze stelle",
+    "velocità della luce"
+   ],
+   "risposta": "Nonostante il nome, l'**anno luce** non misura il tempo ma una **distanza**: è la strada che la luce percorre in un anno, circa **9.500 miliardi di chilometri**.\n\nLa luce è velocissima: dal Sole alla Terra impiega circa **8 minuti**. Le stelle invece sono così lontane che la loro luce viaggia per anni, secoli o anche di più prima di arrivare a noi.\n\nQuando guardate una stella, la vedete com'era quando quella luce è partita.",
+   "lezione": "sistema-solare"
+  },
+  {
+   "domanda": "Chi è stato il primo uomo sulla Luna?",
+   "parole_chiave": [
+    "primo uomo sulla luna",
+    "armstrong",
+    "apollo 11",
+    "1969",
+    "sbarco sulla luna"
+   ],
+   "risposta": "Il primo uomo a camminare sulla Luna è stato l'americano **Neil Armstrong**, il **20 luglio 1969**, con la missione **Apollo 11**. In Italia era ormai la notte tra il 20 e il 21 luglio, e milioni di persone seguirono la diretta in televisione.\n\nCon lui scese sulla Luna **Buzz Aldrin**, mentre **Michael Collins** restò in orbita sulla navicella. Prima di loro, nel **1961**, **Jurij Gagarin** era stato il primo uomo a volare nello spazio.",
+   "lezione": "sistema-solare"
+  },
+  {
+   "domanda": "Quali sono gli stati della materia?",
+   "parole_chiave": [
+    "stati della materia",
+    "solido liquido gassoso",
+    "ghiaccio",
+    "vapore",
+    "acqua bolle"
+   ],
+   "risposta": "La materia si presenta in tre stati principali:\n\n- **solido**: ha una forma propria, come il ghiaccio o una pietra;\n- **liquido**: prende la forma del recipiente, come l'acqua;\n- **gassoso**: si espande e occupa tutto lo spazio, come il vapore.\n\nL'acqua passa da uno stato all'altro con la temperatura: gela a **0 °C** e bolle a **100 °C** al livello del mare. Quando gela aumenta di volume: per questo il ghiaccio galleggia.",
+   "schema": "flowchart LR\n  A[\"🧊 Solido\"] --> B[\"💧 Liquido\"] --> C[\"♨️ Gas\"]",
+   "lezione": "materia-energia"
+  },
+  {
+   "domanda": "Quanti volt ha la corrente di casa?",
+   "parole_chiave": [
+    "volt",
+    "230 volt",
+    "corrente di casa",
+    "tensione",
+    "presa"
+   ],
+   "risposta": "Nelle case italiane, come nel resto d'Europa, arriva una corrente **alternata a 230 volt**.\n\nIl **volt** misura la «spinta» della corrente, il **watt** misura la potenza di un apparecchio e il **kilowattora** l'energia consumata che trovate in bolletta.\n\n230 volt sono **pericolosi** per il corpo umano: non aprite mai prese e apparecchi e non toccate fili scoperti. Per qualsiasi lavoro all'impianto chiamate un **elettricista abilitato**.",
+   "lezione": "materia-energia"
+  },
+  {
+   "domanda": "Cos'è il salvavita?",
+   "parole_chiave": [
+    "salvavita",
+    "interruttore differenziale",
+    "quadro elettrico",
+    "salta la corrente"
+   ],
+   "risposta": "Il **salvavita**, il cui nome tecnico è **interruttore differenziale**, si trova nel quadro elettrico di casa. Controlla di continuo la corrente e, se si accorge di una **dispersione** pericolosa, per esempio verso una persona che tocca un filo, **stacca tutto** in una frazione di secondo.\n\nHa un tasto di **prova**: premetelo periodicamente come indicano le istruzioni, per verificare che funzioni. Se scatta spesso, fate controllare l'impianto da un elettricista.",
+   "lezione": "materia-energia"
+  },
+  {
+   "domanda": "Cosa faccio se sento odore di gas?",
+   "parole_chiave": [
+    "odore di gas",
+    "fuga di gas",
+    "gas",
+    "perdita di gas"
+   ],
+   "risposta": "Mantenete la calma e seguite questi passi:\n\n1. **Non** accendete né spegnete luci o interruttori e non suonate campanelli.\n2. **Niente fiamme** né sigarette.\n3. Aprite subito **porte e finestre**.\n4. Chiudete il **rubinetto generale** del gas.\n5. Uscite di casa e chiamate **da fuori** il pronto intervento gas o il **112**.\n\nIl gas di casa non ha odore naturale: quello che sentite è stato aggiunto apposta per avvisarvi.",
+   "schema": "flowchart LR\n  A[\"👃 Odore di gas\"] --> B[\"🪟 Apro le finestre\"] --> C[\"🔧 Chiudo il gas\"] --> D[\"📞 Chiamo da fuori\"]",
+   "lezione": "materia-energia"
+  },
+  {
+   "domanda": "Cos'è il monossido di carbonio?",
+   "parole_chiave": [
+    "monossido di carbonio",
+    "monossido",
+    "caldaia",
+    "stufa",
+    "braciere",
+    "rilevatore"
+   ],
+   "risposta": "Il **monossido di carbonio** è un gas **invisibile e senza odore**, prodotto quando stufe, caldaie, camini o bracieri bruciano male o in stanze poco aerate. È molto **pericoloso** proprio perché non ce ne si accorge.\n\nPer difendersi:\n\n- fate **controllare** regolarmente caldaie e stufe da un tecnico;\n- **arieggiate** le stanze;\n- non usate bracieri o generatori al chiuso;\n- installate un **rilevatore di monossido**.\n\nSe suona l'allarme, aprite le finestre, uscite e chiamate il **112**.",
+   "lezione": "materia-energia"
+  },
+  {
+   "domanda": "Cos'è il kilowattora in bolletta?",
+   "parole_chiave": [
+    "kilowattora",
+    "kwh",
+    "bolletta luce",
+    "consumo elettrico",
+    "watt"
+   ],
+   "risposta": "Il **kilowattora** (kWh) è l'unità con cui si misura l'**energia elettrica consumata**. Un kWh è l'energia usata da un apparecchio da **1.000 watt acceso per un'ora**.\n\nEsempi: un forno da 2.000 watt acceso mezz'ora consuma 1 kWh; una lampadina LED da 10 watt deve restare accesa 100 ore per consumarne uno.\n\nPer capire la vostra bolletta o scegliere un'offerta, fatevi aiutare da una persona di fiducia o da un'associazione di consumatori.",
+   "lezione": "materia-energia"
+  },
+  {
+   "domanda": "Le lampadine LED consumano meno?",
+   "parole_chiave": [
+    "led",
+    "lampadine",
+    "risparmio energetico",
+    "lampadina a basso consumo",
+    "stand-by"
+   ],
+   "risposta": "Sì. Le lampadine **LED** consumano **molto meno** delle vecchie lampadine a incandescenza a parità di luce, e durano molto più a lungo. Le vecchie lampadine trasformavano gran parte dell'energia in **calore**, per questo scottavano.\n\nQuando le comprate guardate i **lumen** sulla confezione: indicano quanta luce fanno.\n\nAltro consiglio: gli apparecchi in **stand-by**, con la lucina accesa, consumano un po' anche da spenti. Una presa multipla con interruttore aiuta.",
+   "lezione": "materia-energia"
+  },
+  {
+   "domanda": "Cos'è la fotosintesi?",
+   "parole_chiave": [
+    "fotosintesi",
+    "piante",
+    "clorofilla",
+    "ossigeno",
+    "foglie"
+   ],
+   "risposta": "La **fotosintesi** è il modo in cui le piante si nutrono. Nelle foglie, grazie alla **clorofilla**, la sostanza che le rende verdi, la pianta usa:\n\n- la **luce del Sole**,\n- l'**acqua** presa dalle radici,\n- l'**anidride carbonica** dell'aria,\n\nper produrre **zuccheri**, il suo nutrimento, e liberare **ossigeno**.\n\nÈ grazie alla fotosintesi che nell'aria c'è l'ossigeno che respiriamo: le piante sono le prime della catena alimentare.",
+   "schema": "flowchart LR\n  A[\"☀️ Luce\"] --> F[\"🌿 Foglia\"]\n  B[\"💧 Acqua\"] --> F\n  C[\"CO₂ dell'aria\"] --> F\n  F --> O[\"🍃 Ossigeno e zuccheri\"]",
+   "lezione": "natura-ecosistemi"
+  },
+  {
+   "domanda": "Cos'è un ecosistema?",
+   "parole_chiave": [
+    "ecosistema",
+    "catena alimentare",
+    "equilibrio naturale",
+    "ambiente naturale"
+   ],
+   "risposta": "Un **ecosistema** è un ambiente dove esseri viventi, come piante, animali, funghi e microbi, e parti non viventi, come acqua, aria, suolo e clima, stanno insieme e dipendono gli uni dagli altri.\n\nSono ecosistemi un bosco, uno stagno, un prato, il mare.\n\nAl suo interno l'energia passa attraverso la **catena alimentare**: le **piante** producono nutrimento, gli **erbivori** le mangiano, i **carnivori** mangiano altri animali, e **funghi** e **batteri** decompongono i resti restituendo nutrimento al terreno.",
+   "lezione": "natura-ecosistemi"
+  },
+  {
+   "domanda": "Cos'è la biodiversità?",
+   "parole_chiave": [
+    "biodiversità",
+    "specie",
+    "specie in pericolo",
+    "estinzione",
+    "varietà della vita"
+   ],
+   "risposta": "La **biodiversità** è la varietà della vita sulla Terra: tutte le specie di piante, animali, funghi e microrganismi, e gli ambienti in cui vivono.\n\nÈ preziosa perché ci dà cibo, acqua pulita, fibre, sostanze usate anche nelle medicine, e rende gli ecosistemi più forti.\n\nLe minacce principali sono la distruzione degli ambienti naturali, l'inquinamento, i cambiamenti climatici, lo sfruttamento eccessivo e le specie invasive. L'Italia è uno dei Paesi europei più ricchi di specie.",
+   "lezione": "natura-ecosistemi"
+  },
+  {
+   "domanda": "Perché le api sono importanti?",
+   "parole_chiave": [
+    "api",
+    "impollinazione",
+    "polline",
+    "miele",
+    "insetti utili"
+   ],
+   "risposta": "Le **api**, insieme ad altri insetti come bombi e farfalle, sono **impollinatori**: volando di fiore in fiore trasportano il **polline**, e così permettono a molte piante di produrre **frutti e semi**.\n\nMolte delle piante che ci danno frutta e verdura hanno bisogno di loro. Senza impollinatori la nostra tavola sarebbe molto più povera.\n\nPer aiutarle: lasciate qualche fiore sul balcone o in giardino e limitate l'uso di prodotti chimici.",
+   "lezione": "natura-ecosistemi"
+  },
+  {
+   "domanda": "La balena è un pesce?",
+   "parole_chiave": [
+    "balena",
+    "delfino",
+    "mammiferi",
+    "pesci",
+    "vertebrati",
+    "pipistrello"
+   ],
+   "risposta": "No: la **balena** è un **mammifero**, come il delfino. Respira aria con i **polmoni**, risalendo in superficie, e **allatta** i piccoli.\n\nI vertebrati si dividono in cinque gruppi: **mammiferi, uccelli, rettili, anfibi e pesci**. Ci sono altre curiosità: il **pipistrello** è un mammifero che vola, il **pinguino** è un uccello che non vola ma nuota benissimo, e il **ragno** non è un insetto, perché ha otto zampe e non sei.",
+   "lezione": "natura-ecosistemi"
+  },
+  {
+   "domanda": "Cos'è l'effetto serra?",
+   "parole_chiave": [
+    "effetto serra",
+    "riscaldamento globale",
+    "anidride carbonica",
+    "co2",
+    "gas serra",
+    "cambiamento climatico"
+   ],
+   "risposta": "L'**effetto serra** è un fenomeno naturale: alcuni gas dell'aria, come vapore acqueo, **anidride carbonica** e metano, trattengono parte del calore del Sole, come una coperta. Senza di esso la Terra avrebbe in media circa **18 gradi sotto zero**.\n\nBruciando carbone, petrolio e gas e abbattendo foreste, l'uomo ha aumentato molto l'anidride carbonica nell'aria. Gli scienziati concordano che questo rafforza l'effetto serra e contribuisce al **riscaldamento globale**, visibile per esempio nel ritiro dei ghiacciai.",
+   "schema": "flowchart LR\n  A[\"☀️ Sole\"] --> B[\"🌍 Terra\"] --> C[\"☁️ Gas serra\"] --> D[\"🌡️ Calore trattenuto\"]",
+   "lezione": "clima-ambiente"
+  },
+  {
+   "domanda": "Che differenza c'è tra tempo e clima?",
+   "parole_chiave": [
+    "tempo e clima",
+    "clima",
+    "meteo",
+    "previsioni del tempo",
+    "clima mediterraneo"
+   ],
+   "risposta": "Il **tempo** è quello che fa oggi o domani: sole, pioggia, vento, caldo o freddo. Cambia di continuo ed è quello delle **previsioni meteo**.\n\nIl **clima** è il tempo **medio** di un luogo calcolato su molti anni, di solito **trenta**.\n\nPer questo una giornata fredda in estate non smentisce il riscaldamento del clima, e una giornata calda in inverno non lo dimostra: conta l'andamento su lunghi periodi. Gran parte dell'Italia ha un **clima mediterraneo**, con estati calde e inverni miti.",
+   "lezione": "clima-ambiente"
+  },
+  {
+   "domanda": "Quali sono le energie rinnovabili?",
+   "parole_chiave": [
+    "energie rinnovabili",
+    "energia solare",
+    "pannelli solari",
+    "eolico",
+    "fotovoltaico",
+    "fonti fossili"
+   ],
+   "risposta": "Le **energie rinnovabili** vengono da fonti che si rigenerano e non si esauriscono:\n\n- **solare**, con i pannelli fotovoltaici e termici;\n- **eolica**, dal vento;\n- **idroelettrica**, dall'acqua delle dighe;\n- **geotermica**, dal calore della Terra, usata per la prima volta per produrre elettricità a **Larderello**, in Toscana;\n- **biomasse**, da legna e scarti vegetali.\n\nLe fonti **fossili**, cioè carbone, petrolio e gas, invece si esauriscono e bruciando liberano anidride carbonica.",
+   "lezione": "clima-ambiente"
+  },
+  {
+   "domanda": "Come si fa la raccolta differenziata?",
+   "parole_chiave": [
+    "raccolta differenziata",
+    "differenziata",
+    "rifiuti",
+    "riciclo",
+    "dove lo butto",
+    "pile",
+    "farmaci scaduti"
+   ],
+   "risposta": "Le categorie più comuni sono: **organico**, **carta e cartone**, **plastica**, **vetro**, **metalli** e **indifferenziato**.\n\nAttenzioni utili:\n\n- ceramica, specchi e lampadine **non** vanno nel vetro;\n- **pile** e **farmaci scaduti** nei contenitori appositi, spesso presso negozi e farmacie;\n- **olio** di frittura in una bottiglia, da portare all'isola ecologica;\n- vecchi **elettrodomestici** all'isola ecologica o al negozio.\n\nLe regole **cambiano da comune a comune**: seguite il calendario e le istruzioni del vostro comune.",
+   "schema": "flowchart TD\n  R[\"🗑️ Rifiuti\"] --> A[\"🍎 Organico\"]\n  R --> B[\"📦 Carta\"]\n  R --> C[\"🧴 Plastica\"]\n  R --> D[\"🍾 Vetro\"]",
+   "lezione": "clima-ambiente"
+  }
+ ],
+ "lezioni": [
+  {
+   "id": "corpo-umano",
+   "icona": "🫀",
+   "titolo": "Il corpo umano e la salute",
+   "livello": "Scienze",
+   "minuti": 20,
+   "obiettivo": "Conoscere a grandi linee come è fatto il nostro corpo e le buone abitudini di prevenzione riconosciute da tutti. Per ogni dubbio sulla propria salute, il riferimento è sempre il medico.",
+   "palestra": "",
+   "passi": [
+    {
+     "titolo": "Cellule, organi e apparati",
+     "testo": "Il nostro corpo è fatto di miliardi di minuscoli mattoncini chiamati **cellule**, così piccole che si vedono solo al microscopio.\n\nLe cellule simili si uniscono e formano i **tessuti**; più tessuti formano un **organo**, come il cuore o lo stomaco; più organi che lavorano insieme formano un **apparato**, come l'apparato digerente.\n\nA sostenere tutto c'è lo **scheletro**: in un adulto è formato da **206 ossa**. L'osso più lungo è il **femore**, nella coscia; il più piccolo è la **staffa**, dentro l'orecchio. Ossa e **muscoli** insieme ci permettono di muoverci.",
+     "schema": "flowchart LR\n  A[\"🔬 Cellule\"] --> B[\"Tessuti\"] --> C[\"🫀 Organi\"] --> D[\"Apparati\"] --> E[\"🧍 Corpo\"]"
+    },
+    {
+     "titolo": "Il cuore e la circolazione",
+     "testo": "Il **cuore** è un muscolo grande più o meno come un pugno. Funziona come una **pompa**: batte decine di volte al minuto, più di **100.000 volte al giorno**, e spinge il sangue in tutto il corpo.\n\nIl cuore ha **quattro cavità**: due **atri** in alto e due **ventricoli** in basso.\n\n- Le **arterie** portano il sangue **dal cuore** verso il corpo.\n- Le **vene** lo riportano **al cuore**.\n- I **capillari**, sottilissimi, raggiungono ogni angolo.\n\nNel sangue ci sono i **globuli rossi**, che trasportano l'ossigeno, i **globuli bianchi**, che ci difendono dai microbi, e le **piastrine**, che aiutano a chiudere le ferite.",
+     "schema": "flowchart LR\n  C[\"🫀 Cuore\"] --> A[\"Arterie\"] --> K[\"Capillari\"] --> V[\"Vene\"] --> C"
+    },
+    {
+     "titolo": "Respirare e digerire",
+     "testo": "Con la **respirazione** l'aria entra nei **polmoni**. Lì il sangue prende l'**ossigeno** e lascia l'**anidride carbonica**, che buttiamo fuori espirando. Un muscolo a forma di cupola, il **diaframma**, aiuta i polmoni a gonfiarsi e sgonfiarsi.\n\nCon la **digestione** il cibo viene trasformato in sostanze utili:\n\n1. **bocca**: i denti masticano e la saliva inizia il lavoro;\n2. **esofago**: un tubo porta il cibo allo stomaco;\n3. **stomaco**: il cibo viene rimescolato con i succhi gastrici;\n4. **intestino**: le sostanze nutritive passano nel sangue.\n\nIl **fegato**, l'organo interno più grande, produce la **bile** e trasforma molte sostanze. I **reni** filtrano il sangue e producono l'urina."
+    },
+    {
+     "titolo": "Il cervello e i sensi",
+     "testo": "Il **sistema nervoso** è il centro di comando del corpo. È formato dal **cervello**, protetto dal cranio, dal **midollo spinale**, protetto dalla colonna vertebrale, e da una fitta rete di **nervi** che portano messaggi in ogni parte del corpo, come i fili di un grande impianto elettrico.\n\nIl cervello riceve le informazioni dai **cinque sensi**: **vista** (occhi), **udito** (orecchie), **olfatto** (naso), **gusto** (lingua) e **tatto** (pelle).\n\nLa **pelle** è l'organo più esteso del corpo: ci protegge, ci fa sentire caldo, freddo e dolore, e aiuta a regolare la temperatura con il sudore.",
+     "consiglio": "Anche il cervello ama l'esercizio: leggere, imparare cose nuove, giocare e stare in compagnia lo tengono attivo."
+    },
+    {
+     "titolo": "La prevenzione: buone abitudini",
+     "testo": "Prevenire significa fare oggi qualcosa per stare meglio domani. Le abitudini consigliate da tutte le autorità sanitarie sono semplici:\n\n- **muoversi** ogni giorno, anche solo camminare;\n- mangiare in modo **vario**, con frutta, verdura, legumi e cereali, come nella tradizione mediterranea;\n- **non fumare** e moderare l'alcol;\n- **dormire** a sufficienza;\n- **lavarsi le mani** spesso;\n- fare i **controlli**, gli esami e le vaccinazioni che il medico vi consiglia.\n\n**Importante**: queste sono informazioni generali. Per sintomi, medicine e cure rivolgetevi sempre al vostro **medico** o al farmacista. In caso di emergenza chiamate il **112**.",
+     "schema": "flowchart LR\n  A[\"🚶 Movimento\"] --> S[\"💚 Salute\"]\n  B[\"🥗 Cibo vario\"] --> S\n  C[\"😴 Riposo\"] --> S\n  D[\"🩺 Controlli dal medico\"] --> S",
+     "consiglio": "Tenete vicino al telefono un foglio con i numeri utili: medico di famiglia, farmacia, un familiare e il 112."
+    }
+   ],
+   "quiz": [
+    {
+     "domanda": "Quante ossa ha, più o meno, lo scheletro di un adulto?",
+     "opzioni": [
+      "1.000",
+      "50",
+      "206"
+     ],
+     "corretta": 2,
+     "spiegazione": "Lo scheletro di un adulto conta 206 ossa; il femore è il più lungo."
+    },
+    {
+     "domanda": "Che cosa fanno le arterie?",
+     "opzioni": [
+      "Riportano il sangue al cuore",
+      "Portano il sangue dal cuore al corpo",
+      "Portano l'aria ai polmoni"
+     ],
+     "corretta": 1,
+     "spiegazione": "Le arterie partono dal cuore; le vene riportano il sangue al cuore."
+    },
+    {
+     "domanda": "Quale gas prendiamo dall'aria respirando?",
+     "opzioni": [
+      "L'ossigeno",
+      "Il metano",
+      "L'anidride carbonica"
+     ],
+     "corretta": 0,
+     "spiegazione": "Nei polmoni il sangue prende ossigeno e lascia anidride carbonica."
+    },
+    {
+     "domanda": "Qual è l'organo più esteso del corpo?",
+     "opzioni": [
+      "Il cuore",
+      "Il fegato",
+      "La pelle"
+     ],
+     "corretta": 2,
+     "spiegazione": "La pelle ricopre tutto il corpo: è l'organo più esteso. Il fegato è l'organo interno più grande."
+    },
+    {
+     "domanda": "Avete un dubbio su un sintomo o una medicina. A chi vi rivolgete?",
+     "opzioni": [
+      "A un forum su Internet",
+      "Al medico o al farmacista",
+      "Al vicino di casa"
+     ],
+     "corretta": 1,
+     "spiegazione": "Per la salute il riferimento è sempre un professionista: il medico o il farmacista."
+    }
+   ]
+  },
+  {
+   "id": "sistema-solare",
+   "icona": "🪐",
+   "titolo": "Il sistema solare e lo spazio",
+   "livello": "Scienze",
+   "minuti": 20,
+   "obiettivo": "Fare un viaggio tra il Sole, i pianeti, la Luna e le stelle, e ricordare le grandi tappe dell'esplorazione dello spazio.",
+   "palestra": "",
+   "passi": [
+    {
+     "titolo": "Il Sole, la nostra stella",
+     "testo": "Il **Sole** è una **stella**: una gigantesca palla di gas caldissimo che produce luce e calore trasformando l'idrogeno in elio. È la stella più vicina a noi, a circa **150 milioni di chilometri**.\n\nLa sua luce, che viaggia velocissima, impiega circa **8 minuti** per arrivare fino alla Terra.\n\nIl Sole è così grande che al suo interno potrebbero stare più di un milione di Terre. Contiene quasi tutta la materia del sistema solare, e la sua forza di gravità tiene legati a sé i pianeti, che gli girano attorno.\n\nSenza il Sole non ci sarebbero né la luce, né il calore, né la vita sulla Terra.",
+     "consiglio": "Non guardate mai il Sole direttamente, neppure con occhiali da sole: si rischiano danni gravi agli occhi."
+    },
+    {
+     "titolo": "Gli otto pianeti",
+     "testo": "Attorno al Sole girano **otto pianeti**. In ordine, dal più vicino al più lontano:\n\n1. **Mercurio**, il più piccolo e il più vicino al Sole;\n2. **Venere**, il più caldo, avvolto da nubi spesse;\n3. **Terra**, il nostro pianeta;\n4. **Marte**, il «pianeta rosso»;\n5. **Giove**, il più grande;\n6. **Saturno**, famoso per i suoi anelli;\n7. **Urano**;\n8. **Nettuno**.\n\nI primi quattro sono **rocciosi**; gli altri quattro sono **giganti** fatti soprattutto di gas e ghiacci.\n\nE **Plutone**? Dal **2006** gli astronomi lo classificano come **pianeta nano**, perché è molto piccolo e condivide la sua zona con tanti altri corpi ghiacciati.",
+     "schema": "flowchart LR\n  S[\"☀️ Sole\"] --> R[\"🪨 Pianeti rocciosi: Mercurio, Venere, Terra, Marte\"] --> G[\"🪐 Giganti: Giove, Saturno, Urano, Nettuno\"]"
+    },
+    {
+     "titolo": "La Luna",
+     "testo": "La **Luna** è il **satellite naturale** della Terra: le gira intorno a una distanza media di circa **384.000 chilometri**. Non ha luce propria: la vediamo perché riflette la luce del Sole.\n\nMentre gira, ci mostra ogni sera una parte illuminata diversa: sono le **fasi lunari**, luna nuova, primo quarto, luna piena, ultimo quarto. Il ciclo completo dura circa **29 giorni e mezzo**.\n\nLa Luna rivolge alla Terra **sempre la stessa faccia**. Con la sua attrazione provoca, insieme al Sole, le **maree**.\n\nIl **20 luglio 1969**, con la missione **Apollo 11**, l'americano **Neil Armstrong** fu il primo uomo a camminare sulla Luna, seguito da Buzz Aldrin.",
+     "schema": "flowchart LR\n  A[\"🌑 Luna nuova\"] --> B[\"🌓 Primo quarto\"] --> C[\"🌕 Luna piena\"] --> D[\"🌗 Ultimo quarto\"] --> A"
+    },
+    {
+     "titolo": "Stelle, galassie e stelle cadenti",
+     "testo": "Le stelle che vediamo di notte sono **soli lontanissimi**. Le distanze sono così grandi che si misurano in **anni luce**: un anno luce è la strada che la luce percorre in un anno, circa **9.500 miliardi di chilometri**.\n\nIl Sole fa parte di una enorme famiglia di stelle a forma di spirale, la **Via Lattea**, la nostra **galassia**, con centinaia di miliardi di stelle. Nelle notti buie, lontano dalle luci, la si vede come una striscia chiara nel cielo.\n\nLe **stelle cadenti** non sono stelle: sono piccoli granelli di polvere che entrano nell'atmosfera e bruciano. Le più famose si vedono nelle notti intorno al **10 agosto**, la notte di **San Lorenzo**.",
+     "consiglio": "Per vedere le stelle cadenti allontanatevi dalle luci della città e lasciate agli occhi una ventina di minuti per abituarsi al buio."
+    },
+    {
+     "titolo": "L'esplorazione dello spazio",
+     "testo": "- Nel **1609-1610** **Galileo Galilei** puntò il **cannocchiale** verso il cielo e scoprì, tra l'altro, quattro satelliti di Giove.\n- Il **4 ottobre 1957** l'Unione Sovietica lanciò lo **Sputnik 1**, il primo **satellite artificiale**.\n- Il **12 aprile 1961** **Jurij Gagarin** fu il primo uomo a volare nello spazio.\n- Nel **luglio 1969** l'uomo arrivò sulla **Luna**.\n\nOggi migliaia di satelliti artificiali girano attorno alla Terra e ci aiutano ogni giorno: per le **previsioni del tempo**, per la **televisione**, per le **telefonate** e per il **GPS** del navigatore.\n\nAnche l'Italia ha i suoi astronauti: **Samantha Cristoforetti** è stata la prima donna italiana nello spazio, nel 2014.",
+     "schema": "flowchart LR\n  A[\"🔭 1610 Galileo\"] --> B[\"🛰️ 1957 Sputnik\"] --> C[\"👨‍🚀 1961 Gagarin\"] --> D[\"🌕 1969 Luna\"]"
+    }
+   ],
+   "quiz": [
+    {
+     "domanda": "Quanti sono i pianeti del sistema solare?",
+     "opzioni": [
+      "Nove",
+      "Otto",
+      "Dodici"
+     ],
+     "corretta": 1,
+     "spiegazione": "Sono otto: da quando Plutone è stato classificato pianeta nano, nel 2006, non è più contato tra i pianeti."
+    },
+    {
+     "domanda": "Qual è il pianeta più grande?",
+     "opzioni": [
+      "Marte",
+      "Saturno",
+      "Giove"
+     ],
+     "corretta": 2,
+     "spiegazione": "Giove è il gigante del sistema solare: è il più grande di tutti i pianeti."
+    },
+    {
+     "domanda": "Perché vediamo la Luna illuminata?",
+     "opzioni": [
+      "Perché è fatta di ghiaccio luminoso",
+      "Perché riflette la luce del Sole",
+      "Perché produce luce propria"
+     ],
+     "corretta": 1,
+     "spiegazione": "La Luna non ha luce propria: riflette quella del Sole."
+    },
+    {
+     "domanda": "Che cosa sono le stelle cadenti?",
+     "opzioni": [
+      "Granelli di polvere che bruciano entrando nell'atmosfera",
+      "Stelle che cadono sulla Terra",
+      "Satelliti artificiali spenti"
+     ],
+     "corretta": 0,
+     "spiegazione": "Sono piccolissimi frammenti che bruciano per l'attrito con l'aria."
+    },
+    {
+     "domanda": "Chi fu il primo uomo a volare nello spazio?",
+     "opzioni": [
+      "Galileo Galilei",
+      "Neil Armstrong",
+      "Jurij Gagarin"
+     ],
+     "corretta": 2,
+     "spiegazione": "Gagarin volò nello spazio il 12 aprile 1961; Armstrong fu il primo a camminare sulla Luna nel 1969."
+    }
+   ]
+  },
+  {
+   "id": "materia-energia",
+   "icona": "⚡",
+   "titolo": "Materia, energia ed elettricità in casa",
+   "livello": "Scienze",
+   "minuti": 20,
+   "obiettivo": "Capire di cosa sono fatte le cose, che cos'è l'energia, come si legge il consumo di elettricità e come usare corrente e gas in casa in sicurezza.",
+   "palestra": "",
+   "passi": [
+    {
+     "titolo": "La materia e i suoi stati",
+     "testo": "Tutto ciò che ci circonda è **materia**: l'aria, l'acqua, il tavolo, noi stessi. La materia è fatta di particelle piccolissime chiamate **atomi**, che si uniscono in **molecole**. La molecola dell'acqua, **H₂O**, ha due atomi di idrogeno e uno di ossigeno.\n\nLa materia si presenta in tre **stati**:\n\n- **solido**, con forma propria, come il ghiaccio;\n- **liquido**, che prende la forma del recipiente, come l'acqua;\n- **gassoso**, che occupa tutto lo spazio, come il vapore.\n\nL'acqua gela a **0 °C** e bolle a **100 °C** al livello del mare. In alta montagna bolle a una temperatura più bassa.\n\nCuriosità utile: l'acqua quando gela **aumenta di volume**. Per questo una bottiglia piena dimenticata nel congelatore può scoppiare.",
+     "schema": "flowchart LR\n  A[\"🧊 Solido\"] -- \"fusione\" --> B[\"💧 Liquido\"] -- \"evaporazione\" --> C[\"♨️ Gas\"]"
+    },
+    {
+     "titolo": "L'energia si trasforma",
+     "testo": "L'**energia** è la capacità di fare un lavoro: muovere, scaldare, illuminare. Una legge fondamentale della natura dice che l'energia **non si crea e non si distrugge, ma si trasforma**.\n\nAlcuni esempi di casa:\n\n- la **stufa** trasforma l'energia elettrica o del gas in **calore**;\n- la **lampadina** trasforma l'elettricità in **luce**;\n- il nostro corpo trasforma l'energia **chimica** del cibo in **movimento** e calore;\n- un **pannello solare** trasforma la luce del Sole in elettricità.\n\nNelle trasformazioni una parte di energia si disperde quasi sempre come calore: per questo una vecchia lampadina scotta, mentre una lampadina a **LED**, che spreca meno, scalda molto meno."
+    },
+    {
+     "titolo": "L'elettricità in casa e la bolletta",
+     "testo": "Nelle case italiane arriva una corrente **alternata a 230 volt**. Il **volt** misura la «spinta» della corrente.\n\nOgni apparecchio ha una **potenza**, misurata in **watt** (W) e scritta sull'etichetta: un phon può avere circa 2.000 W, una lampadina LED pochi watt.\n\nIn bolletta il consumo si misura in **kilowattora** (kWh): **1 kWh** è l'energia usata da un apparecchio da **1.000 watt acceso per un'ora**. Un forno da 2.000 W acceso per mezz'ora consuma quindi 1 kWh.\n\nIl contatore ha un **limite di potenza**: se accendete insieme troppi apparecchi potenti, come forno, lavatrice e stufetta, la corrente può staccarsi. Basta spegnerne qualcuno e riarmare il contatore.",
+     "schema": "flowchart LR\n  A[\"🔌 Apparecchio 1.000 W\"] --> B[\"⏱️ Acceso 1 ora\"] --> C[\"📄 1 kWh in bolletta\"]",
+     "consiglio": "Gli apparecchi lasciati in stand-by, con la lucina accesa, consumano un po' anche quando non li usate: una presa multipla con interruttore aiuta a spegnerli del tutto."
+    },
+    {
+     "titolo": "Elettricità: le regole di sicurezza",
+     "testo": "Alcuni materiali lasciano passare la corrente: sono i **conduttori**, come i **metalli** e l'**acqua**. Altri la bloccano: sono gli **isolanti**, come **plastica, gomma** e legno asciutto. Per questo i fili sono rivestiti di plastica.\n\nRegole d'oro:\n\n- **mai** toccare apparecchi elettrici con le mani bagnate o a piedi nudi sul bagnato;\n- **mai** usare il phon vicino alla vasca piena;\n- non collegare una presa multipla all'altra e non sovraccaricarle con stufette o forni;\n- staccate la **spina** prima di pulire un apparecchio o cambiare una lampadina;\n- per i lavori all'impianto chiamate un **elettricista abilitato**.\n\nIl **salvavita**, o interruttore differenziale, stacca la corrente in una frazione di secondo se c'è una dispersione pericolosa. Ha un tasto di **prova** da premere periodicamente, come indicano le istruzioni.",
+     "consiglio": "Se qualcuno prende la scossa, non toccatelo: prima staccate la corrente dal quadro elettrico, poi chiamate il 112."
+    },
+    {
+     "titolo": "Il gas e il monossido di carbonio",
+     "testo": "Il **gas metano** di casa in natura non ha odore: gli viene aggiunto apposta un **odore forte** per accorgersi subito delle fughe.\n\nSe sentite **odore di gas**:\n\n1. **non** accendete né spegnete luci o interruttori e non usate campanelli;\n2. **niente fiamme**, niente sigarette;\n3. aprite subito **porte e finestre**;\n4. chiudete il **rubinetto generale** del gas;\n5. uscite e chiamate **da fuori** il pronto intervento gas o il **112**.\n\nAttenzione anche al **monossido di carbonio**: un gas **invisibile e senza odore** prodotto da stufe, caldaie e camini che bruciano male. È molto pericoloso. Per difendersi: far **controllare** caldaie e stufe da un tecnico, **arieggiare** le stanze, non usare bracieri al chiuso e installare un **rilevatore** apposito.",
+     "schema": "flowchart TD\n  A[\"👃 Odore di gas\"] --> B[\"🚫 Niente interruttori né fiamme\"] --> C[\"🪟 Apro le finestre\"] --> D[\"🔧 Chiudo il gas\"] --> E[\"📞 Chiamo da fuori\"]"
+    }
+   ],
+   "quiz": [
+    {
+     "domanda": "A quale temperatura bolle l'acqua al livello del mare?",
+     "opzioni": [
+      "100 °C",
+      "0 °C",
+      "50 °C"
+     ],
+     "corretta": 0,
+     "spiegazione": "Al livello del mare l'acqua bolle a 100 °C e gela a 0 °C."
+    },
+    {
+     "domanda": "Che cosa misura il kilowattora in bolletta?",
+     "opzioni": [
+      "La lunghezza dei fili",
+      "La spinta della corrente",
+      "L'energia elettrica consumata"
+     ],
+     "corretta": 2,
+     "spiegazione": "1 kWh è l'energia di un apparecchio da 1.000 watt acceso per un'ora."
+    },
+    {
+     "domanda": "Quale di questi materiali è un buon isolante?",
+     "opzioni": [
+      "La plastica",
+      "Il rame",
+      "L'acqua"
+     ],
+     "corretta": 0,
+     "spiegazione": "La plastica blocca la corrente: per questo riveste i fili elettrici."
+    },
+    {
+     "domanda": "Sentite odore di gas in cucina. Cosa NON dovete fare?",
+     "opzioni": [
+      "Aprire le finestre",
+      "Chiudere il rubinetto del gas",
+      "Accendere la luce"
+     ],
+     "corretta": 2,
+     "spiegazione": "Anche una piccola scintilla di un interruttore può innescare il gas."
+    },
+    {
+     "domanda": "Che cosa fa il salvavita?",
+     "opzioni": [
+      "Stacca la corrente se c'è una dispersione pericolosa",
+      "Aumenta la potenza del contatore",
+      "Fa risparmiare sulla bolletta del gas"
+     ],
+     "corretta": 0,
+     "spiegazione": "Il salvavita, o interruttore differenziale, interviene in una frazione di secondo e può salvare la vita."
+    }
+   ]
+  },
+  {
+   "id": "natura-ecosistemi",
+   "icona": "🌳",
+   "titolo": "La natura, gli ecosistemi e la biodiversità",
+   "livello": "Scienze",
+   "minuti": 20,
+   "obiettivo": "Scoprire come piante e animali vivono insieme negli ecosistemi, perché la biodiversità è preziosa e come possiamo proteggerla.",
+   "palestra": "",
+   "passi": [
+    {
+     "titolo": "Che cos'è un ecosistema",
+     "testo": "Un **ecosistema** è un ambiente in cui esseri viventi e non viventi stanno insieme e dipendono gli uni dagli altri: piante, animali, funghi e microbi, ma anche acqua, aria, suolo, luce e clima.\n\nSono ecosistemi un **bosco**, uno **stagno**, un **prato**, il **mare**, ma anche un piccolo tronco caduto pieno di insetti e muschi.\n\nIn un ecosistema sano tutto è in **equilibrio**: se una parte cambia molto, per esempio scompare una specie o si inquina l'acqua, ne risentono anche tutte le altre. È come una tavola apparecchiata: se togliete una gamba, tutto traballa."
+    },
+    {
+     "titolo": "La catena alimentare e la fotosintesi",
+     "testo": "In ogni ecosistema l'energia passa da un essere vivente all'altro attraverso la **catena alimentare**.\n\n- I **produttori** sono le **piante**: con la **fotosintesi** usano la luce del Sole, l'acqua e l'anidride carbonica dell'aria per produrre il loro nutrimento, e liberano **ossigeno**. Il colore verde viene dalla **clorofilla**.\n- I **consumatori** sono gli animali: gli **erbivori** mangiano le piante, i **carnivori** mangiano altri animali.\n- I **decompositori**, come **funghi** e **batteri**, trasformano foglie secche e resti in sostanze che nutrono di nuovo il terreno.\n\nNiente va sprecato: è il riciclo più antico del mondo.",
+     "schema": "flowchart LR\n  A[\"☀️ Sole\"] --> B[\"🌿 Piante\"] --> C[\"🐇 Erbivori\"] --> D[\"🦊 Carnivori\"] --> E[\"🍄 Decompositori\"]"
+    },
+    {
+     "titolo": "Gli animali: vertebrati e invertebrati",
+     "testo": "Gli animali con lo scheletro interno e la colonna vertebrale si chiamano **vertebrati** e si dividono in cinque grandi gruppi:\n\n- **mammiferi**: allattano i piccoli, come il cane, l'uomo, la balena e il pipistrello;\n- **uccelli**: hanno piume e depongono uova, come il passero e il pinguino;\n- **rettili**: hanno squame, come la lucertola e la tartaruga;\n- **anfibi**: vivono tra acqua e terra, come la rana;\n- **pesci**: respirano con le branchie.\n\nTutti gli altri sono **invertebrati**: insetti, ragni, lumache, vermi, meduse. Gli **insetti** hanno **sei zampe**, i **ragni otto**: per questo il ragno non è un insetto.",
+     "consiglio": "La balena e il delfino vivono in mare ma non sono pesci: sono mammiferi e respirano aria con i polmoni."
+    },
+    {
+     "titolo": "La biodiversità",
+     "testo": "La **biodiversità** è la grande varietà della vita: tutte le specie di piante, animali, funghi e microrganismi, e gli ambienti in cui vivono. L'Italia, con montagne, pianure, isole e tanti mari diversi, è uno dei Paesi europei più ricchi di specie.\n\nPerché è preziosa?\n\n- Le **api** e altri insetti **impollinano** molte delle piante che ci danno frutta e verdura.\n- Dalle piante si ricavano cibi, fibre e sostanze usate anche per le medicine.\n- Gli ecosistemi ricchi resistono meglio a malattie e cambiamenti.\n\nLe principali minacce sono la **distruzione degli ambienti naturali**, l'**inquinamento**, i **cambiamenti climatici**, lo **sfruttamento eccessivo**, come la pesca senza regole, e le **specie invasive** portate da altri continenti, come lo scoiattolo grigio americano che fa concorrenza al nostro scoiattolo rosso."
+    },
+    {
+     "titolo": "Proteggere la natura",
+     "testo": "Per proteggere ambienti e specie sono nati i **parchi nazionali** e le **aree protette**. I primi parchi nazionali italiani, nati negli anni Venti del Novecento, sono quello del **Gran Paradiso**, simbolo dello **stambecco**, e quello d'**Abruzzo**, casa dell'**orso marsicano** e del **camoscio**.\n\nAnche noi possiamo fare la nostra parte:\n\n- restare sui **sentieri** segnati;\n- riportare a casa i propri **rifiuti**;\n- non raccogliere fiori protetti e non disturbare gli animali;\n- non dare da mangiare agli animali selvatici;\n- tenere il cane al guinzaglio dove richiesto.\n\nSe raccogliete **funghi**, fateli sempre controllare dagli esperti micologi della vostra ASL prima di mangiarli: alcuni sono velenosi e molto simili a quelli buoni.",
+     "schema": "flowchart LR\n  A[\"🥾 Sentieri\"] --> N[\"🌳 Natura protetta\"]\n  B[\"🗑️ Rifiuti a casa\"] --> N\n  C[\"🦌 Animali tranquilli\"] --> N"
+    }
+   ],
+   "quiz": [
+    {
+     "domanda": "Che cosa producono le piante con la fotosintesi, oltre al loro nutrimento?",
+     "opzioni": [
+      "Ossigeno",
+      "Anidride carbonica",
+      "Petrolio"
+     ],
+     "corretta": 0,
+     "spiegazione": "Con la fotosintesi le piante usano anidride carbonica, acqua e luce e liberano ossigeno."
+    },
+    {
+     "domanda": "La balena è…",
+     "opzioni": [
+      "Un anfibio",
+      "Un mammifero",
+      "Un pesce"
+     ],
+     "corretta": 1,
+     "spiegazione": "La balena allatta i piccoli e respira con i polmoni: è un mammifero."
+    },
+    {
+     "domanda": "Quante zampe ha un insetto?",
+     "opzioni": [
+      "Otto",
+      "Quattro",
+      "Sei"
+     ],
+     "corretta": 2,
+     "spiegazione": "Gli insetti hanno sei zampe; i ragni, che non sono insetti, ne hanno otto."
+    },
+    {
+     "domanda": "Qual è il ruolo dei funghi e dei batteri nella catena alimentare?",
+     "opzioni": [
+      "Decompongono i resti e nutrono il terreno",
+      "Mangiano solo animali vivi",
+      "Producono ossigeno con la fotosintesi"
+     ],
+     "corretta": 0,
+     "spiegazione": "I decompositori trasformano foglie e resti in sostanze che tornano al suolo."
+    },
+    {
+     "domanda": "Perché le api sono così importanti?",
+     "opzioni": [
+      "Producono ossigeno",
+      "Tengono lontani gli uccelli",
+      "Impollinano molte piante che ci danno frutta e verdura"
+     ],
+     "corretta": 2,
+     "spiegazione": "Portando il polline da un fiore all'altro, le api permettono a molte piante di produrre frutti e semi."
+    }
+   ]
+  },
+  {
+   "id": "clima-ambiente",
+   "icona": "♻️",
+   "titolo": "Il clima e l'ambiente",
+   "livello": "Scienze",
+   "minuti": 20,
+   "obiettivo": "Capire la differenza tra tempo e clima, che cos'è l'effetto serra, quali sono le energie rinnovabili e come fare bene la raccolta differenziata.",
+   "palestra": "",
+   "passi": [
+    {
+     "titolo": "Tempo e clima non sono la stessa cosa",
+     "testo": "Il **tempo** meteorologico è quello di oggi o di domani: sole, pioggia, vento, temperatura. Cambia di giorno in giorno ed è quello delle previsioni in televisione.\n\nIl **clima**, invece, è il tempo **medio** di un luogo calcolato su molti anni, di solito **trent'anni**. Dire che a Palermo d'inverno fa più caldo che a Bolzano è parlare di clima.\n\nGran parte dell'Italia ha un **clima mediterraneo**: estati calde e asciutte, inverni miti, piogge soprattutto in autunno e inverno. Sulle Alpi e nella Pianura Padana gli inverni sono più freddi.\n\nUn solo inverno freddo o un'estate fresca non dicono nulla sul clima: conta l'andamento su molti anni.",
+     "schema": "flowchart LR\n  A[\"🌦️ Tempo: oggi e domani\"] --> B[\"📊 Media di molti anni\"] --> C[\"🌍 Clima\"]"
+    },
+    {
+     "titolo": "L'effetto serra",
+     "testo": "L'**effetto serra** è un fenomeno **naturale** e indispensabile. Alcuni gas presenti nell'aria, come il **vapore acqueo**, l'**anidride carbonica** (CO₂) e il **metano**, trattengono una parte del calore del Sole, come i vetri di una serra o una coperta.\n\nSenza effetto serra la temperatura media della Terra sarebbe di circa **18 gradi sotto zero**, invece dei circa **15 gradi** attuali.\n\nDalla rivoluzione industriale l'uomo ha bruciato grandi quantità di **carbone, petrolio e gas** e ha abbattuto molte foreste: la CO₂ nell'aria è aumentata molto. Gli scienziati di tutto il mondo concordano che questo rafforza l'effetto serra e contribuisce al **riscaldamento globale**: lo si vede, per esempio, nel **ritiro dei ghiacciai** delle Alpi.",
+     "schema": "flowchart LR\n  A[\"☀️ Calore del Sole\"] --> B[\"🌍 Terra\"] --> C[\"☁️ Gas serra trattengono calore\"] --> D[\"🌡️ Temperatura più alta\"]"
+    },
+    {
+     "titolo": "Le energie rinnovabili",
+     "testo": "Le fonti **rinnovabili** si rigenerano di continuo e non si esauriscono:\n\n- **solare**: i pannelli fotovoltaici producono elettricità, quelli termici scaldano l'acqua;\n- **eolica**: le pale mosse dal vento;\n- **idroelettrica**: l'acqua che scende dalle dighe fa girare le turbine;\n- **geotermica**: il calore della Terra. A **Larderello**, in Toscana, all'inizio del Novecento si produsse per la prima volta al mondo elettricità dal vapore naturale del sottosuolo;\n- **biomasse**: legna e scarti vegetali.\n\nLe fonti **fossili**, cioè carbone, petrolio e gas naturale, si sono formate in milioni di anni da resti di antichi organismi: non sono rinnovabili e, bruciando, liberano CO₂.",
+     "consiglio": "Il modo più pulito per avere energia è non sprecarla: spegnere ciò che non serve è già un piccolo contributo."
+    },
+    {
+     "titolo": "La raccolta differenziata",
+     "testo": "Separare i rifiuti permette di **riciclarli**: carta, vetro, plastica e metalli diventano nuovi oggetti, e l'umido diventa **compost**, un concime naturale.\n\nLe categorie più comuni sono: **organico** o umido, **carta e cartone**, **plastica**, **vetro**, **metalli** e **indifferenziato**.\n\nQualche attenzione:\n\n- nel **vetro** non vanno ceramica, piatti, specchi e lampadine;\n- **pile** e **farmaci scaduti** vanno negli appositi contenitori, che si trovano spesso presso negozi e farmacie;\n- l'**olio** di frittura non va nel lavandino, ma raccolto in una bottiglia e portato all'isola ecologica;\n- gli **apparecchi elettronici** vecchi si portano all'isola ecologica o al negozio dove ne comprate uno nuovo.\n\n**Importante**: le regole cambiano da comune a comune. Seguite il calendario e le istruzioni del vostro comune.",
+     "schema": "flowchart TD\n  R[\"🗑️ Rifiuti\"] --> A[\"🍎 Organico\"]\n  R --> B[\"📦 Carta\"]\n  R --> C[\"🧴 Plastica\"]\n  R --> D[\"🍾 Vetro\"]"
+    },
+    {
+     "titolo": "I piccoli gesti di ogni giorno",
+     "testo": "Per l'ambiente vale la regola delle **tre R**:\n\n1. **Ridurre**: comprare solo ciò che serve, preferire prodotti con meno imballaggi, non sprecare il cibo.\n2. **Riusare**: borse di stoffa, bottiglie riempite di nuovo, oggetti riparati invece che buttati.\n3. **Riciclare**: fare bene la differenziata.\n\nE ancora:\n\n- spegnere le luci e gli apparecchi che non servono e scegliere lampadine **LED**;\n- chiudere il rubinetto mentre ci si lava i denti;\n- camminare o usare i **mezzi pubblici** quando possibile;\n- in inverno non surriscaldare la casa e arieggiare per pochi minuti con le finestre spalancate.\n\nSono gesti piccoli, ma fatti da milioni di persone fanno una grande differenza.",
+     "schema": "flowchart LR\n  A[\"✂️ Ridurre\"] --> B[\"🔁 Riusare\"] --> C[\"♻️ Riciclare\"]"
+    }
+   ],
+   "quiz": [
+    {
+     "domanda": "Che differenza c'è tra tempo e clima?",
+     "opzioni": [
+      "Il tempo è quello di pochi giorni, il clima è la media di molti anni",
+      "Sono la stessa cosa",
+      "Il clima riguarda solo la pioggia"
+     ],
+     "corretta": 0,
+     "spiegazione": "Il tempo cambia di giorno in giorno; il clima descrive le condizioni medie su decenni."
+    },
+    {
+     "domanda": "Senza l'effetto serra naturale, la Terra sarebbe…",
+     "opzioni": [
+      "Molto più calda",
+      "Molto più fredda",
+      "Uguale a oggi"
+     ],
+     "corretta": 1,
+     "spiegazione": "Senza gas serra la temperatura media sarebbe di circa 18 gradi sotto zero."
+    },
+    {
+     "domanda": "Quale di queste è una fonte di energia rinnovabile?",
+     "opzioni": [
+      "Il vento",
+      "Il carbone",
+      "Il petrolio"
+     ],
+     "corretta": 0,
+     "spiegazione": "Il vento si rinnova di continuo; carbone e petrolio sono fonti fossili che si esauriscono."
+    },
+    {
+     "domanda": "Dove si buttano le pile scariche?",
+     "opzioni": [
+      "Nell'umido",
+      "Nel vetro",
+      "Negli appositi contenitori per le pile"
+     ],
+     "corretta": 2,
+     "spiegazione": "Le pile contengono sostanze che vanno recuperate: si raccolgono in contenitori dedicati."
+    },
+    {
+     "domanda": "Cosa significa «ridurre» nella regola delle tre R?",
+     "opzioni": [
+      "Produrre meno rifiuti fin dall'inizio",
+      "Schiacciare le bottiglie",
+      "Bruciare i rifiuti"
+     ],
+     "corretta": 0,
+     "spiegazione": "Ridurre vuol dire evitare gli sprechi e comprare ciò che serve: il rifiuto migliore è quello che non si produce."
+    }
+   ]
+  }
+ ],
+ "prove": [
+  {
+   "id": "scienze",
+   "titolo": "Il Grande Quiz di Scienze",
+   "icona": "🔬",
+   "descrizione": "Venti domande pescate a caso su corpo umano, spazio, materia ed energia, sicurezza in casa, natura, clima e ambiente. Con almeno 14 risposte giuste su 20 ottenete l'attestato. Potete riprovare quante volte volete: le domande cambiano ogni volta.",
+   "attestato": "Scienze e natura",
+   "domande_per_prova": 20,
+   "soglia": 0.7,
+   "domande": [
+    {
+     "domanda": "Qual è l'osso più lungo del corpo umano?",
+     "opzioni": [
+      "Il femore",
+      "La staffa",
+      "La tibia",
+      "L'omero"
+     ],
+     "corretta": 0,
+     "spiegazione": "Il femore, nella coscia, è l'osso più lungo; la staffa, nell'orecchio, è il più piccolo.",
+     "categoria": "Corpo umano"
+    },
+    {
+     "domanda": "Dove si trova la staffa, l'osso più piccolo del corpo?",
+     "opzioni": [
+      "Nel piede",
+      "Nell'orecchio",
+      "Nella mano"
+     ],
+     "corretta": 1,
+     "spiegazione": "La staffa è uno degli ossicini dell'orecchio che trasmettono i suoni.",
+     "categoria": "Corpo umano"
+    },
+    {
+     "domanda": "Quante cavità ha il cuore?",
+     "opzioni": [
+      "Due",
+      "Sei",
+      "Quattro",
+      "Una"
+     ],
+     "corretta": 2,
+     "spiegazione": "Il cuore ha due atri e due ventricoli.",
+     "categoria": "Corpo umano"
+    },
+    {
+     "domanda": "Che cosa fanno le vene?",
+     "opzioni": [
+      "Riportano il sangue al cuore",
+      "Portano il sangue dal cuore al corpo",
+      "Portano il cibo all'intestino"
+     ],
+     "corretta": 0,
+     "spiegazione": "Le vene riportano il sangue al cuore; le arterie lo portano dal cuore al corpo.",
+     "categoria": "Corpo umano"
+    },
+    {
+     "domanda": "Quale compito hanno i globuli rossi?",
+     "opzioni": [
+      "Combattere i microbi",
+      "Digerire il cibo",
+      "Chiudere le ferite",
+      "Trasportare l'ossigeno"
+     ],
+     "corretta": 3,
+     "spiegazione": "I globuli rossi portano ossigeno a tutte le cellule del corpo.",
+     "categoria": "Corpo umano"
+    },
+    {
+     "domanda": "Quale compito hanno i globuli bianchi?",
+     "opzioni": [
+      "Trasportare l'ossigeno",
+      "Difendere il corpo dai microbi",
+      "Produrre la bile"
+     ],
+     "corretta": 1,
+     "spiegazione": "I globuli bianchi sono i «soldati» delle difese del corpo.",
+     "categoria": "Corpo umano"
+    },
+    {
+     "domanda": "Qual è l'organo interno più grande del corpo?",
+     "opzioni": [
+      "Il fegato",
+      "Il cuore",
+      "Lo stomaco",
+      "Il cervello"
+     ],
+     "corretta": 0,
+     "spiegazione": "Il fegato è l'organo interno più grande e produce la bile.",
+     "categoria": "Corpo umano"
+    },
+    {
+     "domanda": "Quale organo filtra il sangue e produce l'urina?",
+     "opzioni": [
+      "Il cuore",
+      "I reni",
+      "I polmoni"
+     ],
+     "corretta": 1,
+     "spiegazione": "I reni, due, filtrano il sangue ed eliminano gli scarti con l'urina.",
+     "categoria": "Corpo umano"
+    },
+    {
+     "domanda": "Quale muscolo aiuta i polmoni a respirare?",
+     "opzioni": [
+      "Il diaframma",
+      "Il cuore",
+      "Il bicipite"
+     ],
+     "corretta": 0,
+     "spiegazione": "Il diaframma, a forma di cupola, si abbassa e si alza aiutando l'aria a entrare e uscire.",
+     "categoria": "Corpo umano"
+    },
+    {
+     "domanda": "Quale gas di scarto buttiamo fuori respirando?",
+     "opzioni": [
+      "L'ossigeno puro",
+      "L'idrogeno",
+      "L'anidride carbonica"
+     ],
+     "corretta": 2,
+     "spiegazione": "Nei polmoni il sangue lascia l'anidride carbonica, che viene espirata.",
+     "categoria": "Corpo umano"
+    },
+    {
+     "domanda": "Quale senso è legato al naso?",
+     "opzioni": [
+      "Il gusto",
+      "L'olfatto",
+      "Il tatto",
+      "L'udito"
+     ],
+     "corretta": 1,
+     "spiegazione": "Con il naso sentiamo gli odori: è l'olfatto.",
+     "categoria": "Corpo umano"
+    },
+    {
+     "domanda": "Quale medico sviluppò il primo vaccino, contro il vaiolo?",
+     "opzioni": [
+      "Edward Jenner",
+      "Alexander Fleming",
+      "Louis Pasteur"
+     ],
+     "corretta": 0,
+     "spiegazione": "Edward Jenner sviluppò il vaccino contro il vaiolo alla fine del Settecento.",
+     "categoria": "Corpo umano"
+    },
+    {
+     "domanda": "Quanto tempo, almeno, è bene strofinare le mani con il sapone?",
+     "opzioni": [
+      "Non serve strofinare",
+      "2 secondi",
+      "Almeno 20 secondi"
+     ],
+     "corretta": 2,
+     "spiegazione": "Strofinare almeno 20 secondi, anche tra le dita e sotto le unghie, elimina molti più microbi.",
+     "categoria": "Corpo umano"
+    },
+    {
+     "domanda": "Qual è il numero unico di emergenza europeo?",
+     "opzioni": [
+      "112",
+      "100",
+      "911"
+     ],
+     "corretta": 0,
+     "spiegazione": "Il 112 è gratuito e funziona anche da cellulare.",
+     "categoria": "Corpo umano"
+    },
+    {
+     "domanda": "Che cos'è il Sole?",
+     "opzioni": [
+      "Un satellite",
+      "Una cometa",
+      "Un pianeta",
+      "Una stella"
+     ],
+     "corretta": 3,
+     "spiegazione": "Il Sole è la stella più vicina a noi e il centro del sistema solare.",
+     "categoria": "Spazio"
+    },
+    {
+     "domanda": "Quanto impiega, più o meno, la luce del Sole ad arrivare sulla Terra?",
+     "opzioni": [
+      "Circa 8 secondi",
+      "Circa 8 minuti",
+      "Circa 8 giorni",
+      "Circa 8 ore"
+     ],
+     "corretta": 1,
+     "spiegazione": "La luce percorre i circa 150 milioni di km tra Sole e Terra in circa 8 minuti.",
+     "categoria": "Spazio"
+    },
+    {
+     "domanda": "Qual è il pianeta più vicino al Sole?",
+     "opzioni": [
+      "Mercurio",
+      "Marte",
+      "Venere"
+     ],
+     "corretta": 0,
+     "spiegazione": "Mercurio è il pianeta più vicino al Sole ed è anche il più piccolo.",
+     "categoria": "Spazio"
+    },
+    {
+     "domanda": "Qual è il pianeta più caldo del sistema solare?",
+     "opzioni": [
+      "Mercurio",
+      "Venere",
+      "Giove",
+      "Marte"
+     ],
+     "corretta": 1,
+     "spiegazione": "Venere è avvolto da nubi spesse che trattengono il calore: è il pianeta più caldo.",
+     "categoria": "Spazio"
+    },
+    {
+     "domanda": "Quale pianeta è chiamato il «pianeta rosso»?",
+     "opzioni": [
+      "Marte",
+      "Saturno",
+      "Giove"
+     ],
+     "corretta": 0,
+     "spiegazione": "Marte ha un colore rossastro dovuto al ferro presente nelle sue rocce.",
+     "categoria": "Spazio"
+    },
+    {
+     "domanda": "Quale pianeta è famoso per i suoi grandi anelli?",
+     "opzioni": [
+      "Marte",
+      "Mercurio",
+      "Saturno"
+     ],
+     "corretta": 2,
+     "spiegazione": "Gli anelli di Saturno sono fatti di ghiaccio e frammenti di roccia.",
+     "categoria": "Spazio"
+    },
+    {
+     "domanda": "Qual è l'ultimo pianeta del sistema solare, il più lontano dal Sole?",
+     "opzioni": [
+      "Saturno",
+      "Nettuno",
+      "Urano",
+      "Plutone"
+     ],
+     "corretta": 1,
+     "spiegazione": "Nettuno è l'ottavo pianeta; Plutone è oggi considerato un pianeta nano.",
+     "categoria": "Spazio"
+    },
+    {
+     "domanda": "Da quale anno Plutone è considerato un pianeta nano?",
+     "opzioni": [
+      "Dal 2006",
+      "Dal 1969",
+      "Dal 1900"
+     ],
+     "corretta": 0,
+     "spiegazione": "Nel 2006 gli astronomi hanno stabilito nuove regole e Plutone è diventato un pianeta nano.",
+     "categoria": "Spazio"
+    },
+    {
+     "domanda": "Quanto dura, più o meno, il ciclo completo delle fasi lunari?",
+     "opzioni": [
+      "Circa un anno",
+      "Circa 7 giorni",
+      "Circa 29 giorni e mezzo"
+     ],
+     "corretta": 2,
+     "spiegazione": "Da una luna nuova alla successiva passano circa 29 giorni e mezzo.",
+     "categoria": "Spazio"
+    },
+    {
+     "domanda": "Che cosa provoca, insieme al Sole, l'attrazione della Luna sulla Terra?",
+     "opzioni": [
+      "Le maree",
+      "Le stagioni",
+      "I terremoti"
+     ],
+     "corretta": 0,
+     "spiegazione": "L'attrazione di Luna e Sole solleva e abbassa periodicamente il livello dei mari.",
+     "categoria": "Spazio"
+    },
+    {
+     "domanda": "In che anno l'uomo ha camminato per la prima volta sulla Luna?",
+     "opzioni": [
+      "1989",
+      "1969",
+      "1957",
+      "1961"
+     ],
+     "corretta": 1,
+     "spiegazione": "Il 20 luglio 1969 Neil Armstrong scese sulla Luna con la missione Apollo 11.",
+     "categoria": "Spazio"
+    },
+    {
+     "domanda": "Chi scoprì quattro satelliti di Giove puntando il cannocchiale verso il cielo?",
+     "opzioni": [
+      "Isaac Newton",
+      "Leonardo da Vinci",
+      "Galileo Galilei"
+     ],
+     "corretta": 2,
+     "spiegazione": "Galileo li osservò nel 1610: fu una scoperta che cambiò l'astronomia.",
+     "categoria": "Spazio"
+    },
+    {
+     "domanda": "Come si chiamava il primo satellite artificiale, lanciato nel 1957?",
+     "opzioni": [
+      "Sputnik 1",
+      "Voyager",
+      "Apollo 11"
+     ],
+     "corretta": 0,
+     "spiegazione": "Lo Sputnik 1 fu lanciato dall'Unione Sovietica il 4 ottobre 1957.",
+     "categoria": "Spazio"
+    },
+    {
+     "domanda": "Chi è stata la prima donna italiana nello spazio?",
+     "opzioni": [
+      "Rita Levi-Montalcini",
+      "Samantha Cristoforetti",
+      "Margherita Hack"
+     ],
+     "corretta": 1,
+     "spiegazione": "Samantha Cristoforetti volò nello spazio per la prima volta nel 2014.",
+     "categoria": "Spazio"
+    },
+    {
+     "domanda": "Come si chiama la galassia di cui fa parte il Sole?",
+     "opzioni": [
+      "Orsa Maggiore",
+      "Andromeda",
+      "Via Lattea"
+     ],
+     "corretta": 2,
+     "spiegazione": "La Via Lattea è una galassia a spirale con centinaia di miliardi di stelle.",
+     "categoria": "Spazio"
+    },
+    {
+     "domanda": "Che cosa misura l'anno luce?",
+     "opzioni": [
+      "Un periodo di tempo",
+      "Una distanza",
+      "La luminosità di una stella"
+     ],
+     "corretta": 1,
+     "spiegazione": "L'anno luce è la distanza percorsa dalla luce in un anno: circa 9.500 miliardi di km.",
+     "categoria": "Spazio"
+    },
+    {
+     "domanda": "Durante un'eclissi di Sole, che cosa si mette davanti al Sole?",
+     "opzioni": [
+      "La Luna",
+      "La Terra",
+      "Venere"
+     ],
+     "corretta": 0,
+     "spiegazione": "Nell'eclissi di Sole la Luna copre il Sole; nell'eclissi di Luna è la Terra a fare ombra alla Luna.",
+     "categoria": "Spazio"
+    },
+    {
+     "domanda": "Che cosa sono le comete?",
+     "opzioni": [
+      "Satelliti artificiali",
+      "Corpi di ghiaccio e polvere che sviluppano una coda vicino al Sole",
+      "Stelle che esplodono"
+     ],
+     "corretta": 1,
+     "spiegazione": "Avvicinandosi al Sole, il ghiaccio delle comete evapora e forma la caratteristica coda.",
+     "categoria": "Spazio"
+    },
+    {
+     "domanda": "Da quali atomi è formata la molecola dell'acqua?",
+     "opzioni": [
+      "Due di idrogeno e uno di ossigeno",
+      "Uno di carbonio e due di ossigeno",
+      "Solo ossigeno"
+     ],
+     "corretta": 0,
+     "spiegazione": "La formula dell'acqua è H₂O: due atomi di idrogeno e uno di ossigeno.",
+     "categoria": "Materia ed energia"
+    },
+    {
+     "domanda": "A quale temperatura gela l'acqua?",
+     "opzioni": [
+      "100 °C",
+      "10 °C",
+      "-20 °C",
+      "0 °C"
+     ],
+     "corretta": 3,
+     "spiegazione": "L'acqua pura gela a 0 °C e bolle a 100 °C al livello del mare.",
+     "categoria": "Materia ed energia"
+    },
+    {
+     "domanda": "Perché una bottiglia d'acqua piena può scoppiare nel congelatore?",
+     "opzioni": [
+      "Perché l'acqua evapora",
+      "Perché il freddo scioglie il vetro",
+      "Perché l'acqua gelando aumenta di volume"
+     ],
+     "corretta": 2,
+     "spiegazione": "Il ghiaccio occupa più spazio dell'acqua liquida: per questo galleggia.",
+     "categoria": "Materia ed energia"
+    },
+    {
+     "domanda": "Come si chiama il passaggio dallo stato liquido a quello gassoso?",
+     "opzioni": [
+      "Evaporazione",
+      "Fusione",
+      "Solidificazione"
+     ],
+     "corretta": 0,
+     "spiegazione": "L'evaporazione trasforma il liquido in vapore; la fusione trasforma il solido in liquido.",
+     "categoria": "Materia ed energia"
+    },
+    {
+     "domanda": "In montagna, ad alta quota, l'acqua bolle…",
+     "opzioni": [
+      "Non bolle mai",
+      "A una temperatura più bassa di 100 °C",
+      "A una temperatura più alta di 100 °C"
+     ],
+     "corretta": 1,
+     "spiegazione": "In quota la pressione dell'aria è minore e l'acqua bolle prima di arrivare a 100 °C.",
+     "categoria": "Materia ed energia"
+    },
+    {
+     "domanda": "Cosa dice la grande legge dell'energia?",
+     "opzioni": [
+      "Non si crea e non si distrugge, si trasforma",
+      "Esiste solo nell'elettricità",
+      "Si consuma e scompare"
+     ],
+     "corretta": 0,
+     "spiegazione": "L'energia passa da una forma all'altra: elettrica, luminosa, termica, di movimento.",
+     "categoria": "Materia ed energia"
+    },
+    {
+     "domanda": "Che cosa misura il watt?",
+     "opzioni": [
+      "Il peso di un oggetto",
+      "La temperatura",
+      "La potenza di un apparecchio"
+     ],
+     "corretta": 2,
+     "spiegazione": "Il watt indica quanta energia usa un apparecchio in ogni istante.",
+     "categoria": "Materia ed energia"
+    },
+    {
+     "domanda": "Che tensione ha la corrente nelle case italiane?",
+     "opzioni": [
+      "12 volt",
+      "230 volt",
+      "50 volt",
+      "1.000 volt"
+     ],
+     "corretta": 1,
+     "spiegazione": "La rete domestica italiana e europea funziona a 230 volt, corrente alternata.",
+     "categoria": "Materia ed energia"
+    },
+    {
+     "domanda": "Un apparecchio da 1.000 watt acceso per un'ora quanto consuma?",
+     "opzioni": [
+      "10 kWh",
+      "100 kWh",
+      "1 kWh"
+     ],
+     "corretta": 2,
+     "spiegazione": "Il kilowattora è proprio l'energia di 1.000 watt per un'ora.",
+     "categoria": "Materia ed energia"
+    },
+    {
+     "domanda": "Quale di questi è un buon conduttore di elettricità?",
+     "opzioni": [
+      "Il rame",
+      "La plastica",
+      "Il legno asciutto",
+      "La gomma"
+     ],
+     "corretta": 0,
+     "spiegazione": "I metalli come il rame conducono la corrente: per questo i fili elettrici sono di rame.",
+     "categoria": "Materia ed energia"
+    },
+    {
+     "domanda": "Perché una lampadina LED scalda molto meno di una vecchia lampadina a incandescenza?",
+     "opzioni": [
+      "Perché funziona senza corrente",
+      "Perché è fatta di ghiaccio",
+      "Perché spreca poca energia in calore"
+     ],
+     "corretta": 2,
+     "spiegazione": "Le vecchie lampadine trasformavano gran parte dell'energia in calore; i LED la trasformano soprattutto in luce.",
+     "categoria": "Materia ed energia"
+    },
+    {
+     "domanda": "Perché non si deve usare il phon vicino alla vasca piena?",
+     "opzioni": [
+      "Perché il phon si bagna e fa rumore",
+      "Perché l'acqua conduce la corrente",
+      "Perché l'acqua si scalda troppo"
+     ],
+     "corretta": 1,
+     "spiegazione": "Se il phon cade in acqua la corrente può passare attraverso il corpo: è molto pericoloso.",
+     "categoria": "Sicurezza in casa"
+    },
+    {
+     "domanda": "Cosa fare prima di pulire un elettrodomestico?",
+     "opzioni": [
+      "Bagnarlo bene",
+      "Accenderlo",
+      "Staccare la spina"
+     ],
+     "corretta": 2,
+     "spiegazione": "Con la spina staccata non c'è il rischio di prendere la scossa.",
+     "categoria": "Sicurezza in casa"
+    },
+    {
+     "domanda": "Una persona sta prendendo la scossa. Qual è la prima cosa da fare?",
+     "opzioni": [
+      "Staccare la corrente dal quadro elettrico",
+      "Tirarla con le mani",
+      "Buttarle addosso dell'acqua"
+     ],
+     "corretta": 0,
+     "spiegazione": "Toccarla vi farebbe prendere la scossa: prima si stacca la corrente, poi si chiama il 112.",
+     "categoria": "Sicurezza in casa"
+    },
+    {
+     "domanda": "È sicuro collegare una presa multipla a un'altra presa multipla?",
+     "opzioni": [
+      "Sì, sempre",
+      "Sì, se sono dello stesso colore",
+      "No, si rischia il sovraccarico"
+     ],
+     "corretta": 2,
+     "spiegazione": "Le prese multiple a catena possono surriscaldarsi: è meglio far aggiungere prese da un elettricista.",
+     "categoria": "Sicurezza in casa"
+    },
+    {
+     "domanda": "Come mai si sente l'odore del gas metano di casa?",
+     "opzioni": [
+      "Perché il metano ha un odore naturale",
+      "Perché gli viene aggiunto apposta un odore",
+      "Perché è mescolato con il caffè"
+     ],
+     "corretta": 1,
+     "spiegazione": "Il metano è inodore: l'odore viene aggiunto per accorgersi subito delle fughe.",
+     "categoria": "Sicurezza in casa"
+    },
+    {
+     "domanda": "In caso di fuga di gas, da dove è meglio telefonare per chiedere aiuto?",
+     "opzioni": [
+      "Da fuori casa",
+      "Dal bagno con la porta chiusa",
+      "Dalla cucina"
+     ],
+     "corretta": 0,
+     "spiegazione": "Meglio uscire e chiamare da fuori, lontano dal gas.",
+     "categoria": "Sicurezza in casa"
+    },
+    {
+     "domanda": "Perché il monossido di carbonio è così pericoloso?",
+     "opzioni": [
+      "Perché è colorato di nero",
+      "Perché è invisibile e senza odore",
+      "Perché ha un odore fortissimo"
+     ],
+     "corretta": 1,
+     "spiegazione": "Non lo si vede né lo si sente: per questo servono controlli alle caldaie e un rilevatore.",
+     "categoria": "Sicurezza in casa"
+    },
+    {
+     "domanda": "Quale apparecchio avvisa della presenza di monossido di carbonio?",
+     "opzioni": [
+      "Un barometro",
+      "Un termometro",
+      "Un rilevatore di monossido"
+     ],
+     "corretta": 2,
+     "spiegazione": "Il rilevatore suona quando il monossido nell'aria raggiunge livelli pericolosi.",
+     "categoria": "Sicurezza in casa"
+    },
+    {
+     "domanda": "Chi deve fare i lavori sull'impianto elettrico di casa?",
+     "opzioni": [
+      "Chiunque abbia un cacciavite",
+      "Un elettricista abilitato",
+      "Il postino"
+     ],
+     "corretta": 1,
+     "spiegazione": "Gli impianti devono essere realizzati e modificati da professionisti abilitati.",
+     "categoria": "Sicurezza in casa"
+    },
+    {
+     "domanda": "Quale oggetto non si deve mai mettere nel forno a microonde?",
+     "opzioni": [
+      "Una pentola di metallo",
+      "Una ciotola di vetro adatta",
+      "Un piatto di ceramica adatto"
+     ],
+     "corretta": 0,
+     "spiegazione": "Il metallo nel microonde può provocare scintille e danneggiare il forno.",
+     "categoria": "Sicurezza in casa"
+    },
+    {
+     "domanda": "Come si chiama la sostanza verde delle foglie che cattura la luce?",
+     "opzioni": [
+      "Linfa",
+      "Resina",
+      "Clorofilla"
+     ],
+     "corretta": 2,
+     "spiegazione": "La clorofilla permette alle piante di usare la luce del Sole per la fotosintesi.",
+     "categoria": "Natura"
+    },
+    {
+     "domanda": "In una catena alimentare, chi sono i «produttori»?",
+     "opzioni": [
+      "I carnivori",
+      "I funghi",
+      "Gli erbivori",
+      "Le piante"
+     ],
+     "corretta": 3,
+     "spiegazione": "Le piante producono il nutrimento con la fotosintesi: sono il primo anello della catena.",
+     "categoria": "Natura"
+    },
+    {
+     "domanda": "Quale animale è un rettile?",
+     "opzioni": [
+      "Il delfino",
+      "La lucertola",
+      "Il pinguino",
+      "La rana"
+     ],
+     "corretta": 1,
+     "spiegazione": "La lucertola ha la pelle a squame: è un rettile. La rana è un anfibio.",
+     "categoria": "Natura"
+    },
+    {
+     "domanda": "Quale animale è un anfibio?",
+     "opzioni": [
+      "La rana",
+      "Il pipistrello",
+      "Il serpente"
+     ],
+     "corretta": 0,
+     "spiegazione": "La rana nasce in acqua come girino e da adulta vive tra acqua e terra.",
+     "categoria": "Natura"
+    },
+    {
+     "domanda": "Il pipistrello è…",
+     "opzioni": [
+      "Un uccello",
+      "Un mammifero",
+      "Un insetto"
+     ],
+     "corretta": 1,
+     "spiegazione": "Il pipistrello allatta i piccoli: è un mammifero capace di volare.",
+     "categoria": "Natura"
+    },
+    {
+     "domanda": "Il pinguino è…",
+     "opzioni": [
+      "Un uccello che non vola",
+      "Un mammifero",
+      "Un pesce"
+     ],
+     "corretta": 0,
+     "spiegazione": "Il pinguino ha piume e depone uova: è un uccello, ottimo nuotatore.",
+     "categoria": "Natura"
+    },
+    {
+     "domanda": "Quante zampe ha un ragno?",
+     "opzioni": [
+      "Dieci",
+      "Sei",
+      "Otto",
+      "Quattro"
+     ],
+     "corretta": 2,
+     "spiegazione": "Il ragno ha otto zampe e non è un insetto: appartiene agli aracnidi.",
+     "categoria": "Natura"
+    },
+    {
+     "domanda": "Come respirano i pesci?",
+     "opzioni": [
+      "Con la pelle soltanto",
+      "Con le branchie",
+      "Con i polmoni"
+     ],
+     "corretta": 1,
+     "spiegazione": "Le branchie prendono l'ossigeno sciolto nell'acqua.",
+     "categoria": "Natura"
+    },
+    {
+     "domanda": "Quale animale è il simbolo del Parco Nazionale del Gran Paradiso?",
+     "opzioni": [
+      "Lo stambecco",
+      "Il cammello",
+      "L'orso polare"
+     ],
+     "corretta": 0,
+     "spiegazione": "Il Gran Paradiso nacque anche per proteggere lo stambecco, allora quasi scomparso.",
+     "categoria": "Natura"
+    },
+    {
+     "domanda": "Quale orso vive nel Parco Nazionale d'Abruzzo?",
+     "opzioni": [
+      "L'orso polare",
+      "Il panda",
+      "L'orso marsicano"
+     ],
+     "corretta": 2,
+     "spiegazione": "L'orso bruno marsicano vive sull'Appennino centrale ed è protetto.",
+     "categoria": "Natura"
+    },
+    {
+     "domanda": "Come si può capire l'età di un albero tagliato?",
+     "opzioni": [
+      "Contando gli anelli del tronco",
+      "Misurando le foglie",
+      "Contando i rami"
+     ],
+     "corretta": 0,
+     "spiegazione": "Di solito ogni anno il tronco forma un nuovo anello di crescita.",
+     "categoria": "Natura"
+    },
+    {
+     "domanda": "Che cosa sono le specie invasive?",
+     "opzioni": [
+      "Specie che vivono solo nei parchi",
+      "Specie in via di estinzione",
+      "Specie portate da altri luoghi che danneggiano quelle locali"
+     ],
+     "corretta": 2,
+     "spiegazione": "Un esempio in Italia è lo scoiattolo grigio americano, che fa concorrenza allo scoiattolo rosso.",
+     "categoria": "Natura"
+    },
+    {
+     "domanda": "Avete raccolto dei funghi nel bosco. Cosa è prudente fare?",
+     "opzioni": [
+      "Cuocerli a lungo, così diventano tutti buoni",
+      "Farli controllare dagli esperti micologi della ASL",
+      "Assaggiarne un pezzetto per prova"
+     ],
+     "corretta": 1,
+     "spiegazione": "Alcuni funghi velenosi sono molto simili a quelli commestibili: solo un esperto può riconoscerli.",
+     "categoria": "Natura"
+    },
+    {
+     "domanda": "Dove vanno molte rondini in autunno?",
+     "opzioni": [
+      "Restano sempre nello stesso nido",
+      "Al Polo Nord",
+      "In Africa, dove fa più caldo"
+     ],
+     "corretta": 2,
+     "spiegazione": "Le rondini sono uccelli migratori: tornano da noi in primavera.",
+     "categoria": "Natura"
+    },
+    {
+     "domanda": "Su quanti anni, di solito, si calcola il clima di un luogo?",
+     "opzioni": [
+      "Un mese",
+      "Circa trent'anni",
+      "Una settimana"
+     ],
+     "corretta": 1,
+     "spiegazione": "Il clima è la media del tempo su lunghi periodi, convenzionalmente trent'anni.",
+     "categoria": "Ambiente e clima"
+    },
+    {
+     "domanda": "Che tipo di clima ha gran parte dell'Italia?",
+     "opzioni": [
+      "Desertico",
+      "Equatoriale",
+      "Polare",
+      "Mediterraneo"
+     ],
+     "corretta": 3,
+     "spiegazione": "Il clima mediterraneo ha estati calde e asciutte e inverni miti.",
+     "categoria": "Ambiente e clima"
+    },
+    {
+     "domanda": "Quale di questi è un gas serra?",
+     "opzioni": [
+      "L'anidride carbonica",
+      "L'azoto",
+      "L'ossigeno"
+     ],
+     "corretta": 0,
+     "spiegazione": "Anidride carbonica, metano e vapore acqueo trattengono il calore nell'atmosfera.",
+     "categoria": "Ambiente e clima"
+    },
+    {
+     "domanda": "Qual è, in media, la temperatura che avrebbe la Terra senza effetto serra?",
+     "opzioni": [
+      "Circa 50 gradi",
+      "Circa 18 gradi sotto zero",
+      "Circa 15 gradi"
+     ],
+     "corretta": 1,
+     "spiegazione": "L'effetto serra naturale porta la temperatura media a circa 15 gradi.",
+     "categoria": "Ambiente e clima"
+    },
+    {
+     "domanda": "Quale di queste è una fonte di energia fossile?",
+     "opzioni": [
+      "Il sole",
+      "Il vento",
+      "Il petrolio",
+      "L'acqua dei fiumi"
+     ],
+     "corretta": 2,
+     "spiegazione": "Petrolio, carbone e gas naturale si sono formati in milioni di anni e non sono rinnovabili.",
+     "categoria": "Ambiente e clima"
+    },
+    {
+     "domanda": "In quale località toscana si produsse per la prima volta al mondo elettricità dal calore della Terra?",
+     "opzioni": [
+      "Viareggio",
+      "Larderello",
+      "San Gimignano"
+     ],
+     "corretta": 1,
+     "spiegazione": "A Larderello, all'inizio del Novecento, il vapore del sottosuolo fu usato per produrre elettricità.",
+     "categoria": "Ambiente e clima"
+    },
+    {
+     "domanda": "Che cosa trasformano i pannelli fotovoltaici?",
+     "opzioni": [
+      "La luce del Sole in elettricità",
+      "Il vento in calore",
+      "L'acqua in gas"
+     ],
+     "corretta": 0,
+     "spiegazione": "I pannelli fotovoltaici producono elettricità dalla luce solare.",
+     "categoria": "Ambiente e clima"
+    },
+    {
+     "domanda": "Dove va buttato un piatto di ceramica rotto?",
+     "opzioni": [
+      "Nella carta",
+      "Non nel vetro: di solito nell'indifferenziato, secondo le regole del comune",
+      "Nel vetro"
+     ],
+     "corretta": 1,
+     "spiegazione": "La ceramica rovina il riciclo del vetro; controllate comunque le regole del vostro comune.",
+     "categoria": "Ambiente e clima"
+    },
+    {
+     "domanda": "Dove si portano i farmaci scaduti?",
+     "opzioni": [
+      "Negli appositi contenitori, spesso presso le farmacie",
+      "Nel lavandino",
+      "Nella plastica"
+     ],
+     "corretta": 0,
+     "spiegazione": "I farmaci scaduti vanno raccolti a parte perché possono inquinare.",
+     "categoria": "Ambiente e clima"
+    },
+    {
+     "domanda": "Cosa fare con l'olio usato per friggere?",
+     "opzioni": [
+      "Versarlo nel lavandino",
+      "Buttarlo nel water",
+      "Raccoglierlo in una bottiglia e portarlo all'isola ecologica"
+     ],
+     "corretta": 2,
+     "spiegazione": "Un solo litro d'olio nello scarico può inquinare molta acqua e intasare le tubature.",
+     "categoria": "Ambiente e clima"
+    },
+    {
+     "domanda": "Che cosa diventa l'umido della raccolta differenziata?",
+     "opzioni": [
+      "Vetro",
+      "Compost, un concime naturale",
+      "Plastica nuova"
+     ],
+     "corretta": 1,
+     "spiegazione": "Gli scarti organici si trasformano in compost, utile per orti e giardini.",
+     "categoria": "Ambiente e clima"
+    },
+    {
+     "domanda": "Quale gesto aiuta a risparmiare acqua?",
+     "opzioni": [
+      "Chiudere il rubinetto mentre ci si lava i denti",
+      "Lasciare l'acqua scorrere",
+      "Lavare l'auto ogni giorno"
+     ],
+     "corretta": 0,
+     "spiegazione": "Piccoli gesti quotidiani, ripetuti da tutti, fanno risparmiare molta acqua.",
+     "categoria": "Ambiente e clima"
+    },
+    {
+     "domanda": "Quale di questi è un segno del riscaldamento globale osservato sulle Alpi?",
+     "opzioni": [
+      "L'arrivo di vulcani",
+      "Il ritiro dei ghiacciai",
+      "La crescita di nuove montagne"
+     ],
+     "corretta": 1,
+     "spiegazione": "Molti ghiacciai alpini si sono ridotti in modo evidente negli ultimi decenni.",
+     "categoria": "Ambiente e clima"
+    }
+   ]
+  }
+ ]
+}

@@ -116,7 +116,7 @@ FunctionEnd
 !macroend
 
 ; ------------------------------------------------------------------------------
-Section "Professore Digitale (programma, lezioni, guida, voce)" SEC_APP
+Section "Professore Digitale (programma, lezioni, quiz, guida, voce)" SEC_APP
   SectionIn RO
   !insertmacro ChiudiProfessore
   SetOutPath "$INSTDIR"
@@ -171,6 +171,32 @@ Section "Microfono offline: motore Vosk (il modello italiano si scarica poi)" SE
   ${EndIf}
 SectionEnd
 
+Section "Voci naturali italiane: Paola (donna) e Riccardo (uomo)" SEC_VOCI
+  ${If} ${RunningX64}
+    RMDir /r "$INSTDIR\piper"
+    SetOutPath "$INSTDIR\piper"
+    File /r "${SORGENTE}\piper\*.*"
+    SetOutPath "$INSTDIR\voci"
+    File /r "${SORGENTE}\voci\*.*"
+    SetOutPath "$INSTDIR"
+  ${EndIf}
+SectionEnd
+
+Section "-Firewall per l'aula"
+  ; il quadro dell'aula riceve i PC degli allievi solo nella rete locale (porte 8766 TCP e 8767 UDP), e solo se attivato
+  StrCmp $MultiUser.InstallMode "AllUsers" 0 fw_fine
+  ${If} ${AtLeastWinVista}
+    nsExec::Exec 'netsh advfirewall firewall delete rule name="Professore Digitale (aula)"'
+    Pop $0
+    nsExec::Exec 'netsh advfirewall firewall add rule name="Professore Digitale (aula)" dir=in action=allow program="$INSTDIR\${ESEGUIBILE}" enable=yes profile=private,domain'
+    Pop $0
+  ${Else}
+    nsExec::Exec 'netsh firewall add allowedprogram program="$INSTDIR\${ESEGUIBILE}" name="Professore Digitale (aula)" mode=ENABLE scope=SUBNET'
+    Pop $0
+  ${EndIf}
+  fw_fine:
+SectionEnd
+
 Section "-Dimensione"
   ${GetSize} "$INSTDIR" "/S=0K" $0 $1 $2
   IntFmt $0 "0x%08X" $0
@@ -180,6 +206,7 @@ SectionEnd
 !insertmacro MUI_FUNCTION_DESCRIPTION_BEGIN
   !insertmacro MUI_DESCRIPTION_TEXT ${SEC_APP} "Lezioni, guida interna, lavagna, palestra e voce di Windows. Funziona senza Internet."
   !insertmacro MUI_DESCRIPTION_TEXT ${SEC_DESK} "Un'icona sul desktop per aprire il Professore con un doppio clic."
+  !insertmacro MUI_DESCRIPTION_TEXT ${SEC_VOCI} "Voci italiane molto naturali, una maschile e una femminile, già pronte (circa 120 MB, nessun download). Richiedono Windows a 64 bit."
   !insertmacro MUI_DESCRIPTION_TEXT ${SEC_MIC} "Permette di fare domande a voce. Il modello della lingua italiana (circa 50 MB) si scarica dalla configurazione guidata o dalla chiavetta."
 !insertmacro MUI_FUNCTION_DESCRIPTION_END
 
@@ -195,6 +222,13 @@ Section "Uninstall"
   RMDir /r "$INSTDIR\web"
   RMDir /r "$INSTDIR\contenuti"
   RMDir /r "$INSTDIR\stt"
+  RMDir /r "$INSTDIR\piper"
+  RMDir /r "$INSTDIR\voci"
+  StrCmp $MultiUser.InstallMode "AllUsers" 0 +5
+  nsExec::Exec 'netsh advfirewall firewall delete rule name="Professore Digitale (aula)"'
+  Pop $0
+  nsExec::Exec 'netsh firewall delete allowedprogram program="$INSTDIR\${ESEGUIBILE}"'
+  Pop $0
   Delete "$INSTDIR\${ESEGUIBILE}"
   Delete "$INSTDIR\VERSION"
   Delete "$INSTDIR\distribuzione.json"
@@ -232,6 +266,8 @@ Function .onInit
   ${IfNot} ${RunningX64}
     SectionSetFlags ${SEC_MIC} ${SF_RO}
     SectionSetText ${SEC_MIC} "Microfono (richiede Windows a 64 bit)"
+    SectionSetFlags ${SEC_VOCI} ${SF_RO}
+    SectionSetText ${SEC_VOCI} "Voci naturali (richiedono Windows a 64 bit)"
   ${EndIf}
 FunctionEnd
 

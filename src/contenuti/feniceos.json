@@ -1,0 +1,3541 @@
+{
+ "formato": "professore-digitale-contenuti",
+ "formato_versione": 1,
+ "id": "feniceos",
+ "titolo": "FeniceOS, recupero ed economia circolare",
+ "versione": "1.1.0",
+ "autore": "Danilo D'Auria",
+ "descrizione": "FeniceOS com'è davvero, dai suoi manuali e dal vademecum ufficiale: la distribuzione Linux live basata su Debian 12 che fa rinascere i computer, i suoi programmi, l'avvio dalla chiavetta, la costruzione e l'installazione. E i temi del riuso: Tecnologia Gentile, economia circolare, obsolescenza programmata, software libero, RAEE. 12 lezioni, 63 risposte e il Grande Quiz con attestato.",
+ "richiede_app": "3.0.0",
+ "suggerimenti": [
+  "Cos'è FeniceOS?",
+  "Qual è la password di FeniceOS?",
+  "Cos'è l'obsolescenza programmata?",
+  "Come avvio il computer dalla chiavetta USB?",
+  "Cos'è il Fenice Store?",
+  "Dove butto un vecchio computer?"
+ ],
+ "domande": [
+  {
+   "domanda": "Cos'è FeniceOS?",
+   "parole_chiave": [
+    "feniceos",
+    "fenice os",
+    "fenice",
+    "sistema fenice",
+    "che cos'è fenice"
+   ],
+   "risposta": "**FeniceOS** è una distribuzione Linux *live*, basata su **Debian 12 «Bookworm»**, ideata e sviluppata da **Danilo D'Auria**.\n\nSi avvia da una **chiavetta USB**, anche senza installarla, e serve a dare una **seconda vita** a computer considerati vecchi. L'obiettivo è funzionare anche con **meno di 500 MB di RAM**, su computer con BIOS o UEFI.\n\nÈ pensata per **centri anziani**, **aule didattiche** e **centri per il sociale**: luoghi dove un computer recuperato diventa uno strumento di inclusione digitale.",
+   "schema": "flowchart LR\n  A[\"💻 PC vecchio\"] --> B[\"🔥 FeniceOS\"] --> C[\"✨ PC rinato\"]",
+   "lezione": "feniceos"
+  },
+  {
+   "domanda": "Perché si chiama FeniceOS?",
+   "parole_chiave": [
+    "perché fenice",
+    "nome fenice",
+    "uccello fenice",
+    "ceneri",
+    "ashborn"
+   ],
+   "risposta": "Il nome viene dalla **fenice** del mito, l'uccello che **rinasce dalle proprie ceneri**. Così FeniceOS fa rinascere computer che il mercato avrebbe destinato alla dismissione.\n\nLa prima versione si chiama **1.0.0 «Ashborn»**, in inglese «nata dalla cenere».\n\n*OS* è la sigla inglese di *Operating System*, cioè **sistema operativo**.",
+   "lezione": "feniceos"
+  },
+  {
+   "domanda": "Da dove viene il mito della fenice?",
+   "parole_chiave": [
+    "mito della fenice",
+    "benu",
+    "eliopoli",
+    "erodoto",
+    "ovidio",
+    "leggenda fenice"
+   ],
+   "risposta": "Il mito ha radici nell'antico Egitto: a **Eliopoli**, la città del Sole, era venerato il **Benu**, un airone legato al dio **Ra** e alla rinascita.\n\nLo storico greco **Erodoto** racconta che la fenice arrivava al tempio del Sole di Eliopoli **ogni 500 anni**. Il poeta latino **Ovidio**, nelle *Metamorfosi*, descrive il nido di spezie da cui nasce una nuova piccola fenice, e lo storico **Tacito** ricorda un suo presunto arrivo in Egitto nel 34 d.C.\n\nIl simbolo è arrivato fino a noi: nel **1828** la Fenice fu la prima moneta della Grecia moderna.",
+   "lezione": "feniceos"
+  },
+  {
+   "domanda": "Chi ha creato FeniceOS?",
+   "parole_chiave": [
+    "chi ha creato feniceos",
+    "autore feniceos",
+    "danilo d'auria",
+    "chi ha fatto fenice",
+    "ideatore"
+   ],
+   "risposta": "FeniceOS è **ideata e sviluppata da Danilo D'Auria**, che ne cura l'architettura, la documentazione e l'evoluzione nel tempo.\n\nDanilo è anche l'autore del libro **«Tecnologia Gentile: Informatica Sostenibile»**, da cui nascono i principi del progetto: etica, sostenibilità e contrasto all'obsolescenza programmata.\n\nFeniceOS si appoggia sul lavoro di tante comunità di software libero: **Debian**, **Xfce**, i sistemi di stampa e Bluetooth e molti altri.",
+   "lezione": "feniceos"
+  },
+  {
+   "domanda": "Su cosa si basa FeniceOS?",
+   "parole_chiave": [
+    "base feniceos",
+    "debian 12",
+    "bookworm",
+    "su cosa è costruita",
+    "64 bit",
+    "amd64"
+   ],
+   "risposta": "FeniceOS è costruita sopra **Debian 12**, nome in codice **«Bookworm»**: una distribuzione nota per stabilità e sicurezza, mantenuta da volontari e libera da costi di licenza.\n\nÈ preparata per l'architettura **amd64**, cioè per computer con processore a **64 bit**.\n\nDa Debian eredita il sistema **APT** per installare e aggiornare i programmi in modo verificato. Sopra la base Debian, FeniceOS aggiunge l'ambiente grafico **Xfce**, i programmi scelti, il **Fenice Store**, gli utenti **fenice** e **ospite** e il **Professore Digitale**.",
+   "lezione": "feniceos"
+  },
+  {
+   "domanda": "Cos'è la Tecnologia Gentile?",
+   "parole_chiave": [
+    "tecnologia gentile",
+    "libro tecnologia gentile",
+    "informatica sostenibile",
+    "filosofia feniceos"
+   ],
+   "risposta": "La **Tecnologia Gentile** è un **metodo** di progettazione e di insegnamento che mette al centro **la persona, non la macchina**. È l'idea del libro di Danilo D'Auria *Tecnologia Gentile: Informatica Sostenibile*.\n\nSi fonda su quattro principi:\n\n1. **Comprensibilità**: lo strumento si spiega da sé.\n2. **Accessibilità**: non esclude per età, reddito, disabilità o esperienza.\n3. **Sostenibilità**: dura, si ripara, non spreca.\n4. **Rispetto**: accompagna, senza trattare nessuno da bambino.\n\nGentile non vuol dire meno potente: vuol dire progettato con intenzione.",
+   "lezione": "tecnologia-gentile"
+  },
+  {
+   "domanda": "Quali sono i principi di FeniceOS?",
+   "parole_chiave": [
+    "principi feniceos",
+    "filosofia di feniceos",
+    "sovranità digitale",
+    "valori feniceos",
+    "manifesto"
+   ],
+   "risposta": "Il vademecum riassume la filosofia di FeniceOS in quattro principi:\n\n- **Sostenibilità**: un computer che funziona non è un rifiuto; ogni installazione evita rifiuti elettronici.\n- **Inclusione**: icone grandi, pannello bloccato, guida offline e un negozio di programmi semplificato, perché chi non ha mai usato un computer possa iniziare senza timore.\n- **Sovranità digitale**: le funzioni didattiche lavorano offline; nessun dato a terzi, nessun tracciamento, nessuna telemetria.\n- **Trasparenza e condivisione**: ogni componente, compreso lo script che crea l'ISO, è aperto e ispezionabile.",
+   "lezione": "tecnologia-gentile"
+  },
+  {
+   "domanda": "Cos'è l'etica del digitale?",
+   "parole_chiave": [
+    "etica del digitale",
+    "etica informatica",
+    "esclusione digitale",
+    "informatica inclusiva"
+   ],
+   "risposta": "L'etica del digitale si chiede, prima di ogni scelta tecnica: **a chi serve davvero questo strumento, e chi rischia di restarne escluso?**\n\nL'esclusione ha volti concreti: chi non riesce a prenotare una visita solo online, chi non può cambiare computer spesso, chi non ha mai avuto qualcuno che gli insegnasse.\n\nIl manuale di FeniceOS propone tre domande guida per ogni scelta: **include o esclude?** **Semplifica o complica?** Rende la persona **più autonoma o più dipendente?**",
+   "lezione": "tecnologia-gentile"
+  },
+  {
+   "domanda": "Cos'è il divario digitale?",
+   "parole_chiave": [
+    "divario digitale",
+    "digital divide",
+    "esclusi dal digitale",
+    "chi resta indietro"
+   ],
+   "risposta": "Il **divario digitale** è la distanza tra chi può usare con sicurezza gli strumenti digitali e chi ne resta escluso.\n\nÈ un errore pensare che riguardi **solo le persone anziane**. Tocca anche chi non può permettersi dispositivi aggiornati, chi vive in zone con una connessione debole, chi non ha mai avuto una formazione adatta, a qualunque età.\n\nOggi che servizi pubblici, sanità e lavoro passano da Internet, è un problema sociale. Un centro con computer recuperati, FeniceOS e un buon corso può colmarne una parte, concretamente.",
+   "lezione": "universo-informatico"
+  },
+  {
+   "domanda": "Cosa sono i RAEE?",
+   "parole_chiave": [
+    "raee",
+    "rifiuti elettronici",
+    "rifiuti elettrici",
+    "elettronica da buttare",
+    "bidone barrato"
+   ],
+   "risposta": "**RAEE** significa *Rifiuti di Apparecchiature Elettriche ed Elettroniche*: tutto ciò che funziona con la corrente o con le pile, dal telefono al frigorifero, dal computer al giocattolo.\n\nContengono materiali **preziosi** da recuperare e sostanze **pericolose** se finiscono nell'ambiente. Per questo vanno sempre consegnati alla **raccolta separata**, mai nel cassonetto dell'indifferenziato. Li riconoscete dal simbolo del **bidone barrato**.",
+   "lezione": "economia-circolare"
+  },
+  {
+   "domanda": "Cos'è l'economia circolare?",
+   "parole_chiave": [
+    "economia circolare",
+    "economia lineare",
+    "riuso",
+    "usa e getta",
+    "ciclo di vita"
+   ],
+   "risposta": "L'**economia lineare** segue lo schema «estrarre, produrre, usare, gettare».\n\nL'**economia circolare** inverte la rotta: gli oggetti si usano più a lungo, si riparano, passano di mano e solo alla fine si riciclano i materiali.\n\nApplicata ai computer, ci dice che una macchina che non regge più un sistema pesante **non è un rifiuto**: è una risorsa che aspetta il software giusto. È proprio lo spazio in cui nasce FeniceOS.",
+   "schema": "flowchart LR\n  A[\"✂️ Ridurre\"] --> B[\"🔁 Riutilizzare\"] --> C[\"🔧 Riparare\"] --> D[\"✨ Rigenerare\"] --> E[\"♻️ Riciclare\"]",
+   "lezione": "economia-circolare"
+  },
+  {
+   "domanda": "Quali sono le R dell'economia circolare?",
+   "parole_chiave": [
+    "le r",
+    "ridurre riusare riciclare",
+    "regola delle r",
+    "rigenerare",
+    "riparare"
+   ],
+   "risposta": "Il manuale di FeniceOS le elenca in ordine di priorità:\n\n1. **Ridurre**: comprare e consumare solo ciò che serve.\n2. **Riutilizzare**: dare una seconda vita all'oggetto, anche regalandolo.\n3. **Riparare**: sostituire il pezzo rotto invece di buttare tutto.\n4. **Rigenerare**: rimettere a nuovo un oggetto usato, come un computer con un sistema leggero.\n5. **Riciclare**: recuperare i materiali, quando non c'è altra strada.\n\nIl riciclo è importante, ma viene **per ultimo**.",
+   "lezione": "economia-circolare"
+  },
+  {
+   "domanda": "Perché un computer inquina anche se lo uso poco?",
+   "parole_chiave": [
+    "impatto ambientale computer",
+    "computer inquina",
+    "produzione computer",
+    "impronta ecologica",
+    "materiali computer"
+   ],
+   "risposta": "Un computer da ufficio contiene **decine di materiali**: rame, alluminio, plastiche, terre rare e piccole quantità di metalli preziosi. Estrarli e lavorarli ha un costo ambientale, e spesso anche sociale, importante.\n\nPer questo gran parte del suo impatto nasce **prima** che lo accendiate, quando viene fabbricato.\n\nAllungare la vita di un computer, anche solo di **due o tre anni**, riduce la necessità di produrne di nuovi ed evita rifiuti elettronici. Il computer più ecologico è spesso quello che avete già.",
+   "lezione": "economia-circolare"
+  },
+  {
+   "domanda": "Cosa dice la legge europea sui rifiuti elettronici?",
+   "parole_chiave": [
+    "legge raee",
+    "direttiva europea",
+    "unione europea rifiuti",
+    "normativa rifiuti elettronici"
+   ],
+   "risposta": "L'Unione Europea ha una **direttiva sui RAEE**, recepita dalle leggi italiane. In parole semplici stabilisce che:\n\n- i rifiuti elettronici vanno **raccolti separatamente**;\n- chi produce e vende apparecchi ha delle **responsabilità** nel loro recupero;\n- i cittadini possono consegnarli **senza pagare** nei punti di raccolta previsti.\n\nPer i dettagli della vostra zona chiedete al comune o all'azienda dei rifiuti.",
+   "lezione": "economia-circolare"
+  },
+  {
+   "domanda": "Cos'è il diritto alla riparazione?",
+   "parole_chiave": [
+    "diritto alla riparazione",
+    "right to repair",
+    "riparare apparecchi",
+    "riparabilità"
+   ],
+   "risposta": "Il **diritto alla riparazione** (*Right to Repair*) è il movimento che difende la possibilità di **riparare i propri apparecchi**, o di farli riparare da chi si preferisce, invece di doversi rivolgere solo al produttore o comprarne uno nuovo.\n\nOggi è anche un tema di legge, con norme approvate in vari Paesi e nell'Unione Europea.\n\nÈ un alleato dell'economia circolare: un oggetto che si ripara dura di più e produce meno rifiuti. Prima di comprare, quando possibile, informatevi sull'**indice di riparabilità**.",
+   "lezione": "economia-circolare"
+  },
+  {
+   "domanda": "Cos'è l'obsolescenza programmata?",
+   "parole_chiave": [
+    "obsolescenza programmata",
+    "obsolescenza",
+    "prodotti fatti per rompersi",
+    "durare meno"
+   ],
+   "risposta": "L'**obsolescenza programmata** è la pratica di progettare un prodotto in modo che la sua vita utile sia **limitata artificialmente**, spingendo a sostituirlo prima che sia davvero necessario.\n\nÈ un problema su tre piani: **ambientale**, perché aumenta i rifiuti elettronici; **economico**, perché fa pagare sostituzioni inutili; **sociale**, perché chi non può rinnovare i propri apparecchi rischia di restare escluso.\n\nFeniceOS esiste proprio per rispondere a questo problema con strumenti concreti.",
+   "lezione": "obsolescenza"
+  },
+  {
+   "domanda": "Quali tipi di obsolescenza esistono?",
+   "parole_chiave": [
+    "tipi di obsolescenza",
+    "obsolescenza software",
+    "obsolescenza percepita",
+    "obsolescenza tecnica"
+   ],
+   "risposta": "Il manuale di FeniceOS ne distingue tre:\n\n- **Tecnica**: componenti poco resistenti, batterie non sostituibili, pezzi incollati, ricambi introvabili.\n- **Software**: un apparecchio che funziona diventa inutilizzabile perché non riceve più aggiornamenti o perché i nuovi sistemi chiedono troppe risorse. È quella che FeniceOS contrasta direttamente.\n- **Percepita**: la pubblicità fa desiderare l'ultimo modello anche quando il nostro funziona benissimo.\n\nLa manutenzione ordinaria, invece, non è obsolescenza: ne contrasta gli effetti.",
+   "schema": "flowchart TD\n  O[\"⏳ Obsolescenza\"] --> A[\"🔩 Tecnica\"]\n  O --> B[\"💾 Software\"]\n  O --> C[\"📺 Percepita\"]",
+   "lezione": "obsolescenza"
+  },
+  {
+   "domanda": "Il mio computer è vecchio: devo buttarlo?",
+   "parole_chiave": [
+    "computer vecchio da buttare",
+    "buttare il computer",
+    "vecchio o rotto",
+    "computer obsoleto",
+    "rottamare"
+   ],
+   "risposta": "Non per forza! **Un dispositivo «vecchio» e un dispositivo «rotto» sono due cose diverse**: è la frase su cui si fonda FeniceOS.\n\nSpesso un computer sembra finito solo perché il sistema operativo gli chiede troppe risorse. Con un sistema **leggero** come FeniceOS può tornare a navigare, scrivere lettere, mostrare foto e seguire un corso.\n\nPrima di decidere, chiedetevi: è davvero **guasto**, oppure è solo lento o senza aggiornamenti? E se proprio non serve più a voi, potete **donarlo** a un progetto di rigenerazione.",
+   "lezione": "obsolescenza"
+  },
+  {
+   "domanda": "Cosa vuol dire e-waste?",
+   "parole_chiave": [
+    "e-waste",
+    "ewaste",
+    "spazzatura elettronica",
+    "rifiuti tecnologici"
+   ],
+   "risposta": "**E-waste** è il termine inglese per i **rifiuti elettronici**: computer, telefoni, schermi, cavi e batterie che vengono buttati. In Italia si chiamano **RAEE**.\n\nSono tra le categorie di rifiuti che **crescono più in fretta al mondo**. Spesso contengono metalli pesanti e sostanze tossiche e vengono riciclati correttamente solo in una piccola parte dei casi.\n\nPer questo ogni computer che torna utilizzabile, invece di essere smaltito, è letteralmente un **rifiuto evitato**.",
+   "lezione": "obsolescenza"
+  },
+  {
+   "domanda": "Dove butto un vecchio computer o un telefono rotto?",
+   "parole_chiave": [
+    "dove butto il computer",
+    "smaltire computer",
+    "isola ecologica",
+    "telefono rotto",
+    "buttare telefono"
+   ],
+   "risposta": "Un apparecchio elettronico che non si può più riparare né riusare è un **RAEE** e non va mai nel cassonetto. Potete consegnarlo:\n\n1. all'**isola ecologica** (centro di raccolta) del vostro comune;\n2. al negozio, con il ritiro **«uno contro uno»** quando comprate un apparecchio nuovo equivalente;\n3. nei negozi più grandi, con il ritiro **«uno contro zero»** per gli apparecchi molto piccoli.\n\nPrima, però, **cancellate i vostri dati** e chiedetevi se qualcuno potrebbe ancora usarlo.",
+   "lezione": "vecchio-pc"
+  },
+  {
+   "domanda": "Cosa vuol dire ritiro uno contro uno e uno contro zero?",
+   "parole_chiave": [
+    "uno contro uno",
+    "uno contro zero",
+    "ritiro in negozio",
+    "1 contro 1",
+    "1 contro 0"
+   ],
+   "risposta": "Sono due modi per consegnare i RAEE in negozio:\n\n- **Uno contro uno**: quando comprate un apparecchio nuovo, il negozio ritira **senza costi** quello vecchio dello **stesso tipo**. Per esempio una lavatrice per una lavatrice.\n- **Uno contro zero**: nei negozi di elettronica più grandi potete lasciare **gratuitamente** gli apparecchi **molto piccoli**, come un vecchio telefono o un caricabatterie, **senza comprare nulla**.\n\nLe regole precise possono cambiare: chiedete al negozio.",
+   "lezione": "vecchio-pc"
+  },
+  {
+   "domanda": "Perché il mio computer è diventato lento?",
+   "parole_chiave": [
+    "computer lento",
+    "pc lento",
+    "rallenta",
+    "va piano",
+    "lentezza"
+   ],
+   "risposta": "Di solito i pezzi del computer lavorano come il primo giorno. A rallentarlo sono soprattutto:\n\n- **programmi e sistemi** sempre più pesanti;\n- programmi che **partono da soli** all'accensione;\n- il **disco quasi pieno**;\n- la **polvere**, che lo fa scaldare;\n- il vecchio **disco meccanico**.\n\nSpesso, quindi, il problema è il software, non l'hardware. Un sistema leggero come **FeniceOS** può ridargli energia.",
+   "lezione": "vecchio-pc"
+  },
+  {
+   "domanda": "Come posso rendere più veloce un vecchio computer?",
+   "parole_chiave": [
+    "velocizzare computer",
+    "computer più veloce",
+    "migliorare pc",
+    "far rinascere computer"
+   ],
+   "risposta": "Ecco gli interventi più utili, dal più economico:\n\n1. Installare un **sistema operativo leggero**, come FeniceOS, che chiede poche risorse.\n2. **Pulire** ventole e griglie dalla polvere, a computer spento e scollegato.\n3. Sostituire il disco meccanico con un **disco SSD**.\n4. Aggiungere **memoria RAM**, se il computer lo permette.\n\nPer aprire il computer fatevi aiutare dal facilitatore o da un tecnico di fiducia.",
+   "schema": "flowchart LR\n  A[\"🐧 Sistema leggero\"] --> B[\"🧹 Pulizia\"] --> C[\"💾 SSD\"] --> D[\"🧠 Più RAM\"]",
+   "lezione": "vecchio-pc"
+  },
+  {
+   "domanda": "Cos'è un disco SSD?",
+   "parole_chiave": [
+    "ssd",
+    "disco ssd",
+    "disco a stato solido",
+    "disco veloce",
+    "disco meccanico"
+   ],
+   "risposta": "Un **SSD** (*disco a stato solido*) è un disco che conserva i dati su chip di memoria, **senza parti in movimento**.\n\nRispetto al vecchio disco meccanico, che ha un piatto che gira e una testina che si muove, è molto **più veloce**, più silenzioso e resiste meglio agli urti.\n\nSostituire il disco meccanico con un SSD è uno dei miglioramenti più efficaci per un vecchio computer: accensione e apertura dei programmi diventano molto più rapide. Fatevi aiutare per la sostituzione e per copiare i dati.",
+   "lezione": "vecchio-pc"
+  },
+  {
+   "domanda": "Cos'è la memoria RAM e serve aggiungerla?",
+   "parole_chiave": [
+    "ram",
+    "memoria ram",
+    "aggiungere memoria",
+    "banco di memoria",
+    "poca memoria"
+   ],
+   "risposta": "La **RAM** è la memoria di lavoro del computer: come una **scrivania** su cui tiene aperti i programmi mentre li usate. Più è grande, più cose si possono fare insieme senza rallentare.\n\nSi spegne con il computer: per conservare i file serve il disco.\n\nAggiungere RAM aiuta se il computer ha posti liberi o accetta moduli più capienti, ma bisogna conoscere il **tipo giusto** per quel modello. FeniceOS punta a funzionare anche con **meno di 500 MB di RAM**.",
+   "lezione": "vecchio-pc"
+  },
+  {
+   "domanda": "Come cancello i miei dati prima di regalare o vendere il computer?",
+   "parole_chiave": [
+    "cancellare dati",
+    "regalare computer",
+    "vendere computer",
+    "cancellazione sicura",
+    "privacy computer usato"
+   ],
+   "risposta": "Mettere i file nel cestino **non basta**: spesso si possono recuperare.\n\n1. **Copiate** prima i file importanti su un disco esterno o una chiavetta.\n2. Fate **cancellare in modo sicuro** il disco, con un programma che lo sovrascrive o con le funzioni di cancellazione del disco stesso.\n3. Se il disco è guasto e non si cancella, si può **toglierlo** e distruggerlo.\n\nÈ un passaggio delicato: fatevi aiutare dal facilitatore o da un tecnico di fiducia.",
+   "lezione": "vecchio-pc"
+  },
+  {
+   "domanda": "Si può pulire il computer dalla polvere?",
+   "parole_chiave": [
+    "polvere computer",
+    "pulire computer",
+    "ventola",
+    "computer caldo",
+    "surriscaldamento"
+   ],
+   "risposta": "Sì, ed è utile: la **polvere** ostruisce ventole e griglie, il computer si scalda di più e può rallentare o spegnersi da solo.\n\n- Spegnete il computer e **staccate la spina**; per i portatili, se possibile, togliete anche la batteria.\n- Pulite le griglie esterne con un pennello morbido.\n- La pulizia **interna** è meglio farla fare a una persona esperta.\n\nÈ manutenzione ordinaria: uno dei modi più semplici per allungare la vita di un computer.",
+   "lezione": "vecchio-pc"
+  },
+  {
+   "domanda": "Cos'è il software libero?",
+   "parole_chiave": [
+    "software libero",
+    "open source",
+    "codice sorgente",
+    "programmi liberi",
+    "quattro libertà"
+   ],
+   "risposta": "Il **software libero** è un programma la cui *ricetta*, il **codice sorgente**, è pubblica. Secondo la definizione della Free Software Foundation garantisce **quattro libertà**:\n\n1. **eseguirlo** per qualsiasi scopo;\n2. **studiarlo** e modificarlo;\n3. **ridistribuirne** copie;\n4. **distribuire le versioni migliorate**.\n\n*Open source* indica la stessa idea dal punto di vista del codice aperto. FeniceOS esiste grazie a questa libertà: Debian, Linux e Xfce sono tutti software libero.",
+   "lezione": "software-libero"
+  },
+  {
+   "domanda": "Software libero vuol dire gratis?",
+   "parole_chiave": [
+    "gratis",
+    "gratuito",
+    "costa",
+    "free software",
+    "assistenza a pagamento"
+   ],
+   "risposta": "Non esattamente. **Libero** vuol dire **libertà**: di usare, studiare, condividere e migliorare il programma.\n\nMolto software libero si può avere **senza pagare**, ed è un grande vantaggio per scuole e associazioni. Ma non è vietato guadagnarci: molte aziende offrono **assistenza professionale a pagamento** su software libero, mentre il codice resta pubblico.\n\nIl punto non è il prezzo, ma il fatto che il programma non vi tiene «prigionieri».",
+   "lezione": "software-libero"
+  },
+  {
+   "domanda": "Cos'è il copyleft?",
+   "parole_chiave": [
+    "copyleft",
+    "gpl",
+    "licenza gpl",
+    "licenza libera",
+    "cc by-sa"
+   ],
+   "risposta": "Il **copyleft** è il meccanismo legale che ha permesso al software libero di crescere per decenni senza essere «richiuso».\n\nCon licenze come la **GPL**, chi modifica un programma e lo ridistribuisce deve condividerlo **con le stesse libertà** che ha ricevuto.\n\nUna logica simile vale anche per i testi: il vademecum di FeniceOS è distribuito con licenza **Creative Commons CC BY-SA 4.0**. Si può condividere e modificare, a patto di **citare l'autore**, Danilo D'Auria, e di **condividere allo stesso modo**.",
+   "lezione": "software-libero"
+  },
+  {
+   "domanda": "Chi ha inventato Linux?",
+   "parole_chiave": [
+    "linux",
+    "linus torvalds",
+    "kernel",
+    "pinguino",
+    "tux",
+    "gnu"
+   ],
+   "risposta": "Il **kernel Linux**, il cuore che dialoga con l'hardware, fu reso pubblico nel **1991** da **Linus Torvalds**, allora studente all'Università di **Helsinki**.\n\nGli strumenti attorno al kernel venivano dal **progetto GNU**, avviato nel **1983** da **Richard Stallman**. Unendo i due nacque un sistema completo: per questo si dice anche **GNU/Linux**.\n\nOggi Linux fa funzionare la maggior parte dei server di Internet. Il suo simbolo è il pinguino **Tux**. 🐧",
+   "lezione": "software-libero"
+  },
+  {
+   "domanda": "Cos'è Debian?",
+   "parole_chiave": [
+    "debian",
+    "bookworm",
+    "ian murdock",
+    "contratto sociale",
+    "distribuzione debian"
+   ],
+   "risposta": "**Debian** è una delle distribuzioni Linux più antiche e rispettate. È nata nel **1993** grazie a **Ian Murdock** ed è costruita da **volontari** di tutto il mondo.\n\nNon è mai stata guidata da interessi commerciali: la regola un **contratto sociale** pubblico con i propri utenti. Ogni pacchetto è verificato e mantenuto con cura.\n\nÈ famosa per la **stabilità**. **FeniceOS** è basata su **Debian 12 «Bookworm»**.",
+   "lezione": "software-libero"
+  },
+  {
+   "domanda": "Cos'è una distribuzione Linux?",
+   "parole_chiave": [
+    "distribuzione",
+    "distro",
+    "versioni di linux",
+    "ubuntu",
+    "mint"
+   ],
+   "risposta": "Linux, da solo, è il **kernel**: il motore. Per usarlo servono anche strumenti, ambiente grafico e programmi.\n\nUna **distribuzione** mette tutto insieme e lo rende **pronto all'uso**, come un'auto completa costruita attorno al motore.\n\nDa Linux sono nate **centinaia** di distribuzioni: alcune per i server, altre per l'ufficio, altre per i computer datati. **Debian** è una delle più antiche; **FeniceOS** è una distribuzione basata su Debian, pensata per l'hardware rigenerato.",
+   "lezione": "software-libero"
+  },
+  {
+   "domanda": "Cos'è APT e come si installano i programmi su Debian?",
+   "parole_chiave": [
+    "apt",
+    "installare programmi linux",
+    "gestore pacchetti",
+    "synaptic",
+    "pacchetti"
+   ],
+   "risposta": "**APT** è il sistema di gestione dei pacchetti di **Debian**, e quindi di FeniceOS. Permette di **installare, aggiornare e rimuovere** i programmi in modo **centralizzato, verificato e sicuro**, prendendoli dagli archivi ufficiali invece che da siti sconosciuti.\n\nSu FeniceOS non serve conoscere i comandi: il **Fenice Store** usa APT dietro le quinte, con un pulsante **Installa** o **Rimuovi**. Per il catalogo completo c'è **Synaptic**, il pulsante «Gestione pacchetti avanzata».",
+   "lezione": "software-libero"
+  },
+  {
+   "domanda": "Perché usare Linux è una scelta etica?",
+   "parole_chiave": [
+    "scelta etica",
+    "perché linux",
+    "etica software",
+    "linux e ambiente"
+   ],
+   "risposta": "Perché unisce valori che contano:\n\n- **Riuso**: i sistemi leggeri tengono in vita computer che altrimenti diventerebbero rifiuti.\n- **Trasparenza**: chiunque può verificare cosa fa un programma; nessuno deve fidarsi ciecamente.\n- **Condivisione**: il sapere resta di tutti.\n- **Inclusione**: scuole, associazioni e famiglie lo usano senza costi di licenza.\n\nIl manuale di FeniceOS considera la trasparenza del software libero un **valore etico**, non solo tecnico.",
+   "lezione": "software-libero"
+  },
+  {
+   "domanda": "FeniceOS funziona sul mio computer vecchio?",
+   "parole_chiave": [
+    "computer vecchio",
+    "requisiti feniceos",
+    "funziona sul mio pc",
+    "quanta ram",
+    "500 mb",
+    "32 bit"
+   ],
+   "risposta": "FeniceOS è pensata proprio per l'hardware rigenerato:\n\n- l'obiettivo è funzionare anche con **meno di 500 MB di RAM**;\n- si avvia sia con **BIOS** tradizionale sia con **UEFI**;\n- include driver per molte schede **Wi-Fi** e di rete.\n\nServe però un processore a **64 bit**: la versione 1.0 è preparata per l'architettura **amd64**, quindi non parte sui computer solo a 32 bit.\n\nIl modo migliore per saperlo è **provarla dalla chiavetta**, con il facilitatore: in modalità live il disco non viene toccato.",
+   "lezione": "fenice-chiavetta"
+  },
+  {
+   "domanda": "Cosa vuol dire distribuzione live?",
+   "parole_chiave": [
+    "live",
+    "modalità live",
+    "senza installare",
+    "provare senza installare",
+    "sistema live"
+   ],
+   "risposta": "Un sistema **live** funziona direttamente da una **chiavetta USB** (o da un DVD), senza essere installato sul disco del computer.\n\nSi inserisce la chiavetta, si accende il computer e il sistema parte, **senza toccare il disco fisso**: i vostri dati restano dove sono. La stessa chiavetta si può portare da un computer all'altro.\n\nFeniceOS è una distribuzione live: perfetta per provarla e per fare lezione senza paura di «rompere qualcosa». Ciò che salvate, però, non resta dopo lo spegnimento: usate una chiavetta personale.",
+   "lezione": "fenice-chiavetta"
+  },
+  {
+   "domanda": "Come creo la chiavetta con FeniceOS?",
+   "parole_chiave": [
+    "creare chiavetta",
+    "chiavetta avviabile",
+    "usb avviabile",
+    "rufus",
+    "balena etcher",
+    "scrivere iso"
+   ],
+   "risposta": "Serve il file **FeniceOS_Live_v1.0.0_amd64.iso** e una chiavetta che si può **cancellare del tutto**.\n\n1. Su **Windows** usate **Rufus**, in modalità **«DD Image»**, oppure **balenaEtcher**: sono gratuiti e open source.\n2. Su **Linux** o **macOS** il facilitatore scrive l'immagine dal terminale, con il comando *dd*, controllando con cura il nome della chiavetta.\n\nAttenzione: se si sbaglia dispositivo, si cancella il disco sbagliato. Fatevi aiutare dal facilitatore.",
+   "schema": "flowchart LR\n  A[\"📀 File ISO\"] --> B[\"🛠️ Rufus o balenaEtcher\"] --> C[\"🔑 Chiavetta pronta\"]",
+   "lezione": "fenice-chiavetta"
+  },
+  {
+   "domanda": "Come avvio il computer dalla chiavetta USB?",
+   "parole_chiave": [
+    "avviare da usb",
+    "boot da chiavetta",
+    "menu di avvio",
+    "boot menu",
+    "f12",
+    "partire dalla chiavetta"
+   ],
+   "risposta": "1. Inserite la chiavetta **prima** di accendere il computer.\n2. Accendetelo e premete **subito, più volte**, il tasto del **menu di avvio**: di solito **F12**, **F2**, **Esc** o **Canc**, secondo il produttore.\n3. Scegliete la **chiavetta USB** con le frecce e premete **Invio**.\n4. Compare il **menu di FeniceOS Live**: dopo pochi secondi parte da solo l'avvio normale.\n\nSe il computer si avvia come al solito, spegnetelo e riprovate premendo il tasto un po' prima.",
+   "schema": "flowchart LR\n  A[\"🔑 Chiavetta\"] --> B[\"⚡ Accendo\"] --> C[\"⌨️ F12, F2, Esc o Canc\"] --> D[\"🔥 FeniceOS\"]",
+   "lezione": "fenice-chiavetta"
+  },
+  {
+   "domanda": "All'avvio di FeniceOS lo schermo resta nero: cosa faccio?",
+   "parole_chiave": [
+    "schermo nero",
+    "schermo distorto",
+    "safe graphics",
+    "non si vede niente",
+    "nomodeset"
+   ],
+   "risposta": "Niente paura: alcune schede grafiche hanno bisogno di un avvio più prudente.\n\n1. Spegnete e riavviate dalla chiavetta.\n2. Nel **menu di FeniceOS Live** scegliete con le frecce la voce **«Safe Graphics»** e premete **Invio**, prima che parta da sola la voce predefinita.\n\nSafe Graphics avvia la grafica in modo semplice e funziona sulla maggior parte dei computer. Questa voce compare sui computer che si avviano con il **BIOS** tradizionale. Se il problema resta, chiedete al facilitatore.",
+   "lezione": "fenice-chiavetta"
+  },
+  {
+   "domanda": "Cosa vuol dire Zero-Disk o toram?",
+   "parole_chiave": [
+    "zero-disk",
+    "zero disk",
+    "toram",
+    "caricare in ram",
+    "non toccare il disco"
+   ],
+   "risposta": "**Zero-Disk (toram)** è una voce del menu di avvio di FeniceOS Live.\n\nCon questa scelta l'intero sistema viene **caricato nella memoria RAM** all'avvio e il **disco fisso non viene mai toccato**. È utile quando si vuole la massima tranquillità sui dati già presenti nel computer.\n\nPoiché tutto il sistema deve stare in memoria, serve un computer con **più RAM** rispetto all'avvio normale. Per l'uso di tutti i giorni va benissimo la voce **Default**.",
+   "lezione": "fenice-chiavetta"
+  },
+  {
+   "domanda": "A cosa serve l'impronta SHA-256 del file di FeniceOS?",
+   "parole_chiave": [
+    "sha256",
+    "sha-256",
+    "impronta",
+    "checksum",
+    "file integro",
+    "verificare iso"
+   ],
+   "risposta": "Accanto al file ISO di FeniceOS c'è un file che finisce con **.sha256**: contiene l'**impronta** del file ISO, una lunga sequenza di numeri e lettere calcolata da tutto il suo contenuto.\n\nIl facilitatore ricalcola l'impronta del file che ha ricevuto e la **confronta** con quella scritta. Se coincidono, il file è **integro**: identico all'originale, senza errori di copia o modifiche.\n\nBasta un solo carattere diverso nel file perché l'impronta cambi completamente.",
+   "lezione": "fenice-chiavetta"
+  },
+  {
+   "domanda": "Qual è la password di FeniceOS?",
+   "parole_chiave": [
+    "password feniceos",
+    "utente fenice",
+    "utente ospite",
+    "login",
+    "accesso feniceos",
+    "nome utente"
+   ],
+   "risposta": "Nella schermata di accesso di FeniceOS ci sono **due utenti**:\n\n- **ospite**, password **ospite**: l'utente pubblico, da usare con gli allievi in aula, in biblioteca o al centro anziani;\n- **fenice**, password **fenice**: l'**amministratore**, che può installare programmi e installare il sistema sul disco.\n\nLa password di fenice è nota a tutti: quando FeniceOS viene **installata sul disco**, l'installazione chiede di sceglierne una **nuova**. Si può cambiare anche in seguito.",
+   "lezione": "fenice-primi-passi"
+  },
+  {
+   "domanda": "Cosa succede ai file dell'utente ospite?",
+   "parole_chiave": [
+    "file ospite",
+    "ospite cancella",
+    "perdo i file",
+    "dove sono i miei file",
+    "salvare su chiavetta"
+   ],
+   "risposta": "La cartella personale dell'utente **ospite** viene **cancellata e ricreata da zero** a ogni accesso e a ogni uscita. Chi arriva dopo di voi trova tutto pulito, senza i vostri documenti, la cronologia o le password.\n\nQuindi, **prima di chiudere la sessione**, salvate ciò che vi interessa su una **chiavetta USB personale**, o stampatelo. FeniceOS ve lo ricorda quando generate un attestato.\n\nL'ospite non può installare programmi né modificare il sistema: una protezione in più per i computer pubblici.",
+   "lezione": "fenice-primi-passi"
+  },
+  {
+   "domanda": "Dove trovo il vademecum di FeniceOS?",
+   "parole_chiave": [
+    "vademecum",
+    "guida feniceos",
+    "manuale feniceos",
+    "istruzioni feniceos",
+    "guida rapida"
+   ],
+   "risposta": "Il **Vademecum ufficiale** di FeniceOS è già nel sistema: c'è un'icona **«Vademecum FeniceOS»** sul desktop e una copia nella cartella **Documenti** di ogni utente.\n\nSi può aprire, **copiare su una chiavetta** o **stampare** liberamente, anche senza Internet.\n\nSul desktop trovate anche **«Informazioni su FeniceOS»**, una guida rapida che si apre nel browser e funziona offline, e la pagina **«Open Source & Sostenibilità»**.",
+   "lezione": "fenice-primi-passi"
+  },
+  {
+   "domanda": "Come cambio lo sfondo del desktop in FeniceOS?",
+   "parole_chiave": [
+    "sfondo",
+    "cambiare sfondo",
+    "immagine desktop",
+    "sfondo scrivania",
+    "personalizzare"
+   ],
+   "risposta": "FeniceOS imposta all'inizio il suo **sfondo ufficiale**, ma siete liberi di cambiarlo:\n\n1. Aprite il menu **Applicazioni** nel pannello in alto, oppure fate clic con il **tasto destro** sul desktop.\n2. Andate in **Impostazioni** e scegliete **Sfondo scrivania**.\n3. Fate clic sull'immagine che preferite.\n\nFeniceOS non vi reimposterà lo sfondo a ogni accesso: la scelta resta vostra. Con l'utente ospite, però, tutto torna come prima all'uscita.",
+   "lezione": "fenice-primi-passi"
+  },
+  {
+   "domanda": "Come spengo FeniceOS?",
+   "parole_chiave": [
+    "spegnere feniceos",
+    "spegnimento",
+    "chiudere feniceos",
+    "staccare la spina",
+    "uscire"
+   ],
+   "risposta": "Per spegnere **non si stacca mai la spina** e non si tiene premuto il pulsante di accensione.\n\n1. **Salvate** il vostro lavoro, se serve su una chiavetta personale.\n2. Aprite il menu **Applicazioni** nel pannello in alto.\n3. Scegliete la voce per **uscire** e poi quella per **spegnere** il computer.\n\nSolo quando lo schermo è spento togliete la chiavetta di FeniceOS. Così non perdete dati e non danneggiate la chiavetta.",
+   "lezione": "fenice-primi-passi"
+  },
+  {
+   "domanda": "Quali programmi ci sono in FeniceOS?",
+   "parole_chiave": [
+    "programmi feniceos",
+    "applicazioni incluse",
+    "cosa c'è in feniceos",
+    "libreoffice",
+    "firefox",
+    "vlc"
+   ],
+   "risposta": "FeniceOS include un kit leggero ma completo:\n\n- **Internet**: Firefox ESR in italiano.\n- **Ufficio**: LibreOffice **Writer**, **Calc** e **Impress** in italiano; Thunar per i file; Mousepad per gli appunti; una calcolatrice.\n- **Multimedia**: **VLC** per i video, **Audacious** per la musica, **Ristretto** per le foto, **Evince** per i PDF e un'icona YouTube.\n- **Accessibilità**: **xzoom**, la lente d'ingrandimento.\n- **Sistema**: Gufw, htop, schermate e avviso degli aggiornamenti.\n- **Formazione**: il **Professore Digitale**.\n\nAltri programmi si aggiungono con il **Fenice Store**.",
+   "lezione": "fenice-programmi"
+  },
+  {
+   "domanda": "Cos'è il Fenice Store?",
+   "parole_chiave": [
+    "fenice store",
+    "store",
+    "installare programmi feniceos",
+    "negozio app",
+    "gimp",
+    "thunderbird"
+   ],
+   "risposta": "Il **Fenice Store** è un pannello semplice, in italiano, per aggiungere programmi opzionali senza appesantire FeniceOS. Propone applicazioni testate:\n\n- **GIMP** e **Inkscape** per immagini e disegno;\n- **Thunderbird** per la posta;\n- **Simple Scan** per lo scanner e **PDF Arranger** per i PDF;\n- **Klavaro** per la dattilografia e **GCompris** per i bambini.\n\nOgni riga ha un pulsante **Installa** o **Rimuovi**. Servono **Internet** e l'utente **fenice**: l'ospite può solo consultare l'elenco.",
+   "lezione": "fenice-programmi"
+  },
+  {
+   "domanda": "Come stampo con FeniceOS?",
+   "parole_chiave": [
+    "stampare feniceos",
+    "stampante",
+    "aggiungere stampante",
+    "cups",
+    "stampa non funziona"
+   ],
+   "risposta": "FeniceOS include **CUPS**, il sistema di stampa di Linux, con driver per la maggior parte delle stampanti **Epson, Canon, HP, Brother, Samsung e Xerox**.\n\n1. Collegate la stampante con il **cavo USB**, oppure verificate che sia sulla **stessa rete** del computer.\n2. Aprite **Impostazioni stampante** dal menu Applicazioni.\n3. Le stampanti di rete spesso compaiono da sole; per quelle USB fate clic su **Aggiungi** e sceglietela dall'elenco.\n\nPer un modello raro, il facilitatore può cercare il driver con Synaptic.",
+   "lezione": "fenice-programmi"
+  },
+  {
+   "domanda": "Come collego le cuffie Bluetooth a FeniceOS?",
+   "parole_chiave": [
+    "bluetooth",
+    "cuffie bluetooth",
+    "casse bluetooth",
+    "abbinare",
+    "blueman"
+   ],
+   "risposta": "1. Accendete le cuffie e mettetele in **modalità abbinamento**.\n2. Fate clic sull'icona **Bluetooth** nel pannello, accanto a quella della rete, poi su **«Cerca dispositivi»**.\n3. Selezionate le cuffie e fate clic su **«Abbina»**.\n4. Aprite **pavucontrol** dal menu Applicazioni e, nella scheda **«Uscita audio»**, scegliete le cuffie come predefinite.\n\nAbbinare e mandare l'audio alle cuffie sono **due passaggi distinti**: se non sentite nulla, controllate il punto 4.",
+   "lezione": "fenice-programmi"
+  },
+  {
+   "domanda": "Non sento l'audio su FeniceOS: cosa faccio?",
+   "parole_chiave": [
+    "audio non funziona",
+    "non sento",
+    "volume",
+    "casse",
+    "pavucontrol",
+    "niente suono"
+   ],
+   "risposta": "L'audio di FeniceOS funziona dal primo avvio, ma controllate questi punti:\n\n1. Il **volume** non deve essere a zero o silenziato: si regola dall'icona nel pannello in alto.\n2. Aprite **pavucontrol** dal menu Applicazioni e, nella scheda **«Uscita audio»**, verificate che sia scelto il **dispositivo giusto** come predefinito: casse, cuffie con il filo o cuffie Bluetooth.\n3. Controllate che casse o cuffie siano accese e ben collegate.\n\nSe ancora non funziona, chiedete al facilitatore.",
+   "lezione": "fenice-programmi"
+  },
+  {
+   "domanda": "Come si aggiorna FeniceOS?",
+   "parole_chiave": [
+    "aggiornare feniceos",
+    "aggiornamenti",
+    "aggiorna ora",
+    "update",
+    "aggiornamento sistema"
+   ],
+   "risposta": "Con l'utente **fenice** è quasi automatico: a ogni avvio FeniceOS controlla in silenzio se ci sono aggiornamenti. Se ce ne sono, dopo circa **mezzo minuto** compare un avviso con due pulsanti, **«Aggiorna ora»** o **«Più tardi»**.\n\nSe non c'è Internet, l'avviso non compare, senza disturbare.\n\nL'utente ospite non riceve l'avviso: non ha i permessi per aggiornare. Il vademecum consiglia di aggiornare **almeno una volta al mese**, soprattutto sui computer pubblici.",
+   "lezione": "fenice-programmi"
+  },
+  {
+   "domanda": "FeniceOS ha un firewall?",
+   "parole_chiave": [
+    "firewall",
+    "gufw",
+    "protezione rete",
+    "sicurezza rete",
+    "ufw"
+   ],
+   "risposta": "Sì: FeniceOS include **Gufw**, un **firewall** con interfaccia grafica, cioè un guardiano che controlla le connessioni di rete.\n\nÈ installato ma **spento** all'inizio, perché in modalità live potrebbe disturbare la rete.\n\nConviene accenderlo **dopo l'installazione sul disco**, se il computer è collegato a una rete **pubblica o condivisa**. Si attiva dal menu **Applicazioni**, in **Impostazioni**, alla voce **Firewall Configuration**, mettendo lo stato su **ON**. Fatelo con il facilitatore.",
+   "lezione": "fenice-programmi"
+  },
+  {
+   "domanda": "Il Professore Digitale funziona su FeniceOS?",
+   "parole_chiave": [
+    "professore digitale feniceos",
+    "professore su fenice",
+    "installare professore digitale",
+    "attestato feniceos",
+    "quiz feniceos"
+   ],
+   "risposta": "Sì, in due modi.\n\nIn **FeniceOS 1.0 «Ashborn»** c'è già l'icona **«Il Professore Digitale»** sul desktop: è la sua forma di **quiz offline**, con sette corsi e un **attestato PDF** per chi risponde bene ad almeno il **70%** delle domande.\n\nQuesta versione più ampia del Professore Digitale, con lezioni, guida e lavagna, funziona anche su FeniceOS: si installa con il suo **pacchetto .deb**, entrando come utente **fenice**. Fatevi aiutare dal facilitatore.",
+   "lezione": "fenice-programmi"
+  },
+  {
+   "domanda": "Come si costruisce FeniceOS?",
+   "parole_chiave": [
+    "costruire feniceos",
+    "build",
+    "debootstrap",
+    "chroot",
+    "squashfs",
+    "xorriso",
+    "creare iso"
+   ],
+   "risposta": "FeniceOS la costruisce uno **script**, **fenice-build-master.sh**: una ricetta automatica che riparte ogni volta da zero e segue sempre gli stessi passi.\n\n1. **debootstrap**: le fondamenta, un sistema Debian 12 minimo.\n2. **chroot**: si entra nel sistema e lo si arreda con driver, Xfce, programmi e utenti.\n3. **mksquashfs**: si comprime tutto in un unico file.\n4. **xorriso**: si crea l'immagine **ISO ibrida**, avviabile da BIOS e da UEFI.\n\nAlla fine lo script calcola anche l'**impronta SHA-256** del file.",
+   "schema": "flowchart LR\n  A[\"🧱 debootstrap\"] --> B[\"🛋️ chroot\"] --> C[\"🗜️ mksquashfs\"] --> D[\"📀 xorriso\"] --> E[\"🔑 Chiavetta\"]",
+   "lezione": "fenice-rinascita"
+  },
+  {
+   "domanda": "Posso installare FeniceOS al posto del mio sistema?",
+   "parole_chiave": [
+    "installare feniceos",
+    "installazione su disco",
+    "installa feniceos sul disco",
+    "sostituire windows",
+    "confermo"
+   ],
+   "risposta": "Sì, ma è un passo importante: l'installazione **cancella tutto il disco scelto** e non si può annullare.\n\n1. Fate prima una **copia di sicurezza** di tutto e scollegate i dischi esterni.\n2. Entrate come **fenice** e fate doppio clic su **«Installa FeniceOS sul disco»**.\n3. Scrivete il nome del disco e digitate **CONFERMO**, in maiuscolo.\n4. Alla fine scegliete una **nuova password** per fenice.\n\nLa chiavetta di avvio viene bloccata per sicurezza. Fatelo sempre con il facilitatore.",
+   "lezione": "fenice-rinascita"
+  },
+  {
+   "domanda": "Dopo l'installazione di FeniceOS, cosa devo salvare per il backup?",
+   "parole_chiave": [
+    "backup feniceos",
+    "copia di sicurezza",
+    "salvare attestati",
+    "dopo l'installazione",
+    "rsync"
+   ],
+   "risposta": "Dopo l'installazione sul disco, i dati dell'utente **fenice** restano salvati, mentre l'ospite continua a ripartire da zero.\n\nIl vademecum indica **due cartelle** da copiare regolarmente su un disco esterno:\n\n- la cartella personale di **fenice**, con documenti, preferiti e impostazioni;\n- l'**archivio del Professore Digitale**, con gli **attestati** e le domande.\n\nIl facilitatore può farlo con il terminale, usando il programma *rsync*. Una copia di sicurezza fatta ogni tanto evita tanti dispiaceri.",
+   "lezione": "fenice-rinascita"
+  },
+  {
+   "domanda": "Cosa pensa il manuale di FeniceOS dell'intelligenza artificiale?",
+   "parole_chiave": [
+    "intelligenza artificiale feniceos",
+    "ia e tecnologia gentile",
+    "scatola nera",
+    "rischi ia",
+    "ia critica"
+   ],
+   "risposta": "Il manuale propone una **posizione equilibrata**: né rifiuto né entusiasmo cieco, ma un **approccio critico e informato**.\n\nL'IA può aiutare, per esempio con assistenti vocali, traduzioni e scrittura con la voce. Ma pone domande: spesso è una **«scatola nera»** di cui non si capisce il ragionamento, rende più difficile distinguere il vero dal falso, consuma molta energia e dipende da poche grandi aziende.\n\nAnche per l'IA valgono i principi della Tecnologia Gentile: **comprensibilità, accessibilità, sostenibilità, rispetto**.",
+   "lezione": "universo-informatico"
+  },
+  {
+   "domanda": "Come si insegna il computer a una persona anziana?",
+   "parole_chiave": [
+    "insegnare agli anziani",
+    "facilitatore",
+    "corso per anziani",
+    "come insegnare",
+    "metodo"
+   ],
+   "risposta": "Il manuale di FeniceOS dà consigli pratici per chi insegna:\n\n- **rispettate i tempi**: ripetere è normale;\n- parlate **senza gergo**, ma senza sminuire, spiegando ogni parola tecnica;\n- partite da un **obiettivo concreto**, come «oggi facciamo una videochiamata»;\n- **normalizzate l'errore** e fate fare **molta pratica**;\n- valorizzate l'**aiuto tra pari** e i momenti di **ripasso**.\n\nIl successo si misura in **autonomia e fiducia ritrovate**.",
+   "lezione": "insegnare-con-fenice"
+  },
+  {
+   "domanda": "Perché usare FeniceOS in un centro anziani?",
+   "parole_chiave": [
+    "feniceos centro anziani",
+    "centro anziani",
+    "aula informatica",
+    "laboratorio informatico",
+    "scuola"
+   ],
+   "risposta": "Perché toglie gli ostacoli più comuni:\n\n- **costi**: funziona su computer donati o dismessi, quindi il laboratorio costa pochissimo;\n- **paura di sbagliare**: in modalità live, e con l'utente **ospite** che riparte pulito, non si rompe nulla;\n- **chiarezza**: icone grandi, pannello bloccato, guida offline;\n- **privacy**: nessuna telemetria e nessun salvataggio delle password nel browser.\n\nNelle scuole ha anche un valore educativo: fa vivere ogni giorno economia circolare e software libero.",
+   "lezione": "insegnare-con-fenice"
+  },
+  {
+   "domanda": "Come si usano i quiz in un gruppo?",
+   "parole_chiave": [
+    "quiz in gruppo",
+    "gioco a quiz",
+    "quiz a squadre",
+    "quiz a voce",
+    "punteggio"
+   ],
+   "risposta": "Il manuale di FeniceOS propone i quiz **come gioco, non come esame**:\n\n- si fanno **da soli o in gruppo**, anche a squadre, con spirito di sfida amichevole;\n- si possono fare **a voce alta**: chi conduce legge le domande e raccoglie le risposte;\n- l'errore **non viene penalizzato**;\n- il **punteggio è facoltativo**: un punto per risposta giusta, solo se il gruppo lo desidera.\n\nUn punteggio non è mai un giudizio sulla persona: conta la conversazione che nasce.",
+   "lezione": "insegnare-con-fenice"
+  },
+  {
+   "domanda": "Come posso aiutare il progetto FeniceOS?",
+   "parole_chiave": [
+    "aiutare feniceos",
+    "contribuire",
+    "donare computer",
+    "segnalare errore",
+    "volontario"
+   ],
+   "risposta": "Ci sono tanti modi:\n\n- **Donate** i computer che non usate più a una scuola, un'associazione o un centro che li rimette in uso, dopo aver cancellato i vostri dati.\n- **Fate da facilitatori**, accompagnando altre persone nei primi passi.\n- **Segnalate problemi** e proponete miglioramenti, documentazione o traduzioni, scrivendo a **danilodauria.site@gmail.com**.\n- **Raccontate** il progetto a scuole, centri anziani e associazioni.\n\nIn un progetto aperto come FeniceOS, chiunque può contribuire.",
+   "lezione": "feniceos"
+  }
+ ],
+ "lezioni": [
+  {
+   "id": "feniceos",
+   "icona": "🔥",
+   "titolo": "FeniceOS: la fenice digitale",
+   "livello": "FeniceOS e riuso",
+   "minuti": 15,
+   "obiettivo": "Conoscere FeniceOS: che cos'è, da dove viene il suo nome, su quali fondamenta è costruita e per quali luoghi è nata.",
+   "palestra": "",
+   "passi": [
+    {
+     "titolo": "Un computer che funziona non è un rifiuto",
+     "testo": "**FeniceOS** è una distribuzione Linux *live* ideata e sviluppata da **Danilo D'Auria**, autore anche del libro *Tecnologia Gentile: Informatica Sostenibile*.\n\nNasce dall'incontro di due bisogni. Da un lato, tanti computer ancora funzionanti vengono messi da parte solo perché non reggono più il peso dei sistemi operativi più recenti. Dall'altro, centri anziani, scuole con pochi fondi e centri per il sociale avrebbero bisogno di postazioni funzionanti, ma non hanno i soldi per comprarle nuove.\n\nFeniceOS unisce i due bisogni: prende l'hardware che non serve più a qualcuno e lo mette a disposizione di chi ne ha bisogno.",
+     "schema": "flowchart LR\n  A[\"💻 PC messo da parte\"] --> B[\"🔥 FeniceOS\"] --> C[\"✨ Postazione funzionante\"] --> D[\"🤝 Centro anziani o scuola\"]"
+    },
+    {
+     "titolo": "Perché proprio «Fenice»",
+     "testo": "Nel mito la **fenice** è l'uccello che rinasce dalle proprie ceneri. Le sue radici sono nell'antico Egitto, nel **Benu** venerato a **Eliopoli**, la città del Sole. Lo storico greco **Erodoto** racconta che la fenice arrivava al tempio del Sole di Eliopoli una volta ogni **500 anni**, e il poeta latino **Ovidio**, nelle *Metamorfosi*, descrive il nido di spezie da cui nasce una nuova piccola fenice.\n\nFeniceOS porta questo nome perché fa rinascere computer che il mercato avrebbe destinato alla dismissione.\n\nLa prima versione si chiama **1.0.0 «Ashborn»**: in inglese, «nata dalla cenere».",
+     "consiglio": "Il mito ha lasciato tracce anche altrove: la Fenice fu la prima moneta della Grecia moderna, nel 1828, e Phoenix è una costellazione del cielo australe."
+    },
+    {
+     "titolo": "Le fondamenta: Debian 12 «Bookworm»",
+     "testo": "FeniceOS non parte da zero: è costruita sopra **Debian 12**, nome in codice **«Bookworm»**.\n\n**Debian** è una delle distribuzioni Linux più antiche e rispettate. È nata nel **1993** grazie a **Ian Murdock**, è mantenuta da volontari di tutto il mondo e non è mai stata guidata da interessi commerciali: la regola un *contratto sociale* pubblico con i propri utenti.\n\nScegliere Debian significa contare su un sistema molto collaudato, aggiornato regolarmente per la sicurezza e libero da costi di licenza.\n\nFeniceOS è preparata per l'architettura **amd64**, cioè per i computer con processore a **64 bit**.",
+     "consiglio": "Debian ha il suo sistema per installare e aggiornare i programmi, chiamato APT: FeniceOS lo eredita."
+    },
+    {
+     "titolo": "Live, leggera, compatibile",
+     "testo": "Tre caratteristiche tecniche, spiegate in parole semplici:\n\n- **Live**: FeniceOS si avvia direttamente da una **chiavetta USB**, senza essere installata. Il disco fisso del computer non viene toccato, quindi la si può provare senza rischi per i dati già presenti.\n- **Leggera**: l'obiettivo dichiarato del progetto è funzionare anche con **meno di 500 MB di RAM**, un valore che molti sistemi commerciali considererebbero del tutto insufficiente.\n- **Compatibile**: si avvia sia sui computer con il vecchio **BIOS** sia su quelli con il più recente **UEFI**.\n\nIn una frase: FeniceOS è costruita per chiedere all'hardware molto meno di quanto chiedano i sistemi più diffusi oggi.",
+     "schema": "flowchart LR\n  A[\"🔑 Live da chiavetta\"] --> D[\"♿ Accessibilità reale\"]\n  B[\"🪶 Leggera\"] --> D\n  C[\"🖥️ BIOS e UEFI\"] --> D"
+    },
+    {
+     "titolo": "Per chi è nata",
+     "testo": "FeniceOS nasce, in modo dichiarato, per tre tipi di luoghi:\n\n1. i **centri anziani**, dove diventa uno strumento di alfabetizzazione digitale;\n2. le **aule didattiche**, dove permette di allestire laboratori anche con budget ridotti;\n3. i **centri per il sociale**, dove l'inclusione digitale fa parte dell'inclusione sociale.\n\nIl vademecum ricorda anche **biblioteche** e **spazi pubblici**.\n\nAttenzione a un equivoco: FeniceOS **non** è «un sistema per anziani» semplificato o limitato. È un sistema operativo completo e libero, che diventa accessibile grazie a una progettazione attenta e a un percorso didattico che accompagna chiunque."
+    }
+   ],
+   "quiz": [
+    {
+     "domanda": "Cosa vuol dire, in inglese, «Ashborn», il nome della prima versione di FeniceOS?",
+     "opzioni": [
+      "Nata dal fuoco del Sole",
+      "Nata dalla cenere",
+      "Senza cenere"
+     ],
+     "corretta": 1,
+     "spiegazione": "«Ashborn» unisce *ash*, cenere, e *born*, nato: richiama la fenice che rinasce dalle proprie ceneri."
+    },
+    {
+     "domanda": "In quale città egizia era venerato il Benu, l'uccello da cui nasce il mito della fenice?",
+     "opzioni": [
+      "Eliopoli",
+      "Alessandria",
+      "Tebe"
+     ],
+     "corretta": 0,
+     "spiegazione": "Eliopoli era la città del Sole: lì era venerato il Benu, e lì, secondo Erodoto, giungeva la fenice ogni 500 anni."
+    },
+    {
+     "domanda": "Per quali processori è preparata FeniceOS 1.0?",
+     "opzioni": [
+      "Solo per i processori dei telefoni",
+      "Per i processori a 32 bit di qualunque età",
+      "Per i processori a 64 bit, architettura amd64"
+     ],
+     "corretta": 2,
+     "spiegazione": "Il file di FeniceOS è preparato per l'architettura amd64, cioè per i computer con processore a 64 bit."
+    },
+    {
+     "domanda": "FeniceOS è «un sistema operativo per anziani» semplificato?",
+     "opzioni": [
+      "No: è un sistema completo e libero, reso accessibile da una progettazione attenta",
+      "Sì: ha solo pochi programmi molto limitati",
+      "Sì: funziona solo nei centri anziani"
+     ],
+     "corretta": 0,
+     "spiegazione": "Il manuale lo dice chiaramente: FeniceOS è completo e libero, ed è accessibile perché pensato per accompagnare chiunque."
+    },
+    {
+     "domanda": "Quali due bisogni unisce il progetto FeniceOS?",
+     "opzioni": [
+      "Vendere computer nuovi e comprare programmi",
+      "Computer funzionanti messi da parte e luoghi che hanno bisogno di postazioni",
+      "Giocare online e guardare la televisione"
+     ],
+     "corretta": 1,
+     "spiegazione": "FeniceOS prende l'hardware che non serve più a qualcuno e lo mette a disposizione di chi ne ha bisogno."
+    }
+   ]
+  },
+  {
+   "id": "tecnologia-gentile",
+   "icona": "🌸",
+   "titolo": "Tecnologia Gentile ed etica del digitale",
+   "livello": "FeniceOS e riuso",
+   "minuti": 15,
+   "obiettivo": "Capire la filosofia da cui nasce FeniceOS: i quattro principi della Tecnologia Gentile, i principi del progetto e le domande dell'etica del digitale.",
+   "palestra": "",
+   "passi": [
+    {
+     "titolo": "Una tecnologia può essere gentile?",
+     "testo": "Le macchine non hanno sentimenti. Eppure chi ha visto una persona bloccarsi davanti a un messaggio d'errore incomprensibile sa che la tecnologia **comunica qualcosa**: dice se è stata pensata per chi la userà, o solo per chi l'ha venduta.\n\nLa **Tecnologia Gentile** è l'idea al centro del libro di Danilo D'Auria *Tecnologia Gentile: Informatica Sostenibile* e di FeniceOS. Non è un prodotto: è un **metodo** di progettazione e di insegnamento che mette al centro **la persona, non la macchina**.\n\nPartiamo da una convinzione semplice: la tecnologia non è neutrale. Il modo in cui la progettiamo, la vendiamo, la insegniamo e la buttiamo dice che tipo di società vogliamo essere."
+    },
+    {
+     "titolo": "I quattro principi",
+     "testo": "La Tecnologia Gentile si fonda su quattro principi:\n\n1. **Comprensibilità**: uno strumento gentile si spiega da sé, o quasi, senza menu nascosti, icone ambigue o messaggi tecnici.\n2. **Accessibilità**: gentile è ciò che **non esclude**, né per età, né per reddito, né per disabilità, né per poca esperienza.\n3. **Sostenibilità**: un prodotto pensato per durare, essere riparato e aggiornato senza essere sostituito.\n4. **Rispetto**: per il tempo, l'intelligenza e l'autonomia delle persone. Non tratta nessuno da bambino, ma non pretende competenze che non ha ancora costruito: **accompagna**.",
+     "schema": "flowchart TD\n  T[\"🌸 Tecnologia Gentile\"] --> A[\"💡 Comprensibilità\"]\n  T --> B[\"♿ Accessibilità\"]\n  T --> C[\"🌱 Sostenibilità\"]\n  T --> D[\"🤝 Rispetto\"]"
+    },
+    {
+     "titolo": "Gentile non vuol dire meno potente",
+     "testo": "Un equivoco frequente: «gentile» non significa «meno potente» o «meno serio». Significa **progettato con intenzione**.\n\nFeniceOS è tecnicamente sofisticata: è costruita con una catena di strumenti che va da *debootstrap* a *xorriso*. Ma questa complessità **si nasconde**: resta a disposizione di chi vuole approfondire, senza mai ostacolare chi vuole solo scrivere una lettera.\n\nIl vademecum riassume la filosofia di FeniceOS in quattro principi: **sostenibilità** (ogni installazione evita rifiuti elettronici), **inclusione** (icone grandi, pannello bloccato, guida offline), **sovranità digitale** (nessun dato inviato a terzi, nessun tracciamento, nessuna telemetria) e **trasparenza e condivisione** (ogni componente è aperto e ispezionabile)."
+    },
+    {
+     "titolo": "Etica del digitale: per chi è pensata?",
+     "testo": "L'etica del digitale si chiede, prima di ogni scelta tecnica: **a chi serve davvero questo strumento, e chi rischia di restarne escluso?**\n\nL'esclusione digitale ha volti concreti: la persona anziana che non riesce a prenotare una visita perché il servizio è solo online; la famiglia che non può cambiare computer ogni due anni; chi non ha mai avuto qualcuno che gli insegnasse.\n\nPer questo il progetto assume impegni precisi: **inclusione per età**, **inclusione per condizione economica**, **trasparenza** del software, **autonomia** delle persone e **sostenibilità ambientale**.\n\nUn sistema perfetto ma inaccessibile a una parte della popolazione non è neutrale: è una scelta, con conseguenze reali."
+    },
+    {
+     "titolo": "Le domande guida",
+     "testo": "Quando si progetta una lezione, si sceglie un programma da includere in FeniceOS o si scrive un messaggio d'errore, la domanda resta sempre la stessa:\n\n- Questa scelta **include o esclude**?\n- **Semplifica** o complica inutilmente?\n- Rende la persona **più autonoma** o più dipendente?\n\nLa pagina *Open Source & Sostenibilità*, che trovate sul desktop di FeniceOS, aggiunge altre domande utili per riconoscere una tecnologia rispettosa: **chi possiede i vostri dati?** Potete **capire cosa fa davvero** il programma? **Dura nel tempo** o va buttato?\n\nSono domande che chiunque può farsi, anche senza essere esperto.",
+     "consiglio": "Provate a farvi queste domande davanti al prossimo programma o al prossimo telefono che vi propongono."
+    }
+   ],
+   "quiz": [
+    {
+     "domanda": "Che cos'è la Tecnologia Gentile?",
+     "opzioni": [
+      "Un nuovo modello di computer",
+      "Un metodo di progettazione e di insegnamento che mette al centro la persona",
+      "Un programma per rendere più lento il computer"
+     ],
+     "corretta": 1,
+     "spiegazione": "La Tecnologia Gentile non è un prodotto ma un metodo: al centro c'è la persona, non la macchina."
+    },
+    {
+     "domanda": "Quale principio della Tecnologia Gentile chiede di «non escludere» nessuno?",
+     "opzioni": [
+      "Accessibilità",
+      "Velocità",
+      "Comprensibilità"
+     ],
+     "corretta": 0,
+     "spiegazione": "Accessibilità vuol dire non escludere per età, reddito, disabilità o poca esperienza."
+    },
+    {
+     "domanda": "Che cosa significa «sovranità digitale» tra i principi di FeniceOS?",
+     "opzioni": [
+      "Che serve sempre Internet",
+      "Che il sistema appartiene a un'azienda",
+      "Nessun dato inviato a terzi, nessun tracciamento, nessuna telemetria"
+     ],
+     "corretta": 2,
+     "spiegazione": "Le funzioni didattiche di FeniceOS lavorano offline e il sistema non invia dati a terzi."
+    },
+    {
+     "domanda": "Quale di queste è una delle domande guida dell'etica del digitale?",
+     "opzioni": [
+      "Quanto costa l'ultimo modello?",
+      "Questa scelta include o esclude?",
+      "Quanti colori ha lo schermo?"
+     ],
+     "corretta": 1,
+     "spiegazione": "Ogni scelta va valutata chiedendosi se include o esclude, se semplifica e se rende più autonomi."
+    },
+    {
+     "domanda": "«Gentile» vuol dire che FeniceOS è meno potente?",
+     "opzioni": [
+      "No: vuol dire progettata con intenzione, con la complessità nascosta a chi non ne ha bisogno",
+      "Sì: ha meno funzioni di proposito",
+      "Sì: funziona solo per scrivere lettere"
+     ],
+     "corretta": 0,
+     "spiegazione": "Un sistema può essere sofisticato e allo stesso tempo comprensibile: la complessità resta a disposizione di chi vuole approfondire."
+    }
+   ]
+  },
+  {
+   "id": "economia-circolare",
+   "icona": "♻️",
+   "titolo": "Economia circolare e rifiuti elettronici",
+   "livello": "FeniceOS e riuso",
+   "minuti": 15,
+   "obiettivo": "Capire la differenza tra economia lineare e circolare, perché un computer vale molto anche da vecchio, cosa sono i RAEE e come il software può allungare la vita dell'hardware.",
+   "palestra": "",
+   "passi": [
+    {
+     "titolo": "Dalla linea retta al cerchio",
+     "testo": "Per decenni l'informatica ha seguito un'**economia lineare**: si estrae, si produce, si usa, si getta. Un computer viene venduto, usato qualche anno e smaltito, spesso molto prima che i suoi pezzi abbiano finito di essere utili.\n\nL'**economia circolare** inverte la rotta. Il ciclo diventa: **ridurre, riutilizzare, riparare, rigenerare, riciclare**, in quest'ordine di priorità.\n\nÈ un'idea antica: le nostre nonne rammendavano i calzini e riusavano i barattoli. Applicata ai computer, ci dice che una macchina che non regge più un sistema pesante **non è un rifiuto**: è una risorsa che aspetta il software giusto.",
+     "schema": "flowchart LR\n  A[\"✂️ Ridurre\"] --> B[\"🔁 Riutilizzare\"] --> C[\"🔧 Riparare\"] --> D[\"✨ Rigenerare\"] --> E[\"♻️ Riciclare\"]"
+    },
+    {
+     "titolo": "Un computer è una piccola miniera",
+     "testo": "Un normale computer da ufficio contiene **decine di materiali diversi**: rame, alluminio, plastiche, terre rare e piccole quantità di metalli preziosi. Estrarli ha un costo ambientale, e spesso anche sociale, importante.\n\nPer questo **allungare la vita** di un computer che già esiste, anche solo di due o tre anni, riduce direttamente la necessità di produrne di nuovi.\n\nNello stesso tempo si evitano rifiuti elettronici, in inglese **e-waste**: una delle categorie di rifiuti che crescono più in fretta al mondo, e che viene riciclata correttamente solo in una piccola parte dei casi.",
+     "consiglio": "Il computer più ecologico è spesso quello che avete già in casa."
+    },
+    {
+     "titolo": "Cosa sono i RAEE",
+     "testo": "In Italia i rifiuti elettronici si chiamano **RAEE**: *Rifiuti di Apparecchiature Elettriche ed Elettroniche*. Sono computer, telefoni, televisori, frigoriferi, lampadine a risparmio, giocattoli con le pile.\n\nContengono materiali **preziosi** da recuperare e sostanze **pericolose** se disperse nell'ambiente. Per questo **non vanno mai nel cassonetto** dell'indifferenziato: si consegnano alla raccolta separata, per esempio all'isola ecologica del comune.\n\nSugli apparecchi lo ricorda un simbolo: il **bidone della spazzatura barrato** da una croce.",
+     "consiglio": "Per orari e punti di raccolta della vostra zona chiedete al comune o all'azienda dei rifiuti."
+    },
+    {
+     "titolo": "I quattro livelli applicati al software",
+     "testo": "Il manuale di FeniceOS traduce l'economia circolare in quattro impegni per chi scrive programmi:\n\n1. **Ridurre i requisiti**: ogni nuova versione dovrebbe chiedere meno risorse, non di più.\n2. **Riutilizzare l'hardware esistente**: preferire soluzioni che funzionano sulle macchine già in circolazione.\n3. **Estendere il ciclo di vita**: mantenere aggiornato e sicuro un sistema anche su computer datati, invece di forzarne la sostituzione.\n4. **Comunità e riparazione condivisa**: in un progetto aperto chiunque può correggere e adattare, e la manutenzione diventa collettiva.\n\nUn sistema leggero come FeniceOS è uno degli strumenti più concreti di economia circolare in informatica."
+    },
+    {
+     "titolo": "Un laboratorio quasi a costo zero",
+     "testo": "C'è anche un vantaggio economico diretto. Un centro anziani o una scuola che riceve in dono dieci computer dismessi da un'azienda, e li rimette in funzione con FeniceOS, ottiene un **laboratorio funzionante** con una spesa altrimenti impensabile.\n\nA questo si collega il **diritto alla riparazione** (*Right to Repair*): il movimento, oggi anche con leggi in vari Paesi e nell'Unione Europea, che difende il diritto di riparare i propri apparecchi, o di farli riparare da chi si preferisce, invece di doverne comprare uno nuovo.\n\nRiparare, riusare e condividere: sono gesti antichi che oggi tornano preziosi."
+    }
+   ],
+   "quiz": [
+    {
+     "domanda": "Quale ordine di priorità segue l'economia circolare?",
+     "opzioni": [
+      "Riciclare, comprare, buttare",
+      "Ridurre, riutilizzare, riparare, rigenerare, riciclare",
+      "Estrarre, produrre, usare, gettare"
+     ],
+     "corretta": 1,
+     "spiegazione": "Il riciclo è l'ultima tappa: prima si riduce, si riutilizza, si ripara e si rigenera."
+    },
+    {
+     "domanda": "Cosa vuol dire la sigla RAEE?",
+     "opzioni": [
+      "Rifiuti di Apparecchiature Elettriche ed Elettroniche",
+      "Registro degli Apparecchi Elettrici Europei",
+      "Riciclo Automatico di Energia Elettrica"
+     ],
+     "corretta": 0,
+     "spiegazione": "I RAEE sono tutti gli apparecchi a corrente o a pile diventati rifiuti: vanno raccolti separatamente."
+    },
+    {
+     "domanda": "Dove va un vecchio telefono che non funziona più?",
+     "opzioni": [
+      "Nel cassonetto dell'indifferenziato",
+      "Nella raccolta della carta",
+      "Nella raccolta dei RAEE, ad esempio all'isola ecologica"
+     ],
+     "corretta": 2,
+     "spiegazione": "Contiene materiali preziosi e sostanze pericolose: va consegnato alla raccolta separata dei RAEE."
+    },
+    {
+     "domanda": "Quale dei quattro livelli applicati al software chiede che ogni nuova versione chieda meno risorse?",
+     "opzioni": [
+      "Comunità e riparazione condivisa",
+      "Estensione del ciclo di vita",
+      "Riduzione dei requisiti"
+     ],
+     "corretta": 2,
+     "spiegazione": "Ridurre i requisiti significa progettare programmi che, versione dopo versione, chiedano meno al computer."
+    },
+    {
+     "domanda": "Che cosa difende il diritto alla riparazione?",
+     "opzioni": [
+      "Il diritto di riparare i propri apparecchi o farli riparare da chi si preferisce",
+      "L'obbligo di comprare sempre un apparecchio nuovo",
+      "Il divieto di aprire un computer"
+     ],
+     "corretta": 0,
+     "spiegazione": "Il movimento Right to Repair chiede che riparare sia possibile e conveniente, invece di dover sostituire."
+    }
+   ]
+  },
+  {
+   "id": "obsolescenza",
+   "icona": "⏳",
+   "titolo": "L'obsolescenza programmata",
+   "livello": "FeniceOS e riuso",
+   "minuti": 15,
+   "obiettivo": "Riconoscere l'obsolescenza programmata nelle sue tre forme, capire perché è un problema e conoscere i modi concreti per contrastarla.",
+   "palestra": "",
+   "passi": [
+    {
+     "titolo": "Che cos'è",
+     "testo": "L'**obsolescenza programmata** è la pratica di progettare un prodotto in modo che la sua vita utile sia **limitata artificialmente**, per ragioni tecniche, commerciali o di software. Così chi lo usa è spinto a sostituirlo **prima che sia davvero necessario**.\n\nSi vede in molti settori, ma è particolarmente evidente nell'elettronica di consumo: telefoni, computer, stampanti.\n\nÈ il tema che sta alla base di FeniceOS. Il progetto esiste proprio perché l'obsolescenza programmata è un problema reale, e perché a quel problema si può rispondere con strumenti tecnici concreti, non solo con buone intenzioni."
+    },
+    {
+     "titolo": "Le tre forme",
+     "testo": "Non tutta l'obsolescenza è uguale:\n\n- **Tecnica**: componenti meno resistenti del necessario, o progetti che rendono difficile riparare. Per esempio batterie non sostituibili, pezzi incollati invece che avvitati, ricambi introvabili.\n- **Software**: un apparecchio perfettamente funzionante diventa inutilizzabile perché il produttore smette di aggiornarlo, o perché i nuovi sistemi chiedono risorse che non ha. È la forma che FeniceOS contrasta direttamente.\n- **Percepita** o psicologica: la pubblicità e il design fanno desiderare l'ultimo modello anche quando il nostro funziona benissimo.",
+     "schema": "flowchart TD\n  O[\"⏳ Obsolescenza\"] --> A[\"🔩 Tecnica\"]\n  O --> B[\"💾 Software\"]\n  O --> C[\"📺 Percepita\"]"
+    },
+    {
+     "titolo": "Perché è un problema",
+     "testo": "Il manuale di FeniceOS lo spiega su tre piani:\n\n1. **Ambientale**: aumentano i rifiuti elettronici, spesso smaltiti in condizioni rischiose per la salute e per l'ambiente nei Paesi dove vengono trattati.\n2. **Economico**: chi compra paga sostituzioni non necessarie, e chi ha meno possibilità ne soffre di più.\n3. **Sociale**: chi non può rinnovare di continuo i propri apparecchi rischia di restare escluso da servizi sempre più digitali. È il **divario digitale**.\n\nI tre piani si tengono per mano: lo spreco di un computer è insieme un danno per l'ambiente, per il portafoglio e per le persone."
+    },
+    {
+     "titolo": "Come si combatte",
+     "testo": "Ognuno può fare qualcosa, da solo o insieme agli altri:\n\n- **Scegliere software libero e leggero**, che chiede al computer solo ciò che serve davvero.\n- **Preferire ciò che si ripara**: quando possibile, informarsi sull'indice di riparabilità prima di comprare.\n- **Sostenere il riuso**: donare i computer che non usate più a progetti di rigenerazione, invece di lasciarli in un cassetto o buttarli.\n- **Informarsi e informare**: sapere che un computer «lento» spesso è solo vittima di un sistema troppo pesante è già una forma di resistenza.\n- **Appoggiare progetti come FeniceOS**, che dimostrano che un'alternativa solida è possibile.",
+     "consiglio": "La manutenzione ordinaria, come pulire dalla polvere e aggiornare, non è obsolescenza: anzi, ne contrasta gli effetti."
+    },
+    {
+     "titolo": "Vecchio non vuol dire rotto",
+     "testo": "Questa frase è il cuore di tutto il progetto: **un dispositivo «vecchio» e un dispositivo «rotto» sono due cose diverse**.\n\nBuona parte dei computer che finiscono in cantina o in discarica sono semplicemente vecchi, non guasti. Hanno ancora tutto ciò che serve per aprire un browser, scrivere una lettera, guardare le foto dei nipoti o seguire un corso.\n\nIl problema, quasi sempre, non è l'hardware: è il software che gli chiede troppo. Per questo, prima di sostituire qualcosa, conviene chiedersi: **è davvero guasto, oppure è lento, senza aggiornamenti o solo «fuori moda»?**"
+    }
+   ],
+   "quiz": [
+    {
+     "domanda": "Che cos'è l'obsolescenza programmata?",
+     "opzioni": [
+      "La normale usura dopo molti decenni",
+      "Progettare un prodotto perché duri meno del necessario e vada sostituito prima",
+      "Un programma per pulire il computer"
+     ],
+     "corretta": 1,
+     "spiegazione": "È la limitazione artificiale della vita di un prodotto, che spinge a sostituirlo prima che serva davvero."
+    },
+    {
+     "domanda": "Una batteria incollata che non si può cambiare è un esempio di obsolescenza…",
+     "opzioni": [
+      "tecnica",
+      "percepita",
+      "software"
+     ],
+     "corretta": 0,
+     "spiegazione": "Batterie non sostituibili e pezzi incollati rendono difficile la riparazione: è obsolescenza tecnica."
+    },
+    {
+     "domanda": "Quale forma di obsolescenza contrasta direttamente FeniceOS?",
+     "opzioni": [
+      "Quella tecnica, cambiando i pezzi",
+      "Quella percepita, con la pubblicità",
+      "Quella software, ridando un sistema leggero e aggiornabile"
+     ],
+     "corretta": 2,
+     "spiegazione": "FeniceOS restituisce un sistema aggiornabile, sicuro e leggero a macchine che i produttori considerano «fine vita»."
+    },
+    {
+     "domanda": "Su quali tre piani l'obsolescenza programmata è un problema?",
+     "opzioni": [
+      "Sportivo, musicale e artistico",
+      "Ambientale, economico e sociale",
+      "Solo estetico"
+     ],
+     "corretta": 1,
+     "spiegazione": "Aumenta i rifiuti, fa pagare sostituzioni inutili e allarga il divario digitale."
+    },
+    {
+     "domanda": "Qual è la frase che riassume il progetto FeniceOS?",
+     "opzioni": [
+      "Un dispositivo vecchio e uno rotto sono due cose diverse",
+      "Ogni due anni bisogna cambiare computer",
+      "I computer vecchi non servono più a nulla"
+     ],
+     "corretta": 0,
+     "spiegazione": "Molti computer accantonati sono solo vecchi, non guasti: con il software giusto tornano utili."
+    }
+   ]
+  },
+  {
+   "id": "vecchio-pc",
+   "icona": "🛠️",
+   "titolo": "Ridare vita a un vecchio computer",
+   "livello": "FeniceOS e riuso",
+   "minuti": 20,
+   "obiettivo": "Capire perché un computer rallenta, quali miglioramenti semplici lo fanno rinascere, come cancellare i dati prima di regalarlo e dove portarlo quando è davvero finito.",
+   "palestra": "",
+   "passi": [
+    {
+     "titolo": "Perché un computer diventa lento",
+     "testo": "Un computer non «invecchia» come una persona: i suoi componenti, di solito, lavorano come il primo giorno. Diventa lento soprattutto perché:\n\n- i **programmi** e i sistemi operativi diventano sempre più pesanti;\n- si accumulano programmi che **partono da soli** all'accensione;\n- il **disco** è quasi pieno;\n- la **polvere** dentro lo fa scaldare;\n- ha un **disco meccanico**, più lento dei dischi moderni.\n\nSpesso, quindi, il problema è il **software**, non l'hardware.",
+     "schema": "flowchart LR\n  A[\"🐢 PC lento\"] --> B[\"Software pesante\"]\n  A --> C[\"Disco pieno\"]\n  A --> D[\"Polvere e calore\"]\n  A --> E[\"Disco meccanico\"]"
+    },
+    {
+     "titolo": "Un sistema leggero",
+     "testo": "Il modo più economico per ridare energia a un vecchio computer è usare un **sistema operativo leggero**, che chiede poca memoria e poco lavoro al processore.\n\nÈ la domanda che si sentono fare spesso i facilitatori: «Perché su questo computer, che con il vecchio sistema non funzionava più, adesso funziona tutto?». La risposta di FeniceOS è semplice: è stata costruita, fin dall'inizio, per **chiedere all'hardware molto meno**. L'obiettivo è funzionare anche con **meno di 500 MB di RAM**.\n\nÈ come cambiare le scarpe a un camminatore: le gambe sono le stesse, ma con scarpe leggere si va più lontano."
+    },
+    {
+     "titolo": "Pulizia e piccoli miglioramenti",
+     "testo": "Con l'aiuto di una persona esperta, alcuni interventi danno grandi risultati:\n\n1. **Pulizia dalla polvere** delle ventole e delle griglie, a computer spento e scollegato.\n2. **Disco SSD** al posto del vecchio disco meccanico: l'accensione e l'apertura dei programmi diventano molto più rapide.\n3. **Più memoria RAM**, se il computer ha posti liberi o accetta moduli più capienti.\n\nSono pezzi che si montano senza cambiare il resto del computer.",
+     "schema": "flowchart LR\n  A[\"🧹 Pulizia\"] --> B[\"💾 Disco SSD\"] --> C[\"🧠 Più RAM\"] --> D[\"🐧 Sistema leggero\"] --> E[\"✨ PC rinato\"]",
+     "consiglio": "Non aprite il computer da soli se non siete pratici: chiedete al facilitatore o a un tecnico di fiducia."
+    },
+    {
+     "titolo": "Prima di regalarlo: i vostri dati",
+     "testo": "Un computer che passa di mano porta con sé le vostre foto, i documenti, le password salvate. **Spostare i file nel cestino non basta**: con programmi appositi si possono spesso recuperare.\n\n1. Fate una **copia** dei file importanti su un disco esterno o una chiavetta.\n2. Fate **cancellare in modo sicuro** il disco, con programmi che lo sovrascrivono o con le funzioni di cancellazione del disco stesso.\n3. Se il disco è rotto e non si cancella, si può **toglierlo** e distruggerlo.\n\nFatevi aiutare dal facilitatore: è un passaggio delicato."
+    },
+    {
+     "titolo": "Quando è davvero finito: dove portarlo",
+     "testo": "Se il computer non si può più riparare né riusare, diventa un **RAEE** e va consegnato correttamente:\n\n- all'**isola ecologica** (centro di raccolta) del vostro comune;\n- in negozio, con il **ritiro «uno contro uno»**: comprando un apparecchio nuovo dello stesso tipo, il negoziante ritira quello vecchio senza costi;\n- con il **ritiro «uno contro zero»**: nei negozi più grandi si possono lasciare gratuitamente gli apparecchi molto piccoli, anche senza comprare nulla.\n\nAnche qui: prima **cancellate i dati**.",
+     "consiglio": "Le regole precise possono cambiare: chiedete al negozio o al vostro comune."
+    }
+   ],
+   "quiz": [
+    {
+     "domanda": "Qual è spesso la causa principale della lentezza di un vecchio computer?",
+     "opzioni": [
+      "Programmi e sistemi diventati troppo pesanti",
+      "La tastiera consumata",
+      "Lo schermo troppo piccolo"
+     ],
+     "corretta": 0,
+     "spiegazione": "Spesso il computer funziona come il primo giorno: sono i programmi che gli chiedono sempre di più."
+    },
+    {
+     "domanda": "Quale miglioramento rende molto più rapida l'accensione di un vecchio PC?",
+     "opzioni": [
+      "Comprare uno schermo più grande",
+      "Sostituire il disco meccanico con un SSD",
+      "Cambiare il mouse"
+     ],
+     "corretta": 1,
+     "spiegazione": "Il disco SSD non ha parti in movimento ed è molto più veloce di un disco meccanico."
+    },
+    {
+     "domanda": "Prima di regalare il computer, basta mettere i file nel cestino?",
+     "opzioni": [
+      "Sì, se poi si spegne il computer",
+      "Sì, il cestino cancella tutto per sempre",
+      "No, il disco va cancellato in modo sicuro"
+     ],
+     "corretta": 2,
+     "spiegazione": "I file cestinati spesso si possono recuperare: serve una cancellazione sicura, meglio con il facilitatore."
+    },
+    {
+     "domanda": "Cosa prevede il ritiro «uno contro uno»?",
+     "opzioni": [
+      "Il negozio ritira il vecchio apparecchio quando ne comprate uno nuovo dello stesso tipo",
+      "Il negozio vi regala un apparecchio nuovo",
+      "Si scambia il computer con un vicino"
+     ],
+     "corretta": 0,
+     "spiegazione": "Comprando un apparecchio equivalente, il negozio ritira quello vecchio senza costi."
+    },
+    {
+     "domanda": "Come si pulisce un computer dalla polvere?",
+     "opzioni": [
+      "Con un panno bagnato mentre è acceso",
+      "A computer spento e scollegato, meglio con l'aiuto di un esperto",
+      "Non si pulisce mai"
+     ],
+     "corretta": 1,
+     "spiegazione": "La pulizia si fa sempre a computer spento e scollegato; se non siete pratici, fatevi aiutare."
+    }
+   ]
+  },
+  {
+   "id": "software-libero",
+   "icona": "🕊️",
+   "titolo": "Il software libero e Linux, una scelta etica",
+   "livello": "FeniceOS e riuso",
+   "minuti": 20,
+   "obiettivo": "Conoscere le libertà del software libero, il copyleft, la storia di GNU, Linux e Debian, e capire perché questa scelta fa bene al riuso e all'inclusione.",
+   "palestra": "",
+   "passi": [
+    {
+     "titolo": "Una ricetta che tutti possono leggere",
+     "testo": "Un programma è scritto in un linguaggio che si chiama **codice sorgente**: è la sua *ricetta*.\n\nNel **software proprietario** la ricetta è un segreto commerciale chiuso in cassaforte: si può usare il piatto, ma non sapere cosa c'è dentro né cambiarlo.\n\nNel **software libero** e *open source* la ricetta è pubblica: chiunque può leggerla, capirla, migliorarla e condividerla. Proprio come le ricette di famiglia che passano di casa in casa, e ognuno aggiunge il suo tocco.\n\nFeniceOS esiste solo grazie a questa libertà: Debian, Linux, Xfce e centinaia di altri programmi sono aperti, e nessuna licenza è stata comprata."
+    },
+    {
+     "titolo": "GNU e le quattro libertà",
+     "testo": "Nel **1983 Richard Stallman** avviò il **progetto GNU** e poi fondò la *Free Software Foundation*. Fu lui a mettere per iscritto le **quattro libertà** del software libero:\n\n1. **eseguire** il programma per qualsiasi scopo;\n2. **studiare** come funziona e modificarlo;\n3. **ridistribuirne** copie;\n4. **distribuire le versioni modificate**, a beneficio di tutta la comunità.\n\n*Libero* vuol dire «libertà», non per forza «gratis». Molte aziende, per esempio, offrono **assistenza a pagamento** su software libero, mentre il codice resta pubblico.",
+     "schema": "flowchart LR\n  A[\"▶️ Eseguire\"] --> B[\"🔍 Studiare\"] --> C[\"🤝 Ridistribuire\"] --> D[\"✨ Migliorare\"]"
+    },
+    {
+     "titolo": "Il copyleft",
+     "testo": "Come ha fatto il software libero a crescere per decenni senza che nessuno lo «richiudesse»?\n\nGrazie al **copyleft**: un meccanismo legale contenuto in licenze come la **GPL**. Chi modifica un programma copyleft e lo ridistribuisce deve condividerlo **con le stesse libertà** che ha ricevuto.\n\nÈ un po' come un libro di ricette di paese con una regola scritta in prima pagina: «Puoi copiarlo e aggiungere le tue ricette, ma se lo regali devi lasciare a tutti gli stessi diritti».\n\nAnche la documentazione di FeniceOS segue questa logica: il vademecum è distribuito con la licenza **Creative Commons CC BY-SA 4.0**, che chiede di citare l'autore e di condividere allo stesso modo."
+    },
+    {
+     "titolo": "Linux, nato da uno studente e da una comunità",
+     "testo": "Nel **1991** **Linus Torvalds**, allora studente all'Università di **Helsinki**, rese pubblico il cuore di un nuovo sistema operativo: il **kernel Linux**, il pezzo che dialoga con l'hardware.\n\nI due progetti, nati separatamente, si unirono: **GNU** forniva gli strumenti, **Linux** il cuore. Per questo si parla spesso di **GNU/Linux**.\n\nDa quel nucleo sono nate centinaia di distribuzioni. E oggi la maggior parte dei **server che fanno funzionare Internet** usa sistemi basati su Linux, anche se chi naviga non se ne accorge.",
+     "consiglio": "Il simbolo di Linux è un pinguino simpatico, chiamato Tux. 🐧"
+    },
+    {
+     "titolo": "Debian e APT",
+     "testo": "Una **distribuzione** è Linux «pronto all'uso»: sistema, programmi e strumenti messi insieme.\n\n**Debian**, nata nel **1993** grazie a **Ian Murdock**, è guidata dalla comunità e da un *contratto sociale* pubblico. Ogni pacchetto è verificato da volontari esperti.\n\nDebian usa **APT**, il sistema di gestione dei pacchetti: permette di installare, aggiornare o rimuovere i programmi in modo **centralizzato, verificato e sicuro**, molto più controllato che cercare programmi a caso su Internet.\n\nFeniceOS, basata su Debian 12, eredita tutto questo: il Fenice Store, per esempio, usa proprio APT dietro le quinte."
+    },
+    {
+     "titolo": "Perché è una scelta etica",
+     "testo": "Scegliere software libero non è solo una questione tecnica:\n\n- **Riuso**: i sistemi leggeri tengono in vita computer che altrimenti diventerebbero rifiuti.\n- **Trasparenza**: chiunque può verificare cosa fa davvero un programma. Nessuno deve fidarsi ciecamente di ciò che non può ispezionare.\n- **Condivisione**: il sapere resta di tutti, come in una biblioteca.\n- **Inclusione**: scuole, associazioni e famiglie possono usarlo senza costi di licenza.\n\nAnche il Professore Digitale è software libero, con **licenza MIT**.",
+     "schema": "flowchart TD\n  S[\"🕊️ Software libero\"] --> A[\"♻️ Riuso\"]\n  S --> B[\"🔍 Trasparenza\"]\n  S --> C[\"📚 Sapere condiviso\"]\n  S --> D[\"🤝 Inclusione\"]"
+    }
+   ],
+   "quiz": [
+    {
+     "domanda": "Cosa significa «libero» in «software libero»?",
+     "opzioni": [
+      "Che è sempre gratuito e basta",
+      "Che funziona senza elettricità",
+      "Che garantisce libertà a chi lo usa"
+     ],
+     "corretta": 2,
+     "spiegazione": "Libero vuol dire libertà di eseguire, studiare, ridistribuire e migliorare, non per forza «gratis»."
+    },
+    {
+     "domanda": "In che anno Richard Stallman avviò il progetto GNU?",
+     "opzioni": [
+      "1983",
+      "1991",
+      "2003"
+     ],
+     "corretta": 0,
+     "spiegazione": "Il progetto GNU partì nel 1983; il kernel Linux arrivò nel 1991."
+    },
+    {
+     "domanda": "Che cosa garantisce il copyleft, come nella licenza GPL?",
+     "opzioni": [
+      "Che il programma diventi segreto",
+      "Che chi ridistribuisce una versione modificata la condivida con le stesse libertà",
+      "Che il programma si possa usare una sola volta"
+     ],
+     "corretta": 1,
+     "spiegazione": "Il copyleft impedisce di «richiudere» il software libero: le libertà passano a chi lo riceve."
+    },
+    {
+     "domanda": "In quale università studiava Linus Torvalds quando pubblicò Linux?",
+     "opzioni": [
+      "Oxford",
+      "Bologna",
+      "Helsinki"
+     ],
+     "corretta": 2,
+     "spiegazione": "Nel 1991 Torvalds era studente all'Università di Helsinki, in Finlandia."
+    },
+    {
+     "domanda": "Che cosa fa APT, su Debian e su FeniceOS?",
+     "opzioni": [
+      "Installa, aggiorna e rimuove i programmi in modo centralizzato e verificato",
+      "Disegna lo sfondo del desktop",
+      "Controlla la stampante"
+     ],
+     "corretta": 0,
+     "spiegazione": "APT è il gestore dei pacchetti di Debian: i programmi arrivano da archivi verificati."
+    }
+   ]
+  },
+  {
+   "id": "fenice-chiavetta",
+   "icona": "🔑",
+   "titolo": "Provare FeniceOS dalla chiavetta",
+   "livello": "FeniceOS e riuso",
+   "minuti": 25,
+   "obiettivo": "Sapere come si prepara la chiavetta di FeniceOS, come si avvia il computer dalla chiavetta, quali voci offre il menu di avvio e come provare il sistema senza rischi.",
+   "palestra": "",
+   "passi": [
+    {
+     "titolo": "Prima di tutto: sicurezza e aiuto",
+     "testo": "Provare FeniceOS è semplice, ma alcune regole valgono sempre:\n\n- La chiavetta che userete **verrà cancellata del tutto**: sceglietene una senza file importanti.\n- Prima di qualsiasi installazione sul disco fate una **copia di sicurezza** (backup) dei vostri file.\n- La prima volta fatevi accompagnare dal **facilitatore** del vostro corso o da una persona esperta.\n\nSpesso è proprio chi organizza il corso a preparare tutto in anticipo, così che voi dobbiate solo accendere il computer. Con queste attenzioni, provare un sistema live è un'esperienza tranquilla.",
+     "consiglio": "Un'etichetta adesiva con scritto «FeniceOS» sulla chiavetta evita di confonderla con le altre."
+    },
+    {
+     "titolo": "Il file ISO e la sua impronta",
+     "testo": "FeniceOS arriva come **immagine ISO**: un unico file che contiene tutto il sistema. Per la versione 1.0 si chiama **FeniceOS_Live_v1.0.0_amd64.iso**.\n\nAccanto c'è un secondo file, che finisce con **.sha256**: contiene l'**impronta digitale** del file ISO, una lunga sequenza di numeri e lettere calcolata da tutto il suo contenuto.\n\nA cosa serve? Il facilitatore può ricalcolare l'impronta del file scaricato e confrontarla con quella scritta: se coincidono, il file è **integro**, cioè identico all'originale. Se anche un solo carattere fosse cambiato, l'impronta sarebbe completamente diversa.",
+     "schema": "flowchart LR\n  A[\"📀 File ISO\"] --> B[\"🔢 Calcolo impronta\"] --> C[\"⚖️ Confronto con .sha256\"] --> D[\"✅ File integro\"]"
+    },
+    {
+     "titolo": "Scrivere la chiavetta",
+     "testo": "Il file ISO non si copia semplicemente sulla chiavetta: va **scritto** con un programma apposito, che la rende avviabile.\n\n- **Su Windows**: **Rufus**, scegliendo la modalità **«DD Image»**, oppure **balenaEtcher**. Sono gratuiti e open source.\n- **Su Linux o macOS**: il facilitatore usa un comando del terminale, chiamato *dd*, che copia l'immagine sulla chiavetta così com'è.\n\nCon il terminale serve **grande attenzione**: bisogna indicare il nome esatto della chiavetta. Se si sbaglia dispositivo, si cancella il disco sbagliato.\n\nRicordate: la chiavetta **viene cancellata**. Fatevi aiutare.",
+     "consiglio": "Per il facilitatore: il comando completo è nelle Domande frequenti della pagina FeniceOS."
+    },
+    {
+     "titolo": "Avviare il computer dalla chiavetta",
+     "testo": "1. Inserite la chiavetta nella porta USB **prima** di accendere il computer.\n2. Accendetelo e premete **subito, più volte**, il tasto del **menu di avvio**.\n3. Nell'elenco scegliete la **chiavetta USB** con le frecce e premete **Invio**.\n\nIl tasto cambia secondo il produttore: di solito è **F12**, **F2**, **Esc** oppure **Canc**. A volte compare scritto per un attimo sullo schermo all'accensione.\n\nFeniceOS si avvia sia sui computer con **BIOS tradizionale** sia su quelli con **UEFI**.",
+     "schema": "flowchart LR\n  A[\"🔑 Chiavetta inserita\"] --> B[\"⚡ Accensione\"] --> C[\"⌨️ F12, F2, Esc o Canc\"] --> D[\"📋 Scelgo USB\"] --> E[\"🔥 FeniceOS\"]",
+     "consiglio": "Se il computer si avvia come al solito, nessun problema: spegnetelo e riprovate premendo il tasto un po' prima."
+    },
+    {
+     "titolo": "Il menu di FeniceOS Live",
+     "testo": "Dopo aver scelto la chiavetta compare il **menu di FeniceOS Live**. Se non toccate nulla, dopo pochi secondi parte da solo la voce predefinita.\n\n- **Default**: l'avvio normale, da usare quasi sempre.\n- **Safe Graphics**: se lo schermo resta **nero** o l'immagine è **distorta**. Avvia la grafica in modo più semplice e prudente.\n- **Zero-Disk (toram)**: carica tutto il sistema nella memoria RAM e **non tocca mai il disco fisso**.\n\nSui computer che si avviano con il BIOS tradizionale compaiono tutte e tre le voci; con UEFI il menu propone l'avvio normale e Zero-Disk."
+    },
+    {
+     "titolo": "La modalità live",
+     "testo": "In **modalità live** FeniceOS funziona tutta dalla chiavetta e dalla memoria del computer: il **disco del computer non viene toccato**. Il vostro sistema di sempre resta lì, uguale.\n\nPotete esplorare, aprire i programmi, provare il Professore Digitale. Ricordate però che, in modalità live, ciò che salvate **non resta** dopo lo spegnimento: per conservare un file salvatelo su un'altra chiavetta personale.\n\nPer tornare al sistema di prima basta spegnere dal menu, **togliere la chiavetta** e riaccendere."
+    }
+   ],
+   "quiz": [
+    {
+     "domanda": "Cosa succede ai file della chiavetta quando ci si scrive sopra FeniceOS?",
+     "opzioni": [
+      "Restano tutti al loro posto",
+      "Vengono cancellati",
+      "Vengono spostati sul computer"
+     ],
+     "corretta": 1,
+     "spiegazione": "Scrivere l'immagine cancella tutta la chiavetta: usatene una senza file importanti."
+    },
+    {
+     "domanda": "A cosa serve il file con estensione .sha256 che accompagna l'ISO?",
+     "opzioni": [
+      "A controllare che il file ISO sia integro, identico all'originale",
+      "A rendere più veloce il computer",
+      "A installare la stampante"
+     ],
+     "corretta": 0,
+     "spiegazione": "Contiene l'impronta del file: se quella ricalcolata coincide, il file non è stato alterato."
+    },
+    {
+     "domanda": "Con Rufus, su Windows, quale modalità si sceglie per scrivere FeniceOS?",
+     "opzioni": [
+      "Modalità aereo",
+      "Modalità «DD Image»",
+      "Modalità risparmio energetico"
+     ],
+     "corretta": 1,
+     "spiegazione": "Il vademecum indica la modalità «DD Image», che copia l'immagine sulla chiavetta così com'è."
+    },
+    {
+     "domanda": "Lo schermo resta nero all'avvio della chiavetta: quale voce del menu conviene scegliere?",
+     "opzioni": [
+      "Zero-Disk",
+      "Default",
+      "Safe Graphics"
+     ],
+     "corretta": 2,
+     "spiegazione": "Safe Graphics avvia la grafica in modo più prudente, proprio per schermi neri o distorti."
+    },
+    {
+     "domanda": "Cosa fa la voce «Zero-Disk (toram)»?",
+     "opzioni": [
+      "Cancella il disco fisso",
+      "Carica tutto il sistema in memoria RAM e non tocca il disco",
+      "Spegne il computer"
+     ],
+     "corretta": 1,
+     "spiegazione": "Con toram il sistema viene copiato in memoria: il disco fisso non viene mai usato."
+    }
+   ]
+  },
+  {
+   "id": "fenice-primi-passi",
+   "icona": "🖥️",
+   "titolo": "Primi passi su FeniceOS",
+   "livello": "FeniceOS e riuso",
+   "minuti": 20,
+   "obiettivo": "Accedere a FeniceOS con l'utente giusto, orientarsi nel desktop Xfce, riconoscere le icone principali e spegnere il computer in modo corretto.",
+   "palestra": "",
+   "passi": [
+    {
+     "titolo": "La schermata di accesso: due utenti",
+     "testo": "Alla fine dell'avvio compare la schermata di accesso, con **due utenti**:\n\n- **ospite**, password **ospite**: è l'utente pubblico, pensato per l'aula, la biblioteca, il centro anziani. È quello da usare per gli allievi.\n- **fenice**, password **fenice**: è l'**amministratore**. Può installare programmi dal Fenice Store, installare FeniceOS sul disco e cambiare le impostazioni del sistema. È l'utente del facilitatore.\n\nScegliete il nome con un clic, scrivete la password e premete **Invio**.",
+     "schema": "flowchart LR\n  A[\"🔐 Schermata di accesso\"] --> B[\"🙂 ospite: per gli allievi\"]\n  A --> C[\"🛠️ fenice: per il facilitatore\"]",
+     "consiglio": "Se FeniceOS viene installata sul disco, la password di fenice va cambiata: l'installazione lo chiede apposta."
+    },
+    {
+     "titolo": "Il desktop Xfce",
+     "testo": "FeniceOS usa **Xfce**, un ambiente grafico veloce e leggero, che funziona bene anche su computer con più di dieci anni.\n\n- In alto c'è il **pannello**, con il menu **Applicazioni**, i collegamenti rapidi, l'orologio e le notifiche. Il pannello è **bloccato**: non si sposta per errore.\n- Sul **desktop**, la scrivania, ci sono **icone grandi** per i programmi principali.\n- Con il **tasto destro** del mouse sul desktop si apre un menu con le impostazioni.\n\nLo sfondo ufficiale di FeniceOS si può cambiare liberamente da **Impostazioni**, voce **Sfondo scrivania**."
+    },
+    {
+     "titolo": "Le icone del desktop",
+     "testo": "Sul desktop trovate subito, con un **doppio clic**:\n\n- **Il Professore Digitale**: corsi e quiz con attestato;\n- **Vademecum FeniceOS**: la guida ufficiale completa, da leggere, copiare o stampare;\n- **Informazioni su FeniceOS**: una guida rapida che funziona anche senza Internet;\n- **Open Source & Sostenibilità**: una pagina che spiega software libero, etica ed economia circolare;\n- **YouTube** e il libro **Tecnologia Gentile**.\n\nL'utente **fenice** vede in più il **Fenice Store** e l'icona **Installa FeniceOS sul disco**."
+    },
+    {
+     "titolo": "L'utente ospite: si riparte da capo",
+     "testo": "L'utente **ospite** ha una particolarità importante: la sua cartella personale viene **cancellata e ricreata da zero** a ogni accesso e a ogni uscita.\n\nÈ una scelta di sicurezza e di rispetto: chi si siede dopo di voi trova un computer pulito, senza i vostri documenti, la vostra cronologia o le vostre password.\n\nQuindi, **prima di chiudere la sessione**, salvate ciò che vi interessa su una **chiavetta USB personale**. FeniceOS ve lo ricorda anche quando generate un attestato con il Professore Digitale.\n\nL'ospite non può installare programmi né modificare il sistema: così il computer dell'aula resta in ordine.",
+     "consiglio": "Fate un'abitudine: lavoro finito, file sulla chiavetta, poi uscita."
+    },
+    {
+     "titolo": "Mouse e finestre",
+     "testo": "Il manuale di FeniceOS ricorda i gesti di base:\n\n- **Clic** con il tasto sinistro: seleziona un elemento.\n- **Doppio clic**, due clic ravvicinati: apre un'icona o un programma.\n- **Tasto destro**: apre un menu di opzioni.\n- **Trascinamento**: tenete premuto il tasto sinistro mentre spostate il mouse.\n\nOgni programma si chiude con la **«x»** in un angolo della finestra. Le finestre si possono spostare, ingrandire e ridurre: provate senza timore. In modalità live, e con l'utente ospite, è praticamente impossibile «rompere» il computer."
+    },
+    {
+     "titolo": "Spegnere nel modo giusto",
+     "testo": "Per spegnere, **non si stacca mai la spina** e non si tiene premuto il pulsante di accensione.\n\n1. **Salvate** il lavoro, se serve su una chiavetta personale.\n2. Aprite il menu **Applicazioni** nel pannello in alto.\n3. Scegliete la voce per **uscire** e poi quella per **spegnere** il computer.\n\nCosì si evitano perdite di dati e si protegge anche la chiavetta da cui funziona FeniceOS. Solo quando lo schermo è spento potete togliere la chiavetta."
+    }
+   ],
+   "quiz": [
+    {
+     "domanda": "Quale utente si usa con gli allievi in un'aula o in un centro anziani?",
+     "opzioni": [
+      "fenice",
+      "ospite",
+      "root"
+     ],
+     "corretta": 1,
+     "spiegazione": "L'utente ospite è pensato per l'uso pubblico: non può modificare il sistema e riparte pulito a ogni accesso."
+    },
+    {
+     "domanda": "Cosa succede ai file dell'utente ospite quando si chiude la sessione?",
+     "opzioni": [
+      "Vengono cancellati: la cartella personale si ricrea da zero",
+      "Restano per sempre",
+      "Vengono inviati per posta"
+     ],
+     "corretta": 0,
+     "spiegazione": "Per questo, prima di uscire, si salva ciò che serve su una chiavetta personale."
+    },
+    {
+     "domanda": "Perché il pannello in alto di FeniceOS è bloccato?",
+     "opzioni": [
+      "Per risparmiare corrente",
+      "Perché è rotto",
+      "Per evitare spostamenti accidentali"
+     ],
+     "corretta": 2,
+     "spiegazione": "Il pannello bloccato è una scelta di inclusione: chi inizia non rischia di perdere i comandi."
+    },
+    {
+     "domanda": "Quale icona del desktop apre la guida ufficiale completa di FeniceOS?",
+     "opzioni": [
+      "YouTube",
+      "Vademecum FeniceOS",
+      "Fenice Store"
+     ],
+     "corretta": 1,
+     "spiegazione": "Il vademecum è sul desktop e nella cartella Documenti: si può leggere, copiare e stampare."
+    },
+    {
+     "domanda": "Come si spegne correttamente FeniceOS?",
+     "opzioni": [
+      "Dal menu Applicazioni, con la voce per uscire e spegnere",
+      "Staccando la spina",
+      "Togliendo la chiavetta mentre è acceso"
+     ],
+     "corretta": 0,
+     "spiegazione": "Si spegne sempre dal menu: così non si perdono dati e non si danneggia la chiavetta."
+    }
+   ]
+  },
+  {
+   "id": "fenice-programmi",
+   "icona": "🧰",
+   "titolo": "I programmi di FeniceOS",
+   "livello": "FeniceOS e riuso",
+   "minuti": 20,
+   "obiettivo": "Conoscere i programmi inclusi in FeniceOS, il Fenice Store, la gestione di stampanti, audio e Bluetooth, gli aggiornamenti e il firewall.",
+   "palestra": "",
+   "passi": [
+    {
+     "titolo": "Il kit «Economia Circolare»",
+     "testo": "FeniceOS include un kit di programmi scelto con un criterio preciso: **leggero, ma completo** per l'uso di ogni giorno.\n\n- **Firefox ESR**, in italiano, per navigare su Internet.\n- **LibreOffice** in italiano: **Writer** per scrivere lettere, **Calc** per i fogli di calcolo, **Impress** per le presentazioni.\n- **Thunar** per sfogliare file e cartelle.\n- **Mousepad** per appunti semplici.\n- **Xarchiver** per aprire gli archivi compressi.\n- Una **calcolatrice**.\n\nSono tutti programmi liberi, scaricati dagli archivi ufficiali di Debian.",
+     "consiglio": "Writer è il programma giusto per la prima lettera: scrivete, poi salvate dando un nome chiaro."
+    },
+    {
+     "titolo": "Foto, video, musica e strumenti",
+     "testo": "Per i momenti multimediali:\n\n- **Ristretto** mostra le **foto**;\n- **Evince** apre i documenti **PDF**;\n- **VLC** riproduce i **video**, **Audacious** la **musica**;\n- l'icona **YouTube** apre i video con l'accelerazione della scheda grafica, così scorrono fluidi anche su computer datati.\n\nPer l'accessibilità c'è **xzoom**, una **lente d'ingrandimento**. Tra gli strumenti di sistema trovate **htop**, che mostra quanto lavora il computer, il programma per le **schermate** e **BleachBit** per la pulizia dei file inutili."
+    },
+    {
+     "titolo": "Firefox, configurato per la privacy",
+     "testo": "In FeniceOS **Firefox ESR** è già preparato per essere semplice e rispettoso:\n\n- **nessuna telemetria**, cioè nessun invio di dati d'uso;\n- niente account Firefox e niente Pocket;\n- **nessun salvataggio automatico delle password**: utile su un computer usato da tante persone;\n- la **barra dei preferiti** è sempre visibile, con la **Guida FeniceOS**, Google, Wikipedia e YouTube.\n\nLa Guida rapida FeniceOS si apre dal browser **anche senza connessione**."
+    },
+    {
+     "titolo": "Il Fenice Store",
+     "testo": "Il **Fenice Store** è un pannello semplice, in italiano, per aggiungere programmi senza appesantire il sistema di base. Contiene una scelta di applicazioni testate:\n\n- **GIMP** per le immagini, **Inkscape** per il disegno;\n- **Thunderbird** per la posta elettronica;\n- **Simple Scan** per lo scanner, **PDF Arranger** per unire o dividere PDF;\n- **Klavaro**, corso di dattilografia, e **GCompris**, giochi educativi per bambini.\n\nOgni riga ha il pulsante **Installa** o **Rimuovi**. Serve Internet e l'utente **fenice**: l'ospite può solo guardare l'elenco.",
+     "consiglio": "Per tutto il resto c'è il pulsante «Gestione pacchetti avanzata», che apre Synaptic con l'intero catalogo Debian."
+    },
+    {
+     "titolo": "Stampanti, audio e Bluetooth",
+     "testo": "- **Stampanti**: FeniceOS include **CUPS**, il sistema di stampa standard di Linux, e driver per la maggior parte delle stampanti **Epson, Canon, HP, Brother, Samsung e Xerox**. Collegate la stampante via USB o alla stessa rete, poi aprite **Impostazioni stampante** dal menu. Quelle di rete spesso vengono trovate da sole.\n- **Audio**: funziona dal primo avvio. Il volume si regola dall'icona nel pannello; per scegliere casse o cuffie c'è **pavucontrol**.\n- **Bluetooth**: con l'icona **Blueman** nel pannello si cercano e si abbinano cuffie, casse e mouse.",
+     "schema": "flowchart LR\n  A[\"🎧 Cuffie accese\"] --> B[\"🔵 Cerca dispositivi\"] --> C[\"🤝 Abbina\"] --> D[\"🔊 Scegli uscita audio\"]",
+     "consiglio": "Cuffie Bluetooth abbinate ma mute? In pavucontrol, scheda «Uscita audio», sceglietele come predefinite."
+    },
+    {
+     "titolo": "Aggiornamenti e firewall",
+     "testo": "**Aggiornamenti**: a ogni avvio dell'utente fenice, FeniceOS controlla in silenzio se ci sono aggiornamenti. Se ce ne sono, dopo circa mezzo minuto compare un avviso con due pulsanti: **«Aggiorna ora»** o **«Più tardi»**. Senza Internet l'avviso semplicemente non compare.\n\n**Firewall**: FeniceOS include **Gufw**, un firewall con interfaccia grafica. È installato ma **spento**, perché in modalità live potrebbe disturbare la rete. Conviene accenderlo **dopo l'installazione sul disco**, se il computer è collegato a una rete pubblica o condivisa.\n\nUn consiglio del vademecum: aggiornate il sistema **almeno una volta al mese**."
+    }
+   ],
+   "quiz": [
+    {
+     "domanda": "Con quale programma di LibreOffice si scrive una lettera?",
+     "opzioni": [
+      "Calc",
+      "Impress",
+      "Writer"
+     ],
+     "corretta": 2,
+     "spiegazione": "Writer è il programma di videoscrittura; Calc serve per i fogli di calcolo, Impress per le presentazioni."
+    },
+    {
+     "domanda": "Quale programma di FeniceOS fa da lente d'ingrandimento?",
+     "opzioni": [
+      "xzoom",
+      "VLC",
+      "Thunar"
+     ],
+     "corretta": 0,
+     "spiegazione": "xzoom ingrandisce una parte dello schermo: è lo strumento di accessibilità incluso."
+    },
+    {
+     "domanda": "Chi può installare programmi dal Fenice Store?",
+     "opzioni": [
+      "Chiunque, anche senza password",
+      "Solo l'utente fenice",
+      "Solo l'utente ospite"
+     ],
+     "corretta": 1,
+     "spiegazione": "L'ospite non ha privilegi di amministratore: può consultare l'elenco ma non installare."
+    },
+    {
+     "domanda": "Cosa compare quando ci sono aggiornamenti per FeniceOS?",
+     "opzioni": [
+      "Un avviso con «Aggiorna ora» o «Più tardi»",
+      "Il computer si spegne da solo",
+      "Un messaggio in inglese che blocca tutto"
+     ],
+     "corretta": 0,
+     "spiegazione": "L'avviso arriva solo all'utente fenice e solo se c'è Internet e ci sono davvero aggiornamenti."
+    },
+    {
+     "domanda": "Perché il firewall Gufw è spento all'inizio?",
+     "opzioni": [
+      "Perché non funziona",
+      "Perché rallenta il mouse",
+      "Perché in modalità live potrebbe disturbare la rete"
+     ],
+     "corretta": 2,
+     "spiegazione": "Si attiva dopo l'installazione sul disco, quando il computer usa una rete pubblica o condivisa."
+    }
+   ]
+  },
+  {
+   "id": "fenice-rinascita",
+   "icona": "🏗️",
+   "titolo": "Come rinasce FeniceOS: costruzione e installazione",
+   "livello": "FeniceOS e riuso",
+   "minuti": 20,
+   "obiettivo": "Capire in parole semplici come FeniceOS viene ricostruita da zero con il suo script, come nasce il file ISO e cosa succede quando la si installa sul disco.",
+   "palestra": "",
+   "passi": [
+    {
+     "titolo": "Una ricetta che si può rifare",
+     "testo": "FeniceOS non si monta a mano: la costruisce uno **script**, cioè una ricetta automatica scritta da Danilo D'Auria, che si chiama **fenice-build-master.sh**. Lo script è aperto e ispezionabile, come tutto il progetto.\n\nOgni volta la costruzione **riparte da zero**: prima si sbloccano e si cancellano i resti della costruzione precedente, poi si rifà tutto, sempre negli stessi passi e nello stesso ordine.\n\nÈ una piccola «risurrezione» della fenice: dalle ceneri della versione vecchia nasce quella nuova. E grazie alla ricetta, ogni FeniceOS esce uguale alla precedente: niente dimenticanze, niente sorprese.",
+     "consiglio": "Lo script va avviato dal facilitatore con i permessi di amministratore e richiede la connessione a Internet."
+    },
+    {
+     "titolo": "Fondamenta e arredamento",
+     "testo": "1. **debootstrap** posa le **fondamenta**: scarica dagli archivi ufficiali di Debian un sistema Debian 12 **minimo**, senza installatore grafico.\n2. **chroot** permette di **entrare in casa** e arredarla, come se quel sistema fosse già acceso. Qui lo script installa il cuore del sistema e i **driver**, compresi quelli per il Wi-Fi, l'ambiente grafico **Xfce**, i programmi, la stampa, l'audio e il Bluetooth.\n\nSempre dentro la casa crea gli utenti **fenice** e **ospite**, il **Fenice Store**, l'avviso degli **aggiornamenti**, il **Professore Digitale**, il vademecum e lo sfondo ufficiale.",
+     "schema": "flowchart LR\n  A[\"🧱 debootstrap\"] --> B[\"🛋️ chroot\"] --> C[\"🗜️ mksquashfs\"] --> D[\"📀 xorriso\"] --> E[\"🔑 Chiavetta\"]"
+    },
+    {
+     "titolo": "Sottovuoto e scatola pronta",
+     "testo": "3. **mksquashfs** mette tutto **sottovuoto**: comprime l'intero sistema in un unico file di sola lettura. È il cuore della modalità live.\n4. Si prepara l'**avvio doppio**: un programma di avvio per i computer con **BIOS** e uno per quelli con **UEFI**, con le voci Default, Safe Graphics e Zero-Disk.\n5. **xorriso** chiude la **scatola**: crea un'immagine **ISO ibrida**, avviabile sia da BIOS sia da UEFI, pronta per la chiavetta.\n\nAlla fine lo script calcola anche l'**impronta SHA-256** del file ISO, il «sigillo» che permette di controllare che nessuno l'abbia alterato."
+    },
+    {
+     "titolo": "Installare FeniceOS sul disco",
+     "testo": "La modalità live è perfetta per provare e fare lezione. Per avere tutta la velocità e conservare i dati, il facilitatore può **installare FeniceOS sul disco**.\n\n1. Dal desktop di **fenice**, doppio clic su **«Installa FeniceOS sul disco»**.\n2. Compare l'elenco dei dischi; la chiavetta di avvio viene **bloccata** per sicurezza.\n3. Si scrive il nome del disco di destinazione.\n4. Si digita **CONFERMO**, in maiuscolo.\n5. Lo script prepara il disco, copia il sistema, installa il programma di avvio e chiede una **nuova password** per fenice.\n\n**Attenzione**: l'operazione **cancella tutto il disco scelto** e non si può annullare.",
+     "consiglio": "Prima di installare: copia di sicurezza di tutto e dischi esterni scollegati."
+    },
+    {
+     "titolo": "Dopo l'installazione",
+     "testo": "Una volta installata sul disco:\n\n- i dati dell'utente **fenice** restano salvati;\n- l'utente **ospite** continua a ripartire da zero a ogni accesso;\n- il **Professore Digitale** conserva l'archivio degli attestati e le domande aggiornate;\n- stampanti e dispositivi **Bluetooth** abbinati restano configurati;\n- si può accendere il **firewall** e aggiornare il sistema con regolarità.\n\nPer le **copie di sicurezza**, il vademecum indica due cartelle da salvare: la cartella personale di fenice e l'archivio del Professore Digitale, che contiene attestati e domande."
+    }
+   ],
+   "quiz": [
+    {
+     "domanda": "Come si chiama lo script che costruisce FeniceOS?",
+     "opzioni": [
+      "fenice-build-master.sh",
+      "installa-tutto.exe",
+      "debian-setup.txt"
+     ],
+     "corretta": 0,
+     "spiegazione": "fenice-build-master.sh è la ricetta automatica che ricostruisce FeniceOS da zero, sempre negli stessi passi."
+    },
+    {
+     "domanda": "Nella costruzione, quale passaggio è come «entrare in casa e arredarla»?",
+     "opzioni": [
+      "xorriso",
+      "chroot",
+      "mksquashfs"
+     ],
+     "corretta": 1,
+     "spiegazione": "Nell'ambiente chroot si lavora dentro il nuovo sistema per installare driver, programmi e utenti."
+    },
+    {
+     "domanda": "Cosa significa che l'ISO di FeniceOS è «ibrida»?",
+     "opzioni": [
+      "Che funziona solo su computer nuovi",
+      "Che contiene anche Windows",
+      "Che si avvia sia da BIOS sia da UEFI"
+     ],
+     "corretta": 2,
+     "spiegazione": "L'immagine contiene due programmi di avvio, uno per il BIOS tradizionale e uno per UEFI."
+    },
+    {
+     "domanda": "Cosa bisogna scrivere per confermare l'installazione sul disco?",
+     "opzioni": [
+      "CONFERMO, in maiuscolo",
+      "SÌ, in minuscolo",
+      "Niente, parte da sola"
+     ],
+     "corretta": 0,
+     "spiegazione": "La parola CONFERMO evita di cancellare un disco per sbaglio: l'operazione non è reversibile."
+    },
+    {
+     "domanda": "Cosa chiede l'installazione alla fine, per sicurezza?",
+     "opzioni": [
+      "Il numero di telefono",
+      "Una nuova password per l'utente fenice",
+      "Di comprare una licenza"
+     ],
+     "corretta": 1,
+     "spiegazione": "La password predefinita «fenice» è nota a tutti: su un'installazione permanente va cambiata."
+    }
+   ]
+  },
+  {
+   "id": "universo-informatico",
+   "icona": "🌍",
+   "titolo": "Ieri, oggi e domani dell'informatica",
+   "livello": "FeniceOS e riuso",
+   "minuti": 20,
+   "obiettivo": "Ripercorrere la storia dell'informatica, capire l'informatica di oggi e guardare all'intelligenza artificiale con spirito critico, come propone il manuale di FeniceOS.",
+   "palestra": "",
+   "passi": [
+    {
+     "titolo": "Le origini del calcolo",
+     "testo": "L'idea di macchine che calcolano da sole attraversa i secoli: dall'**abaco** alle calcolatrici meccaniche del Seicento e del Settecento.\n\nNell'Ottocento **Charles Babbage** progettò, senza mai completarla, la **macchina analitica**, considerata da molti storici un antenato del computer moderno.\n\n**Ada Lovelace**, che collaborò con lui, è riconosciuta come autrice di quello che viene spesso descritto come il **primo algoritmo** pensato per essere eseguito da una macchina. Un algoritmo è una sequenza precisa di istruzioni, come una ricetta da seguire passo passo."
+    },
+    {
+     "titolo": "Dai giganti al computer di casa",
+     "testo": "Negli **anni Quaranta**, durante e subito dopo la Seconda guerra mondiale, nascono i primi calcolatori elettronici programmabili, grandi come stanze, come l'**ENIAC** negli Stati Uniti. In quegli anni **Alan Turing** pone le basi teoriche dell'informatica.\n\nPer circa vent'anni, negli anni Cinquanta e Sessanta, i computer restano **mainframe** riservati a grandi aziende, università e governi.\n\nPoi arriva il **microprocessore**: negli anni Settanta e Ottanta i computer diventano abbastanza piccoli ed economici da entrare in case e uffici, con l'**Apple II** e il **Personal Computer IBM**.",
+     "schema": "flowchart LR\n  A[\"🧮 Abaco\"] --> B[\"⚙️ Babbage e Lovelace\"] --> C[\"🏢 ENIAC e mainframe\"] --> D[\"🖥️ Personal computer\"] --> E[\"🌐 Linux e Web\"]"
+    },
+    {
+     "titolo": "Linux e il Web",
+     "testo": "Nel **1991** Linus Torvalds rende pubblico il kernel **Linux**: da lì nasceranno centinaia di distribuzioni, tra cui **Debian**, guidata dalla comunità dal **1993**, e quindi FeniceOS.\n\nNegli stessi anni **Tim Berners-Lee** inventa il **World Wide Web**, tra il 1989 e il 1991. Internet, nato negli anni Sessanta e Settanta come progetto militare e accademico, diventa così uno strumento di comunicazione di massa, con una crescita esplosiva negli anni Novanta.\n\nLa storia del software libero è la storia di una scelta: costruire tecnologia in modo collaborativo, trasparente e accessibile."
+    },
+    {
+     "titolo": "L'informatica di oggi",
+     "testo": "Oggi Internet è un'infrastruttura quotidiana, come l'elettricità o l'acqua: servizi pubblici, sanità, lavoro e scuola passano dalla connessione.\n\n- Il **cloud** conserva dati e programmi su server lontani, raggiungibili via Internet: comodo, ma pone domande di privacy e di dipendenza dai fornitori.\n- Lo **smartphone** ha spostato in tasca gran parte dell'uso quotidiano, ma per moduli complessi il computer resta più adatto.\n- **Sicurezza** è ormai una competenza di base: riconoscere il **phishing**, usare **password robuste** e diverse per ogni servizio, e dove possibile l'**autenticazione a due fattori**.\n\nIl **divario digitale** non riguarda solo gli anziani: tocca chiunque non abbia strumenti o formazione."
+    },
+    {
+     "titolo": "Domani: l'intelligenza artificiale",
+     "testo": "Per **intelligenza artificiale** oggi si intendono soprattutto programmi **addestrati su enormi quantità di dati** per riconoscere schemi e produrre risposte, traduzioni o immagini. Non hanno coscienza né comprensione come un essere umano.\n\n**Opportunità**: assistenti vocali, traduzione automatica, scrittura con la voce per chi ha difficoltà motorie.\n\n**Rischi**: funzionano spesso come «**scatole nere**», rendono più difficile distinguere il vero dal falso, consumano molta energia e sono concentrati in poche grandi aziende.\n\nLa posizione del manuale è equilibrata: né rifiuto né entusiasmo cieco, ma un **approccio critico e informato**.",
+     "consiglio": "Per questo il Professore Digitale funziona anche senza IA, con risposte scritte e controllate da persone."
+    }
+   ],
+   "quiz": [
+    {
+     "domanda": "Chi progettò nell'Ottocento la «macchina analitica»?",
+     "opzioni": [
+      "Alan Turing",
+      "Charles Babbage",
+      "Tim Berners-Lee"
+     ],
+     "corretta": 1,
+     "spiegazione": "Babbage la progettò senza completarla; Ada Lovelace scrisse per lei il primo algoritmo."
+    },
+    {
+     "domanda": "Che cosa erano i mainframe?",
+     "opzioni": [
+      "Grandi computer riservati ad aziende, università e governi",
+      "I primi telefoni cellulari",
+      "Programmi per scrivere lettere"
+     ],
+     "corretta": 0,
+     "spiegazione": "Negli anni Cinquanta e Sessanta i computer erano macchine costose gestite da personale specializzato."
+    },
+    {
+     "domanda": "Chi inventò il World Wide Web?",
+     "opzioni": [
+      "Linus Torvalds",
+      "Ian Murdock",
+      "Tim Berners-Lee"
+     ],
+     "corretta": 2,
+     "spiegazione": "Tim Berners-Lee inventò il Web tra il 1989 e il 1991, aprendo Internet al grande pubblico."
+    },
+    {
+     "domanda": "Quale di queste è una buona abitudine di sicurezza?",
+     "opzioni": [
+      "Usare la stessa password ovunque",
+      "Usare password lunghe e diverse per ogni servizio",
+      "Scrivere la password su un biglietto attaccato allo schermo"
+     ],
+     "corretta": 1,
+     "spiegazione": "Una password robusta è lunga, complessa e diversa per ogni servizio."
+    },
+    {
+     "domanda": "Quale approccio all'intelligenza artificiale propone il manuale di FeniceOS?",
+     "opzioni": [
+      "Critico e informato, che ne conosca possibilità e rischi",
+      "Rifiutarla senza conoscerla",
+      "Fidarsi di tutto ciò che risponde"
+     ],
+     "corretta": 0,
+     "spiegazione": "Bisogna capire cosa l'IA può e non può fare, e metterla al servizio dell'inclusione."
+    }
+   ]
+  },
+  {
+   "id": "insegnare-con-fenice",
+   "icona": "👩‍🏫",
+   "titolo": "Consigli per chi insegna con FeniceOS",
+   "livello": "FeniceOS e riuso",
+   "minuti": 15,
+   "obiettivo": "Per facilitatori, volontari e insegnanti: gli obiettivi di un corso in un centro anziani, perché FeniceOS aiuta e il metodo consigliato dal manuale.",
+   "palestra": "",
+   "passi": [
+    {
+     "titolo": "Gli obiettivi di un corso",
+     "testo": "Nei centri anziani l'alfabetizzazione digitale **non punta a formare informatici**, ma persone **autonome** nella vita digitale di ogni giorno: capaci di usare la posta elettronica per restare in contatto con i familiari, fare una **videochiamata**, consultare un sito istituzionale, **riconoscere una truffa online**, scrivere e stampare un documento.\n\nE c'è un obiettivo sociale: un corso è anche **compagnia**, contrasto all'isolamento, fiducia in sé. Vedere un coetaneo che videochiama un nipote lontano motiva più di qualsiasi manuale.\n\nIl successo non si misura in nozioni, ma in **autonomia e fiducia ritrovate**."
+    },
+    {
+     "titolo": "Perché FeniceOS aiuta",
+     "testo": "- **Nessuna pressione economica**: gira su computer donati o dismessi, senza costi per il centro e per i partecipanti.\n- **Interfaccia comprensibile**: icone grandi, pannello bloccato, guida offline.\n- **Nessuna paura di «rompere qualcosa»**: in modalità live, e con l'utente **ospite** che riparte pulito, l'ambiente si rimette in ordine facilmente.\n- **Ritmo rispettato**: si procede a piccoli passi, con ripetizione e incoraggiamento.\n\nL'obiettivo non è portare tutti allo stesso livello, ma accompagnare ciascuno **al livello di autonomia che desidera**.",
+     "consiglio": "Per il pubblico usate sempre l'utente ospite: è la regola numero uno del vademecum per i contesti pubblici."
+    },
+    {
+     "titolo": "Il metodo: tempi, parole, obiettivi",
+     "testo": "1. **Rispettate i tempi**: chi comincia ha bisogno di tempi più distesi. Ripetere non è un segno di difficoltà, è parte naturale dell'apprendimento.\n2. **Parlate senza gergo, ma senza sminuire**: evitate frasi come «clicca sull'icona nel tray». Usate parole comuni e spiegate ogni termine tecnico la prima volta, così la persona si costruisce il suo vocabolario.\n3. **Piccoli passi, obiettivi concreti**: «oggi impariamo a fare una videochiamata» funziona meglio di un elenco di funzioni.\n\nIn ogni prima lezione, ogni piccolo successo va **riconosciuto ad alta voce**.",
+     "schema": "flowchart LR\n  A[\"🎯 Obiettivo concreto\"] --> B[\"👀 Mostrare\"] --> C[\"🖐️ Far provare\"] --> D[\"🔁 Ripetere\"] --> E[\"🌟 Riconoscere il successo\"]"
+    },
+    {
+     "titolo": "Errore, pratica e aiuto tra pari",
+     "testo": "- **Normalizzate l'errore**: «ho sbagliato» deve potersi dire senza imbarazzo. Ditelo fin dall'inizio: sbagliare fa parte del percorso.\n- **Più pratica che teoria**: mostrare e far ripetere funziona meglio che spiegare in astratto.\n- **Valorizzate l'aiuto tra pari**: chi ha imparato spiega a chi non ha ancora imparato. Si rafforza il gruppo, e chi spiega ricorda meglio.\n- **Prevedete momenti di ripasso**, senza aggiungere sempre cose nuove.\n- Il passaggio alle funzioni avanzate deve partire da un **interesse della persona**, non da un programma imposto.\n\nIl compito di chi insegna è costruire un **rapporto di fiducia duraturo** con la tecnologia."
+    },
+    {
+     "titolo": "I quiz come gioco",
+     "testo": "Il manuale di FeniceOS propone i quiz **come gioco, non come esame**:\n\n- funzionano **da soli o in gruppo**, anche come sfida amichevole a squadre;\n- si possono fare **a voce alta**, con chi conduce che legge le domande, se qualcuno è meno a suo agio con la scrittura;\n- **nessuna penalità** per l'errore;\n- il **punteggio è facoltativo**: un punto per ogni risposta giusta, solo se il gruppo lo desidera.\n\nUn punteggio non è mai un giudizio sulla persona. Il vero obiettivo è la **conversazione** e l'apprendimento condiviso che il quiz fa nascere."
+    }
+   ],
+   "quiz": [
+    {
+     "domanda": "Qual è l'obiettivo di un corso di informatica in un centro anziani?",
+     "opzioni": [
+      "Formare tecnici informatici",
+      "Rendere le persone autonome nella vita digitale di ogni giorno",
+      "Imparare a memoria tutti i comandi"
+     ],
+     "corretta": 1,
+     "spiegazione": "Contano l'autonomia e la fiducia ritrovate, non la quantità di nozioni tecniche."
+    },
+    {
+     "domanda": "Come si consiglia di trattare l'errore durante il corso?",
+     "opzioni": [
+      "Come una parte naturale del percorso",
+      "Con un voto negativo",
+      "Facendo ricominciare tutto da capo"
+     ],
+     "corretta": 0,
+     "spiegazione": "Sbagliare fa parte dell'apprendimento, e con FeniceOS live non si rischia di rompere nulla."
+    },
+    {
+     "domanda": "Quale frase rispetta il consiglio «senza gergo, ma senza sminuire»?",
+     "opzioni": [
+      "«Clicca sull'icona nel tray»",
+      "«Tanto non capirebbe»",
+      "«In alto a destra c'è una piccola immagine: si chiama icona, fateci clic»"
+     ],
+     "corretta": 2,
+     "spiegazione": "Si usano parole comuni e si spiega il termine tecnico la prima volta che compare."
+    },
+    {
+     "domanda": "Cosa si intende per apprendimento tra pari?",
+     "opzioni": [
+      "Che tutti devono andare alla stessa velocità",
+      "Che chi ha imparato spiega a chi non ha ancora imparato",
+      "Che si studia solo da soli"
+     ],
+     "corretta": 1,
+     "spiegazione": "Aiuta il gruppo e rafforza la memoria di chi spiega."
+    },
+    {
+     "domanda": "Come vanno proposti i quiz secondo il manuale?",
+     "opzioni": [
+      "Come un esame severo",
+      "Solo per iscritto",
+      "Come un gioco, anche a voce e in gruppo, senza penalità"
+     ],
+     "corretta": 2,
+     "spiegazione": "I quiz servono a consolidare in modo piacevole: il punteggio è facoltativo."
+    }
+   ]
+  }
+ ],
+ "prove": [
+  {
+   "id": "riuso",
+   "titolo": "Il Grande Quiz di FeniceOS e del Riuso",
+   "icona": "♻️",
+   "descrizione": "Venti domande pescate a caso tra quelle dei manuali di FeniceOS e del vademecum: primi passi, FeniceOS e i suoi programmi, avvio dalla chiavetta, costruzione e installazione, software libero, storia dell'informatica e IA, economia circolare, obsolescenza, Tecnologia Gentile, RAEE, riparazioni e sicurezza dei dati. Rispondete giusto ad almeno sette domande su dieci per ricevere l'attestato.",
+   "attestato": "FeniceOS, recupero digitale ed economia circolare",
+   "domande_per_prova": 20,
+   "soglia": 0.7,
+   "domande": [
+    {
+     "domanda": "Come si chiama il dispositivo che si usa per spostare il puntatore sullo schermo?",
+     "opzioni": [
+      "Tastiera",
+      "Monitor",
+      "Stampante",
+      "Mouse"
+     ],
+     "corretta": 3,
+     "spiegazione": "Il mouse sposta il puntatore e permette di selezionare gli elementi sullo schermo; sui portatili spesso c'è il touchpad.",
+     "categoria": "Primi passi"
+    },
+    {
+     "domanda": "Come si spegne correttamente il computer?",
+     "opzioni": [
+      "Staccando direttamente la spina",
+      "Con il menu di spegnimento previsto dal sistema",
+      "Tenendo premuto a lungo il pulsante di accensione"
+     ],
+     "corretta": 1,
+     "spiegazione": "Si usa sempre il menu di spegnimento, mai la spina: così non si perdono dati e non si danneggia la chiavetta USB.",
+     "categoria": "Primi passi"
+    },
+    {
+     "domanda": "Quale tasto si usa per andare a capo o confermare un'azione durante la scrittura?",
+     "opzioni": [
+      "Barra spaziatrice",
+      "Invio (Enter)",
+      "Tasto Canc",
+      "Tasto Maiuscolo"
+     ],
+     "corretta": 1,
+     "spiegazione": "Il tasto Invio conferma un'azione o va a capo nel testo.",
+     "categoria": "Primi passi"
+    },
+    {
+     "domanda": "Che cos'è un «doppio clic»?",
+     "opzioni": [
+      "Premere due volte, in rapida successione, il tasto sinistro del mouse",
+      "Premere il tasto destro del mouse",
+      "Tenere premuto il tasto sinistro e spostare il mouse",
+      "Premere contemporaneamente due tasti della tastiera"
+     ],
+     "corretta": 0,
+     "spiegazione": "Il doppio clic è fatto di due clic ravvicinati con il tasto sinistro e serve, di solito, ad aprire un elemento.",
+     "categoria": "Primi passi"
+    },
+    {
+     "domanda": "Da dove si avvia FeniceOS, senza bisogno di installarla sul disco del computer?",
+     "opzioni": [
+      "Da un server su Internet",
+      "Da un cd musicale",
+      "Dalla stampante",
+      "Da una chiavetta USB"
+     ],
+     "corretta": 3,
+     "spiegazione": "FeniceOS è un sistema live: si avvia direttamente dalla chiavetta USB.",
+     "categoria": "FeniceOS"
+    },
+    {
+     "domanda": "A cosa serve il monitor?",
+     "opzioni": [
+      "A scrivere lettere e numeri",
+      "A spostare il puntatore",
+      "A mostrare le informazioni sullo schermo",
+      "A contenere i componenti che fanno funzionare il computer"
+     ],
+     "corretta": 2,
+     "spiegazione": "Il monitor, o schermo, è dove compaiono le informazioni; la tastiera serve a scrivere e il mouse a spostare il puntatore.",
+     "categoria": "Primi passi"
+    },
+    {
+     "domanda": "A cosa serve la tastiera?",
+     "opzioni": [
+      "A mostrare le immagini",
+      "A scrivere lettere, numeri e comandi",
+      "A stampare i documenti",
+      "A raffreddare il computer"
+     ],
+     "corretta": 1,
+     "spiegazione": "Con la tastiera si scrivono lettere, numeri e comandi; non serve memorizzarla tutta subito, la familiarità arriva con la pratica.",
+     "categoria": "Primi passi"
+    },
+    {
+     "domanda": "Che cosa contiene l'unità centrale del computer?",
+     "opzioni": [
+      "I componenti che fanno funzionare tutto il resto",
+      "Solo la tastiera",
+      "Le pagine di Internet",
+      "Il puntatore del mouse"
+     ],
+     "corretta": 0,
+     "spiegazione": "L'unità centrale ospita i componenti principali; schermo, tastiera e mouse sono collegati a lei.",
+     "categoria": "Primi passi"
+    },
+    {
+     "domanda": "Per aprire un programma da un'icona sul desktop, di solito si fa…",
+     "opzioni": [
+      "un singolo clic con il tasto destro",
+      "una pressione prolungata del tasto Invio",
+      "uno scorrimento con due dita",
+      "un doppio clic con il tasto sinistro"
+     ],
+     "corretta": 3,
+     "spiegazione": "Il doppio clic con il tasto sinistro apre icone e programmi; il tasto destro apre invece un menu di opzioni.",
+     "categoria": "Primi passi"
+    },
+    {
+     "domanda": "Se si sbaglia qualcosa usando FeniceOS da chiavetta USB, cosa succede al computer?",
+     "opzioni": [
+      "Si rompe subito il disco fisso",
+      "Bisogna buttare il computer",
+      "È praticamente impossibile romperlo in modo permanente",
+      "Si cancella il sistema di tutti i computer della stanza"
+     ],
+     "corretta": 2,
+     "spiegazione": "La natura live del sistema riduce fortemente il rischio di danni permanenti e rende l'ambiente di apprendimento più sicuro.",
+     "categoria": "FeniceOS"
+    },
+    {
+     "domanda": "Come si chiama il programma che si usa per navigare su Internet?",
+     "opzioni": [
+      "Foglio di calcolo",
+      "Browser",
+      "Editor di testo",
+      "Terminale"
+     ],
+     "corretta": 1,
+     "spiegazione": "Il browser è il programma per navigare sul web; in FeniceOS è Firefox ESR.",
+     "categoria": "Primi passi"
+    },
+    {
+     "domanda": "Che cosa bisogna fare, prima di chiudere un documento appena scritto, per non perdere il lavoro?",
+     "opzioni": [
+      "Salvarlo",
+      "Stamparlo",
+      "Ingrandirlo",
+      "Rinominare il computer"
+     ],
+     "corretta": 0,
+     "spiegazione": "Un documento va sempre salvato, con un nome chiaro e in una cartella riconoscibile, per ritrovarlo dopo.",
+     "categoria": "Primi passi"
+    },
+    {
+     "domanda": "Quale di questi è un esempio concreto di come saper usare il computer aiuta nella vita di ogni giorno?",
+     "opzioni": [
+      "Rendere il televisore più grande",
+      "Evitare di uscire di casa per sempre",
+      "Non dover più imparare nulla",
+      "Restare in contatto con i familiari lontani e accedere ai servizi"
+     ],
+     "corretta": 3,
+     "spiegazione": "Il manuale invita a collegare il computer a bisogni concreti: comunicare con i familiari, accedere ai servizi, informarsi.",
+     "categoria": "Primi passi"
+    },
+    {
+     "domanda": "Per fare una videochiamata, cosa deve riconoscere correttamente il computer?",
+     "opzioni": [
+      "La stampante e lo scanner",
+      "Solo la tastiera",
+      "La webcam e il microfono",
+      "Il lettore DVD"
+     ],
+     "corretta": 2,
+     "spiegazione": "Senza webcam e microfono riconosciuti dal sistema la videochiamata non funziona: va controllato prima di iniziare.",
+     "categoria": "Primi passi"
+    },
+    {
+     "domanda": "Su quale distribuzione Linux è basato FeniceOS?",
+     "opzioni": [
+      "Ubuntu",
+      "Debian 12 «Bookworm»",
+      "Fedora",
+      "Arch Linux"
+     ],
+     "corretta": 1,
+     "spiegazione": "FeniceOS è costruita su Debian 12, nome in codice «Bookworm», nota per stabilità e sicurezza.",
+     "categoria": "FeniceOS"
+    },
+    {
+     "domanda": "Con quanta RAM disponibile è progettato per funzionare FeniceOS?",
+     "opzioni": [
+      "Anche con meno di 500 MB",
+      "Almeno 8 GB",
+      "Almeno 16 GB",
+      "Serve sempre un computer nuovo"
+     ],
+     "corretta": 0,
+     "spiegazione": "L'obiettivo tecnico dichiarato del progetto è funzionare anche con meno di 500 MB di RAM.",
+     "categoria": "FeniceOS"
+    },
+    {
+     "domanda": "Che cosa significa che FeniceOS è un sistema «live»?",
+     "opzioni": [
+      "Che si aggiorna automaticamente ogni giorno",
+      "Che richiede una connessione internet permanente",
+      "Che mostra contenuti in diretta streaming",
+      "Che funziona direttamente da chiavetta USB senza essere installato"
+     ],
+     "corretta": 3,
+     "spiegazione": "Live vuol dire che il sistema parte dalla chiavetta, senza essere installato sul disco fisso.",
+     "categoria": "FeniceOS"
+    },
+    {
+     "domanda": "Con quali due standard di avvio dei computer è compatibile FeniceOS?",
+     "opzioni": [
+      "DOS e Windows",
+      "Mac OS e iOS",
+      "BIOS e UEFI",
+      "Android e iOS"
+     ],
+     "corretta": 2,
+     "spiegazione": "FeniceOS si avvia sia con il più datato BIOS sia con il più recente UEFI.",
+     "categoria": "FeniceOS"
+    },
+    {
+     "domanda": "Che cos'è il «phishing»?",
+     "opzioni": [
+      "Un tipo di virus che rallenta il computer",
+      "Un tentativo di truffa online che imita comunicazioni ufficiali per rubare dati personali",
+      "Un metodo per velocizzare la connessione",
+      "Un componente hardware del computer"
+     ],
+     "corretta": 1,
+     "spiegazione": "Il phishing usa messaggi ingannevoli che sembrano ufficiali per sottrarre dati personali: riconoscerlo è una competenza di base.",
+     "categoria": "Sicurezza digitale"
+    },
+    {
+     "domanda": "Nel «cloud computing», dove si trovano dati e programmi?",
+     "opzioni": [
+      "Anche su server remoti raggiungibili tramite Internet",
+      "Esclusivamente sul disco fisso del proprio computer",
+      "Solo su un floppy disk",
+      "Dentro la stampante"
+     ],
+     "corretta": 0,
+     "spiegazione": "Nel cloud i dati risiedono, anche, su server lontani accessibili via Internet, non soltanto sul disco locale.",
+     "categoria": "Informatica di oggi e IA"
+    },
+    {
+     "domanda": "A cosa serve, in generale, un aggiornamento di sicurezza del sistema operativo?",
+     "opzioni": [
+      "A cambiare i colori del desktop",
+      "A rallentare intenzionalmente il computer",
+      "A cancellare i file personali",
+      "A correggere vulnerabilità e proteggere da minacce note"
+     ],
+     "corretta": 3,
+     "spiegazione": "Gli aggiornamenti di sicurezza chiudono le falle conosciute: per questo vanno installati con regolarità.",
+     "categoria": "Sicurezza digitale"
+    },
+    {
+     "domanda": "Che cosa si intende per «software libero»?",
+     "opzioni": [
+      "Software che si usa solo una volta",
+      "Software che funziona senza computer",
+      "Software con una licenza che garantisce libertà d'uso, studio, modifica e condivisione",
+      "Software vietato nelle scuole"
+     ],
+     "corretta": 2,
+     "spiegazione": "Il software libero è definito dalle sue libertà: usarlo, studiarlo, modificarlo e condividerlo.",
+     "categoria": "Software libero"
+    },
+    {
+     "domanda": "Come si chiama la pratica industriale che limita artificialmente la vita utile di un prodotto?",
+     "opzioni": [
+      "Economia circolare",
+      "Obsolescenza programmata",
+      "Software libero",
+      "Manutenzione ordinaria"
+     ],
+     "corretta": 1,
+     "spiegazione": "L'obsolescenza programmata spinge a sostituire un prodotto prima che sia davvero necessario.",
+     "categoria": "Obsolescenza"
+    },
+    {
+     "domanda": "Che cos'è una password robusta?",
+     "opzioni": [
+      "Una combinazione lunga e complessa di caratteri, diversa per ogni servizio",
+      "Una parola facile da ricordare, come il proprio nome",
+      "La stessa password usata per tutti gli account",
+      "Una sequenza di numeri consecutivi"
+     ],
+     "corretta": 0,
+     "spiegazione": "Una password robusta è lunga, complessa e diversa per ogni servizio: così un furto non apre tutte le porte.",
+     "categoria": "Sicurezza digitale"
+    },
+    {
+     "domanda": "Un'azienda può offrire assistenza a pagamento su un software libero?",
+     "opzioni": [
+      "No, è sempre vietato",
+      "Solo se rende segreto il codice",
+      "Solo il primo giorno",
+      "Sì, molte lo fanno, mentre il codice resta pubblico"
+     ],
+     "corretta": 3,
+     "spiegazione": "Molte aziende offrono assistenza professionale a pagamento su software libero: libero non vuol dire per forza gratis.",
+     "categoria": "Software libero"
+    },
+    {
+     "domanda": "Perché un computer «vecchio» può ancora essere utile con il sistema operativo giusto?",
+     "opzioni": [
+      "Perché i computer vecchi sono sempre più veloci dei nuovi",
+      "Perché il sistema giusto cambia i pezzi da solo",
+      "Perché spesso il problema è il software che chiede troppe risorse, non un guasto",
+      "Non può: va sempre buttato"
+     ],
+     "corretta": 2,
+     "spiegazione": "Molti computer accantonati non sono guasti: un sistema leggero chiede meno risorse e li fa tornare utili.",
+     "categoria": "Obsolescenza"
+    },
+    {
+     "domanda": "Quale strumento consente, su Debian e quindi su FeniceOS, di installare o aggiornare i programmi in modo centralizzato e sicuro?",
+     "opzioni": [
+      "Il Bluetooth",
+      "Il sistema di gestione pacchetti APT",
+      "La stampante di rete",
+      "Il correttore ortografico"
+     ],
+     "corretta": 1,
+     "spiegazione": "APT installa, aggiorna e rimuove i programmi prendendoli da archivi verificati.",
+     "categoria": "Software libero"
+    },
+    {
+     "domanda": "Che cos'è il «terminale» in un sistema Linux come FeniceOS?",
+     "opzioni": [
+      "Un'interfaccia testuale per dare comandi diretti al sistema",
+      "Un accessorio per collegare periferiche",
+      "Il nome del produttore della scheda madre",
+      "Un tipo di virus informatico"
+     ],
+     "corretta": 0,
+     "spiegazione": "Il terminale permette di dare comandi scritti al sistema, senza passare dalle icone: utile agli utenti più esperti.",
+     "categoria": "Costruzione e installazione"
+    },
+    {
+     "domanda": "Nella costruzione di FeniceOS, quale strumento crea da zero un sistema Debian minimo?",
+     "opzioni": [
+      "xorriso",
+      "mksquashfs",
+      "chroot",
+      "debootstrap"
+     ],
+     "corretta": 3,
+     "spiegazione": "debootstrap posa le fondamenta: un sistema Debian essenziale su cui costruire tutto il resto.",
+     "categoria": "Costruzione e installazione"
+    },
+    {
+     "domanda": "Come si chiama l'ambiente in cui si lavora «dentro» il sistema in costruzione, come se ci si trovasse al suo interno?",
+     "opzioni": [
+      "xorriso",
+      "debootstrap",
+      "chroot",
+      "BIOS"
+     ],
+     "corretta": 2,
+     "spiegazione": "Nel chroot si installano e configurano programmi e impostazioni del nuovo sistema.",
+     "categoria": "Costruzione e installazione"
+    },
+    {
+     "domanda": "A cosa serve, nella costruzione di FeniceOS, lo strumento mksquashfs?",
+     "opzioni": [
+      "A scaricare i pacchetti da Internet",
+      "A comprimere il sistema in un unico file compatto ed efficiente",
+      "A configurare la connessione di rete",
+      "A tradurre l'interfaccia in altre lingue"
+     ],
+     "corretta": 1,
+     "spiegazione": "mksquashfs crea il file compresso di sola lettura che è il cuore della modalità live.",
+     "categoria": "Costruzione e installazione"
+    },
+    {
+     "domanda": "Quale strumento trasforma il sistema compresso in un'immagine ISO avviabile, pronta per la chiavetta?",
+     "opzioni": [
+      "xorriso",
+      "APT",
+      "systemd",
+      "grep"
+     ],
+     "corretta": 0,
+     "spiegazione": "xorriso crea l'immagine ISO ibrida, avviabile sia da BIOS sia da UEFI.",
+     "categoria": "Costruzione e installazione"
+    },
+    {
+     "domanda": "Che cos'è l'autenticazione a due fattori?",
+     "opzioni": [
+      "Un accesso con due password identiche",
+      "Una tecnica per velocizzare l'avvio",
+      "Un tipo di connessione Wi-Fi",
+      "Una protezione che chiede, oltre alla password, una seconda prova d'identità"
+     ],
+     "corretta": 3,
+     "spiegazione": "La seconda prova, per esempio un codice temporaneo, protegge l'account anche se qualcuno scopre la password.",
+     "categoria": "Sicurezza digitale"
+    },
+    {
+     "domanda": "In un progetto open source come FeniceOS, chi può proporre correzioni o segnalare problemi?",
+     "opzioni": [
+      "Solo il presidente di un'azienda",
+      "Nessuno, è vietato",
+      "In linea di principio, chiunque",
+      "Solo chi ha comprato una licenza"
+     ],
+     "corretta": 2,
+     "spiegazione": "È uno dei principi fondanti dei progetti open source: la manutenzione diventa collettiva.",
+     "categoria": "Software libero"
+    },
+    {
+     "domanda": "Quale combinazione di competenze è più utile a un volontario che vuole fare il formatore in un centro anziani?",
+     "opzioni": [
+      "Solo la velocità con la tastiera",
+      "Capacità di comunicare unite a solide basi tecniche",
+      "Conoscere a memoria tutti i comandi",
+      "Saper riparare le stampanti e basta"
+     ],
+     "corretta": 1,
+     "spiegazione": "Il manuale suggerisce di unire comunicazione e competenza tecnica: servono entrambe per accompagnare le persone.",
+     "categoria": "Didattica"
+    },
+    {
+     "domanda": "Che cosa distingue il modello di sviluppo di Debian da quello di un sistema commerciale chiuso?",
+     "opzioni": [
+      "È sviluppato in modo comunitario e trasparente, senza costi di licenza",
+      "Costa di più",
+      "Richiede hardware più recente",
+      "Non riceve mai aggiornamenti"
+     ],
+     "corretta": 0,
+     "spiegazione": "Debian è guidata da una comunità di volontari e da un contratto sociale pubblico, e non ha costi di licenza.",
+     "categoria": "Software libero"
+    },
+    {
+     "domanda": "Quale buona pratica protegge una rete condivisa tra più postazioni FeniceOS in un centro sociale?",
+     "opzioni": [
+      "Usare la stessa password su tutte le postazioni",
+      "Non installare mai aggiornamenti",
+      "Disattivare ogni forma di autenticazione",
+      "Aggiornare regolarmente e configurare bene gli accessi alla rete"
+     ],
+     "corretta": 3,
+     "spiegazione": "Aggiornamenti di sicurezza regolari e accessi configurati con cura sono la base della sicurezza di una rete condivisa.",
+     "categoria": "Sicurezza digitale"
+    },
+    {
+     "domanda": "Perché è necessaria la doppia compatibilità BIOS e UEFI di FeniceOS?",
+     "opzioni": [
+      "Per poter usare due mouse",
+      "Per far funzionare due schermi",
+      "Perché deve funzionare su hardware vario e spesso datato",
+      "Non è necessaria, è solo decorativa"
+     ],
+     "corretta": 2,
+     "spiegazione": "I computer donati o dismessi sono di epoche diverse: alcuni usano il BIOS, altri UEFI.",
+     "categoria": "FeniceOS"
+    },
+    {
+     "domanda": "In che modo un utente esperto può contribuire concretamente a FeniceOS?",
+     "opzioni": [
+      "Solo comprando nuovo hardware",
+      "Segnalando problemi, proponendo miglioramenti, aiutando con documentazione o traduzioni",
+      "Non si può contribuire in alcun modo",
+      "Solo se lavora in un'azienda informatica"
+     ],
+     "corretta": 1,
+     "spiegazione": "Chiunque può partecipare: segnalazioni, proposte, documentazione e traduzioni sono contributi preziosi.",
+     "categoria": "FeniceOS"
+    },
+    {
+     "domanda": "Chi scrisse quello che è spesso descritto come il primo algoritmo pensato per una macchina?",
+     "opzioni": [
+      "Ada Lovelace",
+      "Alan Turing",
+      "Tim Berners-Lee",
+      "Linus Torvalds"
+     ],
+     "corretta": 0,
+     "spiegazione": "Ada Lovelace collaborò con Charles Babbage alla macchina analitica, nell'Ottocento.",
+     "categoria": "Storia dell'informatica"
+    },
+    {
+     "domanda": "In quale decennio nascono i primi calcolatori elettronici programmabili, come l'ENIAC?",
+     "opzioni": [
+      "Anni Venti",
+      "Anni Settanta",
+      "Anni Novanta",
+      "Anni Quaranta"
+     ],
+     "corretta": 3,
+     "spiegazione": "Durante e subito dopo la Seconda guerra mondiale nascono macchine enormi come l'ENIAC, negli Stati Uniti.",
+     "categoria": "Storia dell'informatica"
+    },
+    {
+     "domanda": "Per circa vent'anni dopo la loro invenzione, chi poteva usare i computer?",
+     "opzioni": [
+      "Tutte le famiglie",
+      "Soprattutto i bambini a scuola",
+      "Quasi solo grandi aziende, università ed enti governativi",
+      "Solo i negozi di quartiere"
+     ],
+     "corretta": 2,
+     "spiegazione": "Nell'era dei mainframe, anni Cinquanta e Sessanta, i computer erano costosissimi e gestiti da personale specializzato.",
+     "categoria": "Storia dell'informatica"
+    },
+    {
+     "domanda": "Che cosa ha reso possibile la nascita del personal computer negli anni Settanta e Ottanta?",
+     "opzioni": [
+      "L'invenzione del mouse",
+      "L'invenzione del microprocessore",
+      "La diffusione della fibra ottica",
+      "L'invenzione dello smartphone"
+     ],
+     "corretta": 1,
+     "spiegazione": "Il microprocessore ha permesso computer piccoli ed economici, come l'Apple II e il PC IBM.",
+     "categoria": "Storia dell'informatica"
+    },
+    {
+     "domanda": "In che anno Linus Torvalds rese pubblico il kernel Linux?",
+     "opzioni": [
+      "1991",
+      "1981",
+      "2001",
+      "2011"
+     ],
+     "corretta": 0,
+     "spiegazione": "Nel 1991 lo studente finlandese Linus Torvalds pubblicò Linux con licenza libera.",
+     "categoria": "Storia dell'informatica"
+    },
+    {
+     "domanda": "Che cosa si intende, nel linguaggio comune, con «cloud»?",
+     "opzioni": [
+      "Un tipo di virus",
+      "Un componente fisico del computer",
+      "Un sistema per raffreddare il processore",
+      "Dati e programmi conservati su server remoti raggiungibili via Internet"
+     ],
+     "corretta": 3,
+     "spiegazione": "Il cloud, «nuvola», è comodo ma pone domande di privacy, sicurezza e dipendenza dai fornitori.",
+     "categoria": "Informatica di oggi e IA"
+    },
+    {
+     "domanda": "Che tipo di sistemi usa la maggior parte dei server che fanno funzionare Internet?",
+     "opzioni": [
+      "Telefoni cellulari",
+      "Macchine da scrivere elettroniche",
+      "Sistemi basati su Linux",
+      "Solo computer di casa"
+     ],
+     "corretta": 2,
+     "spiegazione": "Linux è oggi parte dell'infrastruttura di Internet, anche se chi naviga non se ne accorge.",
+     "categoria": "Informatica di oggi e IA"
+    },
+    {
+     "domanda": "Quale affermazione sul divario digitale è corretta?",
+     "opzioni": [
+      "Riguarda solo le persone anziane",
+      "Può riguardare chiunque non abbia dispositivi adeguati o formazione, a qualunque età",
+      "Riguarda solo chi vive in campagna",
+      "È un problema ormai risolto"
+     ],
+     "corretta": 1,
+     "spiegazione": "Il divario digitale non è solo generazionale: dipende anche da strumenti, connessione e formazione.",
+     "categoria": "Informatica di oggi e IA"
+    },
+    {
+     "domanda": "Che cos'è il software open source, in parole semplici?",
+     "opzioni": [
+      "Software il cui codice sorgente è pubblico e può essere esaminato o modificato",
+      "Software solo in versione dimostrativa",
+      "Software che funziona solo sui telefoni",
+      "Software che richiede sempre un abbonamento"
+     ],
+     "corretta": 0,
+     "spiegazione": "Open source vuol dire codice aperto: chiunque può leggerlo, verificarlo e migliorarlo.",
+     "categoria": "Software libero"
+    },
+    {
+     "domanda": "Come funziona la maggior parte dei sistemi di intelligenza artificiale oggi diffusi?",
+     "opzioni": [
+      "Seguono istruzioni scritte una per una per ogni caso",
+      "Copiano risposte da un archivio scritto a mano",
+      "Funzionano solo collegati a un unico computer centrale del mondo",
+      "Sono addestrati su grandi quantità di dati per riconoscere schemi e generare risposte"
+     ],
+     "corretta": 3,
+     "spiegazione": "L'IA di oggi impara schemi dai dati, senza essere programmata istruzione per istruzione per ogni compito.",
+     "categoria": "Informatica di oggi e IA"
+    },
+    {
+     "domanda": "I moderni sistemi di intelligenza artificiale hanno coscienza e comprensione come un essere umano?",
+     "opzioni": [
+      "Sì, esattamente come noi",
+      "Sì, ma solo di notte",
+      "No: nonostante il nome, sono sofisticati sistemi statistici",
+      "Solo quelli installati sui computer vecchi"
+     ],
+     "corretta": 2,
+     "spiegazione": "Il nome è evocativo, ma i sistemi attuali non possiedono coscienza o comprensione nel senso umano.",
+     "categoria": "Informatica di oggi e IA"
+    },
+    {
+     "domanda": "Quale di queste è una preoccupazione realistica legata all'intelligenza artificiale?",
+     "opzioni": [
+      "L'impossibilità di usarla per qualunque scopo",
+      "La difficoltà di distinguere contenuti autentici da contenuti generati",
+      "Il fatto che non consumi energia",
+      "L'obbligo di usarla per legge ovunque"
+     ],
+     "corretta": 1,
+     "spiegazione": "Testi e immagini generati in modo realistico aumentano il rischio di disinformazione.",
+     "categoria": "Informatica di oggi e IA"
+    },
+    {
+     "domanda": "In che modo l'intelligenza artificiale può aiutare una persona anziana?",
+     "opzioni": [
+      "Con assistenti e riconoscimento vocale che semplificano l'uso del dispositivo",
+      "Rendendo obbligatorio lo smartphone",
+      "Eliminando ogni bisogno di formazione",
+      "Sostituendo del tutto il contatto umano"
+     ],
+     "corretta": 0,
+     "spiegazione": "Assistenti e riconoscimento vocale permettono di accedere alle informazioni e scrivere anche senza padroneggiare tastiera e menu.",
+     "categoria": "Informatica di oggi e IA"
+    },
+    {
+     "domanda": "Che cosa si intende per sistema di IA che funziona come «scatola nera»?",
+     "opzioni": [
+      "Un computer di colore nero",
+      "Un sistema che funziona solo offline",
+      "Un tipo di virus informatico",
+      "Un sistema che dà risultati senza che il ragionamento sia trasparente"
+     ],
+     "corretta": 3,
+     "spiegazione": "La «scatola nera» è in tensione con il principio di comprensibilità della Tecnologia Gentile.",
+     "categoria": "Informatica di oggi e IA"
+    },
+    {
+     "domanda": "Quali principi dovrebbero guidare anche lo sviluppo dell'intelligenza artificiale, secondo la Tecnologia Gentile?",
+     "opzioni": [
+      "Velocità, prezzo e pubblicità",
+      "Segretezza e controllo",
+      "Comprensibilità, accessibilità, sostenibilità e rispetto",
+      "Solo la potenza di calcolo"
+     ],
+     "corretta": 2,
+     "spiegazione": "Il manuale invita ad applicare all'IA gli stessi quattro principi della Tecnologia Gentile.",
+     "categoria": "Informatica di oggi e IA"
+    },
+    {
+     "domanda": "L'addestramento e l'uso su larga scala dell'intelligenza artificiale consumano energia?",
+     "opzioni": [
+      "No, non consumano nulla",
+      "Sì, il consumo energetico può essere significativo",
+      "Solo quando piove",
+      "Solo sui telefoni"
+     ],
+     "corretta": 1,
+     "spiegazione": "È un tema che collega l'IA alla sostenibilità ambientale.",
+     "categoria": "Informatica di oggi e IA"
+    },
+    {
+     "domanda": "Qual è l'approccio più equilibrato verso l'intelligenza artificiale secondo il manuale di FeniceOS?",
+     "opzioni": [
+      "Critico e informato, che ne comprenda potenzialità e rischi",
+      "Un rifiuto totale e senza riflessione",
+      "Un'adozione entusiasta e senza domande",
+      "Un disinteresse completo"
+     ],
+     "corretta": 0,
+     "spiegazione": "Bisogna capire cosa l'IA può e non può fare, quali interessi la guidano e come metterla al servizio dell'inclusione.",
+     "categoria": "Informatica di oggi e IA"
+    },
+    {
+     "domanda": "Che cos'è l'economia circolare, in sintesi?",
+     "opzioni": [
+      "Un modello basato su «estrarre, produrre, buttare»",
+      "Un tipo di criptovaluta",
+      "Una forma di finanziamento bancario",
+      "Un modello che privilegia riduzione, riutilizzo, riparazione e rigenerazione degli oggetti"
+     ],
+     "corretta": 3,
+     "spiegazione": "L'economia circolare allunga la vita degli oggetti e lascia il riciclo come ultima risorsa.",
+     "categoria": "Economia circolare"
+    },
+    {
+     "domanda": "Un computer che non riesce più a far girare un sistema operativo pesante va considerato subito un rifiuto?",
+     "opzioni": [
+      "Sì, va smaltito subito",
+      "Sì, se ha più di un anno",
+      "No: spesso funziona benissimo con un sistema più leggero",
+      "Sì, perché non si può più accendere"
+     ],
+     "corretta": 2,
+     "spiegazione": "Spesso è ancora perfettamente utilizzabile: è una risorsa che aspetta il software giusto.",
+     "categoria": "Economia circolare"
+    },
+    {
+     "domanda": "Quale di queste NON è una forma di obsolescenza programmata?",
+     "opzioni": [
+      "L'obsolescenza tecnica, con componenti volutamente meno resistenti",
+      "La manutenzione ordinaria programmata di un dispositivo",
+      "L'obsolescenza software, con aggiornamenti che rendono inutilizzabile un dispositivo",
+      "L'obsolescenza percepita, con il desiderio indotto dell'ultimo modello"
+     ],
+     "corretta": 1,
+     "spiegazione": "La manutenzione ordinaria non accorcia la vita di un apparecchio: anzi, contrasta gli effetti dell'obsolescenza.",
+     "categoria": "Obsolescenza"
+    },
+    {
+     "domanda": "Che cosa si intende con «e-waste»?",
+     "opzioni": [
+      "I rifiuti elettronici dei dispositivi digitali buttati",
+      "Energia elettrica sprecata",
+      "Un tipo di software gratuito",
+      "Un formato di file audio"
+     ],
+     "corretta": 0,
+     "spiegazione": "E-waste è il termine inglese per i rifiuti elettronici, tra quelli che crescono più in fretta al mondo.",
+     "categoria": "Obsolescenza"
+    },
+    {
+     "domanda": "Quale principio della Tecnologia Gentile descrive «uno strumento che si spiega da sé»?",
+     "opzioni": [
+      "Sostenibilità",
+      "Rispetto",
+      "Accessibilità",
+      "Comprensibilità"
+     ],
+     "corretta": 3,
+     "spiegazione": "Comprensibilità: chi usa lo strumento deve potersi costruire, passo dopo passo, un'idea corretta di ciò che sta facendo.",
+     "categoria": "Etica e Tecnologia Gentile"
+    },
+    {
+     "domanda": "Quale principio della Tecnologia Gentile significa «non escludere per età, reddito o disabilità»?",
+     "opzioni": [
+      "Comprensibilità",
+      "Sostenibilità",
+      "Accessibilità",
+      "Rispetto"
+     ],
+     "corretta": 2,
+     "spiegazione": "Gentile è ciò che non esclude: un sistema che chiede hardware costoso è, per definizione, meno accessibile.",
+     "categoria": "Etica e Tecnologia Gentile"
+    },
+    {
+     "domanda": "Quale principio della Tecnologia Gentile chiede di «durare, essere riparabile, non sprecare»?",
+     "opzioni": [
+      "Rispetto",
+      "Sostenibilità",
+      "Accessibilità",
+      "Comprensibilità"
+     ],
+     "corretta": 1,
+     "spiegazione": "La sostenibilità estende la gentilezza agli oggetti e all'ambiente.",
+     "categoria": "Etica e Tecnologia Gentile"
+    },
+    {
+     "domanda": "Quale principio della Tecnologia Gentile chiede di non trattare nessuno da bambino, ma senza pretendere competenze che non ha ancora?",
+     "opzioni": [
+      "Rispetto",
+      "Comprensibilità",
+      "Sostenibilità",
+      "Accessibilità"
+     ],
+     "corretta": 0,
+     "spiegazione": "Rispetto per il tempo, l'intelligenza e l'autonomia delle persone: una tecnologia gentile accompagna.",
+     "categoria": "Etica e Tecnologia Gentile"
+    },
+    {
+     "domanda": "Perché il riuso di hardware dismesso è anche una scelta etica, non solo tecnica?",
+     "opzioni": [
+      "Riduce i costi per l'azienda che produce",
+      "Rende il computer più veloce di uno nuovo",
+      "È obbligatorio per legge in ogni Paese",
+      "Riduce gli sprechi e abbassa il costo d'accesso alla tecnologia per chi ha meno"
+     ],
+     "corretta": 3,
+     "spiegazione": "Il riuso protegge l'ambiente e abbatte una barriera concreta, il costo, per le persone più fragili.",
+     "categoria": "Etica e Tecnologia Gentile"
+    },
+    {
+     "domanda": "La trasparenza del software libero, che permette a chiunque di verificarne il funzionamento, è considerata…",
+     "opzioni": [
+      "un difetto da correggere",
+      "un fatto senza importanza",
+      "un valore etico oltre che tecnico",
+      "un pericolo per gli utenti"
+     ],
+     "corretta": 2,
+     "spiegazione": "Nessuno dovrebbe fidarsi ciecamente di un sistema che non può in alcun modo ispezionare.",
+     "categoria": "Etica e Tecnologia Gentile"
+    },
+    {
+     "domanda": "Avete sostituito un apparecchio elettronico: quale domanda aiuta a riconoscere l'obsolescenza?",
+     "opzioni": [
+      "Di che colore era?",
+      "Era un guasto reale, oppure lentezza, mancanza di aggiornamenti o voglia di novità?",
+      "Quanto pesava la scatola?",
+      "In che giorno della settimana l'ho comprato?"
+     ],
+     "corretta": 1,
+     "spiegazione": "Distinguere un guasto vero dall'obsolescenza software o percepita è il primo passo per contrastarla.",
+     "categoria": "Obsolescenza"
+    },
+    {
+     "domanda": "Quale azione contrasta concretamente l'obsolescenza programmata?",
+     "opzioni": [
+      "Donare l'hardware dismesso a progetti di rigenerazione come FeniceOS",
+      "Sostituire un dispositivo appena esce un modello nuovo",
+      "Ignorare gli aggiornamenti di sicurezza",
+      "Comprare solo dispositivi non riparabili"
+     ],
+     "corretta": 0,
+     "spiegazione": "Donare invece di accantonare o smaltire è un gesto concreto contro l'obsolescenza programmata.",
+     "categoria": "Obsolescenza"
+    },
+    {
+     "domanda": "Che cosa rende un'informatica davvero «inclusiva»?",
+     "opzioni": [
+      "Il prezzo più alto possibile",
+      "L'uso riservato agli specialisti",
+      "La pubblicità mirata",
+      "L'assenza di barriere di età e reddito e la reale possibilità di formazione per tutti"
+     ],
+     "corretta": 3,
+     "spiegazione": "Inclusione vuol dire che chiunque può accedere agli strumenti e imparare a usarli.",
+     "categoria": "Etica e Tecnologia Gentile"
+    },
+    {
+     "domanda": "Secondo il manuale di FeniceOS, un dispositivo «vecchio» e uno «rotto» sono…",
+     "opzioni": [
+      "sempre la stessa cosa",
+      "entrambi da buttare subito",
+      "quasi sempre due cose diverse",
+      "entrambi impossibili da riparare"
+     ],
+     "corretta": 2,
+     "spiegazione": "Buona parte dell'hardware accantonato è vecchio, non guasto: è la distinzione su cui si fonda FeniceOS.",
+     "categoria": "Obsolescenza"
+    },
+    {
+     "domanda": "Come mette insieme FeniceOS economia circolare, etica del digitale e contrasto all'obsolescenza?",
+     "opzioni": [
+      "Vende computer nuovi a prezzo scontato",
+      "Riusa computer dismessi, li rende accessibili a chi ha meno e ridà vita a macchine «fine vita»",
+      "Obbliga a cambiare computer ogni anno",
+      "Funziona solo su computer appena comprati"
+     ],
+     "corretta": 1,
+     "spiegazione": "Riuso dell'hardware, accesso per le fasce fragili e funzioni restituite a dispositivi «fine vita» si intrecciano in un'unica soluzione.",
+     "categoria": "Etica e Tecnologia Gentile"
+    },
+    {
+     "domanda": "Come si chiama la prima versione di FeniceOS?",
+     "opzioni": [
+      "1.0.0 «Ashborn»",
+      "1.0 «Phoenix»",
+      "12 «Bookworm»",
+      "2.0 «Cenere»"
+     ],
+     "corretta": 0,
+     "spiegazione": "«Ashborn» richiama la fenice nata dalla cenere; «Bookworm» è invece il nome di Debian 12.",
+     "categoria": "FeniceOS"
+    },
+    {
+     "domanda": "Chi ha ideato e sviluppato FeniceOS?",
+     "opzioni": [
+      "Linus Torvalds",
+      "Ian Murdock",
+      "Richard Stallman",
+      "Danilo D'Auria"
+     ],
+     "corretta": 3,
+     "spiegazione": "Danilo D'Auria ne cura architettura, documentazione ed evoluzione; è anche autore di «Tecnologia Gentile».",
+     "categoria": "FeniceOS"
+    },
+    {
+     "domanda": "Per quale architettura di processore è preparata FeniceOS 1.0?",
+     "opzioni": [
+      "Solo processori a 32 bit",
+      "Processori dei telefoni",
+      "amd64, cioè processori a 64 bit",
+      "Processori delle stampanti"
+     ],
+     "corretta": 2,
+     "spiegazione": "Il file si chiama FeniceOS_Live_v1.0.0_amd64.iso: serve un computer con processore a 64 bit.",
+     "categoria": "FeniceOS"
+    },
+    {
+     "domanda": "Quali sono i quattro principi della filosofia di FeniceOS nel vademecum?",
+     "opzioni": [
+      "Velocità, potenza, pubblicità e prezzo",
+      "Sostenibilità, inclusione, sovranità digitale, trasparenza e condivisione",
+      "Segretezza, controllo, abbonamento e novità",
+      "Solo estetica e moda"
+     ],
+     "corretta": 1,
+     "spiegazione": "Il vademecum li indica come fondamento di tutto il progetto.",
+     "categoria": "FeniceOS"
+    },
+    {
+     "domanda": "Quale ambiente grafico, leggero e modulare, usa FeniceOS?",
+     "opzioni": [
+      "Xfce",
+      "Windows Aero",
+      "Un ambiente solo testuale",
+      "macOS"
+     ],
+     "corretta": 0,
+     "spiegazione": "Xfce funziona bene anche su computer con oltre dieci anni di vita.",
+     "categoria": "Usare FeniceOS"
+    },
+    {
+     "domanda": "Qual è la password dell'utente ospite in FeniceOS live?",
+     "opzioni": [
+      "fenice",
+      "1234",
+      "Non serve nessun nome",
+      "ospite"
+     ],
+     "corretta": 3,
+     "spiegazione": "L'utente ospite ha password «ospite»; l'amministratore fenice ha password «fenice».",
+     "categoria": "Usare FeniceOS"
+    },
+    {
+     "domanda": "Cosa succede alla cartella dell'utente ospite a ogni accesso e uscita?",
+     "opzioni": [
+      "Viene copiata su Internet",
+      "Diventa più grande",
+      "Viene cancellata e ricreata da zero",
+      "Viene stampata"
+     ],
+     "corretta": 2,
+     "spiegazione": "Per questo chi usa l'ospite salva ciò che gli serve su una chiavetta personale prima di uscire.",
+     "categoria": "Usare FeniceOS"
+    },
+    {
+     "domanda": "Un allievo entrato come ospite prova a installare GIMP dal Fenice Store: cosa succede?",
+     "opzioni": [
+      "Il programma si installa subito",
+      "Non può: solo l'utente fenice installa programmi",
+      "Il computer si spegne",
+      "Si cancella il Fenice Store"
+     ],
+     "corretta": 1,
+     "spiegazione": "L'ospite può consultare l'elenco ma non installare: è una scelta di sicurezza per i computer pubblici.",
+     "categoria": "Usare FeniceOS"
+    },
+    {
+     "domanda": "Quale di questi programmi si può installare dal Fenice Store?",
+     "opzioni": [
+      "Thunderbird, per la posta elettronica",
+      "Microsoft Word",
+      "Photoshop",
+      "iTunes"
+     ],
+     "corretta": 0,
+     "spiegazione": "Il Fenice Store propone programmi liberi come GIMP, Inkscape, Thunderbird, Simple Scan, PDF Arranger, Klavaro e GCompris.",
+     "categoria": "Usare FeniceOS"
+    },
+    {
+     "domanda": "Quale programma del Fenice Store serve a imparare a scrivere velocemente con la tastiera?",
+     "opzioni": [
+      "GIMP",
+      "Inkscape",
+      "PDF Arranger",
+      "Klavaro"
+     ],
+     "corretta": 3,
+     "spiegazione": "Klavaro è un corso di dattilografia, utile in aula.",
+     "categoria": "Usare FeniceOS"
+    },
+    {
+     "domanda": "Cosa apre il pulsante «Gestione pacchetti avanzata» del Fenice Store?",
+     "opzioni": [
+      "Il Professore Digitale",
+      "La stampante",
+      "Synaptic, con l'intero catalogo Debian",
+      "Il cestino"
+     ],
+     "corretta": 2,
+     "spiegazione": "Per esigenze più avanzate Synaptic dà accesso a tutto il catalogo di Debian.",
+     "categoria": "Usare FeniceOS"
+    },
+    {
+     "domanda": "Quale sistema di stampa è incluso in FeniceOS?",
+     "opzioni": [
+      "APT",
+      "CUPS",
+      "Blueman",
+      "VLC"
+     ],
+     "corretta": 1,
+     "spiegazione": "CUPS è il sistema di stampa standard su Linux; FeniceOS aggiunge driver per Epson, Canon, HP, Brother, Samsung e Xerox.",
+     "categoria": "Usare FeniceOS"
+    },
+    {
+     "domanda": "Le cuffie Bluetooth sono abbinate ma non si sente nulla: cosa si controlla?",
+     "opzioni": [
+      "In pavucontrol, scheda «Uscita audio», che siano scelte come predefinite",
+      "Che la stampante sia accesa",
+      "Che lo sfondo sia cambiato",
+      "Che il firewall sia acceso"
+     ],
+     "corretta": 0,
+     "spiegazione": "Abbinare il dispositivo e mandargli l'audio sono due passaggi distinti.",
+     "categoria": "Usare FeniceOS"
+    },
+    {
+     "domanda": "Come si chiama l'applet leggera che gestisce il Bluetooth in FeniceOS?",
+     "opzioni": [
+      "Gufw",
+      "Thunar",
+      "Evince",
+      "Blueman"
+     ],
+     "corretta": 3,
+     "spiegazione": "Blueman sta nel pannello, accanto all'icona della rete, e convive senza problemi con il Wi-Fi.",
+     "categoria": "Usare FeniceOS"
+    },
+    {
+     "domanda": "Cosa propone l'avviso degli aggiornamenti di FeniceOS?",
+     "opzioni": [
+      "«Compra ora» oppure «Paga dopo»",
+      "Solo «Spegni»",
+      "«Aggiorna ora» oppure «Più tardi»",
+      "«Cancella tutto»"
+     ],
+     "corretta": 2,
+     "spiegazione": "L'avviso compare solo all'utente fenice, solo con Internet e solo se ci sono aggiornamenti.",
+     "categoria": "Usare FeniceOS"
+    },
+    {
+     "domanda": "In che stato si trova il firewall Gufw quando si avvia FeniceOS?",
+     "opzioni": [
+      "Acceso e bloccato",
+      "Installato ma spento",
+      "Non esiste",
+      "Acceso solo per l'ospite"
+     ],
+     "corretta": 1,
+     "spiegazione": "In modalità live potrebbe disturbare la rete: si accende dopo l'installazione, se la rete è pubblica o condivisa.",
+     "categoria": "Usare FeniceOS"
+    },
+    {
+     "domanda": "Come è configurato Firefox ESR in FeniceOS per proteggere chi lo usa?",
+     "opzioni": [
+      "Senza telemetria e senza salvataggio automatico delle password",
+      "Salva tutte le password di tutti",
+      "Invia le statistiche d'uso ogni ora",
+      "Si apre solo con un account a pagamento"
+     ],
+     "corretta": 0,
+     "spiegazione": "Su un computer usato da tante persone, non salvare le password è una protezione importante.",
+     "categoria": "Usare FeniceOS"
+    },
+    {
+     "domanda": "Quale programma di FeniceOS fa da lente d'ingrandimento per chi vede poco?",
+     "opzioni": [
+      "htop",
+      "Mousepad",
+      "Xarchiver",
+      "xzoom"
+     ],
+     "corretta": 3,
+     "spiegazione": "xzoom è lo strumento di accessibilità incluso nel kit «Economia Circolare».",
+     "categoria": "Usare FeniceOS"
+    },
+    {
+     "domanda": "Nel Professore Digitale incluso in FeniceOS 1.0, quale percentuale di risposte giuste serve per l'attestato?",
+     "opzioni": [
+      "Il 100%",
+      "Almeno il 10%",
+      "Almeno il 70%",
+      "Non c'è attestato"
+     ],
+     "corretta": 2,
+     "spiegazione": "Con almeno il 70% di risposte corrette si genera l'attestato in PDF.",
+     "categoria": "Usare FeniceOS"
+    },
+    {
+     "domanda": "Quali tasti si premono di solito all'accensione per aprire il menu di avvio?",
+     "opzioni": [
+      "Ctrl + C",
+      "F12, F2, Esc o Canc, secondo il produttore",
+      "La barra spaziatrice tenuta per un minuto",
+      "Nessuno: si scuote il computer"
+     ],
+     "corretta": 1,
+     "spiegazione": "Il tasto cambia da marca a marca e a volte compare scritto per un attimo all'accensione.",
+     "categoria": "Avvio dalla chiavetta"
+    },
+    {
+     "domanda": "Preparando la chiavetta su Windows con Rufus, quale opzione indica il vademecum?",
+     "opzioni": [
+      "«DD Image»",
+      "«Modalità aereo»",
+      "«Solo lettura»",
+      "«Risparmio energetico»"
+     ],
+     "corretta": 0,
+     "spiegazione": "La modalità DD Image copia l'immagine ISO sulla chiavetta così com'è.",
+     "categoria": "Avvio dalla chiavetta"
+    },
+    {
+     "domanda": "Lo schermo resta nero o distorto all'avvio: quale voce del menu si sceglie?",
+     "opzioni": [
+      "Zero-Disk (toram)",
+      "Default",
+      "Installa",
+      "Safe Graphics"
+     ],
+     "corretta": 3,
+     "spiegazione": "Safe Graphics avvia la grafica in modo più prudente.",
+     "categoria": "Avvio dalla chiavetta"
+    },
+    {
+     "domanda": "Volete che FeniceOS non usi mai il disco fisso: quale voce del menu di avvio scegliete?",
+     "opzioni": [
+      "Safe Graphics",
+      "Installa sul disco",
+      "Zero-Disk (toram)",
+      "Spegni"
+     ],
+     "corretta": 2,
+     "spiegazione": "Con toram il sistema lavora tutto in memoria: il disco del computer resta intatto.",
+     "categoria": "Avvio dalla chiavetta"
+    },
+    {
+     "domanda": "A cosa serve il file .sha256 che accompagna l'ISO di FeniceOS?",
+     "opzioni": [
+      "A installare la stampante",
+      "A verificare che il file ISO sia integro, identico all'originale",
+      "A cambiare la lingua",
+      "A rendere la chiavetta più capiente"
+     ],
+     "corretta": 1,
+     "spiegazione": "Se l'impronta ricalcolata coincide con quella del file .sha256, l'ISO non è stato alterato.",
+     "categoria": "Avvio dalla chiavetta"
+    },
+    {
+     "domanda": "Scrivendo la chiavetta dal terminale di Linux, perché bisogna controllare bene il nome del dispositivo?",
+     "opzioni": [
+      "Perché se si sbaglia si cancella il disco sbagliato",
+      "Perché altrimenti la chiavetta cambia colore",
+      "Perché il computer si spegne",
+      "Non serve controllare nulla"
+     ],
+     "corretta": 0,
+     "spiegazione": "Il nome del vademecum, come /dev/sdX, è solo un segnaposto: va sostituito con quello reale della chiavetta.",
+     "categoria": "Avvio dalla chiavetta"
+    },
+    {
+     "domanda": "Come si chiama lo script che costruisce l'ISO di FeniceOS?",
+     "opzioni": [
+      "setup.exe",
+      "installa-windows.bat",
+      "debian.iso",
+      "fenice-build-master.sh"
+     ],
+     "corretta": 3,
+     "spiegazione": "È la ricetta automatica che riparte da zero e segue sempre gli stessi passi.",
+     "categoria": "Costruzione e installazione"
+    },
+    {
+     "domanda": "Qual è l'ordine giusto della costruzione di FeniceOS?",
+     "opzioni": [
+      "xorriso, chroot, debootstrap, mksquashfs",
+      "mksquashfs, xorriso, chroot, debootstrap",
+      "debootstrap, chroot, mksquashfs, xorriso",
+      "chroot, xorriso, mksquashfs, debootstrap"
+     ],
+     "corretta": 2,
+     "spiegazione": "Prima le fondamenta, poi l'arredamento, poi il «sottovuoto» e infine la scatola ISO.",
+     "categoria": "Costruzione e installazione"
+    },
+    {
+     "domanda": "L'immagine ISO di FeniceOS è detta «ibrida»: perché?",
+     "opzioni": [
+      "Che funziona con la benzina",
+      "Che si avvia sia da BIOS sia da UEFI",
+      "Che contiene anche un altro sistema",
+      "Che va solo su DVD"
+     ],
+     "corretta": 1,
+     "spiegazione": "L'immagine contiene un programma di avvio per il BIOS tradizionale e uno per UEFI.",
+     "categoria": "Costruzione e installazione"
+    },
+    {
+     "domanda": "Quale parola va digitata per confermare l'installazione di FeniceOS sul disco?",
+     "opzioni": [
+      "CONFERMO, in maiuscolo",
+      "ok",
+      "sì",
+      "INVIO"
+     ],
+     "corretta": 0,
+     "spiegazione": "La conferma esplicita evita errori: l'installazione cancella tutto il disco scelto e non è reversibile.",
+     "categoria": "Costruzione e installazione"
+    },
+    {
+     "domanda": "Cosa fa l'installatore di FeniceOS con la chiavetta da cui è partito il sistema?",
+     "opzioni": [
+      "La cancella per prima",
+      "La formatta in automatico",
+      "La rende più veloce",
+      "La blocca, così non si può scegliere per errore"
+     ],
+     "corretta": 3,
+     "spiegazione": "È una protezione: il disco della chiavetta live non è selezionabile come destinazione.",
+     "categoria": "Costruzione e installazione"
+    },
+    {
+     "domanda": "Cosa chiede l'installazione sul disco nell'ultimo passaggio?",
+     "opzioni": [
+      "Il codice fiscale",
+      "Una licenza a pagamento",
+      "Una nuova password per l'utente fenice",
+      "Di spegnere il monitor"
+     ],
+     "corretta": 2,
+     "spiegazione": "La password «fenice» è nota: su un'installazione permanente va sostituita.",
+     "categoria": "Costruzione e installazione"
+    },
+    {
+     "domanda": "Dopo l'installazione sul disco, cosa succede all'utente ospite?",
+     "opzioni": [
+      "Diventa amministratore",
+      "Continua a ripartire da zero a ogni accesso",
+      "Viene eliminato",
+      "Conserva per sempre i file di tutti"
+     ],
+     "corretta": 1,
+     "spiegazione": "La politica di azzeramento dell'ospite resta attiva anche dopo l'installazione.",
+     "categoria": "Costruzione e installazione"
+    },
+    {
+     "domanda": "Come si chiamava l'uccello egizio venerato a Eliopoli da cui nasce il mito della fenice?",
+     "opzioni": [
+      "Benu",
+      "Horus",
+      "Ibis",
+      "Sfinge"
+     ],
+     "corretta": 0,
+     "spiegazione": "Il Benu era un airone legato al dio Sole Ra e alla rinascita.",
+     "categoria": "Il mito della Fenice"
+    },
+    {
+     "domanda": "Secondo lo storico Erodoto, ogni quanti anni la fenice arrivava al tempio del Sole di Eliopoli?",
+     "opzioni": [
+      "Ogni anno",
+      "Ogni 10 anni",
+      "Ogni 50 anni",
+      "Ogni 500 anni"
+     ],
+     "corretta": 3,
+     "spiegazione": "Erodoto riporta i racconti dei sacerdoti egizi, mantenendo però un certo distacco.",
+     "categoria": "Il mito della Fenice"
+    },
+    {
+     "domanda": "In quale opera il poeta latino Ovidio racconta la fenice?",
+     "opzioni": [
+      "L'Odissea",
+      "La Divina Commedia",
+      "Le Metamorfosi",
+      "L'Eneide"
+     ],
+     "corretta": 2,
+     "spiegazione": "Nelle Metamorfosi Ovidio descrive il nido di spezie da cui nasce una nuova piccola fenice.",
+     "categoria": "Il mito della Fenice"
+    },
+    {
+     "domanda": "Come si chiamava la prima moneta della Grecia moderna, introdotta nel 1828?",
+     "opzioni": [
+      "Dracma d'oro",
+      "Fenice",
+      "Euro",
+      "Lira"
+     ],
+     "corretta": 1,
+     "spiegazione": "Scelta per simboleggiare la rinascita della nazione greca dopo la guerra d'indipendenza.",
+     "categoria": "Il mito della Fenice"
+    },
+    {
+     "domanda": "Qual è il modello opposto all'economia circolare?",
+     "opzioni": [
+      "Estrarre, fabbricare, usare, buttare",
+      "Riparare e riusare",
+      "Prestare gli oggetti ai vicini",
+      "Rammendare i calzini"
+     ],
+     "corretta": 0,
+     "spiegazione": "È l'economia lineare, in cui gli oggetti finiscono presto tra i rifiuti.",
+     "categoria": "Economia circolare"
+    },
+    {
+     "domanda": "Regalare il vecchio computer a un'associazione che lo rimette in uso è un esempio di…",
+     "opzioni": [
+      "Riciclo",
+      "Spreco",
+      "Obsolescenza",
+      "Riuso"
+     ],
+     "corretta": 3,
+     "spiegazione": "Riusare vuol dire dare una seconda vita all'oggetto così com'è, o quasi.",
+     "categoria": "Economia circolare"
+    },
+    {
+     "domanda": "Sostituire la batteria rovinata di un portatile invece di buttarlo è…",
+     "opzioni": [
+      "Riciclare",
+      "Ridurre",
+      "Riparare",
+      "Buttare"
+     ],
+     "corretta": 2,
+     "spiegazione": "Si cambia solo il pezzo rotto e si salva tutto il resto.",
+     "categoria": "Economia circolare"
+    },
+    {
+     "domanda": "Perché il riciclo viene dopo il riuso?",
+     "opzioni": [
+      "Perché riciclare è vietato",
+      "Perché riusare conserva tutto il valore e il lavoro già fatto",
+      "Perché il riciclo non serve a niente",
+      "Perché riusare costa di più"
+     ],
+     "corretta": 1,
+     "spiegazione": "Riciclando si recuperano solo i materiali; riusando si conserva l'oggetto intero.",
+     "categoria": "Economia circolare"
+    },
+    {
+     "domanda": "Cosa significa «hardware rigenerato»?",
+     "opzioni": [
+      "Computer usati controllati, sistemati e rimessi in circolazione",
+      "Computer appena usciti dalla fabbrica",
+      "Computer fatti di carta",
+      "Computer senza schermo"
+     ],
+     "corretta": 0,
+     "spiegazione": "È l'hardware a cui FeniceOS ridà una seconda vita.",
+     "categoria": "Economia circolare"
+    },
+    {
+     "domanda": "Quale gesto è il più ecologico per un computer che funziona ancora?",
+     "opzioni": [
+      "Buttarlo e comprarne uno nuovo",
+      "Lasciarlo acceso giorno e notte",
+      "Smontarlo per gioco",
+      "Usarlo più a lungo"
+     ],
+     "corretta": 3,
+     "spiegazione": "Gran parte dell'impatto ambientale di un computer nasce quando viene fabbricato.",
+     "categoria": "Economia circolare"
+    },
+    {
+     "domanda": "Cosa indica il bidone della spazzatura barrato sugli apparecchi?",
+     "opzioni": [
+      "Che sono di plastica",
+      "Che si possono buttare ovunque",
+      "Che vanno raccolti separatamente",
+      "Che sono nuovi"
+     ],
+     "corretta": 2,
+     "spiegazione": "Il simbolo ricorda che l'apparecchio, a fine vita, è un RAEE.",
+     "categoria": "RAEE"
+    },
+    {
+     "domanda": "Quale di questi oggetti diventa un RAEE quando si butta?",
+     "opzioni": [
+      "Una bottiglia di vetro",
+      "Un vecchio caricabatterie",
+      "Un giornale",
+      "Una buccia di mela"
+     ],
+     "corretta": 1,
+     "spiegazione": "Tutto ciò che funziona a corrente o a pile diventa un RAEE.",
+     "categoria": "RAEE"
+    },
+    {
+     "domanda": "Dove si può portare un vecchio computer non più riparabile?",
+     "opzioni": [
+      "All'isola ecologica del comune",
+      "Nel cassonetto della carta",
+      "In un bosco",
+      "Nel cassonetto dell'indifferenziato"
+     ],
+     "corretta": 0,
+     "spiegazione": "L'isola ecologica raccoglie separatamente i RAEE.",
+     "categoria": "RAEE"
+    },
+    {
+     "domanda": "Cosa permette il ritiro «uno contro zero» nei negozi più grandi?",
+     "opzioni": [
+      "Prendere un apparecchio nuovo gratis",
+      "Scambiare due vecchi apparecchi",
+      "Pagare la metà",
+      "Lasciare apparecchi molto piccoli senza comprare nulla"
+     ],
+     "corretta": 3,
+     "spiegazione": "Vale per apparecchi molto piccoli, come un vecchio telefono.",
+     "categoria": "RAEE"
+    },
+    {
+     "domanda": "Chi stabilisce in Europa le regole generali sui rifiuti elettronici?",
+     "opzioni": [
+      "Ogni negozio da solo",
+      "Le case produttrici di telefoni",
+      "L'Unione Europea, con una direttiva sui RAEE",
+      "Nessuno"
+     ],
+     "corretta": 2,
+     "spiegazione": "La direttiva europea è recepita dalle leggi italiane.",
+     "categoria": "RAEE"
+    },
+    {
+     "domanda": "Quale intervento rende molto più rapido l'avvio di un computer con disco meccanico?",
+     "opzioni": [
+      "Cambiare il tappetino del mouse",
+      "Montare un disco SSD",
+      "Pulire lo schermo",
+      "Comprare casse nuove"
+     ],
+     "corretta": 1,
+     "spiegazione": "Un SSD non ha parti in movimento ed è molto più veloce.",
+     "categoria": "Riparare e migliorare"
+    },
+    {
+     "domanda": "Cos'è la memoria RAM?",
+     "opzioni": [
+      "La scrivania dove il computer tiene aperti i programmi",
+      "L'archivio dove si conservano le foto per sempre",
+      "La presa della corrente",
+      "Il nome del processore"
+     ],
+     "corretta": 0,
+     "spiegazione": "La RAM è la memoria di lavoro: si svuota quando si spegne il computer.",
+     "categoria": "Riparare e migliorare"
+    },
+    {
+     "domanda": "Perché la polvere fa male al computer?",
+     "opzioni": [
+      "Cambia il colore dello schermo",
+      "Cancella i file",
+      "Non fa nessun danno",
+      "Lo fa scaldare e rallentare"
+     ],
+     "corretta": 3,
+     "spiegazione": "Ventole e griglie ostruite raffreddano peggio il computer.",
+     "categoria": "Riparare e migliorare"
+    },
+    {
+     "domanda": "Qual è il miglioramento più economico per un PC lento?",
+     "opzioni": [
+      "Comprare un computer nuovo",
+      "Cambiare la scrivania",
+      "Un sistema operativo leggero",
+      "Un monitor più grande"
+     ],
+     "corretta": 2,
+     "spiegazione": "Un sistema leggero come FeniceOS chiede molte meno risorse.",
+     "categoria": "Riparare e migliorare"
+    },
+    {
+     "domanda": "Prima di aggiungere memoria RAM, cosa bisogna sapere?",
+     "opzioni": [
+      "Il colore del computer",
+      "Il tipo di memoria adatto a quel computer",
+      "La marca del mouse",
+      "Niente, va bene qualsiasi memoria"
+     ],
+     "corretta": 1,
+     "spiegazione": "Ogni computer accetta solo certi tipi di memoria: meglio farsi aiutare.",
+     "categoria": "Riparare e migliorare"
+    },
+    {
+     "domanda": "Se non siete pratici, chi deve aprire il computer per una riparazione?",
+     "opzioni": [
+      "Il facilitatore o un tecnico di fiducia",
+      "Il primo che passa",
+      "Nessuno, va buttato",
+      "Lo si apre con un martello"
+     ],
+     "corretta": 0,
+     "spiegazione": "Aprire il computer richiede attenzione: si fa a computer spento e scollegato.",
+     "categoria": "Riparare e migliorare"
+    },
+    {
+     "domanda": "Chi fondò il progetto GNU e la Free Software Foundation?",
+     "opzioni": [
+      "Bill Gates",
+      "Linus Torvalds",
+      "Tim Berners-Lee",
+      "Richard Stallman"
+     ],
+     "corretta": 3,
+     "spiegazione": "Stallman avviò GNU nel 1983 e mise per iscritto le quattro libertà del software libero.",
+     "categoria": "Software libero"
+    },
+    {
+     "domanda": "Chi avviò il progetto Debian nel 1993?",
+     "opzioni": [
+      "Linus Torvalds",
+      "Steve Jobs",
+      "Ian Murdock",
+      "Ada Lovelace"
+     ],
+     "corretta": 2,
+     "spiegazione": "Debian è una delle distribuzioni più antiche ed è alla base di FeniceOS.",
+     "categoria": "Software libero"
+    },
+    {
+     "domanda": "Come si chiama il pinguino simbolo di Linux?",
+     "opzioni": [
+      "Pingu",
+      "Tux",
+      "Linuxino",
+      "Bookworm"
+     ],
+     "corretta": 1,
+     "spiegazione": "Tux è la mascotte di Linux; Bookworm è il nome di Debian 12.",
+     "categoria": "Software libero"
+    },
+    {
+     "domanda": "Cos'è il «contratto sociale» di Debian?",
+     "opzioni": [
+      "Un impegno pubblico dei volontari verso gli utenti e il software libero",
+      "Un contratto di lavoro a pagamento",
+      "Una legge dello Stato",
+      "Un abbonamento mensile"
+     ],
+     "corretta": 0,
+     "spiegazione": "Debian non è guidata da interessi commerciali ma da questo impegno pubblico.",
+     "categoria": "Software libero"
+    },
+    {
+     "domanda": "Grazie a quale meccanismo il software libero non può essere «richiuso» da chi lo modifica?",
+     "opzioni": [
+      "La garanzia del negozio",
+      "La password dell'amministratore",
+      "Il firewall",
+      "Il copyleft, come nella licenza GPL"
+     ],
+     "corretta": 3,
+     "spiegazione": "È il meccanismo legale che ha impedito al software libero di essere «richiuso».",
+     "categoria": "Software libero"
+    },
+    {
+     "domanda": "Con quale licenza è distribuito il vademecum ufficiale di FeniceOS?",
+     "opzioni": [
+      "Tutti i diritti riservati",
+      "Licenza a pagamento",
+      "Creative Commons CC BY-SA 4.0",
+      "Nessuna licenza, è vietato copiarlo"
+     ],
+     "corretta": 2,
+     "spiegazione": "Si può condividere e modificare citando l'autore e condividendo allo stesso modo.",
+     "categoria": "Software libero"
+    },
+    {
+     "domanda": "Con quale licenza è distribuito il Professore Digitale?",
+     "opzioni": [
+      "Licenza a pagamento",
+      "MIT",
+      "Tutti i diritti riservati",
+      "Licenza solo per aziende"
+     ],
+     "corretta": 1,
+     "spiegazione": "La licenza MIT è una licenza di software libero molto semplice.",
+     "categoria": "Software libero"
+    },
+    {
+     "domanda": "Mettere i file nel cestino li cancella per sempre?",
+     "opzioni": [
+      "No, spesso si possono recuperare",
+      "Sì, sempre",
+      "Sì, se si spegne lo schermo",
+      "Sì, dopo un minuto"
+     ],
+     "corretta": 0,
+     "spiegazione": "Per regalare un computer serve una cancellazione sicura del disco.",
+     "categoria": "Sicurezza dei dati"
+    },
+    {
+     "domanda": "Una formattazione veloce del disco basta per regalare il computer?",
+     "opzioni": [
+      "Sì, sempre",
+      "Sì, se il computer è vecchio",
+      "Sì, se si cambia lo sfondo",
+      "No, i dati spesso restano recuperabili"
+     ],
+     "corretta": 3,
+     "spiegazione": "Meglio una cancellazione sicura che sovrascrive il disco.",
+     "categoria": "Sicurezza dei dati"
+    },
+    {
+     "domanda": "Cosa fare se il disco è guasto e non si riesce a cancellarlo?",
+     "opzioni": [
+      "Regalarlo così com'è",
+      "Buttarlo nel cassonetto",
+      "Toglierlo dal computer e distruggerlo",
+      "Lasciarlo nel computer regalato"
+     ],
+     "corretta": 2,
+     "spiegazione": "Così i dati personali non finiscono nelle mani sbagliate.",
+     "categoria": "Sicurezza dei dati"
+    },
+    {
+     "domanda": "Cos'è un backup?",
+     "opzioni": [
+      "Un tipo di virus",
+      "Una copia di sicurezza dei propri file",
+      "Un pulsante della tastiera",
+      "Un programma per disegnare"
+     ],
+     "corretta": 1,
+     "spiegazione": "Va fatto prima di ogni operazione delicata, come l'installazione di FeniceOS sul disco.",
+     "categoria": "Sicurezza dei dati"
+    },
+    {
+     "domanda": "In modalità live, cosa resta di solito dopo lo spegnimento?",
+     "opzioni": [
+      "Nulla di ciò che si è salvato nella sessione",
+      "Tutto, per sempre",
+      "Solo le password",
+      "Solo i video"
+     ],
+     "corretta": 0,
+     "spiegazione": "Per conservare un file in modalità live si salva su una chiavetta personale.",
+     "categoria": "Sicurezza dei dati"
+    },
+    {
+     "domanda": "Perché è delicato donare un computer senza prepararlo?",
+     "opzioni": [
+      "Perché pesa troppo",
+      "Perché si rompe nel trasporto",
+      "Non è delicato",
+      "Può contenere foto, documenti e password salvate"
+     ],
+     "corretta": 3,
+     "spiegazione": "Prima si copiano i file e poi si cancella il disco in modo sicuro.",
+     "categoria": "Sicurezza dei dati"
+    },
+    {
+     "domanda": "Il Professore Digitale invia i vostri dati in Internet?",
+     "opzioni": [
+      "Sì, a ogni risposta",
+      "Sì, ogni sera",
+      "No, funziona offline e non invia dati",
+      "Solo le foto"
+     ],
+     "corretta": 2,
+     "spiegazione": "Funziona sul vostro computer, senza telemetria.",
+     "categoria": "Sicurezza dei dati"
+    },
+    {
+     "domanda": "Secondo il manuale di FeniceOS, come si misura il successo di un corso in un centro anziani?",
+     "opzioni": [
+      "In numero di comandi imparati a memoria",
+      "In autonomia e fiducia ritrovate",
+      "In velocità di scrittura",
+      "In computer comprati"
+     ],
+     "corretta": 1,
+     "spiegazione": "Non si tratta di formare tecnici, ma persone autonome nella vita digitale.",
+     "categoria": "Didattica"
+    },
+    {
+     "domanda": "Come si consiglia di proporre i quiz in un gruppo?",
+     "opzioni": [
+      "Come un gioco, anche a voce alta, senza penalità per l'errore",
+      "Come un esame con voto",
+      "Solo per iscritto e in silenzio",
+      "Solo a chi è già bravo"
+     ],
+     "corretta": 0,
+     "spiegazione": "Il punteggio è facoltativo e non è mai un giudizio sulla persona.",
+     "categoria": "Didattica"
+    },
+    {
+     "domanda": "Quale utente di FeniceOS va usato sempre con il pubblico, secondo il vademecum?",
+     "opzioni": [
+      "fenice",
+      "root",
+      "amministratore",
+      "ospite"
+     ],
+     "corretta": 3,
+     "spiegazione": "È la prima regola di sicurezza nei contesti pubblici.",
+     "categoria": "Didattica"
+    }
+   ]
+  }
+ ]
+}

@@ -21,7 +21,9 @@
     voice: true, autoReadAnswers: true, autoReadLessons: false, rate: 0.95,
     ttsMode: "auto", browserVoice: "",
     aiEnabled: true, model: "", useKbContext: true, autoSendVoice: true,
-    updateUrl: "", teacherName: "", eyesFollow: true
+    updateUrl: "", teacherName: "", eyesFollow: true,
+    voiceId: "", netCheck: true, idleTips: true, greet: true, goodbye: true, studentName: "",
+    aulaRuolo: "", aulaNome: "Aula", aulaCodice: "", aulaServer: ""
   };
   PD.server = false;
   PD.status = null;
@@ -112,9 +114,34 @@
     }
     html.push(chip(true, "🔒 Offline"));
     c.innerHTML = html.join("");
+    renderNet();
     function chip(on, t) { return '<span class="chip ' + (on ? "on" : "off") + '" title="' + esc(t) + '">' + esc(t) + "</span>"; }
   }
   PD.renderChips = renderChips;
+
+  /* Indicatore "Online": si illumina quando la connessione a Internet funziona davvero.
+   * Il server prova solo ad aprire una connessione verso un indirizzo pubblico neutrale (nessun dato inviato);
+   * nella versione portatile si usa lo stato di rete del browser. Si spegne dalle Impostazioni. */
+  PD.net = { online: null, t: 0 };
+  function renderNet() {
+    var n = $("#net"); if (!n) return;
+    var on = PD.net.online, off = !PD.settings.netCheck;
+    n.className = "net " + (off ? "spento" : on ? "on" : on === false ? "off" : "attesa");
+    n.innerHTML = '<span class="dot" aria-hidden="true"></span><span class="lbl">' + (off ? "Online: non controllato" : on ? "Online" : on === false ? "Non in linea" : "Online…") + "</span>";
+    n.title = off ? "Il controllo della connessione è spento (Impostazioni → Vista)" :
+      on ? "Connessione a Internet attiva" : on === false ? "Nessuna connessione a Internet: il Professore funziona lo stesso" : "Controllo della connessione…";
+  }
+  PD.checkNet = function (force) {
+    if (!PD.settings.netCheck) { PD.net.online = null; renderNet(); return Promise.resolve(null); }
+    var p = PD.server ? api("/api/rete" + (force ? "?forza=1" : "")).then(function (r) { return !!r.online; })
+      : Promise.resolve(navigator.onLine !== false);
+    return p.catch(function () { return navigator.onLine !== false && PD.server ? false : null; }).then(function (on) {
+      var prima = PD.net.online; PD.net.online = on; PD.net.t = Date.now(); renderNet();
+      if (prima != null && on != null && prima !== on) PD.toast(on ? "🌐 La connessione a Internet è tornata." : "📴 Connessione a Internet assente: il Professore continua a funzionare.", 3500);
+      return on;
+    });
+  };
+  PD.renderNet = renderNet;
 
   /* ------------------------------------------------------------------------
    *  Aspetto: dimensione testo, tema, proiettore
@@ -172,12 +199,14 @@
   /* ------------------------------------------------------------------------
    *  Avatar del professore
    * ---------------------------------------------------------------------- */
-  var STATE_LABEL = { riposo: "Pronto ad aiutarvi", ascolto: "Vi ascolto…", pensiero: "Sto pensando…", spiegazione: "Sto spiegando…" };
+  var STATE_LABEL = { riposo: "Pronto ad aiutarvi", ascolto: "Vi ascolto…", pensiero: "Sto pensando…", spiegazione: "Sto spiegando…",
+    attesa: "In attesa… muovete il mouse per svegliarmi" };
   PD.profState = "riposo";
   PD.setProf = function (state) {
     PD.profState = state;
     $$(".prof").forEach(function (el) { el.setAttribute("class", "prof " + state); });
     $$(".prof-state").forEach(function (el) { el.textContent = STATE_LABEL[state] || ""; });
+    if (PD.eyesKick) PD.eyesKick();
   };
   PD.profHTML = function () {
     return '<div><svg class="prof ' + PD.profState + '" role="img" aria-label="Il Professore"><use href="#prof-svg"/></svg>' +
@@ -241,7 +270,7 @@
     var ctrl = new AbortController(); speech.ctrl = ctrl;
     return fetch("/api/tts", {
       method: "POST", headers: { "Content-Type": "application/json" }, signal: ctrl.signal,
-      body: JSON.stringify({ text: text, rate: PD.settings.rate })
+      body: JSON.stringify({ text: text, rate: PD.settings.rate, voice: PD.settings.voiceId || "" })
     }).then(function (r) {
       if (!r.ok) return r.json().then(function (j) { throw new Error(j.error || "errore voce"); });
       return r.blob();
@@ -398,16 +427,20 @@
     var q = terms(query), nq = " " + norm(query) + " ", win = PD.isWindows && PD.isWindows();
     if (!q.length) return [];
     var res = INDEX.docs.map(function (d) {
-      var score = 0;
+      var score = 0, presi = 0;
       q.forEach(function (t) {
         if (!d.set[t]) return;
+        presi++;
         var idf = Math.log(1 + INDEX.n / (INDEX.df[t] || 1));
         d.f.forEach(function (f) { if (f[0].indexOf(t) >= 0) score += f[1] * idf; });
       });
       d.phrases.forEach(function (p) { if (p.indexOf(" ") > 0 && nq.indexOf(" " + p + " ") >= 0) score += 6; });
       // su Windows le risposte pensate per Windows passano davanti a quelle scritte per Linux
       if (win && d.platform) score *= d.platform === "windows" ? 1.1 : 0.6;
-      return { doc: d, score: score / Math.sqrt(q.length) };
+      score = score / Math.sqrt(q.length);
+      // una sola parola in comune su due o piu' (es. "ricetta" della carbonara): suggerimento, non risposta
+      if (presi === 1 && q.length >= 2 && d.kind === "lesson" && score >= PD.KB_THRESHOLD) score = PD.KB_THRESHOLD * 0.9;
+      return { doc: d, score: score };
     }).filter(function (r) { return r.score > 0; });
     res.sort(function (a, b) { return b.score - a.score || (a.doc.kind === "kb" ? -1 : 1); });
     return res.slice(0, n || 3);
@@ -435,44 +468,88 @@
   /* ------------------------------------------------------------------------
    *  INIZIO
    * ---------------------------------------------------------------------- */
-  function lessonStats() {
-    var L = window.PD_LESSONS, done = 0;
+  /* Le lezioni appartengono a un "percorso": il corso di informatica (lezioni di base e pacchetti generici),
+   * la cultura generale (pacchetti cultura-*), FeniceOS e riuso, il libro Tecnologia Gentile. */
+  var AREE = {
+    corso: { back: "#/lessons", label: "← Tutte le lezioni" },
+    cultura: { back: "#/cultura", label: "← Cultura generale" },
+    fenice: { back: "#/fenice", label: "← FeniceOS" },
+    libro: { back: "#/libro", label: "← Tecnologia Gentile" }
+  };
+  PD.lessonArea = function (L) {
+    var p = (L && L.pack) || "";
+    if (/^cultura-/.test(p)) return "cultura";
+    if (p === "feniceos") return "fenice";
+    if (p === "tecnologia-gentile") return "libro";
+    return "corso";
+  };
+  PD.lessonsOf = function (area, pack) {
+    return (window.PD_LESSONS || []).filter(function (L) { return PD.lessonArea(L) === area && (!pack || L.pack === pack); });
+  };
+  function lessonStats(list) {
+    var L = list || PD.lessonsOf("corso"), done = 0;
     L.forEach(function (l) { if ((PD.progress.lessons[l.id] || {}).done) done++; });
     return { done: done, total: L.length };
   }
+  PD.lessonStats = lessonStats;
   function nextLesson() {
-    var L = window.PD_LESSONS;
+    var L = PD.lessonsOf("corso");
     for (var i = 0; i < L.length; i++) if (!(PD.progress.lessons[L[i].id] || {}).done) return L[i];
     return null;
   }
+  PD.nextLesson = nextLesson;
+  PD.greeting = function (d) {
+    var h = (d || new Date()).getHours();
+    return h >= 5 && h < 13 ? "Buongiorno" : h >= 13 && h < 18 ? "Buon pomeriggio" : "Buonasera";
+  };
+  PD.isLate = function (d) { var h = (d || new Date()).getHours(); return h >= 22 || h < 5; };
+  PD.vademecumUrl = function () {
+    return PD.server ? "docs/" + (PD.isWindows() ? "Vademecum_Professore_Digitale_Windows.pdf" : "Vademecum_Professore_Digitale.pdf") : "";
+  };
   PD.views.home = function (el) {
     var st = lessonStats(), nx = nextLesson();
-    var name = PD.settings.teacherName ? ", " + esc(PD.settings.teacherName) : "";
-    var hour = new Date().getHours();
-    var hello = hour < 13 ? "Buongiorno" : hour < 18 ? "Buon pomeriggio" : "Buonasera";
+    var name = PD.settings.studentName || PD.settings.teacherName;
+    var hello = PD.greeting() + (name ? ", " + esc(name) : "");
+    var cult = lessonStats(PD.lessonsOf("cultura"));
+    var nAtt = (PD.progress.attestati || []).length;
+    var prove = PD.prove ? PD.prove() : [];
+    var big = prove.filter(function (q) { return q.id === "informatica"; })[0];
+    var libro = (window.PD_PROVE || []).some(function (q) { return q.pack === "tecnologia-gentile"; }) ||
+      (window.PD_KB || []).some(function (k) { return k.pack === "tecnologia-gentile"; });
     el.innerHTML =
       '<div class="hero">' + PD.profHTML() + "<div>" +
-      "<h1>" + hello + name + "!</h1>" +
+      "<h1>" + hello + "!</h1>" +
       '<p class="lead">Sono il vostro <b>Professore Digitale</b>. Vi accompagno passo dopo passo nel mondo del computer, ' +
       "con parole semplici e senza fretta. Funziono <b>senza Internet</b> e ciò che dite resta su questo computer.</p>" +
       '<div class="row">' +
       (nx ? '<button class="btn big" data-go="#/lessons/' + nx.id + '">▶ ' + (st.done ? "Continua: " : "Inizia: ") + esc(nx.title) + "</button>"
-          : '<span class="notice ok">🎉 Avete completato tutte le lezioni. Complimenti!</span>') +
+          : '<span class="notice ok">🎉 Avete completato tutte le lezioni del corso. Complimenti!</span>') +
       '<button class="btn big ghost" data-go="#/ask">💬 Fai una domanda</button></div>' +
-      '<div style="max-width:28rem;margin-top:1rem"><div class="small muted">Percorso completato: ' + st.done + " di " + st.total + " lezioni</div>" +
-      '<div class="progress"><span style="width:' + Math.round(100 * st.done / st.total) + '%"></span></div></div>' +
+      '<div style="max-width:28rem;margin-top:1rem"><div class="small muted">Corso di informatica: ' + st.done + " di " + st.total + " lezioni" +
+      (nAtt ? " · 🎓 " + nAtt + (nAtt === 1 ? " attestato" : " attestati") : "") + "</div>" +
+      '<div class="progress"><span style="width:' + Math.round(100 * st.done / Math.max(1, st.total)) + '%"></span></div></div>' +
       "</div></div>" +
       '<div class="grid">' +
       tile("📚", "Lezioni", "Un percorso di " + st.total + " lezioni con schemi e quiz.", "#/lessons") +
       tile("💬", "Chiedi al Professore", "Scrivete o parlate: vi risponde a voce e con uno schema.", "#/ask") +
       tile("🖊️", "Lavagna", "Schemi pronti da proiettare e un foglio per disegnare.", "#/board") +
       tile("🎯", "Palestra", "Esercizi per allenare mouse e tastiera, divertendosi.", "#/practice") +
-      "</div>" + (!PD.server ? '<p class="notice info small">Questa è la <b>versione portatile</b>: lezioni, guida, lavagna e palestra funzionano ovunque. ' +
-      "Per l'intelligenza artificiale locale e il microfono installate il programma completo (<b>.exe</b> per Windows, <b>.deb</b> per Linux).</p>" : "") +
+      (big ? tile("🏆", "Il Grande Quiz dell'Informatica", big.domande_per_prova + " domande a sorpresa. Superatelo e stampate il vostro attestato!", "#/quiz/informatica", "spicca") : "") +
+      tile("🌍", "Cultura generale", "Storia, geografia, scienze, arte e attualità" + (cult.total ? ": " + cult.total + " lezioni" : "") + ", con domande e quiz.", "#/cultura") +
+      tile("📖", "Tecnologia Gentile", libro ? "Domande e risposte sul libro di Danilo D'Auria, con quiz e attestato." : "Il libro di Danilo D'Auria sull'informatica sostenibile.", "#/libro") +
+      tile("🔥", "FeniceOS", "Il sistema che fa rinascere i vecchi computer: riuso ed economia circolare.", "#/fenice") +
+      tile("🎓", "Quiz e attestati", "Tutti i grandi quiz e gli attestati da stampare con il vostro nome.", "#/quiz") +
+      (PD.server ? '<a class="card tile" href="' + PD.vademecumUrl() + '" target="_blank" rel="noopener"><span class="big-ico">📘</span><h3>Vademecum</h3><p>Il libretto di istruzioni completo, da leggere o stampare.</p></a>' : "") +
+      (PD.server ? tile("🏫", "Aula", "Il quadro dell'aula: PC collegati, progressi degli allievi, messaggi.", "#/aula") : "") +
+      "</div>" +
+      '<div class="card promemoria" id="home-promemoria"></div>' +
+      (!PD.server ? '<p class="notice info small">Questa è la <b>versione portatile</b>: lezioni, guida, lavagna, palestra e quiz funzionano ovunque. ' +
+      "Per l'intelligenza artificiale locale, le voci naturali, il microfono e l'aula installate il programma completo (<b>.exe</b> per Windows, <b>.deb</b> per Linux).</p>" : "") +
       (PD.isWindows() && !PD.aiReady() && PD.status.ai.recommended && !PD.status.ai.engine ? '<p class="notice info small">💡 Su questo computer può funzionare anche l\'<b>intelligenza artificiale locale</b> ' +
       '(consigliata: ' + esc(PD.status.ai.recommended) + '). <a href="#/setup" data-go="#/setup">Configuratela con un clic</a>.</p>' : "");
-    function tile(ico, t, d, go) {
-      return '<button class="card tile" data-go="' + go + '"><span class="big-ico">' + ico + "</span><h3>" + t + "</h3><p>" + d + "</p></button>";
+    if (PD.renderPromemoria) PD.renderPromemoria($("#home-promemoria", el));
+    function tile(ico, t, d, go, cls) {
+      return '<button class="card tile' + (cls ? " " + cls : "") + '" data-go="' + go + '"><span class="big-ico">' + ico + "</span><h3>" + t + "</h3><p>" + d + "</p></button>";
     }
   };
 
@@ -483,7 +560,7 @@
   PD.views.lessons = function (el, args) {
     if (args[0]) return openLesson(el, args[0], args[1]);
     var st = lessonStats(), groups = {}, order = [];
-    window.PD_LESSONS.forEach(function (L) { if (!groups[L.level]) { groups[L.level] = []; order.push(L.level); } groups[L.level].push(L); });
+    PD.lessonsOf("corso").forEach(function (L) { if (!groups[L.level]) { groups[L.level] = []; order.push(L.level); } groups[L.level].push(L); });
     var html = '<h1>📚 Lezioni</h1><p class="lead">Scegliete una lezione. Ogni lezione ha pochi passi, uno schema alla lavagna e un piccolo quiz finale.</p>' +
       '<div style="max-width:30rem;margin-bottom:1.2rem"><div class="small muted">Completate ' + st.done + " su " + st.total + '</div><div class="progress"><span style="width:' +
       Math.round(100 * st.done / st.total) + '%"></span></div></div>';
@@ -505,7 +582,7 @@
     if (!L) { PD.go("#/lessons"); return; }
     var nSteps = L.steps.length, isQuiz = stepArg === "quiz";
     var idx = isQuiz ? nSteps : Math.max(0, Math.min(nSteps - 1, parseInt(stepArg || "0", 10) || 0));
-    var p = lp(L.id);
+    var p = lp(L.id), area = AREE[PD.lessonArea(L)];
     if (!isQuiz && p.seen.indexOf(idx) < 0) { p.seen.push(idx); PD.saveProgress(); }
     p.last = idx; PD.progress.lastLesson = L.id;
 
@@ -515,7 +592,7 @@
     }).join("") + '<button data-go="#/lessons/' + L.id + '/quiz" class="' + (p.done ? "seen" : "") + '"' + (isQuiz ? ' aria-current="step"' : "") + ' title="Quiz finale">?</button>';
 
     var head = '<div class="lesson-head"><span class="big-ico">' + L.icon + '</span><div><div class="small muted">' + esc(L.level) + " · circa " + L.minutes +
-      " minuti</div><h1>" + esc(L.title) + '</h1></div><button class="btn ghost" data-go="#/lessons" style="margin-left:auto">← Tutte le lezioni</button></div>' +
+      " minuti</div><h1>" + esc(L.title) + '</h1></div><button class="btn ghost" data-go="' + area.back + '" style="margin-left:auto">' + area.label + "</button></div>" +
       '<div class="stepper" aria-label="Passi della lezione">' + stepper + "</div>";
 
     if (isQuiz) { el.innerHTML = head + '<div id="quiz"></div>'; renderQuiz($("#quiz", el), L); return; }
@@ -555,10 +632,10 @@
       PD.speak((ok ? "Esatto! " : "Non proprio. ") + q.e);
       if (answered === L.quiz.length) {
         var p = lp(L.id); p.done = true; p.quiz = { score: score, total: L.quiz.length }; p.when = new Date().toISOString(); PD.saveProgress();
-        var idx = window.PD_LESSONS.indexOf(L), nx = window.PD_LESSONS[idx + 1];
+        var same = PD.lessonsOf(PD.lessonArea(L), PD.lessonArea(L) === "corso" ? null : L.pack), idx = same.indexOf(L), nx = same[idx + 1];
         $("#quiz-end", box).innerHTML = '<div class="notice ok"><b>🎉 Lezione completata!</b> Risposte giuste: ' + score + " su " + L.quiz.length + ".</div>" +
           '<div class="row">' + (L.practice ? '<button class="btn ghost big" data-go="#/practice/' + L.practice + '">🎯 Allenati in Palestra</button>' : "") +
-          (nx ? '<button class="btn big" data-go="#/lessons/' + nx.id + '">Prossima: ' + esc(nx.title) + " →</button>" : '<button class="btn big" data-go="#/home">🏠 Torna all\'inizio</button>') + "</div>";
+          (nx ? '<button class="btn big" data-go="#/lessons/' + nx.id + '">Prossima: ' + esc(nx.title) + " →</button>" : '<button class="btn big" data-go="' + (PD.lessonArea(L) === "corso" ? "#/home" : AREE[PD.lessonArea(L)].back) + '">' + (PD.lessonArea(L) === "corso" ? "🏠 Torna all\'inizio" : "✓ Fine del percorso") + "</button>") + "</div>";
       }
     });
   }
@@ -582,6 +659,11 @@
   var SUGGESTIONS = ["Come si scrive la chiocciola?", "Cos'è il phishing?", "Come faccio una videochiamata?", "Come creo una password sicura?",
     "Dove trovo i file scaricati?", "Cos'è lo SPID?", "Come si copia e incolla?", "Il computer è bloccato, cosa faccio?"];
   var chatCtrl = null, busy = false;
+  function pickSuggestions(n) {
+    var extra = (PD.extraSuggestions || []).slice(), out = SUGGESTIONS.slice(0, Math.ceil(n * 0.6));
+    while (out.length < n && extra.length) out.push(extra.splice(Math.floor(Math.random() * extra.length), 1)[0]);
+    return out.concat(SUGGESTIONS.slice(out.length)).slice(0, n);
+  }
 
   PD.views.ask = function (el, args) {
     var aiLine = PD.aiReady()
@@ -591,7 +673,7 @@
       '<h1>💬 Chiedi al Professore</h1><p class="lead">Scrivete la vostra domanda' + (PD.sttReady() ? " oppure premete il microfono e parlate" : "") +
       ". Non esistono domande sbagliate. " + aiLine + "</p>" +
       '<div class="ask-layout"><div class="card"><div class="chat" id="chat" aria-live="polite"></div>' +
-      '<div class="suggest" id="suggest">' + (PD.extraSuggestions || []).concat(SUGGESTIONS).slice(0, PD.history.length ? 4 : 8).map(function (s) { return "<button>" + esc(s) + "</button>"; }).join("") + "</div>" +
+      '<div class="suggest" id="suggest">' + pickSuggestions(PD.history.length ? 4 : 8).map(function (s) { return "<button>" + esc(s) + "</button>"; }).join("") + "</div>" +
       '<form class="composer" id="composer"><button type="button" class="mic" id="mic" title="' +
       (PD.sttReady() ? "Premete e parlate; premete di nuovo per finire" : "Microfono non disponibile: vedi Impostazioni") + '" aria-label="Microfono"' +
       (PD.sttReady() ? "" : " disabled") + '>🎤</button>' +
@@ -837,15 +919,24 @@
       field("Colori", select("s-theme", [["light", "Chiaro"], ["dark", "Scuro"], ["contrast", "Alto contrasto"]], s.theme)) +
       sw("s-projector", "Modalità proiettore (testo grande, menu nascosto)", s.projector) +
       sw("s-eyes", "Gli occhi del Professore seguono il mouse", s.eyesFollow) +
-      field("Nome dell'insegnante o del corso (facoltativo)", '<input type="text" id="s-teacher" maxlength="60" value="' + esc(s.teacherName) + '">') + "</div>" +
+      sw("s-net", "Indicatore «Online»: controlla ogni minuto se Internet funziona (nessun dato inviato)", s.netCheck) +
+      field("Nome dell'allievo (per i saluti e gli attestati)", '<input type="text" id="s-student" maxlength="60" value="' + esc(s.studentName) + '" placeholder="es. Maria Rossi">') +
+      field("Nome dell'insegnante o del corso (facoltativo, firma gli attestati)", '<input type="text" id="s-teacher" maxlength="60" value="' + esc(s.teacherName) + '">') + "</div>" +
 
       '<div class="card"><h2 style="margin-top:0">🔊 Voce</h2>' +
       sw("s-voice", "Voce attiva", s.voice) + sw("s-autoread", "Leggi automaticamente le risposte", s.autoReadAnswers) +
       sw("s-autolessons", "Leggi automaticamente i passi delle lezioni", s.autoReadLessons) +
+      (S && S.tts.voices && S.tts.voices.length ? field("Voce del Professore", select("s-voiceid", [["", "Automatica (consigliata)"]].concat(S.tts.voices.map(function (v) {
+        return [v.id, (v.genere === "m" ? "👨 " : v.genere === "f" ? "👩 " : "🔈 ") + v.nome];
+      })), s.voiceId) + '<span class="small muted">' + S.tts.voices.filter(function (v) { return v.genere === "m"; }).length + " voci maschili e " +
+        S.tts.voices.filter(function (v) { return v.genere === "f"; }).length + " femminili su questo computer.</span>") : "") +
       field("Velocità della voce: <b id='rate-val'>" + s.rate.toFixed(2) + "</b>", '<input type="range" min="0.6" max="1.4" step="0.05" id="s-rate" value="' + s.rate + '">') +
       field("Motore vocale", select("s-tts", [["auto", "Automatico (consigliato)"], ["server", "Motore del computer (" + (S ? (S.tts.engines.join(", ") || "nessuno") : "non disponibile") + ")"], ["browser", "Voce del browser"]], s.ttsMode)) +
       (voices.length ? field("Voce del browser", select("s-bvoice", [["", "Automatica (italiano)"]].concat(voices.map(function (v) { return [v.name, v.name + " (" + v.lang + ")"]; })), s.browserVoice)) : "") +
-      '<button class="btn ghost" id="test-voice">▶ Prova la voce</button></div>' +
+      '<button class="btn ghost" id="test-voice">▶ Prova la voce</button>' +
+      sw("s-greet", "Il Professore saluta a voce all'avvio (buongiorno, buon pomeriggio, buonasera)", s.greet) +
+      sw("s-goodbye", "All'uscita ricorda i promemoria e saluta (buona notte se è tardi)", s.goodbye) +
+      sw("s-idle", "Quando nessuno lo usa per un po', il Professore dà qualche consiglio e poi si mette in attesa", s.idleTips) + "</div>" +
 
       '<div class="card"><h2 style="margin-top:0">🤖 Intelligenza artificiale locale</h2>' +
       (PD.server ? (S.ai.available
@@ -899,7 +990,10 @@
 
     bind("s-font", "input", function () { s.fontSize = +this.value; $("#fs-val").textContent = s.fontSize + "px"; PD.saveSettings(); });
     bind("s-theme", "change", function () { s.theme = this.value; PD.saveSettings(); });
-    chk("s-projector", "projector"); chk("s-eyes", "eyesFollow"); chk("s-voice", "voice"); chk("s-autoread", "autoReadAnswers"); chk("s-autolessons", "autoReadLessons");
+    chk("s-projector", "projector"); chk("s-eyes", "eyesFollow"); chk("s-greet", "greet"); chk("s-goodbye", "goodbye"); chk("s-idle", "idleTips");
+    bind("s-net", "change", function () { s.netCheck = this.checked; PD.saveSettings(); PD.checkNet(true); });
+    bind("s-student", "change", function () { s.studentName = this.value.trim(); PD.saveSettings(); });
+    bind("s-voiceid", "change", function () { s.voiceId = this.value; if (this.value) s.ttsMode = "server"; PD.saveSettings(); PD.speak("Buongiorno! Questa è la mia nuova voce.", true); }); chk("s-voice", "voice"); chk("s-autoread", "autoReadAnswers"); chk("s-autolessons", "autoReadLessons");
     chk("s-ai", "aiEnabled"); chk("s-kbctx", "useKbContext"); chk("s-autosend", "autoSendVoice");
     bind("s-teacher", "change", function () { s.teacherName = this.value.trim(); PD.saveSettings(); });
     bind("s-rate", "input", function () { s.rate = +this.value; $("#rate-val").textContent = s.rate.toFixed(2); PD.saveSettings(); });
@@ -1028,7 +1122,8 @@
       var g = e.target.closest("[data-go]"); if (g) { e.preventDefault(); PD.go(g.getAttribute("data-go")); return; }
       var a = e.target.closest("[data-ask]"); if (a) { PD.go("#/ask/" + encodeURIComponent("Non ho capito bene: " + a.getAttribute("data-ask"))); }
     });
-    $$(".nav-btn").forEach(function (b) { b.onclick = function () { PD.go("#/" + b.getAttribute("data-view")); }; });
+    $$(".nav-btn[data-view]").forEach(function (b) { b.onclick = function () { PD.go("#/" + b.getAttribute("data-view")); }; });
+    var nb = $("#net"); if (nb) nb.onclick = function () { PD.checkNet(true).then(function (on) { PD.toast(on ? "🌐 Connessione a Internet attiva." : on === false ? "📴 Nessuna connessione a Internet: il Professore funziona lo stesso, tutto offline." : "Il controllo della connessione è spento (Impostazioni → Vista)."); }); };
     $("#btn-stop").onclick = PD.stopSpeech;
     $("#btn-font-up").onclick = function () { PD.settings.fontSize = Math.min(34, PD.settings.fontSize + 2); PD.saveSettings(); };
     $("#btn-font-down").onclick = function () { PD.settings.fontSize = Math.max(14, PD.settings.fontSize - 2); PD.saveSettings(); };
@@ -1063,6 +1158,7 @@
   function heartbeat() {
     if (!PD.server) return;
     fetch("/api/heartbeat", { method: "POST", headers: { "Content-Type": "application/json" }, body: "{}" }).catch(function () { /* server spento */ });
+    if (PD.settings.aulaRuolo === "allievo" && PD.aulaPresenza) PD.aulaPresenza();
   }
 
   PD.init = function () {
@@ -1079,8 +1175,12 @@
     }).then(function () {
       applySettings(); renderChips(); measureTop();
       $("#app-version").textContent = PD.version;
-      if (PD.server) { setInterval(heartbeat, 20000); setInterval(function () { PD.detect(); }, 60000); }
+      if (PD.server) { setInterval(heartbeat, 20000); setInterval(function () { PD.detect(); }, 60000); setTimeout(heartbeat, 3000); }
+      PD.checkNet(); setInterval(function () { if (!document.hidden) PD.checkNet(); }, 60000);
+      window.addEventListener("online", function () { PD.checkNet(true); });
+      window.addEventListener("offline", function () { PD.checkNet(true); });
       route();
+      if (PD.onReady) PD.onReady();
     });
   };
   document.addEventListener("DOMContentLoaded", function () { PD.init(); });

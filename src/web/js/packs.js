@@ -6,7 +6,7 @@
   var PD = window.PD;
   var FORMATO = "professore-digitale-contenuti";
   var RE_ID = /^[a-z0-9][a-z0-9-]{1,48}$/, RE_VER = /^\d+\.\d+(\.\d+)?$/;
-  var PALESTRA = ["", "click", "dblclick", "drag", "typing"];
+  var PALESTRA = ["", "click", "dblclick", "drag", "typing", "scroll", "rightclick", "copypaste", "select", "keys", "memory", "scam"];
   var LS_KEY = "pd.packs";
 
   var base = { kb: (window.PD_KB || []).slice(), lessons: (window.PD_LESSONS || []).slice() };
@@ -39,7 +39,10 @@
     var dom = p.domande || [], lez = p.lezioni || [];
     if (!Array.isArray(dom)) { add("domande", "deve essere un elenco"); dom = []; }
     if (!Array.isArray(lez)) { add("lezioni", "deve essere un elenco"); lez = []; }
-    if (!dom.length && !lez.length) add("pacchetto", "serve almeno una domanda o una lezione");
+    var pr = p.prove || [];
+    if (!Array.isArray(pr)) { add("prove", "deve essere un elenco"); pr = []; }
+    if (!dom.length && !lez.length && !pr.length) add("pacchetto", "serve almeno una domanda, una lezione o una prova");
+    if (pr.length > 20) add("prove", "troppe (max 20)");
     if (dom.length > 2000) add("domande", "troppe (max 2000)");
     if (lez.length > 200) add("lezioni", "troppe (max 200)");
     dom.slice(0, 2000).forEach(function (d, i) {
@@ -60,7 +63,7 @@
       txt(L, "titolo", w, true, 120); txt(L, "obiettivo", w, false, 400); txt(L, "livello", w, false, 40); txt(L, "icona", w, false, 16);
       var m = L.minuti == null ? 15 : L.minuti;
       if (typeof m !== "number" || m % 1 !== 0 || m < 1 || m > 240) add(w + ".minuti", "numero intero tra 1 e 240");
-      if (PALESTRA.indexOf(L.palestra == null ? "" : L.palestra) < 0) add(w + ".palestra", "uno tra: click, dblclick, drag, typing");
+      if (PALESTRA.indexOf(L.palestra == null ? "" : L.palestra) < 0) add(w + ".palestra", "uno tra: " + PALESTRA.slice(1).join(", "));
       var ps = L.passi;
       if (!Array.isArray(ps) || ps.length < 1 || ps.length > 30) { add(w + ".passi", "elenco di 1-30 passi"); ps = []; }
       ps.forEach(function (s, j) {
@@ -74,6 +77,29 @@
         var ww = w + ".quiz[" + j + "]";
         if (!q || typeof q !== "object") return add(ww, "deve essere un oggetto");
         txt(q, "domanda", ww, true, 300); txt(q, "spiegazione", ww, true, 600);
+        var op = q.opzioni;
+        if (!Array.isArray(op) || op.length < 2 || op.length > 6 || !op.every(function (x) { return typeof x === "string" && x; })) { add(ww + ".opzioni", "elenco di 2-6 risposte"); op = []; }
+        if (typeof q.corretta !== "number" || q.corretta % 1 !== 0 || q.corretta < 0 || q.corretta >= Math.max(1, op.length)) add(ww + ".corretta", "numero della risposta giusta, contando da 0");
+      });
+    });
+    var pids = {};
+    pr.slice(0, 20).forEach(function (P, i) {
+      var w = "prove[" + i + "]";
+      if (!P || typeof P !== "object") return add(w, "deve essere un oggetto");
+      if (typeof P.id !== "string" || !RE_ID.test(P.id)) add(w + ".id", "solo lettere minuscole, cifre e trattini");
+      else if (pids[P.id]) add(w + ".id", "ripetuto");
+      pids[P.id] = 1;
+      txt(P, "titolo", w, true, 120); txt(P, "icona", w, false, 16); txt(P, "descrizione", w, false, 600); txt(P, "attestato", w, false, 120);
+      var n = P.domande_per_prova == null ? 20 : P.domande_per_prova;
+      if (typeof n !== "number" || n % 1 !== 0 || n < 5 || n > 100) add(w + ".domande_per_prova", "numero intero tra 5 e 100");
+      var sg = P.soglia == null ? 0.7 : P.soglia;
+      if (typeof sg !== "number" || sg < 0.5 || sg > 1) add(w + ".soglia", "numero tra 0.5 e 1 (es. 0.7 = 70%)");
+      var dd = P.domande;
+      if (!Array.isArray(dd) || dd.length < 5 || dd.length > 1000) { add(w + ".domande", "elenco di 5-1000 domande"); dd = []; }
+      dd.forEach(function (q, j) {
+        var ww = w + ".domande[" + j + "]";
+        if (!q || typeof q !== "object") return add(ww, "deve essere un oggetto");
+        txt(q, "domanda", ww, true, 300); txt(q, "spiegazione", ww, true, 600); txt(q, "categoria", ww, false, 60);
         var op = q.opzioni;
         if (!Array.isArray(op) || op.length < 2 || op.length > 6 || !op.every(function (x) { return typeof x === "string" && x; })) { add(ww + ".opzioni", "elenco di 2-6 risposte"); op = []; }
         if (typeof q.corretta !== "number" || q.corretta % 1 !== 0 || q.corretta < 0 || q.corretta >= Math.max(1, op.length)) add(ww + ".corretta", "numero della risposta giusta, contando da 0");
@@ -94,14 +120,19 @@
         quiz: (L.quiz || []).map(function (q) { return { q: q.domanda, o: q.opzioni, a: q.corretta, e: q.spiegazione }; })
       };
     });
-    return { kb: kb, lessons: lessons, suggestions: p.suggerimenti || [] };
+    var prove = (p.prove || []).map(function (P) {
+      return { id: P.id, titolo: P.titolo, icona: P.icona || "🏆", descrizione: P.descrizione || "", attestato: P.attestato || P.titolo,
+        domande_per_prova: P.domande_per_prova || 20, soglia: P.soglia == null ? 0.7 : P.soglia, pack: p.id, packTitolo: p.titolo,
+        domande: P.domande.map(function (q) { return { q: q.domanda, o: q.opzioni, a: q.corretta, e: q.spiegazione, c: q.categoria || "" }; }) };
+    });
+    return { kb: kb, lessons: lessons, suggestions: p.suggerimenti || [], prove: prove };
   }
 
   function lsGet() { try { return JSON.parse(localStorage.getItem(LS_KEY) || "{}") || {}; } catch (e) { return {}; } }
   function lsSet(v) { try { localStorage.setItem(LS_KEY, JSON.stringify(v)); return true; } catch (e) { return false; } }
 
   function apply(entries) {
-    var kb = base.kb.slice(), lessons = base.lessons.slice(), sugg = [];
+    var kb = base.kb.slice(), lessons = base.lessons.slice(), sugg = [], prove = [];
     entries.forEach(function (en) {
       var c = toInternal(en.pacchetto);
       kb = kb.concat(c.kb);
@@ -111,8 +142,13 @@
         if (i >= 0) lessons[i] = L; else lessons.push(L);
       });
       sugg = sugg.concat(c.suggestions);
+      c.prove.forEach(function (P) {
+        var i = -1;
+        prove.forEach(function (x, j) { if (x.id === P.id) i = j; });
+        if (i >= 0) prove[i] = P; else prove.push(P);
+      });
     });
-    window.PD_KB = kb; window.PD_LESSONS = lessons; PD.extraSuggestions = sugg;
+    window.PD_KB = kb; window.PD_LESSONS = lessons; window.PD_PROVE = prove; PD.extraSuggestions = sugg;
     if (PD.resetIndex) PD.resetIndex();
   }
 

@@ -524,7 +524,7 @@ static int do_piper(const wchar_t *kitdir, const wchar_t *tmpdir) {
         char hs[65] = ""; hf_sha(hf, f, hs);
         char u[1024]; snprintf(u, sizeof u, "https://huggingface.co/%s/resolve/main/%s", hf, f);
         wchar_t *wb = u8to16(base), *dst = path_join(vdir, wb);
-        ok = fetch("la voce «Paola»", u, hs, dst, 100, NULL);
+        ok = fetch("le voci naturali", u, hs, dst, 100, NULL);
         free(wb); free(dst);
     }
     if (ok && !kitdir) {
@@ -535,7 +535,7 @@ static int do_piper(const wchar_t *kitdir, const wchar_t *tmpdir) {
         if (ok) {
             tts_invalidate();
             buf_t wav; char used[32] = "", err[200] = "";
-            if (tts_synthesize("Buongiorno, sono il Professore Digitale.", 1.0, NULL, &wav, used, sizeof used, err, sizeof err) && !strcmp(used, "piper"))
+            if (tts_synthesize("Buongiorno, sono il Professore Digitale.", 1.0, NULL, NULL, &wav, used, sizeof used, err, sizeof err) && !strcmp(used, "piper"))
                 jlog("✔ Voce naturale installata e provata.");
             else jlog("! Voce naturale installata, ma la prova non è riuscita: si userà la voce di Windows.");
             buf_free(&wav);
@@ -610,8 +610,9 @@ static unsigned __stdcall job_online(void *arg) {
         else ok = do_vosk(NULL, tmp);
     }
     if (ok && JR.voce && !J.cancel) {
-        jphase(++k, "Voce naturale «Paola»");
-        if (!p.piper_ok) jlog("! La voce naturale richiede Windows 7 o successivo a 64 bit: passo saltato.");
+        jphase(++k, "Voci naturali «Paola» e «Riccardo»");
+        if (!p.piper_ok) jlog("! Le voci naturali richiedono Windows 7 o successivo a 64 bit: passo saltato.");
+        else if (tts_has_piper()) jlog("✓ Le voci naturali sono già incluse nel programma.");
         else ok = do_piper(NULL, tmp);
     }
     if (ok && JR.browser && !J.cancel) { jphase(++k, "Browser compatibile"); ok = do_supermium(NULL, tmp, p.hw.is64os, 1); }
@@ -960,8 +961,7 @@ static void info_json(buf_t *b) {
     buf_addf(b, ", \"installato\": {\"ollama\": %s, \"ollama_attivo\": %s", oi ? "true" : "false", oi && ai_ollama_alive() ? "true" : "false");
     char se[32] = "", sd[512] = ""; stt_status(se, sizeof se, sd, sizeof sd, 0);
     buf_addf(b, ", \"microfono\": %s", se[0] ? "true" : "false");
-    wchar_t pe[MAX_PATH]; _snwprintf(pe, MAX_PATH, L"%ls\\piper\\piper.exe", G.local_dir); pe[MAX_PATH - 1] = 0;
-    buf_addf(b, ", \"voce_naturale\": %s, \"voce_windows\": ", file_exists(pe) ? "true" : "false");
+    buf_addf(b, ", \"voce_naturale\": %s, \"voce_windows\": ", tts_has_piper() ? "true" : "false");
     sapi_italian_voices(b);
     wchar_t *ia = path_join(G.local_dir, L"ia.json"); jv *conf = load_json_file(ia); free(ia);
     buf_adds(b, ", \"ia\": ");

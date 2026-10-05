@@ -1,0 +1,1015 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<title>Professore Digitale – Vademecum per Linux</title>
+<meta name="author" content="Danilo D'Auria">
+<link rel="stylesheet" href="stile-manuale.css">
+<style>
+/* indice piu' compatto: 21 capitoli in una pagina */
+.toc li { padding: .9mm 0; line-height: 1.3; }
+.toc .tt small { font-size: 7.6pt; }
+</style>
+</head>
+<body>
+
+<!-- ======================================================= COPERTINA -->
+<section class="cover">
+  <div class="sopra">
+    <div class="ka">CATTEDRA DIGITALE PORTATILE</div>
+    <h1>Professore Digitale</h1>
+    <div class="sotto">Vademecum e libro di istruzioni<br>per Linux · Debian, Ubuntu, Mint, FeniceOS</div>
+    <div class="lavagna">
+      <div class="gesso">Imparare il digitale,<br>con calma e senza<br>Internet.</div>
+      <div class="riga">Lezioni guidate · Quiz con attestato · Cultura generale<br>Voci italiane, maschili e femminili · Palestra<br>Quadro dell'aula · IA locale facoltativa</div>
+    </div>
+    <img class="prof" src="professore.svg" alt="">
+  </div>
+  <div class="sotto2">
+    <span class="pill">100% offline</span><span class="pill">Privacy per costruzione</span><span class="pill">Anche su PC ricondizionati</span>
+    <span class="pill">Debian · Ubuntu · Mint · FeniceOS</span><span class="pill">Voci italiane incluse</span><span class="pill">Software libero · MIT</span>
+    <div class="firma">
+      <div><b>Danilo D'Auria</b><small>Ideazione e sviluppo · Tecnico IT &amp; Divulgatore Digitale per il Sociale</small></div>
+      <div class="v">v3.0.0<small>Ottobre 2026</small></div>
+    </div>
+  </div>
+</section>
+<div class="segnaposto"></div>
+
+<!-- ======================================================= COME USARE -->
+<div class="pagina">
+<h2 style="margin-top:2mm">Come usare questo vademecum</h2>
+<p>Questo libretto accompagna chi installa il Professore Digitale su computer <b>Linux</b>, chi conduce gli incontri e chi lo usa per imparare.
+Non serve leggerlo tutto: ogni capitolo sta in piedi da solo. Esiste un vademecum gemello per i computer Windows (da XP a Windows 11):
+le lezioni, i quiz, la guida e i pacchetti di contenuti sono gli stessi.</p>
+<table>
+<thead><tr><th>Se siete…</th><th>Leggete prima</th></tr></thead>
+<tbody>
+<tr><td><b>Chi installa</b> il programma (tecnico, volontario, rigeneratore di PC)</td><td>Capitoli 2, 3, 14, 15, 19 e 20</td></tr>
+<tr><td><b>Insegnante o facilitatore</b> che guida un gruppo</td><td>Capitoli 4–13, 15 e 16</td></tr>
+<tr><td><b>Allievo</b> che usa il programma da solo</td><td>Capitoli 4, 5, 6, 8, 9, 10, 12 e il Glossario (21)</td></tr>
+</tbody></table>
+<div class="box"><span class="t">Convenzioni</span>
+I comandi da scrivere nel <b>Terminale</b> sono in <code>carattere a macchina</code>: si possono copiare e incollare; le parti dopo <code>#</code> sono spiegazioni e non vanno scritte.
+I tasti sono indicati così: <kbd>Invio</kbd>, <kbd>Ctrl</kbd> + <kbd>Z</kbd>. I percorsi dei menu sono in <b>grassetto</b>: <b>Applicazioni → Istruzione</b>.
+Il simbolo <code>~</code> indica la vostra cartella personale. I riquadri verdi contengono consigli, quelli gialli attenzioni.</div>
+<div class="box consiglio"><span class="t">Novità della versione 3.0</span>
+<b>Voci italiane maschili e femminili già incluse</b> (Riccardo e Paola) · <b>Quiz e attestati</b> con il vostro nome, da stampare o salvare in PDF ·
+<b>Cultura generale</b> con 26 lezioni · pagine dedicate al libro <b>Tecnologia Gentile</b> e a <b>FeniceOS</b> · <b>Palestra</b> con 11 esercizi ·
+<b>quadro dell'aula</b> in rete locale · pulsante <b>🖨️ Stampa</b> · indicatore <b>Online</b> · il Professore <b>saluta</b>, dà consigli, ricorda i <b>promemoria</b> e si congeda con il pulsante <b>🚪 Esci</b>.</div>
+<p class="small" style="margin-top:10mm"><b>Professore Digitale – Cattedra Digitale Portatile</b>, versione 3.0.0 per Linux.<br>
+Ideato e sviluppato da <b>Danilo D'Auria</b>, Tecnico IT &amp; Divulgatore Digitale per il Sociale — danilodauria.site@gmail.com<br>
+Software libero rilasciato con licenza <b>MIT</b>. Componenti di terze parti: Mermaid (MIT), Piper (MIT) e le voci italiane «Paola» e «Riccardo»;
+quelli facoltativi (espeak-ng, Pico, Vosk, Ollama, modelli di IA) hanno le proprie licenze, indicate in <code>/usr/share/doc/professore-digitale/copyright</code>.<br>
+Questo vademecum può essere stampato, copiato e distribuito liberamente, anche allegato ai computer rigenerati.</p>
+
+<!-- ======================================================= INDICE -->
+<h2 style="break-before:page;margin-top:2mm">Indice</h2>
+<ul class="toc">
+<li><span class="n">1</span><span class="tt">Benvenuti nella Cattedra Digitale<small>Che cos'è, a chi serve, i suoi principi, cosa trovate dentro</small></span><span class="toc-p" data-c="1"></span></li>
+<li><span class="n">2</span><span class="tt">Di cosa avete bisogno<small>Distribuzioni, computer, voci, file forniti</small></span><span class="toc-p" data-c="2"></span></li>
+<li><span class="n">3</span><span class="tt">Installazione<small>Pacchetto .deb, aggiornamento dalla 2.x, versione portatile</small></span><span class="toc-p" data-c="3"></span></li>
+<li><span class="n">4</span><span class="tt">Il primo avvio<small>La finestra, la pagina Inizio, la barra in alto, il Professore e i suoi occhi</small></span><span class="toc-p" data-c="4"></span></li>
+<li><span class="n">5</span><span class="tt">Le Lezioni<small>Il percorso, i passi, lo schema, il quiz</small></span><span class="toc-p" data-c="5"></span></li>
+<li><span class="n">6</span><span class="tt">Chiedi al Professore<small>Domande scritte e a voce, guida interna e IA</small></span><span class="toc-p" data-c="6"></span></li>
+<li><span class="n">7</span><span class="tt">La Lavagna<small>Schemi pronti e disegno libero</small></span><span class="toc-p" data-c="7"></span></li>
+<li><span class="n">8</span><span class="tt">La Palestra<small>Undici esercizi di mouse, tastiera e prudenza</small></span><span class="toc-p" data-c="8"></span></li>
+<li><span class="n">9</span><span class="tt">Quiz e attestati<small>I grandi quiz, la soglia del 70%, l'attestato con il vostro nome</small></span><span class="toc-p" data-c="9"></span></li>
+<li><span class="n">10</span><span class="tt">Cultura generale<small>Storia, geografia, scienze, arte e attualità</small></span><span class="toc-p" data-c="10"></span></li>
+<li><span class="n">11</span><span class="tt">Tecnologia Gentile e FeniceOS<small>Il libro e il sistema operativo di Danilo D'Auria</small></span><span class="toc-p" data-c="11"></span></li>
+<li><span class="n">12</span><span class="tt">Voci, saluti, promemoria, stampa e «Online»<small>Il Professore che vi accoglie, vi consiglia e vi saluta</small></span><span class="toc-p" data-c="12"></span></li>
+<li><span class="n">13</span><span class="tt">Impostazioni e accessibilità<small>Vista, voce, IA, dati, aggiornamenti</small></span><span class="toc-p" data-c="13"></span></li>
+<li><span class="n">14</span><span class="tt">IA, microfono e voci: i componenti facoltativi<small>Ollama, riconoscimento vocale, voci naturali, aule senza rete</small></span><span class="toc-p" data-c="14"></span></li>
+<li><span class="n">15</span><span class="tt">Il quadro dell'aula<small>Facilitatore e allievi in rete locale, messaggi, elenco, firewall</small></span><span class="toc-p" data-c="15"></span></li>
+<li><span class="n">16</span><span class="tt">Guida per il facilitatore<small>Preparare l'aula, condurre un incontro, consigli pratici</small></span><span class="toc-p" data-c="16"></span></li>
+<li><span class="n">17</span><span class="tt">Privacy e sicurezza<small>Dove stanno i dati, le due eccezioni dichiarate, cosa non fa</small></span><span class="toc-p" data-c="17"></span></li>
+<li><span class="n">18</span><span class="tt">Manutenzione, aggiornamenti e disinstallazione<small>Backup, aggiornare dalla 2.x, pulizia radicale</small></span><span class="toc-p" data-c="18"></span></li>
+<li><span class="n">19</span><span class="tt">Risoluzione dei problemi<small>Sintomo, causa, rimedio</small></span><span class="toc-p" data-c="19"></span></li>
+<li><span class="n">20</span><span class="tt">Riferimento rapido<small>Comandi, cartelle, porte, scorciatoie</small></span><span class="toc-p" data-c="20"></span></li>
+<li><span class="n">21</span><span class="tt">Glossario semplice<small>Le parole del digitale spiegate in breve</small></span><span class="toc-p" data-c="21"></span></li>
+</ul>
+<!-- ======================================================= 1 -->
+<section class="capitolo"><span class="marca">§§c1§§</span>
+<div class="capitolo-testa"><span class="num">1</span><div><div class="eti">CAPITOLO</div><h1>Benvenuti nella Cattedra Digitale</h1></div></div>
+<p class="intro">Il Professore Digitale è un insegnante paziente che vive dentro il computer. Spiega l'informatica di base con parole semplici,
+disegna schemi alla lavagna, risponde alle domande a voce, fa esercitare mouse e tastiera e, alla fine del percorso, consegna un <b>attestato</b>.
+E lo fa <b>senza bisogno di Internet</b>.</p>
+<figure><img src="img-linux/01-home.jpg" alt=""><figcaption><b>Figura 1.</b> La pagina Inizio della versione 3.0: il Professore saluta l'allieva per nome,
+propone la prossima lezione e mostra i progressi; sotto, i riquadri delle sezioni. In alto le «pastiglie» di stato e l'indicatore verde <b>Online</b>.</figcaption></figure>
+<h2>A chi è rivolto</h2>
+<p>È pensato per i luoghi dove il divario digitale si sente di più: <b>centri anziani</b>, circoli culturali, biblioteche, parrocchie, scuole,
+associazioni e famiglie. Funziona bene anche dove la connessione è assente o instabile, perché tutto il lavoro avviene sul computer, e gira sui
+computer ricondizionati con distribuzioni Linux leggere, come <b>FeniceOS</b>.</p>
+<h2>I principi del progetto</h2>
+<ul>
+<li><b>Offline per davvero.</b> Lezioni, quiz, guida, lavagna, palestra e voci funzionano senza rete. Internet serve solo, e una volta sola, per aggiungere i componenti facoltativi.</li>
+<li><b>Privacy per costruzione.</b> Domande, risposte e progressi restano sul computer. Nessun account, nessun tracciamento, nessun abbonamento.
+Le sole due eccezioni (l'indicatore «Online» e il quadro dell'aula) sono dichiarate, limitate e si possono spegnere (capitolo 17).</li>
+<li><b>Tecnologia gentile e riuso.</b> Il programma è leggero e gira su computer ricondizionati con distribuzioni Linux leggere: meno rifiuti elettronici, più persone connesse.</li>
+<li><b>Non si blocca mai.</b> Se l'intelligenza artificiale non c'è, o non risponde, il Professore usa la sua guida interna. L'allievo riceve sempre una risposta.</li>
+<li><b>Trasparenza.</b> Il programma non scarica nulla da solo: aggiornamenti e scaricamenti partono solo se lo chiedete voi.</li>
+</ul>
+<h2>Cosa trovate dentro</h2>
+<table><thead><tr><th></th><th>Sezione</th><th>A cosa serve</th></tr></thead><tbody>
+<tr><td class="ico">📚</td><td><b>Lezioni</b></td><td>Il corso di informatica: 15 lezioni guidate (circa 5 ore in tutto), ognuna con passi brevi, uno schema alla lavagna, lettura ad alta voce e un quiz finale.</td></tr>
+<tr><td class="ico">💬</td><td><b>Chiedi al Professore</b></td><td>Domande scritte o a voce. Risponde la guida interna (73 risposte pronte più il testo delle lezioni e le domande dei percorsi) oppure l'IA locale, se installata.</td></tr>
+<tr><td class="ico">🖊️</td><td><b>Lavagna</b></td><td>Decine di schemi pronti da mostrare al gruppo e un foglio per disegnare con gessetti colorati.</td></tr>
+<tr><td class="ico">🎯</td><td><b>Palestra</b></td><td>Undici esercizi: clic, doppio clic, trascinare, tastiera, tasti speciali, scorrere, clic destro, selezionare, copia e incolla, memory, riconosci la truffa.</td></tr>
+<tr><td class="ico">🎓</td><td><b>Quiz e attestati</b></td><td>Nove grandi quiz, tra cui il <b>Grande Quiz dell'Informatica</b> (264 domande). Con il 70% di risposte giuste si ottiene un attestato con il proprio nome.</td></tr>
+<tr><td class="ico">🌍</td><td><b>Cultura generale</b></td><td>26 lezioni di storia, geografia, scienze, arte e attualità, 145 domande e risposte da consultare, un quiz per ogni materia.</td></tr>
+<tr><td class="ico">📖</td><td><b>Tecnologia Gentile</b></td><td>Il libro di Danilo D'Auria raccontato in 20 lezioni, con domande e risposte e un quiz finale.</td></tr>
+<tr><td class="ico">🔥</td><td><b>FeniceOS</b></td><td>Il sistema operativo che fa rinascere i vecchi computer: come provarlo, i requisiti, il manifesto, 12 lezioni sul riuso, domande e quiz.</td></tr>
+<tr><td class="ico">🏫</td><td><b>Aula</b></td><td>Il quadro dell'aula: il PC del facilitatore vede i PC degli allievi collegati alla stessa rete e manda messaggi a tutti.</td></tr>
+<tr><td class="ico">⚙️</td><td><b>Impostazioni</b></td><td>Testo più grande, colori ad alto contrasto, modalità proiettore, scelta della voce, saluti e consigli, salvataggio dei progressi.</td></tr>
+</tbody></table>
+</section>
+<!-- ======================================================= 2 -->
+<section class="capitolo"><span class="marca">§§c2§§</span>
+<div class="capitolo-testa"><span class="num">2</span><div><div class="eti">CAPITOLO</div><h1>Di cosa avete bisogno</h1></div></div>
+<p class="intro">Il Professore Digitale è stato progettato per accontentarsi di poco. Il programma di base gira praticamente su qualsiasi computer Linux;
+solo l'intelligenza artificiale chiede un po' più di memoria.</p>
+<h2>Sistemi operativi</h2>
+<p>Il pacchetto funziona sulle distribuzioni basate su Debian che hanno Python 3.7 o successivo, cioè praticamente tutte quelle degli ultimi anni:
+<b>Debian</b> 10–13, <b>Ubuntu</b> dalla 20.04, <b>Linux Mint</b>, <b>FeniceOS</b>, Q4OS, Zorin OS, MX Linux, antiX, elementary OS e le distribuzioni live derivate da Debian.
+È di tipo <code>Architecture: all</code>: lo stesso file va bene su PC a 64 e 32 bit e su schede ARM.</p>
+<h2>Le voci</h2>
+<table><thead><tr><th>Computer</th><th>Voci del Professore</th></tr></thead><tbody>
+<tr><td><b>PC a 64 bit</b> (x86_64) e <b>ARM a 64 bit</b> (aarch64) con un sistema recente<br><span class="small">Debian 11 e successive, Ubuntu 20.04 e successive, Mint 20 e successive, FeniceOS</span></td>
+<td class="si">✔ voci naturali <b>Riccardo</b> (uomo) e <b>Paola</b> (donna), già incluse, più le voci leggere</td></tr>
+<tr><td>PC a 32 bit, sistemi più vecchi (per esempio Debian 10)</td><td class="si">✔ voci leggere maschili e femminili (espeak-ng)</td></tr>
+<tr><td>Versione portatile <code>.html</code></td><td>La voce del browser, se c'è</td></tr>
+</tbody></table>
+<p class="small">Le voci naturali usano il motore Piper, incluso nel pacchetto; se il sistema è troppo vecchio per avviarlo il Professore se ne accorge da solo
+e usa le voci leggere. Se è installato, anche Pico (<code>libttspico-utils</code>) può fare da voce.</p>
+<h2>Il computer</h2>
+<table><thead><tr><th>Uso</th><th>Memoria (RAM)</th><th>Processore</th><th>Spazio su disco</th></tr></thead><tbody>
+<tr><td><b>Programma di base</b><br><span class="small">lezioni, quiz, guida, lavagna, palestra, aula, voci</span></td><td>1 GB</td><td>Qualsiasi, anche 32 bit</td><td>circa 250 MB, voci incluse</td></tr>
+<tr><td><b>Con microfono</b> (Vosk)</td><td>2 GB</td><td>64 bit</td><td>+ 150 MB</td></tr>
+<tr><td><b>Con IA locale</b>, PC datato</td><td>4 GB</td><td>64 bit</td><td>+ 1–2 GB</td></tr>
+<tr><td><b>Con IA locale</b>, PC normale</td><td>8–16 GB</td><td>64 bit</td><td>+ 3–5 GB</td></tr>
+<tr><td><b>Con IA locale</b>, PC recente o con scheda video</td><td>16–32 GB</td><td>64 bit</td><td>+ 7–10 GB</td></tr>
+</tbody></table>
+<p>Servono anche uno schermo, altoparlanti o cuffie per la voce e, se volete fare domande a voce, un microfono (anche quello integrato nel portatile o nella webcam).
+Per il <b>quadro dell'aula</b> i computer devono essere collegati alla stessa rete (Wi-Fi o cavo); Internet non serve.</p>
+<h2>I file che ricevete</h2>
+<table><thead><tr><th>File</th><th>Cos'è</th></tr></thead><tbody>
+<tr><td><code>professore-digitale_3.0.0_all.deb</code></td><td>Il programma completo da installare. È più grande delle versioni precedenti (circa 150 MB) perché <b>include le voci naturali</b> Riccardo e Paola.</td></tr>
+<tr><td><code>professore-digitale-portatile.html</code></td><td>La versione da aprire con doppio clic, senza installazione (senza IA, voci naturali, microfono e aula).</td></tr>
+<tr><td><code>ProfessoreDigitale-Setup-3.0.0.exe</code></td><td>L'installatore per i computer Windows.</td></tr>
+<tr><td><code>SHA256SUMS</code></td><td>Le «impronte digitali» dei file, per verificare che siano integri.</td></tr>
+</tbody></table>
+<div class="box"><span class="t">Pacchetto o versione portatile?</span>
+Installate il pacchetto <code>.deb</code> sui computer dell'aula: offre le voci, il microfono, l'IA locale, il quadro dell'aula e il salvataggio su disco.
+Usate la versione portatile per una prova veloce, su un computer che non potete modificare o su sistemi diversi da Linux.</div>
+<table><thead><tr><th>Funzione</th><th>Pacchetto .deb</th><th>Versione portatile</th></tr></thead><tbody>
+<tr><td>Lezioni, quiz e attestati, cultura, guida interna, lavagna, palestra</td><td class="si">✔</td><td class="si">✔</td></tr>
+<tr><td>Lettura ad alta voce</td><td class="si">✔ Riccardo, Paola, voci leggere</td><td class="si">✔ voce del browser, se disponibile</td></tr>
+<tr><td>Domande a voce (microfono)</td><td class="si">✔ dopo la configurazione</td><td class="no">—</td></tr>
+<tr><td>Intelligenza artificiale locale</td><td class="si">✔ dopo la configurazione</td><td class="no">—</td></tr>
+<tr><td>Quadro dell'aula</td><td class="si">✔</td><td class="no">—</td></tr>
+<tr><td>Progressi salvati</td><td class="si">✔ nella cartella dell'utente</td><td class="si">✔ nel browser</td></tr>
+</tbody></table>
+</section>
+<!-- ======================================================= 3 -->
+<section class="capitolo"><span class="marca">§§c3§§</span>
+<div class="capitolo-testa"><span class="num">3</span><div><div class="eti">CAPITOLO</div><h1>Installazione</h1></div></div>
+<p class="intro">Esiste un solo pacchetto, adatto sia ai computer moderni sia a quelli datati. L'installazione non scarica nulla da Internet
+(salvo, se mancano, la voce leggera e i caratteri con le icone) e richiede un paio di minuti.</p>
+<h2>Metodo A · Dal terminale (il più affidabile, anche su PC datati)</h2>
+<ol class="passi">
+<li>Copiate <code>professore-digitale_3.0.0_all.deb</code> nella cartella <b>Scaricati</b> (non installatelo direttamente dalla chiavetta).</li>
+<li>Aprite la cartella, fate clic destro in uno spazio vuoto e scegliete <b>Apri nel terminale</b> (su alcuni sistemi: <b>Apri un terminale qui</b>).</li>
+<li>Scrivete il comando e premete <kbd>Invio</kbd>:
+<pre>sudo apt install ./professore-digitale_3.0.0_all.deb</pre></li>
+<li>Scrivete la password del computer. Mentre la scrivete <b>non compare nulla</b>, nemmeno gli asterischi: è normale, è una protezione di Linux. Premete <kbd>Invio</kbd>
+e, se compare «Continuare? [S/n]», premete <kbd>S</kbd> e <kbd>Invio</kbd>.</li>
+<li>Il sistema installa il programma con le voci naturali e, se servono, anche la voce leggera (<code>espeak-ng</code>) e i caratteri con le icone colorate.</li>
+</ol>
+<div class="box attenzione"><span class="t">Attenzione al «./»</span>Il punto e la barra davanti al nome del file sono indispensabili: dicono ad apt di usare il file
+che si trova nella cartella, invece di cercarlo su Internet. Senza, compare «Impossibile trovare il pacchetto».</div>
+<h2>Metodo B · Con il mouse</h2>
+<p>Fate doppio clic sul file: si apre l'installatore del sistema (Software Center, GDebi, Discover o simili). Premete <b>Installa</b> e inserite la password.
+Sui computer più lenti questi programmi possono sembrare bloccati: aspettate, oppure usate il metodo A.</p>
+<h2>Dove lo trovate</h2>
+<p>A installazione finita trovate <b>Professore Digitale</b> nel menu delle applicazioni, categoria <b>Istruzione</b> (<b>Applicazioni → Istruzione</b>),
+insieme a <b>Professore Digitale: configura IA</b> e <b>Professore Digitale: configura microfono</b>. Dal terminale si apre con <code>professore-digitale</code>.</p>
+<h2>Verificare l'installazione</h2>
+<pre>professore-digitale --version          <span class="c"># deve rispondere: Professore Digitale 3.0.0</span>
+professore-digitale --status           <span class="c"># mostra IA, voci e microfono disponibili</span></pre>
+<h2>Aggiornare dalla versione 2.x</h2>
+<p>Se avete già il Professore 2.0, 2.1, 2.2 o 2.3, usate lo stesso comando del metodo A: la 3.0.0 si installa <b>sopra</b> la precedente, senza disinstallare.
+Progressi, impostazioni, conversazioni, contenuti aggiunti, IA e microfono già configurati restano al loro posto, perché stanno nella vostra cartella personale (capitolo 18).</p>
+<h2>Verificare l'integrità del file (facoltativo)</h2>
+<p>Se il file è passato da molte chiavette, potete controllare che non si sia rovinato. Nella cartella dove si trovano il pacchetto e <code>SHA256SUMS</code>:</p>
+<pre>sha256sum -c SHA256SUMS --ignore-missing         <span class="c"># deve rispondere: OK</span></pre>
+<h2>Metodo C · La versione portatile</h2>
+<p>Fate doppio clic su <code>professore-digitale-portatile.html</code>: si apre nel browser e funziona subito, anche da chiavetta USB. Lezioni, quiz con attestato,
+cultura generale, palestra e lavagna ci sono tutti; i progressi vengono ricordati dal browser di quel computer.</p>
+<div class="box consiglio"><span class="t">Consiglio</span>Per preparare molti computer, copiate su una chiavetta il pacchetto, questo vademecum e (se volete il microfono
+in un'aula senza rete) la cartella preparata come descritto nel capitolo 14. Su FeniceOS il Professore si installa nello stesso modo.</div>
+</section>
+<!-- ======================================================= 4 -->
+<section class="capitolo"><span class="marca">§§c4§§</span>
+<div class="capitolo-testa"><span class="num">4</span><div><div class="eti">CAPITOLO</div><h1>Il primo avvio</h1></div></div>
+<p class="intro">Aprite il menu delle applicazioni, categoria <b>Istruzione</b>, e fate clic su <b>Professore Digitale</b>.
+Dopo qualche secondo si apre una finestra pulita, senza le barre del browser, e il Professore vi dà il benvenuto a voce.</p>
+<h2>Cosa succede dietro le quinte</h2>
+<p>L'icona avvia un piccolo programma invisibile che lavora solo all'interno del computer (all'indirizzo <code>http://127.0.0.1:8765</code>) e apre
+l'interfaccia nel browser. Se l'icona viene premuta di nuovo, il programma non si duplica: riapre la finestra. Quando tutte le finestre del
+Professore restano chiuse per quattro minuti, si spegne da solo per non consumare memoria; con il pulsante <b>🚪 Esci</b> si chiude subito (capitolo 12).</p>
+<div class="box"><span class="t">Quale browser?</span>Il programma preferisce Chromium o Chrome, che permettono una finestra «da applicazione» senza barre;
+altrimenti usa Firefox o il browser predefinito. Si può scegliere un browser preciso con la variabile <code>PD_BROWSER</code> (capitolo 20).</div>
+<h2>La pagina Inizio</h2>
+<div class="affianca">
+<figure><img src="img-linux/30-home-intera.jpg" alt=""><figcaption><b>Figura 2.</b> La pagina Inizio per intero: in alto il saluto e la lezione da continuare,
+poi i riquadri delle sezioni e, in fondo, i promemoria.</figcaption></figure>
+<div><p>In alto il Professore saluta (buongiorno, buon pomeriggio o buonasera, con il nome dell'allievo se è stato scritto), propone di <b>continuare la lezione</b>
+dal punto in cui eravate rimasti e mostra quante lezioni del corso sono completate e quanti attestati avete ottenuto. Sotto, un riquadro per ogni sezione:</p>
+<ul>
+<li><b>Lezioni</b>, <b>Chiedi al Professore</b>, <b>Lavagna</b>, <b>Palestra</b>;</li>
+<li>🏆 <b>Il Grande Quiz dell'Informatica</b>: 30 domande a sorpresa e l'attestato (capitolo 9);</li>
+<li>🌍 <b>Cultura generale</b> (capitolo 10);</li>
+<li>📖 <b>Tecnologia Gentile</b> e 🔥 <b>FeniceOS</b> (capitolo 11);</li>
+<li>🎓 <b>Quiz e attestati</b>: tutti i quiz e gli attestati ottenuti;</li>
+<li>📘 <b>Vademecum</b>: apre questo libretto;</li>
+<li>🏫 <b>Aula</b>: il quadro dell'aula (capitolo 15).</li>
+</ul>
+<p>In fondo alla pagina c'è il riquadro <b>📝 I miei promemoria</b>: le cose da non dimenticare, che il Professore vi ricorda quando uscite (capitolo 12).</p></div></div>
+<h2>La barra in alto</h2>
+<figure><img src="img-linux/48-barra.jpg" alt=""><figcaption><b>Figura 3.</b> Da sinistra: le pastiglie di stato, l'indicatore <b>Online</b>, il pulsante <b>🖨️ Stampa</b>,
+la grandezza del testo, i colori e la modalità proiettore.</figcaption></figure>
+<table><thead><tr><th>Pastiglia</th><th>Significato</th></tr></thead><tbody>
+<tr><td>🤖 nome del modello / 🤖 Guida interna</td><td>Quale «cervello» risponde: l'IA locale oppure la guida interna.</td></tr>
+<tr><td>🔊 voce naturale / espeak-ng / pico</td><td>Il motore della voce in uso (verde se disponibile).</td></tr>
+<tr><td>🎤 vosk / microfono spento</td><td>Se le domande a voce sono attive.</td></tr>
+<tr><td>🔒 Offline</td><td>Promemoria: tutto ciò che fate resta su questo computer.</td></tr>
+<tr><td>● <b>Online</b></td><td>Verde quando la connessione a Internet funziona, grigio «Non in linea» quando manca. Il Professore funziona in entrambi i casi (capitolo 12).</td></tr>
+</tbody></table>
+<table><thead><tr><th>Pulsante</th><th>Cosa fa</th></tr></thead><tbody>
+<tr><td><b>■ Stop voce</b> (rosso)</td><td>Compare mentre il Professore parla: lo fa tacere subito. Anche <kbd>Esc</kbd> ferma la voce.</td></tr>
+<tr><td><b>🖨️</b></td><td>Stampa la pagina che vedete oppure l'argomento intero (capitolo 12).</td></tr>
+<tr><td><b>A−</b> e <b>A+</b></td><td>Rimpiccioliscono o ingrandiscono tutto il testo.</td></tr>
+<tr><td><b>◐</b></td><td>Cambia i colori: chiaro, scuro, alto contrasto.</td></tr>
+<tr><td><b>⛶</b></td><td>Modalità proiettore: schermo intero, testo grande, menu nascosto.</td></tr>
+</tbody></table>
+<p>Il menu a sinistra porta alle sezioni; in fondo, il pulsante <b>🚪 Esci</b> chiude il Professore salutando e ricordando i promemoria. Su schermi stretti
+(tablet, netbook, finestre piccole) il menu si sposta in basso. Il tasto indietro del browser riporta alla pagina precedente.</p>
+<h2>Il Professore, i suoi stati e i suoi occhi</h2>
+<p>Il personaggio con il tocco e gli occhiali cambia espressione per far capire cosa sta facendo: un aiuto prezioso per chi è alle prime armi.
+<b>I suoi occhi seguono il puntatore del mouse</b>: ogni occhio guarda per conto suo, il movimento è morbido, le palpebre sbattono a intervalli irregolari
+e quando nessuno muove il mouse il Professore si guarda un po' intorno. Mentre l'allievo scrive una domanda, il Professore guarda la casella di testo.</p>
+<figure class="media"><img src="img-linux/occhi.jpg" alt=""><figcaption><b>Figura 4.</b> Lo sguardo segue il mouse: in alto a sinistra, in basso, a destra.</figcaption></figure>
+<table><thead><tr><th>Stato</th><th>Come si riconosce</th></tr></thead><tbody>
+<tr><td><b>Pronto ad aiutarvi</b></td><td>Sbatte le palpebre e segue con lo sguardo il mouse.</td></tr>
+<tr><td><b>Vi ascolto…</b></td><td>Onde arancioni vicino all'orecchio e sopracciglia alzate: il microfono è acceso.</td></tr>
+<tr><td><b>Sto pensando…</b></td><td>Nuvolette sopra la testa e sguardo verso l'alto: sta preparando la risposta.</td></tr>
+<tr><td><b>Sto spiegando…</b></td><td>La bocca si muove: sta leggendo ad alta voce.</td></tr>
+<tr><td><b>In attesa…</b></td><td>Occhi socchiusi: nessuno lo usa da un po'. Basta muovere il mouse o premere un tasto per «svegliarlo» (capitolo 12).</td></tr>
+</tbody></table>
+<p class="small">Chi preferisce un'immagine ferma può spegnere gli occhi mobili in <b>Impostazioni → Vista</b>. Se nel sistema è attiva la riduzione delle animazioni, gli occhi restano fermi da soli.</p>
+</section>
+<!-- ======================================================= 5 -->
+<section class="capitolo"><span class="marca">§§c5§§</span>
+<div class="capitolo-testa"><span class="num">5</span><div><div class="eti">CAPITOLO</div><h1>Le Lezioni</h1></div></div>
+<p class="intro">Il cuore della Cattedra è il corso di informatica: 15 lezioni, dal primo contatto con il computer fino ai servizi pubblici digitali,
+agli acquisti sicuri e all'intelligenza artificiale. Ogni lezione dura dai 15 ai 25 minuti.</p>
+<h2>Il catalogo</h2>
+<table><thead><tr><th></th><th>Lezione</th><th>Livello</th><th>Min.</th><th>Obiettivo</th></tr></thead><tbody>
+<tr><td class="ico">🖥️</td><td><b>Il computer: com'è fatto</b></td><td>Primi passi</td><td>15</td><td>Conoscere le parti del computer, accenderlo e spegnerlo nel modo giusto.</td></tr>
+<tr><td class="ico">🖱️</td><td><b>Usare il mouse</b></td><td>Primi passi</td><td>20</td><td>Clic, doppio clic, clic destro, trascinare.</td></tr>
+<tr><td class="ico">⌨️</td><td><b>La tastiera senza paura</b></td><td>Primi passi</td><td>20</td><td>Scrivere, correggere, maiuscole, chiocciola @.</td></tr>
+<tr><td class="ico">🪟</td><td><b>Il desktop e le finestre</b></td><td>Primi passi</td><td>15</td><td>Orientarsi sul desktop, ridurre, ingrandire e chiudere finestre.</td></tr>
+<tr><td class="ico">📁</td><td><b>File e cartelle: l'armadio digitale</b></td><td>Intermedio</td><td>20</td><td>Salvare, ritrovare, cestino, chiavetta USB.</td></tr>
+<tr><td class="ico">🌐</td><td><b>Internet e il browser</b></td><td>Intermedio</td><td>20</td><td>Cos'è Internet, cercare, riconoscere i siti affidabili.</td></tr>
+<tr><td class="ico">✉️</td><td><b>La posta elettronica</b></td><td>Intermedio</td><td>20</td><td>Scrivere un'email, allegare una foto, riconoscere lo spam.</td></tr>
+<tr><td class="ico">📱</td><td><b>Smartphone, messaggi e videochiamate</b></td><td>Intermedio</td><td>20</td><td>Messaggi, vocali e videochiamate con i propri cari.</td></tr>
+<tr><td class="ico">🖼️</td><td><b>Foto e ricordi al sicuro</b></td><td>Intermedio</td><td>15</td><td>Passare le foto dal telefono al computer, ordinarle, farne copie.</td></tr>
+<tr><td class="ico">🔐</td><td><b>Password e sicurezza</b></td><td>Sicurezza</td><td>20</td><td>La frase segreta, dove conservarla, la verifica in due passaggi.</td></tr>
+<tr><td class="ico">🛡️</td><td><b>Riconoscere le truffe online</b></td><td>Sicurezza</td><td>25</td><td>Phishing, SMS falsi, finti tecnici; cosa fare se si è stati truffati.</td></tr>
+<tr><td class="ico">🛒</td><td><b>Acquisti e pagamenti online sicuri</b></td><td>Sicurezza</td><td>20</td><td>Scegliere il negozio, pagare in modo protetto, riconoscere i falsi.</td></tr>
+<tr><td class="ico">🏛️</td><td><b>Servizi pubblici digitali</b></td><td>Avanzato</td><td>25</td><td>SPID, CIE, app IO, pagoPA e come riconoscere i falsi.</td></tr>
+<tr><td class="ico">🤖</td><td><b>L'intelligenza artificiale, spiegata semplice</b></td><td>Avanzato</td><td>20</td><td>Cosa sa fare l'IA, dove sbaglia, perché l'IA locale tutela la privacy.</td></tr>
+<tr><td class="ico">🐧</td><td><b>Linux, software libero e riuso</b></td><td>Avanzato</td><td>15</td><td>Sistema operativo, software libero, economia circolare.</td></tr>
+</tbody></table>
+<p class="small">Le lezioni di cultura generale, del libro Tecnologia Gentile e di FeniceOS hanno la stessa forma, ma stanno nelle loro pagine (capitoli 10 e 11)
+e non entrano nel conteggio del corso.</p>
+<h2>Come è fatta una lezione</h2>
+<figure><img src="img-linux/03-lezione.jpg" alt=""><figcaption><b>Figura 5.</b> Un passo della lezione sulle truffe: a sinistra il testo, a destra lo schema disegnato sulla lavagna.</figcaption></figure>
+<ol class="passi">
+<li>I pallini numerati in alto sono i <b>passi</b>; il punto interrogativo è il <b>quiz</b>. I passi già visti diventano verdi. Si può saltare avanti e indietro liberamente.</li>
+<li>Il testo è breve e usa metafore della vita quotidiana (l'armadio per le cartelle, la strada per Internet, la chiave per la password). In fondo c'è spesso un 💡 consiglio.</li>
+<li>La lavagna a destra mostra lo <b>schema</b> del passo, quando c'è.</li>
+<li><b>🔊 Leggi ad alta voce</b> fa leggere il passo al Professore; <b>💬 Ho una domanda</b> porta alle domande con l'argomento già scritto.</li>
+<li><b>Avanti →</b> e <b>← Indietro</b>, grandi e in basso, per chi ha difficoltà con il mouse.</li>
+</ol>
+<div class="box consiglio"><span class="t">La lezione su carta</span>Dal pulsante <b>🖨️</b> in alto scegliete <b>«Stampa la lezione intera»</b>: tutti i passi, gli schemi
+e il quiz con le soluzioni in fondo, pronti da distribuire al gruppo (capitolo 12).</div>
+<h2>Il quiz finale</h2>
+<div class="affianca"><figure><img src="img-linux/04-quiz.jpg" alt=""><figcaption><b>Figura 6.</b> Il quiz: ogni risposta viene spiegata subito.</figcaption></figure>
+<div><p>Il quiz <b>non dà voti</b>: serve a ripassare. Dopo ogni risposta il Professore dice se è giusta e spiega il perché, a voce e per iscritto.
+La risposta corretta viene sempre evidenziata in verde.</p>
+<p>Quando tutte le domande hanno una risposta, la lezione risulta completata e compaiono due pulsanti: la lezione successiva e, dove previsto,
+l'esercizio collegato in Palestra. I progressi (passi visti, lezioni completate, punteggi) vengono salvati da soli.</p>
+<p>Per mettersi alla prova sul corso intero c'è <b>Il Quiz del Corso di Informatica</b>, con attestato (capitolo 9).</p></div></div>
+</section>
+
+<!-- ======================================================= 6 -->
+<section class="capitolo"><span class="marca">§§c6§§</span>
+<div class="capitolo-testa"><span class="num">6</span><div><div class="eti">CAPITOLO</div><h1>Chiedi al Professore</h1></div></div>
+<p class="intro">Qui si fanno le domande, con le proprie parole: «come si scrive la chiocciola?», «il programma non risponde», «mi è comparso un messaggio
+che dice che il mio conto è bloccato». Il Professore risponde per iscritto, a voce e, quando serve, con uno schema sulla lavagna.</p>
+<figure><img src="img-linux/05-chiedi.jpg" alt=""><figcaption><b>Figura 7.</b> Una risposta della guida interna sul phishing, con lo schema sulla lavagna e i suggerimenti collegati.</figcaption></figure>
+<h2>Fare una domanda</h2>
+<ul>
+<li><b>Scrivendo:</b> scrivete nel riquadro e premete <b>Invia</b> oppure <kbd>Invio</kbd>. Per andare a capo senza inviare: <kbd>Maiusc</kbd> + <kbd>Invio</kbd>.</li>
+<li><b>Con i suggerimenti:</b> i pulsanti tondi sopra il riquadro sono domande pronte, utili per rompere il ghiaccio.</li>
+<li><b>A voce:</b> premete il microfono arancione 🎤 e parlate. Quando smettete di parlare, dopo un paio di secondi il Professore capisce che avete finito
+(potete anche premere di nuovo il pulsante, diventato ■). La prima volta il browser chiede il permesso di usare il microfono: scegliete <b>Consenti</b>.
+Il microfono si attiva con la configurazione del capitolo 14.</li>
+</ul>
+<h2>Chi risponde: guida interna o IA</h2>
+<table><thead><tr><th></th><th>📚 Guida interna</th><th>🤖 IA locale</th></tr></thead><tbody>
+<tr><td><b>Sempre disponibile</b></td><td>Sì, anche nella versione portatile</td><td>Solo se configurata (capitolo 14)</td></tr>
+<tr><td><b>Cosa sa</b></td><td>73 risposte verificate, il testo delle lezioni e le domande di cultura generale, del libro e di FeniceOS</td><td>Risponde a domande libere, formulate in molti modi</td></tr>
+<tr><td><b>Affidabilità</b></td><td>Contenuti scritti e controllati</td><td>Buona, ma può sbagliare: va verificata sui temi importanti</td></tr>
+<tr><td><b>Velocità</b></td><td>Istantanea</td><td>Da pochi secondi a un minuto, secondo il computer e il modello</td></tr>
+</tbody></table>
+<p>Quando l'IA è attiva, il Professore le passa anche le informazioni pertinenti della guida interna: così anche i modelli più piccoli danno risposte più precise.
+Se l'IA non risponde o dà errore, la risposta arriva comunque dalla guida interna, con una nota che lo segnala. Se la guida non trova una risposta adatta,
+lo dice apertamente e propone gli argomenti più vicini: meglio un «non lo so» onesto che una risposta sbagliata.</p>
+<h2>I pulsanti sotto le risposte</h2>
+<table><tbody>
+<tr><td><b>🔊 Riascolta</b></td><td>Fa rileggere la risposta.</td></tr>
+<tr><td><b>📊 Schema</b></td><td>Riporta sulla lavagna lo schema di quella risposta.</td></tr>
+<tr><td><b>📚 Apri la lezione</b></td><td>Porta al passo della lezione da cui proviene la risposta.</td></tr>
+<tr><td><b>■ Ferma la risposta</b></td><td>Interrompe l'IA mentre scrive (utile se la risposta è troppo lunga).</td></tr>
+<tr><td><b>🧹 Nuova conversazione</b></td><td>Cancella la conversazione e ricomincia (ad esempio quando cambia l'allievo).</td></tr>
+</tbody></table>
+<p>Con <b>🖨️ → Stampa tutta la conversazione</b> le domande e le risposte della giornata finiscono su carta, da portare a casa.</p>
+<div class="box attenzione"><span class="t">Con l'IA, buon senso</span>Insegnate agli allievi a verificare con una fonte ufficiale o con una persona di fiducia
+le informazioni su salute, soldi, leggi e scadenze. Il Professore stesso lo ricorda nella lezione sull'intelligenza artificiale.</div>
+</section>
+
+<!-- ======================================================= 7 -->
+<section class="capitolo"><span class="marca">§§c7§§</span>
+<div class="capitolo-testa"><span class="num">7</span><div><div class="eti">CAPITOLO</div><h1>La Lavagna</h1></div></div>
+<p class="intro">La lavagna ha due facce: gli schemi pronti, da proiettare mentre si spiega, e il disegno libero, per tracciare a mano frecce, cerchi e parole.</p>
+<div class="affianca">
+<figure><img src="img-linux/06-lavagna.jpg" alt=""><figcaption><b>Figura 8.</b> Gli schemi pronti: si sceglie dall'elenco o si scorre con Precedente e Successivo.</figcaption></figure>
+<figure><img src="img-linux/07-disegno.jpg" alt=""><figcaption><b>Figura 9.</b> Il disegno libero: gessetti colorati, spessore, cancellino, annulla, pulisci e salva.</figcaption></figure>
+</div>
+<h2>Schemi pronti</h2>
+<p>L'elenco raccoglie gli schemi delle lezioni e della guida e, in cima, l'ultimo schema disegnato in una risposta. <b>⛶ Schermo intero</b> ingrandisce
+la lavagna per il proiettore. Sulle lavagne strette gli schemi orizzontali lunghi vengono ridisposti in verticale da soli, per restare leggibili.</p>
+<h2>Disegno libero</h2>
+<ul>
+<li><b>Gessetti:</b> sei colori (bianco, giallo, rosa, azzurro, verde, arancio). Funziona con il mouse, con il dito sugli schermi touch e con le penne.</li>
+<li><b>Spessore:</b> il cursore regola la grandezza del tratto.</li>
+<li><b>🧽 Cancellino</b>, <b>↶ Annulla</b> (fino a 20 passi indietro) e <b>🗑️ Pulisci</b>.</li>
+<li><b>💾 Salva immagine:</b> scarica il disegno come immagine PNG nella cartella <b>Scaricati</b>, per stamparlo o mandarlo al gruppo.</li>
+</ul>
+<p>Il disegno resta sulla lavagna anche se passate a un'altra sezione e poi tornate.</p>
+</section>
+
+<!-- ======================================================= 8 -->
+<section class="capitolo"><span class="marca">§§c8§§</span>
+<div class="capitolo-testa"><span class="num">8</span><div><div class="eti">CAPITOLO</div><h1>La Palestra</h1></div></div>
+<p class="intro">Mouse e tastiera si imparano con le mani, non con gli occhi. La Palestra propone <b>undici esercizi</b> brevi e giocosi, in cui non si può
+sbagliare: si può solo migliorare. Ogni esercizio ricorda il vostro <b>record</b> personale.</p>
+<figure><img src="img-linux/08-palestra.jpg" alt="" style="width:86%;margin:0 auto"><figcaption><b>Figura 10.</b> Gli undici esercizi della Palestra, con i record già ottenuti.</figcaption></figure>
+<table><thead><tr><th></th><th>Esercizio</th><th>Cosa si allena</th><th>Come funziona</th></tr></thead><tbody>
+<tr><td class="ico">🎯</td><td><b>Il clic</b></td><td>Mira e clic sinistro</td><td>Compaiono 10 palloncini, uno alla volta, in punti diversi; diventano più piccoli man mano. Record: il tempo più breve.</td></tr>
+<tr><td class="ico">📂</td><td><b>Il doppio clic</b></td><td>Selezionare e aprire</td><td>Cinque cartelle: un clic le seleziona, due clic rapidi («toc-toc») le aprono. Insegna la differenza tra i due gesti.</td></tr>
+<tr><td class="ico">✋</td><td><b>Trascinare</b></td><td>Tenere premuto e spostare</td><td>Cinque fogli da portare nella cartella in basso a destra, come nel gestore dei file.</td></tr>
+<tr><td class="ico">⌨️</td><td><b>La tastiera</b></td><td>Scrivere e correggere</td><td>Dodici parole di difficoltà crescente, da «casa» fino a «mario@esempio.it», con suggerimenti su Maiusc, spazio, <kbd>Alt Gr</kbd> e trattino.</td></tr>
+<tr><td class="ico">⏎</td><td><b>I tasti speciali</b></td><td>Trovare i tasti importanti</td><td>Dieci tasti da trovare e premere: Invio, Spazio, Cancella, Maiuscolo, Esc, le frecce, Tab, Canc e la chiocciola. Per ognuno, dove si trova e a cosa serve.</td></tr>
+<tr><td class="ico">🖲️</td><td><b>Scorrere la pagina</b></td><td>La rotellina del mouse</td><td>Una pagina lunga piena di disegni: girando la rotellina si cercano le cinque stelle ⭐ nascoste e si fa clic su ciascuna.</td></tr>
+<tr><td class="ico">🖱️</td><td><b>Il clic destro</b></td><td>Il menu del tasto destro</td><td>Cinque prove: clic destro sul file indicato («Lettera», «Foto del mare»…) e scelta del comando giusto (Apri, Copia, Rinomina).</td></tr>
+<tr><td class="ico">🖍️</td><td><b>Selezionare il testo</b></td><td>Doppio e triplo clic</td><td>Doppio clic per selezionare una parola, triplo clic per tutta la frase.</td></tr>
+<tr><td class="ico">📋</td><td><b>Copia e incolla</b></td><td><kbd>Ctrl</kbd> + <kbd>C</kbd> e <kbd>Ctrl</kbd> + <kbd>V</kbd></td><td>Quattro frasi (un saluto, un indirizzo email, un indirizzo di casa, un appuntamento) da copiare e incollare, con la tastiera o con il clic destro.</td></tr>
+<tr><td class="ico">🧠</td><td><b>Memory digitale</b></td><td>Occhio e mouse insieme</td><td>Dodici carte coperte con i simboli del digitale: si girano due alla volta per trovare le sei coppie.</td></tr>
+<tr><td class="ico">🚩</td><td><b>Riconosci la truffa</b></td><td>Prudenza</td><td>Dieci messaggi (SMS, email, WhatsApp, telefonate): per ognuno si sceglie «È una truffa» o «È affidabile» e il Professore spiega i segnali da notare.</td></tr>
+</tbody></table>
+<div class="affianca">
+<figure><img src="img-linux/40-clic-destro.jpg" alt=""><figcaption><b>Figura 11.</b> Il clic destro: il menu si apre accanto al file, come nel gestore dei file.</figcaption></figure>
+<figure><img src="img-linux/41-truffa.jpg" alt=""><figcaption><b>Figura 12.</b> Riconosci la truffa: minaccia, scadenza e richiesta della carta sono i tre segnali del phishing.</figcaption></figure>
+</div>
+<div class="box consiglio"><span class="t">Consiglio per il facilitatore</span>Fate fare l'esercizio del clic all'inizio di ogni incontro, come «riscaldamento».
+Vedere il proprio tempo migliorare di settimana in settimana è un grande incoraggiamento. «Riconosci la truffa» funziona benissimo proiettato:
+il gruppo vota a voce e poi si legge la spiegazione. Sui portatili, all'inizio, collegate un mouse con il filo: il touchpad è più difficile.</div>
+</section>
+
+<!-- ======================================================= 9 -->
+<section class="capitolo"><span class="marca">§§c9§§</span>
+<div class="capitolo-testa"><span class="num">9</span><div><div class="eti">CAPITOLO</div><h1>Quiz e attestati</h1></div></div>
+<p class="intro">Dopo le lezioni, la prova: i grandi quiz mettono alla prova con calma, senza fretta e senza voti di scuola. Chi risponde bene ad almeno
+il <b>70% delle domande</b> riceve un <b>attestato</b> con il proprio nome, da stampare o salvare in PDF.</p>
+<figure><img src="img-linux/32-quiz.jpg" alt=""><figcaption><b>Figura 13.</b> La pagina <b>Quiz e attestati</b>: un riquadro per ogni grande quiz, con il miglior risultato ottenuto.
+Più in basso, l'elenco degli attestati.</figcaption></figure>
+<h2>I grandi quiz</h2>
+<table><thead><tr><th></th><th>Quiz</th><th>Domande per tentativo</th><th>Da dove vengono</th></tr></thead><tbody>
+<tr><td class="ico">🏆</td><td><b>Il Grande Quiz dell'Informatica</b></td><td>30 su 264</td><td>Il manuale di Danilo D'Auria: storia, hardware, sistemi operativi, software, Internet, comunicazione, sicurezza, cloud, intelligenza artificiale, economia circolare, FeniceOS e Linux, dal livello Base all'Esperto.</td></tr>
+<tr><td class="ico">🖥️</td><td><b>Il Quiz del Corso di Informatica</b></td><td>20 su 148</td><td>Ciò che si è imparato nelle lezioni del corso: mouse e tastiera, file, Internet, posta, password, truffe, smartphone, servizi pubblici, IA, Linux e Windows.</td></tr>
+<tr><td class="ico">🏛️</td><td><b>Storia</b> · <b>Geografia</b> · <b>Scienze</b> · <b>Arte</b> · <b>Cittadinanza e Attualità</b></td><td>20 per ciascuno, su 80–90</td><td>Le materie della Cultura generale (capitolo 10).</td></tr>
+<tr><td class="ico">♻️</td><td><b>Il Grande Quiz di FeniceOS e del Riuso</b></td><td>20 su 141</td><td>FeniceOS, Linux, recupero dei computer ed economia circolare.</td></tr>
+<tr><td class="ico">🌿</td><td><b>Il Quiz di Tecnologia Gentile</b></td><td>20 su 82</td><td>Il libro di Danilo D'Auria (capitolo 11).</td></tr>
+</tbody></table>
+<h2>Come si svolge</h2>
+<ol class="passi">
+<li>Scegliete un quiz. Nella prima pagina il Professore spiega le regole e chiede <b>nome e cognome</b>: è il nome che comparirà sull'attestato
+(si può scrivere una volta sola in <b>Impostazioni → Vista</b>, «Nome dell'allievo»).</li>
+<li>Premete <b>▶ Inizia il quiz</b>. Le domande arrivano una alla volta, <b>scelte a caso</b> e mescolate tra gli argomenti: ogni tentativo è diverso,
+e anche l'ordine delle risposte cambia.</li>
+<li>Fate clic sulla risposta. Subito compare se è giusta (in verde) o no (in rosso, con quella giusta in verde) e una breve <b>spiegazione</b>.
+<b>🔊 Leggi la domanda</b> fa leggere domanda e risposte al Professore. Poi <b>Avanti →</b>.</li>
+<li>Alla fine vedete quante risposte giuste avete dato. Con almeno il 70% il quiz è <b>superato</b> e compare <b>🎓 Il vostro attestato</b>;
+altrimenti il Professore incoraggia a ripassare e riprovare.</li>
+<li>Sotto il risultato, il riquadro <b>📝 Da ripassare</b> elenca le domande sbagliate con la risposta giusta e la spiegazione.</li>
+</ol>
+<figure><img src="img-linux/34-quiz-domanda.jpg" alt=""><figcaption><b>Figura 14.</b> Una domanda del Grande Quiz dell'Informatica: la risposta scelta era sbagliata,
+il Professore mostra quella giusta e la spiega.</figcaption></figure>
+<p>Si può riprovare tutte le volte che si vuole: il Professore ricorda il <b>miglior risultato</b> e il numero di tentativi. <b>✕ Interrompi</b> torna all'elenco senza salvare il tentativo.</p>
+<h2>L'attestato</h2>
+<figure><img src="img-linux/35-attestato.jpg" alt=""><figcaption><b>Figura 15.</b> L'attestato di Maria Rossi per il Grande Quiz dell'Informatica: nome, quiz superato,
+punteggio e giudizio, data, codice e firma del facilitatore.</figcaption></figure>
+<ul>
+<li>Contiene il <b>nome</b> dell'allievo, il titolo del quiz e l'ambito, le <b>risposte esatte</b> con la percentuale, un <b>giudizio</b>
+(Sufficiente, Buono dal 75%, Ottimo dall'85%, Eccellente dal 95%), la <b>data</b>, un <b>codice</b> che lo identifica e lo spazio per la firma.</li>
+<li>Il nome del facilitatore o del corso, se scritto in <b>Impostazioni → Vista</b>, compare già al posto della firma.</li>
+<li>Il nome si può correggere nella casella <b>Nome sull'attestato</b> sopra il disegno (per esempio per aggiungere il secondo nome).</li>
+<li><b>🖨️ Stampa</b> lo prepara su un foglio A4 orizzontale. <b>📄 Salva in PDF</b> crea il file <code>Attestato - Nome - Titolo.pdf</code> nella cartella
+<b>Scaricati</b>, da conservare, mandare per email o stampare altrove. Tutto avviene sul computer, senza Internet.</li>
+<li>Gli attestati ottenuti restano nell'elenco <b>🏅 I vostri attestati</b>, in fondo alla pagina <b>Quiz e attestati</b>, con il pulsante <b>Apri e stampa</b>.</li>
+</ul>
+<div class="box consiglio"><span class="t">Una piccola cerimonia</span>Consegnare l'attestato stampato davanti al gruppo, magari a fine corso, vale moltissimo:
+per molti allievi è il primo «diploma» digitale. Usate carta un po' più spessa e, se potete, una cartellina.</div>
+</section>
+
+<!-- ======================================================= 10 -->
+<section class="capitolo"><span class="marca">§§c10§§</span>
+<div class="capitolo-testa"><span class="num">10</span><div><div class="eti">CAPITOLO</div><h1>Cultura generale</h1></div></div>
+<p class="intro">Il computer è anche una finestra sul mondo. In <b>🌍 Cultura generale</b> trovate lezioni brevi di storia, geografia, scienze, arte e attualità,
+con schemi alla lavagna, domande e risposte da consultare e un grande quiz per ogni materia: un modo piacevole per esercitarsi con il computer imparando altro.</p>
+<figure><img src="img-linux/36-cultura.jpg" alt=""><figcaption><b>Figura 16.</b> Le cinque materie, con il numero di lezioni e di domande e la barra dei progressi.
+Quando il quiz di una materia è superato compare «🎓 Attestato ottenuto».</figcaption></figure>
+<table><thead><tr><th></th><th>Materia</th><th>Lezioni</th><th>Domande e risposte</th></tr></thead><tbody>
+<tr><td class="ico">🏛️</td><td><b>Storia</b></td><td>Preistoria e prime civiltà · Grecia antica e Roma · Il Medioevo · Rinascimento, scoperte ed età moderna · Il Risorgimento e l'Unità d'Italia · Il Novecento: guerre, Repubblica ed Europa</td><td>30</td></tr>
+<tr><td class="ico">🌍</td><td><b>Geografia</b></td><td>La Terra: forma, movimenti e stagioni · L'Italia fisica · L'Italia delle regioni e dei capoluoghi · L'Europa e i suoi Paesi · Leggere una mappa e orientarsi</td><td>30</td></tr>
+<tr><td class="ico">🔬</td><td><b>Scienze</b></td><td>Il corpo umano e la salute · Il sistema solare e lo spazio · Materia, energia ed elettricità in casa · La natura, gli ecosistemi e la biodiversità · Il clima e l'ambiente</td><td>30</td></tr>
+<tr><td class="ico">🎨</td><td><b>Arte</b></td><td>L'arte antica: Grecia e Roma · L'arte medievale e Giotto · Il Rinascimento: Leonardo, Michelangelo, Raffaello · Dal Barocco all'Impressionismo · Arte moderna, musei e patrimonio UNESCO</td><td>25</td></tr>
+<tr><td class="ico">📰</td><td><b>Attualità e cittadinanza</b></td><td>La Costituzione italiana e i suoi principi · Come funziona lo Stato · L'Unione europea e le organizzazioni internazionali · Informarsi bene e riconoscere le notizie false · Sostenibilità e futuro</td><td>30</td></tr>
+</tbody></table>
+<h2>La pagina di una materia</h2>
+<p>Facendo clic su una materia si apre la sua pagina, divisa in tre parti:</p>
+<ol class="passi">
+<li><b>📚 Lezioni</b>: si svolgono come quelle del corso (capitolo 5), con passi, schemi, lettura ad alta voce e quiz finale.</li>
+<li><b>Il Grande Quiz</b> della materia: 20 domande a sorpresa, con attestato (capitolo 9).</li>
+<li><b>❓ Domande e risposte</b>: un elenco da consultare. Scrivete una parola nella casella di ricerca (per esempio «Garibaldi», «Alpi», «Leonardo»)
+e restano solo le domande che la contengono; fate clic su una domanda per aprire la risposta, con lo schema quando c'è, <b>🔊 Leggi</b> e <b>📚 Apri la lezione</b>.</li>
+</ol>
+<figure><img src="img-linux/37-materia-domande.jpg" alt=""><figcaption><b>Figura 17.</b> Storia: il quiz della materia, già superato, e la ricerca tra le domande con la parola «garibaldi».</figcaption></figure>
+<p>Le stesse domande sono note anche a <b>Chiedi al Professore</b>: «chi era Garibaldi?» riceve la risposta anche dalla guida interna.
+Con <b>🖨️ → Stampa lezioni e domande dell'argomento</b> si ottiene un fascicolo con l'elenco delle lezioni e tutte le domande e risposte della materia.</p>
+</section>
+
+<!-- ======================================================= 11 -->
+<section class="capitolo"><span class="marca">§§c11§§</span>
+<div class="capitolo-testa"><span class="num">11</span><div><div class="eti">CAPITOLO</div><h1>Tecnologia Gentile e FeniceOS</h1></div></div>
+<p class="intro">Il Professore Digitale fa parte di un progetto più ampio di Danilo D'Auria: un libro che spiega l'idea di <b>Tecnologia Gentile</b> e un sistema
+operativo, <b>FeniceOS</b>, che la mette in pratica sui computer da recuperare. Ciascuno ha la sua pagina, nel menu a sinistra.</p>
+<h2>📖 Tecnologia Gentile · il libro</h2>
+<figure><img src="img-linux/38-libro.jpg" alt=""><figcaption><b>Figura 18.</b> La pagina del libro: la copertina, la presentazione e i capitoli raccontati come lezioni.</figcaption></figure>
+<p><i>Tecnologia Gentile: Informatica Sostenibile</i> è il libro di Danilo D'Auria, pubblicato su Amazon. Racconta un'informatica a misura di persona:
+inclusiva, rispettosa dell'ambiente e di chi sta imparando. Nella pagina trovate:</p>
+<ul>
+<li><b>📖 I capitoli</b>: 20 lezioni brevi, una per capitolo, dal Manifesto della Tecnologia Gentile alla storia del computer, dalla sicurezza allo
+«smartphone senza occhiali», dai «Nipoti Digitali» alla rigenerazione dei PC, fino all'Intelligenza Artificiale Gentile.</li>
+<li><b>Il Quiz di Tecnologia Gentile</b>: 20 domande su 82, con attestato.</li>
+<li><b>❓ Domande e risposte sul libro</b>: 67 domande con la ricerca per parola.</li>
+</ul>
+<h2>🔥 FeniceOS · il sistema operativo della rinascita digitale</h2>
+<figure><img src="img-linux/39-fenice.jpg" alt="" style="width:86%;margin:0 auto"><figcaption><b>Figura 19.</b> La pagina di FeniceOS: il motto «Un computer che funziona non è un rifiuto», la presentazione e i numeri principali.</figcaption></figure>
+<p><b>FeniceOS</b> è una distribuzione Linux live, basata su Debian 12 «Bookworm», ideata e sviluppata da Danilo D'Auria. Si avvia da una chiavetta USB e fa
+rinascere i computer che il mercato considera obsoleti, trasformandoli in postazioni per centri anziani, aule, centri per il sociale e biblioteche.
+Il Professore Digitale funziona benissimo su FeniceOS: si installa con lo stesso pacchetto <code>.deb</code> (capitolo 3).
+La pagina contiene:</p>
+<table><tbody>
+<tr><td><b>I numeri</b></td><td>Versione 1.0.0 «Ashborn», base Debian 12, obiettivo di meno di 500 MB di RAM, un'unica immagine per BIOS e UEFI, due utenti (fenice per il facilitatore, ospite per gli allievi), zero telemetria.</td></tr>
+<tr><td><b>Undici sezioni</b></td><td>Perché «Fenice», la filosofia della Tecnologia Gentile, economia circolare, obsolescenza programmata, cosa c'è dentro, come nasce l'immagine ISO, i due utenti, per chi è pensata, FeniceOS e Professore Digitale, privacy e sicurezza, come contribuire. Si raggiungono con l'indice in alto.</td></tr>
+<tr><td><b>💾 Provare FeniceOS dalla chiavetta</b></td><td>Nove passi, dal file ISO con la sua impronta alla scrittura della chiavetta (Rufus in modalità «DD Image» o balenaEtcher), dal menu di avvio (F12, F2, Esc o Canc) alle voci Safe Graphics e Zero-Disk, fino all'accesso come ospite o fenice.</td></tr>
+<tr><td><b>🖥️ Di cosa ha bisogno</b></td><td>Processore a 64 bit, memoria, avvio da USB, rete, stampanti, Internet, disco.</td></tr>
+<tr><td><b>📜 Il manifesto</b></td><td>I dieci principi della tecnologia gentile.</td></tr>
+<tr><td><b>Lezioni, quiz e domande</b></td><td>12 lezioni sul riuso, il Grande Quiz di FeniceOS e del Riuso (20 domande su 141, con attestato), 63 domande e risposte e 15 domande frequenti.</td></tr>
+</tbody></table>
+<div class="box attenzione"><span class="t">Prima di provare FeniceOS</span>Scrivere FeniceOS su una chiavetta la <b>cancella del tutto</b>, e installarlo sul disco
+cancella il disco scelto. In modalità live, invece, il disco del computer non viene toccato. Fatevi sempre aiutare dal facilitatore e fate prima una copia dei vostri file.</div>
+</section>
+
+<!-- ======================================================= 12 -->
+<section class="capitolo"><span class="marca">§§c12§§</span>
+<div class="capitolo-testa"><span class="num">12</span><div><div class="eti">CAPITOLO</div><h1>Voci, saluti, promemoria, stampa e «Online»</h1></div></div>
+<p class="intro">Dalla versione 3.0 il Professore è più «presente»: parla con una voce maschile o femminile a scelta, vi accoglie quando aprite il programma,
+vi dà un consiglio se restate fermi, ricorda le vostre cose da fare e vi saluta quando uscite. Tutto si può spegnere in <b>Impostazioni → Voce</b>.</p>
+<h2>Le voci italiane, maschili e femminili</h2>
+<div class="affianca">
+<figure><img src="img-linux/42-voce.jpg" alt="" style="width:88%;margin:0 auto"><figcaption><b>Figura 20.</b> <b>Impostazioni → Voce → «Voce del Professore»</b>: 👨 voci maschili e 👩 voci femminili.
+(L'elenco qui è aperto per intero; nel programma si apre con un clic.)</figcaption></figure>
+<div>
+<p>Nel pacchetto sono già incluse due <b>voci naturali</b> italiane, che funzionano senza Internet:</p>
+<ul>
+<li><b>👨 Riccardo</b>, voce maschile: è la voce predefinita, perché il Professore è un uomo;</li>
+<li><b>👩 Paola</b>, voce femminile, morbida e chiara.</li>
+</ul>
+<p>Funzionano sui PC a 64 bit (x86_64) e sulle schede ARM a 64 bit con un sistema recente (Debian 11, Ubuntu 20.04, Mint 20 e successive, FeniceOS).
+Nello stesso elenco ci sono anche quattro <b>voci leggere</b> (espeak-ng): <b>maschile</b>, <b>maschile grave</b>, <b>femminile</b> e <b>femminile morbida</b>,
+che funzionano su tutti i computer, anche a 32 bit e molto vecchi.</p>
+<p>Per cambiare voce: <b>Impostazioni → Voce → Voce del Professore</b>. Appena scelta, il Professore dice «Buongiorno! Questa è la mia nuova voce.».
+Con <b>Automatica (consigliata)</b> usa Riccardo, poi Paola, poi la voce leggera maschile. Sotto l'elenco si legge quante voci maschili e femminili ci sono sul computer.</p>
+</div></div>
+<h2>Il saluto all'avvio</h2>
+<div class="affianca">
+<figure><img src="img-linux/45-saluto.jpg" alt=""><figcaption><b>Figura 21.</b> Il saluto della mattina, con la lezione da continuare e i promemoria.</figcaption></figure>
+<figure><img src="img-linux/46-consiglio.jpg" alt=""><figcaption><b>Figura 22.</b> Dopo qualche minuto senza attività, un consiglio.</figcaption></figure>
+</div>
+<p>Quando aprite il programma, il Professore compare in una nuvoletta in basso a destra e saluta a voce secondo l'ora del computer:
+<b>«Buongiorno»</b> fino alle 13, <b>«Buon pomeriggio»</b> fino alle 18, poi <b>«Buonasera»</b>, con il nome dell'allievo se è stato scritto.
+Propone la lezione da continuare (<b>▶ Continua la lezione</b> oppure <b>Più tardi</b>) e dice quanti promemoria avete. Se è molto tardi (dopo le 22)
+consiglia qualcosa di breve, e poi a riposare. Il saluto si fa una volta sola per finestra.</p>
+<p class="small">Su alcuni computer il browser permette di parlare solo dopo il primo clic: in quel caso il Professore saluta a voce appena toccate il mouse o la tastiera.</p>
+<h2>I consigli e l'attesa</h2>
+<div class="affianca">
+<div>
+<p>Se nessuno usa il programma per qualche minuto (circa 3), il Professore propone un <b>consiglio</b>: continuare la lezione, provare il Grande Quiz,
+allenarsi in Palestra, scoprire la Cultura generale o FeniceOS, fare una domanda, alzarsi a sgranchire le gambe. Dopo altri minuti ne propone un secondo,
+diverso dal primo. I pulsanti della nuvoletta portano direttamente dove serve; <b>No, grazie</b> la chiude.</p>
+<p>Dopo circa 10 minuti di silenzio dice «Mi metto in attesa» e socchiude gli occhi: <b>In attesa… muovete il mouse per svegliarmi</b>.
+Appena muovete il mouse o premete un tasto vi accoglie con «Bentornati!». Il Professore non interrompe mai mentre parla, mentre ascolta,
+durante un esercizio della Palestra o una stampa.</p>
+</div>
+<figure><img src="img-linux/47-attesa.jpg" alt="" style="width:70%;margin:0 auto"><figcaption><b>Figura 23.</b> Il Professore in attesa, con gli occhi socchiusi.</figcaption></figure>
+</div>
+<h2>I promemoria</h2>
+<figure><img src="img-linux/31-promemoria.jpg" alt="" style="width:80%;margin:0 auto"><figcaption><b>Figura 24.</b> I promemoria in fondo alla pagina Inizio.</figcaption></figure>
+<p>In fondo alla pagina <b>Inizio</b>, nel riquadro <b>📝 I miei promemoria</b>, scrivete le cose da non dimenticare («Chiamare il medico per la ricetta»,
+«Portare la chiavetta giovedì») e premete <b>➕ Aggiungi</b>. Quando una cosa è fatta, premete <b>✓ Fatto</b> e sparisce. Il Professore ricorda quanti promemoria
+ci sono quando saluta, ne cita uno tra i consigli e li legge tutti quando uscite.</p>
+<h2>Il pulsante 🚪 Esci</h2>
+<figure><img src="img-linux/44-uscita.jpg" alt=""><figcaption><b>Figura 25.</b> L'uscita di sera: i promemoria, la prossima lezione, il consiglio di spegnere bene il computer e la buona notte.</figcaption></figure>
+<p>In fondo al menu a sinistra, <b>🚪 Esci</b> apre una finestra di congedo: il Professore elenca i <b>promemoria</b>, ricorda la <b>prossima lezione</b>,
+consiglia di salvare il lavoro e spegnere il computer dal menu e saluta secondo l'ora («buona giornata», «buon pomeriggio», «buona serata» oppure,
+se è tardi, <b>«Buona notte, e sogni d'oro!»</b>). Con la voce attiva legge tutto e poi chiude il programma da solo; altrimenti premete <b>🚪 Esci adesso</b>.
+<b>↩ Resto ancora</b> annulla. Alla fine compare «Il Professore si è chiuso. Ora potete chiudere questa finestra».</p>
+<h2>Il pulsante 🖨️ Stampa</h2>
+<div class="affianca">
+<figure><img src="img-linux/43-stampa.jpg" alt=""><figcaption><b>Figura 26.</b> Il menu di stampa durante una lezione.</figcaption></figure>
+<div><p>Il pulsante <b>🖨️</b> nella barra in alto apre un piccolo menu con due scelte:</p>
+<ul><li><b>🖥️ Stampa questa pagina</b>: ciò che vedete, senza menu e pulsanti.</li>
+<li><b>📄 Stampa l'argomento</b>, quando la pagina ne ha uno: la <b>lezione intera</b> con tutti i passi, gli schemi e il quiz (soluzioni in fondo);
+<b>tutta la conversazione</b> in Chiedi al Professore; <b>lezioni e domande</b> di una materia di cultura, del libro o di FeniceOS; l'<b>attestato</b>.</li></ul>
+<p>Scorciatoia: <kbd>Ctrl</kbd> + <kbd>Maiusc</kbd> + <kbd>P</kbd> stampa subito l'argomento. Nella finestra di stampa potete anche scegliere <b>«Salva come PDF»</b>.</p></div></div>
+<h2>L'indicatore «Online»</h2>
+<p>Accanto alle pastiglie in alto, <b>● Online</b> si illumina di <b>verde</b> quando la connessione a Internet funziona davvero, ed è grigio con la scritta
+<b>«Non in linea»</b> quando manca: utile per capire in un attimo se si può navigare o se il router ha un problema. Il Professore funziona benissimo in entrambi i casi.
+Fate clic sull'indicatore per controllare subito.</p>
+<p>Per saperlo, il programma prova al massimo <b>una volta al minuto</b> ad aprire e chiudere una connessione verso un server pubblico neutrale
+(come 1.1.1.1 o 9.9.9.9): <b>nessun dato viene inviato</b>. Chi preferisce che il computer resti del tutto silenzioso può spegnerlo in
+<b>Impostazioni → Vista</b>: l'indicatore diventa «Online: non controllato».</p>
+<table><thead><tr><th>Cosa spegnere</th><th>Dove</th></tr></thead><tbody>
+<tr><td>Saluto a voce all'avvio</td><td><b>Impostazioni → Voce</b> → «Il Professore saluta a voce all'avvio»</td></tr>
+<tr><td>Promemoria e saluto all'uscita</td><td><b>Impostazioni → Voce</b> → «All'uscita ricorda i promemoria e saluta»</td></tr>
+<tr><td>Consigli e attesa</td><td><b>Impostazioni → Voce</b> → «Quando nessuno lo usa per un po', il Professore dà qualche consiglio…»</td></tr>
+<tr><td>Indicatore «Online»</td><td><b>Impostazioni → Vista</b> → «Indicatore «Online»»</td></tr>
+</tbody></table>
+</section>
+
+<!-- ======================================================= 13 -->
+<section class="capitolo"><span class="marca">§§c13§§</span>
+<div class="capitolo-testa"><span class="num">13</span><div><div class="eti">CAPITOLO</div><h1>Impostazioni e accessibilità</h1></div></div>
+<p class="intro">Ogni gruppo è diverso. Le impostazioni adattano la Cattedra alla vista, all'udito e al ritmo di chi la usa. Le scelte vengono salvate
+e ritrovate al prossimo avvio.</p>
+<figure><img src="img-linux/10-impostazioni.jpg" alt=""><figcaption><b>Figura 27.</b> La pagina delle impostazioni, divisa in riquadri: Vista, Voce, Intelligenza artificiale, Microfono, Dati, Contenuti, Aggiornamenti, Diagnostica, Informazioni.</figcaption></figure>
+<h3>👁️ Vista</h3>
+<ul>
+<li><b>Dimensione del testo</b> da 14 a 34 punti (anche con A− / A+ in alto).</li>
+<li><b>Colori</b>: chiaro, scuro (riposante la sera o nelle stanze buie), alto contrasto giallo su nero per chi vede poco.</li>
+<li><b>Modalità proiettore</b>: testo grande e menu nascosto.</li>
+<li><b>Gli occhi del Professore seguono il mouse</b>: attivo di serie; spegnetelo se distrae.</li>
+<li><b>Indicatore «Online»</b>: attivo di serie; spegnetelo se non volete nessun controllo della connessione (capitolo 12).</li>
+<li><b>Nome dell'allievo</b>: per i saluti e gli attestati. <b>Nome dell'insegnante o del corso</b> (facoltativo): firma gli attestati e viene comunicato all'IA.</li>
+</ul>
+<div class="affianca">
+<figure><img src="img-linux/11-contrasto.jpg" alt=""><figcaption><b>Figura 28.</b> Colori ad alto contrasto.</figcaption></figure>
+<figure><img src="img-linux/12-proiettore.jpg" alt=""><figcaption><b>Figura 29.</b> Modalità proiettore con colori scuri.</figcaption></figure>
+</div>
+<h3>🔊 Voce</h3>
+<ul>
+<li><b>Voce attiva</b>: l'interruttore generale. <b>Leggi automaticamente le risposte</b> (attivo di serie) e <b>i passi delle lezioni</b> (spento di serie).</li>
+<li><b>Voce del Professore</b>: Riccardo, Paola o una voce leggera, maschile o femminile (capitolo 12).</li>
+<li><b>Velocità</b> da 0,60 a 1,40. Per le persone anziane si consiglia tra 0,85 e 0,95.</li>
+<li><b>Motore vocale</b>: «Automatico» usa le voci del computer e, in mancanza, la voce del browser. <b>▶ Prova la voce</b> controlla volume e velocità.</li>
+<li><b>Saluto all'avvio</b>, <b>promemoria e saluto all'uscita</b>, <b>consigli e attesa</b>: tre interruttori, tutti attivi di serie.</li>
+</ul>
+<h3>🤖 Intelligenza artificiale e 🎤 microfono</h3>
+<p>Mostrano se l'IA (Ollama) e il riconoscimento vocale sono attivi, quali modelli sono installati e quale è consigliato per la memoria di questo computer,
+e permettono di scegliere il modello. Se qualcosa manca, indicano il comando da dare nel terminale (capitolo 14). Si può spegnere l'IA (per usare solo la guida interna) e decidere se inviare subito la domanda
+dopo aver parlato. <b>🔄 Ricontrolla i componenti</b> aggiorna lo stato dopo un'installazione.</p>
+<h3>📦 Dati e progressi</h3>
+<p><b>Esporta progressi</b> salva un file <code>professore-digitale-progressi.json</code> nella cartella Scaricati, con lezioni, risultati dei quiz, attestati,
+record della Palestra e promemoria; <b>Importa</b> lo ricarica (anche su un altro computer, anche Windows); <b>Azzera progressi</b> ricomincia il percorso e chiede
+una seconda conferma. La cartella dei progressi è indicata nel riquadro stesso (capitolo 17).</p>
+<h3>🧩 Contenuti aggiuntivi, 🔄 Aggiornamenti e 🩺 Diagnostica</h3>
+<p>Si possono importare pacchetti di domande, lezioni e quiz (file <code>.json</code>) senza reinstallare: l'elenco mostra anche i pacchetti già inclusi
+(cultura, libro, FeniceOS, Grande Quiz). Il controllo degli aggiornamenti parte solo premendo il pulsante: se c'è una versione nuova il Professore la scarica
+nella cartella Scaricati, ne verifica l'impronta e mostra il comando per installarla (capitolo 18). La Diagnostica riassume lo stato del sistema: utile da copiare quando si chiede aiuto.</p>
+</section>
+
+<!-- ======================================================= 14 -->
+<section class="capitolo"><span class="marca">§§c14§§</span>
+<div class="capitolo-testa"><span class="num">14</span><div><div class="eti">CAPITOLO</div><h1>IA, microfono e voci: i componenti facoltativi</h1></div></div>
+<p class="intro">Il programma di base è completo e ha già le voci. Due componenti possono arricchirlo: l'<b>intelligenza artificiale locale</b> e il <b>microfono</b>.
+Ognuno richiede Internet una sola volta, durante la configurazione; poi funziona offline.</p>
+<p>Si configurano dal menu delle applicazioni (<b>Professore Digitale: configura IA</b> e <b>Professore Digitale: configura microfono</b>) oppure dal terminale.
+Le procedure sono guidate, in italiano, e chiedono conferma prima di ogni passo importante. Dopo l'installazione di un componente, nel Professore premete
+<b>Impostazioni → 🔄 Ricontrolla i componenti</b> (oppure riavviatelo).</p>
+<h2>L'intelligenza artificiale locale</h2>
+<pre>professore-digitale-setup-ia</pre>
+<ol class="passi">
+<li>Controlla memoria, processore e architettura (serve un sistema a 64 bit).</li>
+<li>Se manca, installa <b>Ollama</b> dal sito ufficiale (chiede la password di amministratore).</li>
+<li>Avvia il servizio e propone il modello più adatto alla memoria del computer.</li>
+<li>Scarica il modello e fa una prova in italiano.</li>
+</ol>
+<table><thead><tr><th>Modello</th><th>Dimensione</th><th>Adatto a</th></tr></thead><tbody>
+<tr><td><code>qwen2.5:0.5b</code></td><td>~0,4 GB</td><td>PC molto datati, meno di 3–4 GB di RAM: risposte semplici</td></tr>
+<tr><td><code>qwen3.5:0.8b</code></td><td>~1 GB</td><td>PC datati, 4–5 GB di RAM</td></tr>
+<tr><td><code>qwen3.5:2b</code></td><td>~2,7 GB</td><td>PC con 6–8 GB di RAM</td></tr>
+<tr><td><code>qwen3.5:4b</code></td><td>~3,4 GB</td><td>PC con 8–16 GB di RAM (scelta tipica)</td></tr>
+<tr><td><code>gemma3:4b</code></td><td>~3,3 GB</td><td>Alternativa con ottimo italiano</td></tr>
+<tr><td><code>qwen3.5:9b</code></td><td>~6,6 GB</td><td>PC recenti, 16 GB di RAM o scheda video</td></tr>
+<tr><td><code>gemma4:12b</code></td><td>~8 GB</td><td>PC potenti, 24 GB di RAM o scheda video da 12 GB</td></tr>
+</tbody></table>
+<p>Per scegliere direttamente un modello: <code>professore-digitale-setup-ia --modello qwen3.5:4b</code>. Si possono installare più modelli e scegliere quello da usare
+in <b>Impostazioni → Intelligenza artificiale → Modello</b>.</p>
+<div class="box consiglio"><span class="t">Regola pratica</span>Meglio un modello piccolo che risponde in 10 secondi di uno grande che fa aspettare un minuto:
+davanti a un gruppo, l'attenzione vale più della raffinatezza.</div>
+<h2>Il microfono (riconoscimento vocale offline)</h2>
+<pre>professore-digitale-setup-voce</pre>
+<p>Installa nella cartella dell'utente, senza password, il motore Vosk e il modello della lingua italiana (circa 50 MB).</p>
+<h2>Le voci</h2>
+<p>Le voci naturali <b>Riccardo</b> (uomo) e <b>Paola</b> (donna) sono già nel pacchetto, insieme al motore Piper per PC a 64 bit (x86_64) e ARM a 64 bit (aarch64):
+non serve installare nulla. Funzionano sui sistemi recenti (Debian 11 e successive, Ubuntu 20.04 e successive, Mint 20 e successive, FeniceOS); se il sistema è troppo vecchio
+il Professore usa le <b>voci leggere</b> di espeak-ng, maschili e femminili. Si scelgono in <b>Impostazioni → Voce → «Voce del Professore»</b> (capitolo 12).</p>
+<p class="small">Il comando <code>professore-digitale-setup-voce --voce-naturale</code> scarica di nuovo Piper con Paola e Riccardo nella cartella personale: serve solo in casi particolari,
+per esempio per riaverle dopo averle tolte con <code>--rimuovi</code>.</p>
+<h2>Aule senza Internet</h2>
+<p>Per i computer che non si collegheranno mai alla rete, preparate tutto su un PC connesso e portatelo con una chiavetta:</p>
+<pre><span class="c"># 1. sul PC con Internet (stessa architettura e versione di Python del PC di destinazione)</span>
+professore-digitale-setup-voce --prepara-pacchetti /media/chiavetta/voce
+<span class="c"># 2. sul PC senza rete</span>
+professore-digitale-setup-voce --pacchetti-da /media/chiavetta/voce \
+     --modello-da /media/chiavetta/voce/vosk-model-small-it-0.22.zip</pre>
+<p>Per l'IA, i modelli di Ollama si possono copiare da un PC all'altro: si trovano nella cartella dei modelli di Ollama
+(per l'installazione di sistema di solito <code>/usr/share/ollama/.ollama/models</code>).</p>
+<h2>Togliere i componenti</h2>
+<pre>professore-digitale-setup-voce --rimuovi           <span class="c"># microfono e voce scaricata nella cartella personale</span>
+ollama list                                        <span class="c"># i modelli dell'IA installati</span>
+ollama rm qwen3.5:4b                               <span class="c"># toglie un modello</span></pre>
+</section>
+<!-- ======================================================= 15 -->
+<section class="capitolo"><span class="marca">§§c15§§</span>
+<div class="capitolo-testa"><span class="num">15</span><div><div class="eti">CAPITOLO</div><h1>Il quadro dell'aula</h1></div></div>
+<p class="intro">Con il menu <b>🏫 Aula</b> il PC del facilitatore vede in tempo reale i PC degli allievi collegati alla stessa rete (Wi-Fi o cavo): chi c'è,
+cosa sta facendo, a che punto è con le lezioni, i quiz e gli attestati. Può anche mandare un messaggio a tutti. Internet non serve: i dati restano nella rete dell'aula.</p>
+<figure><img src="img-linux/49-aula-ruoli.jpg" alt=""><figcaption><b>Figura 30.</b> La pagina Aula: si sceglie che ruolo ha questo computer. Qui è il PC del facilitatore, con il nome e il codice dell'aula.</figcaption></figure>
+<h2>I tre ruoli</h2>
+<table><thead><tr><th></th><th>Ruolo</th><th>Cosa fa</th></tr></thead><tbody>
+<tr><td class="ico">🧑‍🏫</td><td><b>Il PC del facilitatore</b></td><td>Riceve i progressi degli allievi e mostra il quadro dell'aula. Ce n'è uno per aula.</td></tr>
+<tr><td class="ico">🧑‍🎓</td><td><b>Il PC di un allievo</b></td><td>Si collega da solo al PC del facilitatore e gli invia nome, attività e progressi.</td></tr>
+<tr><td class="ico">💻</td><td><b>Un PC senza aula</b></td><td>Nessun collegamento: tutto resta su questo computer. È la scelta di serie.</td></tr>
+</tbody></table>
+<h2>Preparare il PC del facilitatore</h2>
+<ol class="passi">
+<li>Aprite <b>🏫 Aula</b> e scegliete <b>«Il PC del facilitatore»</b>.</li>
+<li>Scrivete il <b>nome dell'aula</b> (per esempio «Aula del Centro anziani») e il <b>codice dell'aula</b>: <b>🎲 Nuovo codice</b> ne propone uno di quattro cifre
+(fino a otto). Solo i PC che conoscono il codice possono collegarsi; lasciandolo vuoto si accettano tutti i PC della rete.</li>
+<li>Premete <b>💾 Salva e applica</b>. Nel riquadro «Questo PC» controllate che <b>In ascolto per gli allievi</b> sia ✅ (porta 8766) e <b>Ricerca automatica</b> ✅ attiva.
+Se compare ❌ «porta occupata o bloccata dal firewall», leggete il riquadro «Il firewall» qui sotto.</li>
+</ol>
+<h2>Collegare i PC degli allievi</h2>
+<div class="affianca">
+<figure><img src="img-linux/51-aula-allievo.jpg" alt=""><figcaption><b>Figura 31.</b> Sul PC dell'allievo: nome, codice dell'aula e, solo se serve, l'indirizzo del facilitatore.</figcaption></figure>
+<div><ol class="passi">
+<li>Su ogni PC degli allievi aprite <b>🏫 Aula</b> e scegliete <b>«Il PC di un allievo»</b>.</li>
+<li>Scrivete il <b>nome</b> dell'allievo e il <b>codice dell'aula</b> detto dal facilitatore.</li>
+<li>Premete <b>💾 Salva e applica</b>. Il PC cerca da solo quello del facilitatore; dopo pochi secondi compare
+«✅ Collegato al PC del facilitatore». Se non lo trova, scrivete il suo <b>indirizzo</b> (lo vedete nel riquadro «Questo PC», per esempio <code>192.168.1.10</code>).</li>
+</ol>
+<p class="small">Il PC dell'allievo invia un breve riepilogo ogni 20 secondi e, quando cambia pagina, entro pochi secondi. <b>🔄 Invia adesso</b> lo manda subito.</p></div></div>
+<h2>Il quadro</h2>
+<figure><img src="img-linux/50-aula-quadro.jpg" alt="" style="width:86%;margin:0 auto"><figcaption><b>Figura 32.</b> Il quadro del facilitatore: i numeri dell'aula, questo PC, il messaggio a tutti e l'elenco degli allievi.</figcaption></figure>
+<ul>
+<li><b>I numeri</b>: allievi collegati ora, PC visti in aula, lezioni completate e attestati ottenuti da tutto il gruppo.</li>
+<li><b>Gli allievi</b>: per ognuno un pallino <b>verde</b> se è collegato (grigio se non lo è più), il nome (con «😴 inattivo da N min» se è fermo da più di 5 minuti),
+<b>cosa sta facendo</b> (per esempio «Lezione: Riconoscere le truffe online (passo 3)» o il quiz in corso), le <b>lezioni</b> completate con la barra,
+<b>quiz e attestati</b> con il miglior risultato, il <b>computer</b> (nome, sistema, memoria, IA e microfono, un avviso se ha una versione diversa del Professore)
+e l'<b>ultimo contatto</b> con l'indirizzo. Il pulsante <b>✕</b> toglie un PC dall'elenco.</li>
+<li><b>📣 Messaggio a tutti gli allievi</b>: scrivete, per esempio, «Tra cinque minuti facciamo una pausa» e premete <b>📣 Invia</b>. Entro pochi secondi
+il messaggio compare su ogni PC nella nuvoletta del Professore, letto a voce, con il pulsante <b>Ho capito</b>.</li>
+<li><b>⬇️ Esporta elenco</b>: salva nella cartella Scaricati il file <code>aula-AAAA-MM-GG.csv</code>, che si apre con LibreOffice Calc:
+allievo, computer, sistema, attività, lezioni, quiz, attestati e ultimo contatto. Utile per il registro del corso.</li>
+<li><b>🧹 Togli i PC non collegati</b>: ripulisce l'elenco a fine giornata.</li>
+</ul>
+<h2>🔍 Cerca nella rete</h2>
+<p>In fondo alla pagina, su qualunque PC, <b>🔍 Cerca nella rete</b> mostra l'indirizzo di questo computer, se Internet è collegato, i <b>PC dei facilitatori</b>
+trovati (nome, computer, indirizzo, versione, se serve il codice) e il server degli aggiornamenti dell'aula, se c'è. È il primo controllo quando un allievo non si collega.</p>
+<div class="box attenzione"><span class="t">Il firewall</span>Il PC del facilitatore riceve i collegamenti sulle porte <b>8766 TCP</b> e <b>8767 UDP</b>, solo dalla rete locale.
+Su molte distribuzioni il firewall è spento e non serve fare nulla. Se sul PC del facilitatore è attivo <b>ufw</b> (lo vedete con <code>sudo ufw status</code>),
+consentite le due porte e riavviate il Professore:
+<pre>sudo ufw allow 8766/tcp
+sudo ufw allow 8767/udp</pre>
+I PC degli allievi non hanno bisogno di regole. Se nell'aula ci sono anche PC Windows con il ruolo di facilitatore, vedete il vademecum per Windows.</div>
+<div class="box"><span class="t">Cosa viaggia in rete, e cosa no</span>Il PC dell'allievo invia al facilitatore, solo nella rete locale: il nome, la pagina in uso, le lezioni completate,
+i risultati dei quiz e gli attestati, il nome e la memoria del computer. <b>Mai le conversazioni</b> con il Professore. Si accettano solo indirizzi della rete locale;
+l'interfaccia del Professore resta sempre chiusa dentro il computer. Il quadro dell'aula funziona con il programma installato, non con la versione portatile <code>.html</code>.</div>
+</section>
+
+<!-- ======================================================= 16 -->
+<section class="capitolo"><span class="marca">§§c16§§</span>
+<div class="capitolo-testa"><span class="num">16</span><div><div class="eti">CAPITOLO</div><h1>Guida per il facilitatore</h1></div></div>
+<p class="intro">Il Professore Digitale non sostituisce il facilitatore: gli dà una lavagna, una voce in più, un percorso già pronto, i quiz con gli attestati
+e, con l'aula, uno sguardo d'insieme sul gruppo. Ecco come ottenere il meglio da un incontro.</p>
+<h2>Preparare l'aula</h2>
+<div class="colonne"><ul class="check">
+<li>Computer accesi e aggiornati prima dell'arrivo del gruppo.</li>
+<li>Professore aperto e testo ingrandito (A+).</li>
+<li>Voce scelta (Riccardo o Paola) e volume provato con <b>▶ Prova la voce</b>.</li>
+<li>Il vostro PC impostato come <b>facilitatore</b> in <b>🏫 Aula</b>, codice dell'aula scritto alla lavagna.</li>
+<li>PC degli allievi collegati all'aula (✅ Collegato).</li>
+<li>Proiettore collegato (schermi «duplicati» nelle impostazioni dello schermo) e modalità proiettore attiva.</li>
+<li>Mouse con filo (più facili dei touchpad).</li>
+<li>Cuffie per chi sente poco.</li>
+<li>Un foglio con nome utente e password di ogni PC.</li>
+<li>Risparmio energia: schermo che non si spegne durante la lezione.</li>
+<li>Stampante pronta per gli attestati.</li>
+<li>Questo vademecum stampato, a portata di mano.</li>
+</ul></div>
+<h2>Un incontro tipo (90 minuti)</h2>
+<table><thead><tr><th>Tempo</th><th>Attività</th></tr></thead><tbody>
+<tr><td>0–10'</td><td><b>Accoglienza.</b> Caffè, nomi, cosa è successo in settimana con il telefono o il computer: spesso le domande migliori nascono qui.
+Il Professore saluta ciascuno sul proprio PC.</td></tr>
+<tr><td>10–20'</td><td><b>Riscaldamento in Palestra.</b> Esercizio del clic, dei tasti speciali o «Riconosci la truffa»; ognuno annota il proprio record.</td></tr>
+<tr><td>20–50'</td><td><b>La lezione del giorno</b>, proiettata. Il facilitatore legge o fa leggere il Professore, un passo alla volta, fermandosi sulle domande.</td></tr>
+<tr><td>50–60'</td><td>Pausa (con un <b>📣 messaggio a tutti</b> per avvisare).</td></tr>
+<tr><td>60–75'</td><td><b>Pratica a coppie</b> sui PC: ripetere i passi della lezione (salvare un file, scrivere un'email…). Dal quadro dell'aula vedete chi è rimasto indietro.</td></tr>
+<tr><td>75–85'</td><td><b>Quiz insieme</b>, proiettato: il gruppo vota a voce, poi si legge la spiegazione. A fine percorso: il <b>Grande Quiz</b> individuale e gli attestati.</td></tr>
+<tr><td>85–90'</td><td>Domande libere in «Chiedi al Professore», un promemoria per la volta dopo e saluti con <b>🚪 Esci</b>.</td></tr>
+</tbody></table>
+<h2>Dieci consigli per insegnare agli adulti e agli anziani</h2>
+<ol>
+<li><b>Mani sul mouse loro, non vostre.</b> Guidate a parole; toccate il mouse solo se chiesto.</li>
+<li><b>Una cosa alla volta.</b> Un passo, una prova, un sorriso. Poi il passo successivo.</li>
+<li><b>Metafore concrete:</b> il Professore ne usa molte (l'armadio, la strada, la chiave); riprendetele e aggiungete le vostre.</li>
+<li><b>L'errore è benvenuto.</b> Mostrate <kbd>Ctrl</kbd> + <kbd>Z</kbd> e il Cestino fin dal primo giorno.</li>
+<li><b>Ripetere senza stancarsi.</b> Rivedere una lezione è normale: i passi già visti restano segnati in verde.</li>
+<li><b>Testo grande e voce lenta.</b> Regolateli all'inizio, non a metà incontro.</li>
+<li><b>Partite dai loro bisogni:</b> la videochiamata con il nipote motiva più di qualsiasi teoria. La Cultura generale aiuta chi ha paura del computer: si esercita senza accorgersene.</li>
+<li><b>Sicurezza sempre.</b> Ripetete la regola d'oro: nessuno chiede password o codici per telefono.</li>
+<li><b>Scrivere su carta</b> i passaggi chiave: molti allievi ricordano meglio con un foglio accanto. Il pulsante 🖨️ stampa la lezione intera.</li>
+<li><b>Celebrare i progressi.</b> I record della Palestra, le lezioni completate e gli attestati sono piccoli traguardi da festeggiare.</li>
+</ol>
+<h2>Più allievi sullo stesso computer</h2>
+<p>I progressi appartengono all'utente del computer. Se più persone usano lo stesso PC, create un utente Linux per ciascuna
+(<b>Impostazioni di sistema → Utenti</b>); oppure usate <b>Esporta progressi</b> a fine incontro e <b>Importa</b> la volta dopo.
+Su FeniceOS gli allievi entrano come <b>ospite</b>: ricordate che in modalità live ciò che si salva non resta, quindi esportate i progressi su una chiavetta personale.
+Ricordate di cambiare il nome dell'allievo in <b>Impostazioni → Vista</b>, perché compare nei saluti, negli attestati e nel quadro dell'aula.</p>
+</section>
+
+<!-- ======================================================= 17 -->
+<section class="capitolo"><span class="marca">§§c17§§</span>
+<div class="capitolo-testa"><span class="num">17</span><div><div class="eti">CAPITOLO</div><h1>Privacy e sicurezza</h1></div></div>
+<p class="intro">Chi impara a usare il digitale deve poter sbagliare e fare domande senza timore. Per questo il Professore è costruito in modo da non far uscire nulla dal computer.</p>
+<h2>Cosa fa il programma</h2>
+<ul>
+<li>Il server interno ascolta solo <b>all'interno del computer</b> (127.0.0.1): dagli altri computer della rete l'interfaccia non è raggiungibile.</li>
+<li>Accetta richieste solo dalla propria finestra: una pagina web estranea non può comandarlo.</li>
+<li>IA, voci e riconoscimento vocale lavorano sul computer: domande e registrazioni non vengono inviate a nessuno. Le registrazioni del microfono vengono trascritte e cancellate subito.</li>
+<li>Gli attestati in PDF si creano sul computer, senza servizi esterni.</li>
+<li>Non richiede privilegi di amministratore durante l'uso.</li>
+<li>Ogni file scaricato su vostra richiesta (aggiornamenti, contenuti) viene verificato con la sua impronta SHA-256.</li>
+</ul>
+<h2>Le due eccezioni, dichiarate e disattivabili</h2>
+<table><thead><tr><th style="width:24%">Funzione</th><th>Cosa fa in rete</th><th style="width:26%">Come si spegne</th></tr></thead><tbody>
+<tr><td><b>Indicatore «Online»</b></td><td>Al massimo una volta al minuto il programma <b>apre e chiude</b> una connessione verso un server pubblico neutrale (1.1.1.1, 9.9.9.9…) per sapere
+se Internet funziona. <b>Nessun dato viene inviato.</b></td><td><b>Impostazioni → Vista</b> → «Indicatore «Online»»</td></tr>
+<tr><td><b>Quadro dell'aula</b></td><td>Solo se scegliete un ruolo in <b>🏫 Aula</b>. Il PC del facilitatore ascolta nella rete locale soltanto due indirizzi (<code>/aula/info</code> e
+<code>/aula/ciao</code>, porta 8766 TCP) e risponde alla ricerca dei PC (porta 8767 UDP). Il PC dell'allievo invia ogni 20 secondi nome, pagina in uso,
+lezioni completate, risultati dei quiz e attestati: <b>mai le conversazioni</b>. Solo indirizzi IP privati; il codice dell'aula blocca i PC estranei.</td>
+<td><b>🏫 Aula</b> → «Un PC senza aula» (è la scelta di serie)</td></tr>
+</tbody></table>
+<h2>Cosa non fa</h2>
+<ul><li>Non crea account e non chiede dati personali (il nome per saluti e attestati è facoltativo e resta sul computer).</li><li>Non contiene pubblicità né sistemi di tracciamento.</li>
+<li>Non scarica nulla da solo, nemmeno gli aggiornamenti.</li></ul>
+<h2>Dove stanno i dati</h2>
+<table><thead><tr><th>Dato</th><th>Posizione</th></tr></thead><tbody>
+<tr><td>Impostazioni</td><td><code>~/.local/share/professore-digitale/settings.json</code></td></tr>
+<tr><td>Progressi: lezioni, Palestra, risultati dei quiz, attestati, promemoria</td><td><code>~/.local/share/professore-digitale/progress.json</code></td></tr>
+<tr><td>Conversazione (ultimi 60 messaggi)</td><td><code>~/.local/share/professore-digitale/history.json</code></td></tr>
+<tr><td>Pacchetti di contenuti importati</td><td><code>~/.local/share/professore-digitale/contenuti/</code></td></tr>
+<tr><td>Elenco degli allievi dell'aula (solo sul PC del facilitatore)</td><td><code>~/.local/share/professore-digitale/aula-clienti.json</code></td></tr>
+<tr><td>Modelli vocali, motore Vosk</td><td><code>~/.local/share/professore-digitale/models/</code> e <code>venv/</code></td></tr>
+<tr><td>Registro tecnico</td><td><code>~/.local/state/professore-digitale/server.log</code></td></tr>
+<tr><td>Versione portatile</td><td>Memoria del browser di quel computer</td></tr>
+</tbody></table>
+<p class="small">Il simbolo <code>~</code> indica la cartella personale dell'utente (le cartelle che iniziano con il punto sono nascoste: nel gestore dei file si vedono con
+<kbd>Ctrl</kbd> + <kbd>H</kbd>). Sono semplici file di testo, leggibili e cancellabili in qualsiasi momento.</p>
+<div class="box attenzione"><span class="t">Su un computer condiviso</span>A fine corso, o prima di donare il computer, usate <code>professore-digitale-pulizia</code>
+(capitolo 18) oppure <b>🧹 Nuova conversazione</b> e <b>Azzera progressi</b>.</div>
+</section>
+<!-- ======================================================= 18 -->
+<section class="capitolo"><span class="marca">§§c18§§</span>
+<div class="capitolo-testa"><span class="num">18</span><div><div class="eti">CAPITOLO</div><h1>Manutenzione, aggiornamenti e disinstallazione</h1></div></div>
+<h2>Salvare i progressi</h2>
+<p>In <b>Impostazioni → Dati e progressi → Esporta progressi</b> si ottiene un file da conservare su chiavetta, con lezioni, quiz, attestati e promemoria.
+Per un salvataggio completo di un utente basta copiare la cartella <code>~/.local/share/professore-digitale</code>. Gli attestati salvati in PDF stanno nella cartella <b>Scaricati</b>.</p>
+<h2>Aggiornare</h2>
+<div class="affianca">
+<div><ol class="passi">
+<li>In <b>Impostazioni → Aggiornamenti</b> premete <b>🌐 Controlla aggiornamenti</b> (serve Internet in quel momento, oppure un PC dell'aula che fa da server).</li>
+<li>Se c'è una versione nuova, leggete le novità e premete <b>⬇️ Scarica il nuovo pacchetto</b>: il file va nella cartella <b>Scaricati</b> e viene verificato con la sua impronta.</li>
+<li>Installatelo come la prima volta: <code>sudo apt install ./professore-digitale_X.Y.Z_all.deb</code>. Impostazioni e progressi vengono conservati.</li>
+</ol></div>
+<figure><img src="img-linux/lx-agg.jpg" alt="" style="width:80%;margin:0 auto"><figcaption><b>Figura 33.</b> La scheda Aggiornamenti: il Professore si collega a Internet solo quando premete il pulsante.</figcaption></figure>
+</div>
+<p>Nella stessa scheda si possono aggiungere i nuovi <b>contenuti</b> (domande, lezioni e quiz) con un clic, senza aggiornare il programma. L'indirizzo del file di versione
+si può cambiare, ad esempio per usare un PC dell'aula (<code>http://192.168.1.10:8080/aggiornamenti.json</code>). Se il centro ha configurato il Professore come
+fonte del sistema, arriva con gli altri aggiornamenti (<code>sudo apt update</code> e <code>sudo apt install --only-upgrade professore-digitale</code>).</p>
+<div class="box consiglio"><span class="t">Dalla 2.x alla 3.0</span>Si installa sopra la versione precedente, senza disinstallare. Tutto resta al suo posto: progressi, impostazioni,
+conversazione, contenuti aggiunti, IA e microfono già configurati. Le novità (quiz, cultura, aula, voci) compaiono subito. Il pacchetto della 3.0 è più grande
+(circa 150 MB) perché include le voci: se scaricarlo nell'aula è lento, portatelo con una chiavetta.</div>
+<h2>Ripristino dopo un problema</h2>
+<p>Se dopo un'interruzione di corrente il Professore non si comporta bene:</p>
+<pre>professore-digitale --stop                                       <span class="c"># chiude il server interno</span>
+professore-digitale                                              <span class="c"># lo riapre</span>
+sudo apt install --reinstall ./professore-digitale_3.0.0_all.deb <span class="c"># reinstalla i file del programma</span></pre>
+<p>Se il microfono smette di funzionare, rifate la configurazione: <code>professore-digitale-setup-voce --rimuovi</code> e poi <code>professore-digitale-setup-voce</code>.</p>
+<h2>Disinstallazione radicale</h2>
+<p>Per restituire il computer «come nuovo», ad esempio prima di una donazione o dopo molte prove di installazione:</p>
+<ol class="passi">
+<li>Pulire i dati di ogni utente che ha usato il Professore (da quell'utente): <pre>professore-digitale-pulizia</pre></li>
+<li>Rimuovere il programma, le voci incluse e le icone (il pacchetto chiude da solo gli eventuali server del Professore ancora attivi):
+<pre>sudo apt purge professore-digitale
+sudo apt autoremove --purge</pre></li>
+<li>Facoltativo, l'IA: elencare e rimuovere i modelli (<code>ollama list</code>, <code>ollama rm NOME</code>). Per togliere Ollama del tutto seguite le istruzioni ufficiali di Ollama.</li>
+<li>Se avevate aperto le porte dell'aula nel firewall: <code>sudo ufw delete allow 8766/tcp</code> e <code>sudo ufw delete allow 8767/udp</code>.</li>
+</ol>
+</section>
+<!-- ======================================================= 19 -->
+<section class="capitolo"><span class="marca">§§c19§§</span>
+<div class="capitolo-testa"><span class="num">19</span><div><div class="eti">CAPITOLO</div><h1>Risoluzione dei problemi</h1></div></div>
+<p class="intro">Prima di tutto, un comando che risolve metà dei dubbi: <code>professore-digitale --status</code> mostra cosa è attivo e cosa no.
+Nel programma, <b>Impostazioni → Diagnostica</b> dice lo stesso; il registro tecnico è in <code>~/.local/state/professore-digitale/server.log</code>.</p>
+<table><thead><tr><th style="width:27%">Sintomo</th><th style="width:25%">Causa probabile</th><th>Rimedio</th></tr></thead><tbody>
+<tr><td>Clic sull'icona e non succede nulla</td><td>Nessun browser installato o PC molto lento</td><td>Aspettate fino a 45 secondi. Poi da terminale: <code>professore-digitale</code>; leggete il messaggio e il registro. Installate un browser: <code>sudo apt install firefox-esr</code> (Debian) o <code>chromium</code>.</td></tr>
+<tr><td>Si apre il browser con barre e schede</td><td>Chromium/Chrome non installati</td><td>È normale con Firefox. Per una finestra pulita installate Chromium.</td></tr>
+<tr><td>Il Professore non parla</td><td>Voce spenta, volume basso</td><td>Controllate il volume del sistema; in Impostazioni «Voce attiva» e «Prova la voce». Se mancano tutte le voci: <code>sudo apt install espeak-ng</code>.</td></tr>
+<tr><td>Nell'elenco mancano Riccardo e Paola</td><td>PC a 32 bit o sistema troppo vecchio per Piper</td><td>Su questi computer si usano le voci leggere, maschili e femminili. Controllate con <code>professore-digitale --status</code>; su un sistema recente a 64 bit reinstallate il pacchetto.</td></tr>
+<tr><td>La voce è molto robotica</td><td>Si sta usando la voce leggera</td><td>In <b>Impostazioni → Voce</b> scegliete Riccardo o Paola, se ci sono.</td></tr>
+<tr><td>All'avvio il saluto si vede ma non si sente</td><td>Il browser permette la voce solo dopo un clic</td><td>È normale con alcuni browser: il Professore parla appena toccate il mouse o la tastiera.</td></tr>
+<tr><td>I consigli o il saluto disturbano la lezione</td><td>Funzioni attive di serie</td><td><b>Impostazioni → Voce</b>: spegnete «saluta a voce all'avvio» e/o «dà qualche consiglio».</td></tr>
+<tr><td>L'indicatore «Online» è sempre grigio</td><td>Niente Internet, firewall che blocca, controllo spento</td><td>Fate clic sull'indicatore per riprovare. Se dice «non controllato», riattivatelo in <b>Impostazioni → Vista</b>. Il Professore funziona comunque.</td></tr>
+<tr><td>«Salva in PDF» dell'attestato non funziona</td><td>Browser molto vecchio</td><td>Premete <b>🖨️ Stampa</b> e nella finestra di stampa scegliete <b>Salva come PDF</b> (o «Stampa su file»).</td></tr>
+<tr><td>L'allievo non si collega all'aula: «nessun PC del facilitatore trovato»</td><td>Reti diverse, firewall, codice sbagliato</td><td>Stessa rete per tutti. Sul facilitatore controllate «In ascolto ✅» e, se c'è ufw, aprite le porte (capitolo 15). Scrivete a mano l'indirizzo del facilitatore e ricontrollate il codice. Usate <b>🔍 Cerca nella rete</b>.</td></tr>
+<tr><td>Sul facilitatore: «porta occupata o bloccata dal firewall»</td><td>Firewall attivo o altro programma sulla porta 8766</td><td><code>sudo ufw allow 8766/tcp</code> e <code>sudo ufw allow 8767/udp</code>, poi riavviate il Professore (<code>professore-digitale --stop</code>).</td></tr>
+<tr><td>Il microfono è grigio</td><td>Riconoscimento vocale non configurato</td><td><code>professore-digitale-setup-voce</code>, poi Impostazioni → Ricontrolla i componenti.</td></tr>
+<tr><td>«Non ho sentito nulla»</td><td>Microfono muto, lontano o non scelto</td><td>Controllate nelle impostazioni audio del sistema il dispositivo di ingresso e il livello; parlate a 20–30 cm.</td></tr>
+<tr><td>Il browser chiede il permesso per il microfono</td><td>Protezione del browser</td><td>Scegliete <b>Consenti</b> (e «Ricorda»): l'audio resta sul computer.</td></tr>
+<tr><td>Risponde sempre la «Guida interna»</td><td>IA spenta, Ollama fermo o senza modelli</td><td>Impostazioni → «Usa l'IA» attivo. Da terminale: <code>ollama list</code>; se Ollama è fermo: <code>sudo systemctl start ollama</code>; altrimenti <code>professore-digitale-setup-ia</code>.</td></tr>
+<tr><td>L'IA è lentissima</td><td>Modello troppo grande per il PC</td><td>Scegliete un modello più piccolo (capitolo 14). Chiudete gli altri programmi.</td></tr>
+<tr><td>L'IA risponde in inglese o in modo strano</td><td>Modello molto piccolo</td><td>Riformulate la domanda in modo semplice o passate a un modello più grande; la guida interna resta un'alternativa sicura.</td></tr>
+<tr><td>Lo schema non si disegna</td><td>Schema dell'IA non valido</td><td>Compare comunque la descrizione testuale. Rifate la domanda o chiedete «fammi uno schema semplice».</td></tr>
+<tr><td>Le icone appaiono come quadratini</td><td>Manca il carattere delle emoji</td><td><code>sudo apt install fonts-noto-color-emoji</code>, poi riavviate il Professore.</td></tr>
+<tr><td>Ho perso i progressi nella versione portatile</td><td>La memoria del browser è stata cancellata</td><td>Usate regolarmente Esporta progressi; con il pacchetto .deb i progressi stanno in un file su disco.</td></tr>
+<tr><td>«apt» dice che il pacchetto non si trova</td><td>Manca il «./» davanti al nome</td><td><code>sudo apt install ./professore-digitale_3.0.0_all.deb</code></td></tr>
+<tr><td>«Impossibile acquisire il lock»</td><td>Un altro aggiornamento è in corso</td><td>Aspettate qualche minuto (o chiudete il Gestore aggiornamenti) e ripetete il comando.</td></tr>
+<tr><td>Avviso «Download is performed unsandboxed as root»</td><td>Il file è sulla chiavetta</td><td>È solo un avviso, l'installazione riesce. Per evitarlo copiate prima il file nella cartella Scaricati.</td></tr>
+</tbody></table>
+</section>
+<!-- ======================================================= 20 -->
+<section class="capitolo"><span class="marca">§§c20§§</span>
+<div class="capitolo-testa"><span class="num">20</span><div><div class="eti">CAPITOLO</div><h1>Riferimento rapido</h1></div></div>
+<h2>Comandi</h2>
+<table><thead><tr><th>Comando</th><th>Funzione</th></tr></thead><tbody>
+<tr><td><code>professore-digitale</code></td><td>Apre il Professore (o la finestra già attiva)</td></tr>
+<tr><td><code>professore-digitale --status</code></td><td>Stato di IA, voci, microfono, memoria</td></tr>
+<tr><td><code>professore-digitale --stop</code></td><td>Chiude il server interno</td></tr>
+<tr><td><code>professore-digitale --no-browser</code></td><td>Avvia il server e mostra solo l'indirizzo</td></tr>
+<tr><td><code>professore-digitale --version</code></td><td>Versione installata</td></tr>
+<tr><td><code>professore-digitale-setup-ia [--modello NOME]</code></td><td>Configura l'IA locale (Ollama)</td></tr>
+<tr><td><code>professore-digitale-setup-voce</code></td><td>Configura il microfono</td></tr>
+<tr><td><code>… --prepara-pacchetti DIR</code></td><td>Prepara l'installazione del microfono senza rete</td></tr>
+<tr><td><code>… --pacchetti-da DIR --modello-da FILE.zip</code></td><td>Installa il microfono senza rete</td></tr>
+<tr><td><code>… --voce-naturale</code> · <code>… --rimuovi</code></td><td>Riscarica Piper con Paola e Riccardo nella cartella personale · toglie i componenti vocali</td></tr>
+<tr><td><code>professore-digitale-contenuti</code></td><td>Gestisce i pacchetti di contenuti (domande, lezioni, quiz)</td></tr>
+<tr><td><code>professore-digitale-pulizia</code></td><td>Cancella i dati dell'utente corrente</td></tr>
+<tr><td><code>man professore-digitale</code></td><td>Manuale tecnico nel terminale</td></tr>
+</tbody></table>
+<h2>Rete, aula e firewall</h2>
+<table><tbody>
+<tr><td><code>127.0.0.1:8765</code></td><td>Interfaccia del Professore, solo dentro il computer</td></tr>
+<tr><td><b>8766 TCP</b> · <b>8767 UDP</b></td><td>Quadro dell'aula: solo rete locale, solo sul PC del facilitatore e solo se attivato</td></tr>
+<tr><td><code>sudo ufw allow 8766/tcp</code><br><code>sudo ufw allow 8767/udp</code></td><td>Apre le porte dell'aula sul PC del facilitatore, se il firewall ufw è attivo</td></tr>
+</tbody></table>
+<h2>Variabili d'ambiente</h2>
+<table><tbody>
+<tr><td><code>PD_BROWSER=firefox</code></td><td>Usa un browser preciso</td></tr>
+<tr><td><code>PD_PORT=9000</code></td><td>Porta del server interno (se 8765 è occupata ne viene scelta un'altra da sola)</td></tr>
+<tr><td><code>OLLAMA_HOST=http://127.0.0.1:11434</code></td><td>Indirizzo del servizio Ollama</td></tr>
+</tbody></table>
+<h2>Contenuto del pacchetto</h2>
+<table><tbody>
+<tr><td><code>/usr/bin/professore-digitale*</code></td><td>Avviatore e procedure di configurazione</td></tr>
+<tr><td><code>/usr/share/professore-digitale/</code></td><td>Server interno in Python (solo libreria standard), interfaccia, contenuti, voci Paola e Riccardo</td></tr>
+<tr><td><code>/usr/lib/professore-digitale/piper/</code></td><td>Motore delle voci naturali per x86_64 e aarch64</td></tr>
+<tr><td><code>/var/lib/professore-digitale/contenuti/</code></td><td>Contenuti aggiunti per tutti gli utenti</td></tr>
+<tr><td><code>/usr/share/applications/professore-digitale*.desktop</code></td><td>Voci del menu (categoria Istruzione)</td></tr>
+<tr><td><code>/usr/share/doc/professore-digitale/</code></td><td>README, licenza, novità, questo vademecum</td></tr>
+</tbody></table>
+<h2>Scorciatoie da tastiera</h2>
+<div class="affianca"><table><tbody>
+<tr><td><kbd>Esc</kbd></td><td>Ferma la voce</td></tr><tr><td><kbd>Invio</kbd></td><td>Invia la domanda</td></tr>
+<tr><td><kbd>Maiusc</kbd> + <kbd>Invio</kbd></td><td>A capo nella domanda</td></tr><tr><td><kbd>Tab</kbd></td><td>Passa al pulsante successivo</td></tr>
+</tbody></table><table><tbody>
+<tr><td><kbd>Ctrl</kbd> + <kbd>+</kbd> / <kbd>−</kbd></td><td>Zoom</td></tr><tr><td><kbd>F11</kbd></td><td>Schermo intero</td></tr>
+<tr><td><kbd>Ctrl</kbd> + <kbd>P</kbd></td><td>Stampa la pagina</td></tr><tr><td><kbd>Ctrl</kbd> + <kbd>Maiusc</kbd> + <kbd>P</kbd></td><td>Stampa l'argomento intero</td></tr>
+</tbody></table></div>
+<div class="affianca"><figure><img src="img-linux/15-telefono.jpg" alt="" style="width:62%;margin:0 auto"><figcaption><b>Figura 34.</b> Su schermi stretti il menu passa in basso.</figcaption></figure>
+<div class="box" style="align-self:center"><span class="t">Tablet e schermi piccoli</span>L'interfaccia si adatta da sola alle finestre strette e agli schermi touch:
+menu in basso, pulsanti grandi, lavagna utilizzabile con il dito. Utile per i netbook e per le finestre affiancate.</div></div>
+</section>
+<!-- ======================================================= 21 -->
+<section class="capitolo"><span class="marca">§§c21§§</span>
+<div class="capitolo-testa"><span class="num">21</span><div><div class="eti">CAPITOLO</div><h1>Glossario semplice</h1></div></div>
+<dl class="glossario colonne">
+<div><dt>Allegato</dt><dd>File che viaggia insieme a un'email, come una foto nella busta.</dd></div>
+<div><dt>App</dt><dd>Programma, soprattutto sullo smartphone.</dd></div>
+<div><dt>apt</dt><dd>Il programma che installa e aggiorna i pacchetti su Debian, Ubuntu, Mint e FeniceOS.</dd></div>
+<div><dt>Attestato</dt><dd>Il «diploma» che il Professore consegna a chi supera un grande quiz con almeno il 70% di risposte giuste.</dd></div>
+<div><dt>Browser</dt><dd>Programma per navigare su Internet: Firefox, Chromium, Chrome.</dd></div>
+<div><dt>Cartella</dt><dd>Contenitore di file, come un cassetto dell'armadio.</dd></div>
+<div><dt>Cestino</dt><dd>Dove vanno i file eliminati; da lì si possono ancora recuperare.</dd></div>
+<div><dt>CIE</dt><dd>Carta d'Identità Elettronica, usata anche per entrare nei servizi pubblici online.</dd></div>
+<div><dt>Clic / doppio clic</dt><dd>Una pressione del tasto sinistro per scegliere; due rapide per aprire.</dd></div>
+<div><dt>Clic destro</dt><dd>La pressione del tasto destro del mouse: apre un menu con i comandi possibili.</dd></div>
+<div><dt>Copia e incolla</dt><dd>Duplicare un testo o un file: <kbd>Ctrl</kbd> + <kbd>C</kbd> per copiare, <kbd>Ctrl</kbd> + <kbd>V</kbd> per incollare.</dd></div>
+<div><dt>CSV</dt><dd>Un file di testo a forma di tabella, che si apre con Excel o LibreOffice Calc.</dd></div>
+<div><dt>Desktop</dt><dd>La «scrivania» con le icone che si vede all'accensione.</dd></div>
+<div><dt>Gestore dei file</dt><dd>Il programma per vedere cartelle e documenti (Nautilus, Nemo, Thunar, Dolphin…).</dd></div>
+<div><dt>Facilitatore</dt><dd>Chi guida il gruppo: insegnante, volontario, animatore digitale.</dd></div>
+<div><dt>FeniceOS</dt><dd>Sistema operativo libero, basato su Debian, che fa rinascere i computer datati.</dd></div>
+<div><dt>File</dt><dd>Un documento, una foto, una musica salvati nel computer.</dd></div>
+<div><dt>Firewall</dt><dd>Il «portinaio» del computer: decide quali collegamenti dalla rete possono entrare.</dd></div>
+<div><dt>IA (intelligenza artificiale)</dt><dd>Programma che ha imparato da moltissimi testi a rispondere con parole probabili; utile, ma può sbagliare.</dd></div>
+<div><dt>IA locale</dt><dd>IA che funziona sul proprio computer, senza inviare dati a Internet.</dd></div>
+<div><dt>Impronta (SHA-256)</dt><dd>Un codice che identifica un file: se il file cambia anche di poco, l'impronta cambia. Serve a controllare che sia integro.</dd></div>
+<div><dt>Internet</dt><dd>La rete di strade che collega i computer di tutto il mondo.</dd></div>
+<div><dt>Linux</dt><dd>Sistema operativo libero, leggero, adatto anche ai computer datati.</dd></div>
+<div><dt>Menu delle applicazioni</dt><dd>Il menu da cui partono tutti i programmi; il Professore è nella categoria Istruzione.</dd></div>
+<div><dt>Modello</dt><dd>Il «cervello» dell'IA: più è grande, più sa, ma più è lento e occupa spazio.</dd></div>
+<div><dt>Offline / Online</dt><dd>Senza / con connessione a Internet.</dd></div>
+<div><dt>Ollama</dt><dd>Programma che fa funzionare i modelli di IA sul computer (su Linux, Windows e macOS).</dd></div>
+<div><dt>pagoPA</dt><dd>Il sistema per i pagamenti verso la Pubblica Amministrazione.</dd></div>
+<div><dt>Pacchetto .deb</dt><dd>Il «pacco» che contiene un programma da installare su Debian, Ubuntu, Mint e FeniceOS.</dd></div>
+<div><dt>Password</dt><dd>La chiave segreta di un account. Non si comunica mai a nessuno.</dd></div>
+<div><dt>PDF</dt><dd>Un formato di documento che si vede uguale su ogni computer: ideale per stampare e conservare.</dd></div>
+<div><dt>Phishing</dt><dd>Truffa con messaggi falsi che imitano banche o enti per rubare dati.</dd></div>
+<div><dt>RAM</dt><dd>La memoria di lavoro del computer: più ce n'è, più programmi lavorano insieme senza rallentare.</dd></div>
+<div><dt>Rete locale</dt><dd>I computer collegati allo stesso router (stesso Wi-Fi o cavo), per esempio quelli di un'aula.</dd></div>
+<div><dt>Router</dt><dd>La scatolina con le lucine che porta Internet in casa.</dd></div>
+<div><dt>Scaricare</dt><dd>Copiare sul proprio computer un file che si trova su Internet; finisce nella cartella Scaricati.</dd></div>
+<div><dt>Scheda video</dt><dd>La parte del computer che disegna le immagini; quelle potenti aiutano anche l'IA.</dd></div>
+<div><dt>Schema</dt><dd>Disegno con riquadri e frecce che mostra una sequenza o una struttura.</dd></div>
+<div><dt>Software libero</dt><dd>Programma che si può usare, studiare, modificare e condividere, come il Professore.</dd></div>
+<div><dt>SPID</dt><dd>Sistema Pubblico di Identità Digitale: le credenziali per i servizi pubblici online.</dd></div>
+<div><dt>Terminale</dt><dd>Finestra dove si danno ordini al computer scrivendo comandi.</dd></div>
+<div><dt>Wi-Fi</dt><dd>Collegamento senza fili tra i dispositivi e il router.</dd></div>
+</dl>
+</section>
+
+
+</div>
+<!-- ======================================================= QUARTA DI COPERTINA -->
+<div class="segnaposto fine"></div>
+<section class="back">
+  <img class="prof" src="professore.svg" alt="">
+  <div class="dentro">
+    <h1>Tecnologia gentile,<br>per tutti.</h1>
+    <p>Il Professore Digitale nasce per democratizzare l'accesso al digitale là dove serve di più: nei centri anziani, nelle scuole, nelle associazioni
+    e nelle case, anche senza connessione e su computer che altrimenti finirebbero in discarica — su Linux, su FeniceOS e su Windows.</p>
+    <p>Lezioni, quiz con attestato, cultura generale, voci italiane e un quadro dell'aula: tutto sul vostro computer, niente nel cloud.</p>
+    <p>È software libero: potete usarlo, copiarlo, migliorarlo e condividerlo. Se vi è stato utile, fatelo conoscere.</p>
+  </div>
+  <div class="piede"><div><b>Danilo D'Auria</b><br>Tecnico IT &amp; Divulgatore Digitale per il Sociale<br>danilodauria.site@gmail.com</div>
+  <div style="text-align:right">Professore Digitale 3.0.0 per Linux<br>Licenza MIT · Ottobre 2026</div></div>
+</section>
+</body>
+</html>

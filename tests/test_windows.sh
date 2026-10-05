@@ -22,7 +22,7 @@ avvia() {
   PD_DATA_DIR="$(winpath "$W/dati")" PD_DOWNLOAD_DIR="$(winpath "$W/dl")" OLLAMA_HOST=http://127.0.0.1:18992 \
   PD_NO_TRAY=1 PD_NO_ENGINE_START=1 wine "$APP/ProfessoreDigitale.exe" --no-browser --port 18993 --idle-timeout 0 >"$W/server.log" 2>&1 &
   PIDW=$!
-  for _ in $(seq 1 40); do curl -fs http://127.0.0.1:18993/api/status >/dev/null 2>&1 && return 0; sleep 0.5; done
+  for _ in $(seq 1 120); do curl -fs http://127.0.0.1:18993/api/status >/dev/null 2>&1 && return 0; sleep 0.5; done
   echo "  FAIL il server Windows non si avvia"; cat "$W/server.log"; return 1
 }
 ferma() { curl -fs -X POST -H "Content-Type: application/json" -d '{}' http://127.0.0.1:18993/api/shutdown >/dev/null 2>&1; sleep 1; kill "$PIDW" 2>/dev/null; wineserver -k 2>/dev/null; true; }

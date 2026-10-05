@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<title>Professore Digitale – Installare e aggiornare alla versione 3.0.0</title>
+<meta name="author" content="Danilo D'Auria">
+<link rel="stylesheet" href="stile-manuale.css">
+<style>
+.dove { display: inline-block; font: 700 7pt "Noto Sans"; letter-spacing: .12em; padding: .15em .6em; border-radius: 99px; margin-right: .3em; vertical-align: middle; }
+.dove.lin { background: #e8f6ec; color: #15803d; }
+.dove.win { background: #e3eef8; color: #1d5c8f; }
+.dove.tutti { background: #fdf6dc; color: #a16207; }
+.percorso td:first-child { width: 46%; }
+.esito { border: 1.5px dashed #9fb7cc; border-radius: 8px; padding: .4em .8em; margin: .4em 0 .8em; font-size: 9pt; background: #fafcfe; }
+.esito b { color: #15803d; }
+</style>
+</head>
+<body>
+
+<!-- ======================================================= COPERTINA -->
+<section class="cover">
+  <div class="sopra">
+    <div class="ka">CATTEDRA DIGITALE PORTATILE</div>
+    <h1>Professore Digitale</h1>
+    <div class="sotto">Installare e aggiornare<br>alla versione 3.0.0 · passo dopo passo</div>
+    <div class="lavagna">
+      <div class="gesso">Un aggiornamento<br>sereno, senza perdere<br>nulla.</div>
+      <div class="riga">Linux · Windows da XP a 11 · Chiavetta · Aule e firewall<br>Comandi pronti da copiare · Controlli finali<br>Problemi frequenti e soluzioni</div>
+    </div>
+    <img class="prof" src="professore.svg" alt="">
+  </div>
+  <div class="sotto2">
+    <span class="pill">Per tutti gli utenti</span><span class="pill">Linux Debian · Ubuntu · Mint · FeniceOS</span>
+    <span class="pill">Windows XP · 7 · 8 · 10 · 11</span><span class="pill">I progressi restano al loro posto</span>
+    <div class="firma">
+      <div><b>Danilo D'Auria</b><small>Ideazione e sviluppo · Tecnico IT &amp; Divulgatore Digitale per il Sociale</small></div>
+      <div class="v">v3.0.0<small>Ottobre 2026</small></div>
+    </div>
+  </div>
+</section>
+<div class="segnaposto"></div>
+
+<div class="pagina">
+<!-- ======================================================= COME USARE -->
+<h2 style="margin-top:2mm">Come usare questo libretto</h2>
+<p>Questo libretto spiega come <b>installare per la prima volta</b> il Professore Digitale 3.0.0 e come <b>aggiornare</b> una versione già presente,
+su computer <b>Linux</b> e <b>Windows</b>. Non serve leggerlo tutto: trovate il vostro caso nella tabella e andate al capitolo indicato.</p>
+<table class="percorso"><thead><tr><th>Il vostro caso</th><th>Capitolo</th></tr></thead><tbody>
+<tr><td><span class="dove lin">LINUX</span> Ho già il Professore (2.0, 2.1, 2.2 o 2.3) e voglio la 3.0.0</td><td><b>2</b> · Aggiornare su Linux</td></tr>
+<tr><td><span class="dove lin">LINUX</span> Non ho mai installato il Professore</td><td><b>3</b> · Prima installazione su Linux</td></tr>
+<tr><td><span class="dove win">WINDOWS</span> Voglio il Professore sul mio PC Windows (anche se ho già la 2.3)</td><td><b>4</b> · Installare su Windows</td></tr>
+<tr><td><span class="dove win">WINDOWS</span> Ho la 2.3 e voglio la 3.0, o arriverà una versione nuova</td><td><b>5</b> · Aggiornare su Windows</td></tr>
+<tr><td><span class="dove tutti">AULE</span> Devo preparare molti computer, anche senza Internet, e il quadro dell'aula</td><td><b>6</b> · Molti computer, chiavetta e aula</td></tr>
+<tr><td><span class="dove tutti">TUTTI</span> Voglio provarlo senza installare nulla</td><td><b>7</b> · Versione portatile e da chiavetta</td></tr>
+<tr><td><span class="dove tutti">TUTTI</span> Ho installato: funziona tutto?</td><td><b>8</b> · I controlli finali</td></tr>
+<tr><td><span class="dove tutti">TUTTI</span> Qualcosa non va</td><td><b>9</b> · Problemi frequenti</td></tr>
+</tbody></table>
+<div class="box"><span class="t">Convenzioni</span>
+<span class="dove lin">LINUX</span> i comandi si scrivono nel <b>Terminale</b>. <span class="dove win">WINDOWS</span> i comandi si scrivono nel <b>Prompt dei comandi</b>.
+I comandi sono in <code>carattere a macchina</code>: si possono copiare e incollare. Le righe che iniziano con <code>#</code> sono spiegazioni e non vanno scritte.
+I tasti sono indicati così: <kbd>Invio</kbd>, <kbd>Ctrl</kbd> + <kbd>C</kbd>. I riquadri verdi contengono consigli, quelli gialli attenzioni.</div>
+<div class="box consiglio"><span class="t">La promessa più importante</span>Aggiornare <b>non cancella nulla</b>: progressi degli allievi, impostazioni, conversazioni,
+contenuti aggiunti, intelligenza artificiale e microfono già configurati restano al loro posto, perché stanno nella cartella personale di ogni utente e non in quella del programma.
+<b>Non serve disinstallare</b> la versione precedente.</div>
+
+<!-- ======================================================= INDICE -->
+<h2 style="break-before:page;margin-top:2mm">Indice</h2>
+<ul class="toc">
+<li><span class="n">1</span><span class="tt">Prima di iniziare<small>Cosa c'è di nuovo, i file, l'impronta di controllo</small></span><span class="toc-p" data-c="1"></span></li>
+<li><span class="n">2</span><span class="tt">Aggiornare su Linux<small>Dal Professore, dal terminale o con il doppio clic</small></span><span class="toc-p" data-c="2"></span></li>
+<li><span class="n">3</span><span class="tt">Prima installazione su Linux<small>Installare e attivare IA, microfono e voce</small></span><span class="toc-p" data-c="3"></span></li>
+<li><span class="n">4</span><span class="tt">Installare su Windows<small>Da Windows XP a Windows 11, per tutti o solo per me</small></span><span class="toc-p" data-c="4"></span></li>
+<li><span class="n">5</span><span class="tt">Aggiornare su Windows<small>Dalla 2.3 alla 3.0 e alle versioni successive</small></span><span class="toc-p" data-c="5"></span></li>
+<li><span class="n">6</span><span class="tt">Molti computer, chiavetta e aula<small>Aule, centri, PC senza Internet, firewall per il quadro dell'aula</small></span><span class="toc-p" data-c="6"></span></li>
+<li><span class="n">7</span><span class="tt">Versione portatile e da chiavetta<small>Usare il Professore senza installarlo</small></span><span class="toc-p" data-c="7"></span></li>
+<li><span class="n">8</span><span class="tt">I controlli finali<small>Versione, voci, saluto, novità, aula, progressi</small></span><span class="toc-p" data-c="8"></span></li>
+<li><span class="n">9</span><span class="tt">Problemi frequenti<small>Sintomo, causa, rimedio</small></span><span class="toc-p" data-c="9"></span></li>
+<li><span class="n">10</span><span class="tt">Se un giorno volete togliere tutto<small>Disinstallazione su Linux e Windows</small></span><span class="toc-p" data-c="10"></span></li>
+</ul>
+<div class="box" style="margin-top:8mm"><span class="t">Riepilogo per chi ha fretta</span>
+<span class="dove lin">LINUX</span> nella cartella del file scaricato:
+<pre>sudo apt install ./professore-digitale_3.0.0_all.deb
+professore-digitale --version          # deve rispondere: Professore Digitale 3.0.0</pre>
+<span class="dove win">WINDOWS</span> doppio clic su <code>ProfessoreDigitale-Setup-3.0.0.exe</code> → se compare l'avviso blu: <b>Ulteriori informazioni → Esegui comunque</b> → <b>Avanti</b> fino a <b>Fine</b>.</div>
+
+<!-- ======================================================= 1 -->
+<section class="capitolo"><span class="marca">§§c1§§</span>
+<div class="capitolo-testa"><span class="num">1</span><div><div class="eti">CAPITOLO</div><h1>Prima di iniziare</h1></div></div>
+<p class="intro">Bastano pochi minuti e nessuna competenza particolare. Leggete questa pagina una volta: vi evita le sorprese più comuni.</p>
+<h2>Cosa c'è di nuovo nella 3.0.0</h2>
+<figure class="media"><img src="img-linux/01-home.jpg" alt=""><figcaption><b>Figura 1.</b> La pagina Inizio della 3.0.0, con i nuovi riquadri e l'indicatore «Online».</figcaption></figure>
+<ul>
+<li><b>Voci italiane maschili e femminili già incluse</b>: le voci naturali <b>Riccardo</b> (uomo) e <b>Paola</b> (donna), più le voci leggere su Linux e tutte le voci italiane di Windows.
+Si scelgono in <b>Impostazioni → Voce → «Voce del Professore»</b>.</li>
+<li><b>Quiz e attestati</b>: nove grandi quiz, tra cui il Grande Quiz dell'Informatica (264 domande); con il 70% si ottiene un attestato con il proprio nome, da stampare o salvare in PDF.</li>
+<li><b>Cultura generale</b> (26 lezioni), le pagine del libro <b>Tecnologia Gentile</b> e di <b>FeniceOS</b>, una <b>Palestra</b> con 11 esercizi.</li>
+<li><b>Quadro dell'aula</b> in rete locale: il PC del facilitatore vede i PC degli allievi e manda messaggi a tutti.</li>
+<li>Pulsante <b>🖨️ Stampa</b>, indicatore <b>Online</b>, saluto all'avvio, consigli, <b>promemoria</b> e pulsante <b>🚪 Esci</b>.</li>
+</ul>
+<div class="box"><span class="t">Perché il file è più grande</span>Il pacchetto per Linux (circa 150 MB) e l'installatore per Windows (circa 107 MB) sono molto più grandi
+delle versioni 2.x perché <b>contengono le voci naturali</b>, che così funzionano subito e senza Internet. Se la connessione dell'aula è lenta, scaricate il file
+una volta sola e portatelo sugli altri computer con una chiavetta.</div>
+<h2>I file</h2>
+<table><thead><tr><th>File</th><th>Per chi</th></tr></thead><tbody>
+<tr><td><code>professore-digitale_3.0.0_all.deb</code></td><td><span class="dove lin">LINUX</span> Debian, Ubuntu, Linux Mint, FeniceOS e derivate: PC a 64 e 32 bit e schede ARM (circa 150 MB, voci incluse).</td></tr>
+<tr><td><code>ProfessoreDigitale-Setup-3.0.0.exe</code></td><td><span class="dove win">WINDOWS</span> Da Windows XP SP3 a Windows 11, a 32 e 64 bit (circa 107 MB, voci incluse).</td></tr>
+<tr><td><code>professore-digitale-windows-3.0.0.zip</code></td><td><span class="dove win">WINDOWS</span> Versione da chiavetta, senza installazione.</td></tr>
+<tr><td><code>professore-digitale-portatile.html</code></td><td><span class="dove tutti">TUTTI</span> Prova veloce in qualsiasi browser, senza installazione.</td></tr>
+<tr><td><code>SHA256SUMS</code></td><td><span class="dove tutti">TUTTI</span> Le impronte per controllare che i file siano integri.</td></tr>
+</tbody></table>
+<p>I file si scaricano dal sito del progetto, oppure arrivano su chiavetta dal facilitatore. Dal Professore già installato su Linux si possono anche
+scaricare da soli (capitolo 2, metodo A).</p>
+<h2>Controllare che il file sia integro (consigliato)</h2>
+<p>Se il file è passato da molte chiavette o da una connessione instabile, potrebbe essersi rovinato. L'<b>impronta SHA-256</b> è un codice che cambia
+se cambia anche un solo byte del file: deve essere uguale a quella scritta in <code>SHA256SUMS</code>.</p>
+<p><span class="dove lin">LINUX</span> Nella cartella dove avete il file e <code>SHA256SUMS</code>:</p>
+<pre>sha256sum -c SHA256SUMS --ignore-missing</pre>
+<div class="esito">Deve comparire <b>OK</b> accanto al nome del file. Se compare un errore, scaricate o ricopiate di nuovo il file.</div>
+<p><span class="dove win">WINDOWS</span> Aprite la cartella del file, scrivete <code>cmd</code> nella barra degli indirizzi in alto e premete <kbd>Invio</kbd>; poi:</p>
+<pre>certutil -hashfile ProfessoreDigitale-Setup-3.0.0.exe SHA256</pre>
+<div class="esito">Confrontate il codice che compare con quello scritto accanto al nome del file in <code>SHA256SUMS</code> (si apre con il Blocco note): devono essere <b>identici</b>.</div>
+<div class="box attenzione"><span class="t">Prima di aggiornare</span>Chiudete il Professore se è aperto. Non è obbligatorio (l'installazione lo chiude da sola), ma evita di
+interrompere una lezione a metà. Se volete stare doppiamente tranquilli, prima esportate i progressi: <b>Impostazioni → Dati e progressi → ⬇️ Esporta progressi</b>.</div>
+</section>
+
+<!-- ======================================================= 2 -->
+<section class="capitolo"><span class="marca">§§c2§§</span>
+<div class="capitolo-testa"><span class="num">2</span><div><div class="eti">CAPITOLO</div><h1>Aggiornare su Linux</h1></div></div>
+<p class="intro">Avete già il Professore 2.0, 2.1, 2.2 o 2.3. La versione 3.0.0 si installa <b>direttamente sopra</b> la precedente: non serve disinstallarla.
+Scegliete uno dei tre metodi.</p>
+<h2>Metodo A · Dal Professore (il più semplice)</h2>
+<div class="affianca">
+<div><ol class="passi">
+<li>Collegate il computer a Internet e aprite il Professore Digitale.</li>
+<li>Andate in <b>⚙️ Impostazioni</b>, scheda <b>🔄 Aggiornamenti</b>.</li>
+<li>Premete <b>🌐 Controlla aggiornamenti</b>: compare «È disponibile la versione 3.0.0» con l'elenco delle novità.</li>
+<li>Premete <b>⬇️ Scarica il nuovo pacchetto</b>. Il file viene salvato nella cartella <b>Scaricati</b> e verificato da solo con la sua impronta.</li>
+<li>Il Professore mostra il comando da scrivere: copiatelo e proseguite con il metodo B dal passo 2.</li>
+</ol></div>
+<figure><img src="img-windows/lx-agg.jpg" alt="" style="width:80%;margin:0 auto"><figcaption><b>Figura 2.</b> La scheda Aggiornamenti: il Professore si collega a Internet solo quando premete il pulsante.</figcaption></figure>
+</div>
+<h2>Metodo B · Dal terminale (il più affidabile)</h2>
+<ol class="passi">
+<li>Aprite la cartella <b>Scaricati</b> (o quella dove si trova il file), fate clic destro in uno spazio vuoto e scegliete <b>Apri nel terminale</b>
+(su alcuni sistemi: <b>Apri un terminale qui</b>).</li>
+<li>Scrivete il comando e premete <kbd>Invio</kbd>:
+<pre>sudo apt install ./professore-digitale_3.0.0_all.deb</pre></li>
+<li>Scrivete la password del computer e premete <kbd>Invio</kbd>. Mentre la scrivete <b>non compare nulla</b>, nemmeno gli asterischi: è normale.</li>
+<li>Se compare una domanda «Continuare? [S/n]», premete <kbd>S</kbd> e <kbd>Invio</kbd>. Aspettate il ritorno del cursore.</li>
+<li>Controllate la versione:
+<pre>professore-digitale --version</pre>
+<div class="esito">Risposta attesa: <b>Professore Digitale 3.0.0</b></div></li>
+</ol>
+<div class="box attenzione"><span class="t">Il «./» è indispensabile</span>Il punto e la barra davanti al nome dicono ad apt di usare il file della cartella,
+invece di cercarlo su Internet. Senza, compare «Impossibile trovare il pacchetto».</div>
+<h2>Metodo C · Con il doppio clic</h2>
+<p>Fate doppio clic su <code>professore-digitale_3.0.0_all.deb</code>: si apre l'installatore del sistema (Software Center, GDebi, Discover o simili).
+Premete <b>Aggiorna</b> o <b>Installa</b> e inserite la password. Sui computer più lenti questi programmi possono sembrare bloccati: aspettate, oppure usate il metodo B.</p>
+<h2>Se il vostro centro usa il «repository»</h2>
+<p>Se il facilitatore ha configurato il Professore come fonte di aggiornamenti del sistema, la 3.0.0 arriva con gli altri aggiornamenti
+(Gestore aggiornamenti), oppure dal terminale:</p>
+<pre>sudo apt update
+sudo apt install --only-upgrade professore-digitale</pre>
+<h2>Dopo l'aggiornamento</h2>
+<p>Se il Professore era aperto, chiudetelo e riapritelo dal menu delle applicazioni (categoria <b>Istruzione</b>): il Professore vi saluta con la sua nuova voce.
+I componenti facoltativi già installati (IA con Ollama, microfono) continuano a funzionare senza rifare nulla; la voce si sceglie in <b>Impostazioni → Voce</b>.
+Progressi, impostazioni e conversazioni restano: le novità (quiz, cultura, aula) si aggiungono. Per scegliere un modello di IA più recente: capitolo 3, «Componenti facoltativi».</p>
+</section>
+
+<!-- ======================================================= 3 -->
+<section class="capitolo"><span class="marca">§§c3§§</span>
+<div class="capitolo-testa"><span class="num">3</span><div><div class="eti">CAPITOLO</div><h1>Prima installazione su Linux</h1></div></div>
+<p class="intro">Il pacchetto funziona sulle distribuzioni basate su Debian con Python 3.7 o successivo: Debian 10–13, Ubuntu dalla 20.04, Linux Mint, Q4OS,
+Zorin OS, MX Linux, antiX, FeniceOS e derivate. L'installazione non scarica nulla da Internet, salvo la voce italiana di sistema se manca.</p>
+<ol class="passi">
+<li>Copiate <code>professore-digitale_3.0.0_all.deb</code> nella cartella <b>Scaricati</b>. Non installatelo direttamente dalla chiavetta.</li>
+<li>Aprite il terminale in quella cartella (clic destro → <b>Apri nel terminale</b>) e scrivete:
+<pre>sudo apt install ./professore-digitale_3.0.0_all.deb</pre></li>
+<li>Inserite la password (non si vede mentre la scrivete) e confermate con <kbd>S</kbd> se richiesto.
+Il pacchetto contiene già le voci naturali Riccardo e Paola; il sistema installa anche, se mancano, la voce leggera <code>espeak-ng</code> e i caratteri con le icone colorate.</li>
+<li>Controllate:
+<pre>professore-digitale --version          # Professore Digitale 3.0.0
+professore-digitale --status           # mostra IA, voci e microfono disponibili</pre></li>
+<li>Aprite il Professore dal menu delle applicazioni, categoria <b>Istruzione</b>, oppure scrivendo <code>professore-digitale</code>.</li>
+</ol>
+<h2>Componenti facoltativi (serve Internet una sola volta)</h2>
+<table><thead><tr><th>Comando</th><th>Cosa fa</th></tr></thead><tbody>
+<tr><td><code>professore-digitale-setup-ia</code></td><td>Installa Ollama e propone il modello di IA adatto alla memoria del computer (da Qwen 3.5 · 0,8 miliardi per 4 GB fino a Gemma 4 · 12 miliardi per 24 GB e oltre). Chiede la password.</td></tr>
+<tr><td><code>professore-digitale-setup-ia --modello qwen3.5:4b</code></td><td>Installa direttamente un modello preciso.</td></tr>
+<tr><td><code>professore-digitale-setup-voce</code></td><td>Attiva il <b>microfono offline</b> (modello italiano Vosk, circa 50 MB), senza password.</td></tr>
+</tbody></table>
+<p>Le stesse procedure si trovano nel menu delle applicazioni: <b>Professore Digitale: configura IA</b> e <b>configura microfono</b>. Dopo l'installazione
+di un componente, nel Professore andate in <b>Impostazioni → 🔄 Ricontrolla i componenti</b> (oppure riavviatelo).</p>
+<div class="box consiglio"><span class="t">Avete già un modello di IA?</span>Non è obbligatorio cambiarlo: il Professore continua a usare quello installato.
+Per provare un modello più recente, eseguite <code>professore-digitale-setup-ia</code> e poi sceglietelo in <b>Impostazioni → Intelligenza artificiale → Modello</b>.
+Il vecchio si toglie con <code>ollama rm NOME</code> (per vedere i nomi: <code>ollama list</code>).</div>
+</section>
+
+<!-- ======================================================= 4 -->
+<section class="capitolo"><span class="marca">§§c4§§</span>
+<div class="capitolo-testa"><span class="num">4</span><div><div class="eti">CAPITOLO</div><h1>Installare su Windows</h1></div></div>
+<p class="intro">Un solo installatore va bene per tutti i computer, da Windows XP a Windows 11. L'installazione non scarica nulla da Internet e richiede un paio di minuti. Se avete già la 2.3, eseguitelo sopra: non serve disinstallare.</p>
+<ol class="passi">
+<li>Copiate <code>ProfessoreDigitale-Setup-3.0.0.exe</code> sul desktop o nella cartella <b>Download</b> e fate <b>doppio clic</b>.</li>
+<li>Se compare la finestra blu <b>«Windows ha protetto il PC»</b>, fate clic su <b>Ulteriori informazioni</b> e poi su <b>Esegui comunque</b>.
+Accade con tutti i programmi nuovi senza firma digitale a pagamento; il Professore è software libero e verificabile con la sua impronta.</li>
+<li>Se Windows chiede «Consentire a questa app di apportare modifiche?», rispondete <b>Sì</b>.</li>
+<li>Pagina di benvenuto e licenza: premete <b>Avanti</b>.</li>
+<li>Scegliete <b>per chi</b> installare:
+<ul><li><b>Per tutti gli utenti</b> del computer (consigliato nelle aule, serve la password di amministratore; aggiunge la regola del firewall per il quadro dell'aula);</li>
+<li><b>Solo per me</b> (non chiede password, va bene a casa).</li></ul></li>
+<li>Lasciate le spunte proposte: programma, icona sul desktop e — sui Windows a 64 bit — il motore del microfono e le <b>voci naturali Paola e Riccardo</b>. Premete <b>Avanti</b>, poi <b>Installa</b>.</li>
+<li>Nell'ultima pagina lasciate la spunta <b>«Configura subito IA e voce»</b> se il computer è collegato a Internet, oppure solo <b>«Apri il Professore Digitale»</b>.
+Premete <b>Fine</b>.</li>
+</ol>
+<figure class="media"><img src="img-windows/45-saluto.jpg" alt=""><figcaption><b>Figura 3.</b> Al primo avvio il Professore saluta a voce e propone la lezione da continuare.</figcaption></figure>
+<h2>Configurare IA e voce</h2>
+<p>Si apre dal menu a sinistra <b>🧰 Configura IA e voce</b>, dal menu <b>Start → Professore Digitale → Configura IA e voce</b>, o con il tasto destro sull'icona del Professore
+vicino all'orologio. Il programma esamina il computer, propone il modello di IA adatto e installa tutto con <b>▶ Configura automaticamente</b>:
+Ollama su Windows 10 22H2 e 11, il motore compatibile su Windows 7, 8 e 8.1 a 64 bit. Le voci naturali sono già incluse sui Windows a 64 bit (da Windows 7). Su Windows XP, Vista e sui sistemi a 32 bit il Professore
+usa la sua guida interna. I dettagli sono nel <i>Vademecum per Windows</i>, capitolo 14.</p>
+<h2>Windows XP e Vista</h2>
+<p>Serve un browser moderno: <b>Supermium</b>. Installatelo <b>prima</b> del Professore dalla chiavetta preparata dal facilitatore
+(cartella <code>ProfessoreDigitale-kit\browser</code>). Se il Professore si apre in Internet Explorer, compare un messaggio con le istruzioni.</p>
+<h2>Controllare la versione</h2>
+<p>Tasto destro sull'icona del Professore vicino all'orologio → <b>Apri il Professore Digitale</b> → <b>Impostazioni → Informazioni</b>: deve dire <b>3.0.0</b>.
+Oppure <span class="dove win">WINDOWS</span> nel Prompt dei comandi:</p>
+<pre>"%LOCALAPPDATA%\Programs\ProfessoreDigitale\ProfessoreDigitale.exe" --version
+<span class="c">rem se installato per tutti gli utenti:</span>
+"%ProgramFiles(x86)%\ProfessoreDigitale\ProfessoreDigitale.exe" --version</pre>
+<p class="small">Sui Windows a 32 bit la seconda cartella è <code>%ProgramFiles%\ProfessoreDigitale</code>.</p>
+</section>
+
+<!-- ======================================================= 5 -->
+<section class="capitolo"><span class="marca">§§c5§§</span>
+<div class="capitolo-testa"><span class="num">5</span><div><div class="eti">CAPITOLO</div><h1>Aggiornare su Windows</h1></div></div>
+<p class="intro">Dalla 2.3 alla 3.0.0, e poi alle versioni successive: due strade, entrambe senza disinstallare e senza perdere nulla.</p>
+<h2>Dal Professore</h2>
+<ol class="passi">
+<li>Con il computer collegato a Internet: <b>⚙️ Impostazioni → 🔄 Aggiornamenti → 🌐 Controlla aggiornamenti</b>.</li>
+<li>Se c'è una versione nuova, leggete le novità e premete <b>⬇️ Scarica il nuovo pacchetto</b>: il file va nella cartella <b>Download</b> e viene verificato con la sua impronta.
+Per la 3.0.0 sono circa 107 MB: con una connessione lenta ci vuole qualche minuto.</li>
+<li>Premete <b>▶ Installa adesso</b>: il Professore si chiude e parte l'installatore. Seguite le pagine come nel capitolo 4 e riapritelo alla fine.</li>
+</ol>
+<div class="box consiglio"><span class="t">Dalla 2.3 alla 3.0: cosa resta e cosa cambia</span>Restano progressi delle lezioni, record della Palestra, impostazioni, conversazione,
+contenuti aggiunti, IA e microfono configurati. Si aggiungono quiz e attestati, cultura generale, aula, saluti e promemoria. Se avevate scaricato la voce «Paola» dalla 2.3,
+ora la trovate già inclusa insieme a «Riccardo»: sceglietela in <b>Impostazioni → Voce</b>.</div>
+<h2>Con il file</h2>
+<p>Fate doppio clic sul nuovo <code>ProfessoreDigitale-Setup-X.Y.Z.exe</code> (dal sito o dalla chiavetta) e seguite le stesse pagine del capitolo 4.
+L'installatore chiude da solo il Professore aperto, sostituisce i file del programma e lascia intatti i dati.</p>
+<div class="box consiglio"><span class="t">Ripara anche</span>Rieseguire l'installatore della stessa versione è il modo più semplice per «riparare» un Professore che si comporta in modo strano dopo
+un'interruzione di corrente: i file del programma vengono riscritti, i dati restano.</div>
+<h2>Solo nuovi contenuti o nuovi modelli di IA</h2>
+<p>Domande, lezioni e l'elenco dei modelli di IA consigliati si aggiornano <b>senza installare nulla</b>: dopo <b>Controlla aggiornamenti</b>
+premete <b>➕ Aggiungi</b> o <b>🔄 Aggiorna</b> accanto ai contenuti; in <b>Configura IA e voce</b> premete <b>Cerca un catalogo più recente</b>.</p>
+</section>
+
+<!-- ======================================================= 6 -->
+<section class="capitolo"><span class="marca">§§c6§§</span>
+<div class="capitolo-testa"><span class="num">6</span><div><div class="eti">CAPITOLO</div><h1>Molti computer e chiavetta</h1></div></div>
+<p class="intro">Per le aule, i centri anziani e le scuole: come aggiornare molti computer in poco tempo, anche dove Internet non c'è.</p>
+<h2><span class="dove lin">LINUX</span> Con la chiavetta di aggiornamento</h2>
+<p>Il facilitatore prepara una chiavetta con la cartella <code>professore-digitale</code> (contiene il pacchetto, i contenuti e lo script). Su ogni PC:</p>
+<pre><span class="c"># aprite il terminale nella cartella della chiavetta, poi:</span>
+sh installa-da-chiavetta.sh</pre>
+<p>Lo script controlla le impronte, installa o aggiorna solo se serve e conserva i progressi.</p>
+<h2><span class="dove lin">LINUX</span> Con un PC dell'aula che fa da server</h2>
+<p>Se il facilitatore ha attivato un «server degli aggiornamenti» nella rete dell'aula, su ogni PC basta: <b>Impostazioni → Aggiornamenti</b>, scrivere l'indirizzo
+indicato (per esempio <code>http://192.168.1.10:8080/aggiornamenti.json</code>) e premere <b>Controlla aggiornamenti</b>, poi seguire il capitolo 2.</p>
+<h2><span class="dove win">WINDOWS</span> Installazione silenziosa</h2>
+<p>Da un Prompt dei comandi aperto come amministratore, nella cartella dell'installatore (anche dalla chiavetta):</p>
+<pre><span class="c">rem per tutti gli utenti del computer, senza domande</span>
+ProfessoreDigitale-Setup-3.0.0.exe /S /AllUsers
+<span class="c">rem solo per l'utente attuale, senza password</span>
+ProfessoreDigitale-Setup-3.0.0.exe /S /CurrentUser</pre>
+<p>Si può mettere la riga in un file <code>installa.bat</code> sulla chiavetta e lanciarlo con doppio clic su ogni PC.</p>
+<h2><span class="dove win">WINDOWS</span> IA e voce senza Internet</h2>
+<ol class="passi">
+<li>Su un PC <b>collegato</b>: <b>Configura IA e voce → Computer senza Internet</b>, scegliete il tipo di Windows dei PC di destinazione e il modello,
+poi <b>💾 Prepara la chiavetta</b>. Si crea la cartella <code>ProfessoreDigitale-kit</code>, con ogni file e la sua impronta.</li>
+<li>Su ogni PC <b>senza rete</b>: installate il Professore, aprite <b>Configura IA e voce</b> e premete <b>📥 Installa dalla chiavetta</b>,
+scegliendo la cartella <code>ProfessoreDigitale-kit</code>. Un file rovinato viene rifiutato con una spiegazione.</li>
+</ol>
+<div class="box consiglio"><span class="t">Più allievi sullo stesso computer</span>I progressi appartengono all'utente del computer: con un account per allievo
+ognuno ritrova il proprio percorso. Su Windows installate «per tutti gli utenti».</div>
+<h2><span class="dove tutti">AULE</span> Il quadro dell'aula e il firewall</h2>
+<p>Con il menu <b>🏫 Aula</b> un PC diventa quello del <b>facilitatore</b> e gli altri quelli degli <b>allievi</b>: il facilitatore vede chi è collegato, cosa sta facendo,
+lezioni, quiz e attestati, e può mandare un messaggio a tutti. Funziona nella rete locale (stesso Wi-Fi o cavo), senza Internet. Il PC del facilitatore riceve i collegamenti
+sulle porte <b>8766 TCP</b> e <b>8767 UDP</b>; i PC degli allievi non hanno bisogno di nulla.</p>
+<p><span class="dove win">WINDOWS</span> Installando <b>«per tutti gli utenti»</b> (anche con <code>/S /AllUsers</code>) l'installatore aggiunge da solo la regola del firewall
+«Professore Digitale (aula)» per le reti private, e la toglie quando disinstallate. Con l'installazione «solo per me», la prima volta che scegliete «Il PC del facilitatore»
+Windows può chiedere se consentire l'accesso: scegliete le <b>reti private</b> e <b>Consenti accesso</b>.</p>
+<p><span class="dove lin">LINUX</span> Su molte distribuzioni il firewall è spento e non serve nulla. Se sul PC del facilitatore è attivo <b>ufw</b> (<code>sudo ufw status</code>):</p>
+<pre>sudo ufw allow 8766/tcp
+sudo ufw allow 8767/udp</pre>
+<p>Poi, nel Professore: <b>🏫 Aula → «Il PC del facilitatore»</b>, un codice dell'aula, <b>💾 Salva e applica</b>; nel riquadro «Questo PC» deve comparire
+<b>In ascolto per gli allievi ✅</b>. Sui PC degli allievi: <b>🏫 Aula → «Il PC di un allievo»</b>, nome e codice, <b>💾 Salva e applica</b>.</p>
+</section>
+
+<!-- ======================================================= 7 -->
+<section class="capitolo"><span class="marca">§§c7§§</span>
+<div class="capitolo-testa"><span class="num">7</span><div><div class="eti">CAPITOLO</div><h1>Versione portatile e da chiavetta</h1></div></div>
+<p class="intro">Per una prova veloce, o sui computer che non si possono modificare (biblioteca, ufficio).</p>
+<h2>Versione portatile · <span class="dove tutti">TUTTI</span></h2>
+<p>Fate doppio clic su <code>professore-digitale-portatile.html</code>: si apre nel browser e funziona subito, anche da chiavetta e su qualsiasi sistema.
+Ci sono lezioni, quiz con attestato, cultura generale, guida interna, lavagna, palestra e voce del browser; mancano IA, voci naturali, microfono e quadro dell'aula.
+I progressi restano nella memoria del browser di quel computer: per aggiornare basta sostituire il file con quello nuovo, i progressi restano.</p>
+<h2>Versione da chiavetta per Windows · <span class="dove win">WINDOWS</span></h2>
+<ol class="passi">
+<li>Clic destro su <code>professore-digitale-windows-3.0.0.zip</code> → <b>Estrai tutto</b>, scegliendo la chiavetta.</li>
+<li>Aprite la cartella <code>ProfessoreDigitale</code> e fate doppio clic su <code>ProfessoreDigitale.exe</code>.</li>
+<li>I progressi vengono salvati nella sottocartella <code>dati</code> accanto al programma: la chiavetta passa da un PC all'altro con il proprio percorso.</li>
+</ol>
+<p><b>Per aggiornare</b> la versione da chiavetta: estraete il nuovo zip in una cartella nuova e poi copiate dentro la vecchia sottocartella <code>dati</code>.</p>
+</section>
+
+<!-- ======================================================= 8 -->
+<section class="capitolo"><span class="marca">§§c8§§</span>
+<div class="capitolo-testa"><span class="num">8</span><div><div class="eti">CAPITOLO</div><h1>I controlli finali</h1></div></div>
+<p class="intro">Cinque minuti per essere sicuri che tutto funzioni, prima che arrivi il gruppo.</p>
+<table><thead><tr><th style="width:6%"></th><th style="width:36%">Controllo</th><th>Come si fa · cosa deve succedere</th></tr></thead><tbody>
+<tr><td>☐</td><td><b>Versione</b></td><td>Impostazioni → Informazioni: <b>3.0.0</b>. Su Linux anche <code>professore-digitale --version</code>.</td></tr>
+<tr><td>☐</td><td><b>Il saluto</b></td><td>All'apertura il Professore saluta a voce (buongiorno, buon pomeriggio o buonasera) in una nuvoletta in basso a destra.</td></tr>
+<tr><td>☐</td><td><b>Le voci</b></td><td>Impostazioni → Voce → <b>Voce del Professore</b>: ci sono voci 👨 maschili e 👩 femminili (Riccardo e Paola sui PC a 64 bit). Sceglietene una: dice «Questa è la mia nuova voce».</td></tr>
+<tr><td>☐</td><td><b>I progressi</b></td><td>Pagina Lezioni: le lezioni già fatte risultano «✓ Completata» come prima.</td></tr>
+<tr><td>☐</td><td><b>Le novità</b></td><td>Nel menu ci sono Quiz e attestati, Cultura generale, Tecnologia Gentile, FeniceOS e Aula; la Palestra ha 11 esercizi.</td></tr>
+<tr><td>☐</td><td><b>L'indicatore «Online»</b></td><td>In alto: verde se Internet funziona, grigio se manca. Il Professore funziona in entrambi i casi.</td></tr>
+<tr><td>☐</td><td><b>L'intelligenza artificiale</b></td><td>In alto, la pastiglia 🤖 mostra il nome del modello (se configurata). Altrimenti «Guida interna»: va bene lo stesso.</td></tr>
+<tr><td>☐</td><td><b>Il microfono</b></td><td>Se configurato, la pastiglia 🎤 è verde. Premete il microfono e dite «come si scrive la chiocciola».</td></tr>
+<tr><td>☐</td><td><b>L'aula</b> (se la usate)</td><td>Sul PC del facilitatore: 🏫 Aula → «In ascolto per gli allievi ✅». Sui PC degli allievi: «✅ Collegato al PC del facilitatore».</td></tr>
+<tr><td>☐</td><td><b>Lo stato completo</b></td><td>Impostazioni → <b>🩺 Diagnostica</b>, oppure su Linux <code>professore-digitale --status</code>.</td></tr>
+</tbody></table>
+</section>
+
+<!-- ======================================================= 9 -->
+<section class="capitolo"><span class="marca">§§c9§§</span>
+<div class="capitolo-testa"><span class="num">9</span><div><div class="eti">CAPITOLO</div><h1>Problemi frequenti</h1></div></div>
+<div class="box" style="margin-top:0"><span class="t">Chiedere aiuto</span>Copiate il contenuto di <b>Impostazioni → 🩺 Diagnostica</b> e mandatelo a chi vi assiste, insieme al
+messaggio di errore e al nome del sistema (per esempio «Linux Mint 22» o «Windows 10»). Contatto del progetto: danilodauria.site@gmail.com</div>
+<table style="font-size:8.4pt"><thead><tr><th style="width:28%">Sintomo</th><th style="width:26%">Causa probabile</th><th>Rimedio</th></tr></thead><tbody>
+<tr><td><span class="dove lin">LINUX</span> «Impossibile trovare il pacchetto»</td><td>Manca <code>./</code> davanti al nome</td><td><code>sudo apt install ./professore-digitale_3.0.0_all.deb</code></td></tr>
+<tr><td><span class="dove lin">LINUX</span> «Download is performed unsandboxed as root»</td><td>Il file è sulla chiavetta</td><td>È solo un avviso, l'installazione riesce. Per evitarlo copiate prima il file in Scaricati.</td></tr>
+<tr><td><span class="dove lin">LINUX</span> «Impossibile acquisire il lock» (dpkg/apt occupato)</td><td>Un altro aggiornamento è in corso</td><td>Aspettate qualche minuto che finisca (o chiudete il Gestore aggiornamenti) e ripetete il comando.</td></tr>
+<tr><td><span class="dove lin">LINUX</span> La password «non si scrive»</td><td>Protezione del terminale</td><td>È normale: scrivetela alla cieca e premete <kbd>Invio</kbd>.</td></tr>
+<tr><td><span class="dove lin">LINUX</span> Dopo l'aggiornamento vedo ancora la versione vecchia</td><td>Finestra rimasta aperta</td><td>Chiudete tutte le finestre del Professore e riapritelo; se serve: <code>professore-digitale --stop</code> e poi <code>professore-digitale</code>.</td></tr>
+<tr><td><span class="dove win">WINDOWS</span> «Windows ha protetto il PC»</td><td>SmartScreen, programma senza firma a pagamento</td><td><b>Ulteriori informazioni → Esegui comunque</b>.</td></tr>
+<tr><td><span class="dove win">WINDOWS</span> L'antivirus chiede conferma</td><td>Programma nuovo e poco diffuso</td><td>Controllate l'impronta (capitolo 1) e consentite l'esecuzione.</td></tr>
+<tr><td><span class="dove win">WINDOWS</span> Si apre «browser troppo vecchio»</td><td>Si è aperto Internet Explorer</td><td>Installate Edge, Chrome o Firefox aggiornati (su XP e Vista: Supermium) e riaprite il Professore.</td></tr>
+<tr><td><span class="dove win">WINDOWS</span> Il Professore non parla</td><td>Windows a 32 bit senza voce italiana</td><td>Sui 64 bit scegliete Riccardo o Paola in Impostazioni → Voce. Altrimenti: Impostazioni di Windows → Ora e lingua → Voce → Aggiungi voci → Italiano.</td></tr>
+<tr><td><span class="dove lin">LINUX</span> Mancano Riccardo e Paola</td><td>PC a 32 bit o sistema troppo vecchio</td><td>Si usano le voci leggere, maschili e femminili. Controllate con <code>professore-digitale --status</code>.</td></tr>
+<tr><td><span class="dove tutti">AULE</span> L'allievo non trova il facilitatore</td><td>Reti diverse, firewall, codice sbagliato</td><td>Stessa rete per tutti; firewall come nel capitolo 6; scrivete a mano l'indirizzo del facilitatore; usate <b>🔍 Cerca nella rete</b>.</td></tr>
+<tr><td><span class="dove tutti">TUTTI</span> «Controllo non riuscito» negli aggiornamenti</td><td>Niente Internet o indirizzo sbagliato</td><td>Controllate la connessione e l'indirizzo nella scheda Aggiornamenti; senza rete usate la chiavetta (capitolo 6).</td></tr>
+<tr><td><span class="dove tutti">TUTTI</span> «Impronta SHA-256 non corrispondente»</td><td>File rovinato durante lo scaricamento</td><td>Il Professore lo ha già scartato per sicurezza: riprovate più tardi.</td></tr>
+<tr><td><span class="dove tutti">TUTTI</span> Il saluto o i consigli disturbano</td><td>Funzioni attive di serie</td><td>Impostazioni → Voce: spegnete il saluto all'avvio, il congedo o i consigli.</td></tr>
+<tr><td><span class="dove tutti">TUTTI</span> I progressi sembrano spariti</td><td>Si è entrati con un altro utente del computer</td><td>Entrate con il vostro utente. Se avevate esportato i progressi: Impostazioni → Dati e progressi → Importa.</td></tr>
+</tbody></table>
+
+</section>
+
+<!-- ======================================================= 10 -->
+<section class="capitolo"><span class="marca">§§c10§§</span>
+<div class="capitolo-testa"><span class="num">10</span><div><div class="eti">CAPITOLO</div><h1>Se un giorno volete togliere tutto</h1></div></div>
+<p class="intro">Per aggiornare non serve mai disinstallare. Queste istruzioni servono solo per restituire il computer «come nuovo», per esempio prima di donarlo.</p>
+<h2><span class="dove lin">LINUX</span></h2>
+<pre><span class="c"># 1. da ogni utente che ha usato il Professore: cancella i suoi dati e progressi</span>
+professore-digitale-pulizia
+<span class="c"># 2. toglie il programma e le sue icone</span>
+sudo apt purge professore-digitale
+sudo apt autoremove --purge
+<span class="c"># 3. facoltativo: i modelli di IA (vedere i nomi, poi toglierli)</span>
+ollama list
+ollama rm NOME-DEL-MODELLO</pre>
+<p class="small">Se avevate aperto le porte dell'aula: <code>sudo ufw delete allow 8766/tcp</code> e <code>sudo ufw delete allow 8767/udp</code>.</p>
+<h2><span class="dove win">WINDOWS</span></h2>
+<ol class="passi">
+<li><b>Start → Impostazioni → App</b> (o <b>Pannello di controllo → Programmi e funzionalità</b>) → <b>Professore Digitale</b> → <b>Disinstalla</b>.</li>
+<li>Alla domanda «Volete cancellare anche i progressi…» rispondete <b>Sì</b> per una pulizia completa, <b>No</b> se pensate di reinstallare. Vengono tolte anche le voci incluse e la regola del firewall per l'aula.</li>
+<li>Facoltativo: Ollama si toglie dallo stesso elenco di app.</li>
+</ol>
+<div class="box consiglio" style="margin-top:10mm"><span class="t">Per saperne di più</span>Il <i>Vademecum e libro di istruzioni</i> (per Linux e per Windows) spiega
+lezioni, guida, lavagna, palestra, impostazioni, privacy e il lavoro del facilitatore. Si apre anche dal Professore: <b>Impostazioni → Informazioni → 📖 Apri il vademecum</b>.</div>
+</section>
+</div>
+
+<!-- ======================================================= QUARTA -->
+<div class="segnaposto fine"></div>
+<section class="back">
+  <img class="prof" src="professore.svg" alt="">
+  <div class="dentro">
+    <h1>Tecnologia gentile,<br>per tutti.</h1>
+    <p>Il Professore Digitale nasce per democratizzare l'accesso al digitale là dove serve di più: nei centri anziani, nelle scuole, nelle associazioni
+    e nelle case, anche senza connessione e su computer che altrimenti finirebbero in discarica — su Linux e su Windows, da XP a Windows 11.</p>
+    <p>È software libero: potete usarlo, copiarlo, migliorarlo e condividerlo. Questo libretto può essere stampato e distribuito liberamente.</p>
+  </div>
+  <div class="piede"><div><b>Danilo D'Auria</b><br>Tecnico IT &amp; Divulgatore Digitale per il Sociale<br>danilodauria.site@gmail.com</div>
+  <div style="text-align:right">Professore Digitale 3.0.0<br>Licenza MIT · Ottobre 2026</div></div>
+</section>
+</body>
+</html>

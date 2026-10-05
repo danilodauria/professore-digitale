@@ -47,5 +47,8 @@ fonti ufficiali soltanto dopo il consenso dell'utente. Ognuno ha la propria lice
 * Modelli di IA (Qwen: Apache 2.0; Gemma: Gemma Terms of Use; Ministral:
   Apache 2.0) - le condizioni sono pubblicate sulle pagine dei modelli.
 * Modello vocale italiano Vosk - Licenza Apache 2.0.
-* Piper e la voce "Paola" - Licenza MIT (voce: vedi la scheda del modello).
+* Piper (programma della voce naturale, incluso nella cartella "piper") - Licenza MIT.
+  Contiene anche eSpeak NG (espeak-ng.dll, espeak-ng-data), licenza GPL-3.0 o successiva:
+  sorgenti su https://github.com/rhasspy/espeak-ng ; ONNX Runtime (Microsoft) - Licenza MIT.
+* Voci "Paola" (donna, dati CC0-1.0) e "Riccardo" (uomo, dati M-AILABS) - modelli Piper, Licenza MIT.
 * Supermium (solo per Windows XP e Vista) - Licenza BSD.
