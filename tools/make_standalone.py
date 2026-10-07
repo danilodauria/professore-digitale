@@ -15,7 +15,7 @@ html = open(os.path.join(web, "index.html"), encoding="utf-8").read()
 def rd(p): return open(os.path.join(web, p), encoding="utf-8").read()
 def js_safe(s): return s.replace("</script", "<\\/script").replace("<!--", "<\\!--")
 
-html = html.replace('<link rel="stylesheet" href="css/app.css">', "<style>\n" + rd("css/app.css") + "\n</style>")
+html = re.sub(r'<link rel="stylesheet" href="(css/[^"]+)">', lambda m: "<style>\n" + rd(m.group(1)) + "\n</style>", html)
 icon = base64.b64encode(open(os.path.join(web, "img/icon.svg"), "rb").read()).decode()
 html = html.replace('href="img/icon.svg"', 'href="data:image/svg+xml;base64,' + icon + '"')
 def inline_script(m):

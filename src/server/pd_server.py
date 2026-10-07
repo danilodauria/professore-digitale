@@ -100,7 +100,7 @@ if not OLLAMA_HOST.startswith("http"):
 UPDATE_URL_DEFAULT = DISTRIBUZIONE.get("aggiornamenti_url") or \
     "https://raw.githubusercontent.com/danilodauria/professore-digitale/main/aggiornamenti.json"
 
-DATA_KEYS = ("settings", "progress", "history", "board", "practice")
+DATA_KEYS = ("settings", "progress", "history", "board", "practice", "profili", "registro")
 MAX_BODY = 8 * 1024 * 1024        # 8 MB (audio del microfono)
 MAX_JSON = 2 * 1024 * 1024
 MAX_TTS_CHARS = 6000

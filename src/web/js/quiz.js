@@ -111,6 +111,7 @@
           var oi = +b.getAttribute("data-o"), ok = oi === q.a;
           $$(".quiz-opt", el).forEach(function (x) { x.disabled = true; if (+x.getAttribute("data-o") === q.a) x.classList.add("right"); });
           if (!ok) { b.classList.add("wrong"); sbagliate.push(q); } else giuste++;
+          if (PD.registraRisposta) PD.registraRisposta({ q: q.q, o: q.o, a: q.a, e: q.e, fonte: P.titolo, prova: P.id }, ok);
           $(".explain", el).innerHTML = (ok ? "✅ <b>Esatto!</b> " : "❌ <b>Non proprio.</b> ") + esc(q.e) +
             '<div class="row" style="margin-top:.8rem"><button class="btn big" id="q-avanti">' + (i + 1 < D.length ? "Avanti →" : "Vedi il risultato 🏁") + "</button></div>";
           if (PD.settings.autoReadAnswers) PD.speak((ok ? "Esatto! " : "Non proprio. ") + q.e);

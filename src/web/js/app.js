@@ -23,13 +23,19 @@
     aiEnabled: true, model: "", useKbContext: true, autoSendVoice: true,
     updateUrl: "", teacherName: "", eyesFollow: true,
     voiceId: "", netCheck: true, idleTips: true, greet: true, goodbye: true, studentName: "",
-    aulaRuolo: "", aulaNome: "Aula", aulaCodice: "", aulaServer: ""
+    aulaRuolo: "", aulaNome: "Aula", aulaCodice: "", aulaServer: "",
+    voiceCommands: false, tremore: false, vista: false, leggiFocus: false, domandaGiorno: true
   };
   PD.server = false;
   PD.status = null;
   PD.settings = Object.assign({}, DEFAULTS);
   PD.progress = { lessons: {} };
   PD.history = [];
+  /* Punti di aggancio per i moduli (profili.js, ripasso.js, accessibilita.js, enti.js…):
+   *  dopoCaricamento: funzioni chiamate dopo aver letto i dati e prima di mostrare la pagina (possono restituire una Promise)
+   *  homeCards / settingsCards: { html: function () -> stringa, bind: function (el) } aggiunti in fondo all'Inizio / alle Impostazioni
+   *  homeTiles: funzioni che restituiscono l'HTML di un riquadro (usare PD.tileHTML) */
+  PD.hooks = { dopoCaricamento: [], homeCards: [], settingsCards: [], homeTiles: [] };
   PD.lastDiagram = null;
 
   /* ------------------------------------------------------------------------
@@ -506,6 +512,9 @@
   PD.vademecumUrl = function () {
     return PD.server ? "docs/" + (PD.isWindows() ? "Vademecum_Professore_Digitale_Windows.pdf" : "Vademecum_Professore_Digitale.pdf") : "";
   };
+  PD.tileHTML = function (ico, t, d, go, cls) {
+    return '<button class="card tile' + (cls ? " " + cls : "") + '" data-go="' + go + '"><span class="big-ico">' + ico + "</span><h3>" + t + "</h3><p>" + d + "</p></button>";
+  };
   PD.views.home = function (el) {
     var st = lessonStats(), nx = nextLesson();
     var name = PD.settings.studentName || PD.settings.teacherName;
@@ -541,7 +550,9 @@
       tile("🎓", "Quiz e attestati", "Tutti i grandi quiz e gli attestati da stampare con il vostro nome.", "#/quiz") +
       (PD.server ? '<a class="card tile" href="' + PD.vademecumUrl() + '" target="_blank" rel="noopener"><span class="big-ico">📘</span><h3>Vademecum</h3><p>Il libretto di istruzioni completo, da leggere o stampare.</p></a>' : "") +
       (PD.server ? tile("🏫", "Aula", "Il quadro dell'aula: PC collegati, progressi degli allievi, messaggi.", "#/aula") : "") +
+      PD.hooks.homeTiles.map(function (f) { try { return f() || ""; } catch (e) { return ""; } }).join("") +
       "</div>" +
+      PD.hooks.homeCards.map(function (c) { try { return c.html() || ""; } catch (e) { return ""; } }).join("") +
       '<div class="card promemoria" id="home-promemoria"></div>' +
       '<p class="sostieni-riga small muted">Il Professore Digitale è gratuito e libero. <a href="#/sostieni" data-go="#/sostieni">❤️ Sostieni il progetto</a></p>' +
       (!PD.server ? '<p class="notice info small">Questa è la <b>versione portatile</b>: lezioni, guida, lavagna, palestra e quiz funzionano ovunque. ' +
@@ -549,6 +560,7 @@
       (PD.isWindows() && !PD.aiReady() && PD.status.ai.recommended && !PD.status.ai.engine ? '<p class="notice info small">💡 Su questo computer può funzionare anche l\'<b>intelligenza artificiale locale</b> ' +
       '(consigliata: ' + esc(PD.status.ai.recommended) + '). <a href="#/setup" data-go="#/setup">Configuratela con un clic</a>.</p>' : "");
     if (PD.renderPromemoria) PD.renderPromemoria($("#home-promemoria", el));
+    PD.hooks.homeCards.forEach(function (c) { try { if (c.bind) c.bind(el); } catch (e) { if (window.console) console.error(e); } });
     function tile(ico, t, d, go, cls) {
       return '<button class="card tile' + (cls ? " " + cls : "") + '" data-go="' + go + '"><span class="big-ico">' + ico + "</span><h3>" + t + "</h3><p>" + d + "</p></button>";
     }
@@ -630,6 +642,7 @@
       $(".explain", qd).innerHTML = (ok ? "✅ <b>Esatto!</b> " : "❌ <b>Non proprio.</b> ") + esc(q.e);
       if (ok) score++;
       answered++;
+      if (PD.registraRisposta) PD.registraRisposta({ q: q.q, o: q.o, a: q.a, e: q.e, fonte: L.title, lezione: L.id }, ok);
       PD.speak((ok ? "Esatto! " : "Non proprio. ") + q.e);
       if (answered === L.quiz.length) {
         var p = lp(L.id); p.done = true; p.quiz = { score: score, total: L.quiz.length }; p.when = new Date().toISOString(); PD.saveProgress();
@@ -862,7 +875,9 @@
       return out;
     }
     function setBtn(on) { var b = $("#mic"); if (b) { b.classList.toggle("rec", on); b.textContent = on ? "■" : "🎤"; } }
-    function start() {
+    var onText = null;
+    function start(cb) {
+      onText = cb || null;
       if (!PD.sttReady()) { PD.toast("Il riconoscimento vocale non è installato. Vedi Impostazioni."); return; }
       if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) { PD.toast("Il browser non permette l'uso del microfono."); return; }
       PD.stopSpeech();
@@ -899,11 +914,13 @@
           var t = (j.text || "").trim();
           if (!t) { PD.toast("Non ho capito bene. Potete ripetere?"); return; }
           t = t.charAt(0).toUpperCase() + t.slice(1);
+          if (onText) { var f = onText; onText = null; f(t); return; }
           if (PD.settings.autoSendVoice) PD.ask(t); else { var q = $("#question"); if (q) { q.value = t; q.focus(); } }
         })
         .catch(function (e) { PD.setProf("riposo"); PD.toast("Trascrizione non riuscita: " + e.message); });
     }
-    return { toggle: function () { if (st) stop(); else start(); }, stop: stop, encodeWav: encodeWav };
+    /* toggle(cb): con cb il testo riconosciuto va a cb invece che alla domanda (comandi vocali, «È una truffa?») */
+    return { toggle: function (cb) { if (st) stop(); else start(cb); }, stop: stop, encodeWav: encodeWav, active: function () { return !!st; } };
   })();
 
   /* ------------------------------------------------------------------------
@@ -973,6 +990,7 @@
 
       '<div class="card"><h2 style="margin-top:0">🩺 Diagnostica</h2><div class="diag" id="diag"></div></div>' +
 
+      PD.hooks.settingsCards.map(function (c) { try { return c.html() || ""; } catch (e) { return ""; } }).join("") +
       (PD.sostieniHTML ? PD.sostieniHTML(true) : "") +
 
       '<div class="card"><h2 style="margin-top:0">ℹ️ Informazioni</h2><dl class="kv"><dt>Programma</dt><dd>Professore Digitale – Cattedra Digitale Portatile</dd>' +
@@ -991,6 +1009,7 @@
     function bind(id, ev, fn) { var n = $("#" + id, el); if (n) n.addEventListener(ev, fn); }
     function chk(id, key) { bind(id, "change", function () { s[key] = this.checked; PD.saveSettings(); renderChips(); }); }
 
+    PD.hooks.settingsCards.forEach(function (c) { try { if (c.bind) c.bind(el); } catch (e) { if (window.console) console.error(e); } });
     bind("s-font", "input", function () { s.fontSize = +this.value; $("#fs-val").textContent = s.fontSize + "px"; PD.saveSettings(); });
     bind("s-theme", "change", function () { s.theme = this.value; PD.saveSettings(); });
     chk("s-projector", "projector"); chk("s-eyes", "eyesFollow"); chk("s-greet", "greet"); chk("s-goodbye", "goodbye"); chk("s-idle", "idleTips");
@@ -1175,6 +1194,10 @@
       migrate();
       if (Array.isArray(r[2])) PD.history = r[2];
       return PD.packs ? PD.packs.load() : null;
+    }).then(function () {
+      return PD.hooks.dopoCaricamento.reduce(function (p, fn) {
+        return p.then(function () { try { return fn(); } catch (e) { if (window.console) console.error(e); } });
+      }, Promise.resolve());
     }).then(function () {
       applySettings(); renderChips(); measureTop();
       $("#app-version").textContent = PD.version;

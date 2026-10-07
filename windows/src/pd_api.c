@@ -4,7 +4,7 @@
 #include "pd.h"
 #include <shellapi.h>
 
-static const char *DATA_KEYS[] = { "settings", "progress", "history", "board", "practice", NULL };
+static const char *DATA_KEYS[] = { "settings", "progress", "history", "board", "practice", "profili", "registro", NULL };
 
 /* ------------------------------------------------------------------ utilita' delle richieste */
 static jv *read_json(req_t *r, char *err, size_t errn) {
