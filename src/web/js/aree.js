@@ -128,8 +128,11 @@
   /* ------------------------------------------------------------------ TECNOLOGIA GENTILE (il libro) */
   PD.views.libro = function (el) {
     var P = pacchetto("tecnologia-gentile"), b = P ? blocchi("tecnologia-gentile", { titoloLezioni: "📖 I capitoli", titoloDomande: "❓ Domande e risposte sul libro", esempio: "sostenibile" }) : null;
-    el.innerHTML = '<section class="libro-hero"><div class="libro-copertina" aria-hidden="true"><div class="lc-autore">Danilo D\'Auria</div><div class="lc-titolo">Tecnologia<br>Gentile</div>' +
-      '<div class="lc-sotto">Informatica Sostenibile</div><div class="lc-foglia">🌿</div></div><div><div class="ka">Il libro</div><h1>Tecnologia Gentile</h1>' +
+    var copertina = window.PD_COPERTINA_LIBRO ?
+      '<img class="libro-copertina-img" src="' + window.PD_COPERTINA_LIBRO + '" alt="Copertina del libro «Tecnologia Gentile – Informatica Sostenibile» di Danilo D\'Auria">' :
+      '<div class="libro-copertina" aria-hidden="true"><div class="lc-autore">Danilo D\'Auria</div><div class="lc-titolo">Tecnologia<br>Gentile</div>' +
+      '<div class="lc-sotto">Informatica Sostenibile</div><div class="lc-foglia">🌿</div></div>';
+    el.innerHTML = '<section class="libro-hero">' + copertina + '<div><div class="ka">Il libro</div><h1>Tecnologia Gentile</h1>' +
       '<p class="motto">Informatica Sostenibile</p><p>Il libro di <b>Danilo D\'Auria</b>, ideatore del Professore Digitale e di FeniceOS, pubblicato su Amazon. ' +
       "Racconta un'informatica a misura di persona: inclusiva, rispettosa dell'ambiente e di chi sta imparando.</p>" +
       (P ? '<p class="small muted">' + esc(P.descrizione || "") + "</p>" : "") + "</div></section>" +

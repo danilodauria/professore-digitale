@@ -477,3 +477,5 @@ h2.sez { font-size: 1.25rem; margin: 1.6rem 0 .6rem; }
 .sostieni-iban { font-size: 1.05em; word-break: normal; }
 .sostieni-iban { letter-spacing: .03em; font-weight: 600; }
 @media print { .sostieni-modo .row { display: none; } }
+.libro-copertina-img { width: 11rem; max-width: 40vw; height: auto; border-radius: 4px 10px 10px 4px; box-shadow: 0 10px 24px rgba(0,0,0,.35); flex-shrink: 0; }
+@media (max-width: 560px) { .libro-copertina-img { width: 9rem; max-width: 60vw; } }
