@@ -99,6 +99,12 @@
           setTimeout(function () { finish(box, "dblclick", "Avete aperto tutte le cartelle in <b>" + sec + " secondi</b>." + (rec ? " Nuovo record!" : ""), function () { dblGame(box); }); }, 500);
         }
       };
+      var ultimoClic = 0;   // mani che tremano: due clic semplici vicini valgono come doppio clic
+      b.addEventListener("click", function () {
+        if (!(PD.tremore && PD.tremore.attivo())) return;
+        var ora = Date.now();
+        if (ora - ultimoClic <= PD.tremore.sogliaDoppioClic) { ultimoClic = 0; b.ondblclick(); } else ultimoClic = ora;
+      });
       arena.appendChild(b);
     });
     void H;

@@ -108,7 +108,10 @@ int file_read(const wchar_t *path, buf_t *out, size_t limit) {
     return 1;
 }
 int file_write_atomic(const wchar_t *path, const void *data, size_t n) {
-    wchar_t *tmp = wcsdup_printf(L"%ls.tmp", path);
+    /* nome temporaneo diverso per ogni scrittura: due salvataggi contemporanei della stessa chiave
+       (il server risponde a piu' richieste insieme) non devono litigare sullo stesso file .tmp */
+    static volatile LONG seq = 0;
+    wchar_t *tmp = wcsdup_printf(L"%ls.%lu.%ld.tmp", path, (unsigned long)GetCurrentThreadId(), (long)InterlockedIncrement(&seq));
     if (!tmp) return 0;
     HANDLE h = CreateFileW(tmp, GENERIC_WRITE, 0, NULL, CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
     if (h == INVALID_HANDLE_VALUE) { free(tmp); return 0; }
@@ -120,7 +123,14 @@ int file_write_atomic(const wchar_t *path, const void *data, size_t n) {
     }
     FlushFileBuffers(h);
     CloseHandle(h);
-    if (ok) ok = MoveFileExW(tmp, path, MOVEFILE_REPLACE_EXISTING | MOVEFILE_WRITE_THROUGH) != 0;
+    if (ok) {   /* il file di destinazione puo' essere aperto un attimo da un'altra richiesta o dall'antivirus: si riprova */
+        int prova;
+        ok = 0;
+        for (prova = 0; prova < 20 && !ok; prova++) {
+            ok = MoveFileExW(tmp, path, MOVEFILE_REPLACE_EXISTING | MOVEFILE_WRITE_THROUGH) != 0;
+            if (!ok) Sleep(25);
+        }
+    }
     if (!ok) DeleteFileW(tmp);
     free(tmp);
     return ok;

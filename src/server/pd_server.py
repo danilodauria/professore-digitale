@@ -127,11 +127,16 @@ def ensure_dirs():
             pass
 
 
+_SCRITTURA = threading.Lock()
+
+
 def atomic_write(path, data):
-    tmp = path + ".tmp"
-    with open(tmp, "w", encoding="utf-8") as f:
-        f.write(data)
-    os.replace(tmp, path)
+    # il server risponde a piu' richieste insieme: un salvataggio alla volta e un file temporaneo per ognuno
+    with _SCRITTURA:
+        tmp = "%s.%d.%d.tmp" % (path, os.getpid(), threading.get_ident())
+        with open(tmp, "w", encoding="utf-8") as f:
+            f.write(data)
+        os.replace(tmp, path)
 
 
 def read_json_file(path, default=None):

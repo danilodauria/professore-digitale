@@ -1,1 +1,158 @@
-/* enti */
+/* Professore Digitale - Competenze DigComp, Incontri pronti, pagina per facilitatori ed enti
+ * Autore: Danilo D'Auria - Licenza MIT */
+
+/* ---------- le mie competenze ---------- */
+.dc-sommario { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 1.2rem; align-items: center; }
+.dc-numero { display: flex; flex-direction: column; align-items: center; justify-content: center; width: 6.5rem; height: 6.5rem; border-radius: 50%;
+  background: var(--brand-soft); color: var(--brand); border: 3px solid var(--brand); line-height: 1.1; }
+.dc-numero b { font-size: 2.4rem; }
+.dc-numero span { font-size: .85rem; font-weight: 700; }
+.dc-legenda { margin: .6rem 0 0; display: flex; flex-wrap: wrap; gap: .3rem .9rem; align-items: center; }
+.dc-pallini { display: inline-flex; gap: .2rem; vertical-align: middle; }
+.dc-pallini span { width: .7rem; height: .7rem; border-radius: 50%; border: 2px solid var(--ok); background: transparent; }
+.dc-pallini span.on { background: var(--ok); }
+
+.dc-area { margin-top: 1rem; border-left: 8px solid var(--dc-col, var(--brand)); }
+:root[data-theme="contrast"] .dc-area { border-left-color: var(--line); }
+.dc-area-testa { display: flex; gap: .9rem; align-items: center; }
+.dc-area-testa .big-ico { font-size: 2.2rem; flex: none; }
+.dc-area-testa h2 { margin: 0; font-size: 1.25rem; }
+.dc-area-testa p { margin: .1rem 0 0; }
+.dc-area-testa > div { min-width: 0; flex: 1 1 auto; }
+.dc-conta { margin-left: auto; font-weight: 800; white-space: nowrap; color: var(--ink2); }
+.dc-barra { margin: .7rem 0 .9rem; }
+.dc-lista { display: grid; gap: .8rem; grid-template-columns: repeat(auto-fill, minmax(min(100%, 22rem), 1fr)); }
+.dc-comp { border: 2px solid var(--line); border-radius: 12px; padding: .8rem .9rem; background: var(--bg2); min-width: 0; }
+.dc-comp.dc-l2, .dc-comp.dc-l3 { border-color: var(--ok); background: var(--ok-soft); }
+.dc-comp.dc-l1 { border-color: var(--warn); }
+.dc-comp-testa { display: flex; gap: .6rem; align-items: flex-start; }
+.dc-comp-testa h3 { margin: 0; font-size: 1rem; line-height: 1.3; }
+.dc-codice { flex: none; font-weight: 800; font-size: .85rem; padding: .15rem .5rem; border-radius: 8px; background: var(--dc-col, var(--brand)); color: #fff; }
+.dc-area .dc-codice { background: var(--dc-col, var(--brand)); }
+:root[data-theme="contrast"] .dc-codice { background: var(--brand); color: var(--brand-ink); }
+.dc-stato { margin: .45rem 0 .2rem; gap: .5rem; }
+.dc-semplice { margin: .3rem 0 .5rem; font-size: .92rem; }
+.dc-atts { display: flex; flex-wrap: wrap; gap: .4rem; }
+.dc-att { min-height: 2.4rem; padding: .3rem .7rem; font-size: .85rem; text-align: left; justify-content: flex-start; max-width: 100%; white-space: normal; }
+.dc-att.fatta { border-color: var(--ok); color: var(--ok); }
+.dc-altre summary { cursor: pointer; font-size: .85rem; font-weight: 700; color: var(--brand); margin: .4rem 0; }
+.dc-chips { display: flex; flex-wrap: wrap; gap: .25rem; margin-top: .3rem; }
+.dc-chip { display: inline-block; font-size: .72rem; font-weight: 800; padding: .05rem .45rem; border-radius: 6px; background: var(--dc-col, var(--brand)); color: #fff; }
+:root[data-theme="contrast"] .dc-chip { background: var(--brand); color: var(--brand-ink); }
+
+/* tabella del quadro (scheda per enti) */
+.dc-tabella { display: grid; gap: .1rem; margin-top: .8rem; }
+.dc-riga { display: grid; grid-template-columns: auto minmax(0, 1fr) minmax(9rem, 14rem); gap: .8rem; align-items: start; padding: .6rem 0; border-top: 1px solid var(--line); }
+.dc-riga p { margin: .1rem 0 0; }
+.dc-dove { text-align: right; }
+
+/* ---------- pagina enti ---------- */
+.enti-intro p { max-width: 75ch; }
+.enti-schede { display: flex; gap: .2rem; flex-wrap: nowrap; overflow-x: auto; margin: 1rem 0 0; border-bottom: 2px solid var(--line); }
+.enti-scheda { border: 2px solid transparent; border-bottom: none; background: transparent; padding: .6rem .7rem; border-radius: 12px 12px 0 0; cursor: pointer;
+  font-weight: 700; font-size: .88rem; color: var(--ink2); margin-bottom: -2px; white-space: nowrap; flex: none; }
+.enti-scheda:hover { background: var(--brand-soft); }
+.enti-scheda[aria-selected="true"] { background: var(--panel); color: var(--brand); border-color: var(--line); border-bottom: 2px solid var(--panel); }
+:root[data-theme="contrast"] .enti-scheda[aria-selected="true"] { text-decoration: underline; }
+.enti-box { padding-top: .4rem; }
+.enti-box > .card { margin-top: 1rem; }
+.enti-box > .card h2 { margin-top: 0; }
+
+/* incontri */
+.inc-tile { position: relative; }
+.inc-n { font-size: .75rem; font-weight: 800; text-transform: uppercase; letter-spacing: .04em; color: var(--accent); }
+.inc-testa { margin-top: 1rem; }
+.inc-testa h2 { margin: 0; font-size: 1.45rem; }
+.inc-azioni { margin-bottom: 1rem; }
+.inc-info { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(min(100%, 17rem), 1fr)); margin: 1rem 0; }
+.inc-info h3, .inc-scaletta-card h3, .enti-box .card h3 { margin: 0 0 .5rem; font-size: 1.1rem; }
+.inc-info ul { margin: 0; padding-left: 1.2rem; }
+.inc-comp { list-style: none; padding-left: 0 !important; }
+.inc-comp li { margin-bottom: .3rem; }
+.inc-scaletta { list-style: none; margin: 0; padding: 0; }
+.inc-scaletta > li { display: grid; grid-template-columns: 5.5rem minmax(0, 1fr); gap: .8rem; padding: .7rem 0; border-top: 1px solid var(--line); }
+.inc-scaletta > li:first-child { border-top: none; }
+.inc-scaletta > li.pausa { color: var(--ink2); }
+.inc-ora { font-weight: 800; color: var(--brand); white-space: nowrap; }
+.inc-ora small { display: block; font-weight: 600; color: var(--ink2); font-size: .75rem; }
+.inc-cosa p { margin: .2rem 0 .4rem; }
+.inc-apri { min-height: 2.4rem; padding: .3rem .8rem; font-size: .88rem; white-space: normal; text-align: left; }
+.inc-nav { margin-top: 1rem; }
+
+/* guida a tempo */
+.inc-guida-passo { border: 3px solid var(--brand); transition: border-color .6s, background-color .6s; }
+.inc-guida-passo h2 { font-size: 1.6rem; margin: .2rem 0 .4rem; }
+.inc-guida-cosa { font-size: 1.1rem; max-width: 70ch; }
+.inc-crono { display: flex; align-items: baseline; gap: .6rem; flex-wrap: wrap; margin: .6rem 0 .3rem; }
+.inc-crono-t { font-size: 3.2rem; font-weight: 800; font-variant-numeric: tabular-nums; line-height: 1; }
+.inc-crono-di { font-size: 1.2rem; color: var(--ink2); font-weight: 700; }
+.inc-scaduto-msg { display: none; margin: .6rem 0 0; font-weight: 700; }
+.inc-guida-passo.scaduto { border-color: var(--warn); background: var(--warn-soft); }
+.inc-guida-passo.scaduto .inc-scaduto-msg { display: block; }
+.inc-guida-passo.scaduto .progress > span { background: var(--warn); }
+.inc-guida-cmd { margin-top: 1rem; }
+.inc-suono { display: inline-flex; gap: .4rem; align-items: center; margin-top: .8rem; cursor: pointer; }
+.inc-scaletta-guida > li { display: block; padding: 0; }
+.inc-salta { display: grid; grid-template-columns: 5.5rem minmax(0, 1fr); gap: .8rem; width: 100%; text-align: left; background: transparent; border: 0; padding: .6rem .4rem;
+  cursor: pointer; border-radius: 10px; }
+.inc-salta:hover { background: var(--brand-soft); }
+.inc-scaletta-guida li.ora .inc-salta { background: var(--brand-soft); font-weight: 800; }
+.inc-scaletta-guida li.fatto .inc-salta { color: var(--ink2); }
+
+/* barra piccola della guida, visibile mentre si usano le lezioni */
+#enti-guida-bar { position: fixed; z-index: 40; left: 16rem; bottom: 1rem; display: flex; align-items: center; gap: .6rem; max-width: min(36rem, calc(100vw - 17rem));
+  background: var(--panel); color: var(--ink); border: 2px solid var(--brand); border-radius: 16px; padding: .5rem .6rem .5rem .8rem; box-shadow: 0 8px 24px rgba(0,0,0,.18); }
+#enti-guida-bar.scaduto { border-color: var(--warn); background: var(--warn-soft); }
+#enti-guida-bar .gb-ico { font-size: 1.5rem; }
+#enti-guida-bar .gb-testo { display: flex; flex-direction: column; min-width: 0; line-height: 1.25; }
+#enti-guida-bar .gb-testo b { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+#enti-guida-bar .btn { min-height: 2.4rem; padding: .3rem .8rem; font-size: .88rem; flex: none; }
+#enti-guida-bar [data-enti-t] { font-variant-numeric: tabular-nums; font-weight: 700; }
+
+@media (max-width: 900px) {
+  #enti-guida-bar { left: .5rem; right: .5rem; bottom: 5.2rem; max-width: none; }
+  .dc-riga { grid-template-columns: auto minmax(0, 1fr); }
+  .dc-dove { grid-column: 2; text-align: left; }
+  .inc-crono-t { font-size: 2.6rem; }
+}
+@media (max-width: 520px) {
+  .dc-sommario { grid-template-columns: 1fr; justify-items: center; text-align: center; }
+  .dc-legenda { justify-content: center; }
+  .dc-conta { display: none; }
+  .enti-schede { display: grid; grid-template-columns: 1fr 1fr; gap: .35rem; border-bottom: none; }
+  .enti-scheda { padding: .45rem .5rem; font-size: .8rem; border: 2px solid var(--line); border-radius: 10px; margin: 0; text-align: center; }
+  .enti-scheda[aria-selected="true"] { background: var(--brand); color: var(--brand-ink); border-color: var(--brand); }
+  #view-enti > .lesson-head .big-ico, .inc-testa .big-ico { display: none; }
+  #view-enti > .lesson-head h1 { font-size: 1.25rem; }
+  .inc-scaletta > li, .inc-salta { grid-template-columns: 4.2rem minmax(0, 1fr); gap: .5rem; }
+  .inc-guida-cmd .btn { flex: 1 1 auto; }
+  #enti-guida-bar .gb-ico { display: none; }
+}
+@media (prefers-reduced-motion: reduce) { .inc-guida-passo { transition: none; } }
+
+/* ---------- stampe (schede degli incontri, competenze) ---------- */
+@media print {
+  #enti-guida-bar { display: none !important; }
+  #print-area .enti-p { font-size: 11.5pt; line-height: 1.4; }
+  #print-area .enti-p h2 { font-size: 13pt; margin: 12pt 0 4pt; }
+  #print-area .enti-p ul, #print-area .enti-p ol { margin: 0 0 4pt; padding-left: 16pt; }
+  #print-area .p-chi { font-size: 11pt; margin: 0 0 8pt; }
+  #print-area .p-tab { width: 100%; border-collapse: collapse; font-size: 10pt; }
+  #print-area .p-tab th { text-align: left; border-bottom: 1.5pt solid #1d5c8f; padding: 3pt 4pt; }
+  #print-area .p-tab td { border-bottom: .5pt solid #bbb; padding: 4pt; vertical-align: top; }
+  #print-area .p-tab tr { break-inside: avoid; }
+  #print-area .p-cod { font-weight: 700; white-space: nowrap; width: 3.2em; }
+  #print-area .p-stato { white-space: nowrap; width: 7em; }
+  #print-area .p-sempl { color: #444; font-size: 9.5pt; }
+  #print-area .p-nota { font-size: 9pt; color: #555; margin-top: 10pt; }
+  #print-area .p-righe i { display: block; height: 9mm; border-bottom: .6pt solid #999; }
+  /* scheda per gli allievi: caratteri grandi */
+  #print-area .enti-allievi { font-size: 14pt; line-height: 1.35; }
+  #print-area .enti-allievi h1 { font-size: 22pt; }
+  #print-area .enti-allievi h2 { margin-top: 9pt; }
+  #print-area .enti-allievi h2 { font-size: 16pt; }
+  #print-area .enti-allievi li { margin-bottom: 4pt; }
+  #print-area .enti-allievi .p-sempl { font-size: 12pt; }
+  #print-area .enti-allievi .p-compito { border: 2pt solid #c2410c; border-radius: 8pt; padding: 4pt 12pt; margin: 10pt 0; break-inside: avoid; }
+  #print-area .enti-allievi .p-ricorda { font-size: 12pt; background: #eef7ef; padding: 6pt 10pt; border-left: 4pt solid #15803d; }
+}

@@ -1,1 +1,95 @@
-/* truffa */
+/* ==============================================================================
+ *  PROFESSORE DIGITALE - «È una truffa?» (js/truffa.js)
+ * ============================================================================== */
+#view-truffa .lesson-head { display: flex; gap: 1rem; align-items: center; margin-bottom: 1rem; }
+#view-truffa .lesson-head .big-ico { font-size: 3rem; line-height: 1; }
+#view-truffa .card { margin-bottom: 1rem; }
+#view-truffa h2 { font-size: 1.25rem; margin: 0 0 .6rem; }
+#view-truffa h3 { font-size: 1.1rem; margin: 1.1rem 0 .5rem; }
+
+.tr-tipi { border: 0; padding: 0; margin: 0 0 .8rem; display: flex; flex-wrap: wrap; gap: .5rem; min-width: 0; }
+.tr-tipi legend { padding: 0; margin-bottom: .4rem; }
+.tr-tipo { position: relative; cursor: pointer; }
+.tr-tipo input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+.tr-tipo span { display: inline-block; padding: .45rem .9rem; border: 2px solid var(--line); border-radius: 99px; font-weight: 600; font-size: .92rem; background: var(--bg2); }
+.tr-tipo input:checked + span { border-color: var(--brand); background: var(--brand); color: var(--brand-ink); }
+.tr-tipo input:focus-visible + span { outline: 3px solid var(--focus); outline-offset: 2px; }
+.tr-tipo:hover span { border-color: var(--brand); }
+
+.tr-etichetta { display: block; font-weight: 700; margin-bottom: .3rem; }
+#tr-testo { width: 100%; box-sizing: border-box; min-height: 9rem; font: inherit; font-size: 1.05rem; line-height: 1.45; padding: .8rem;
+  border: 2px solid var(--line); border-radius: 12px; background: var(--bg2); color: var(--ink); resize: vertical; }
+#tr-testo:focus { border-color: var(--brand); outline: none; box-shadow: 0 0 0 3px var(--brand-soft); }
+.tr-azioni { margin-top: .8rem; }
+.tr-esempi { margin-top: .6rem; padding-top: .8rem; border-top: 1px dashed var(--line); }
+.tr-esempi .row { gap: .45rem; margin-top: .4rem; }
+.tr-esempi .btn { min-height: 2.5rem; padding: .35rem .8rem; font-size: .9rem; }
+
+/* esito */
+.tr-esito { border-width: 2px; }
+.tr-bordo-alto { border-color: var(--bad); }
+.tr-bordo-medio { border-color: var(--warn); }
+.tr-bordo-basso { border-color: var(--ok); }
+.tr-verdetto { display: flex; gap: .9rem; align-items: center; padding: .9rem 1rem; border-radius: 12px; border-left: 8px solid; font-size: 1.15rem; }
+.tr-verdetto b { font-size: 1.25rem; }
+.tr-verdetto .small { margin-top: .2rem; color: var(--ink2); }
+.tr-verdetto .tr-ico { font-size: 2.4rem; line-height: 1; }
+.tr-alto { background: var(--bad-soft); border-color: var(--bad); }
+.tr-medio { background: var(--warn-soft); border-color: var(--warn); }
+.tr-basso { background: var(--ok-soft); border-color: var(--ok); }
+.tr-segnali, .tr-passi { padding-left: 1.6rem; margin: 0; }
+.tr-segnali li, .tr-passi li { margin-bottom: .6rem; line-height: 1.4; }
+.tr-segnali li { padding: .4rem .6rem; border-left: 4px solid var(--line); border-radius: 0 8px 8px 0; background: var(--bg2); }
+.tr-segnali li.tr-p5, .tr-segnali li.tr-p4 { border-left-color: var(--bad); }
+.tr-segnali li.tr-p3, .tr-segnali li.tr-p2 { border-left-color: var(--warn); }
+.tr-segnali li .small { color: var(--ink2); margin-top: .15rem; }
+.tr-trovato { font-style: italic; color: var(--ink2); overflow-wrap: anywhere; }
+.tr-testo { margin: 1rem 0 0; border: 1px solid var(--line); border-radius: 12px; }
+.tr-testo summary { cursor: pointer; font-weight: 700; padding: .6rem .9rem; }
+.tr-testo-corpo, .tr-stampa-testo { padding: .7rem .9rem; line-height: 1.6; overflow-wrap: anywhere; border-top: 1px solid var(--line); }
+#view-truffa mark, .tr-stampa mark { background: var(--warn-soft); color: var(--ink); border-bottom: 3px solid var(--bad); padding: 0 .1em; border-radius: 3px; }
+.tr-gia { margin-top: 1rem; }
+.tr-gia ol { margin: .4rem 0 0; padding-left: 1.4rem; }
+.tr-gia li { margin-bottom: .3rem; }
+.tr-ia { margin-top: 1rem; padding: .9rem 1rem; border: 2px dashed var(--brand); border-radius: 12px; background: var(--brand-soft); }
+.tr-ia h3 { margin-top: 0; }
+
+/* regole d'oro */
+.tr-regole > summary { cursor: pointer; list-style: none; }
+.tr-regole > summary::-webkit-details-marker { display: none; }
+.tr-regole > summary h2 { display: inline; margin: 0; }
+.tr-regole > summary::after { content: " ▸ apri"; color: var(--brand); font-weight: 700; font-size: .9rem; }
+.tr-regole[open] > summary::after { content: " ▾ chiudi"; }
+.tr-regole ol { padding-left: 1.6rem; margin: .8rem 0; }
+.tr-regole li { margin-bottom: .55rem; line-height: 1.4; }
+
+/* storico */
+.tr-storico { list-style: none; padding: 0; margin: 0 0 .8rem; }
+.tr-storico li { display: flex; gap: .7rem; align-items: flex-start; padding: .5rem 0; border-bottom: 1px solid var(--line); }
+.tr-st-ico { font-size: 1.4rem; line-height: 1.2; }
+.tr-st-ant { overflow-wrap: anywhere; }
+
+html[data-theme="contrast"] .tr-tipo span, html[data-theme="contrast"] #tr-testo { border-color: #fff; }
+html[data-theme="contrast"] #view-truffa mark { background: #ffeb3b; color: #000; border-bottom-color: #000; }
+
+@media (max-width: 600px) {
+  #view-truffa .lesson-head .big-ico { font-size: 2.3rem; }
+  .tr-verdetto { font-size: 1rem; padding: .7rem .8rem; }
+  .tr-verdetto b { font-size: 1.1rem; }
+  .tr-azioni .btn.big { flex: 1 1 100%; }
+}
+
+@media print {
+  #print-area .tr-stampa .tr-verdetto { border: 2px solid #333; border-left-width: 8px; padding: 6pt 8pt; display: flex; gap: 8pt; align-items: center; }
+  #print-area .tr-stampa .tr-alto { background: #fee2e2; border-color: #b91c1c; }
+  #print-area .tr-stampa .tr-medio { background: #fef3c7; border-color: #a16207; }
+  #print-area .tr-stampa .tr-basso { background: #dcfce7; border-color: #15803d; }
+  #print-area .tr-stampa .tr-ico { font-size: 20pt; }
+  #print-area .tr-stampa .tr-stampa-testo { border: 1px solid #999; padding: 6pt 8pt; margin: 6pt 0 10pt; }
+  #print-area .tr-stampa mark { background: #fde68a; color: #000; border-bottom: 2px solid #b91c1c; }
+  #print-area .tr-stampa .tr-segnali li { break-inside: avoid; border-left: 3pt solid #999; padding-left: 5pt; margin-bottom: 5pt; list-style-position: outside; }
+  #print-area .tr-stampa .tr-gia { border: 1px solid #a16207; padding: 6pt 8pt; background: #fffbeb; }
+  #print-area .tr-stampa h3 { font-size: 13pt; color: #1d5c8f; margin: 10pt 0 4pt; }
+  #print-area .tr-stampa .small { font-size: 10pt; }
+  #print-area .tr-stampa .p-piede { margin-top: 12pt; font-size: 8.5pt; color: #555; border-top: 1px solid #999; padding-top: 4pt; }
+}

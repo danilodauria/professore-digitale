@@ -1,1 +1,51 @@
-/* ripasso */
+/* Professore Digitale - Ripasso intelligente e domanda del giorno (ripasso.js) */
+
+/* numeri in alto */
+.rip-numeri { display: grid; grid-template-columns: repeat(auto-fit, minmax(9.5rem, 1fr)); gap: .8rem; margin: .8rem 0 1rem; }
+.rip-num { display: flex; flex-direction: column; gap: .2rem; padding: .9rem 1rem; border-left: 6px solid var(--line); }
+.rip-num b { font-size: 2rem; line-height: 1; color: var(--ink); }
+.rip-num span { color: var(--ink2); font-size: .9rem; }
+.rip-num.oggi { border-left-color: var(--brand); }
+.rip-num.oggi b { color: var(--brand); }
+.rip-num.ok { border-left-color: var(--ok); }
+.rip-num.serie { border-left-color: var(--accent); }
+
+.rip-intro { display: grid; grid-template-columns: auto 1fr; gap: 1.2rem; align-items: start; }
+.rip-intro .lead { margin-top: 0; }
+.rip-come { margin-top: 1rem; }
+.rip-scatole { list-style: none; padding: 0; margin: .4rem 0 .8rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(8.5rem, 1fr)); gap: .6rem; }
+.rip-scatole li { display: flex; flex-direction: column; gap: .2rem; padding: .7rem .8rem; border: 2px solid var(--line); border-radius: 12px; background: var(--bg2); }
+.rip-scatole li .badge { align-self: flex-start; font-size: .85rem; }
+.rip-scatole li.fine { border-color: var(--ok); }
+
+/* sessione */
+.rip-run .rip-fonte { margin-bottom: .3rem; }
+.rip-nota { margin-top: .5rem; padding: .45rem .7rem; border-radius: 10px; background: var(--brand-soft); }
+.rip-fine { text-align: center; padding: 2rem 1.2rem; }
+.rip-riga { padding: .6rem 0; border-bottom: 1px dashed var(--line); }
+.rip-riga:last-child { border-bottom: 0; }
+
+/* domanda del giorno (pagina Inizio) */
+.rip-giorno { margin-top: 1.2rem; border: 2px solid var(--warn); background: linear-gradient(135deg, var(--panel) 65%, var(--warn-soft)); max-width: 52rem; }
+.rip-giorno-testa { display: flex; align-items: center; justify-content: space-between; gap: .6rem; }
+.rip-giorno-testa h2 { margin: 0; font-size: 1.2rem; }
+.rip-giorno .rip-chiudi { min-height: 2.4rem; min-width: 2.4rem; padding: .2rem .6rem; }
+.rip-giorno .quiz-q { margin: .6rem 0 .4rem; }
+.rip-giorno .quiz-opt { padding: .6rem .9rem; }
+.rip-esito { margin: .4rem 0; }
+.rip-domani { margin: .4rem 0 0; font-size: 1.05rem; }
+
+/* riquadro dell'Inizio */
+.rip-tile.rip-attesa { border-color: var(--brand); }
+.rip-tile h3 .badge { vertical-align: middle; font-size: .8rem; }
+.rip-tile .rip-n { color: var(--ink); }
+
+:root[data-theme="contrast"] .rip-giorno { background: var(--panel); border-color: var(--warn); }
+:root[data-theme="contrast"] .rip-num { border: 2px solid var(--line); border-left-width: 6px; }
+
+@media (max-width: 640px) {
+  .rip-intro { grid-template-columns: 1fr; }
+  .rip-intro .prof { max-width: 8rem; }
+  .rip-numeri { grid-template-columns: 1fr 1fr; }
+  .rip-num b { font-size: 1.6rem; }
+}

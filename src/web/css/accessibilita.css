@@ -1,1 +1,103 @@
-/* accessibilita */
+/* ==============================================================================
+ *  PROFESSORE DIGITALE - «Accessibilità vera» (3.2): comandi a voce, mani che tremano,
+ *  vedo poco, leggi ciò che indico. Classi su <html>: pd-voce, pd-tremore, pd-vista, pd-leggi.
+ *  Ideato e sviluppato da Danilo D'Auria - Licenza MIT
+ * ============================================================================== */
+
+/* ---------- riquadro nelle Impostazioni e menu rapido ---------- */
+.pd-a11y-card .switch { align-items: flex-start; }
+.pd-a11y-card .switch input, .pd-a11y-menu .switch input { flex: none; margin-top: .15rem; }
+.pd-a11y-menu .switch { align-items: flex-start; }
+.pd-a11y-off { opacity: .6; cursor: not-allowed; }
+.pd-a11y-nota { margin: -.3rem 0 .6rem 2rem; }
+.pd-a11y-comandi { margin-top: .6rem; }
+.pd-a11y-comandi summary { cursor: pointer; font-weight: 700; padding: .4rem 0; }
+.pd-a11y-comandi ul { margin: .3rem 0 .6rem; padding-left: 1.2rem; }
+.pd-a11y-comandi li { margin: .2rem 0; }
+.pd-a11y-menu { min-width: 20rem; max-width: min(26rem, 92vw); }
+.pd-a11y-menu .switch { margin: .3rem .5rem; font-size: .92rem; }
+.pd-a11y-menu .pd-a11y-nota { margin: 0 .6rem .4rem 2.4rem; font-size: .75rem; }
+#btn-a11y { font-size: 1.05rem; }
+
+/* ---------- pulsante «🎙️ Comando» ---------- */
+.pd-voce-btn {
+  position: fixed; right: 1rem; bottom: 1rem; z-index: 40;
+  display: inline-flex; align-items: center; gap: .5rem; min-height: 3.6rem; padding: .6rem 1.3rem;
+  border-radius: 99px; border: 3px solid var(--panel); background: var(--accent); color: #fff;
+  font-size: 1.15rem; font-weight: 800; cursor: pointer; box-shadow: 0 6px 18px rgba(0, 0, 0, .25);
+}
+.pd-voce-btn:hover { filter: brightness(1.08); }
+.pd-voce-btn.ascolto { background: var(--bad); animation: pd-voce-pulsa 1.2s infinite; }
+@keyframes pd-voce-pulsa { 0%, 100% { box-shadow: 0 0 0 0 rgba(185, 28, 28, .55); } 50% { box-shadow: 0 0 0 .7rem rgba(185, 28, 28, 0); } }
+@media (prefers-reduced-motion: reduce) { .pd-voce-btn.ascolto { animation: none; } }
+:root[data-theme="contrast"] .pd-voce-btn { background: #ffeb3b; color: #000; border-color: #fff; }
+/* spazio in fondo alla pagina, così il pulsante non copre gli ultimi pulsanti */
+html.pd-voce main { padding-bottom: 7rem; }
+@media (max-width: 480px) { .pd-voce-btn { min-height: 3.2rem; padding: .5rem 1rem; font-size: 1rem; right: .6rem; } }
+@media print { .pd-voce-btn { display: none !important; } }
+
+/* ---------- Mani che tremano ---------- */
+/* cursore grande (freccia nera bordata di bianco), punta in alto a sinistra */
+html.pd-tremore, html.pd-tremore body, html.pd-vista, html.pd-vista body {
+  cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='48' viewBox='0 0 48 48'%3E%3Cpath d='M3 3 L3 40 L13 31 L20 46 L27 43 L20 28 L34 28 Z' fill='%23000' stroke='%23fff' stroke-width='3' stroke-linejoin='round'/%3E%3C/svg%3E") 3 3, auto;
+}
+html.pd-tremore button, html.pd-tremore a, html.pd-tremore [data-go], html.pd-tremore label, html.pd-tremore summary,
+html.pd-vista button, html.pd-vista a, html.pd-vista [data-go], html.pd-vista label, html.pd-vista summary {
+  cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='48' viewBox='0 0 48 48'%3E%3Cpath d='M16 4 a4 4 0 0 1 8 0 v16 l3 -1 a4 4 0 0 1 5 3 l3 -1 a4 4 0 0 1 5 3 l2 0 a4 4 0 0 1 4 4 v8 c0 6 -4 11 -10 11 h-10 c-4 0 -7 -2 -9 -5 l-9 -12 a3.5 3.5 0 0 1 5 -5 l3 3 z' fill='%23fff' stroke='%23000' stroke-width='2.5' stroke-linejoin='round'/%3E%3C/svg%3E") 20 2, pointer;
+}
+html.pd-tremore .btn, html.pd-tremore .icon-btn, html.pd-tremore .quiz-opt, html.pd-tremore .nav-btn,
+html.pd-tremore .menu-pop button, html.pd-tremore .suggest button, html.pd-tremore .stepper button,
+html.pd-tremore main button, html.pd-tremore .pd-bubble .btn { min-height: 56px; min-width: 56px; }
+html.pd-tremore .btn { padding: .7rem 1.4rem; }
+html.pd-tremore .icon-btn { height: auto; min-height: 56px; min-width: 56px; }
+html.pd-tremore .row { gap: 1rem; }
+html.pd-tremore .lesson-nav { gap: 1.6rem; }
+html.pd-tremore .stepper { gap: .8rem; }
+html.pd-tremore .stepper button { width: 56px; height: 56px; border-radius: 16px; }
+html.pd-tremore .tools { gap: .6rem; }
+html.pd-tremore .sidebar { gap: .7rem; }
+html.pd-tremore .quiz-opt { margin: .9rem 0; padding: 1rem 1.2rem; }
+html.pd-tremore .switch { gap: 1rem; margin: 1rem 0; min-height: 56px; }
+html.pd-tremore input[type="checkbox"], html.pd-tremore input[type="radio"] { width: 2.1rem; height: 2.1rem; min-width: 32px; min-height: 32px; flex: none; }
+html.pd-tremore input[type="range"] { height: 3rem; }
+html.pd-tremore input[type="text"], html.pd-tremore input[type="url"], html.pd-tremore input[type="search"], html.pd-tremore select, html.pd-tremore textarea { min-height: 56px; }
+html.pd-tremore .tile { min-height: 7rem; }
+html.pd-tremore .grid { gap: 1.2rem; }
+/* niente effetti al solo passaggio del mouse: ciò che si vede cambia solo con il clic */
+html.pd-tremore *:hover { transform: none !important; }
+html.pd-tremore .nav-btn:hover:not([aria-current]), html.pd-tremore .icon-btn:hover, html.pd-tremore .menu-pop button:hover { background: inherit; }
+html.pd-tremore .btn:hover { filter: none; }
+@media (max-width: 900px) {
+  html.pd-tremore .nav-btn { min-width: 5.2rem; }
+  html.pd-tremore .icon-btn { min-height: 48px; min-width: 48px; }
+}
+
+/* ---------- Vedo poco ---------- */
+html.pd-vista { font-size: 24px; font-size: max(24px, var(--fs)); }
+html.pd-vista body { line-height: 1.75; letter-spacing: .01em; }
+html.pd-vista p, html.pd-vista li { max-width: 65ch; }
+html.pd-vista a { text-decoration: underline; text-decoration-thickness: .12em; text-underline-offset: .18em; }
+html.pd-vista .btn, html.pd-vista .icon-btn, html.pd-vista .quiz-opt, html.pd-vista .tile,
+html.pd-vista .stepper button, html.pd-vista .menu-pop button { border-width: 3px; border-style: solid; border-color: var(--ink); }
+html.pd-vista .btn.ghost { border-color: var(--brand); }
+html.pd-vista .nav-btn { border-color: var(--line); }
+html.pd-vista .small, html.pd-vista small { font-size: .9rem; }
+html.pd-vista .chip, html.pd-vista .net { font-size: .85rem; }
+html.pd-vista :focus, html.pd-vista :focus-visible {
+  outline: 5px solid #000 !important; outline-offset: 3px !important;
+  box-shadow: 0 0 0 3px #000, 0 0 0 9px #ffd400 !important;
+}
+html.pd-vista[data-theme="contrast"] :focus, html.pd-vista[data-theme="contrast"] :focus-visible,
+html.pd-vista[data-theme="dark"] :focus, html.pd-vista[data-theme="dark"] :focus-visible {
+  outline-color: #ffd400 !important; box-shadow: 0 0 0 3px #ffd400, 0 0 0 9px #000 !important;
+}
+html.pd-vista input[type="checkbox"], html.pd-vista input[type="radio"] { width: 1.6rem; height: 1.6rem; }
+/* in modalità «vedo poco» la barra in alto può andare a capo senza uscire dallo schermo */
+html.pd-vista .topbar { flex-wrap: wrap; }
+html.pd-vista .tools { flex-wrap: wrap; }
+@media (max-width: 900px) { html.pd-vista .nav-btn { font-size: .62rem; } }
+/* con il testo grande le parole lunghe (indirizzi, nomi di file) vanno a capo invece di allargare la pagina */
+html.pd-vista main { word-wrap: break-word; overflow-wrap: break-word; overflow-wrap: anywhere; }
+/* le voci del menu non si schiacciano quando il testo diventa più grande */
+html.pd-tremore .sidebar > *, html.pd-vista .sidebar > * { flex-shrink: 0; }
+@media (max-width: 520px) { .menu-pop.pd-a11y-menu { min-width: 0; max-width: none; left: 8px; right: 8px !important; } }

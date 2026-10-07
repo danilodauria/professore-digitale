@@ -51,6 +51,12 @@ Leggere questo file per intero prima di modificare qualunque cosa.
 | `src/web/js/aula.js`, `src/server/pd_aula.py`, `windows/src/pd_aula.c` | Quadro dell'aula in rete locale (facilitatore/allievo), messaggi a tutti, stato della connessione |
 | `src/web/js/stampa.js`, `presenza.js` | Stampa della pagina o dell'argomento intero; saluti all'avvio, consigli quando è inattivo, attesa, uscita con promemoria |
 | `src/web/js/sostieni.js`, `data-sostieni.js` | Pagina «❤️ Sostieni il progetto» (PayPal, bonifico, QR già pronti, pulsanti Copia). `data-sostieni.js` si rigenera con `tools/genera-sostieni.py` (serve `segno`) se cambiano IBAN o PayPal: mai pubblicare il numero della carta, solo l'IBAN |
+| `src/web/js/vita.js`, `vita-sim2.js` | **Palestra della vita digitale** (dalla 3.2): simulatori sicuri con nomi di fantasia e fascia «PROVA»: `identita`, `visita`, `pagamento` (vita.js, che contiene il framework `PD.vita.registra(sim)` e `ctx.passo/bravo/errore/telefono/foglio/indirizzo/controlla/fine`), `banca`, `messaggi`, `posta` (vita-sim2.js). Risultati in `progress.vita` |
+| `src/web/js/truffa.js` | «È una truffa?»: motore a regole offline `PD.truffa.analizza(testo, tipo)` → livello alto/medio/basso + segnali; IA locale facoltativa; storico anonimizzato in `progress.truffa` |
+| `src/web/js/profili.js` | Profili allievo sullo stesso PC: il profilo attivo usa `progress`/`history` come prima; gli altri stanno nella chiave dati `profili`; `progress.profilo` = proprietario. API `PD.profili` |
+| `src/web/js/ripasso.js` | Ripasso a scatole (Leitner) e domanda del giorno: `PD.registraRisposta(item, giusta)` chiamata dai quiz; dati in `progress.ripasso` |
+| `src/web/js/accessibilita.js` | Comandi a voce (`PD.comando`), mani che tremano (`PD.tremore`), vedo poco, lettura di ciò che si indica |
+| `src/web/js/data-digcomp.js`, `data-incontri.js`, `enti.js`, `registro.js` | Competenze DigComp 2.2 (`PD.digcomp`, vista `#/competenze`), pagina facilitatori `#/enti/{incontri,registro,resoconto,digcomp}`, 12 incontri pronti da 2 ore, registro presenze e resoconto per l'ente (chiave dati `registro`, CSV, stampa) |
 | `tools/voci.sh` | Scarica e verifica (SHA-256) le **voci naturali incluse**: Piper Linux x86_64/aarch64 e Windows x64, voci Paola (f) e Riccardo (m). Cache in `~/.cache/professore-digitale/voci` |
 | `archivio/` | .deb prodotti in questa copia (ignorato da git, escluso dall'archivio sorgenti). I .deb pubblicati si conservano sul PC di Danilo in `$ARCHIVIO` (`~/professore-digitale-archivio`, vedi `rilascio.conf`) |
 
@@ -80,8 +86,15 @@ PD_SHARE_DIR=src python3 packaging/professore-digitale-contenuti valida src/cont
   quelle di `tecnologia-gentile` nella pagina del libro; tutte le altre nel corso (pagina Lezioni e conteggio dell'Inizio).
 - I contenuti di FeniceOS e del libro derivano dai materiali di Danilo (manuali, vademecum, script di build, libro): restare fedeli.
   Il «Grande Quiz dell'Informatica» (prova `informatica`, 264 domande) è il manuale di Danilo: non alterarne domande e risposte.
-- Dati nuovi in `progress.json`: `quiz` (risultati per prova), `attestati`, `promemoria`, `ultimoAnnuncio`.
-  Impostazioni nuove: `voiceId, netCheck, idleTips, greet, goodbye, studentName, aulaRuolo, aulaNome, aulaCodice, aulaServer`.
+- Dati nuovi in `progress.json`: `quiz` (risultati per prova), `attestati`, `promemoria`, `ultimoAnnuncio`;
+  dalla 3.2 `vita`, `truffa`, `ripasso`, `profilo`. Chiavi dati nuove (server Python e C): `profili`, `registro`.
+  Impostazioni nuove: `voiceId, netCheck, idleTips, greet, goodbye, studentName, aulaRuolo, aulaNome, aulaCodice, aulaServer`;
+  dalla 3.2 `voiceCommands, tremore, vista, leggiFocus, domandaGiorno`.
+- **Moduli (dalla 3.2)**: si agganciano con `PD.hooks` (`dopoCaricamento`, `homeTiles`, `homeCards`, `settingsCards`, in app.js);
+  CSS in `src/web/css/<modulo>.css` (make_standalone li incorpora tutti). Test di ogni modulo in `tests/ui_<modulo>.py`
+  (`prova(page, ROOT, check, SHOTS)`), chiamati da `test_ui.py`. Nei test usare selettori dentro la vista
+  (`#view-lessons .quiz-q`): la domanda del giorno nell'Inizio usa le stesse classi dei quiz.
+  Profili nei test: `?noprofilo` o `sessionStorage['pd.profiloScelto']='1'` evitano la scelta all'avvio.
 - Test: il saluto all'avvio si salta con `sessionStorage['pd.salutato']='1'` (test_ui.py) o con `?nosaluto`; i tempi dei consigli
   con `PD.idleConfig`. L'aula del server Python nei test usa `PD_AULA_PORT`/`PD_AULA_UDP`.
 

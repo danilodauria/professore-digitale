@@ -1,1 +1,92 @@
-/* registro */
+/* Professore Digitale - Registro presenze e resoconto per l'ente (registro.js)
+ * Autore: Danilo D'Auria - Licenza MIT */
+.rg { display: grid; gap: 1rem; min-width: 0; }
+.rg > * { min-width: 0; }
+.rg .card { margin: 0; }
+.rg h2 { margin: 0 0 .5rem; font-size: 1.3rem; }
+.rg h3 { margin: 1rem 0 .4rem; font-size: 1.1rem; }
+.rg .notice { margin: 0; }
+.rg-testa { display: flex; flex-wrap: wrap; gap: .6rem; align-items: center; justify-content: space-between; }
+.rg-testa h2 { margin: 0; }
+.rg-campi { display: grid; gap: 0 1rem; grid-template-columns: repeat(auto-fit, minmax(min(15rem, 100%), 1fr)); }
+.rg-orari { grid-template-columns: repeat(auto-fit, minmax(min(10rem, 100%), 1fr)); align-items: end; }
+.rg .field input, .rg .field select, .rg .field textarea, .rg-aggiungi input {
+  padding: .6rem .75rem; border-radius: 10px; border: 2px solid var(--line); background: var(--panel); color: var(--ink);
+  min-height: 3rem; width: 100%; max-width: 100%;
+}
+.rg .field textarea { min-height: 4rem; resize: vertical; }
+.rg .field input:focus, .rg .field select:focus, .rg .field textarea:focus, .rg-aggiungi input:focus { border-color: var(--brand); }
+.rg details > summary { cursor: pointer; font-weight: 700; padding: .5rem 0; min-height: 2.6rem; }
+.rg .btn { min-height: 3rem; }
+
+/* iscritti */
+.rg-lista { list-style: none; margin: 0 0 .8rem; padding: 0; }
+.rg-lista > li { border-bottom: 1px solid var(--line); padding: .2rem 0; }
+.rg-lista summary { display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; font-weight: 400; }
+.rg-lista summary::-webkit-details-marker { margin-right: .2rem; }
+.rg-lista details[open] { background: var(--bg2); border-radius: 10px; padding: 0 .6rem .7rem; margin: .3rem 0; }
+.rg-aggiungi { display: flex; gap: .6rem; flex-wrap: wrap; }
+.rg-aggiungi input { flex: 1 1 12rem; font-size: 1.1rem; }
+.rg-azioni { margin-top: .8rem; }
+.rg-conferma { margin: .6rem 0 0 !important; }
+.rg-conferma .row { margin-top: .5rem; }
+
+/* incontri */
+.rg-inc-lista { list-style: none; margin: .8rem 0 0; padding: 0; display: grid; gap: .6rem; }
+.rg-inc-lista > li { display: grid; grid-template-columns: 1fr auto; gap: .4rem .8rem; align-items: center; padding: .7rem .8rem; border: 2px solid var(--line); border-radius: 12px; background: var(--bg2); }
+.rg-inc-lista > li.rg-sel { border-color: var(--brand); }
+.rg-inc-info { min-width: 0; overflow-wrap: anywhere; }
+.rg-inc-n { font-size: 1.15rem; white-space: nowrap; }
+.rg-inc-az, .rg-inc-lista .rg-conferma { grid-column: 1 / -1; }
+.rg-appello { border: 3px solid var(--brand); border-radius: var(--radius); padding: .4rem 1rem 1rem; margin-top: .8rem; background: var(--brand-soft); }
+.rg-appello h3:first-child { margin-top: .6rem; }
+.rg-appello .field input, .rg-appello .field select, .rg-appello .field textarea { background: var(--panel); }
+.rg-presenze { display: grid; gap: .6rem; grid-template-columns: repeat(auto-fill, minmax(min(14rem, 100%), 1fr)); margin: .8rem 0; }
+.rg-pres { display: flex; align-items: center; gap: .8rem; padding: .8rem 1rem; min-height: 3.8rem; border: 3px solid var(--line); border-radius: 14px;
+  background: var(--panel); cursor: pointer; font-size: 1.1rem; font-weight: 600; overflow-wrap: anywhere; user-select: none; }
+.rg-pres input { width: 2rem; height: 2rem; flex: none; accent-color: var(--ok); margin: 0; cursor: pointer; }
+.rg-pres.on { border-color: var(--ok); background: var(--ok-soft); }
+.rg-pres:hover { border-color: var(--brand); }
+
+/* file da importare: il campo vero resta nascosto ma raggiungibile con la tastiera */
+.rg-file { position: relative; overflow: hidden; display: inline-flex; align-items: center; cursor: pointer; }
+.rg-file input { position: absolute; inset: 0; opacity: 0; cursor: pointer; width: 100%; }
+.rg-file:focus-within { outline: 4px solid var(--focus); outline-offset: 2px; }
+
+/* resoconto */
+.rg-numeri { margin: 0; grid-template-columns: repeat(auto-fit, minmax(min(10rem, 100%), 1fr)); }
+.rg-tab { overflow-x: auto; max-width: 100%; }
+.rg-tab table { width: 100%; border-collapse: collapse; font-size: .9rem; }
+.rg-tab th { text-align: left; padding: .45rem .5rem; border-bottom: 2px solid var(--line); white-space: nowrap; }
+.rg-tab td { padding: .45rem .5rem; border-bottom: 1px solid var(--line); vertical-align: top; }
+.rg-tab tfoot th { border-top: 2px solid var(--line); border-bottom: 0; }
+.rg-esporta h3 { margin-top: 1.2rem; }
+
+html[data-theme="contrast"] .rg-pres.on { outline: 3px solid var(--ok); }
+
+@media (max-width: 600px) {
+  .rg-aggiungi .btn, .rg-appello > .row .btn, .rg-esporta .btn, .rg-copie .btn { flex: 1 1 100%; justify-content: center; }
+  .rg-inc-lista > li { grid-template-columns: 1fr; }
+  .rg-tab table { font-size: .8rem; }
+}
+
+/* ---------- documento stampato (A4) ---------- */
+@media print {
+  #print-area .rg-doc { font-size: 10.5pt; color: #111; }
+  #print-area .rg-doc h1 { font-size: 18pt; margin: 0 0 8pt; }
+  #print-area .rg-doc h2 { font-size: 12.5pt; margin: 14pt 0 5pt; }
+  #print-area .rg-doc table { width: 100%; border-collapse: collapse; font-size: 9.5pt; break-inside: auto; }
+  #print-area .rg-doc tr { break-inside: avoid; }
+  #print-area .rg-doc th, #print-area .rg-doc td { border: 1px solid #999; padding: 3pt 5pt; text-align: left; vertical-align: top; color: #111; background: #fff; }
+  #print-area .rg-doc thead th, #print-area .rg-doc tfoot th { background: #eef3f8; }
+  #print-area .rg-intesta th { width: 25%; background: #eef3f8; }
+  #print-area .rg-sintesi td { text-align: center; width: 33%; }
+  #print-area .rg-sintesi b { font-size: 15pt; color: #1d5c8f; }
+  #print-area .rg-griglia td, #print-area .rg-griglia th { text-align: center; }
+  #print-area .rg-griglia td:first-child, #print-area .rg-griglia th:first-child { text-align: left; }
+  #print-area .rg-tab { overflow: visible; }
+  #print-area .rg-doc .small { font-size: 8.5pt; }
+  #print-area .rg-firma { display: flex; justify-content: space-between; gap: 30pt; margin-top: 28pt; break-inside: avoid; }
+  #print-area .rg-firma > div { flex: 1; }
+  #print-area .rg-riga { display: block; border-bottom: 1px solid #333; height: 26pt; }
+}

@@ -85,10 +85,10 @@ with sync_playwright() as p:
 
     # quiz completo
     page.goto(ROOT + "#/lessons/computer/quiz")
-    page.wait_for_selector(".quiz-q")
+    page.wait_for_selector("#view-lessons .quiz-q")
     answers = page.evaluate("PD_LESSONS[0].quiz.map(q => q.a)")
     for qi, a in enumerate(answers):
-        page.click('.quiz-q[data-q="%d"] .quiz-opt[data-o="%d"]' % (qi, a))
+        page.click('#view-lessons .quiz-q[data-q="%d"] .quiz-opt[data-o="%d"]' % (qi, a))
     page.wait_for_selector("#quiz-end .notice.ok")
     check("quiz completato", "3 su 3" in page.inner_text("#quiz-end"))
     page.screenshot(path=SHOTS + "/04-quiz.png")
@@ -339,7 +339,7 @@ with sync_playwright() as p:
     page.goto(ROOT + "#/quiz/informatica"); page.wait_for_selector("#q-via")
     page.fill("#q-nome", "Maria Rossi"); page.click("#q-via")
     for i in range(30):
-        page.wait_for_selector(".quiz-opt:not([disabled])"); page.locator(".quiz-opt").first.click(); page.click("#q-avanti")
+        page.wait_for_selector("#view-quiz .quiz-opt:not([disabled])"); page.locator("#view-quiz .quiz-opt").first.click(); page.click("#q-avanti")
     page.wait_for_selector("#q-ancora")
     r = page.evaluate("PD.progress.quiz.informatica")
     check("quiz completato e registrato", r and r["tentativi"] == 1 and r["totale"] == 30, r)
@@ -437,6 +437,18 @@ with sync_playwright() as p:
     g.goto(ROOT + "#/home"); g.wait_for_selector("#pd-bubble", timeout=15000)
     check("saluto all'avvio", any(w in g.inner_text("#pd-bubble") for w in ("Buongiorno", "Buon pomeriggio", "Buonasera")))
     g.close()
+
+    # --- moduli della 3.2: ognuno ha il suo file tests/ui_<modulo>.py con prova(page, ROOT, check, SHOTS) ---
+    import importlib.util
+    for _nome in ("ui_vita", "ui_vita2", "ui_truffa", "ui_profili", "ui_ripasso", "ui_accessibilita", "ui_enti", "ui_registro"):
+        _s = importlib.util.spec_from_file_location(_nome, os.path.join(os.path.dirname(os.path.abspath(__file__)), _nome + ".py"))
+        _m = importlib.util.module_from_spec(_s); _s.loader.exec_module(_m)
+        print("  ·· " + _nome)
+        page.goto(ROOT + "#/home"); page.wait_for_selector("#view-home h1")
+        try:
+            _m.prova(page, ROOT, check, SHOTS)
+        except Exception as _e:
+            check("modulo %s completato senza eccezioni" % _nome, False, repr(_e)[:400])
 
     # --- telefono / schermo stretto ---
     m = b.new_context(viewport={"width": 390, "height": 800}).new_page()

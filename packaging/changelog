@@ -1,3 +1,22 @@
+professore-digitale (3.2.0) stable; urgency=medium
+
+  * Nuova «Palestra della vita digitale»: sei prove sicure per imparare
+    senza rischi l'identità digitale, la prenotazione di una visita, il
+    pagamento di un avviso, la banca online, i messaggi e la posta, con le
+    trappole dei truffatori da riconoscere.
+  * Nuova pagina «È una truffa?»: incollate o dettate un messaggio
+    sospetto e il Professore vi dice quali segnali vede e cosa fare.
+  * Più persone sullo stesso computer, ognuna con i suoi progressi;
+    ripasso intelligente e domanda del giorno.
+  * Accessibilità: comandi a voce, pulsanti grandi per chi ha le mani che
+    tremano, modalità per chi vede poco e lettura di ciò che indicate.
+  * Per facilitatori ed enti: competenze europee DigComp 2.2, 12 incontri
+    pronti con guida a tempo, registro presenze e resoconto stampabile o in
+    CSV.
+  * Vademecum aggiornati con i nuovi capitoli.
+
+ -- Danilo D'Auria <danilodauria.site@gmail.com>  Wed, 07 Oct 2026 22:03:51 +0200
+
 professore-digitale (3.1.0) stable; urgency=medium
 
   * Nuova pagina «❤️ Sostieni il progetto» (Impostazioni e pagina

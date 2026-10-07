@@ -1,1 +1,67 @@
-/* profili */
+/* ---------- Profili allievo: «Chi usa il computer?» (3.2) ---------- */
+.pf-vista h1 { margin-top: 0; }
+.pf-griglia {
+  display: grid; gap: 1rem; margin: 1rem 0 1.4rem;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 12.5rem), 1fr));
+}
+.pf-persona {
+  --pf-colore: var(--brand);
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: .45rem;
+  min-height: 11rem; padding: 1.1rem .8rem; border-radius: var(--radius);
+  background: var(--panel); color: var(--ink); border: 3px solid var(--line); border-top: 10px solid var(--pf-colore);
+  box-shadow: var(--shadow); cursor: pointer; font: inherit; text-align: center;
+}
+.pf-persona:hover, .pf-persona:focus-visible { border-color: var(--pf-colore); background: var(--brand-soft); }
+.pf-persona:focus-visible { outline: 4px solid var(--focus); outline-offset: 3px; }
+.pf-persona:disabled { opacity: .6; cursor: wait; }
+.pf-persona .pf-ico { font-size: 4rem; line-height: 1; }
+.pf-persona .pf-nome { font-size: 1.45rem; font-weight: 800; overflow-wrap: anywhere; }
+.pf-persona .pf-stato { font-size: .85rem; font-weight: 700; color: var(--ok); }
+.pf-persona.attivo { border-color: var(--ok); border-top-color: var(--pf-colore); }
+.pf-persona.pf-nuova { border-style: dashed; border-top: 3px dashed var(--line); background: var(--bg2); }
+.pf-persona.pf-nuova .pf-nome { font-size: 1.2rem; color: var(--brand); }
+
+.pf-modulo h2, .pf-gestisci h2 { margin-top: 0; }
+.pf-modulo { margin-bottom: 1.4rem; border: 2px solid var(--brand); }
+.pf-input { font-size: 1.3rem !important; padding: .7rem .9rem !important; max-width: 26rem; }
+.pf-errore { color: var(--bad); font-weight: 700; min-height: 1.2em; margin: .4rem 0; }
+.pf-icone { display: grid; gap: .5rem; grid-template-columns: repeat(auto-fill, minmax(3.8rem, 1fr)); max-width: 36rem; margin: .5rem 0 .8rem; }
+.pf-icona {
+  font-size: 2.2rem; line-height: 1; aspect-ratio: 1; min-height: 3.8rem; border-radius: 12px;
+  border: 3px solid var(--line); background: var(--bg2); cursor: pointer; padding: 0;
+}
+.pf-icona:hover { border-color: var(--brand); }
+.pf-icona.scelta { border-color: var(--brand); background: var(--brand-soft); box-shadow: 0 0 0 3px var(--brand) inset; }
+
+.pf-gestisci > summary { cursor: pointer; font-weight: 700; font-size: 1.1rem; padding: .3rem 0; }
+.pf-elenco { list-style: none; margin: .6rem 0 0; padding: 0; display: grid; gap: .8rem; }
+.pf-riga { border: 1px solid var(--line); border-radius: 12px; padding: .8rem .9rem; background: var(--bg2); }
+.pf-riga-testa { display: flex; align-items: center; gap: .7rem; margin-bottom: .5rem; }
+.pf-ico-p { font-size: 2.2rem; line-height: 1; flex: none; }
+.pf-riga-testa b { font-size: 1.15rem; overflow-wrap: anywhere; }
+.pf-azioni .btn { min-height: 2.9rem; }
+.pf-azioni .btn:disabled { filter: grayscale(1); }
+.pf-badge { display: inline-block; font-size: .75rem; font-weight: 700; padding: .1rem .55rem; border-radius: 99px; background: var(--ok-soft); color: var(--ok); vertical-align: middle; }
+.pf-pannello { margin-top: .7rem; padding: .8rem .9rem; border-radius: 12px; background: var(--panel); border: 2px solid var(--brand); }
+.pf-pannello .field { margin-top: 0; }
+.pf-pericolo { border-color: var(--bad); background: var(--bad-soft); }
+.pf-pericolo p { margin-top: 0; }
+.pf-nota { margin: 1rem 0; }
+
+.pf-mini { list-style: none; padding: 0; margin: .4rem 0 .6rem; display: flex; flex-wrap: wrap; gap: .4rem .9rem; font-weight: 600; }
+
+/* pulsante nella barra in alto */
+.pf-barra { display: inline-flex; align-items: center; gap: .35rem; max-width: 12rem; }
+.pf-barra[hidden] { display: none; }
+.pf-barra-ico { font-size: 1.2rem; line-height: 1; }
+.pf-barra-nome { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+@media (max-width: 480px) {
+  .pf-barra .pf-barra-nome { display: none; }
+  .pf-persona { min-height: 8.5rem; }
+  .pf-persona .pf-ico { font-size: 3.2rem; }
+  .pf-griglia { grid-template-columns: 1fr 1fr; gap: .7rem; }
+  .pf-azioni .btn { flex: 1 1 100%; }
+}
+
+html[data-theme="contrast"] .pf-persona, html[data-theme="contrast"] .pf-icona { border-color: #fff; }
+html[data-theme="contrast"] .pf-persona.attivo, html[data-theme="contrast"] .pf-icona.scelta { border-color: var(--accent); }

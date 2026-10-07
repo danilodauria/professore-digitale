@@ -1,1 +1,311 @@
-/* vita */
+/* ==============================================================================
+ *  Palestra della vita digitale (vita.js, vita-sim2.js)
+ *  vita-*  = cornice del simulatore (guida, finto browser, finto telefono, fogli)
+ *  vs-*    = finti siti dentro la finestra; vf-* = fogli «sul tavolo» (foglietto, tessera, lettera)
+ * ============================================================================== */
+
+/* ---------- indice ---------- */
+.vita-hero .prof { width: 7.5rem; height: 7.5rem; }
+.vita-hero h1 { margin: 0 0 .4rem; font-size: 1.8rem; }
+.vita-hero p { margin: 0 0 .6rem; max-width: 62ch; }
+.vita-avanz { display: grid; grid-template-columns: auto minmax(8rem, 22rem); gap: .8rem; align-items: center; margin: 1rem 0; }
+.vita-griglia { grid-template-columns: repeat(auto-fill, minmax(min(17rem, 100%), 1fr)); }
+.vita-tile { position: relative; min-height: 13rem; }
+.vita-tile.fatto { border-color: var(--ok); }
+.vita-tile p { flex: 1; }
+.vita-tile-piede { display: flex; justify-content: space-between; align-items: center; gap: .5rem; flex-wrap: wrap; margin-top: .5rem; }
+.vita-inizia { display: inline-flex; align-items: center; min-height: 2.6rem; padding: .35rem 1rem; border-radius: 12px; background: var(--brand); color: var(--brand-ink); font-weight: 700; }
+.vita-fatto { font-size: 1rem; }
+.vita-nota { margin-top: 1.4rem; max-width: 70ch; }
+
+/* ---------- testata e guida (fascia PROVA + fumetto del Professore) ---------- */
+.vita-head { margin-bottom: .6rem; }
+.vita-prova {
+  position: sticky; top: var(--top-h, 4rem); z-index: 16; height: 2.1rem; line-height: 1.4rem; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;
+  background: repeating-linear-gradient(135deg, #fde68a 0 14px, #fcd34d 14px 28px); color: #3b2a00; font-weight: 600; font-size: .85rem;
+  padding: .3rem .9rem; border-radius: 10px 10px 0 0; border: 2px solid #d4a017; border-bottom: none; text-align: center;
+}
+.vita-guida { position: relative; z-index: 15; margin: 0 0 1rem; background: var(--bg); padding-bottom: .4rem; }
+/* la guida resta fissa in alto solo se lo schermo e' abbastanza alto; altrimenti vita.js la riporta in vista a ogni passo */
+@media (min-width: 641px) and (min-height: 880px) { .vita-guida { position: sticky; top: calc(var(--top-h, 4rem) + 2.1rem); } }
+.vita-fumetto-riga { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: .8rem; align-items: start;
+  background: var(--panel); border: 2px solid #d4a017; border-top: none; border-radius: 0 0 var(--radius) var(--radius); padding: .6rem .9rem; box-shadow: var(--shadow); }
+.vita-prof .prof { width: 4.2rem; height: 4.2rem; }
+.vita-prof .prof-state { display: none; }
+.vita-fumetto { position: relative; background: var(--brand-soft); border-radius: 16px; padding: .6rem .9rem; min-height: 4rem; font-size: 1.02rem; }
+.vita-fumetto::before { content: ""; position: absolute; left: -.6rem; top: 1.2rem; border: .6rem solid transparent; border-left: none; border-right-color: var(--brand-soft); }
+.vita-testo p { margin: 0 0 .35rem; }
+.vita-testo p:last-child { margin-bottom: 0; }
+.vita-esito:empty { display: none; }
+.vita-esito { margin: 0 0 .45rem; padding: .4rem .7rem; border-radius: 10px; font-size: .95rem; }
+.vita-esito.ok { background: var(--ok-soft); color: var(--ink); border-left: 5px solid var(--ok); }
+.vita-esito.sbaglio { background: var(--warn-soft); color: var(--ink); border-left: 5px solid var(--warn); }
+.vita-esito p { margin: 0; display: inline; }
+.vita-fumetto-piede { display: flex; gap: .8rem; align-items: center; flex-wrap: wrap; margin-top: .5rem; }
+.vita-aiuto { min-height: 2.4rem; padding: .25rem .9rem; font-size: .9rem; background: var(--panel); }
+.vita-scuoti { animation: vitaScuoti .45s; }
+.vita-ok { animation: vitaOk .5s; }
+@keyframes vitaScuoti { 0%, 100% { transform: none; } 25% { transform: translateX(-6px); } 50% { transform: translateX(6px); } 75% { transform: translateX(-3px); } }
+@keyframes vitaOk { 0% { box-shadow: 0 0 0 0 rgba(21,128,61,.5); } 100% { box-shadow: 0 0 0 12px rgba(21,128,61,0); } }
+
+/* ---------- scena: finto browser + lato (foglio e telefono) ---------- */
+.vita-scena { display: grid; grid-template-columns: minmax(0, 1fr); gap: 1.2rem; align-items: start; }
+.vita-scena.con-lato { grid-template-columns: minmax(0, 1fr) 19rem; }
+.vita-lato { display: flex; flex-direction: column; gap: 1rem; }
+.vita-browser { border: 1px solid var(--line); border-radius: 12px; overflow: hidden; box-shadow: 0 6px 22px rgba(20,30,40,.14); background: var(--panel); min-width: 0; }
+.vita-barra { display: flex; align-items: center; gap: .6rem; padding: .45rem .7rem; background: var(--bg2); border-bottom: 1px solid var(--line); }
+.vita-pallini { display: flex; gap: .3rem; flex: none; }
+.vita-pallini i { width: .7rem; height: .7rem; border-radius: 50%; background: #ef4444; display: block; }
+.vita-pallini i + i { background: #f59e0b; } .vita-pallini i + i + i { background: #22c55e; }
+.vita-frecce { color: var(--ink2); font-size: .9rem; flex: none; letter-spacing: .2em; }
+.vita-url { flex: 1; min-width: 0; display: flex; align-items: center; gap: .4rem; background: var(--panel); border: 1px solid var(--line); border-radius: 99px; padding: .3rem .9rem; font-size: .9rem; }
+.vita-url-testo { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0; }
+.vita-url-testo b { color: var(--ink); }
+.vita-url-p { color: var(--ink2); }
+.vita-url.non-sicuro { border-color: var(--bad); }
+.vita-url.non-sicuro .vita-lucchetto { color: var(--bad); }
+.vita-pagina { min-height: 22rem; }
+
+/* fogli sul tavolo */
+.vita-foglio { background: var(--bg2); border: 1px dashed var(--line); border-radius: 12px; padding: .7rem; }
+.vita-foglio-tit { font-weight: 700; margin-bottom: .5rem; }
+.vita-foglio .small { margin: .5rem 0 0; }
+.vf-postit { background: #fff6a8; color: #2b2b1a; padding: .8rem 1rem; border-radius: 3px; box-shadow: 2px 4px 10px rgba(0,0,0,.18); transform: rotate(-1.2deg);
+  font-family: "Comic Neue", "Comic Sans MS", "Atkinson Hyperlegible", sans-serif; }
+.vf-postit p { margin: 0 0 .45rem; }
+.vf-postit code { font-size: 1.12rem; font-weight: 700; background: rgba(255,255,255,.6); padding: 0 .3rem; border-radius: 4px; color: #1a1a1a; word-break: break-all; }
+.vf-piccolo { font-size: .72rem; opacity: .8; margin: .4rem 0 0 !important; }
+.vf-tessera, .vf-ricetta, .vf-lettera { color: #1d2733; border-radius: 10px; padding: .7rem .8rem; box-shadow: 0 3px 10px rgba(0,0,0,.15); font-size: .85rem; }
+.vf-tessera { background: linear-gradient(160deg, #e0f2fe, #bae6fd); border: 1px solid #7dd3fc; margin-bottom: .8rem; }
+.vf-ricetta { background: #fff; border: 1px solid #d1d5db; border-top: 6px solid #dc2626; }
+.vf-tess-tit, .vf-ric-tit { font-weight: 800; letter-spacing: .03em; margin-bottom: .4rem; }
+.vf-tess-tit small, .vf-ric-tit small { font-weight: 600; color: #b91c1c; }
+.vf-tess-riga { display: flex; flex-direction: column; margin: .25rem 0; }
+.vf-tess-riga span { font-size: .7rem; text-transform: uppercase; color: #475569; }
+.vf-tess-riga b { font-family: "DejaVu Sans Mono", "Liberation Mono", monospace; font-size: .95rem; word-break: break-all; }
+.vf-tess-riga u { text-decoration-thickness: 3px; text-decoration-color: #dc2626; }
+.vf-lettera { background: #fffdf7; border: 1px solid #d6d3c4; margin-top: .8rem; }
+.vf-lettera:first-child { margin-top: 0; }
+.vf-let-testa { border-bottom: 2px solid #1e4f8f; padding-bottom: .3rem; margin-bottom: .4rem; color: #1e4f8f; }
+.vf-lettera h4 { margin: .3rem 0; letter-spacing: .04em; }
+.vf-lettera p { margin: .3rem 0; }
+.vf-let-griglia { display: grid; grid-template-columns: auto 1fr; gap: .15rem .6rem; background: #f1f5f9; border-radius: 6px; padding: .4rem .5rem; }
+.vf-let-griglia span { font-size: .72rem; color: #475569; align-self: center; }
+.vf-let-griglia b { font-family: "DejaVu Sans Mono", "Liberation Mono", monospace; font-size: .9rem; }
+.vf-qr { width: 3.6rem; height: 3.6rem; margin: .5rem 0 0 auto; border: 3px solid #111; background:
+  linear-gradient(90deg, #111 25%, transparent 25% 50%, #111 50% 62%, transparent 62%) 0 0 / 100% 25%,
+  linear-gradient(#111 30%, transparent 30% 60%, #111 60%) 0 0 / 33% 100%; opacity: .75; }
+
+/* telefono finto */
+.vita-tel-cornice { position: relative; width: 100%; max-width: 17.5rem; margin: 0 auto; background: #1f2937; border-radius: 2rem; padding: 1.4rem .6rem 1.6rem; box-shadow: 0 10px 28px rgba(0,0,0,.3); }
+.vita-tel-cam { position: absolute; top: .55rem; left: 50%; width: 3.6rem; height: .45rem; margin-left: -1.8rem; border-radius: 99px; background: #374151; }
+.vita-tel-tasto { position: absolute; bottom: .45rem; left: 50%; width: 3rem; height: .3rem; margin-left: -1.5rem; border-radius: 99px; background: #4b5563; }
+.vita-tel-stato { display: flex; justify-content: space-between; color: #e5e7eb; font-size: .72rem; padding: 0 .7rem .3rem; }
+.vita-tel-schermo { background: #f3f4f6; color: #111827; border-radius: 1.1rem; padding: .7rem; min-height: 16rem; display: flex; flex-direction: column; gap: .6rem; }
+.vita-tel-app { font-weight: 800; font-size: .9rem; color: #374151; }
+.vita-notifica { background: #fff; border-radius: 14px; padding: .7rem .8rem; box-shadow: 0 2px 8px rgba(0,0,0,.1); font-size: .92rem; line-height: 1.4; }
+.vita-mitt { font-weight: 700; font-size: .8rem; color: #4b5563; margin-bottom: .25rem; }
+.vita-msg { word-break: break-word; }
+.vita-tel-pulsanti { display: flex; flex-direction: column; gap: .45rem; margin-top: auto; }
+.vita-tel-btn { min-height: 2.9rem; border-radius: 12px; border: 2px solid #9ca3af; background: #fff; color: #111827; font-weight: 700; font-size: .92rem; cursor: pointer; padding: .4rem .6rem; }
+.vita-tel-btn:hover { border-color: #1d5c8f; }
+.vita-tel-btn.verde { background: #15803d; border-color: #15803d; color: #fff; }
+.vita-tel.vibra .vita-tel-cornice { animation: vitaVibra .5s 2; }
+@keyframes vitaVibra { 0%, 100% { transform: none; } 20% { transform: rotate(-2deg); } 40% { transform: rotate(2deg); } 60% { transform: rotate(-1deg); } 80% { transform: rotate(1deg); } }
+
+/* aiuto visivo («Aiutami» illumina il punto giusto) */
+.vita-indica { outline: 4px solid var(--focus) !important; outline-offset: 3px; animation: vitaIndica 1s 4; position: relative; z-index: 1; }
+@keyframes vitaIndica { 0%, 100% { box-shadow: 0 0 0 0 rgba(245,158,11,.7); } 50% { box-shadow: 0 0 0 10px rgba(245,158,11,0); } }
+.vita-compila { display: inline-flex; align-self: flex-start; margin-top: .4rem; min-height: 2.6rem; padding: .3rem .9rem; border-radius: 10px; border: 2px dashed var(--accent);
+  background: var(--warn-soft); color: var(--ink); font-weight: 700; cursor: pointer; }
+
+/* schermata finale */
+.vita-fine-card { text-align: center; max-width: 46rem; margin: 0 auto; }
+.vita-medaglia { font-size: 4rem; line-height: 1; animation: vitaOk 1s; }
+.vita-fine-card h2 { margin: .3rem 0; font-size: 1.6rem; }
+.vita-errori { font-weight: 700; padding: .5rem .8rem; border-radius: 10px; background: var(--warn-soft); display: inline-block; }
+.vita-errori.zero { background: var(--ok-soft); }
+.vita-fine-card h3 { margin: 1.2rem 0 .4rem; }
+.vita-consigli { text-align: left; list-style: none; padding: 0; margin: 0 0 1rem; }
+.vita-consigli li { padding: .55rem .7rem .55rem 2.2rem; position: relative; border-bottom: 1px dashed var(--line); }
+.vita-consigli li::before { content: "✔"; position: absolute; left: .6rem; top: .55rem; color: var(--ok); font-weight: 800; }
+.vita-fine-card .row { justify-content: center; }
+
+/* ==========================================================================
+ *  Finti siti (vs-*): ognuno ha il suo colore; testo e sfondo seguono il tema
+ * ======================================================================== */
+.vs-sito { --vs-c: #1e4f8f; --vs-soft: var(--brand-soft); background: var(--panel); color: var(--ink); min-height: 22rem; display: flex; flex-direction: column; }
+.vs-comune { --vs-c: #1e4f8f; }
+.vs-idp { --vs-c: #17734a; }
+.vs-salute { --vs-c: #0f766e; }
+.vs-paga { --vs-c: #5b3fa0; }
+.vs-posta { --vs-c: #b45309; }
+.vs-testa { display: flex; align-items: center; gap: .7rem; padding: .7rem 1rem; background: var(--vs-c); color: #fff; flex-wrap: wrap; }
+.vs-testa b { display: block; font-size: 1.1rem; line-height: 1.2; }
+.vs-testa small { display: block; font-size: .72rem; opacity: .9; }
+.vs-logo { font-size: 1.7rem; width: 2.6rem; height: 2.6rem; display: grid; place-items: center; background: rgba(255,255,255,.18); border-radius: 10px; flex: none; }
+.vs-esci { margin-left: auto; background: rgba(255,255,255,.15); color: #fff; border: 2px solid rgba(255,255,255,.7); border-radius: 10px; padding: .35rem .8rem; font-weight: 700; cursor: pointer; min-height: 2.6rem; }
+.vs-menu { display: flex; flex-wrap: wrap; gap: .2rem; padding: .3rem .6rem; border-bottom: 1px solid var(--line); background: var(--bg2); }
+.vs-menu a { padding: .5rem .8rem; border-radius: 8px; text-decoration: none; color: var(--ink); font-weight: 600; }
+.vs-menu a:hover { background: var(--brand-soft); }
+.vs-menu-forte { color: var(--vs-t, var(--vs-c)) !important; border: 2px solid var(--vs-t, var(--vs-c)); }
+.vs-banda { background: linear-gradient(120deg, var(--vs-c), rgba(0,0,0,.25)), var(--vs-c); color: #fff; padding: 1.1rem 1.2rem; }
+.vs-banda h2 { margin: 0 0 .2rem; font-size: 1.3rem; }
+.vs-banda p { margin: 0; }
+.vs-corpo { padding: 1rem 1.2rem 1.3rem; flex: 1; }
+.vs-corpo h2 { margin: 0 0 .5rem; font-size: 1.3rem; color: var(--vs-t, var(--vs-c)); }
+.vs-centro { text-align: center; }
+.vs-colonne { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(14rem, 100%), 1fr)); gap: .8rem; padding: 1rem 1.2rem; }
+.vs-box { border: 1px solid var(--line); border-radius: 10px; padding: .7rem .9rem; }
+.vs-box h3 { margin: 0 0 .3rem; font-size: 1rem; }
+.vs-box p { margin: 0; font-size: .9rem; color: var(--ink2); }
+.vs-piede { padding: .5rem 1rem; font-size: .72rem; color: var(--ink2); border-top: 1px solid var(--line); background: var(--bg2); }
+.vs-nota { display: block; font-size: .82rem; color: var(--ink2); margin: .4rem 0; }
+.vs-richiesta { background: var(--bg2); border: 1px solid var(--line); border-radius: 10px; padding: .5rem .8rem; }
+
+.vs-btn { display: inline-flex; align-items: center; justify-content: center; gap: .4rem; min-height: 3rem; padding: .5rem 1.3rem; border-radius: 10px;
+  border: 2px solid var(--vs-c); background: var(--vs-c); color: #fff; font-weight: 700; font-size: 1rem; cursor: pointer; }
+.vs-btn:hover { filter: brightness(1.1); }
+.vs-btn-sec { background: transparent; color: var(--vs-t, var(--vs-c)); border-color: var(--vs-t, var(--vs-c)); }
+.vs-btn-grande { width: 100%; max-width: 26rem; min-height: 3.6rem; font-size: 1.08rem; }
+.vs-rosso { background: #b91c1c; border-color: #b91c1c; color: #fff; }
+.vs-accessi { display: flex; flex-direction: column; align-items: center; gap: .7rem; margin: 1rem 0; }
+
+.vs-servizi { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(12rem, 100%), 1fr)); gap: .7rem; margin-top: .6rem; }
+.vs-servizio, .vs-gestore, .vs-pref, .vs-proposta { display: flex; align-items: center; gap: .7rem; text-align: left; padding: .8rem 1rem; min-height: 3.6rem;
+  border-radius: 12px; border: 2px solid var(--line); background: var(--bg2); color: var(--ink); font-weight: 700; font-size: 1rem; cursor: pointer; }
+.vs-servizio:hover, .vs-gestore:hover, .vs-pref:hover, .vs-proposta:hover { border-color: var(--vs-c); }
+.vs-servizio span, .vs-pref span { font-size: 1.6rem; }
+.vs-gestori { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(13rem, 100%), 1fr)); gap: .7rem; }
+.vs-g-ico { font-size: 1.5rem; }
+.vs-preferiti { display: flex; gap: .8rem; justify-content: center; flex-wrap: wrap; margin-top: .8rem; }
+.vs-pref { flex-direction: column; width: 9.5rem; text-align: center; font-size: .9rem; }
+.vs-proposte { display: grid; gap: .6rem; }
+.vs-proposta { flex-direction: column; align-items: flex-start; gap: .1rem; }
+.vs-proposta span { font-weight: 400; font-size: .88rem; color: var(--ink2); }
+.vs-proposta .vs-quando { color: var(--ink); font-weight: 700; font-size: .95rem; }
+
+.vs-form-stretto { max-width: 32rem; }
+.vs-campo { display: flex; flex-direction: column; gap: .25rem; margin: 0 0 .9rem; }
+.vs-campo label { font-weight: 700; }
+.vs-campo input { font-size: 1.2rem; padding: .7rem .9rem; border-radius: 10px; border: 2px solid var(--line); background: var(--panel); color: var(--ink); width: 100%;
+  font-family: "DejaVu Sans Mono", "Liberation Mono", monospace; letter-spacing: .03em; }
+.vs-campo input:focus { border-color: var(--vs-c); outline: 3px solid var(--focus); outline-offset: 1px; }
+.vs-campo input.vita-sbagliato { border-color: var(--bad); background: var(--bad-soft); }
+.vs-mostra { display: flex; align-items: center; gap: .5rem; margin: -.3rem 0 .9rem; cursor: pointer; }
+.vs-mostra input { width: 1.3rem; height: 1.3rem; accent-color: var(--vs-c); }
+
+.vs-numero { display: inline-block; font-size: 2.6rem; font-weight: 800; letter-spacing: .1em; padding: .2rem 1.2rem; border-radius: 14px; border: 3px solid var(--vs-t, var(--vs-c)); color: var(--vs-t, var(--vs-c)); margin: .2rem 0 .4rem; }
+.vs-attesa { font-weight: 700; color: var(--ink2); animation: pulse 1.6s infinite; }
+.vs-ok-grande { font-size: 3rem; line-height: 1; }
+.vs-lista { list-style: none; padding: 0; margin: .6rem 0; }
+.vs-lista li { display: flex; justify-content: space-between; align-items: center; gap: .6rem; flex-wrap: wrap; padding: .6rem .2rem; border-bottom: 1px solid var(--line); }
+.vs-lista .vs-btn { min-height: 2.6rem; padding: .3rem 1rem; }
+.vs-riep { display: grid; grid-template-columns: auto 1fr; gap: .35rem 1rem; margin: .4rem 0 1rem; padding: .7rem .9rem; border-radius: 10px; background: var(--bg2); border: 1px solid var(--line); }
+.vs-riep dt { font-weight: 700; color: var(--ink2); }
+.vs-riep dd { margin: 0; overflow-wrap: anywhere; }
+.vs-importo { font-size: 1.3rem; font-weight: 800; }
+.vs-salvato { margin-top: .8rem; padding: .7rem .9rem; border-radius: 10px; background: var(--ok-soft); border-left: 5px solid var(--ok); }
+
+/* documento (certificato, ricevuta): sempre «carta», chiaro */
+.vs-doc { position: relative; overflow: hidden; background: #fffdf8; color: #1f2933; border: 1px solid #d6d3c4; border-radius: 6px; padding: 1.2rem 1.4rem; margin: 0 0 1rem;
+  box-shadow: 0 4px 14px rgba(0,0,0,.12); font-family: Georgia, "DejaVu Serif", serif; max-width: 34rem; }
+.vs-doc h3 { text-align: center; letter-spacing: .06em; margin: .6rem 0; }
+.vs-doc-ente { text-align: center; margin: 0; font-weight: 700; color: #1e4f8f; }
+.vs-doc-nota { font-size: .75rem; color: #7c2d12; font-style: italic; }
+.vs-filigrana { position: absolute; inset: 0; display: grid; place-items: center; font-size: 2.2rem; font-weight: 800; color: rgba(185,28,28,.13); transform: rotate(-24deg); pointer-events: none; white-space: nowrap; }
+.vs-ricevuta .vs-riep { background: #f4f1e8; border-color: #e1dccb; color: #1f2933; }
+.vs-ricevuta .vs-riep dt { color: #475569; }
+
+/* motore di ricerca finto */
+.vs-cerca-testa { display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; padding: .8rem 1rem; border-bottom: 1px solid var(--line); }
+.vs-cerca-logo { font-size: 1.4rem; color: var(--ink2); }
+.vs-cerca-logo b { color: #2563eb; }
+.vs-cerca-box { flex: 1; min-width: 12rem; padding: .5rem 1rem; border: 2px solid var(--line); border-radius: 99px; background: var(--bg2); }
+.vs-risultati { padding: .6rem 1rem 1rem; }
+.vs-ris { padding: .7rem .4rem; border-bottom: 1px solid var(--line); }
+.vs-ris p { margin: .2rem 0 0; font-size: .9rem; color: var(--ink2); }
+.vs-ris-url { display: block; font-size: .85rem; color: var(--ok); word-break: break-all; }
+.vs-ris-tit { display: block; font-size: 1.12rem; font-weight: 700; color: #1d4ed8; }
+:root[data-theme="dark"] .vs-ris-tit, :root[data-theme="dark"] .vs-cerca-logo b { color: #93c5fd; }
+.vs-sponsor { display: inline-block; font-size: .72rem; font-weight: 800; padding: 0 .4rem; border-radius: 5px; border: 1px solid var(--ink2); margin-right: .4rem; }
+.vs-annuncio .vs-ris-url { display: inline; }
+.vs-annuncio { background: var(--bg2); border-radius: 8px; }
+
+/* posta finta */
+.vs-mail-lista { list-style: none; padding: 0; margin: 0; }
+.vs-mail { width: 100%; display: grid; grid-template-columns: 1fr auto; gap: .1rem .8rem; text-align: left; padding: .7rem .8rem; border: none; border-bottom: 1px solid var(--line);
+  background: transparent; color: var(--ink); cursor: pointer; font-size: .95rem; }
+.vs-mail:hover { background: var(--bg2); }
+.vs-mail b { grid-column: 1; word-break: break-word; font-size: .85rem; }
+.vs-mail span { grid-column: 1; }
+.vs-mail small { grid-column: 2; grid-row: 1; color: var(--ink2); }
+.vs-mail.nuova span { font-weight: 800; }
+.vs-mail.nuova { border-left: 5px solid var(--vs-c); }
+.vs-mail-aperta { border: 1px solid var(--line); border-radius: 10px; padding: .8rem 1rem; margin-bottom: 1rem; }
+.vs-mail-aperta h3 { color: #b91c1c; margin: .4rem 0; }
+.vs-mail-da { font-size: .88rem; word-break: break-word; margin: 0; }
+.vs-finto-link { display: inline-block; padding: .5rem 1rem; background: #b91c1c; color: #fff; font-weight: 800; border-radius: 6px; }
+
+/* ---------- tema scuro: i fogli restano carta ---------- */
+:root[data-theme="dark"] .vs-comune { --vs-t: #93c5fd; }
+:root[data-theme="dark"] .vs-idp { --vs-t: #6ee7b7; }
+:root[data-theme="dark"] .vs-salute { --vs-t: #5eead4; }
+:root[data-theme="dark"] .vs-paga { --vs-t: #c4b5fd; }
+:root[data-theme="dark"] .vs-posta { --vs-t: #fdba74; }
+:root[data-theme="dark"] .vs-mail-aperta h3 { color: #fca5a5; }
+:root[data-theme="dark"] .vita-browser { box-shadow: 0 6px 22px rgba(0,0,0,.45); }
+:root[data-theme="dark"] .vita-tel-schermo { background: #e5e7eb; }
+:root[data-theme="dark"] .vita-prova { color: #2a1f00; }
+
+/* ---------- alto contrasto ---------- */
+:root[data-theme="contrast"] .vita-prova { background: #000; color: #ffeb3b; border-color: #ffeb3b; }
+:root[data-theme="contrast"] .vita-fumetto-riga { border-color: #ffeb3b; }
+:root[data-theme="contrast"] .vita-fumetto { background: #000; border: 2px solid #fff; }
+:root[data-theme="contrast"] .vita-fumetto::before { display: none; }
+:root[data-theme="contrast"] .vs-testa, :root[data-theme="contrast"] .vs-banda { background: #000; border-bottom: 2px solid #fff; }
+:root[data-theme="contrast"] .vs-sito { --vs-c: #ffeb3b; }
+:root[data-theme="contrast"] .vs-btn { color: #000; }
+:root[data-theme="contrast"] .vs-btn-sec { color: #ffeb3b; background: #000; }
+:root[data-theme="contrast"] .vs-rosso { background: #000; color: #ff8080; border-color: #ff8080; }
+:root[data-theme="contrast"] .vs-ris-tit { color: #00e5ff; }
+:root[data-theme="contrast"] .vita-tel-schermo, :root[data-theme="contrast"] .vita-notifica, :root[data-theme="contrast"] .vita-tel-btn { background: #000; color: #fff; border-color: #fff; }
+:root[data-theme="contrast"] .vita-tel-app, :root[data-theme="contrast"] .vita-mitt { color: #ffeb3b; }
+:root[data-theme="contrast"] .vita-tel-btn.verde { background: #000; color: #7CFF7C; border-color: #7CFF7C; }
+:root[data-theme="contrast"] .vf-postit, :root[data-theme="contrast"] .vf-tessera, :root[data-theme="contrast"] .vf-ricetta,
+:root[data-theme="contrast"] .vf-lettera, :root[data-theme="contrast"] .vs-doc { background: #000; color: #fff; border: 2px solid #fff; box-shadow: none; transform: none; }
+:root[data-theme="contrast"] .vf-postit code, :root[data-theme="contrast"] .vf-let-griglia { background: #000; color: #fff; }
+:root[data-theme="contrast"] .vf-tess-riga span, :root[data-theme="contrast"] .vf-let-griglia span, :root[data-theme="contrast"] .vf-let-testa,
+:root[data-theme="contrast"] .vs-doc-ente, :root[data-theme="contrast"] .vs-doc-nota, :root[data-theme="contrast"] .vs-ricevuta .vs-riep dt { color: #ffeb3b; }
+:root[data-theme="contrast"] .vs-ricevuta .vs-riep { background: #000; color: #fff; }
+:root[data-theme="contrast"] .vf-qr { border-color: #fff; filter: invert(1); }
+
+/* ---------- schermi stretti ---------- */
+@media (max-width: 900px) {
+  .vita-scena.con-lato { grid-template-columns: minmax(0, 1fr); }
+  .vita-lato { position: static; }
+  .vita-hero .prof { width: 5.5rem; height: 5.5rem; }
+}
+@media (max-width: 640px) {
+  .vita-prova { font-size: .72rem; padding: .2rem .5rem; height: auto; white-space: normal; }
+  .vita-prova-lungo { display: none; }
+  .vita-fumetto-riga { grid-template-columns: minmax(0, 1fr); padding: .4rem .5rem; }
+  .vita-prof { display: none; }
+  .vita-fumetto { font-size: .95rem; padding: .5rem .7rem; min-height: 0; }
+  .vita-fumetto::before { display: none; }
+  .vita-fumetto-piede { margin-top: .3rem; }
+  .vita-head h1 { font-size: 1.2rem; }
+  .vita-frecce { display: none; }
+  .vita-barra { padding: .35rem .5rem; gap: .4rem; }
+  .vita-url { font-size: .8rem; padding: .25rem .6rem; }
+  .vs-corpo { padding: .8rem; }
+  .vs-numero { font-size: 2rem; }
+  .vs-pref { width: 100%; flex-direction: row; text-align: left; }
+  .vita-avanz { grid-template-columns: minmax(0, 1fr); }
+  .vs-doc { padding: .9rem; }
+  .vs-riep { grid-template-columns: minmax(0, 1fr); gap: 0; }
+  .vs-riep dd { margin-bottom: .45rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .vita-scuoti, .vita-ok, .vita-tel.vibra .vita-tel-cornice, .vita-indica, .vita-medaglia, .vs-attesa { animation: none !important; }
+}

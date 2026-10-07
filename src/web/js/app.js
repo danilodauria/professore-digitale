@@ -1170,12 +1170,14 @@
   /* Migrazione dei dati salvati tra versioni: ogni cambio di struttura incrementa DATA_SCHEMA
    * e aggiunge qui un passo (es. da 1 a 2). Cosi' i progressi degli allievi non si perdono mai. */
   var DATA_SCHEMA = 1;
-  function migrate() {
-    var p = PD.progress;
+  function migrate(p) {
+    p = p || PD.progress;
     if (!p.schema) p.schema = 1;
     // esempio futuro:  if (p.schema < 2) { ...trasforma p...; p.schema = 2; }
     if (p.schema !== DATA_SCHEMA) p.schema = DATA_SCHEMA;
+    return p;
   }
+  PD.migraProgressi = migrate;   // usata anche da profili.js per i progressi delle altre persone
 
   function heartbeat() {
     if (!PD.server) return;
