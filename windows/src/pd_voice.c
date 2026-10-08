@@ -1,5 +1,5 @@
 /* Professore Digitale per Windows - voce (sintesi) e microfono (riconoscimento), entrambi offline
- *  Sintesi:  voci naturali Piper Riccardo e Paola (64 bit, incluse)  >  voci italiane di Windows (SAPI 5, da XP in poi)
+ *  Sintesi:  voci naturali Piper Giorgio, Serena e Paola (64 bit, incluse)  >  voci italiane di Windows (SAPI 5, da XP in poi)
  *  Microfono: Vosk con modello italiano, tramite pd-stt.exe (64 bit, processo separato)
  * Ideato e sviluppato da Danilo D'Auria - Licenza MIT */
 #define COBJMACROS
@@ -20,7 +20,7 @@ static void vu(void) { LeaveCriticalSection(&vlock); }
 
 
 /* ------------------------------------------------------------------ elenco delle voci
- * Voci naturali Piper (incluse nell'installatore: Paola, donna, e Riccardo, uomo; solo Windows a 64 bit)
+ * Voci naturali Piper (incluse nell'installatore: Giorgio, uomo, Serena e Paola, donne; solo Windows a 64 bit)
  * e tutte le voci italiane di Windows (SAPI 5 e OneCore), maschili e femminili. */
 typedef struct { char id[320]; char nome[200]; char genere[2]; int piper; wchar_t rif[MAX_PATH]; } voce_t;
 #define MAX_VOCI 32
@@ -32,7 +32,45 @@ static int is64os(void) {
     return si.wProcessorArchitecture == PROCESSOR_ARCHITECTURE_AMD64 || si.wProcessorArchitecture == 12;
 }
 
-static void aggiungi_piper(const wchar_t *dir, voce_t *v, int *n) {
+/* Le voci addestrate con Piper 1.5 hanno nella mappa dei fonemi anche coppie di simboli (es. "aɪ") che il motore
+ * Piper incluso rifiuta: si tolgono (l'italiano non le usa). Restituisce 1 se il file e' utilizzabile. */
+static int utf8_un_carattere(const char *s, size_t n) {
+    if (n == 0) return 0;
+    unsigned char c = (unsigned char)s[0];
+    size_t l = c < 0x80 ? 1 : (c >> 5) == 6 ? 2 : (c >> 4) == 14 ? 3 : (c >> 3) == 30 ? 4 : 0;
+    return l && l == n;
+}
+static int pulisci_json_voce(const wchar_t *js, int scrivibile) {
+    buf_t b = {0}; char err[100];
+    if (!file_read(js, &b, 4u * 1024u * 1024u)) return 0;
+    jv *d = json_parse(b.p, b.n, err, sizeof err);
+    buf_free(&b);
+    if (!d) return 0;
+    jv *m = jget(d, "phoneme_id_map");
+    size_t tolte = 0;
+    if (m && m->t == J_OBJ) {
+        size_t w = 0;
+        for (size_t i = 0; i < m->n; i++) {
+            if (utf8_un_carattere(m->keys[i], strlen(m->keys[i]))) { m->keys[w] = m->keys[i]; m->items[w] = m->items[i]; w++; }
+            else { json_free(m->items[i]); free(m->keys[i]); tolte++; }
+        }
+        m->n = w;
+    }
+    int ok = 1;
+    if (tolte) {
+        if (!scrivibile) ok = 0;
+        else {
+            buf_t o = {0}; json_write(&o, d, 1, 0);
+            ok = file_write_atomic(js, o.p, o.n);
+            buf_free(&o);
+            if (ok) pd_log("voce ripulita per Piper (%u simboli tolti)", (unsigned)tolte);
+        }
+    }
+    json_free(d);
+    return ok;
+}
+
+static void aggiungi_piper(const wchar_t *dir, voce_t *v, int *n, int scrivibile) {
     wchar_t pat[MAX_PATH]; _snwprintf(pat, MAX_PATH, L"%ls\\*.onnx", dir); pat[MAX_PATH - 1] = 0;
     WIN32_FIND_DATAW fd; HANDLE h = FindFirstFileW(pat, &fd);
     if (h == INVALID_HANDLE_VALUE) return;
@@ -40,7 +78,7 @@ static void aggiungi_piper(const wchar_t *dir, voce_t *v, int *n) {
         wchar_t full[MAX_PATH], js[MAX_PATH];
         _snwprintf(full, MAX_PATH, L"%ls\\%ls", dir, fd.cFileName); full[MAX_PATH - 1] = 0;
         _snwprintf(js, MAX_PATH, L"%ls.json", full); js[MAX_PATH - 1] = 0;
-        if (!file_exists(js)) continue;
+        if (!file_exists(js) || !pulisci_json_voce(js, scrivibile)) continue;
         char *b8 = u16to8(fd.cFileName); size_t L = strlen(b8); if (L > 5) b8[L - 5] = 0;   /* senza .onnx */
         int k; for (k = 0; k < *n; k++) if (v[k].piper && !strcmp(v[k].id + 6, b8)) break;
         if (k == *n) { if (*n >= MAX_VOCI) { free(b8); break; } (*n)++; }
@@ -48,13 +86,17 @@ static void aggiungi_piper(const wchar_t *dir, voce_t *v, int *n) {
         x->piper = 1; snprintf(x->id, sizeof x->id, "piper:%s", b8); wcsncpy(x->rif, full, MAX_PATH - 1);
         const char *chi = strchr(b8, '-'); char nome[64] = "";
         if (chi) { const char *f = strchr(chi + 1, '-'); size_t l = f ? (size_t)(f - chi - 1) : strlen(chi + 1); if (l > 60) l = 60; memcpy(nome, chi + 1, l); nome[l] = 0; }
-        if (!strcmp(nome, "paola") || !strcmp(nome, "serena")) x->genere[0] = 'f';
-        else if (!strcmp(nome, "riccardo")) x->genere[0] = 'm';
+        if (!strcmp(nome, "paola") || !strcmp(nome, "serena") || !strcmp(nome, "aurora")) x->genere[0] = 'f';
+        else if (!strcmp(nome, "riccardo") || !strcmp(nome, "giorgio") || !strcmp(nome, "leonardo") || !strcmp(nome, "ugo")) x->genere[0] = 'm';
         if (nome[0]) nome[0] = (char)toupper((unsigned char)nome[0]);
         snprintf(x->nome, sizeof x->nome, "%s (%s, voce naturale)", nome[0] ? nome : b8, x->genere[0] == 'm' ? "uomo" : x->genere[0] == 'f' ? "donna" : "voce");
         free(b8);
     } while (FindNextFileW(h, &fd));
     FindClose(h);
+}
+
+static int posto_voce(const char *id) {
+    return strstr(id, "-giorgio-") ? 0 : strstr(id, "-serena-") ? 1 : strstr(id, "-paola-") ? 2 : 3;
 }
 
 static void aggiungi_sapi(const wchar_t *catid, voce_t *v, int *n) {
@@ -112,14 +154,13 @@ static void scan_voci(int force) {
         }
         if (exe[0]) {
             wchar_t *inc = path_join(G.install_dir, L"voci"), *usr = path_join(G.models_dir, L"piper");
-            aggiungi_piper(inc, v, &n); aggiungi_piper(usr, v, &n);
+            aggiungi_piper(inc, v, &n, 0); aggiungi_piper(usr, v, &n, 1);
             free(inc); free(usr);
         }
     }
-    /* in cima Riccardo (il Professore e' un uomo), poi Paola, poi le altre voci naturali */
+    /* in cima Giorgio (il Professore e' un uomo), poi Serena e Paola, poi le altre voci naturali */
     for (int i = 0; i < n; i++) for (int j = i + 1; j < n; j++) {
-        int ri = strstr(v[i].id, "riccardo") ? 0 : strstr(v[i].id, "paola") ? 1 : 2, rj = strstr(v[j].id, "riccardo") ? 0 : strstr(v[j].id, "paola") ? 1 : 2;
-        if (rj < ri) { voce_t t = v[i]; v[i] = v[j]; v[j] = t; }
+        if (posto_voce(v[j].id) < posto_voce(v[i].id)) { voce_t t = v[i]; v[i] = v[j]; v[j] = t; }
     }
     HRESULT ci = CoInitializeEx(NULL, COINIT_MULTITHREADED);
     aggiungi_sapi(PD_VOICES_SAPI, v, &n);
@@ -265,7 +306,7 @@ int tts_synthesize(const char *text, double rate, const char *engine, const char
         if (x->piper) {
             char *t8 = u16to8(clean);
             wchar_t *qe = quote_arg(pe), *qm = quote_arg(x->rif), *qo = quote_arg(tmpf);
-            wchar_t *cl = wcsdup_printf(L"%ls --model %ls --output_file %ls --length_scale %.2f", qe, qm, qo, 1.0 / rate);
+            wchar_t *cl = wcsdup_printf(L"%ls --model %ls --output_file %ls --length_scale %.2f --sentence_silence 0.25", qe, qm, qo, 1.0 / rate);
             wchar_t dir[MAX_PATH]; wcsncpy(dir, pe, MAX_PATH - 1); dir[MAX_PATH - 1] = 0; wchar_t *sl = wcsrchr(dir, L'\\'); if (sl) *sl = 0;
             DWORD code = 1;
             if (run_process(cl, dir, t8, strlen(t8), NULL, 120000, &code, 1) && code == 0 && file_size(tmpf) > 44) ok = 1;

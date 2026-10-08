@@ -1,1 +1,123 @@
-/* lettera */
+/* ==============================================================================
+ *  PROFESSORE DIGITALE - «Spiegami questa lettera» (js/lettera.js)
+ * ============================================================================== */
+#view-lettera .lesson-head { display: flex; gap: 1rem; align-items: center; margin-bottom: 1rem; }
+#view-lettera .lesson-head .big-ico { font-size: 3rem; line-height: 1; }
+#view-lettera .card { margin-bottom: 1rem; }
+#view-lettera h2 { font-size: 1.25rem; margin: 0 0 .6rem; }
+#view-lettera h3 { font-size: 1.1rem; margin: 1.2rem 0 .5rem; }
+.lt-privacy { margin-top: 0; }
+
+/* ingresso: foto, webcam, testo */
+.lt-sorgenti { margin-bottom: .4rem; }
+.lt-nascosto { position: absolute; width: 1px; height: 1px; opacity: 0; overflow: hidden; clip: rect(0 0 0 0); }
+.lt-file-btn { cursor: pointer; }
+.lt-nascosto:focus-visible + .lt-file-btn, .lt-file-btn:focus-within { outline: 3px solid var(--focus); outline-offset: 2px; }
+.lt-cam { margin: .8rem 0; padding: .8rem; border: 2px dashed var(--brand); border-radius: 12px; background: var(--brand-soft); }
+.lt-cam video { display: block; width: 100%; max-width: 40rem; max-height: 60vh; background: #000; border-radius: 10px; margin-bottom: .6rem; }
+.lt-img { margin: .8rem 0 1rem; }
+.lt-anteprima { border: 2px solid var(--line); border-radius: 12px; background: var(--bg2); padding: .5rem; text-align: center; }
+.lt-anteprima canvas { display: inline-block; max-width: 100%; max-height: 22rem; height: auto; border-radius: 6px; }
+.lt-img-azioni { margin-top: .6rem; }
+.lt-ocr { margin-top: .8rem; padding: .8rem 1rem; border-radius: 12px; background: var(--brand-soft); border-left: 6px solid var(--brand); }
+.lt-ocr .progress { margin: .5rem 0 .6rem; }
+.lt-ocr-msg { font-weight: 600; }
+.lt-ocr-ok { background: var(--ok-soft); border-left-color: var(--ok); }
+.lt-ocr-male { background: var(--warn-soft); border-left-color: var(--warn); }
+.lt-h2-testo { margin-top: 1.2rem !important; }
+.lt-nota-testo { margin-top: -.3rem; }
+.lt-etichetta { display: block; font-weight: 700; margin-bottom: .3rem; }
+#lt-testo { width: 100%; box-sizing: border-box; min-height: 10rem; font: inherit; font-size: 1.05rem; line-height: 1.45; padding: .8rem;
+  border: 2px solid var(--line); border-radius: 12px; background: var(--bg2); color: var(--ink); resize: vertical; }
+#lt-testo:focus { border-color: var(--brand); outline: none; box-shadow: 0 0 0 3px var(--brand-soft); }
+.lt-azioni { margin-top: .8rem; }
+.lt-esempi { margin-top: .8rem; padding-top: .8rem; border-top: 1px dashed var(--line); }
+.lt-esempi .row { gap: .45rem; margin-top: .4rem; }
+.lt-esempi .btn { min-height: 2.5rem; padding: .35rem .8rem; font-size: .9rem; }
+
+/* spiegazione */
+.lt-esito { border-width: 2px; }
+.lt-bordo-alto { border-color: var(--bad); }
+.lt-tipo { display: flex; gap: .9rem; align-items: center; }
+.lt-tipo-ico { font-size: 2.8rem; line-height: 1; }
+.lt-tipo h2 { margin: 0 !important; }
+.lt-mitt { margin-top: .2rem; overflow-wrap: anywhere; }
+.lt-truffa { margin: 1rem 0 0; padding: .9rem 1rem; border-radius: 12px; border-left: 8px solid var(--warn); background: var(--warn-soft); }
+.lt-truffa-alto { border-left-color: var(--bad); background: var(--bad-soft); }
+.lt-truffa > b { font-size: 1.15rem; }
+.lt-truffa ul { margin: .5rem 0; padding-left: 1.3rem; }
+.lt-truffa li { margin-bottom: .4rem; line-height: 1.4; }
+.lt-trovato { font-style: italic; color: var(--ink2); overflow-wrap: anywhere; }
+.lt-chiave { display: grid; grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr)); gap: .8rem; margin-top: 1rem; }
+.lt-box { padding: .8rem 1rem; border-radius: 12px; border: 2px solid var(--line); background: var(--bg2); min-width: 0; }
+.lt-box-soldi { border-color: var(--accent); }
+.lt-box-data { border-color: var(--brand); }
+.lt-box.lt-vuoto { border-style: dashed; color: var(--ink2); }
+.lt-grande { font-size: 1.9rem; font-weight: 800; line-height: 1.15; margin: .15rem 0; overflow-wrap: anywhere; }
+.lt-giorni { font-weight: 700; color: var(--brand); }
+.lt-vicina { border-color: var(--warn); background: var(--warn-soft); }
+.lt-vicina .lt-giorni { color: var(--ink); }
+.lt-scaduta { color: var(--bad); }
+.lt-box.lt-scaduta { border-color: var(--bad); background: var(--bad-soft); color: var(--ink); }
+.lt-box.lt-scaduta .lt-giorni { color: var(--bad); }
+.lt-lista { margin: 0; padding-left: 1.3rem; }
+.lt-lista li { margin-bottom: .45rem; line-height: 1.4; overflow-wrap: anywhere; }
+.lt-importi .lt-cifra { font-weight: 700; white-space: nowrap; }
+.lt-importi .lt-tot .lt-cifra { color: var(--accent); }
+.lt-tag { font-size: .75rem; text-transform: uppercase; background: var(--accent); color: #fff; padding: .05rem .45rem; border-radius: 99px; }
+.lt-codici { list-style: none; padding-left: 0; }
+.lt-codici li { padding: .5rem .7rem; border-left: 4px solid var(--brand); background: var(--bg2); border-radius: 0 8px 8px 0; }
+.lt-cod-tipo { font-weight: 700; }
+.lt-cod { font-size: 1.05rem; background: var(--brand-soft); color: var(--ink); padding: .1rem .4rem; border-radius: 6px; overflow-wrap: anywhere; word-break: break-all; }
+.lt-codici .small, .lt-lista .small { color: var(--ink2); margin-top: .15rem; }
+.lt-passi { padding-left: 1.6rem; margin: 0; }
+.lt-passi li { margin-bottom: .55rem; line-height: 1.45; }
+.lt-glossario { margin: 0; display: grid; grid-template-columns: minmax(8rem, 13rem) 1fr; gap: .45rem 1rem; }
+.lt-glossario dt { font-weight: 700; color: var(--brand); }
+.lt-glossario dd { margin: 0; line-height: 1.4; }
+.lt-avvertenza { margin-top: 1.2rem; }
+.lt-testo-ev { margin: 1rem 0 0; border: 1px solid var(--line); border-radius: 12px; }
+.lt-testo-ev summary { cursor: pointer; font-weight: 700; padding: .6rem .9rem; }
+.lt-legenda { padding: 0 .9rem .5rem; display: flex; gap: .4rem; flex-wrap: wrap; }
+.lt-testo-corpo { padding: .7rem .9rem; line-height: 1.6; overflow-wrap: anywhere; border-top: 1px solid var(--line); }
+#view-lettera mark.lt-m { color: var(--ink); padding: 0 .12em; border-radius: 3px; border-bottom: 3px solid; }
+#view-lettera mark.lt-m-totale { background: var(--warn-soft); border-color: var(--accent); font-weight: 700; }
+#view-lettera mark.lt-m-soldi { background: var(--warn-soft); border-color: var(--warn); }
+#view-lettera mark.lt-m-scadenza { background: var(--brand-soft); border-color: var(--brand); font-weight: 700; }
+#view-lettera mark.lt-m-data { background: transparent; border-color: var(--brand); }
+#view-lettera mark.lt-m-codice { background: var(--ok-soft); border-color: var(--ok); }
+#view-lettera mark.lt-m-termine { background: var(--bad-soft); border-color: var(--bad); }
+.lt-ia { margin-top: 1rem; padding: .9rem 1rem; border: 2px dashed var(--brand); border-radius: 12px; background: var(--brand-soft); }
+.lt-ia h3 { margin-top: 0 !important; }
+
+html[data-theme="contrast"] #lt-testo, html[data-theme="contrast"] .lt-box, html[data-theme="contrast"] .lt-anteprima { border-color: #fff; }
+html[data-theme="contrast"] #view-lettera mark.lt-m { background: #ffeb3b; color: #000; border-color: #000; }
+html[data-theme="contrast"] .lt-tag { background: #ffeb3b; color: #000; }
+
+@media (max-width: 600px) {
+  #view-lettera .lesson-head .big-ico { font-size: 2.3rem; }
+  .lt-sorgenti .btn.big, .lt-azioni .btn.big, .lt-img-azioni .btn.big { flex: 1 1 100%; }
+  .lt-tipo-ico { font-size: 2.2rem; }
+  .lt-grande { font-size: 1.6rem; }
+  .lt-glossario { grid-template-columns: 1fr; gap: .1rem; }
+  .lt-glossario dd { margin-bottom: .5rem; }
+}
+
+@media print {
+  #print-area .lt-stampa .lt-tipo { display: flex; gap: 8pt; align-items: center; }
+  #print-area .lt-stampa .lt-tipo-ico { font-size: 22pt; }
+  #print-area .lt-stampa .lt-tipo h2 { margin: 0; }
+  #print-area .lt-stampa .lt-chiave { display: flex; gap: 8pt; margin: 8pt 0; }
+  #print-area .lt-stampa .lt-box { flex: 1; border: 2px solid #555; border-radius: 6pt; padding: 6pt 8pt; }
+  #print-area .lt-stampa .lt-grande { font-size: 18pt; font-weight: 800; }
+  #print-area .lt-stampa .lt-truffa { border: 2px solid #b91c1c; border-left-width: 8px; background: #fee2e2; padding: 6pt 8pt; }
+  #print-area .lt-stampa h3 { font-size: 13pt; color: #1d5c8f; margin: 10pt 0 4pt; break-after: avoid; }
+  #print-area .lt-stampa .lt-codici li { list-style: none; border-left: 3pt solid #1d5c8f; padding-left: 5pt; margin-bottom: 4pt; break-inside: avoid; }
+  #print-area .lt-stampa .lt-cod { font-family: monospace; font-size: 11pt; }
+  #print-area .lt-stampa .lt-glossario { display: grid; grid-template-columns: 35mm 1fr; gap: 3pt 8pt; }
+  #print-area .lt-stampa .lt-glossario dt { font-weight: 700; }
+  #print-area .lt-stampa .lt-glossario dd { margin: 0; }
+  #print-area .lt-stampa .lt-passi li { margin-bottom: 3pt; }
+  #print-area .lt-stampa .small { font-size: 10pt; }
+  #print-area .lt-stampa .p-piede { margin-top: 12pt; font-size: 8.5pt; color: #555; border-top: 1px solid #999; padding-top: 4pt; }
+}

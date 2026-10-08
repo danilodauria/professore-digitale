@@ -203,6 +203,103 @@ st, ann = call("/api/aula/annuncio", {"testo": "Pausa caffè"})
 check("aula: messaggio a tutti", ann.get("annuncio", {}).get("testo") == "Pausa caffè", ann)
 code, risp = ciao("2468")
 check("aula: l'allievo riceve il messaggio", risp and risp.get("annuncio", {}).get("testo") == "Pausa caffè", risp)
+# --- 3.3: mano alzata (stesse risposte di pd_aula.py) ---
+def ciao_mano(cid, mano, utente="Anna Bianchi"):
+    corpo = {"id": cid, "codice": "2468", "pc": "PC-3", "utente": utente, "versione": "3.3.0", "attivita": {"titolo": "Lezione: Il mouse (passo 3)"}}
+    if mano is not None: corpo["mano"] = mano
+    req = urllib.request.Request("http://127.0.0.1:%d/aula/ciao" % a1.get("porta", 8766), headers={"Content-Type": "application/json"}, data=json.dumps(corpo).encode())
+    try:
+        with urllib.request.build_opener(urllib.request.ProxyHandler({})).open(req, timeout=10) as r: return r.status, json.loads(r.read().decode())
+    except urllib.error.HTTPError as e: return e.code, None
+def mano_di(cid):
+    return ([c for c in (call("/api/aula")[1].get("clienti") or []) if c["id"] == cid] or [{}])[0].get("mano")
+da = int(time.time()) - 60
+code, risp = ciao_mano("pc-wine-1", {"alzata": True, "da": da, "messaggio": "non trovo\u0007 il pulsante " + "x" * 200})
+m = mano_di("pc-wine-1")
+check("mano: il facilitatore vede la mano alzata", code == 200 and "mano" not in risp and m["alzata"] is True and m["da"] == da and m["stato"] == "" and m["attesa_s"] >= 0, m)
+check("mano: messaggio ripulito e accorciato a 120 caratteri", m["messaggio"].startswith("non trovo il pulsante x") and len(m["messaggio"]) == 120, m["messaggio"])
+code, risp = ciao_mano("pc-wine-2", None, "Carlo")
+check("mano: presenza senza mano (allievo 3.2) accettata", code == 200 and mano_di("pc-wine-2")["alzata"] is False, mano_di("pc-wine-2"))
+for corpo, atteso in (({"id": "pc wine", "stato": "arrivo"}, 400), ({"id": "pc-wine-1", "stato": "boh"}, 400), ({"id": "pc-wine-9", "stato": "arrivo"}, 404),
+                      ({"id": "pc-wine-2", "stato": "arrivo"}, 409), ({"id": 5, "stato": "arrivo"}, 400), ([1, 2], 400)):
+    st, e = call("/api/aula/rispondi", corpo)
+    check("mano: rispondi %s → %d" % (json.dumps(corpo), atteso), st == atteso and e.get("ok") is False and e.get("error"), (st, e))
+st, e = call("/api/aula/mano", {"alzata": True})
+check("mano: sul facilitatore /api/aula/mano → 409", st == 409, (st, e))
+st, r = call("/api/aula/rispondi", {"id": "pc-wine-1", "stato": "arrivo"})
+check("mano: «Arrivo!»", st == 200 and r["id"] == "pc-wine-1" and r["mano"]["alzata"] is True and r["mano"]["stato"] == "arrivo", r)
+code, risp = ciao_mano("pc-wine-1", {"alzata": True, "da": da, "messaggio": "ok"})
+check("mano: risposta mirata all'allievo", risp.get("mano") == {"da": da, "stato": "arrivo"} and mano_di("pc-wine-1")["stato"] == "arrivo", risp)
+code, risp = ciao_mano("pc-wine-2", None, "Carlo")
+check("mano: gli altri allievi non ricevono la risposta", "mano" not in risp, risp)
+st, r = call("/api/aula/rispondi", {"id": "pc-wine-1", "stato": "risolto"})
+check("mano: «Risolto» abbassa la mano", st == 200 and r["mano"]["alzata"] is False, r)
+code, risp = ciao_mano("pc-wine-1", {"alzata": True, "da": da, "messaggio": "ok"})
+check("mano: l'allievo riceve «risolto»", risp.get("mano") == {"da": da, "stato": "risolto"} and mano_di("pc-wine-1")["alzata"] is False, risp)
+st, e = call("/api/aula/rispondi", {"id": "pc-wine-1", "stato": "risolto"})
+check("mano: già abbassata → 409", st == 409, (st, e))
+code, risp = ciao_mano("pc-wine-1", {"alzata": True, "da": da + 30, "messaggio": ""})
+m = mano_di("pc-wine-1")
+check("mano: nuova richiesta riparte da capo", "mano" not in risp and m["alzata"] and m["stato"] == "" and m["da"] == da + 30, m)
+call("/api/aula/rimuovi", {"id": "*"})
+
+# --- 3.3: mano alzata sul PC dell'allievo (un finto facilitatore registra le presenze) ---
+ricevuti, risposta_mano = [], {}
+class FintoFacilitatore(http.server.BaseHTTPRequestHandler):
+    def log_message(self, *a): pass
+    def do_POST(self):
+        d = json.loads(self.rfile.read(int(self.headers.get("Content-Length") or 0)).decode())
+        ricevuti.append((time.time(), d))
+        out = {"ok": True, "nome": "Finta aula", "annuncio": {"id": 0, "testo": ""}}
+        if risposta_mano: out["mano"] = dict(risposta_mano)
+        b = json.dumps(out).encode()
+        self.send_response(200); self.send_header("Content-Type", "application/json"); self.send_header("Content-Length", str(len(b))); self.end_headers(); self.wfile.write(b)
+finto = socketserver.ThreadingTCPServer(("127.0.0.1", 0), FintoFacilitatore); finto.daemon_threads = True   # porta libera qualsiasi
+threading.Thread(target=finto.serve_forever, daemon=True).start()
+def aspetta(f, sec):
+    fine = time.time() + sec
+    while time.time() < fine:
+        v = f()
+        if v: return v
+        time.sleep(0.3)
+    return f()
+call("/api/data/settings", {"value": dict(nuove, aulaRuolo="allievo", studentName="Maria", aulaServer="127.0.0.1:%d" % finto.server_address[1])})
+st, a3 = call("/api/aula/applica", {})
+check("mano: allievo con la mano abbassata", a3.get("mano", {}).get("alzata") is False and a3["mano"].get("risposta") == "", a3.get("mano"))
+check("mano: prima presenza al finto facilitatore", aspetta(lambda: len(ricevuti), 12), ricevuti)
+time.sleep(1); n0 = len(ricevuti); t0 = time.time()
+st, r = call("/api/aula/mano", {"alzata": True})
+check("mano: alzata (API locale)", st == 200 and r["mano"]["alzata"] is True and r["mano"]["da"] > 0 and r["mano"]["messaggio"] == "", r)
+da = r["mano"]["da"]
+x = aspetta(lambda: [d for t, d in ricevuti[n0:] if (d.get("mano") or {}).get("alzata")], 4)
+check("mano: presenza inviata subito (meno di 4 s)", x and x[0]["mano"]["da"] == da, (time.time() - t0, ricevuti[n0:]))
+st, r = call("/api/aula/mano", {"alzata": True, "messaggio": "  non trovo il pulsante  "})
+check("mano: messaggio (spazi tolti)", st == 200 and r["mano"]["messaggio"] == "non trovo il pulsante" and r["mano"]["da"] == da, r)
+for corpo in ({"alzata": "sì"}, {"alzata": 1}, {"alzata": True, "messaggio": "x" * 121}, {"alzata": True, "messaggio": "a\u0007b"}, {"alzata": True, "messaggio": 5}, [True]):
+    st, e = call("/api/aula/mano", corpo)
+    check("mano: validazione %s → 400" % json.dumps(corpo)[:40], st == 400 and e.get("ok") is False, (st, e))
+st, e = call("/api/aula/mano", {"alzata": True, "messaggio": "è" * 120})
+check("mano: 120 caratteri accentati ammessi", st == 200, (st, e))
+st, e = call("/api/aula/rispondi", {"id": "abc", "stato": "arrivo"})
+check("mano: sull'allievo /api/aula/rispondi → 409", st == 409, (st, e))
+risposta_mano.update({"da": da - 1, "stato": "arrivo"})
+time.sleep(7)
+check("mano: risposta a una richiesta vecchia ignorata", call("/api/aula")[1]["mano"]["risposta"] == "", call("/api/aula")[1]["mano"])
+risposta_mano.update({"da": da, "stato": "arrivo"})
+m = aspetta(lambda: call("/api/aula")[1]["mano"]["risposta"] == "arrivo" and call("/api/aula")[1]["mano"], 12)
+check("mano: l'allievo riceve «arrivo»", m and m["alzata"] is True, m)
+risposta_mano.update({"da": da, "stato": "risolto"})
+m = aspetta(lambda: call("/api/aula")[1]["mano"]["risposta"] == "risolto" and call("/api/aula")[1]["mano"], 12)
+check("mano: l'allievo riceve «risolto» e la mano si abbassa", m and m["alzata"] is False, m)
+risposta_mano.clear()
+st, r = call("/api/aula/mano", {"alzata": True})
+check("mano: rialzata con un nuovo identificativo", st == 200 and r["mano"]["da"] > da and r["mano"]["risposta"] == "", r)
+n0 = len(ricevuti)
+st, r = call("/api/aula/mano", {"alzata": False})
+check("mano: abbassata dall'allievo", st == 200 and r["mano"]["alzata"] is False, r)
+x = aspetta(lambda: [d for t, d in ricevuti[n0:] if (d.get("mano") or {}).get("alzata") is False], 4)
+check("mano: il facilitatore lo sa subito", bool(x), ricevuti[n0:])
+finto.shutdown(); finto.server_close()
 call("/api/aula/rimuovi", {"id": "*"})
 call("/api/data/settings", {"value": dict(nuove, aulaRuolo="")}); call("/api/aula/applica", {})
 

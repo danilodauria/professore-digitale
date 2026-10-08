@@ -57,7 +57,10 @@ Leggere questo file per intero prima di modificare qualunque cosa.
 | `src/web/js/ripasso.js` | Ripasso a scatole (Leitner) e domanda del giorno: `PD.registraRisposta(item, giusta)` chiamata dai quiz; dati in `progress.ripasso` |
 | `src/web/js/accessibilita.js` | Comandi a voce (`PD.comando`), mani che tremano (`PD.tremore`), vedo poco, lettura di ciò che si indica |
 | `src/web/js/data-digcomp.js`, `data-incontri.js`, `enti.js`, `registro.js` | Competenze DigComp 2.2 (`PD.digcomp`, vista `#/competenze`), pagina facilitatori `#/enti/{incontri,registro,resoconto,digcomp}`, 12 incontri pronti da 2 ore, registro presenze e resoconto per l'ente (chiave dati `registro`, CSV, stampa) |
-| `tools/voci.sh` | Scarica e verifica (SHA-256) le **voci naturali incluse**: Piper Linux x86_64/aarch64 e Windows x64, voci Paola (f) e Riccardo (m). Cache in `~/.cache/professore-digitale/voci` |
+| `src/web/js/lettera.js`, `src/web/vendor/ocr/` | «Spiegami questa lettera» (3.3): OCR offline con tesseract.js servito in locale (non nel portatile), motore a regole `PD.lettera.analizza`, nulla salvato |
+| `src/web/js/mente.js`, `mente-giochi.js` | «Ginnastica per la mente» (3.3): framework `PD.mente.registra(gioco)`, diario in `progress.mente`; giochi di memoria/attenzione/calcolo (mente.js) e cruciverba, indovina la frase, parole (mente-giochi.js) |
+| `src/web/js/editor.js` | «Crea lezioni e quiz» (3.3): editor visuale di pacchetti di contenuti, salva con `PD.packs.importText`; campo facoltativo `senza_attestato` nelle prove |
+| `tools/voci.sh`, `packaging/voci/` | Scarica e verifica (SHA-256) le **voci naturali incluse**: Piper Linux x86_64/aarch64 e Windows x64, voci **Giorgio** (m, predefinita), **Serena** (f) e Paola (f); Riccardo (x_low) tolto nella 3.3. I `.onnx.json` di Giorgio e Serena (CC BY 4.0) stanno ripuliti in `packaging/voci/` (`copia_voci DEST`). Cache in `~/.cache/professore-digitale/voci` |
 | `archivio/` | .deb prodotti in questa copia (ignorato da git, escluso dall'archivio sorgenti). I .deb pubblicati si conservano sul PC di Danilo in `$ARCHIVIO` (`~/professore-digitale-archivio`, vedi `rilascio.conf`) |
 
 ## Comandi
@@ -78,7 +81,11 @@ PD_SHARE_DIR=src python3 packaging/professore-digitale-contenuti valida src/cont
   Linux: Piper incluso nel .deb (`/usr/lib/professore-digitale/piper/<arch>/`, voci in `/usr/share/professore-digitale/voci/`,
   avviabile solo se glibc ≥ 2.29: altrimenti si usano le varianti espeak-ng `it+m3`, `it+m1`, `it+f2`, `it+f4`), poi Pico.
   Windows: Piper (solo 64 bit, `piper\` e `voci\` nella cartella del programma) e tutte le voci italiane SAPI/OneCore con il genere.
-  Voce predefinita: Riccardo (il Professore è un uomo), poi Paola. Le voci si scelgono in Impostazioni → Voce.
+  Voce predefinita: Giorgio (il Professore è un uomo), poi Serena e Paola. Le voci si scelgono in Impostazioni → Voce.
+  Pausa tra le frasi `--sentence_silence 0.25`. Le voci addestrate con Piper 1.5 hanno nella `phoneme_id_map` simboli di 2
+  caratteri che il motore Piper 2023 rifiuta: `pulisci_json_voce` (Python) e `pulisci_json_voce` (pd_voice.c) li tolgono
+  dalle voci scaricate dall'utente; quelle incluse sono già pulite. Il catalogo Windows ha `voce.piper.voci` (3.3+) accanto a
+  `file` (che resta per le versioni precedenti). `tests/test_voci.py` prova le voci con il vero Piper.
 - **Pacchetti**: oltre a `domande` e `lezioni` possono avere `prove` (grandi quiz: `id, titolo, icona, descrizione, attestato,
   domande_per_prova 5-100, soglia 0.5-1, domande[{domanda, opzioni, corretta, spiegazione, categoria}]`). Validatori in
   `pd_packs.py` e `packs.js` (stesse regole). Palestra: `click, dblclick, drag, typing, scroll, rightclick, copypaste, select, keys, memory, scam`.
@@ -90,6 +97,9 @@ PD_SHARE_DIR=src python3 packaging/professore-digitale-contenuti valida src/cont
   dalla 3.2 `vita`, `truffa`, `ripasso`, `profilo`. Chiavi dati nuove (server Python e C): `profili`, `registro`.
   Impostazioni nuove: `voiceId, netCheck, idleTips, greet, goodbye, studentName, aulaRuolo, aulaNome, aulaCodice, aulaServer`;
   dalla 3.2 `voiceCommands, tremore, vista, leggiFocus, domandaGiorno`.
+- **Aula, mano alzata (3.3)**: `/aula/ciao` porta `mano: {alzata, da, messaggio}`; la risposta mirata torna nella risposta
+  a quel PC (`mano: {da, stato: "arrivo"|"risolto"}`). API locali `/api/aula/mano` (allievo) e `/api/aula/rispondi`
+  (facilitatore) in Python e C. Impostazione `aulaManoSuono`.
 - **Moduli (dalla 3.2)**: si agganciano con `PD.hooks` (`dopoCaricamento`, `homeTiles`, `homeCards`, `settingsCards`, in app.js);
   CSS in `src/web/css/<modulo>.css` (make_standalone li incorpora tutti). Test di ogni modulo in `tests/ui_<modulo>.py`
   (`prova(page, ROOT, check, SHOTS)`), chiamati da `test_ui.py`. Nei test usare selettori dentro la vista

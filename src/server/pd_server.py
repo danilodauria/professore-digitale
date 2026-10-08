@@ -197,15 +197,37 @@ def ollama_models(timeout=1.5):
 
 
 # ------------------------------------------------------------------------------
-#  Sintesi vocale (TTS): voci naturali Piper (incluse nel pacchetto: Paola e Riccardo),
+#  Sintesi vocale (TTS): voci naturali Piper (incluse nel pacchetto: Giorgio, Serena e Paola),
 #  Pico (femminile) ed espeak-ng (varianti maschili e femminili). L'utente sceglie la voce.
 # ------------------------------------------------------------------------------
 LIB_DIR = os.environ.get("PD_LIB_DIR") or "/usr/lib/professore-digitale"
 VOICES_DIR = os.environ.get("PD_VOICES_DIR") or os.path.join(SHARE_DIR, "voci")
-PIPER_NOMI = {"paola": ("Paola", "f"), "riccardo": ("Riccardo", "m"), "serena": ("Serena", "f")}
+PIPER_NOMI = {"paola": ("Paola", "f"), "riccardo": ("Riccardo", "m"), "serena": ("Serena", "f"), "giorgio": ("Giorgio", "m"),
+              "leonardo": ("Leonardo", "m"), "ugo": ("Ugo", "m"), "aurora": ("Aurora", "f")}
+PIPER_ORDINE = ("giorgio", "serena", "paola")   # il Professore e' un uomo: prima Giorgio, poi le voci femminili
+PIPER_PAUSA = "0.25"                           # secondi di pausa tra una frase e l'altra: la voce respira
 ESPEAK_VARIANTI = (("m3", "Voce leggera maschile", "m"), ("m1", "Voce leggera maschile, grave", "m"),
                    ("f2", "Voce leggera femminile", "f"), ("f4", "Voce leggera femminile, morbida", "f"))
-VOCE_PREDEFINITA = ("piper:it_IT-riccardo-x_low", "piper:it_IT-paola-medium", "espeak:m3", "pico")
+VOCE_PREDEFINITA = ("piper:it_IT-giorgio-medium", "piper:it_IT-serena-medium", "piper:it_IT-paola-medium",
+                    "piper:it_IT-riccardo-x_low", "espeak:m3", "pico")
+
+
+def pulisci_json_voce(path):
+    """Le voci addestrate con Piper 1.5 hanno nella mappa dei fonemi anche coppie di simboli (es. "aɪ") che il motore
+    Piper incluso rifiuta: si tolgono (l'italiano non le usa). Restituisce True se il file e' utilizzabile."""
+    try:
+        with open(path, "r", encoding="utf-8") as f:
+            d = json.load(f)
+        m = d.get("phoneme_id_map") or {}
+        brutti = [k for k in m if len(k) != 1]
+        if brutti:
+            for k in brutti:
+                del m[k]
+            atomic_write(path, json.dumps(d, ensure_ascii=False, indent=1))
+            log("Voce ripulita per Piper:", path)
+        return True
+    except (OSError, ValueError):
+        return False
 
 
 def _arch_piper():
@@ -242,7 +264,10 @@ def piper_models():
     for d in (VOICES_DIR, os.path.join(MODELS_DIR, "piper")):
         try:
             for name in sorted(os.listdir(d)):
-                if name.endswith(".onnx") and os.path.isfile(os.path.join(d, name + ".json")):
+                js = os.path.join(d, name + ".json")
+                if name.endswith(".onnx") and os.path.isfile(js):
+                    if d != VOICES_DIR and os.access(js, os.W_OK) and not pulisci_json_voce(js):
+                        continue
                     out[name[:-5]] = os.path.join(d, name)
         except OSError:
             pass
@@ -262,7 +287,12 @@ def tts_voices():
     """Elenco delle voci disponibili: [{"id", "nome", "genere": "m"/"f", "motore", "naturale"}]."""
     voci = []
     if piper_bin():
-        for base in sorted(piper_models(), key=lambda b: (0 if "riccardo" in b else 1 if "paola" in b else 2, b)):
+        def posto(b):
+            for i, n in enumerate(PIPER_ORDINE):
+                if "-%s-" % n in b:
+                    return i
+            return len(PIPER_ORDINE)
+        for base in sorted(piper_models(), key=lambda b: (posto(b), b)):
             parti = base.split("-")
             chi = parti[1] if len(parti) > 1 else base
             nome, genere = PIPER_NOMI.get(chi, (chi.capitalize(), ""))
@@ -334,7 +364,7 @@ def synthesize(text, rate=1.0, engine=None, voice=None):
                     eng = "piper"
                     model = piper_models().get(vid[6:])
                     subprocess.run([piper_bin(), "--model", model, "--output_file", out,
-                                    "--length_scale", "%.2f" % (1.0 / rate)],
+                                    "--length_scale", "%.2f" % (1.0 / rate), "--sentence_silence", PIPER_PAUSA],
                                    input=text.encode("utf-8"), stdout=subprocess.DEVNULL,
                                    stderr=subprocess.DEVNULL, timeout=120, check=True)
                 elif vid == "pico":
@@ -832,6 +862,9 @@ class Handler(BaseHTTPRequestHandler):
             if azione == "rimuovi":
                 aula.rimuovi(str(req.get("id", "")))
                 return self._send(200, {"ok": True})
+            r = aula.api_locale(azione, req)   # mano alzata (3.3): /api/aula/mano, /api/aula/rispondi
+            if r:
+                return self._send(*r)
             return self._error(404, "API sconosciuta")
 
         if path == "/api/stt-reprobe":

@@ -3,6 +3,8 @@
  *  Il PC del facilitatore vede i PC degli allievi collegati alla stessa rete: chi c'e', cosa sta
  *  facendo, a che punto e' con le lezioni, quiz e attestati, che computer usa. Puo' mandare un
  *  messaggio a tutti. Si attiva solo se lo sceglie l'utente; i dati restano nella rete locale.
+ *  Dalla 3.3 «✋ Mano alzata»: l'allievo chiede aiuto con un pulsante, il facilitatore vede un avviso
+ *  (con un suono gentile, disattivabile) ovunque nell'app e risponde «Arrivo!» o «Risolto».
  *  JavaScript puro (ES5). Ideato e sviluppato da Danilo D'Auria - Licenza MIT
  * ============================================================================== */
 (function () {
@@ -82,7 +84,7 @@
   };
 
   function carica(el, tutto) {
-    PD.api("/api/aula").then(function (st) { ultimoStato = st; disegna(el, st, tutto); }).catch(function (e) {
+    PD.api("/api/aula").then(function (st) { ultimoStato = st; disegna(el, st, tutto); mani.aggiorna(st); }).catch(function (e) {
       var c = $("#aula-corpo", el); if (c) c.innerHTML = '<p class="notice">Stato dell\'aula non disponibile: ' + esc(e.message) + "</p>";
     });
   }
@@ -141,7 +143,7 @@
       // salvataggio immediato (non ritardato) perche' il server legga subito il nuovo ruolo
       PD.api("/api/data/settings", { value: s }).then(function () { return PD.api("/api/aula/applica", {}); }).then(function (st) {
         PD.toast(r === "facilitatore" ? "🧑‍🏫 Questo è ora il PC del facilitatore." : r === "allievo" ? "🧑‍🎓 Collegamento all'aula attivato." : "Aula disattivata.");
-        ultimoStato = st;
+        ultimoStato = st; mani.ruolo(st);
         if (r === "allievo") PD.aulaPresenza().then(function () { carica(document.getElementById("view-aula"), true); });
         else disegna(document.getElementById("view-aula"), st, true);
       }).catch(function (e) { PD.toast("Non riuscito: " + e.message); });
@@ -151,10 +153,11 @@
   function vivo(box, st) {
     if (!box) return;
     if (st.ruolo === "facilitatore") {
-      var cl = st.clienti || [], on = cl.filter(function (x) { return x.online; });
+      var cl = ordinaMani(st.clienti || []), on = cl.filter(function (x) { return x.online; });
+      var alzate = cl.filter(manoAlzata).length;
       var lez = cl.reduce(function (a, x) { return a + x.progressi.lezioni_fatte; }, 0), att = cl.reduce(function (a, x) { return a + x.progressi.attestati.length; }, 0);
       box.innerHTML = '<div class="numeri">' + numero(on.length, "allievi collegati ora") + numero(cl.length, "PC visti in aula") + numero(lez, "lezioni completate") +
-        numero(att, "attestati ottenuti") + "</div>" +
+        numero(att, "attestati ottenuti") + (alzate ? '<div class="card numero pd-mano-numero"><b>✋ ' + alzate + "</b><span>" + (alzate === 1 ? "chiede aiuto" : "chiedono aiuto") + "</span></div>" : "") + "</div>" +
         '<div class="card"><h2 style="margin-top:0">🖥️ Questo PC: «' + esc(st.nome) + '»</h2><dl class="kv"><dt>Nome del computer</dt><dd>' + esc(st.pc) + "</dd>" +
         "<dt>Indirizzi in rete</dt><dd>" + (st.ips.length ? esc(st.ips.join(", ")) : "nessuna rete") + "</dd><dt>Codice dell'aula</dt><dd>" + (st.codice ? "<b>" + esc(st.codice) + "</b>" : "nessuno (accetta tutti)") + "</dd>" +
         "<dt>In ascolto per gli allievi</dt><dd>" + (st.in_ascolto ? "✅ porta " + st.porta : "❌ porta " + st.porta + " occupata o bloccata dal firewall") + "</dd>" +
@@ -175,6 +178,7 @@
           .then(function () { carica(document.getElementById("view-aula"), false); });
       };
       $("#aula-csv", box).onclick = function () { csv(cl); };
+      mani.collega(box);
       $$("[data-togli]", box).forEach(function (b) {
         b.onclick = function () { PD.api("/api/aula/rimuovi", { id: b.getAttribute("data-togli") }).then(function () { carica(document.getElementById("view-aula"), false); }); };
       });
@@ -194,8 +198,11 @@
   function riga(x) {
     var p = x.progressi, perc = p.lezioni_totali ? Math.round(100 * p.lezioni_fatte / p.lezioni_totali) : 0;
     var verDiversa = x.versione && x.versione !== (ultimoStato && ultimoStato.versione);
-    return '<tr class="' + (x.online ? "on" : "off") + '"><td><span class="stato-dot ' + (x.online ? "on" : "") + '" title="' + (x.online ? "collegato" : "non collegato") + '"></span></td>' +
-      "<td><b>" + esc(x.utente || "(senza nome)") + "</b>" + (x.attivita.inattivo_s > 300 && x.online ? '<br><span class="small muted">😴 inattivo da ' + Math.round(x.attivita.inattivo_s / 60) + " min</span>" : "") + "</td>" +
+    var m = manoAlzata(x) ? x.mano : null;
+    return '<tr class="' + (x.online ? "on" : "off") + (m ? " pd-mano-riga" : "") + '"><td><span class="stato-dot ' + (x.online ? "on" : "") + '" title="' + (x.online ? "collegato" : "non collegato") + '"></span></td>' +
+      "<td><b>" + esc(x.utente || "(senza nome)") + "</b>" + (x.attivita.inattivo_s > 300 && x.online ? '<br><span class="small muted">😴 inattivo da ' + Math.round(x.attivita.inattivo_s / 60) + " min</span>" : "") +
+        (m ? '<div class="pd-mano-cella"><b>✋ Chiede aiuto ' + attesa(m.attesa_s) + "</b>" + (m.messaggio ? "<br>«" + esc(m.messaggio) + "»" : "") +
+          '<div class="row">' + pulsantiRisposta(x) + "</div></div>" : "") + "</td>" +
       "<td>" + esc(x.attivita.titolo || "—") + "</td>" +
       '<td style="min-width:7rem">' + p.lezioni_fatte + " / " + p.lezioni_totali + '<div class="progress"><span style="width:' + perc + '%"></span></div></td>' +
       "<td>" + (p.quiz.length ? p.quiz.map(function (q) { return (q.superata ? "🎓 " : "📝 ") + esc(q.titolo.replace(/^Il Grande Quiz (dell'|di |del )?/i, "")) + " " + q.migliore + "%"; }).join("<br>") : "—") + "</td>" +
@@ -226,4 +233,232 @@
         "<dt>Server degli aggiornamenti</dt><dd>" + (x.aggiornamenti ? (x.aggiornamenti.raggiungibile ? "✅ " : "❌ ") + esc(x.aggiornamenti.url) : "non configurato nella rete locale") + "</dd></dl>";
     }).catch(function (e) { out.innerHTML = '<p class="notice">Ricerca non riuscita: ' + esc(e.message) + "</p>"; });
   }
+  /* ==================================================================================
+   *  ✋ MANO ALZATA (3.3)
+   *  Allievo: pulsante fisso «✋ Ho bisogno di aiuto» → POST /api/aula/mano {alzata, messaggio}
+   *           (il server invia subito la presenza al facilitatore) e si controlla la risposta in /api/aula.
+   *  Facilitatore: ogni 5 s /api/aula (anche fuori dalla pagina Aula) → riquadro in alto con suono gentile;
+   *           «Arrivo!» / «Risolto» → POST /api/aula/rispondi {id, stato}.
+   * ================================================================================== */
+  var MANO_MAX = 120;
+  function manoAlzata(x) { return !!(x && x.mano && x.mano.alzata); }
+  function ordinaMani(cl) {
+    // prima chi ha la mano alzata, a partire da chi aspetta da più tempo; poi gli altri nell'ordine di prima
+    return cl.map(function (x, i) { return { x: x, i: i }; }).sort(function (a, b) {
+      var ma = manoAlzata(a.x), mb = manoAlzata(b.x);
+      if (ma !== mb) return ma ? -1 : 1;
+      if (ma) return (b.x.mano.attesa_s || 0) - (a.x.mano.attesa_s || 0) || a.i - b.i;
+      return a.i - b.i;
+    }).map(function (o) { return o.x; });
+  }
+  function attesa(s) {
+    s = s || 0;
+    if (s < 60) return "da meno di un minuto";
+    return "da " + Math.floor(s / 60) + " min";
+  }
+  function pulsantiRisposta(x) {
+    var arrivo = x.mano && x.mano.stato === "arrivo";
+    return '<button class="btn pd-mano-arrivo" type="button" data-mano-rispondi="arrivo" data-mano-id="' + esc(x.id) + '"' + (arrivo ? " disabled" : "") + ">" +
+      (arrivo ? "🏃 State arrivando" : "🏃 Arrivo!") + "</button>" +
+      '<button class="btn ghost pd-mano-risolto" type="button" data-mano-rispondi="risolto" data-mano-id="' + esc(x.id) + '">✅ Risolto</button>';
+  }
+  function pulisci(t) { return String(t || "").replace(/[\u0000-\u001f\u007f-\u009f]/g, " ").replace(/^\s+|\s+$/g, "").slice(0, MANO_MAX); }
+
+  var mani = (function () {
+    var ruoloOra = "", giro = 0, visti = {}, firma = "", actx = null, suonati = 0, titolo0 = document.title, ultimo = null;
+    var elAllievo = null, statoMano = { alzata: false, risposta: "" }, invioOk = true, inCorso = false, firmaAllievo = "";
+
+    /* ---------- suono gentile (WebAudio, nessun file) ---------- */
+    function suono() {
+      if (PD.settings.aulaManoSuono === false) return false;
+      try {
+        var AC = window.AudioContext || window.webkitAudioContext; if (!AC) return false;
+        actx = actx || new AC();
+        if (actx.state === "suspended" && actx.resume) actx.resume();
+        var t0 = actx.currentTime, note = [659.25, 880], i;
+        for (i = 0; i < note.length; i++) {
+          var o = actx.createOscillator(), g = actx.createGain(), t = t0 + i * 0.2;
+          o.type = "sine"; o.frequency.value = note[i];
+          g.gain.setValueAtTime(0.0001, t); g.gain.exponentialRampToValueAtTime(0.12, t + 0.03); g.gain.exponentialRampToValueAtTime(0.0001, t + 0.45);
+          o.connect(g); g.connect(actx.destination); o.start(t); o.stop(t + 0.5);
+        }
+        suonati++;
+        return true;
+      } catch (e) { return false; }
+    }
+
+    /* ---------- posizione dei riquadri fissi (non coprono la barra né altri pulsanti) ---------- */
+    function posiziona() {
+      if (!elAllievo) return;
+      var sb = $(".sidebar"), stretto = window.innerWidth <= 900, basso = 16, sinistra = 16;
+      if (sb && sb.offsetWidth) {
+        if (stretto) basso += sb.offsetHeight; else sinistra = Math.max(16, Math.round(sb.getBoundingClientRect().right) + 16);
+      }
+      if (stretto) sinistra = 10;
+      var guida = document.getElementById("enti-guida-bar");
+      if (guida && guida.offsetHeight && !stretto) basso += guida.offsetHeight + 10;
+      elAllievo.style.bottom = basso + "px"; elAllievo.style.left = sinistra + "px";
+      elAllievo.style.maxWidth = "calc(100vw - " + (sinistra + 10) + "px)";
+      document.documentElement.style.setProperty("--pd-mano-spazio", (elAllievo.offsetHeight + basso + 16) + "px");
+    }
+
+    /* ---------- PC dell'allievo ---------- */
+    function disegnaAllievo() {
+      if (!elAllievo) return;
+      var m = statoMano, f = [m.alzata, m.risposta, m.messaggio, invioOk].join("|");
+      if (f === firmaAllievo && elAllievo.innerHTML) { posiziona(); return; }   // niente da cambiare: non disturbo chi scrive
+      firmaAllievo = f;
+      if (!m.alzata) {
+        elAllievo.className = "pd-mano pd-mano-riposo";
+        elAllievo.innerHTML = '<button class="pd-mano-btn" type="button" id="pd-mano-alza">✋ Ho bisogno di aiuto</button>';
+        $("#pd-mano-alza", elAllievo).onclick = function () { alza(true); };
+      } else {
+        var arriva = m.risposta === "arrivo";
+        elAllievo.className = "pd-mano pd-mano-su" + (arriva ? " arriva" : "");
+        var input = $("#pd-mano-msg", elAllievo), scritto = input ? input.value : "", fuoco = input && document.activeElement === input;
+        elAllievo.innerHTML = '<p class="pd-mano-titolo" role="status" aria-live="polite">' +
+          (arriva ? "🏃 Il facilitatore sta arrivando 🙂" : "✋ Mano alzata – il facilitatore arriva") + "</p>" +
+          (invioOk ? "" : '<p class="pd-mano-nota small">⚠️ Il PC del facilitatore non risponde: alzate la mano anche davvero!</p>') +
+          (m.messaggio ? '<p class="pd-mano-nota small">Il vostro messaggio: «' + esc(m.messaggio) + "»</p>" : "") +
+          '<div class="pd-mano-scrivi"><label class="sr-only" for="pd-mano-msg">Cosa vi serve? (facoltativo)</label>' +
+          '<input type="text" id="pd-mano-msg" maxlength="' + MANO_MAX + '" placeholder="Cosa vi serve? (facoltativo)" autocomplete="off">' +
+          '<button class="btn ghost" type="button" id="pd-mano-invia">Invia</button></div>' +
+          '<button class="btn pd-mano-giu" type="button" id="pd-mano-giu">👇 Abbassa la mano</button>';
+        input = $("#pd-mano-msg", elAllievo); input.value = scritto; if (fuoco) input.focus();
+        $("#pd-mano-invia", elAllievo).onclick = function () { alza(true, pulisci(input.value)); };
+        input.onkeydown = function (e) { if (e.key === "Enter") { e.preventDefault(); alza(true, pulisci(input.value)); } };
+        $("#pd-mano-giu", elAllievo).onclick = function () { alza(false); };
+      }
+      document.documentElement.classList.add("pd-mano-on");
+      posiziona();
+    }
+    function alza(su, messaggio) {
+      if (inCorso) return; inCorso = true;
+      var corpo = { alzata: su }; if (messaggio !== undefined) corpo.messaggio = messaggio;
+      // prima la presenza aggiornata (pagina in uso), poi la mano: il server la invia subito al facilitatore
+      (su && !statoMano.alzata && PD.aulaPresenza ? PD.aulaPresenza() : Promise.resolve()).then(function () {
+        return PD.api("/api/aula/mano", corpo);
+      }).then(function (r) {
+        inCorso = false;
+        var prima = statoMano.alzata; statoMano = r.mano || statoMano;
+        if (su && !prima) PD.toast("✋ Ho avvisato il facilitatore: arriva appena può.", 4500);
+        else if (su && messaggio !== undefined) { PD.toast("✉️ Messaggio inviato al facilitatore."); var i = $("#pd-mano-msg", elAllievo); if (i) i.value = ""; }
+        else if (!su) PD.toast("👇 Mano abbassata.");
+        disegnaAllievo(); pianifica(1500);
+      }).catch(function (e) { inCorso = false; PD.toast("Non riuscito: " + e.message, 5000); });
+    }
+    function controllaAllievo() {
+      return PD.api("/api/aula").then(function (st) {
+        if (st.ruolo !== "allievo") { ruolo(st); return; }
+        var m = st.mano || { alzata: false, risposta: "" }, prima = statoMano;
+        invioOk = !(st.invio && st.invio.ok === false && st.invio.fa_s != null);
+        if (m.alzata && m.risposta === "arrivo" && prima.risposta !== "arrivo") {
+          PD.toast("🙂 Il facilitatore sta arrivando!", 6000); PD.speak("Il facilitatore sta arrivando.", true);
+        }
+        if (!m.alzata && prima.alzata) {
+          if (m.risposta === "risolto") { PD.toast("✅ Il facilitatore ha segnato «risolto». Buon lavoro!", 6000); PD.speak("Bene! Buon lavoro.", true); }
+          else PD.toast("👇 La mano si è abbassata.", 4000);
+        }
+        statoMano = m; disegnaAllievo();
+      });
+    }
+
+    /* ---------- PC del facilitatore ---------- */
+    function riquadro() {
+      var el = document.getElementById("pd-mani");
+      if (!el) {
+        el = document.createElement("div"); el.id = "pd-mani"; el.className = "pd-mani"; el.setAttribute("role", "region");
+        el.setAttribute("aria-label", "Richieste di aiuto"); el.hidden = true; document.body.appendChild(el);
+      }
+      return el;
+    }
+    function aggiorna(st) {
+      if (!st || st.ruolo !== "facilitatore") return;
+      ultimo = st;
+      var lista = ordinaMani((st.clienti || []).filter(manoAlzata)), el = riquadro(), nuove = 0, i, chiavi = {};
+      for (i = 0; i < lista.length; i++) {
+        var k = lista[i].id + ":" + lista[i].mano.da; chiavi[k] = 1;
+        if (!visti[k]) { visti[k] = 1; nuove++; }
+      }
+      visti = chiavi;
+      if (nuove) { suono(); PD.toast("✋ " + (lista[0].utente || "Un allievo") + " chiede aiuto.", 4000); }
+      document.title = (lista.length ? "✋ (" + lista.length + ") " : "") + titolo0.replace(/^✋ \(\d+\) /, "");
+      var f = JSON.stringify(lista.map(function (x) { return [x.id, x.mano.da, x.mano.stato, x.mano.messaggio, Math.floor(x.mano.attesa_s / 60), x.attivita.titolo]; })) + PD.settings.aulaManoSuono;
+      if (f === firma && !el.hidden === !!lista.length) return;
+      firma = f;
+      if (!lista.length) { el.hidden = true; el.innerHTML = ""; return; }
+      var mostra = lista.slice(0, 3), suonoOn = PD.settings.aulaManoSuono !== false;
+      el.innerHTML = '<div class="pd-mani-testa"><b>✋ ' + (lista.length === 1 ? "Un allievo chiede aiuto" : lista.length + " allievi chiedono aiuto") + "</b>" +
+        '<button class="icon-btn" type="button" id="pd-mani-suono" aria-pressed="' + suonoOn + '" title="' + (suonoOn ? "Disattiva il suono" : "Attiva il suono") + '">' + (suonoOn ? "🔔" : "🔕") + "</button></div>" +
+        mostra.map(function (x) {
+          return '<div class="pd-mani-voce' + (x.mano.stato === "arrivo" ? " arrivo" : "") + '"><p class="pd-mani-testo">✋ <b>' + esc(x.utente || "Un allievo") + "</b> (" + esc(x.pc || x.ip || "") +
+            ") chiede aiuto – " + esc(x.attivita.titolo || "—") + " – " + attesa(x.mano.attesa_s) + "</p>" +
+            (x.mano.messaggio ? '<p class="pd-mani-msg">«' + esc(x.mano.messaggio) + "»</p>" : "") + '<div class="row">' + pulsantiRisposta(x) + "</div></div>";
+        }).join("") +
+        (lista.length > mostra.length ? '<p class="small"><a href="#/aula">Altre ' + (lista.length - mostra.length) + " richieste nel quadro dell'aula →</a></p>" : "");
+      el.hidden = false;
+      var tb = $(".topbar"); if (tb) el.style.top = Math.max(8, Math.round(tb.getBoundingClientRect().bottom) + 8) + "px";
+      $("#pd-mani-suono", el).onclick = function () {
+        PD.settings.aulaManoSuono = PD.settings.aulaManoSuono === false; PD.saveSettings();
+        if (PD.settings.aulaManoSuono) suono();
+        aggiorna(ultimo);
+      };
+      collega(el);
+    }
+    function collega(box) {
+      $$("[data-mano-rispondi]", box).forEach(function (b) {
+        b.onclick = function () {
+          var stato = b.getAttribute("data-mano-rispondi"); b.disabled = true;
+          PD.api("/api/aula/rispondi", { id: b.getAttribute("data-mano-id"), stato: stato }).then(function () {
+            PD.toast(stato === "arrivo" ? "🏃 L'allievo vede: «Il facilitatore sta arrivando»." : "✅ Fatto: la mano è abbassata.");
+          }).catch(function (e) { PD.toast("Non riuscito: " + e.message, 5000); }).then(function () {
+            firma = "";
+            var v = document.getElementById("view-aula");
+            if (v && !v.hidden && document.getElementById("aula-corpo")) carica(v, false);
+            else controllaFacilitatore();
+          });
+        };
+      });
+    }
+    function controllaFacilitatore() {
+      return PD.api("/api/aula").then(function (st) { if (st.ruolo !== "facilitatore") ruolo(st); else aggiorna(st); });
+    }
+
+    /* ---------- ciclo ---------- */
+    function pianifica(ms) {
+      clearTimeout(giro);
+      giro = setTimeout(function () {
+        var p = null, v = document.getElementById("view-aula");
+        if (ruoloOra === "allievo" && statoMano.alzata) p = controllaAllievo();
+        // nella pagina Aula il quadro si aggiorna già da solo ogni 5 secondi (carica → aggiorna)
+        else if (ruoloOra === "facilitatore" && !(v && !v.hidden && document.getElementById("aula-corpo"))) p = controllaFacilitatore();
+        (p || Promise.resolve()).catch(function () { /* server spento */ }).then(function () { if (ruoloOra) pianifica(); });
+      }, ms || (ruoloOra === "allievo" ? 4000 : 5000));
+    }
+    function ruolo(st) {
+      var r = PD.server ? ((st && st.ruolo) || "") : "";
+      if (r !== "allievo" && elAllievo) { elAllievo.parentNode.removeChild(elAllievo); elAllievo = null; document.documentElement.classList.remove("pd-mano-on"); }
+      if (r !== "facilitatore") { var el = document.getElementById("pd-mani"); if (el) { el.hidden = true; el.innerHTML = ""; } firma = ""; visti = {}; document.title = titolo0; }
+      if (r === "allievo") {
+        if (!elAllievo) { elAllievo = document.createElement("div"); elAllievo.id = "pd-mano"; document.body.appendChild(elAllievo); }
+        if (st && st.mano) statoMano = st.mano;
+        disegnaAllievo();
+      }
+      if (r === "facilitatore" && st && st.clienti) aggiorna(st);
+      ruoloOra = r;
+      if (r) pianifica(r === "facilitatore" ? 300 : 0); else clearTimeout(giro);
+    }
+    window.addEventListener("resize", posiziona);
+    window.addEventListener("hashchange", function () { setTimeout(posiziona, 300); });
+    return { aggiorna: aggiorna, ruolo: ruolo, collega: collega, suono: suono, posiziona: posiziona,
+      stato: function () { return { ruolo: ruoloOra, mano: statoMano, suonati: suonati }; } };
+  })();
+  PD.aulaMano = mani;
+
+  var prevReady = PD.onReady;
+  PD.onReady = function () {
+    if (prevReady) prevReady();
+    if (!PD.server || !PD.settings.aulaRuolo) return;
+    PD.api("/api/aula").then(function (st) { mani.ruolo(st); }).catch(function () { /* aula non disponibile */ });
+  };
 })();

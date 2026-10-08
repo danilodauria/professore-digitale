@@ -122,7 +122,7 @@
     });
     var prove = (p.prove || []).map(function (P) {
       return { id: P.id, titolo: P.titolo, icona: P.icona || "🏆", descrizione: P.descrizione || "", attestato: P.attestato || P.titolo,
-        domande_per_prova: P.domande_per_prova || 20, soglia: P.soglia == null ? 0.7 : P.soglia, pack: p.id, packTitolo: p.titolo,
+        domande_per_prova: P.domande_per_prova || 20, soglia: P.soglia == null ? 0.7 : P.soglia, pack: p.id, packTitolo: p.titolo, senza_attestato: !!P.senza_attestato,
         domande: P.domande.map(function (q) { return { q: q.domanda, o: q.opzioni, a: q.corretta, e: q.spiegazione, c: q.categoria || "" }; }) };
     });
     return { kb: kb, lessons: lessons, suggestions: p.suggerimenti || [], prove: prove };

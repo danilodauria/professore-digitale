@@ -11,6 +11,13 @@
 #                ogni 20 secondi un breve riepilogo (mai le conversazioni).
 #  Accetta e invia dati solo verso indirizzi della rete locale (IP privati).
 #  L'interfaccia resta sempre e solo su 127.0.0.1.
+#
+#  «Mano alzata» (dalla 3.3): l'allievo chiede aiuto (POST /api/aula/mano) e il suo PC invia subito
+#  la presenza con il campo  mano: {alzata, da, messaggio}  (da = istante della richiesta, secondi epoch,
+#  usato come identificativo della richiesta). Il facilitatore risponde (POST /api/aula/rispondi
+#  {id, stato: "arrivo"|"risolto"}) e la risposta arriva all'allievo nella risposta a /aula/ciao,
+#  come gli annunci ma mirata a quel PC:  mano: {da, stato}.  Un PC 3.2 ignora i campi nuovi.
+#  La mano si abbassa da sola dopo 30 minuti. Stesse regole in windows/src/pd_aula.c.
 # ==============================================================================
 import ipaddress
 import json
@@ -27,6 +34,40 @@ DOMANDA = b"PD-AULA?"
 MAX_CIAO = 64 * 1024
 MAX_CLIENTI = 200
 INTERVALLO = 20
+INTERVALLO_MANO = 5          # con la mano alzata la presenza parte ogni 5 s (la risposta arriva prima)
+MANO_MAX_S = 30 * 60         # la mano si abbassa da sola dopo 30 minuti
+MANO_MAX_TESTO = 120
+STATI_RISPOSTA = ("arrivo", "risolto")
+
+
+def testo_pulito(x, n=MANO_MAX_TESTO):
+    """Testo ricevuto dalla rete: senza caratteri di controllo, al massimo n caratteri (come pd_aula.c)."""
+    if not isinstance(x, str):
+        return ""
+    x = "".join("\ufffd" if 0xD800 <= ord(c) <= 0xDFFF else c for c in x)
+    x = "".join(c for c in x if not (ord(c) < 32 or 0x7F <= ord(c) <= 0x9F))
+    return x.strip(" ")[:n].strip(" ")
+
+
+def controlla_messaggio(x):
+    """Validazione stretta del messaggio scritto dall'allievo (API locale). Restituisce (testo, errore)."""
+    if x is None:
+        return "", None
+    if not isinstance(x, str):
+        return None, "il messaggio deve essere un testo"
+    x = "".join("\ufffd" if 0xD800 <= ord(c) <= 0xDFFF else c for c in x).strip(" ")
+    if any(ord(c) < 32 or 0x7F <= ord(c) <= 0x9F for c in x):
+        return None, "il messaggio contiene caratteri non ammessi"
+    if len(x) > MANO_MAX_TESTO:
+        return None, "il messaggio è troppo lungo (al massimo %d caratteri)" % MANO_MAX_TESTO
+    return x, None
+
+
+_ID_OK = set("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-")
+
+
+def id_valido(cid):
+    return isinstance(cid, str) and 0 < len(cid) <= 40 and all(c in _ID_OK for c in cid)
 
 
 def ip_locale(ip):
@@ -57,6 +98,16 @@ def indirizzi_locali():
     except OSError:
         pass
     return ips
+
+
+def num_grande(x):
+    """Istante in secondi (epoch) ricevuto dalla rete: intero tra 0 e 10^11."""
+    try:
+        if isinstance(x, bool) or not isinstance(x, (int, float)):
+            return 0
+        return max(0, min(10 ** 11, int(x)))
+    except (TypeError, ValueError, OverflowError):
+        return 0
 
 
 def nome_pc():
@@ -108,6 +159,8 @@ class Aula(object):
         self.server = None          # facilitatore trovato (PC allievo)
         self.ultimo_invio = {"t": 0, "ok": False, "errore": ""}
         self.annuncio_ricevuto = {"id": 0, "testo": ""}
+        self.mano = {"alzata": False, "da": 0, "messaggio": "", "risposta": ""}   # PC allievo
+        self._sveglia = threading.Event()   # invio immediato della presenza (mano alzata/abbassata)
         self._http = None
         self._udp = None
         self._file = os.path.join(data_dir, "aula-clienti.json")
@@ -166,7 +219,11 @@ class Aula(object):
                     self._invia()
             except Exception as e:   # l'aula non deve mai fermare il Professore
                 self.log("aula:", repr(e))
-            time.sleep(INTERVALLO if self.ruolo == "allievo" else 5)
+            with self.lock:
+                alzata = self._mano_allievo()["alzata"]
+            attesa = (INTERVALLO_MANO if alzata else INTERVALLO) if self.ruolo == "allievo" else 5
+            self._sveglia.wait(attesa)
+            self._sveglia.clear()
 
     # ------------------------------------------------------------------ facilitatore
     def _avvia_facilitatore(self):
@@ -306,14 +363,30 @@ class Aula(object):
             "progressi": {"lezioni_fatte": num(p.get("lezioni_fatte")), "lezioni_totali": num(p.get("lezioni_totali")),
                           "quiz": quiz, "attestati": attestati, "palestra": num(p.get("palestra"))},
         }
+        m = d.get("mano") if isinstance(d.get("mano"), dict) else {}
+        alzata = m.get("alzata") is True
+        da = num_grande(m.get("da"))
+        msg = testo_pulito(m.get("messaggio")) if alzata else ""
         with self.lock:
             if cid not in self.clienti and len(self.clienti) >= MAX_CLIENTI:
                 vecchio = min(self.clienti.values(), key=lambda c: c.get("visto", 0))
                 self.clienti.pop(vecchio["id"], None)
+            prec = (self.clienti.get(cid) or {}).get("mano") or {}
+            if alzata and da:
+                # stessa richiesta di prima: si conservano l'ora d'arrivo (orologio del facilitatore) e la risposta
+                stessa = prec.get("da") == da and prec.get("dal")
+                stato = prec.get("stato", "") if stessa else ""
+                rec["mano"] = {"alzata": stato != "risolto", "da": da, "dal": prec["dal"] if stessa else rec["visto"],
+                               "stato": stato, "messaggio": msg}
+            else:
+                rec["mano"] = {"alzata": False, "da": da, "dal": 0, "stato": "", "messaggio": ""}
             self.clienti[cid] = rec
             self._salva()
             ann = dict(self.annuncio)
-        return 200, {"ok": True, "nome": self.cfg.get("nome"), "annuncio": ann}
+            out = {"ok": True, "nome": self.cfg.get("nome"), "annuncio": ann}
+            if alzata and da and rec["mano"]["stato"]:
+                out["mano"] = {"da": da, "stato": rec["mano"]["stato"]}   # risposta mirata a questo PC
+        return 200, out
 
     def imposta_annuncio(self, testo):
         with self.lock:
@@ -408,6 +481,9 @@ class Aula(object):
             "sistema": sistema or self.sistema, "componenti": pres.get("componenti", {}),
             "attivita": pres.get("attivita", {}), "progressi": pres.get("progressi", {}),
         }
+        with self.lock:
+            m = self._mano_allievo()
+            corpo["mano"] = {"alzata": m["alzata"], "da": m["da"], "messaggio": m["messaggio"] if m["alzata"] else ""}
         req = urllib.request.Request("http://%s/aula/ciao" % host, data=json.dumps(corpo).encode("utf-8"),
                                      headers={"Content-Type": "application/json"})
         try:
@@ -420,6 +496,7 @@ class Aula(object):
             a = risp.get("annuncio")
             if isinstance(a, dict):
                 self.annuncio_ricevuto = {"id": int(a.get("id") or 0), "testo": str(a.get("testo") or "")[:500]}
+            self._risposta_mano(risp.get("mano"))
         except Exception as e:
             err = getattr(e, "code", None)
             msg = "codice dell'aula non corretto" if err == 403 else "il PC del facilitatore non risponde"
@@ -455,6 +532,7 @@ class Aula(object):
                 c = dict(c)
                 c["fa_s"] = int(ora - c.get("visto", 0))
                 c["online"] = c["fa_s"] < INTERVALLO * 3 + 10
+                c["mano"] = self._mano_cliente(c, ora)
                 clienti.append(c)
             out = {"ok": True, "ruolo": self.ruolo, "nome": self.cfg.get("nome", ""), "codice": self.cfg.get("codice", ""),
                    "pc": nome_pc(), "ips": indirizzi_locali(), "porta": PORTA_AULA, "versione": self.version,
@@ -465,5 +543,92 @@ class Aula(object):
             elif self.ruolo == "allievo":
                 srv = self.server or ({"ip": self.cfg.get("server"), "manuale": True} if self.cfg.get("server") else None)
                 out.update({"server": srv, "invio": dict(self.ultimo_invio, fa_s=int(ora - self.ultimo_invio["t"]) if self.ultimo_invio["t"] else None),
-                            "annuncio": dict(self.annuncio_ricevuto), "allievo": self.cfg.get("allievo", "")})
+                            "annuncio": dict(self.annuncio_ricevuto), "allievo": self.cfg.get("allievo", ""),
+                            "mano": dict(self._mano_allievo())})
         return out
+
+    # ------------------------------------------------------------------ mano alzata (3.3)
+    def _mano_allievo(self):
+        """Stato della mano su questo PC (allievo); da chiamare con il lock. Dopo 30 minuti si abbassa da sola."""
+        m = self.mano
+        if m["alzata"] and time.time() - m["da"] > MANO_MAX_S:
+            m.update({"alzata": False, "messaggio": "", "risposta": ""})
+        return m
+
+    @staticmethod
+    def _mano_cliente(c, ora):
+        """Mano di un allievo come la vede il facilitatore (stessi campi in pd_aula.c)."""
+        m = c.get("mano") if isinstance(c.get("mano"), dict) else {}
+        attesa = int(ora - m.get("dal", 0)) if m.get("dal") else 0
+        alzata = bool(m.get("alzata")) and attesa < MANO_MAX_S
+        return {"alzata": alzata, "da": int(m.get("da") or 0), "messaggio": m.get("messaggio", "") if alzata else "",
+                "stato": m.get("stato", "") if alzata else "", "attesa_s": max(0, attesa) if alzata else 0}
+
+    def _risposta_mano(self, r):
+        """Risposta mirata del facilitatore (nella risposta a /aula/ciao): arrivo o risolto."""
+        if not isinstance(r, dict) or r.get("stato") not in STATI_RISPOSTA:
+            return
+        with self.lock:
+            m = self.mano
+            if not m["da"] or num_grande(r.get("da")) != m["da"]:
+                return                      # risposta a una richiesta vecchia
+            if r["stato"] == "risolto":
+                m.update({"alzata": False, "messaggio": "", "risposta": "risolto"})
+            elif m["alzata"]:
+                m["risposta"] = "arrivo"
+
+    def api_locale(self, azione, req):
+        """API locali della mano alzata: (codice, risposta) oppure None se l'azione non è di questo modulo."""
+        if azione == "mano":
+            return self.alza_mano(req)
+        if azione == "rispondi":
+            return self.rispondi(req)
+        return None
+
+    def alza_mano(self, req):
+        if not isinstance(req, dict):
+            return 400, {"ok": False, "error": "richiesta non valida"}
+        if self.ruolo != "allievo":
+            return 409, {"ok": False, "error": "questo PC non è collegato all'aula come allievo"}
+        alzata = req.get("alzata")
+        if not isinstance(alzata, bool):
+            return 400, {"ok": False, "error": "«alzata» deve essere true o false"}
+        msg, err = controlla_messaggio(req.get("messaggio"))
+        if err:
+            return 400, {"ok": False, "error": err}
+        with self.lock:
+            m = self._mano_allievo()
+            if alzata and not m["alzata"]:
+                # «da» identifica la richiesta: sempre nuovo, anche se si rialza la mano nello stesso secondo
+                m.update({"alzata": True, "da": max(int(time.time()), m["da"] + 1), "messaggio": msg, "risposta": ""})
+            elif alzata:
+                m["messaggio"] = msg
+            else:
+                m.update({"alzata": False, "messaggio": "", "risposta": ""})
+            out = dict(m)
+        self._sveglia.set()                 # la presenza parte subito, senza aspettare i 20 secondi
+        return 200, {"ok": True, "mano": out}
+
+    def rispondi(self, req):
+        if not isinstance(req, dict):
+            return 400, {"ok": False, "error": "richiesta non valida"}
+        if self.ruolo != "facilitatore":
+            return 409, {"ok": False, "error": "questo PC non è il facilitatore"}
+        cid, stato = req.get("id"), req.get("stato")
+        if not id_valido(cid):
+            return 400, {"ok": False, "error": "id non valido"}
+        if stato not in STATI_RISPOSTA:
+            return 400, {"ok": False, "error": "stato non valido (arrivo o risolto)"}
+        ora = time.time()
+        with self.lock:
+            c = self.clienti.get(cid)
+            if not c:
+                return 404, {"ok": False, "error": "allievo non trovato"}
+            if not self._mano_cliente(c, ora)["alzata"]:
+                return 409, {"ok": False, "error": "questo allievo non ha la mano alzata"}
+            m = c["mano"]
+            m["stato"] = stato
+            if stato == "risolto":
+                m["alzata"] = False
+            self._salva()
+            return 200, {"ok": True, "id": cid, "mano": self._mano_cliente(c, ora)}

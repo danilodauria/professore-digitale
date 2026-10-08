@@ -4,6 +4,8 @@
  *                               e risponde alla ricerca "PD-AULA?" (porta 8767, UDP);
  *   aulaRuolo = "allievo":      cerca il PC del facilitatore e ogni 20 secondi gli invia un riepilogo.
  * Solo indirizzi della rete locale; l'interfaccia resta su 127.0.0.1. Compatibile con Windows XP SP3.
+ * «Mano alzata» (3.3): presenza con  mano: {alzata, da, messaggio};  risposta mirata nella risposta a /aula/ciao
+ *   mano: {da, stato: "arrivo"|"risolto"};  API locali /api/aula/mano e /api/aula/rispondi (come pd_aula.py).
  * Ideato e sviluppato da Danilo D'Auria - Licenza MIT */
 #include "pd.h"
 #include <objbase.h>
@@ -13,8 +15,16 @@
 #define AULA_MAX_CIAO (64 * 1024)
 #define AULA_MAX_CLIENTI 200
 #define AULA_INTERVALLO 20
+#define AULA_INTERVALLO_MANO 5          /* con la mano alzata la presenza parte ogni 5 s */
+#define MANO_MAX_S (30 * 60)            /* la mano si abbassa da sola dopo 30 minuti */
+#define MANO_MAX_TESTO 120              /* caratteri (non byte) */
+#define MANO_BUF 488                    /* 120 caratteri UTF-8 di al massimo 4 byte */
 
-typedef struct { char id[48]; double visto; char *json; } cliente_t;   /* json = record senza "visto" */
+typedef struct {
+    char id[48]; double visto; char *json;                /* json = record senza "visto" */
+    int m_alzata; long long m_da; double m_dal;            /* mano: da = istante dell'allievo, dal = ora del facilitatore */
+    char m_stato[12]; char m_msg[MANO_BUF];
+} cliente_t;
 
 static CRITICAL_SECTION A; static LONG a_init = 0;
 static char ruolo[16] = "", c_nome[64] = "Aula", c_codice[16] = "", c_server[104] = "", c_allievo[64] = "";
@@ -27,10 +37,85 @@ static unsigned long long inv_t = 0; static int inv_ok = 0; static char inv_err[
 static long long ann_ric_id = 0; static char ann_ric[512] = "";
 static SOCKET tcp_s = INVALID_SOCKET, udp_s = INVALID_SOCKET;
 static volatile LONG fac_attivo = 0;
+static int mano_alzata = 0; static long long mano_da = 0; static char mano_msg[MANO_BUF] = "", mano_risp[12] = "";   /* PC allievo */
+static HANDLE sveglia = NULL; static volatile LONG forza_invio = 0;   /* invio immediato della presenza */
 
 static void al(void) { if (InterlockedCompareExchange(&a_init, 1, 0) == 0) InitializeCriticalSection(&A); EnterCriticalSection(&A); }
 static void au(void) { LeaveCriticalSection(&A); }
 static double now_s(void) { FILETIME ft; GetSystemTimeAsFileTime(&ft); ULARGE_INTEGER u; u.LowPart = ft.dwLowDateTime; u.HighPart = ft.dwHighDateTime; return (double)(u.QuadPart - 116444736000000000ULL) / 1e7; }
+
+/* ------------------------------------------------------------------ mano alzata: testi e numeri */
+static int car_controllo(const unsigned char *p, size_t L, size_t i) {   /* 0-31, 127, U+0080-U+009F */
+    return p[i] < 0x20 || p[i] == 0x7f || (p[i] == 0xC2 && i + 1 < L && p[i + 1] >= 0x80 && p[i + 1] <= 0x9F);
+}
+static size_t conta_car(const char *s, size_t L) { size_t n = 0; for (size_t i = 0; i < L; i++) if (((unsigned char)s[i] & 0xC0) != 0x80) n++; return n; }
+static void togli_spazi(char *s) {
+    size_t L = strlen(s), a = 0;
+    while (L && s[L - 1] == ' ') s[--L] = 0;
+    while (s[a] == ' ') a++;
+    if (a) memmove(s, s + a, L - a + 1);
+}
+static void taglia_car(char *s, size_t max) {           /* al massimo max caratteri, senza spezzare l'UTF-8 */
+    size_t n = 0, i = 0;
+    for (; s[i]; i++) if (((unsigned char)s[i] & 0xC0) != 0x80 && n++ == max) break;
+    s[i] = 0;
+}
+/* testo ricevuto dalla rete: senza caratteri di controllo, al massimo 120 caratteri (come testo_pulito in pd_aula.py) */
+static void testo_pulito(const jv *v, char *out, size_t n) {
+    out[0] = 0;
+    if (!v || v->t != J_STR) return;
+    const unsigned char *p = (const unsigned char *)v->str; size_t L = v->slen, o = 0;
+    for (size_t i = 0; i < L && o + 4 < n; i++) {
+        if (car_controllo(p, L, i)) { if (p[i] == 0xC2) i++; continue; }
+        out[o++] = (char)p[i];
+    }
+    out[o] = 0;
+    togli_spazi(out); taglia_car(out, MANO_MAX_TESTO); togli_spazi(out);
+}
+/* validazione stretta del messaggio dell'allievo (API locale): NULL se va bene, altrimenti l'errore */
+static const char *controlla_messaggio(const jv *v, char *out, size_t n) {
+    out[0] = 0;
+    if (!v || v->t == J_NULL) return NULL;
+    if (v->t != J_STR) return "il messaggio deve essere un testo";
+    char *t = (char *)malloc(v->slen + 1); memcpy(t, v->str, v->slen); t[v->slen] = 0;
+    size_t L = v->slen, a = 0;
+    while (L && t[L - 1] == ' ') L--;
+    while (a < L && t[a] == ' ') a++;
+    const char *err = NULL;
+    for (size_t i = a; i < L && !err; i++) if (car_controllo((const unsigned char *)t, L, i)) err = "il messaggio contiene caratteri non ammessi";
+    if (!err && conta_car(t + a, L - a) > MANO_MAX_TESTO) err = "il messaggio è troppo lungo (al massimo 120 caratteri)";
+    if (!err && L - a >= n) err = "il messaggio è troppo lungo (al massimo 120 caratteri)";
+    if (!err) { memcpy(out, t + a, L - a); out[L - a] = 0; }
+    free(t);
+    return err;
+}
+static long long num_grande(const jv *v) {             /* istante in secondi: intero tra 0 e 10^11 */
+    if (!v || v->t != J_NUM || !(v->num >= 0)) return 0;
+    return v->num > 1e11 ? 100000000000LL : (long long)v->num;
+}
+static int id_valido(const jv *v) {
+    if (!v || v->t != J_STR || v->slen == 0 || v->slen > 40) return 0;
+    for (size_t i = 0; i < v->slen; i++) if (!isalnum((unsigned char)v->str[i]) || (unsigned char)v->str[i] > 127) { if (v->str[i] != '-') return 0; }
+    return 1;
+}
+/* mano di questo PC (allievo); con il lock preso. Dopo 30 minuti si abbassa da sola */
+static void mano_scadenza(void) { if (mano_alzata && now_s() - (double)mano_da > MANO_MAX_S) { mano_alzata = 0; mano_msg[0] = 0; mano_risp[0] = 0; } }
+static void mano_allievo_json(buf_t *b) {
+    mano_scadenza();
+    buf_addf(b, "{\"alzata\": %s, \"da\": %lld, \"messaggio\": ", mano_alzata ? "true" : "false", mano_da); json_str(b, mano_msg);
+    buf_adds(b, ", \"risposta\": "); json_str(b, mano_risp); buf_adds(b, "}");
+}
+/* mano di un allievo come la vede il facilitatore (stessi campi di _mano_cliente in pd_aula.py) */
+static int mano_su(const cliente_t *c, double ora, int *attesa) {
+    int att = c->m_dal > 0 ? (int)(ora - c->m_dal) : 0;
+    if (attesa) *attesa = att < 0 ? 0 : att;
+    return c->m_alzata && att < MANO_MAX_S;
+}
+static void mano_cliente_json(buf_t *b, const cliente_t *c, double ora) {
+    int att, su = mano_su(c, ora, &att);
+    buf_addf(b, "{\"alzata\": %s, \"da\": %lld, \"messaggio\": ", su ? "true" : "false", c->m_da); json_str(b, su ? c->m_msg : "");
+    buf_adds(b, ", \"stato\": "); json_str(b, su ? c->m_stato : ""); buf_addf(b, ", \"attesa_s\": %d}", su ? att : 0);
+}
 
 /* ------------------------------------------------------------------ rete: utilita' */
 static int ip_privato(unsigned long a_host) {          /* a_host in ordine dell'host */
@@ -138,7 +223,10 @@ static void salva_clienti(void) {          /* chiamare con il lock preso */
     buf_adds(&b, "{\"clienti\": {");
     for (int i = 0; i < nclienti; i++) {
         if (i) buf_adds(&b, ", ");
-        json_str(&b, clienti[i].id); buf_addf(&b, ": {\"visto\": %.3f, \"r\": %s}", clienti[i].visto, clienti[i].json);
+        cliente_t *c = &clienti[i];
+        json_str(&b, c->id); buf_addf(&b, ": {\"visto\": %.3f, \"r\": %s", c->visto, c->json);
+        buf_addf(&b, ", \"m\": {\"alzata\": %s, \"da\": %lld, \"dal\": %.3f, \"stato\": ", c->m_alzata ? "true" : "false", c->m_da, c->m_dal);
+        json_str(&b, c->m_stato); buf_adds(&b, ", \"messaggio\": "); json_str(&b, c->m_msg); buf_adds(&b, "}}");
     }
     buf_addf(&b, "}, \"annuncio\": {\"id\": %lld, \"testo\": ", ann_id); json_str(&b, ann_testo); buf_adds(&b, "}}");
     wchar_t *p = path_join(G.data_dir, L"aula-clienti-win.json");
@@ -154,8 +242,14 @@ static void carica_clienti(void) {
         for (size_t i = 0; c && c->t == J_OBJ && i < c->n && nclienti < AULA_MAX_CLIENTI; i++) {
             jv *x = c->items[i], *r = jget(x, "r");
             if (!r || r->t != J_OBJ) continue;
-            cliente_t *k = &clienti[nclienti++];
+            cliente_t *k = &clienti[nclienti++]; memset(k, 0, sizeof *k);
             snprintf(k->id, sizeof k->id, "%.40s", c->keys[i]); k->visto = jnum(x, "visto", 0);
+            jv *m = jget(x, "m");
+            if (m) {
+                k->m_alzata = jbool(m, "alzata", 0); k->m_da = num_grande(jget(m, "da")); k->m_dal = jnum(m, "dal", 0);
+                const char *st = jstr(m, "stato", ""); snprintf(k->m_stato, sizeof k->m_stato, "%s", !strcmp(st, "arrivo") || !strcmp(st, "risolto") ? st : "");
+                testo_pulito(jget(m, "messaggio"), k->m_msg, sizeof k->m_msg);
+            }
             k->json = (char *)malloc(r->rawlen + 1); memcpy(k->json, r->raw, r->rawlen); k->json[r->rawlen] = 0;
         }
         if (a) { ann_id = (long long)jnum(a, "id", 0); snprintf(ann_testo, sizeof ann_testo, "%.500s", jstr(a, "testo", "")); }
@@ -206,6 +300,9 @@ static int ricevi(const char *body, size_t n, const char *ip, buf_t *out) {
         buf_adds(&r, "{\"titolo\": "); str_lim(&r, x, "titolo", 80); buf_adds(&r, ", \"data\": "); str_lim(&r, x, "data", 20); buf_addf(&r, ", \"punteggio\": %lld}", num_lim(x, "punteggio"));
     }
     buf_adds(&r, "]}}");
+    jv *mj = jget(d, "mano"), *ma = jget(mj, "alzata");
+    int m_alz = ma && ma->t == J_TRUE; long long m_da = num_grande(jget(mj, "da"));
+    char m_msg[MANO_BUF]; if (m_alz) testo_pulito(jget(mj, "messaggio"), m_msg, sizeof m_msg); else m_msg[0] = 0;
     al();
     int idx = -1;
     for (int i = 0; i < nclienti; i++) if (!strcmp(clienti[i].id, id)) idx = i;
@@ -213,9 +310,17 @@ static int ricevi(const char *body, size_t n, const char *ip, buf_t *out) {
         if (nclienti >= AULA_MAX_CLIENTI) { int v = 0; for (int i = 1; i < nclienti; i++) if (clienti[i].visto < clienti[v].visto) v = i; free(clienti[v].json); clienti[v] = clienti[--nclienti]; }
         idx = nclienti++; memset(&clienti[idx], 0, sizeof clienti[idx]); snprintf(clienti[idx].id, sizeof clienti[idx].id, "%s", id);
     }
-    free(clienti[idx].json); clienti[idx].json = buf_steal(&r); clienti[idx].visto = now_s();
+    cliente_t *kc = &clienti[idx];
+    free(kc->json); kc->json = buf_steal(&r); kc->visto = now_s();
+    if (m_alz && m_da) {
+        /* stessa richiesta di prima: si conservano l'ora d'arrivo e la risposta del facilitatore */
+        if (!(kc->m_da == m_da && kc->m_dal > 0)) { kc->m_stato[0] = 0; kc->m_dal = kc->visto; }
+        kc->m_alzata = strcmp(kc->m_stato, "risolto") != 0; kc->m_da = m_da; snprintf(kc->m_msg, sizeof kc->m_msg, "%s", m_msg);
+    } else { kc->m_alzata = 0; kc->m_da = m_da; kc->m_dal = 0; kc->m_stato[0] = 0; kc->m_msg[0] = 0; }
     salva_clienti();
-    buf_adds(out, "{\"ok\": true, \"nome\": "); json_str(out, c_nome); buf_addf(out, ", \"annuncio\": {\"id\": %lld, \"testo\": ", ann_id); json_str(out, ann_testo); buf_adds(out, "}}");
+    buf_adds(out, "{\"ok\": true, \"nome\": "); json_str(out, c_nome); buf_addf(out, ", \"annuncio\": {\"id\": %lld, \"testo\": ", ann_id); json_str(out, ann_testo); buf_adds(out, "}");
+    if (m_alz && m_da && kc->m_stato[0]) { buf_addf(out, ", \"mano\": {\"da\": %lld, \"stato\": ", m_da); json_str(out, kc->m_stato); buf_adds(out, "}"); }   /* risposta mirata */
+    buf_adds(out, "}");
     au();
     json_free(d);
     return 200;
@@ -418,6 +523,8 @@ static void invia(void) {
     json_str(&b, hw.arm64 ? "ARM64" : hw.is64os ? "64 bit" : "32 bit"); buf_adds(&b, "}");
     const char *chiavi[3] = { "componenti", "attivita", "progressi" };
     for (int i = 0; i < 3; i++) { jv *x = jget(pr, chiavi[i]); buf_addf(&b, ", \"%s\": ", chiavi[i]); if (x && x->t == J_OBJ) buf_add(&b, x->raw, x->rawlen); else buf_adds(&b, "{}"); }
+    mano_scadenza();
+    buf_addf(&b, ", \"mano\": {\"alzata\": %s, \"da\": %lld, \"messaggio\": ", mano_alzata ? "true" : "false", mano_da); json_str(&b, mano_alzata ? mano_msg : ""); buf_adds(&b, "}");
     buf_adds(&b, "}");
     json_free(pr);
     au();
@@ -431,6 +538,11 @@ static void invia(void) {
         jv *r = json_parse(risp.p ? risp.p : "{}", risp.n, e, sizeof e), *a = jget(r, "annuncio");
         if (jstr(r, "nome", NULL)) snprintf(srv_nome, sizeof srv_nome, "%.60s", jstr(r, "nome", ""));
         if (a) { ann_ric_id = (long long)jnum(a, "id", 0); snprintf(ann_ric, sizeof ann_ric, "%.500s", jstr(a, "testo", "")); }
+        jv *m = jget(r, "mano"); const char *st = jstr(m, "stato", "");
+        if (mano_da && num_grande(jget(m, "da")) == mano_da) {          /* risposta del facilitatore a QUESTA richiesta */
+            if (!strcmp(st, "risolto")) { mano_alzata = 0; mano_msg[0] = 0; snprintf(mano_risp, sizeof mano_risp, "risolto"); }
+            else if (!strcmp(st, "arrivo") && mano_alzata) snprintf(mano_risp, sizeof mano_risp, "arrivo");
+        }
         json_free(r);
     } else {
         inv_ok = 0; snprintf(inv_err, sizeof inv_err, "%s", hr.status == 403 ? "codice dell'aula non corretto" : "il PC del facilitatore non risponde");
@@ -453,14 +565,16 @@ static unsigned __stdcall ciclo(void *arg) {
     unsigned long long ultimo = 0;
     for (;;) {
         applica();
-        al(); int all = !strcmp(ruolo, "allievo"); au();
-        if (all && now_ms() - ultimo >= AULA_INTERVALLO * 1000ULL) { invia(); ultimo = now_ms(); }
-        Sleep(5000);
+        al(); int all = !strcmp(ruolo, "allievo"); mano_scadenza(); int su = mano_alzata; au();
+        unsigned long long iv = (su ? AULA_INTERVALLO_MANO : AULA_INTERVALLO) * 1000ULL;
+        if (all && (InterlockedExchange(&forza_invio, 0) || now_ms() - ultimo >= iv)) { invia(); ultimo = now_ms(); }
+        if (sveglia) WaitForSingleObject(sveglia, 5000); else Sleep(5000);
     }
     if (SUCCEEDED(ci)) CoUninitialize();
     return 0;
 }
 void aula_init(void) {
+    sveglia = CreateEventW(NULL, FALSE, FALSE, NULL);
     carica_clienti();
     HANDLE t = (HANDLE)_beginthreadex(NULL, 0, ciclo, NULL, 0, NULL);
     if (t) CloseHandle(t);
@@ -493,7 +607,8 @@ static void stato_json(buf_t *b) {
             if (i) buf_adds(b, ", ");
             size_t L = strlen(c->json);
             buf_add(b, c->json, L - 1);   /* senza la graffa finale */
-            buf_addf(b, ", \"visto\": %.3f, \"fa_s\": %d, \"online\": %s}", c->visto, fa, fa < AULA_INTERVALLO * 3 + 10 ? "true" : "false");
+            buf_addf(b, ", \"visto\": %.3f, \"fa_s\": %d, \"online\": %s, \"mano\": ", c->visto, fa, fa < AULA_INTERVALLO * 3 + 10 ? "true" : "false");
+            mano_cliente_json(b, c, ora); buf_adds(b, "}");
         }
         buf_addf(b, "], \"annuncio\": {\"id\": %lld, \"testo\": ", ann_id); json_str(b, ann_testo); buf_adds(b, "}");
     } else if (!strcmp(ruolo, "allievo")) {
@@ -506,6 +621,7 @@ static void stato_json(buf_t *b) {
         if (inv_t) buf_addf(b, ", \"fa_s\": %d}", (int)((now_ms() - inv_t) / 1000)); else buf_adds(b, ", \"fa_s\": null}");
         buf_addf(b, ", \"annuncio\": {\"id\": %lld, \"testo\": ", ann_ric_id); json_str(b, ann_ric);
         buf_adds(b, "}, \"allievo\": "); json_str(b, c_allievo);
+        buf_adds(b, ", \"mano\": "); mano_allievo_json(b);
     }
     buf_adds(b, "}");
     au();
@@ -554,6 +670,51 @@ void aula_api(req_t *r, const char *azione, jv *req) {
         }
         salva_clienti(); au();
         send_ok(r);
+    } else if (!strcmp(azione, "mano")) {                  /* PC allievo: alza/abbassa la mano */
+        jv *a = jget(req, "alzata"); char msg[MANO_BUF]; const char *err = NULL;
+        al(); int all = !strcmp(ruolo, "allievo"); au();
+        if (!req || req->t != J_OBJ) send_error(r, 400, "richiesta non valida");
+        else if (!all) send_error(r, 409, "questo PC non è collegato all'aula come allievo");
+        else if (!a || (a->t != J_TRUE && a->t != J_FALSE)) send_error(r, 400, "«alzata» deve essere true o false");
+        else if ((err = controlla_messaggio(jget(req, "messaggio"), msg, sizeof msg)) != NULL) send_error(r, 400, err);
+        else {
+            al();
+            mano_scadenza();
+            if (a->t == J_TRUE && !mano_alzata) {
+                long long ora = (long long)now_s();
+                mano_alzata = 1; mano_da = ora > mano_da + 1 ? ora : mano_da + 1; mano_risp[0] = 0;
+                snprintf(mano_msg, sizeof mano_msg, "%s", msg);
+            } else if (a->t == J_TRUE) snprintf(mano_msg, sizeof mano_msg, "%s", msg);
+            else { mano_alzata = 0; mano_msg[0] = 0; mano_risp[0] = 0; }
+            buf_adds(&b, "{\"ok\": true, \"mano\": "); mano_allievo_json(&b); buf_adds(&b, "}");
+            au();
+            InterlockedExchange(&forza_invio, 1); if (sveglia) SetEvent(sveglia);   /* la presenza parte subito */
+            send_json(r, 200, &b);
+        }
+    } else if (!strcmp(azione, "rispondi")) {              /* PC facilitatore: «Arrivo!» o «Risolto» */
+        jv *idv = jget(req, "id"), *stv = jget(req, "stato");
+        al(); int fac = !strcmp(ruolo, "facilitatore"); au();
+        int st_ok = stv && stv->t == J_STR && stv->slen == strlen(stv->str) && (!strcmp(stv->str, "arrivo") || !strcmp(stv->str, "risolto"));
+        if (!req || req->t != J_OBJ) send_error(r, 400, "richiesta non valida");
+        else if (!fac) send_error(r, 409, "questo PC non è il facilitatore");
+        else if (!id_valido(idv)) send_error(r, 400, "id non valido");
+        else if (!st_ok) send_error(r, 400, "stato non valido (arrivo o risolto)");
+        else {
+            double ora = now_s(); int code = 200; const char *e = NULL;
+            al();
+            cliente_t *c = NULL;
+            for (int i = 0; i < nclienti; i++) if (!strcmp(clienti[i].id, idv->str)) c = &clienti[i];
+            if (!c) { code = 404; e = "allievo non trovato"; }
+            else if (!mano_su(c, ora, NULL)) { code = 409; e = "questo allievo non ha la mano alzata"; }
+            else {
+                snprintf(c->m_stato, sizeof c->m_stato, "%s", stv->str);
+                if (!strcmp(stv->str, "risolto")) c->m_alzata = 0;
+                salva_clienti();
+                buf_adds(&b, "{\"ok\": true, \"id\": "); json_str(&b, c->id); buf_adds(&b, ", \"mano\": "); mano_cliente_json(&b, c, ora); buf_adds(&b, "}");
+            }
+            au();
+            if (e) send_error(r, code, e); else send_json(r, 200, &b);
+        }
     } else send_error(r, 404, "API sconosciuta");
     buf_free(&b);
 }

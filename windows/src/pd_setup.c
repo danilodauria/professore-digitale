@@ -518,6 +518,22 @@ static int do_piper(const wchar_t *kitdir, const wchar_t *tmpdir) {
     const char *hf = jstr(p, "hf", "rhasspy/piper-voices");
     wchar_t *vdir = kitdir ? _wcsdup(kitdir) : path_join(G.models_dir, L"piper");
     mkdirs(vdir);
+    jv *voci = jget(p, "voci");   /* dalla 3.3: voci da archivi diversi, con nome del file sul PC (Giorgio, Serena, Paola) */
+    if (voci && voci->t == J_ARR && voci->n) {
+        for (size_t i = 0; ok && i < voci->n; i++) {
+            const char *repo = jstr(voci->items[i], "repo", ""), *f = jstr(voci->items[i], "path", ""), *nome = jstr(voci->items[i], "nome", "");
+            if (!repo[0] || !f[0] || !nome[0] || strchr(nome, '/') || strchr(nome, '\\') || strstr(nome, "..")) continue;
+            char hs[65] = ""; hf_sha(repo, f, hs);
+            char fe[600] = ""; size_t k = 0;   /* il percorso puo' contenere "=": si codifica per l'indirizzo */
+            for (const char *c = f; *c && k + 4 < sizeof fe; c++) { if (*c == '=') { memcpy(fe + k, "%3D", 3); k += 3; } else fe[k++] = *c; }
+            fe[k] = 0;
+            char u[1024]; snprintf(u, sizeof u, "https://huggingface.co/%s/resolve/main/%s", repo, fe);
+            wchar_t *wb = u8to16(nome), *dst = path_join(vdir, wb);
+            ok = fetch("le voci naturali", u, hs, dst, 100, NULL);
+            free(wb); free(dst);
+        }
+        files = NULL;
+    }
     for (size_t i = 0; ok && files && files->t == J_ARR && i < files->n; i++) {
         const char *f = files->items[i]->str ? files->items[i]->str : "";
         const char *base = strrchr(f, '/'); base = base ? base + 1 : f;
@@ -610,7 +626,7 @@ static unsigned __stdcall job_online(void *arg) {
         else ok = do_vosk(NULL, tmp);
     }
     if (ok && JR.voce && !J.cancel) {
-        jphase(++k, "Voci naturali «Paola» e «Riccardo»");
+        jphase(++k, "Voci naturali «Giorgio», «Serena» e «Paola»");
         if (!p.piper_ok) jlog("! Le voci naturali richiedono Windows 7 o successivo a 64 bit: passo saltato.");
         else if (tts_has_piper()) jlog("✓ Le voci naturali sono già incluse nel programma.");
         else ok = do_piper(NULL, tmp);

@@ -24,7 +24,7 @@
     updateUrl: "", teacherName: "", eyesFollow: true,
     voiceId: "", netCheck: true, idleTips: true, greet: true, goodbye: true, studentName: "",
     aulaRuolo: "", aulaNome: "Aula", aulaCodice: "", aulaServer: "",
-    voiceCommands: false, tremore: false, vista: false, leggiFocus: false, domandaGiorno: true
+    voiceCommands: false, tremore: false, vista: false, leggiFocus: false, domandaGiorno: true, aulaManoSuono: true
   };
   PD.server = false;
   PD.status = null;
@@ -1177,6 +1177,11 @@
     if (p.schema !== DATA_SCHEMA) p.schema = DATA_SCHEMA;
     return p;
   }
+  /* Impostazioni: dalla 3.3 la voce «Riccardo» (bassa qualità) è sostituita da «Giorgio» */
+  function migraImpostazioni(s) {
+    if (s && /riccardo/.test(s.voiceId || "")) s.voiceId = "piper:it_IT-giorgio-medium";
+    return s;
+  }
   PD.migraProgressi = migrate;   // usata anche da profili.js per i progressi delle altre persone
 
   function heartbeat() {
@@ -1191,7 +1196,7 @@
     return PD.detect().then(function () {
       return Promise.all([PD.store.load("settings"), PD.store.load("progress"), PD.store.load("history")]);
     }).then(function (r) {
-      if (r[0] && typeof r[0] === "object") PD.settings = Object.assign({}, DEFAULTS, r[0]);
+      if (r[0] && typeof r[0] === "object") PD.settings = migraImpostazioni(Object.assign({}, DEFAULTS, r[0]));
       if (r[1] && r[1].lessons) PD.progress = r[1];
       migrate();
       if (Array.isArray(r[2])) PD.history = r[2];

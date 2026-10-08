@@ -79,7 +79,7 @@
       '<div class="card quiz-intro">' + PD.profHTML() + "<div>" + (P.descrizione ? "<p>" + esc(P.descrizione) + "</p>" : "") +
       "<ul><li>Riceverete <b>" + P.domande_per_prova + " domande</b>, una alla volta, scelte a caso: ogni tentativo è diverso.</li>" +
       "<li>Dopo ogni risposta vedrete se è giusta e una breve spiegazione.</li>" +
-      "<li>Con almeno <b>" + Math.ceil(P.domande_per_prova * P.soglia) + " risposte giuste</b> su " + P.domande_per_prova + " (" + Math.round(P.soglia * 100) + "%) ottenete l'<b>attestato</b>.</li></ul>" +
+      "<li>Con almeno <b>" + Math.ceil(P.domande_per_prova * P.soglia) + " risposte giuste</b> su " + P.domande_per_prova + " (" + Math.round(P.soglia * 100) + "%) " + (P.senza_attestato ? "il quiz è superato." : "ottenete l'<b>attestato</b>.") + "</li></ul>" +
       (r ? '<p class="small muted">Tentativi fatti: ' + r.tentativi + " · miglior risultato: " + r.perc + "%" + (r.superata ? " · ✓ superato" : "") + "</p>" : "") +
       '<div class="field"><label for="q-nome">Il vostro nome e cognome (comparirà sull\'attestato)</label><input type="text" id="q-nome" maxlength="60" value="' +
       esc(PD.settings.studentName) + '" placeholder="es. Maria Rossi"></div>' +
@@ -126,7 +126,7 @@
       r[P.id] = { best: Math.max(prec.best || 0, giuste), totale: tot, perc: Math.max(prec.perc || 0, perc), superata: !!(prec.superata || ok),
         tentativi: (prec.tentativi || 0) + 1, ultima: new Date().toISOString(), ultimo_perc: perc };
       var att = null;
-      if (ok) {
+      if (ok && !P.senza_attestato) {
         att = { codice: codice(P.id), prova: P.id, titolo: P.titolo, attestato: P.attestato, nome: nome || "Allievo", punteggio: giuste, totale: tot, perc: perc,
           giudizio: giudizio(perc), data: new Date().toISOString(), facilitatore: PD.settings.teacherName || "" };
         attestati().push(att);
@@ -142,7 +142,7 @@
           return '<div class="ripasso"><b>' + esc(q.q) + "</b><br>✔ " + esc(q.o[q.a]) + '<br><span class="small muted">' + esc(q.e) + "</span></div>";
         }).join("") + "</div>" : "");
       $("#q-ancora", el).onclick = function () { gioca(el, P, nome); };
-      PD.speak(ok ? "Complimenti! Avete superato il quiz con " + giuste + " risposte giuste su " + tot + ". Ecco il vostro attestato." :
+      PD.speak(ok ? "Complimenti! Avete superato il quiz con " + giuste + " risposte giuste su " + tot + "." + (att ? " Ecco il vostro attestato." : "") :
         "Avete dato " + giuste + " risposte giuste su " + tot + ". Ci siete quasi: ripassate e riprovate!");
       if (PD.aulaPresenza) PD.aulaPresenza();
     }

@@ -171,12 +171,14 @@ Section "Microfono offline: motore Vosk (il modello italiano si scarica poi)" SE
   ${EndIf}
 SectionEnd
 
-Section "Voci naturali italiane: Paola (donna) e Riccardo (uomo)" SEC_VOCI
+Section "Voci naturali italiane: Giorgio (uomo), Serena e Paola (donna)" SEC_VOCI
   ${If} ${RunningX64}
     RMDir /r "$INSTDIR\piper"
     SetOutPath "$INSTDIR\piper"
     File /r "${SORGENTE}\piper\*.*"
     SetOutPath "$INSTDIR\voci"
+    Delete "$INSTDIR\voci\it_IT-riccardo-x_low.onnx"        ; dalla 3.3 sostituita da Giorgio
+    Delete "$INSTDIR\voci\it_IT-riccardo-x_low.onnx.json"
     File /r "${SORGENTE}\voci\*.*"
     SetOutPath "$INSTDIR"
   ${EndIf}

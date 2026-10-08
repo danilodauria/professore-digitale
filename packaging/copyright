@@ -11,6 +11,22 @@ Files: usr/share/professore-digitale/web/vendor/mermaid.min.js
 Copyright: 2014-2022 Knut Sveidqvist and Mermaid contributors
 License: MIT
 
+Files: usr/share/professore-digitale/web/vendor/ocr/tesseract.min.js
+ usr/share/professore-digitale/web/vendor/ocr/worker.min.js
+ usr/share/professore-digitale/web/vendor/ocr/tesseract-core-*
+Copyright: 2016-2025 Jerome Wu, Balearica e i contributori di tesseract.js;
+ 2006-2025 Google Inc. e i contributori di Tesseract OCR
+License: Apache-2.0
+Comment: tesseract.js 7.0.0 e tesseract.js-core 7.0.0 (pacchetti npm). I file
+ .min.js includono anche regenerator-runtime (MIT), buffer (MIT), ieee754
+ (BSD-3-Clause) e zlib.js (MIT): vedere i file *.LICENSE.txt nella stessa cartella.
+
+Files: usr/share/professore-digitale/web/vendor/ocr/lang/ita.traineddata.gz
+Copyright: Google Inc. e i contributori di Tesseract OCR (tessdata_best, ita)
+License: Apache-2.0
+Comment: dati per l'italiano "4.0.0_best_int" dal pacchetto npm @tesseract.js-data/ita 1.0.0
+ (involucro npm con licenza MIT; i dati sono di tesseract-ocr/tessdata_best, Apache-2.0).
+
 Files: usr/lib/professore-digitale/piper/*
 Copyright: 2022-2023 Michael Hansen (Piper, piper-phonemize); Microsoft Corporation (ONNX Runtime)
 License: MIT
@@ -24,10 +40,20 @@ Copyright: modello Piper "paola" (rhasspy/piper-voices); dati: paolapersico1/Voi
 License: MIT
 Comment: modello rilasciato con Piper; il dataset di addestramento e' CC0-1.0.
 
-Files: usr/share/professore-digitale/voci/it_IT-riccardo-x_low.*
-Copyright: modello Piper "riccardo" (rhasspy/piper-voices); dati: M-AILABS Speech Dataset
-License: MIT
-Comment: modello rilasciato con Piper; il dataset M-AILABS e' distribuito con licenza permissiva (stile BSD).
+Files: usr/share/professore-digitale/voci/it_IT-serena-medium.*
+Copyright: modello Piper "serena" di committa (https://huggingface.co/committa/it_IT-serena-medium);
+ dati: committa/serena-synthetic-it-28h
+License: CC-BY-4.0
+Comment: voce femminile in italiano standard. Il file .onnx.json e' stato ripulito (tolte 5 voci
+ della mappa dei fonemi non usate dall'italiano) per funzionare con Piper 2023.11.14-2.
+ Licenza: https://creativecommons.org/licenses/by/4.0/deed.it
+
+Files: usr/share/professore-digitale/voci/it_IT-giorgio-medium.*
+Copyright: modello Piper "Giorgio" di kirys79 (https://huggingface.co/kirys79/piper_italiano);
+ dati: Multilingual LibriSpeech (MLS, OpenSLR 94), lettore 8181
+License: CC-BY-4.0
+Comment: voce maschile, affinamento del modello "Leonardo" dello stesso autore. File rinominato
+ da giorgio-epoch=5028-step=1098436.onnx. Licenza: https://creativecommons.org/licenses/by/4.0/deed.it
 
 License: MIT
  Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -47,3 +73,19 @@ License: MIT
  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  SOFTWARE.
+
+License: Apache-2.0
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
+ .
+ http://www.apache.org/licenses/LICENSE-2.0
+ .
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+ .
+ On Debian systems, the complete text of the Apache License, Version 2.0
+ can be found in "/usr/share/common-licenses/Apache-2.0".

@@ -10,7 +10,7 @@
 #    professore-digitale-setup-voce --prepara-pacchetti DIR  (su un PC con Internet) salva in DIR
 #                                   tutto il necessario per installare Vosk senza rete
 #    professore-digitale-setup-voce --pacchetti-da DIR  installa Vosk dalla cartella DIR (offline)
-#    professore-digitale-setup-voce --voce-naturale    aggiunge la voce Piper "Paola" (circa 80 MB)
+#    professore-digitale-setup-voce --voce-naturale    aggiunge le voci Piper "Giorgio" e "Serena" (circa 150 MB)
 #    professore-digitale-setup-voce --rimuovi          elimina i componenti vocali installati
 #  Tutto viene installato nella cartella dell'utente: non serve la password.
 # ==============================================================================
@@ -20,8 +20,8 @@ MODELS="$DATA/models"
 VENV="$DATA/venv"
 VOSK_URL="https://alphacephei.com/vosk/models/vosk-model-small-it-0.22.zip"
 PIPER_VER="2023.11.14-2"
-PIPER_VOICE_URL="https://huggingface.co/rhasspy/piper-voices/resolve/main/it/it_IT/paola/medium"
-PIPER_VOICE_URL_M="https://huggingface.co/rhasspy/piper-voices/resolve/main/it/it_IT/riccardo/x_low"
+PIPER_GIORGIO="https://huggingface.co/kirys79/piper_italiano/resolve/main/Giorgio/giorgio-epoch%3D5028-step%3D1098436"
+PIPER_SERENA="https://huggingface.co/committa/it_IT-serena-medium/resolve/main/it_IT-serena-medium"
 MODELLO_DA=""; PACCHETTI_DA=""; PREPARA=""; PIPER=0; RIMUOVI=0; AUTO_SI=0
 while [ $# -gt 0 ]; do
   case "$1" in
@@ -120,21 +120,24 @@ fi
 
 # ---- 4. voce naturale facoltativa ----
 if [ "$PIPER" = 1 ]; then
-  echo; echo "${B}3. Voci naturali (Piper: Paola e Riccardo)${N}"
+  echo; echo "${B}3. Voci naturali (Piper: Giorgio e Serena)${N}"
   case "$(uname -m)" in x86_64) PA="x86_64" ;; aarch64|arm64) PA="aarch64" ;; armv7l) PA="armv7l" ;; *) PA="" ;; esac
   if [ -z "$PA" ]; then attenzione "Piper non è disponibile per $(uname -m): si userà espeak-ng."
   elif [ -x "/usr/lib/professore-digitale/piper/$PA/piper" ] && /usr/lib/professore-digitale/piper/$PA/piper --version >/dev/null 2>&1; then
-    ok "Le voci naturali Paola (donna) e Riccardo (uomo) sono già incluse nel programma: sceglietele in Impostazioni → Voce."
+    ok "Le voci naturali Giorgio (uomo), Serena e Paola (donna) sono già incluse nel programma: sceglietele in Impostazioni → Voce."
   else
     TMP2=$(mktemp -d)
     if scarica "https://github.com/rhasspy/piper/releases/download/$PIPER_VER/piper_linux_$PA.tar.gz" "$TMP2/p.tgz" \
        && tar -xzf "$TMP2/p.tgz" -C "$DATA" \
        && mkdir -p "$MODELS/piper" \
-       && scarica "$PIPER_VOICE_URL/it_IT-paola-medium.onnx" "$MODELS/piper/it_IT-paola-medium.onnx" \
-       && scarica "$PIPER_VOICE_URL/it_IT-paola-medium.onnx.json" "$MODELS/piper/it_IT-paola-medium.onnx.json" \
-       && scarica "$PIPER_VOICE_URL_M/it_IT-riccardo-x_low.onnx" "$MODELS/piper/it_IT-riccardo-x_low.onnx" \
-       && scarica "$PIPER_VOICE_URL_M/it_IT-riccardo-x_low.onnx.json" "$MODELS/piper/it_IT-riccardo-x_low.onnx.json"; then
-      if echo "Buongiorno" | "$DATA/piper/piper" --model "$MODELS/piper/it_IT-paola-medium.onnx" --output_file "$TMP2/t.wav" >/dev/null 2>&1; then
+       && scarica "$PIPER_GIORGIO.onnx" "$MODELS/piper/it_IT-giorgio-medium.onnx" \
+       && scarica "$PIPER_GIORGIO.json" "$MODELS/piper/it_IT-giorgio-medium.onnx.json" \
+       && scarica "$PIPER_SERENA.onnx" "$MODELS/piper/it_IT-serena-medium.onnx" \
+       && scarica "$PIPER_SERENA.onnx.json" "$MODELS/piper/it_IT-serena-medium.onnx.json"; then
+      # il file di Serena (Piper 1.5) contiene simboli che il motore 2023 rifiuta: si tolgono (l'italiano non li usa)
+      python3 -c 'import json,sys; p=sys.argv[1]; d=json.load(open(p)); m=d["phoneme_id_map"]; [m.pop(k) for k in [k for k in m if len(k)!=1]]; json.dump(d,open(p,"w"),ensure_ascii=False)' \
+        "$MODELS/piper/it_IT-serena-medium.onnx.json" 2>/dev/null
+      if echo "Buongiorno" | "$DATA/piper/piper" --model "$MODELS/piper/it_IT-giorgio-medium.onnx" --output_file "$TMP2/t.wav" >/dev/null 2>&1; then
         ok "Voce naturale installata."
       else attenzione "Piper installato ma la prova non è riuscita: si userà espeak-ng."; fi
     else errore "Download della voce naturale non riuscito."; fi

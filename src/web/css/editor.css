@@ -1,1 +1,107 @@
-/* editor */
+/* ==============================================================================
+ *  PROFESSORE DIGITALE - «Crea lezioni e quiz» (js/editor.js)
+ *  Usa le variabili di app.css: funziona con i temi chiaro, scuro e alto contrasto.
+ * ============================================================================== */
+.ed h1 { margin-bottom: .3rem; }
+.ed h2 { font-size: 1.2rem; margin: 0 0 .6rem; }
+.ed h3 { font-size: 1.02rem; margin: 1rem 0 .5rem; }
+.ed-top { display: flex; gap: 1rem; align-items: center; justify-content: space-between; flex-wrap: wrap; margin-bottom: 1rem; }
+.ed-top-tit { display: flex; gap: .8rem; align-items: center; min-width: 0; }
+.ed-top-tit .big-ico { font-size: 2.2rem; }
+.ed-top-tit b { font-size: 1.1rem; overflow-wrap: anywhere; }
+
+/* schede */
+.ed-tabs { display: flex; flex-wrap: wrap; gap: .4rem; margin: 0 0 1rem; border-bottom: 2px solid var(--line); padding-bottom: .4rem; }
+.ed-tab { font: inherit; font-weight: 700; font-size: 1rem; min-height: 3rem; padding: .5rem 1rem; border-radius: 12px; border: 2px solid var(--line);
+  background: var(--panel); color: var(--ink); cursor: pointer; display: inline-flex; align-items: center; gap: .35rem; }
+.ed-tab:hover { border-color: var(--brand); }
+.ed-tab[aria-selected="true"] { background: var(--brand); border-color: var(--brand); color: var(--brand-ink); }
+.ed-conta { display: none; }
+.ed-conta.on { display: inline-block; min-width: 1.4rem; padding: 0 .35rem; border-radius: 99px; background: var(--warn-soft); color: var(--ink);
+  border: 1px solid var(--warn); font-size: .78rem; line-height: 1.3rem; text-align: center; }
+
+/* sezioni e campi */
+.ed-sez { margin-bottom: 1rem; }
+.ed-sez-head, .ed-sub-head { display: flex; gap: .6rem; align-items: center; justify-content: space-between; flex-wrap: wrap; margin-bottom: .6rem; }
+.ed-sub { margin: .8rem 0; background: var(--bg2); box-shadow: none; }
+.ed-field input[type="text"], .ed-field input[type="number"], .ed-field textarea, .ed-field select,
+.ed-opz input[type="text"], .ed-schema textarea, .ed-apri select, .ed-sez select {
+  font: inherit; font-size: 1.02rem; padding: .6rem .75rem; border-radius: 10px; border: 2px solid var(--line); background: var(--panel); color: var(--ink);
+  width: 100%; max-width: 100%; box-sizing: border-box; }
+.ed-field input[type="number"] { max-width: 9rem; }
+.ed-field textarea { resize: vertical; line-height: 1.45; }
+.ed-field input:focus, .ed-field textarea:focus, .ed-field select:focus, .ed-opz input:focus { border-color: var(--brand); outline: 3px solid var(--focus); outline-offset: 1px; }
+.ed-field [aria-invalid="true"] { border-color: var(--warn); }
+.ed-err:empty { display: none; }
+.ed-err { font-size: .92rem; color: var(--ink); background: var(--warn-soft); border-left: 5px solid var(--warn); border-radius: 8px; padding: .35rem .7rem; margin-top: .3rem; }
+.ed-err span { display: block; }
+.ed-2col { display: grid; grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr)); gap: 0 1rem; align-items: start; }
+.ed-id code { overflow-wrap: anywhere; }
+.ed-barra { display: flex; flex-wrap: wrap; gap: .3rem; }
+.ed-barra .btn { min-height: 2.4rem; padding: .25rem .7rem; font-size: .9rem; }
+.ed-md-box { margin-top: .4rem; }
+.ed-md-box summary { cursor: pointer; font-weight: 700; color: var(--brand); padding: .3rem 0; }
+.ed-md { background: var(--panel); border: 1px dashed var(--line); border-radius: 10px; padding: .4rem .9rem; }
+.ed-risposta { margin-top: .3rem; }
+.ed-contaparole.ok, .ed-chiavi .ok { color: var(--ok); font-weight: 700; }
+.ed-contaparole.ko, .ed-chiavi .ko { color: var(--warn); font-weight: 700; }
+html[data-theme="dark"] .ed-contaparole.ko, html[data-theme="dark"] .ed-chiavi .ko { color: var(--warn); }
+.ed-chiavi { display: flex; flex-wrap: wrap; gap: .3rem; align-items: center; margin-top: .3rem; }
+.ed-chiavi .chip { font-size: .85rem; }
+
+/* icone */
+.ed-icone { display: flex; flex-wrap: wrap; gap: .3rem; }
+.ed-ico { font-size: 1.5rem; width: 2.9rem; height: 2.9rem; border-radius: 10px; border: 2px solid var(--line); background: var(--panel); cursor: pointer; line-height: 1; padding: 0; }
+.ed-ico:hover { border-color: var(--brand); }
+.ed-ico.on { border-color: var(--brand); background: var(--brand-soft); box-shadow: 0 0 0 2px var(--brand); }
+
+/* elenchi, ordine, risposte */
+.ed-ordine { display: flex; gap: .3rem; flex-wrap: wrap; }
+.ed-ordine .btn { min-height: 2.6rem; padding: .3rem .8rem; }
+.ed-del { color: var(--bad); border-color: var(--bad); }
+.ed-elenco, .ed-miei { display: flex; flex-direction: column; gap: .6rem; }
+.ed-riga, .ed-mio { display: flex; gap: .8rem; align-items: center; flex-wrap: wrap; padding: .7rem .8rem; border: 1px solid var(--line); border-radius: 12px; background: var(--bg2); }
+.ed-riga .big-ico { font-size: 2rem; }
+.ed-riga-t { flex: 1 1 12rem; min-width: 0; overflow-wrap: anywhere; }
+.ed-riga .ed-err, .ed-riga-t .ed-err { background: none; border: 0; padding: 0; color: var(--warn); font-weight: 700; }
+.ed-mio > div:first-child { flex: 1 1 14rem; min-width: 0; overflow-wrap: anywhere; }
+.ed-opz { display: flex; gap: .4rem; align-items: center; margin: .3rem 0; }
+.ed-opz input[type="text"] { flex: 1; min-width: 0; }
+.ed-opz .btn { min-height: 2.6rem; padding: .3rem .8rem; flex: none; }
+.ed-num { font-weight: 700; min-width: 1.6rem; text-align: right; }
+.ed-giusta { display: inline-flex; align-items: center; gap: .2rem; cursor: pointer; flex: none; padding: .3rem .45rem; border-radius: 10px; border: 2px solid var(--line); }
+.ed-giusta input { width: 1.3rem; height: 1.3rem; accent-color: var(--ok); margin: 0; }
+.ed-giusta span { font-weight: 800; color: var(--ok); }
+.ed-giusta:has(input:checked) { border-color: var(--ok); background: var(--ok-soft); }
+
+/* schema a riquadri */
+.ed-schema { margin-top: .8rem; padding: .7rem .8rem; border: 2px dashed var(--line); border-radius: 12px; }
+.ed-boxes { display: flex; flex-wrap: wrap; gap: .4rem; align-items: center; margin: .4rem 0; }
+.ed-box { display: inline-flex; gap: .2rem; align-items: center; flex: 1 1 10rem; min-width: 0; max-width: 100%; }
+.ed-box input { font: inherit; padding: .55rem .6rem; border-radius: 10px; border: 2px solid var(--brand); background: var(--panel); color: var(--ink); min-width: 0; width: 100%; }
+.ed-box .btn { min-height: 2.4rem; padding: .2rem .55rem; }
+.ed-freccia { font-size: 1.4rem; font-weight: 800; color: var(--brand); }
+.ed-lavagna { margin-top: .6rem; }
+.ed-modelli .tile { min-height: 9rem; }
+.ed-file { position: relative; overflow: hidden; cursor: pointer; }
+.ed-file input { position: absolute; inset: 0; opacity: 0; cursor: pointer; width: 100%; }
+.ed-apri select { width: auto; flex: 1 1 14rem; }
+.ed-sez select#ed-copia-lez { width: auto; flex: 1 1 16rem; }
+.ed-lista-err { margin: .4rem 0 0; padding-left: 1.2rem; }
+.ed-lista-err li { margin: .25rem 0; }
+.ed-link { font: inherit; font-weight: 700; color: var(--brand); background: none; border: 0; padding: 0; text-decoration: underline; cursor: pointer; text-align: left; }
+
+/* anteprima */
+.ed-ap { margin-top: 1.2rem; border: 3px solid var(--brand); border-radius: var(--radius); overflow: hidden; background: var(--bg); }
+.ed-ap-barra { display: flex; justify-content: space-between; align-items: center; gap: .6rem; flex-wrap: wrap; padding: .6rem .9rem; background: var(--brand-soft); }
+.ed-ap-corpo { padding: 1rem; }
+.ed-ap-corpo .lesson-nav { display: flex; justify-content: space-between; gap: .6rem; margin-top: 1rem; flex-wrap: wrap; }
+
+@media (max-width: 640px) {
+  .ed-tab { flex: 1 1 calc(50% - .4rem); justify-content: center; padding: .45rem .5rem; font-size: .95rem; }
+  .ed-top .row, .ed-top .row .btn { width: 100%; }
+  .ed-freccia { transform: rotate(90deg); width: 100%; text-align: center; line-height: 1; }
+  .ed-box { flex-basis: 100%; }
+  .ed-ap-corpo { padding: .6rem; }
+  .ed-sub { padding: .8rem .7rem; }
+}

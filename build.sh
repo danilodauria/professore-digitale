@@ -43,7 +43,7 @@ python3 -c 'import json,sys; json.dump({"aggiornamenti_url": sys.argv[1], "pagin
         "$AGGIORNAMENTI_URL" "$PAGINA_PROGETTO" "$S/$PKG/distribuzione.json"
 chmod 0644 "$S/$PKG/distribuzione.json"
 cp -r src/web "$S/$PKG/web"
-echo "» Voci naturali incluse (Piper: Paola e Riccardo; motore per PC a 64 bit x86 e ARM)"
+echo "» Voci naturali incluse (Piper: Giorgio, Serena e Paola; motore per PC a 64 bit x86 e ARM)"
 source tools/voci.sh; prepara_voci
 install -d "$BUILD/usr/lib/$PKG/piper" "$S/$PKG/voci"
 for a in x86_64 aarch64; do
@@ -52,8 +52,7 @@ for a in x86_64 aarch64; do
 done
 rm -rf "$BUILD/usr/lib/$PKG/piper/"*/pkgconfig
 find "$BUILD/usr/lib/$PKG" -type d -exec chmod 0755 {} +
-install -m 0644 "$VOCI_CACHE"/it_IT-paola-medium.onnx "$VOCI_CACHE"/it_IT-paola-medium.onnx.json \
-                "$VOCI_CACHE"/it_IT-riccardo-x_low.onnx "$VOCI_CACHE"/it_IT-riccardo-x_low.onnx.json "$S/$PKG/voci/"
+copia_voci "$S/$PKG/voci"; chmod 0644 "$S/$PKG/voci/"*
 if ls src/contenuti/*.json >/dev/null 2>&1; then install -m 0644 src/contenuti/*.json "$S/$PKG/contenuti/"; fi
 find "$S/$PKG/web" -type d -exec chmod 0755 {} +; find "$S/$PKG/web" -type f -exec chmod 0644 {} +
 rm -f "$S/$PKG/web/vendor/mermaid.LICENSE"
@@ -98,7 +97,7 @@ Description: cattedra digitale portatile per l'alfabetizzazione informatica
  disegnare, una palestra di esercizi, grandi quiz con attestato da stampare,
  lezioni di cultura generale, le pagine di FeniceOS e del libro Tecnologia
  Gentile e un quadro dell'aula per il facilitatore in rete locale. Include le
- voci naturali italiane Paola e Riccardo (Piper).
+ voci naturali italiane Giorgio, Serena e Paola (Piper).
  .
  Funziona senza Internet anche su computer ricondizionati: nessun dato
  lascia il computer. Ideato e sviluppato da Danilo D'Auria.

@@ -10,6 +10,8 @@ ESITO=0
 
 echo "== 1. Formato dei pacchetti di contenuti"
 python3 tests/test_packs.py || ESITO=1
+echo "== 1b. Voci naturali incluse (Piper)"
+python3 tests/test_voci.py || ESITO=1
 
 echo "== 2. Sito di aggiornamenti simulato"
 mkdir -p "$T/sito/contenuti" "$T/home/Scaricati"

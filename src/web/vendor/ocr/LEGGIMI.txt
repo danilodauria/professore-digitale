@@ -1,0 +1,15 @@
+Lettura delle foto (OCR) per «Spiegami questa lettera» - funziona sul PC, senza Internet.
+Usato da src/web/js/lettera.js, caricato solo quando l'allievo chiede di leggere una foto
+(solo con il server locale: la versione portatile file:// non include questa cartella).
+
+File e provenienza (pacchetti npm, registry.npmjs.org):
+- tesseract.min.js, worker.min.js (+ *.LICENSE.txt)   tesseract.js 7.0.0, dist/          Apache-2.0
+- tesseract-core-simd-lstm.wasm.js                    tesseract.js-core 7.0.0           Apache-2.0
+- tesseract-core-lstm.wasm.js (PC senza SIMD)         tesseract.js-core 7.0.0           Apache-2.0
+- lang/ita.traineddata.gz                             @tesseract.js-data/ita 1.0.0,
+                                                      cartella 4.0.0_best_int (dati tessdata_best, Apache-2.0)
+Testo della licenza: LICENSE-Apache-2.0.txt
+
+Per aggiornare: npm pack tesseract.js tesseract.js-core @tesseract.js-data/ita, copiare gli stessi
+file (solo le varianti *-lstm.wasm.js: hanno il wasm dentro e bastano per l'italiano) e rifare
+tests/ui_lettera.py (prova OCR vera su un'immagine generata).
