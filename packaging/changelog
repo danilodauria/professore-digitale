@@ -1,3 +1,25 @@
+professore-digitale (3.3.0) stable; urgency=medium
+
+  * Voci più naturali: arrivano Giorgio (la nuova voce del Professore) e
+    Serena, con pause più naturali tra le frasi. La vecchia voce Riccardo
+    è sostituita da sola.
+  * Nuova pagina «Spiegami questa lettera»: fotografate una bolletta, una
+    multa o una lettera e il Professore la legge sul computer, senza
+    Internet, e ve la spiega con parole semplici: importi, scadenze, cosa
+    fare e se sembra una truffa.
+  * Nuova «Ginnastica per la mente»: 12 giochi (cruciverba, indovina la
+    frase, coppie, sequenze, la spesa, il resto, l'orologio e altri) con il
+    gioco del giorno e un diario dei progressi.
+  * In aula: l'allievo può alzare la mano con un clic e il facilitatore lo
+    vede subito.
+  * Per i facilitatori: «Crea lezioni e quiz», per preparare lezioni sui
+    servizi del proprio Comune o della propria associazione senza toccare
+    file tecnici.
+  * La pagina del libro «Tecnologia Gentile» mostra la copertina vera.
+    Vademecum aggiornati.
+
+ -- Danilo D'Auria <danilodauria.site@gmail.com>  Thu, 08 Oct 2026 10:03:58 +0200
+
 professore-digitale (3.2.0) stable; urgency=medium
 
   * Nuova «Palestra della vita digitale»: sei prove sicure per imparare

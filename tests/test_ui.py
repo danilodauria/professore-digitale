@@ -24,7 +24,8 @@ with sync_playwright() as p:
     page = ctx.new_page()
     errors, tts_calls = [], []
     page.on("pageerror", lambda e: errors.append("pageerror: " + str(e)))
-    page.on("console", lambda m: errors.append("console: " + m.text) if m.type == "error" else None)
+    # «special-words» è un file facoltativo che il motore OCR cerca da solo: il suo avviso non è un errore del Professore
+    page.on("console", lambda m: errors.append("console: " + m.text) if m.type == "error" and "special-words" not in m.text else None)
     page.on("request", lambda r: tts_calls.append(r.url) if r.url.endswith("/api/tts") else None)
 
     page.goto(ROOT + "")

@@ -260,7 +260,9 @@ def _prova(page, ROOT, check, SHOTS):
 
     # ---------------------------------------------------------------- Parole a catena
     vai(page, "#/mente/catena/1", V + " .mg-ca-form")
-    trova = """(pre) => { var u = {}; Array.prototype.forEach.call(document.querySelectorAll('#view-mente .mg-ca-anello'), function (a) { u[a.textContent] = 1; });
+    # la catena mostra solo gli ultimi anelli: le parole già usate le ricorda anche il test (usate)
+    usate = []
+    trova = """([pre, usate]) => { var u = {}; usate.forEach(function (w) { u[w] = 1; }); Array.prototype.forEach.call(document.querySelectorAll('#view-mente .mg-ca-anello'), function (a) { u[a.textContent] = 1; });
         var c = Object.keys(PD.menteGiochi.parole).filter(function (w) { return w.indexOf(pre) === 0 && w.length >= 3 && w !== pre && !u[w]; });
         return c[0] || ''; }"""
     for t in range(5):
@@ -280,7 +282,15 @@ def _prova(page, ROOT, check, SHOTS):
             page.fill(V + " .mg-input", "XYZ")
             page.press(V + " .mg-input", "Enter")
             check("catena: avvisa se non comincia bene", pre in page.inner_text(V + " .mg-ca-msg"))
-        w = page.evaluate(trova, pre)
+        w = page.evaluate(trova, [pre, usate])
+        if w:
+            usate.append(w)
+        if not w:   # vicolo cieco nel dizionario (parola iniziale a caso): si usa una parola «di fiducia»
+            page.fill(V + " .mg-input", (pre + "ARIO").lower())
+            page.press(V + " .mg-input", "Enter")
+            page.wait_for_selector(V + " .mg-ca-dubbio")
+            page.click(V + " [data-a=si]")
+            continue
         if t == 3:
             page.click(V + " [data-a=tastiera]")
             page.wait_for_selector(V + " .mg-tastiera")

@@ -20,6 +20,14 @@ def prova(page, ROOT, check, SHOTS):
         page.wait_for_selector("#view-home h1")
 
 
+
+def _due_clic(page, sel):
+    """Due clic veloci nello stesso punto (il mouse, senza attese tra uno e l'altro: anche su PC lenti restano vicini)."""
+    page.locator(sel).scroll_into_view_if_needed()
+    bb = page.locator(sel).bounding_box()
+    x, y = bb["x"] + bb["width"] / 2, bb["y"] + bb["height"] / 2
+    page.mouse.click(x, y); page.mouse.click(x, y)
+
 def _prove(page, ROOT, check, SHOTS):
     page.goto(ROOT + "#/settings")
     page.wait_for_selector("#pd-a11y-card")
@@ -45,7 +53,7 @@ def _prove(page, ROOT, check, SHOTS):
         b.textContent = 'Conta'; b.setAttribute('data-n', '0');
         b.onclick = function () { b.setAttribute('data-n', +b.getAttribute('data-n') + 1); };
         document.querySelector('#view-lessons').appendChild(b); }""")
-    page.click("#a11y-conta"); page.click("#a11y-conta", delay=10)
+    _due_clic(page, "#a11y-conta")
     n1 = page.evaluate("+document.querySelector('#a11y-conta').getAttribute('data-n')")
     check("a11y: doppio clic involontario ignorato", n1 == 1, n1)
     page.wait_for_timeout(800)
@@ -55,7 +63,7 @@ def _prove(page, ROOT, check, SHOTS):
     check("a11y: PD.tremore per la Palestra", page.evaluate("PD.tremore.attivo() && PD.tremore.sogliaDoppioClic === 900"))
     page.evaluate("PD.settings.tremore = false; PD.saveSettings()")
     check("a11y: tremore disattivato", not page.evaluate("document.documentElement.classList.contains('pd-tremore')"))
-    page.click("#a11y-conta"); page.click("#a11y-conta", delay=10)
+    _due_clic(page, "#a11y-conta")
     n3 = page.evaluate("+document.querySelector('#a11y-conta').getAttribute('data-n')")
     check("a11y: senza tremore i clic contano tutti", n3 == 4, n3)
 
