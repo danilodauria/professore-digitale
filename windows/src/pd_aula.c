@@ -718,3 +718,11 @@ void aula_api(req_t *r, const char *azione, jv *req) {
     } else send_error(r, 404, "API sconosciuta");
     buf_free(&b);
 }
+
+/* ------------------------------------------------------------------ per i tablet dell'aula (pd_tablet.c) */
+int aula_indirizzi(char ips[][20], int max) { return indirizzi(ips, max); }
+int aula_codice_facilitatore(char *codice, size_t n) {
+    al(); int fac = !strcmp(ruolo, "facilitatore"); snprintf(codice, n, "%s", c_codice); au();
+    return fac;
+}
+int aula_ricevi(const char *body, size_t n, const char *ip, buf_t *out) { return ricevi(body, n, ip, out); }

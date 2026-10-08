@@ -12,7 +12,8 @@
 Server HTTP locale del Professore Digitale.
 
 Principi di progetto:
-  * ascolta SOLO su 127.0.0.1 (mai sulla rete);
+  * l'interfaccia ascolta SOLO su 127.0.0.1; la rete locale si usa solo se l'utente accende
+    il quadro dell'aula (pd_aula.py) o la condivisione con i tablet (pd_tablet.py, porta 8768);
   * controlla gli header Host/Origin (protezione da DNS-rebinding e CSRF);
   * non richiede privilegi di root: i dati dell'utente stanno in
     ~/.local/share/professore-digitale;
@@ -50,6 +51,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
 import pd_packs  # noqa: E402  (pacchetti di contenuti)
 import pd_aula   # noqa: E402  (quadro dell'aula in rete locale, stato della connessione)
+import pd_tablet  # noqa: E402  (condivisione con i tablet dell'aula, spenta se non la si accende)
 
 SHARE_DIR = os.path.normpath(os.path.join(HERE, ".."))
 WEB_DIR = os.path.normpath(os.environ.get("PD_WEB_DIR") or os.path.join(SHARE_DIR, "web"))
@@ -107,6 +109,7 @@ MAX_TTS_CHARS = 6000
 
 LAST_SEEN = [time.time()]
 AULA = [None]
+TABLET = [None]
 STATE = {"port": None, "idle_timeout": 240, "stt_probe": None, "stt_probe_time": 0}
 LOCK = threading.Lock()
 
@@ -595,6 +598,7 @@ def importa_pacchetto(pack):
 class Handler(BaseHTTPRequestHandler):
     server_version = "ProfessoreDigitale/" + VERSION
     protocol_version = "HTTP/1.1"
+    ospite = False          # True per le richieste dei tablet (TabletHandler)
 
     # --- log silenzioso (niente rumore nel terminale) ---
     def log_message(self, fmt, *args):
@@ -672,7 +676,9 @@ class Handler(BaseHTTPRequestHandler):
         if not self._host_ok() or not self._origin_ok():
             return self._error(403, "origine non consentita")
         LAST_SEEN[0] = time.time()
-        path = self.path.split("?", 1)[0]
+        return self._post_protetto(self.path.split("?", 1)[0])
+
+    def _post_protetto(self, path):
         try:
             return self._api_post(path)
         except ValueError as e:
@@ -707,6 +713,15 @@ class Handler(BaseHTTPRequestHandler):
 
     # --- API GET ---
     def _api_get(self, path):
+        if path == "/api/status" and self.ospite:
+            # tablet dell'aula: solo cio' che serve all'interfaccia, niente percorsi di disco o dati del PC
+            ok, models = ollama_models()
+            return self._send(200, {
+                "ok": True, "version": VERSION, "mode": "server", "ospite": True,
+                "ai": {"available": ok, "models": models},
+                "tts": {"engines": tts_engines(), "voices": tts_voices()},
+                "stt": {"engine": None, "detail": None}, "system": {},
+            })
         if path == "/api/status":
             ok, models = ollama_models()
             ram = mem_total_mb()
@@ -731,7 +746,12 @@ class Handler(BaseHTTPRequestHandler):
             return self._send(200, AULA[0].stato() if AULA[0] else {"ok": True, "ruolo": ""})
         if path == "/api/packs":
             packs, errori = pacchetti_installati()
+            if self.ospite:     # ai tablet si mostra solo il nome del file, mai il percorso sul disco
+                packs = [dict(p, file=os.path.basename(p.get("file") or "")) for p in packs]
+                errori = [dict(e, file=os.path.basename(e.get("file") or "")) for e in errori]
             return self._send(200, {"ok": True, "packs": packs, "errori": errori})
+        if path == "/api/tablet" and TABLET[0]:
+            return self._send(200, TABLET[0].stato())
         m = re.match(r"^/api/data/([a-z]+)$", path)
         if m:
             key = m.group(1)
@@ -867,6 +887,23 @@ class Handler(BaseHTTPRequestHandler):
                 return self._send(*r)
             return self._error(404, "API sconosciuta")
 
+        if path == "/api/tablet" and TABLET[0]:
+            # condivisione con i tablet: si accende, si spegne e si gestisce SOLO da questo PC (127.0.0.1)
+            req = self._read_json()
+            tab, azione = TABLET[0], req.get("azione")
+            if azione == "accendi":
+                if not tab.accendi():
+                    return self._send(409, dict(tab.stato(), ok=False, error=tab.errore))
+            elif azione == "spegni":
+                tab.spegni()
+            elif azione == "codice":
+                tab.cambia_codice()
+            elif azione == "togli":
+                tab.togli(str(req.get("id", "")))
+            else:
+                raise ValueError("azione non valida (accendi, spegni, codice, togli)")
+            return self._send(200, tab.stato())
+
         if path == "/api/stt-reprobe":
             self._read_body(1024)
             return self._send(200, {"ok": True, "stt": stt_probe(force=True)})
@@ -948,6 +985,132 @@ class Handler(BaseHTTPRequestHandler):
 
 
 # ------------------------------------------------------------------------------
+#  Tablet dell'aula (pd_tablet.py): secondo ascolto, solo rete locale, codice e lista bianca
+# ------------------------------------------------------------------------------
+class TabletHandler(Handler):
+    ospite = True
+
+    def _ip(self):
+        return self.client_address[0]
+
+    def _host_ok(self):
+        # l'unico Host valido e' l'indirizzo di questo PC su cui e' arrivata la connessione (niente nomi: DNS rebinding)
+        try:
+            loc = self.connection.getsockname()[0]
+        except OSError:
+            return False
+        return (self.headers.get("Host") or "").lower() == "%s:%d" % (loc, TABLET[0].porta)
+
+    def _origin_ok(self):
+        origin = self.headers.get("Origin")
+        return origin is None or origin == "http://" + (self.headers.get("Host") or "").lower()
+
+    def _error(self, code, msg):
+        # un rifiuto puo' lasciare non letto il corpo della richiesta: si chiude la connessione (niente avanzi)
+        self.close_connection = True
+        self._send(code, {"ok": False, "error": msg}, extra={"Connection": "close"})
+
+    def _vietato(self, msg="non consentito dai tablet"):
+        return self._error(403, msg)
+
+    def _token(self):
+        return pd_tablet.token_da_cookie(self.headers.get("Cookie"))
+
+    def _pagina_codice(self, errore="", code=200):
+        self._send(code, pd_tablet.pagina_codice(errore), "text/html; charset=utf-8",
+                   {"Content-Security-Policy": pd_tablet.CSP_CODICE})
+
+    def do_GET(self):
+        tab = TABLET[0]
+        if not pd_tablet.ip_privato(self._ip()):
+            return self._vietato("solo dalla rete locale")
+        if not self._host_ok():
+            return self._error(403, "host non consentito")
+        LAST_SEEN[0] = time.time()
+        path, _, query = self.path.partition("?")
+        q = urllib.parse.parse_qs(query)
+        if path == "/" and "c" in q:
+            esito, token = tab.prova_codice(self._ip(), q["c"][0].strip())
+            if esito == "ok":
+                return self._send(303, b"", "text/plain; charset=utf-8", {
+                    "Location": "/", "Set-Cookie": "%s=%s; Path=/; Max-Age=%d; HttpOnly; SameSite=Strict" %
+                    (pd_tablet.COOKIE, token, pd_tablet.SESSIONE_S)})
+            return self._pagina_codice(esito, 429 if esito == "troppi" else 403)
+        token = self._token()
+        sess = tab.sessione(token, self._ip())
+        if not sess:
+            if path.startswith("/api/"):
+                return self._vietato("serve il codice del facilitatore")
+            if path in ("/", "/index.html"):
+                return self._pagina_codice("scaduto" if token else "")
+            return self._vietato("serve il codice del facilitatore")
+        if path.startswith("/api/"):
+            if path not in pd_tablet.OSPITE_GET:
+                return self._vietato()
+            return self._api_get(path)
+        return self._static(path)
+
+    def do_POST(self):
+        tab = TABLET[0]
+        if not pd_tablet.ip_privato(self._ip()):
+            return self._vietato("solo dalla rete locale")
+        if not self._host_ok() or not self._origin_ok():
+            return self._error(403, "origine non consentita")
+        path = self.path.split("?", 1)[0]
+        token = self._token()
+        sess = tab.sessione(token, self._ip())
+        if not sess:
+            return self._vietato("serve il codice del facilitatore")
+        if path not in pd_tablet.OSPITE_POST:
+            return self._vietato()
+        LAST_SEEN[0] = time.time()
+        if path == "/api/ospite/presenza":
+            return self._post_ospite(self._presenza, token, sess)
+        sem = tab.chat if path == "/api/chat" else tab.tts
+        if not sem.acquire(False):
+            return self._error(503, "il PC dell'aula sta già rispondendo ad altri tablet: riprovate tra poco")
+        try:
+            return self._post_protetto(path)
+        finally:
+            sem.release()
+
+    def _post_ospite(self, fn, *a):
+        try:
+            return fn(*a)
+        except ValueError as e:
+            return self._error(400, str(e))
+
+    def _presenza(self, token, sess):
+        """Il tablet compare nel quadro dell'aula come un allievo (stessa validazione di /aula/ciao)."""
+        n = int(self.headers.get("Content-Length") or 0)
+        if n <= 0 or n > pd_tablet.MAX_PRESENZA:
+            raise ValueError("richiesta non valida")
+        d = self._read_json()
+        if not isinstance(d, dict):
+            raise ValueError("oggetto atteso")
+        att = d.get("attivita") if isinstance(d.get("attivita"), dict) else {}
+        nome = pd_aula.testo_pulito(d.get("nome"), 60)
+        TABLET[0].aggiorna(token, nome, pd_aula.testo_pulito(att.get("titolo"), 120))
+        aula = AULA[0]
+        if not aula or aula.ruolo != "facilitatore":
+            return self._send(200, {"ok": True, "aula": False})
+        corpo = {"id": "tablet-" + sess["id"], "codice": aula.cfg.get("codice", ""), "pc": "Tablet o telefono",
+                 "utente": nome, "versione": VERSION, "sistema": {"os": "Tablet o telefono (ospite)"},
+                 "componenti": {"ia": "IA del PC dell'aula", "voce": "PC dell'aula", "microfono": ""},
+                 "attivita": att, "progressi": d.get("progressi"), "mano": d.get("mano")}
+        codice, risp = aula.ricevi(corpo, self._ip())
+        if codice == 200:
+            risp["aula"] = True
+        return self._send(codice, risp)
+
+
+def crea_server_tablet(porta):
+    srv = Server(("0.0.0.0", porta), TabletHandler)
+    srv.daemon_threads = True
+    return srv
+
+
+# ------------------------------------------------------------------------------
 #  Avvio
 # ------------------------------------------------------------------------------
 class Server(ThreadingHTTPServer):
@@ -1025,6 +1188,11 @@ def main(argv=None):
         AULA[0] = aula
     except Exception as e:   # l'aula e' facoltativa: il Professore funziona comunque
         log("aula non disponibile:", repr(e))
+    tab = pd_tablet.Condivisione(log, pd_aula.indirizzi_locali)
+    tab.fabbrica = crea_server_tablet
+    TABLET[0] = tab
+    if (read_json_file(os.path.join(DATA_DIR, "settings.json"), {}) or {}).get("tabletCondividi") is True:
+        tab.accendi()      # scelta fatta dall'utente su questo PC (Aula -> Tablet): si riaccende con un codice nuovo
     print("Professore Digitale %s in ascolto su http://127.0.0.1:%d/" % (VERSION, port), flush=True)
     try:
         server.serve_forever(poll_interval=0.5)
@@ -1032,6 +1200,8 @@ def main(argv=None):
         pass
     finally:
         remove_runtime()
+        if TABLET[0]:
+            TABLET[0].spegni()
         server.server_close()
     return 0
 

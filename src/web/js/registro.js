@@ -76,7 +76,7 @@
     sporco = false;
     R.aggiornato = new Date().toISOString();
     PD.store.save("registro", R);
-    if (PD.server && PD.api) {
+    if (PD.server && !PD.ospite && PD.api) {
       PD.api("/api/data/registro", { value: R }).catch(function () {
         if (!avvisato && PD.toast) { avvisato = true; PD.toast("⚠️ Non riesco a salvare il registro sul disco: resta una copia nel browser. Salvate una copia (JSON) per sicurezza.", 6000); }
       });
@@ -86,7 +86,7 @@
   function salvaPresto() { sporco = true; R.aggiornato = new Date().toISOString(); PD.store.save("registro", R); }
   /* chiudendo la pagina subito dopo aver scritto, l'ultima modifica arriva comunque sul disco */
   window.addEventListener("pagehide", function () {
-    if (!sporco || !PD.server || !window.fetch) return;
+    if (!sporco || !PD.server || PD.ospite || !window.fetch) return;
     sporco = false;
     try { fetch("/api/data/registro", { method: "POST", keepalive: true, headers: { "Content-Type": "application/json" }, body: JSON.stringify({ value: R }) }); } catch (e) { /* resta la copia nel browser */ }
   });
@@ -272,7 +272,7 @@
   }
 
   /* ------------------------------------------------------------------ dati dall'aula (PC del facilitatore) */
-  function aulaDisponibile() { return !!(PD.server && PD.api && PD.settings && PD.settings.aulaRuolo === "facilitatore"); }
+  function aulaDisponibile() { return !!(PD.server && !PD.ospite && PD.api && PD.settings && PD.settings.aulaRuolo === "facilitatore"); }
   function importaAula(c) {
     return PD.api("/api/aula").then(function (st) {
       var cl = (st && st.clienti) || [], agg = 0, nuovi = 0, quando = new Date().toISOString();

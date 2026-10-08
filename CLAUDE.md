@@ -8,13 +8,23 @@ Leggere questo file per intero prima di modificare qualunque cosa.
 ## Regole del progetto (non negoziabili)
 - **Offline e privato**: il programma non si collega a Internet da solo e non invia dati. Il server ascolta
   solo su 127.0.0.1 e controlla Host/Origin. Nessuna telemetria, nessuna libreria da CDN.
-  Due sole eccezioni, dalla 3.0, entrambe disattivabili e documentate nel vademecum:
+  Tre sole eccezioni (dalla 3.0 le prime due, dalla 3.4 la terza), tutte disattivabili e documentate nel vademecum:
   1. **Indicatore «Online»** (`/api/rete`, impostazione `netCheck`): al massimo una volta al minuto il server *apre e chiude*
      una connessione TCP verso un server pubblico neutrale (1.1.1.1, 9.9.9.9…) per sapere se Internet funziona. Nessun dato inviato.
   2. **Quadro dell'aula** (`pd_aula.py` / `pd_aula.c`), solo se l'utente sceglie un ruolo in Aula: il PC del facilitatore ascolta
      in rete locale SOLO `/aula/info` e `/aula/ciao` (TCP 8766) e risponde alla ricerca `PD-AULA?` (UDP 8767); il PC dell'allievo
      invia ogni 20 s nome, pagina in uso, lezioni completate, risultati dei quiz e attestati (mai le conversazioni).
      Solo indirizzi IP privati; un codice dell'aula facoltativo blocca i PC estranei. L'interfaccia resta su 127.0.0.1.
+  3. **Condividi con i tablet dell'aula** (`pd_tablet.py` / `pd_tablet.c`, impostazione `tabletCondividi`): **spenta per
+     impostazione predefinita**, si accende SOLO dal PC stesso (pagina `#/tablet`, API locale `/api/tablet`). Accesa, il server apre
+     un SECONDO ascolto su tutte le interfacce, TCP **8768**, che accetta solo IP privati (10/8, 172.16/12, 192.168/16, 169.254/16),
+     controlla Host (= IP di questo PC su cui arriva la connessione + porta) e Origin, e chiede un **codice di 6 cifre** mostrato sul
+     PC (con QR code): `http://IP:8768/?c=CODICE` → cookie di sessione casuale (HttpOnly, SameSite=Strict, 12 ore); 10 tentativi al
+     minuto per indirizzo. Con la sessione il tablet può avere SOLO: i file di `web/`, `GET /api/status` ridotta (`ospite: true`,
+     niente percorsi né dati del PC), `GET /api/packs` (senza percorsi), `GET /api/rete`, `POST /api/tts`, `POST /api/chat`
+     (2 alla volta) e `POST /api/ospite/presenza` (quadro dell'aula, stessa validazione di `/aula/ciao`). Tutto il resto → 403
+     (dati, pacchetti, aggiornamenti, setup, aula, spegnimento, microfono). I progressi dei tablet restano nel loro browser.
+     «Cambia codice» chiude tutte le sessioni, «Spegni» chiude la porta. L'ascolto principale resta solo su 127.0.0.1.
 - **Server senza dipendenze**: `src/server/*.py` usa solo la libreria standard, compatibile **Python 3.7+**
   (verificare con `vermin -t=3.7- --no-tips --violations src/server/*.py packaging/professore-digitale`).
 - **Interfaccia leggera**: JavaScript puro in stile ES5 (`var`, funzioni), niente framework né build step.
@@ -28,7 +38,8 @@ Leggere questo file per intero prima di modificare qualunque cosa.
 |---|---|
 | `VERSION` | Unica fonte del numero di versione (non modificare a mano: lo fa `tools/rilascio.sh`) |
 | `rilascio.conf` | Indirizzi di pubblicazione (GitHub Pages) e manutentore |
-| `src/server/pd_server.py` | Server: API `/api/status, chat, tts, stt, data/*, packs*, update-check, update-download` |
+| `src/server/pd_server.py` | Server: API `/api/status, chat, tts, stt, data/*, packs*, update-check, update-download, aula*, tablet`; `TabletHandler` = ascolto dei tablet (lista bianca) |
+| `src/server/pd_tablet.py`, `windows/src/pd_tablet.c` | **Tablet dell'aula** (3.4): stato della condivisione, codice, sessioni, limite dei tentativi, pagina del codice, IP ammessi |
 | `src/server/pd_packs.py` | Formato e validazione dei pacchetti di contenuti (gemello di `src/web/js/packs.js`) |
 | `src/server/pd_stt_worker.py` | Riconoscimento vocale (Vosk / faster-whisper) in processo separato |
 | `src/web/js/data-lessons.js`, `data-kb.js` | 13 lezioni e 43 risposte di base |
@@ -38,6 +49,7 @@ Leggere questo file per intero prima di modificare qualunque cosa.
 | `src/web/js/board.js`, `practice.js` | Lavagna; Palestra |
 | `packaging/` | Avviatore, `professore-digitale-contenuti`, setup IA/voce, pulizia, .desktop, man, **changelog** |
 | `tools/` | `rilascio.sh`, `pubblica-contenuti.sh`, `pubblica-sito.sh`, `pubblica-tutto.sh`, `pubblica-locale.sh`, `server-aggiornamenti.sh`, `backup-locale.sh`, `verifica_pubblicazione.py`, `repo-apt.sh`, `make_standalone.py`, `metainfo.py`, `prepara-ambiente.sh` |
+| `tools/make_pwa.py`, `tools/pwa/`, `tools/make_sito.py`, `tools/sito/` | **App per telefono e tablet** (PWA) → `dist/pubblica/app/`: la portatile + manifest + `sw.js` (offline dopo la prima apertura, OCR salvato al primo uso) + icone già pronte in `src/web/img/pwa/` + `vendor/ocr/`; pagina del sito `dist/pubblica/index.html` (download, QR di `BASE_URL/app/`). Le crea `rilascio.sh`; test `tests/test_pwa.py` |
 | `tests/` | `esegui_test.sh` (tutto), `test_packs.py`, `test_ui.py` (Playwright), `mock_ollama.py` |
 | `docs/` | Vademecum e Guida agli aggiornamenti (PDF); il vademecum entra nel .deb |
 | `windows/src/` | **Versione Windows**: server nativo C (API Win32, compatibile XP SP3). `pd_main.c` avvio/istanza unica/icona/browser, `pd_http.c` server, `pd_api.c` API (stesse risposte di `pd_server.py`), `pd_ai.c` Ollama e motore compatibile KoboldCpp (API OpenAI), `pd_voice.c` voce SAPI/Piper e microfono, `pd_setup.c` configurazione automatica e chiavetta, `pd_hw.c` hardware, `pd_net.c` WinHTTP, `pd_json.c`, `pd_zip.c`, `pd_util.c`; `pd_stt_main.c` = `pd-stt.exe` (64 bit, Vosk) |
@@ -48,7 +60,8 @@ Leggere questo file per intero prima di modificare qualunque cosa.
 | `src/web/js/eyes.js`, `setup.js`, `compat.js` | Occhi che seguono il mouse; pagina «Configura IA e voce» (solo Windows); avviso per browser troppo vecchi |
 | `src/web/js/quiz.js` | Grandi quiz (chiave `prove` dei pacchetti) e **attestato** (SVG → stampa, oppure PDF generato in JS senza librerie) |
 | `src/web/js/aree.js`, `data-fenice.js` | Percorsi tematici: Cultura generale (pacchetti `cultura-*`), FeniceOS (`feniceos` + dati della pagina), libro Tecnologia Gentile (`tecnologia-gentile`) |
-| `src/web/js/aula.js`, `src/server/pd_aula.py`, `windows/src/pd_aula.c` | Quadro dell'aula in rete locale (facilitatore/allievo), messaggi a tutti, stato della connessione |
+| `src/web/js/aula.js`, `src/server/pd_aula.py`, `windows/src/pd_aula.c` | Quadro dell'aula in rete locale (facilitatore/allievo), messaggi a tutti, stato della connessione; presenza e mano alzata dei tablet ospiti (aula.js) |
+| `src/web/js/tablet.js`, `qr.js`, `css/tablet.css` | Pagina `#/tablet` sul PC (accendi/spegni, codice grande, indirizzi, QR, tablet collegati) e riquadro in Aula/Impostazioni; `PD.qr` = generatore di QR code ES5 (byte, correzione M, versioni 1-6) |
 | `src/web/js/stampa.js`, `presenza.js` | Stampa della pagina o dell'argomento intero; saluti all'avvio, consigli quando è inattivo, attesa, uscita con promemoria |
 | `src/web/js/sostieni.js`, `data-sostieni.js` | Pagina «❤️ Sostieni il progetto» (PayPal, bonifico, QR già pronti, pulsanti Copia). `data-sostieni.js` si rigenera con `tools/genera-sostieni.py` (serve `segno`) se cambiano IBAN o PayPal: mai pubblicare il numero della carta, solo l'IBAN |
 | `src/web/js/vita.js`, `vita-sim2.js` | **Palestra della vita digitale** (dalla 3.2): simulatori sicuri con nomi di fantasia e fascia «PROVA»: `identita`, `visita`, `pagamento` (vita.js, che contiene il framework `PD.vita.registra(sim)` e `ctx.passo/bravo/errore/telefono/foglio/indirizzo/controlla/fine`), `banca`, `messaggi`, `posta` (vita-sim2.js). Risultati in `progress.vita` |
@@ -96,7 +109,7 @@ PD_SHARE_DIR=src python3 packaging/professore-digitale-contenuti valida src/cont
 - Dati nuovi in `progress.json`: `quiz` (risultati per prova), `attestati`, `promemoria`, `ultimoAnnuncio`;
   dalla 3.2 `vita`, `truffa`, `ripasso`, `profilo`. Chiavi dati nuove (server Python e C): `profili`, `registro`.
   Impostazioni nuove: `voiceId, netCheck, idleTips, greet, goodbye, studentName, aulaRuolo, aulaNome, aulaCodice, aulaServer`;
-  dalla 3.2 `voiceCommands, tremore, vista, leggiFocus, domandaGiorno`.
+  dalla 3.2 `voiceCommands, tremore, vista, leggiFocus, domandaGiorno`; dalla 3.4 `tabletCondividi`.
 - **Aula, mano alzata (3.3)**: `/aula/ciao` porta `mano: {alzata, da, messaggio}`; la risposta mirata torna nella risposta
   a quel PC (`mano: {da, stato: "arrivo"|"risolto"}`). API locali `/api/aula/mano` (allievo) e `/api/aula/rispondi`
   (facilitatore) in Python e C. Impostazione `aulaManoSuono`.
@@ -107,6 +120,15 @@ PD_SHARE_DIR=src python3 packaging/professore-digitale-contenuti valida src/cont
   Profili nei test: `?noprofilo` o `sessionStorage['pd.profiloScelto']='1'` evitano la scelta all'avvio.
 - Test: il saluto all'avvio si salta con `sessionStorage['pd.salutato']='1'` (test_ui.py) o con `?nosaluto`; i tempi dei consigli
   con `PD.idleConfig`. L'aula del server Python nei test usa `PD_AULA_PORT`/`PD_AULA_UDP`.
+- **Tablet dell'aula (3.4)**: API locali (solo 127.0.0.1) `GET /api/tablet` → `{attivo, porta, codice, ips, indirizzi, dispositivi:
+  [{id, ip, nome, pagina, fa_s}], errore}` e `POST /api/tablet {azione: accendi|spegni|codice|togli, id}` (accendi fallita → 409).
+  Sul tablet `/api/status` ha `ospite: true` → `PD.ospite` (app.js): `PD.server` resta vero (voce, IA, contenuti) ma `PD.store`
+  usa SOLO localStorage; nascosti microfono, aggiornamenti, import/rimozione pacchetti, «Salva e usa» dell'editor, configurazione IA,
+  aula del facilitatore; niente heartbeat né `/api/shutdown`. Nei moduli: usare `PD.server && !PD.ospite` per tutto ciò che scrive
+  sul PC o usa API fuori dalla lista bianca. Presenza del tablet: `POST /api/ospite/presenza {nome, attivita, progressi, mano}` →
+  `{ok, aula: false}` oppure la risposta di `/aula/ciao` con `aula: true` (id nel quadro `tablet-<id sessione>`).
+  Test: `PD_TABLET_PORT` (Python 18968, Wine 18969) e `PD_TABLET_LOOPBACK=1` (permette 127.0.0.1, SOLO nei test); `tests/ui_tablet.py`.
+  Installatore Windows: regola firewall «Professore Digitale (tablet)» TCP 8768, tolta alla disinstallazione.
 
 ## Versione per Windows (regole in più)
 - **Compatibilità XP SP3 → Windows 11**: il programma principale è a 32 bit (`-D_WIN32_WINNT=0x0501`) e usa solo
@@ -128,7 +150,8 @@ PD_SHARE_DIR=src python3 packaging/professore-digitale-contenuti valida src/cont
   dell'interfaccia più `tests/test_windows_api.py`. Microfono, Ollama vero, SAPI e download reali non si provano in Wine:
   dichiararlo nella consegna. Attenzione: `pkill -f` o `pgrep -f` con il nome dell'exe nella stessa riga di comando
   colpiscono la propria shell; per fermare Wine usare `wineserver -k`.
-- Variabili utili ai test: `PD_DATA_DIR`, `PD_LOCAL_DIR`, `PD_DOWNLOAD_DIR`, `PD_NO_TRAY`, `PD_NO_ENGINE_START`, `OLLAMA_HOST`, `PD_DEBUG`.
+- Variabili utili ai test: `PD_DATA_DIR`, `PD_LOCAL_DIR`, `PD_DOWNLOAD_DIR`, `PD_NO_TRAY`, `PD_NO_ENGINE_START`, `OLLAMA_HOST`, `PD_DEBUG`,
+  `PD_TABLET_PORT`, `PD_TABLET_LOOPBACK`.
 
 ## Pubblicazione: con GitHub oppure tutto in locale
 - **GitHub** (predefinito): `tools/pubblica-tutto.sh ZIP` → GitHub Pages + sorgenti.
@@ -194,7 +217,7 @@ Il .deb precedente non è nell'archivio sorgenti: ricostruirlo dal tag git, es.
 creare dei progressi, installare il nuovo .deb e controllare che i progressi restino.
 
 ## Note per l'ambiente di sviluppo
-- I test UI richiedono Playwright (Python) con Chromium. Porte usate dai test: 18990–18992.
+- I test UI richiedono Playwright (Python) con Chromium. Porte usate dai test: 18990–18993, aula 18966–18967, tablet 18968 (Python) e 18969 (Wine).
 - In ambienti senza accesso a ollama.com / alphacephei.com l'IA e il microfono si provano con i finti
   server dei test (`mock_ollama.py`, modello Vosk finto): dichiararlo sempre quando si consegna.
 - `pkill -f pd_server.py` può colpire anche la propria shell: usare `pkill -f "[p]d_server.py --port"`.

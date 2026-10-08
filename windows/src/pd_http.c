@@ -15,7 +15,7 @@ void send_raw(req_t *r, const char *data, size_t n) {
 
 static const char *reason(int code) {
     switch (code) {
-        case 200: return "OK"; case 400: return "Bad Request"; case 403: return "Forbidden"; case 404: return "Not Found";
+        case 200: return "OK"; case 303: return "See Other"; case 429: return "Too Many Requests"; case 400: return "Bad Request"; case 403: return "Forbidden"; case 404: return "Not Found";
         case 405: return "Method Not Allowed"; case 409: return "Conflict"; case 413: return "Payload Too Large";
         case 500: return "Internal Server Error"; case 502: return "Bad Gateway"; case 503: return "Service Unavailable";
         default: return "OK";
@@ -117,28 +117,33 @@ static int origin_ok(req_t *r) {
     return !strcmp(r->origin, a) || !strcmp(r->origin, b);
 }
 
-static unsigned __stdcall conn_thread(void *arg) {
-    SOCKET s = (SOCKET)(UINT_PTR)arg;
-    req_t r; memset(&r, 0, sizeof r); r.s = s; r.clen = 0;
+static void serve_conn(SOCKET s, int ospite) {
+    req_t r; memset(&r, 0, sizeof r); r.s = s; r.clen = 0; r.ospite = ospite;
+    {
+        struct sockaddr_in a; int al = sizeof a;
+        if (getpeername(s, (struct sockaddr *)&a, &al) == 0) snprintf(r.ip, sizeof r.ip, "%s", inet_ntoa(a.sin_addr));
+        al = sizeof a;
+        if (getsockname(s, (struct sockaddr *)&a, &al) == 0) snprintf(r.local, sizeof r.local, "%s", inet_ntoa(a.sin_addr));
+    }
     DWORD tmo = 30000;
     setsockopt(s, SOL_SOCKET, SO_RCVTIMEO, (const char *)&tmo, sizeof tmo);
     char *hdr = (char *)malloc(65537); size_t hn = 0; char *end = NULL;
-    if (!hdr) { closesocket(s); return 0; }
+    if (!hdr) { closesocket(s); return; }
     while (hn < 65536) {
         int k = recv(s, hdr + hn, (int)(65536 - hn), 0);
         if (k <= 0) break;
         hn += (size_t)k; hdr[hn] = 0;
         if ((end = strstr(hdr, "\r\n\r\n")) != NULL) break;
     }
-    if (!end) { free(hdr); closesocket(s); return 0; }
+    if (!end) { free(hdr); closesocket(s); return; }
     *end = 0;
     char *body_start = end + 4; size_t already = hn - (size_t)(body_start - hdr);
     /* riga di richiesta */
     char *line = hdr, *nl = strstr(line, "\r\n");
     if (nl) *nl = 0;
     char target[2048] = "";
-    if (sscanf(line, "%7s %2047s", r.method, target) != 2) { free(hdr); closesocket(s); return 0; }
-    char *q = strchr(target, '?'); if (q) { if (strstr(q, "forza=1")) r.forza = 1; *q = 0; }
+    if (sscanf(line, "%7s %2047s", r.method, target) != 2) { free(hdr); closesocket(s); return; }
+    char *q = strchr(target, '?'); if (q) { if (strstr(q, "forza=1")) r.forza = 1; snprintf(r.query, sizeof r.query, "%s", q + 1); *q = 0; }
     snprintf(r.path, sizeof r.path, "%s", target);
     /* intestazioni */
     char *h = nl ? nl + 2 : NULL;
@@ -152,15 +157,18 @@ static unsigned __stdcall conn_thread(void *arg) {
             else if (!strcmp(h, "origin")) snprintf(r.origin, sizeof r.origin, "%s", v);
             else if (!strcmp(h, "content-type")) { snprintf(r.ctype, sizeof r.ctype, "%s", v); char *sc = strchr(r.ctype, ';'); if (sc) *sc = 0; lower(r.ctype); char *t = r.ctype + strlen(r.ctype); while (t > r.ctype && t[-1] == ' ') *--t = 0; }
             else if (!strcmp(h, "content-length")) r.clen = _atoi64(v);
+            else if (!strcmp(h, "cookie")) snprintf(r.cookie, sizeof r.cookie, "%s", v);
         }
         h = e ? e + 2 : NULL;
     }
-    InterlockedExchange(&G.last_seen, (LONG)GetTickCount());
-
-    if (!host_ok(&r)) { send_error(&r, 403, "host non consentito"); goto out; }
     if (!strcmp(r.method, "HEAD")) { r.head_only = 1; strcpy(r.method, "GET"); }
+    if (ospite) {
+        /* tablet dell'aula: rete locale, Host, codice/sessione e lista bianca (pd_tablet.c) */
+        if (!tablet_ingresso(&r)) goto out;
+    } else if (!host_ok(&r)) { send_error(&r, 403, "host non consentito"); goto out; }
+    InterlockedExchange(&G.last_seen, (LONG)GetTickCount());
     if (!strcmp(r.method, "POST")) {
-        if (!origin_ok(&r)) { send_error(&r, 403, "origine non consentita"); goto out; }
+        if (!ospite && !origin_ok(&r)) { send_error(&r, 403, "origine non consentita"); goto out; }
         size_t limit = !strcmp(r.path, "/api/stt") ? PD_MAX_BODY : PD_MAX_JSON + 64 * 1024;
         if (r.clen < 0 || (unsigned long long)r.clen > limit) { send_error(&r, 400, "richiesta troppo grande"); goto out; }
         r.body = (char *)malloc((size_t)r.clen + 1);
@@ -181,8 +189,9 @@ out:
     closesocket(s);
     free(r.body);
     free(hdr);
-    return 0;
 }
+static unsigned __stdcall conn_thread(void *arg) { serve_conn((SOCKET)(UINT_PTR)arg, 0); return 0; }
+unsigned __stdcall http_conn_ospite(void *arg) { serve_conn((SOCKET)(UINT_PTR)arg, 1); return 0; }
 
 static unsigned __stdcall accept_thread(void *arg) {
     (void)arg;

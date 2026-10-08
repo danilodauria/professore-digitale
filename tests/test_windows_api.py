@@ -303,6 +303,110 @@ finto.shutdown(); finto.server_close()
 call("/api/aula/rimuovi", {"id": "*"})
 call("/api/data/settings", {"value": dict(nuove, aulaRuolo="")}); call("/api/aula/applica", {})
 
+# --- 3.4: condivisione con i tablet dell'aula (stesse risposte di pd_server.py / pd_tablet.py) ---
+import http.client, socket
+def porta_chiusa(p):
+    s = socket.socket(); s.settimeout(2)
+    try: s.connect(("127.0.0.1", p)); return False
+    except OSError: return True
+    finally: s.close()
+def tab(metodo, path, body=None, cookie=None, headers=None):
+    c = http.client.HTTPConnection("127.0.0.1", TP, timeout=60)
+    h = {"Host": "127.0.0.1:%d" % TP}
+    if cookie: h["Cookie"] = "pd_tablet=" + cookie
+    if body is not None: h["Content-Type"] = "application/json"
+    h.update(headers or {})
+    c.request(metodo, path, body=json.dumps(body).encode() if body is not None else None, headers=h)
+    r = c.getresponse(); b = r.read(); hd = dict(r.getheaders()); c.close()
+    try: j = json.loads(b.decode())
+    except ValueError: j = None
+    return r.status, b, hd, j
+st, t0 = call("/api/tablet")
+TP = t0.get("porta")
+check("tablet: spenta per impostazione predefinita", st == 200 and t0["attivo"] is False and t0["codice"] == "" and t0["indirizzi"] == [], t0)
+check("tablet: porta dei tablet chiusa", TP and porta_chiusa(TP), TP)
+st, e = call("/api/tablet", {"azione": "boh"})
+check("tablet: azione sconosciuta → 400", st == 400, (st, e))
+st, t1 = call("/api/tablet", {"azione": "accendi"})
+cod = t1.get("codice", "")
+check("tablet: accesa con codice di 6 cifre", st == 200 and t1["attivo"] and len(cod) == 6 and cod.isdigit(), t1)
+check("tablet: indirizzi con porta e codice (loopback per i test)", "http://127.0.0.1:%d/?c=%s" % (TP, cod) in t1["indirizzi"] and "127.0.0.1" in t1["ips"], t1)
+st, b, hd, _ = tab("GET", "/")
+check("tablet: pagina del codice senza sessione", st == 200 and "Inserite il codice che vedete sullo schermo del facilitatore" in b.decode() and
+      "default-src 'none'" in hd.get("Content-Security-Policy", ""), (st, hd))
+st, b, hd, j = tab("GET", "/api/status")
+check("tablet: API senza sessione → 403", st == 403 and j and j["error"] == "serve il codice del facilitatore", (st, j))
+st, b, hd, j = tab("GET", "/js/app.js")
+check("tablet: file senza sessione → 403", st == 403, st)
+sbagliato = "%06d" % ((int(cod) + 1) % 1000000)
+st, b, hd, _ = tab("GET", "/?c=" + sbagliato)
+check("tablet: codice sbagliato → 403 e messaggio", st == 403 and "non è giusto" in b.decode() and "Set-Cookie" not in hd, st)
+st, b, hd, _ = tab("GET", "/?c=" + cod)
+ck = hd.get("Set-Cookie", "")
+tok = ck.split("pd_tablet=", 1)[-1].split(";", 1)[0]
+check("tablet: codice giusto → 303 verso / con cookie HttpOnly, SameSite=Strict, 12 ore", st == 303 and hd.get("Location") == "/" and len(tok) == 32 and
+      "HttpOnly" in ck and "SameSite=Strict" in ck and "Max-Age=43200" in ck and "Path=/" in ck, (st, hd))
+st, b, hd, j = tab("GET", "/api/status", cookie=tok)
+check("tablet: stato ridotto con ospite: true", st == 200 and j["ospite"] is True and j["system"] == {} and "update_url" not in j and "platform" not in j and
+      set(j["ai"]) == {"available", "models"} and j["stt"] == {"engine": None, "detail": None}, j)
+st, b, hd, _ = tab("GET", "/", cookie=tok)
+check("tablet: con la sessione arriva l'interfaccia", st == 200 and b"js/app.js" in b and "default-src 'self'" in hd.get("Content-Security-Policy", ""), st)
+st, b, hd, j = tab("GET", "/api/packs", cookie=tok)
+check("tablet: pacchetti senza percorsi del disco", st == 200 and j["packs"] and all("\\" not in p["file"] and "/" not in p["file"] for p in j["packs"]), [p["file"] for p in (j or {}).get("packs", [])][:3])
+st, b, hd, j = tab("GET", "/api/rete", cookie=tok)
+check("tablet: stato della rete permesso", st == 200 and isinstance(j.get("online"), bool), j)
+if j and voci:
+    st, b, hd, _ = tab("POST", "/api/tts", {"text": "Buongiorno dal tablet"}, cookie=tok)
+    check("tablet: voce del PC", st == 200 and b[:4] == b"RIFF", st)
+vietate = {}
+for m, p, corpo in (("GET", "/api/data/progress", None), ("POST", "/api/data/progress", {"value": 1}), ("POST", "/api/packs/import", {"pack": {}}),
+                    ("POST", "/api/packs/remove", {"id": "x"}), ("POST", "/api/packs/download", {}), ("POST", "/api/update-check", {}),
+                    ("POST", "/api/update-download", {}), ("POST", "/api/update-install", {}), ("POST", "/api/shutdown", {}), ("POST", "/api/heartbeat", {}),
+                    ("GET", "/api/aula", None), ("POST", "/api/aula/applica", {}), ("GET", "/api/tablet", None), ("POST", "/api/tablet", {"azione": "spegni"}),
+                    ("GET", "/api/setup/info", None), ("POST", "/api/setup/start", {}), ("POST", "/api/stt-reprobe", {}), ("POST", "/api/open", {}),
+                    ("POST", "/api/stt", None)):
+    vietate[m + " " + p] = tab(m, p, corpo, cookie=tok)[0]
+check("tablet: tutto il resto → 403 (dati, pacchetti, aggiornamenti, setup, spegnimento, aula, microfono)", all(v == 403 for v in vietate.values()), vietate)
+st, b, hd, j = tab("GET", "/api/status", cookie=tok, headers={"Host": "evil.example:%d" % TP})
+check("tablet: Host falso → 403", st == 403, st)
+st, b, hd, j = tab("POST", "/api/tts", {"text": "x"}, cookie=tok, headers={"Origin": "http://evil.example"})
+check("tablet: Origin estranea → 403", st == 403, st)
+st, b, hd, j = tab("POST", "/api/ospite/presenza", {"nome": "Lucia\u0007 Tablet", "attivita": {"vista": "home", "titolo": "Inizio"}}, cookie=tok)
+check("tablet: presenza senza aula → aula: false", st == 200 and j == {"ok": True, "aula": False}, (st, j))
+st, e = call("/api/ospite/presenza", {"nome": "x"})
+check("tablet: /api/ospite/presenza non esiste per il PC", st == 404, (st, e))
+_, sett = call("/api/data/settings")
+call("/api/data/settings", {"value": dict(sett.get("value") or {}, aulaRuolo="facilitatore", aulaCodice="2468")}); call("/api/aula/applica", {})
+da = int(time.time())
+st, b, hd, j = tab("POST", "/api/ospite/presenza", {"nome": "Lucia\u0007 Tablet", "attivita": {"vista": "lessons", "titolo": "Lezione: Il mouse"},
+                   "progressi": {"lezioni_fatte": 3, "lezioni_totali": 15}, "mano": {"alzata": True, "da": da, "messaggio": "aiuto"}}, cookie=tok)
+check("tablet: presenza nel quadro (facilitatore)", st == 200 and j["ok"] and j["aula"] is True and j["annuncio"]["id"] >= 0 and "mano" not in j, (st, j))
+cl = [c for c in (call("/api/aula")[1].get("clienti") or []) if c["id"].startswith("tablet-")]
+check("tablet: il quadro lo mostra come allievo (nome ripulito, mano alzata)", len(cl) == 1 and cl[0]["utente"] == "Lucia Tablet" and cl[0]["ip"] == "127.0.0.1" and
+      cl[0]["progressi"]["lezioni_fatte"] == 3 and cl[0]["mano"]["alzata"] is True and cl[0]["mano"]["messaggio"] == "aiuto" and cl[0]["pc"] == "Tablet o telefono", cl)
+st, r = call("/api/aula/rispondi", {"id": cl[0]["id"] if cl else "x", "stato": "arrivo"})
+st, b, hd, j = tab("POST", "/api/ospite/presenza", {"nome": "Lucia Tablet", "mano": {"alzata": True, "da": da, "messaggio": "aiuto"}}, cookie=tok)
+check("tablet: risposta mirata «arrivo» al tablet", j and j.get("mano") == {"da": da, "stato": "arrivo"}, j)
+st, b, hd, j = tab("POST", "/api/ospite/presenza", [1, 2], cookie=tok)
+check("tablet: presenza non valida → 400", st == 400, (st, j))
+st, t2 = call("/api/tablet")
+d = [x for x in t2["dispositivi"] if x["nome"] == "Lucia Tablet"]
+check("tablet: elenco dei dispositivi (nome, IP, pagina, ultimo accesso)", d and d[0]["ip"] == "127.0.0.1" and d[0]["fa_s"] >= 0 and len(d[0]["id"]) == 8, t2)
+call("/api/aula/rimuovi", {"id": "*"}); call("/api/data/settings", {"value": dict(sett.get("value") or {}, aulaRuolo="")}); call("/api/aula/applica", {})
+st, t3 = call("/api/tablet", {"azione": "codice"})
+check("tablet: «Cambia codice» → codice nuovo e sessioni chiuse", t3["codice"] != cod and t3["dispositivi"] == [] and tab("GET", "/api/status", cookie=tok)[0] == 403, t3)
+st, b, hd, _ = tab("GET", "/", cookie=tok)
+check("tablet: sessione scaduta → pagina del codice con spiegazione", st == 200 and "è scaduto" in b.decode(), st)
+st, b, hd, _ = tab("GET", "/?c=" + t3["codice"])
+tok2 = hd.get("Set-Cookie", "").split("pd_tablet=", 1)[-1].split(";", 1)[0]
+st, t4 = call("/api/tablet", {"azione": "togli", "id": call("/api/tablet")[1]["dispositivi"][0]["id"]})
+check("tablet: «togli» scollega un tablet", t4["dispositivi"] == [] and tab("GET", "/api/status", cookie=tok2)[0] == 403, t4)
+esiti = [tab("GET", "/?c=" + sbagliato)[0] for _ in range(11)]
+check("tablet: troppi tentativi → 429", esiti[-1] == 429 and 403 in esiti, esiti)
+st, t5 = call("/api/tablet", {"azione": "spegni"})
+time.sleep(0.5)
+check("tablet: «Spegni» chiude la porta", t5["attivo"] is False and t5["codice"] == "" and porta_chiusa(TP), t5)
+
 # --- chiusura ---
 rt = os.path.join(WORK, "dati", "locale", "runtime.json")
 check("file di esecuzione presente", os.path.isfile(rt))

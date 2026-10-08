@@ -190,6 +190,7 @@
       var er = validate(pack);
       if (er.length) return Promise.reject(new Error(er.slice(0, 4).join("; ")));
       var self = this;
+      if (PD.ospite) return Promise.reject(new Error("su un tablet collegato al PC dell'aula non si installano pacchetti: importateli sul PC del facilitatore"));
       var save = PD.server ? PD.api("/api/packs/import", { pack: pack }) : new Promise(function (res, rej) {
         var all = lsGet(); all[pack.id] = pack;
         if (lsSet(all)) res(); else rej(new Error("spazio del browser non disponibile"));
@@ -198,11 +199,13 @@
     },
     remove: function (id) {
       var self = this;
+      if (PD.ospite) return Promise.reject(new Error("i pacchetti si tolgono dal PC del facilitatore"));
       var p = PD.server ? PD.api("/api/packs/remove", { id: id }) : new Promise(function (res) { var all = lsGet(); delete all[id]; lsSet(all); res(); });
       return p.then(function () { return self.load(); });
     },
     download: function (url, sha256) {
       var self = this;
+      if (PD.ospite) return Promise.reject(new Error("i contenuti si scaricano dal PC del facilitatore"));
       return PD.api("/api/packs/download", { url: url, sha256: sha256 || "" }).then(function (r) { return self.load().then(function () { return r; }); });
     },
     template: function () {

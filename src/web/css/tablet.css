@@ -1,0 +1,40 @@
+/* Professore Digitale - «📱 Condividi con i tablet dell'aula» (3.4)
+ * Pagina #/tablet sul PC del facilitatore (QR code, codice e indirizzi scritti grandi) ed etichetta della modalità ospite.
+ * Ideato e sviluppato da Danilo D'Auria - Licenza MIT */
+
+.tablet-qr-riga { display: flex; gap: 1.6rem; align-items: flex-start; flex-wrap: wrap; }
+/* il QR resta sempre nero su bianco (anche nei temi scuri): le fotocamere lo leggono meglio */
+.tablet-qr { flex: 0 0 auto; background: #fff; padding: .4rem; border-radius: 12px; border: 2px solid var(--line); line-height: 0; }
+.tablet-qr svg { width: 17rem; height: 17rem; max-width: calc(100vw - 4rem); max-height: calc(100vw - 4rem); display: block; }
+.tablet-qr-vuoto { background: transparent; line-height: normal; max-width: 20rem; }
+.tablet-istruzioni { flex: 1 1 18rem; min-width: 0; }
+.tablet-istruzioni ol { padding-left: 1.4rem; margin: .3rem 0 .6rem; }
+.tablet-istruzioni li { margin-bottom: .35rem; }
+.tablet-indirizzi { margin: .2rem 0 1rem; }
+.tablet-url {
+  font-family: "DejaVu Sans Mono", "Liberation Mono", Consolas, monospace; font-size: 1.7rem; font-weight: 700;
+  color: var(--brand); overflow-wrap: anywhere; line-height: 1.25; margin-bottom: .3rem;
+}
+.tablet-codice {
+  display: inline-block; font-family: "DejaVu Sans Mono", "Liberation Mono", Consolas, monospace; font-size: 3.4rem; font-weight: 800;
+  letter-spacing: .12em; padding: .2rem 1.1rem; border-radius: 14px; background: var(--brand-soft); color: var(--ink); border: 3px solid var(--brand);
+}
+.tablet-comandi { margin-top: 1.2rem; }
+.tablet-tab td, .tablet-tab th { vertical-align: middle; }
+.tablet-carta-stato { white-space: nowrap; }
+
+/* tablet ospite: etichetta discreta tra i chip di stato */
+.chip.pd-ospite-chip { background: var(--brand-soft); color: var(--ink); border-color: var(--brand); }
+/* sugli schermi stretti i chip sono nascosti: sul tablet resta visibile solo l'etichetta dell'ospite */
+@media (max-width: 900px) {
+  html.pd-ospite .chips { display: flex; flex: 0 1 auto; }
+  html.pd-ospite .chips .chip:not(.pd-ospite-chip) { display: none; }
+}
+@media (max-width: 480px) { html.pd-ospite .chip.pd-ospite-chip { white-space: normal; text-align: center; max-width: 8.5rem; } }
+
+@media (max-width: 700px) {
+  .tablet-url { font-size: 1.25rem; }
+  .tablet-codice { font-size: 2.4rem; }
+  .tablet-qr svg { width: 14rem; height: 14rem; }
+}
+html[data-theme="contrast"] .tablet-codice { background: #000; color: #ffeb3b; border-color: #ffeb3b; }

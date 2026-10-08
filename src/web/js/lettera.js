@@ -2,8 +2,10 @@
  *  PROFESSORE DIGITALE - «Spiegami questa lettera»
  *  L'allievo fotografa (o scansiona) una bolletta, una multa, una lettera del Comune o dell'INPS,
  *  oppure ne scrive/incolla il testo. Il Professore:
- *   1. legge il testo SUL PC, senza Internet (OCR con tesseract.js servito da vendor/ocr/,
- *      caricato solo quando serve e solo con il server locale);
+ *   1. legge il testo SUL PC (o sul telefono), senza Internet (OCR con tesseract.js servito da vendor/ocr/,
+ *      caricato solo quando serve: con il server locale oppure nell'app per telefono e tablet,
+ *      dove make_pwa.py mette window.PD_OCR_LOCALE e il service worker salva i file al primo uso;
+ *      mai nella versione portatile file://);
  *   2. spiega in parole semplici con un motore a regole offline: tipo di documento, mittente,
  *      importi e totale, scadenze («mancano N giorni»), codici utili, termini per il ricorso,
  *      glossario delle parole difficili, cosa fare passo passo, controllo anti-truffa;
@@ -628,8 +630,10 @@
    * ---------------------------------------------------------------------- */
   var OCR = { stato: "spento", worker: null, promessa: null, simd: null };
   function baseOcr() { return location.href.replace(/[#?].*$/, "").replace(/[^\/]*$/, "") + "vendor/ocr/"; }
+  /* app per telefono e tablet (tools/make_pwa.py): pagina sul sito, vendor/ocr/ accanto a index.html */
+  function app() { return !PD.server && window.PD_OCR_LOCALE === true && /^https?:$/.test(location.protocol); }
   function ocrPossibile() {
-    return !!(PD.server && /^https?:$/.test(location.protocol) && typeof WebAssembly === "object" && typeof Worker === "function" &&
+    return !!((PD.server || app()) && /^https?:$/.test(location.protocol) && typeof WebAssembly === "object" && typeof Worker === "function" &&
       window.Promise && window.URL && document.createElement("canvas").getContext);
   }
   function haSimd() {
@@ -813,20 +817,29 @@
     PD.printHTML('<div class="lt-stampa">' + html + "</div>", "verticale");
   }
 
+  /* telefono o tablet: il dito al posto del mouse -> pulsante che apre direttamente la fotocamera */
+  function touch() { return !!(window.matchMedia && window.matchMedia("(pointer: coarse)").matches); }
   function htmlPagina() {
-    var ocr = ocrPossibile(), cam = ocr && navigator.mediaDevices && typeof navigator.mediaDevices.getUserMedia === "function";
-    var perche = !PD.server ? "Nella versione portatile (quella che si apre senza installare niente) il Professore non può leggere le foto: scrivete o incollate qui sotto il testo della lettera. Con il Professore installato sul computer potete anche fotografarla."
+    var ocr = ocrPossibile(), tel = ocr && touch();
+    var cam = ocr && !tel && navigator.mediaDevices && typeof navigator.mediaDevices.getUserMedia === "function";
+    var perche = location.protocol === "file:" ? "Nella versione portatile (quella che si apre senza installare niente) il Professore non può leggere le foto: scrivete o incollate qui sotto il testo della lettera. " +
+        "Con il Professore installato sul computer, oppure con l'app per telefono e tablet presa dal sito, potete anche fotografarla."
+      : !PD.server && window.PD_OCR_LOCALE !== true ? "In questa pagina il Professore non può leggere le foto: scrivete o incollate qui sotto il testo della lettera."
       : "Questo browser è troppo vecchio per leggere le foto: scrivete o incollate qui sotto il testo della lettera.";
+    var dove = app() ? "questo dispositivo" : "questo computer";
     return '<div class="lesson-head"><span class="big-ico">✉️</span><div><h1 style="margin:0">Spiegami questa lettera</h1>' +
       '<p class="lead" style="margin:0">Una bolletta, una multa, una lettera del Comune o dell\'INPS, una raccomandata… ' +
       (ocr ? "Fotografatela o scansionatela, oppure scrivetene il testo:" : "Scrivetene o incollatene il testo:") + " il Professore ve la spiega con parole semplici.</p></div></div>" +
-      '<div class="notice ok lt-privacy">🔒 <b>Resta tutto su questo computer.</b> La lettera contiene dati personali: il Professore la legge qui, senza Internet, ' +
+      '<div class="notice ok lt-privacy">🔒 <b>Resta tutto su ' + dove + '.</b> La lettera contiene dati personali: il Professore la legge qui, senza Internet, ' +
       "non la salva e non la manda a nessuno. Quando avete finito premete «🗑️ Dimentica questa lettera».</div>" +
       '<div class="card lt-box-ingresso">' +
       (ocr ? '<h2>1. Date la lettera al Professore</h2><div class="row lt-sorgenti">' +
-        '<input type="file" id="lt-file" accept="image/*,.pdf,application/pdf" class="lt-nascosto"><label class="btn big lt-file-btn" for="lt-file">📷 Carica la foto o la scansione</label>' +
+        (tel ? '<input type="file" id="lt-foto" accept="image/*" capture="environment" class="lt-nascosto"><label class="btn big lt-file-btn" for="lt-foto">📷 Fotografa la lettera</label>' : "") +
+        '<input type="file" id="lt-file" accept="image/*,.pdf,application/pdf" class="lt-nascosto"><label class="btn big lt-file-btn' + (tel ? " ghost" : "") + '" for="lt-file">' +
+        (tel ? "🖼️ Scegli una foto già fatta" : "📷 Carica la foto o la scansione") + "</label>" +
         (cam ? '<button class="btn big ghost" id="lt-cam">🎥 Usa la webcam</button>' : "") + "</div>" +
         '<p class="small muted">Consigli: lettera ben distesa, con tanta luce, foto dritta e da vicino, senza ombre. Vanno bene le foto del telefono (JPG o PNG).</p>' +
+        '<p class="notice info small lt-ocr-prima" hidden>📶 La prima volta che il Professore legge una foto serve Internet, per preparare i suoi «occhiali» (circa 6 MB). Dopo funziona anche senza Internet. Intanto potete scrivere il testo qui sotto.</p>' +
         '<div id="lt-cam-box" class="lt-cam" hidden><video id="lt-video" autoplay playsinline muted></video><div class="row"><button class="btn big" id="lt-scatta">📸 Scatta la foto</button><button class="btn ghost" id="lt-cam-stop">✖ Spegni la webcam</button></div></div>' +
         '<div id="lt-img-box" class="lt-img" hidden><div class="lt-anteprima"><canvas id="lt-canvas" aria-label="Anteprima della lettera"></canvas></div>' +
         '<div class="row lt-img-azioni"><button class="btn ghost" id="lt-ruota-s" title="Ruota a sinistra">↺ Ruota</button><button class="btn ghost" id="lt-ruota-d" title="Ruota a destra">↻ Ruota</button>' +
@@ -887,10 +900,11 @@
       stato.testo = ""; stato.r = null; stato.img = null; stato.canvas = null; stato.rot = 0;
       ta.value = "";
       var f = $("#lt-file", el); if (f) f.value = "";
+      f = $("#lt-foto", el); if (f) f.value = "";
       var ib = $("#lt-img-box", el); if (ib) ib.hidden = true;
       var cv = $("#lt-canvas", el); if (cv) { cv.width = 1; cv.height = 1; }
       var box = $("#lt-esito", el); box.hidden = true; box.innerHTML = "";
-      PD.toast("🗑️ Fatto: ho dimenticato la lettera. Sul computer non è rimasto niente.");
+      PD.toast("🗑️ Fatto: ho dimenticato la lettera. " + (app() ? "Sul dispositivo" : "Sul computer") + " non è rimasto niente.");
       window.scrollTo(0, 0);
     }
     $("#lt-spiega", el).onclick = spiega;
@@ -922,7 +936,14 @@
       leggi();
     }
     if (stato.img) disegna();
-    $("#lt-file", el).onchange = function () {
+    /* app senza Internet: gli «occhiali» (vendor/ocr/) sono già stati salvati dal service worker? */
+    if (app() && navigator.onLine === false && window.caches && caches.match) {
+      caches.match(baseOcr() + "tesseract.min.js").then(function (c) {
+        var nota = $(".lt-ocr-prima", el);
+        if (!c && nota) nota.hidden = false;
+      }, function () { /* ignora */ });
+    }
+    function sceltaFile() {
       var file = this.files && this.files[0];
       if (!file) return;
       if (/pdf$/i.test(file.type) || /\.pdf$/i.test(file.name)) {
@@ -939,7 +960,9 @@
         img.src = lettore.result;
       };
       lettore.readAsDataURL(file);
-    };
+    }
+    $("#lt-file", el).onchange = sceltaFile;
+    if ($("#lt-foto", el)) $("#lt-foto", el).onchange = sceltaFile;
     $("#lt-ruota-s", el).onclick = function () { annullaLettura(); stato.rot = (stato.rot + 270) % 360; disegna(); $("#lt-ocr", el).hidden = true; };
     $("#lt-ruota-d", el).onclick = function () { annullaLettura(); stato.rot = (stato.rot + 90) % 360; disegna(); $("#lt-ocr", el).hidden = true; };
     $("#lt-leggi-img", el).onclick = leggi;
@@ -993,7 +1016,9 @@
         btn.disabled = false; $("#lt-ocr-stop", el).hidden = true; $(".progress", box).hidden = true;
         if (PD.profState === "pensiero") PD.setProf("riposo");
         box.className = "lt-ocr lt-ocr-male";
-        msg.textContent = "Mi dispiace, su questo computer non riesco a leggere le foto (" + (e && e.message ? e.message : e) + "). Potete scrivere o incollare il testo qui sotto: la spiegazione funziona lo stesso.";
+        msg.textContent = app() && navigator.onLine === false
+          ? "Per leggere le foto, la prima volta serve Internet: collegatevi (Wi-Fi o dati) e premete di nuovo «📖 Leggi la lettera». Dopo funzionerà anche senza Internet. Intanto potete scrivere il testo qui sotto."
+          : "Mi dispiace, su " + (app() ? "questo dispositivo" : "questo computer") + " non riesco a leggere le foto (" + (e && e.message ? e.message : e) + "). Potete scrivere o incollare il testo qui sotto: la spiegazione funziona lo stesso.";
       });
     }
 

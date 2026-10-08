@@ -185,15 +185,23 @@ Section "Voci naturali italiane: Giorgio (uomo), Serena e Paola (donna)" SEC_VOC
 SectionEnd
 
 Section "-Firewall per l'aula"
-  ; il quadro dell'aula riceve i PC degli allievi solo nella rete locale (porte 8766 TCP e 8767 UDP), e solo se attivato
+  ; il quadro dell'aula riceve i PC degli allievi solo nella rete locale (porte 8766 TCP e 8767 UDP), e solo se attivato;
+  ; i tablet dell'aula (3.4) si collegano alla porta TCP 8768, solo se si accende la condivisione
   StrCmp $MultiUser.InstallMode "AllUsers" 0 fw_fine
   ${If} ${AtLeastWinVista}
     nsExec::Exec 'netsh advfirewall firewall delete rule name="Professore Digitale (aula)"'
     Pop $0
     nsExec::Exec 'netsh advfirewall firewall add rule name="Professore Digitale (aula)" dir=in action=allow program="$INSTDIR\${ESEGUIBILE}" enable=yes profile=private,domain'
     Pop $0
+    ; tablet dell'aula (3.4): porta TCP 8768, aperta dal programma solo se si accende la condivisione
+    nsExec::Exec 'netsh advfirewall firewall delete rule name="Professore Digitale (tablet)"'
+    Pop $0
+    nsExec::Exec 'netsh advfirewall firewall add rule name="Professore Digitale (tablet)" dir=in action=allow protocol=TCP localport=8768 program="$INSTDIR\${ESEGUIBILE}" enable=yes profile=private,domain'
+    Pop $0
   ${Else}
     nsExec::Exec 'netsh firewall add allowedprogram program="$INSTDIR\${ESEGUIBILE}" name="Professore Digitale (aula)" mode=ENABLE scope=SUBNET'
+    Pop $0
+    nsExec::Exec 'netsh firewall add portopening protocol=TCP port=8768 name="Professore Digitale (tablet)" mode=ENABLE scope=SUBNET'
     Pop $0
   ${EndIf}
   fw_fine:
@@ -226,10 +234,14 @@ Section "Uninstall"
   RMDir /r "$INSTDIR\stt"
   RMDir /r "$INSTDIR\piper"
   RMDir /r "$INSTDIR\voci"
-  StrCmp $MultiUser.InstallMode "AllUsers" 0 +5
+  StrCmp $MultiUser.InstallMode "AllUsers" 0 +9
   nsExec::Exec 'netsh advfirewall firewall delete rule name="Professore Digitale (aula)"'
   Pop $0
   nsExec::Exec 'netsh firewall delete allowedprogram program="$INSTDIR\${ESEGUIBILE}"'
+  Pop $0
+  nsExec::Exec 'netsh advfirewall firewall delete rule name="Professore Digitale (tablet)"'
+  Pop $0
+  nsExec::Exec 'netsh firewall delete portopening protocol=TCP port=8768'
   Pop $0
   Delete "$INSTDIR\${ESEGUIBILE}"
   Delete "$INSTDIR\VERSION"

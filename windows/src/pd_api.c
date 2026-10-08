@@ -65,7 +65,12 @@ typedef struct { char id[64]; char ver[32]; char origine[16]; char *file; char *
 static int cmp_wstr(const void *a, const void *b) { return wcscmp(*(wchar_t * const *)a, *(wchar_t * const *)b); }
 
 /* scrive {"packs": [...], "errori": [...]}  oppure (solo_versioni) restituisce l'elenco per update-check */
-static int load_packs(pack_entry **out, buf_t *errors) {
+static const char *solo_nome(const char *f) {   /* ai tablet si mostra solo il nome del file, mai il percorso */
+    const char *a = strrchr(f, '\\'), *b = strrchr(f, '/');
+    if (b > a) a = b;
+    return a ? a + 1 : f;
+}
+static int load_packs(pack_entry **out, buf_t *errors, int ospite) {
     struct { const char *orig; const wchar_t *dir; } dirs[3] = { { "sistema", G.system_packs }, { "computer", G.local_packs }, { "utente", G.user_packs } };
     pack_entry *list = NULL; int n = 0, cap = 0;
     int first_err = 1;
@@ -118,7 +123,7 @@ static int load_packs(pack_entry **out, buf_t *errors) {
             if (errs.n > 2 && errors) {
                 if (!first_err) buf_adds(errors, ", ");
                 first_err = 0;
-                buf_adds(errors, "{\"file\": "); json_str(errors, full8); buf_adds(errors, ", \"errori\": "); buf_add(errors, errs.p, errs.n); buf_adds(errors, "}");
+                buf_adds(errors, "{\"file\": "); json_str(errors, ospite ? solo_nome(full8) : full8); buf_adds(errors, ", \"errori\": "); buf_add(errors, errs.p, errs.n); buf_adds(errors, "}");
             }
             buf_free(&errs); json_free(p); free(full8); free(full); free(names[i]);
         }
@@ -131,13 +136,13 @@ static void free_packs(pack_entry *l, int n) { for (int i = 0; i < n; i++) { fre
 
 static void api_packs(req_t *r) {
     buf_t errs; buf_init(&errs);
-    pack_entry *l; int n = load_packs(&l, &errs);
+    pack_entry *l; int n = load_packs(&l, &errs, r->ospite);
     buf_t b; buf_init(&b);
     buf_adds(&b, "{\"ok\": true, \"packs\": [");
     for (int i = 0; i < n; i++) {
         if (i) buf_adds(&b, ", ");
         buf_adds(&b, "{\"origine\": "); json_str(&b, l[i].origine);
-        buf_adds(&b, ", \"file\": "); json_str(&b, l[i].file);
+        buf_adds(&b, ", \"file\": "); json_str(&b, r->ospite ? solo_nome(l[i].file) : l[i].file);
         buf_adds(&b, ", \"pacchetto\": "); buf_adds(&b, l[i].raw); buf_adds(&b, "}");
     }
     buf_adds(&b, "], \"errori\": ["); if (errs.n) buf_add(&b, errs.p, errs.n); buf_adds(&b, "]}");
@@ -246,7 +251,7 @@ static void api_update_check(req_t *r, jv *req) {
         } else buf_adds(&o, "null");
         free(cu);
         /* contenuti */
-        pack_entry *l; int n = load_packs(&l, NULL);
+        pack_entry *l; int n = load_packs(&l, NULL, 0);
         buf_adds(&o, ", \"contenuti\": [");
         jv *cont = jget(info, "contenuti"); int first = 1;
         for (size_t i = 0; cont && cont->t == J_ARR && i < cont->n && i < 50; i++) {
@@ -342,7 +347,21 @@ static void api_update_install(req_t *r, jv *req) {
 }
 
 /* ------------------------------------------------------------------ stato */
+/* tablet dell'aula: solo cio' che serve all'interfaccia, niente percorsi di disco o dati del PC (come pd_server.py) */
+static void api_status_ospite(req_t *r) {
+    buf_t ai; buf_init(&ai); buf_adds(&ai, "{"); ai_status_json(&ai); buf_adds(&ai, "}");
+    char e[64]; jv *a = json_parse(ai.p, ai.n, e, sizeof e), *x = jget(a, "ai"), *m = jget(x, "models");
+    buf_t b; buf_init(&b);
+    buf_adds(&b, "{\"ok\": true, \"version\": "); json_str(&b, G.version);
+    buf_addf(&b, ", \"mode\": \"server\", \"ospite\": true, \"ai\": {\"available\": %s, \"models\": ", jbool(x, "available", 0) ? "true" : "false");
+    if (m && m->t == J_ARR) buf_add(&b, m->raw, m->rawlen); else buf_adds(&b, "[]");
+    buf_adds(&b, "}, \"tts\": {\"engines\": "); tts_engines_json(&b); buf_adds(&b, ", \"voices\": "); tts_voices_json(&b);
+    buf_adds(&b, "}, \"stt\": {\"engine\": null, \"detail\": null}, \"system\": {}}");
+    send_json(r, 200, &b);
+    buf_free(&b); buf_free(&ai); json_free(a);
+}
 static void api_status(req_t *r) {
+    if (r->ospite) { api_status_ospite(r); return; }
     static pd_hw hw; static DWORD hw_t = 0;
     EnterCriticalSection(&G.lock);
     if (!hw_t || GetTickCount() - hw_t > 300000) { hw_detect(&hw); hw_t = GetTickCount(); if (!hw_t) hw_t = 1; }
@@ -381,6 +400,12 @@ void handle_api(req_t *r) {
     jv *req = NULL;
 
     if (!strncmp(path, "/api/setup/", 11)) { setup_api(r, path + 11); return; }
+    if (!r->ospite && !strcmp(path, "/api/tablet")) {        /* condivisione con i tablet: solo da questo PC */
+        if (!post) { tablet_api(r, NULL); return; }
+        req = read_json(r, err, sizeof err);
+        if (!req) { send_error(r, 400, err[0] ? err : "JSON non valido"); return; }
+        tablet_api(r, req); json_free(req); return;
+    }
 
     if (!post) {
         if (!strcmp(path, "/api/status")) { api_status(r); return; }
@@ -428,7 +453,10 @@ void handle_api(req_t *r) {
     req = read_json(r, err, sizeof err);
     if (!req) { send_error(r, 400, err[0] ? err : "JSON non valido"); return; }
 
-    if (!strcmp(path, "/api/chat")) { ai_chat(r, req); }
+    if (r->ospite && !strcmp(path, "/api/ospite/presenza")) tablet_presenza(r, req);
+    else if (r->ospite && (!strcmp(path, "/api/chat") || !strcmp(path, "/api/tts")) && !tablet_posto(!strcmp(path, "/api/chat")))
+        send_error(r, 503, "il PC dell'aula sta già rispondendo ad altri tablet: riprovate tra poco");
+    else if (!strcmp(path, "/api/chat")) { ai_chat(r, req); if (r->ospite) tablet_libera(1); }
     else if (!strncmp(path, "/api/aula/", 10)) aula_api(r, path + 10, req);
     else if (!strcmp(path, "/api/tts")) {
         buf_t wav; buf_init(&wav);
@@ -441,6 +469,7 @@ void handle_api(req_t *r) {
             send_response(r, 200, "audio/wav", wav.p, wav.n, extra);
         }
         buf_free(&wav);
+        if (r->ospite) tablet_libera(0);
     }
     else if (!strncmp(path, "/api/data/", 10)) {
         const char *key = path + 10;

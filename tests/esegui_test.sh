@@ -37,7 +37,7 @@ json.dump(info, open(os.path.join(d, "aggiornamenti.json"), "w"), ensure_ascii=F
 PY
 python3 -m http.server 18991 --bind 127.0.0.1 --directory "$T/sito" >/dev/null 2>&1 & PIDS+=($!)
 python3 tests/mock_ollama.py 18992 >/dev/null 2>&1 & PIDS+=($!)
-HOME="$T/home" PD_DATA_DIR="$T/dati" OLLAMA_HOST=http://127.0.0.1:18992 PD_AULA_PORT=18966 PD_AULA_UDP=18967 \
+HOME="$T/home" PD_DATA_DIR="$T/dati" OLLAMA_HOST=http://127.0.0.1:18992 PD_AULA_PORT=18966 PD_AULA_UDP=18967 PD_TABLET_PORT=18968 PD_TABLET_LOOPBACK=1 \
   python3 -B src/server/pd_server.py --port 18990 --idle-timeout 0 >"$T/server.log" 2>&1 & PIDS+=($!)
 sleep 2
 
@@ -48,6 +48,9 @@ PD_TEST_SITO=http://127.0.0.1:18991 PD_TEST_HOME="$T/home" \
 echo "== 4. Versione portatile"
 python3 tools/make_standalone.py src/web "$T/portatile.html" >/dev/null
 timeout 900 python3 tests/test_ui.py "file://$T/portatile.html" "$T/shots2" || ESITO=1
+
+echo "== 4b. App per telefono e tablet (PWA, offline)"
+timeout 900 python3 tests/test_pwa.py "$T/shots-pwa" || ESITO=1
 
 echo "== 5. Versione per Windows (server nativo in Wine)"
 if command -v wine >/dev/null && command -v i686-w64-mingw32-gcc >/dev/null; then

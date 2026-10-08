@@ -410,7 +410,7 @@
       '<h1>✏️ Crea lezioni e quiz</h1><p class="lead">Preparate lezioni, risposte e quiz sui servizi del vostro Comune, della vostra associazione o del vostro gruppo. ' +
       "Non serve conoscere l'informatica: compilate le schede, controllate e premete «Salva e usa».</p>" +
       '<div class="card ed-top"><div class="ed-top-tit"><span class="big-ico">📦</span><div><b id="ed-top-titolo">' + esc(trim(S.pack.titolo) || "Pacchetto senza titolo") + '</b><br><span class="small muted" id="ed-top-stato">' + stato + "</span></div></div>" +
-      '<div class="row"><button class="btn big" data-act="salva">💾 Salva e usa</button><button class="btn ghost" data-act="scarica">⬇️ Scarica il file del pacchetto</button></div></div>' +
+      '<div class="row">' + (PD.ospite ? "" : '<button class="btn big" data-act="salva">💾 Salva e usa</button>') + '<button class="btn ghost" data-act="scarica">⬇️ Scarica il file del pacchetto</button></div></div>' +
       '<nav class="ed-tabs" role="tablist">' + SCHEDE.map(function (s) {
         return '<button role="tab" class="ed-tab" data-tab="' + s[0] + '" aria-selected="' + (S.tab === s[0]) + '"><span aria-hidden="true">' + s[1] + "</span> " + s[2] + '<span class="ed-conta" data-conta="' + s[0] + '"></span></button>';
       }).join("") + "</nav>" +
@@ -570,8 +570,8 @@
     }).join("") + "</ul></div>";
     else h += '<div class="notice ok" id="ed-pronto"><b>👍 Il pacchetto è pronto.</b> Il controllo del programma non ha trovato errori.</div>';
     if (r.consigli.length) h += '<div class="notice info"><b>💡 Consigli per migliorarlo</b> (non obbligatori)<ul>' + r.consigli.map(function (x) { return "<li>" + esc(x.m) + "</li>"; }).join("") + "</ul></div>";
-    h += '<div class="row"><button class="btn big" data-act="salva"' + (r.errori.length ? " disabled" : "") + '>💾 Salva e usa</button><button class="btn ghost big" data-act="scarica">⬇️ Scarica il file del pacchetto</button></div>' +
-      '<p class="small muted">' + (PD.server ? "«Salva e usa» installa il pacchetto su questo computer: le lezioni compaiono subito." :
+    h += '<div class="row">' + (PD.ospite ? "" : '<button class="btn big" data-act="salva"' + (r.errori.length ? " disabled" : "") + '>💾 Salva e usa</button>') + '<button class="btn ghost big" data-act="scarica">⬇️ Scarica il file del pacchetto</button></div>' +
+      '<p class="small muted">' + (PD.ospite ? "📱 Su un tablet collegato al PC dell'aula il pacchetto non si installa: scaricate il file e importatelo sul PC del facilitatore (Impostazioni → Contenuti aggiuntivi → Importa)." : PD.server ? "«Salva e usa» installa il pacchetto su questo computer: le lezioni compaiono subito." :
         "Versione portatile: il pacchetto si salva in questo browser. Scaricate anche il file, per portarlo su altri computer (Impostazioni → Contenuti aggiuntivi → Importa).") + "</p>" +
       '<div id="ed-esito" aria-live="polite">' + esitoSalva + "</div></div>";
     return h;

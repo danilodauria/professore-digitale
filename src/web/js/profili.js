@@ -50,7 +50,7 @@
    * subito, in ordine, aspettando ogni risposta: cosi' nulla del profilo vecchio finisce su quello nuovo. */
   function scrivi(chiave, valore) {
     PD.store.save(chiave, valore);
-    if (!PD.server || !PD.api) return Promise.resolve();
+    if (!PD.server || PD.ospite || !PD.api) return Promise.resolve();   // tablet (ospite): solo nel browser
     return PD.api("/api/data/" + chiave, { value: valore }).then(function () {}, function (e) {
       if (window.console) console.warn("profili: salvataggio di " + chiave + " rimandato", e && e.message);
     });
@@ -419,7 +419,7 @@
     aggiornaBarra();
     // invito a voce: con il server l'avviatore permette l'audio subito; nel browser solo dopo un gesto dell'utente
     var attivo = navigator.userActivation ? navigator.userActivation.hasBeenActive : false;
-    if (chiestoAllAvvio && PD.speak && (PD.server || attivo)) {
+    if (chiestoAllAvvio && PD.speak && ((PD.server && !PD.ospite) || attivo)) {
       setTimeout(function () {
         if (/^#\/profili/.test(location.hash)) PD.speak("Buongiorno! Chi sta usando il computer? Toccate il vostro nome.");
       }, 700);

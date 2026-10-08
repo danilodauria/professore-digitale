@@ -161,6 +161,12 @@ typedef struct {
     int head_only;
     int sent;
     int forza;                       /* ?forza=1 nella richiesta */
+    int ospite;                      /* richiesta di un tablet dell'aula (pd_tablet.c) */
+    char ip[48];                     /* indirizzo di chi chiede */
+    char local[48];                  /* indirizzo di questo PC su cui e' arrivata la connessione */
+    char cookie[512];
+    char query[512];
+    char token[40];                  /* sessione del tablet (dal cookie) */
 } req_t;
 int  http_server_start(int port_from);
 void send_raw(req_t *r, const char *data, size_t n);
@@ -170,6 +176,7 @@ void send_error(req_t *r, int code, const char *msg);
 void send_ok(req_t *r);
 void handle_api(req_t *r);
 void handle_static(req_t *r);
+unsigned __stdcall http_conn_ospite(void *arg);  /* connessione arrivata sull'ascolto dei tablet */
 
 /* ------------------------------------------------------------------ componenti */
 /* hardware */
@@ -217,6 +224,17 @@ void aula_init(void);
 int  aula_facilitatore(void);
 void aula_api(req_t *r, const char *azione, jv *req);
 void aula_rete_json(buf_t *b, int forza);
+int  aula_indirizzi(char ips[][20], int max);    /* IPv4 di questo PC */
+int  aula_codice_facilitatore(char *codice, size_t n);   /* 1 se questo PC e' il facilitatore */
+int  aula_ricevi(const char *body, size_t n, const char *ip, buf_t *out);   /* come /aula/ciao */
+
+/* condivisione con i tablet dell'aula (spenta se non la si accende dal PC) */
+void tablet_init(void);
+void tablet_api(req_t *r, jv *req);              /* GET/POST /api/tablet, solo dal PC */
+int  tablet_ingresso(req_t *r);                  /* tablet: 1 = si prosegue, 0 = risposta gia' inviata */
+void tablet_presenza(req_t *r, jv *req);         /* POST /api/ospite/presenza */
+int  tablet_posto(int chat);                     /* limite di richieste insieme (IA o voce): 1 = c'e' posto */
+void tablet_libera(int chat);
 
 /* configurazione guidata */
 void setup_api(req_t *r, const char *path);

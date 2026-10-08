@@ -396,6 +396,7 @@ int WINAPI wWinMain(HINSTANCE inst, HINSTANCE prev, PWSTR cmdline, int show) {
     g_quit = CreateEventW(NULL, TRUE, FALSE, NULL);
     ai_init();
     aula_init();
+    tablet_init();     /* condivisione con i tablet: solo se l'utente l'ha accesa su questo PC */
     tts_init();
     create_window(inst, tray && !getenv("PD_NO_TRAY"));
     if (!no_browser) open_app_window(hash);

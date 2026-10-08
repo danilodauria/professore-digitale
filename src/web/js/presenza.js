@@ -79,7 +79,7 @@
     if (!PD.settings.voice) return;
     var attiva = navigator.userActivation ? navigator.userActivation.hasBeenActive : false;
     // l'avviatore apre il browser con la riproduzione automatica permessa; altrove si aspetta il primo clic
-    if (PD.server && !attiva) {
+    if (PD.server && !PD.ospite && !attiva) {   // sul tablet (ospite) il browser non permette l'audio prima di un tocco
       fetch("/api/tts", { method: "POST", headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ text: t, rate: PD.settings.rate, voice: PD.settings.voiceId || "" }) })
         .then(function (r) { if (!r.ok) throw new Error("voce"); return r.blob(); })
@@ -171,7 +171,7 @@
       if (chiuso) return; chiuso = true; PD.stopSpeech();
       ov.querySelector(".uscita-card").innerHTML = PD.profHTML() + "<div><h2>" + (PD.isLate() ? "🌙 Buona notte!" : "👋 Arrivederci!") +
         "</h2><p>Il Professore si è chiuso. Ora potete chiudere questa finestra.</p></div>";
-      var stop = PD.server ? PD.api("/api/shutdown", {}).catch(function () {}) : Promise.resolve();
+      var stop = PD.server && !PD.ospite ? PD.api("/api/shutdown", {}).catch(function () {}) : Promise.resolve();   // un tablet non spegne il PC
       stop.then(function () { setTimeout(function () { try { window.close(); } catch (e) { /* finestra non chiudibile da script */ } }, 400); });
     }
     $("#u-esci", ov).onclick = vai; $("#u-resta", ov).onclick = resta;

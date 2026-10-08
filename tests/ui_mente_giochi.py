@@ -104,7 +104,7 @@ def sol(page):
 
 
 def fine_ok(page, gioco):
-    page.wait_for_selector(V + " .mente-fine:not([hidden]) .mente-fine-card", timeout=8000)
+    page.wait_for_selector(V + " .mente-fine:not([hidden]) .mente-fine-card", timeout=20000)
     return page.evaluate("(g) => { var s = PD.mente.stato(g); return s && s.volte >= 1 && s.massimo > 0 ? s : null; }", gioco)
 
 

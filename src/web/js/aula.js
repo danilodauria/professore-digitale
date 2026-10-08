@@ -42,7 +42,46 @@
       palestra: Object.keys(prat).length
     };
   }
+  function annuncio(a) {
+    if (a && a.id && a.testo && a.id !== PD.progress.ultimoAnnuncio) {
+      PD.progress.ultimoAnnuncio = a.id; PD.saveProgress();
+      PD.bubble("📣 **Messaggio dal facilitatore:** " + a.testo, [{ t: "Ho capito", fn: function () {} }], 0);
+      PD.speak("Messaggio dal facilitatore. " + a.testo, true);
+    }
+  }
+
+  /* ------------------------------------------------------------------ tablet ospite (3.4)
+   *  Un tablet collegato al PC dell'aula (PD.ospite) non ha un server suo: invia la presenza al PC con
+   *  POST /api/ospite/presenza {nome, attivita, progressi, mano}; il PC la mette nel quadro dell'aula
+   *  (se è il facilitatore) con le stesse regole di /aula/ciao e risponde {ok, aula, nome, annuncio, mano?}.
+   *  La mano alzata del tablet vive qui, nel browser: da = istante della richiesta (identificativo). */
+  var ospite = { aula: null, ok: true, nome: "", mano: { alzata: false, da: 0, messaggio: "", risposta: "" } };
+  function statoOspite() {
+    var m = ospite.mano;
+    return { ruolo: ospite.aula ? "allievo" : "", invio: { ok: ospite.ok, fa_s: 0 },
+      mano: { alzata: m.alzata, da: m.da, messaggio: m.messaggio, risposta: m.risposta } };
+  }
+  function presenzaOspite() {
+    var m = ospite.mano;
+    if (m.alzata && Date.now() / 1000 - m.da > 30 * 60) { m.alzata = false; m.messaggio = ""; m.risposta = ""; }   // dopo 30 minuti si abbassa
+    var corpo = { nome: PD.settings.studentName || "", attivita: attivitaCorrente(), progressi: riepilogo(),
+      mano: { alzata: m.alzata, da: m.da, messaggio: m.alzata ? m.messaggio : "" } };
+    return PD.api("/api/ospite/presenza", corpo).then(function (r) {
+      var prima = ospite.aula;
+      ospite.ok = true; ospite.aula = !!r.aula; ospite.nome = r.nome || "";
+      if (r.mano && r.mano.da === m.da) {
+        if (r.mano.stato === "risolto") { m.alzata = false; m.messaggio = ""; m.risposta = "risolto"; }
+        else if (r.mano.stato === "arrivo" && m.alzata) m.risposta = "arrivo";
+      }
+      annuncio(r.annuncio);
+      if (prima !== ospite.aula) mani.ruolo(statoOspite());
+      return r;
+    }).catch(function () { ospite.ok = false; return null; });
+  }
+  PD.aulaOspite = function () { return statoOspite(); };
+
   PD.aulaPresenza = function () {
+    if (PD.ospite) return presenzaOspite();
     if (!PD.server || PD.settings.aulaRuolo !== "allievo") return Promise.resolve(null);
     var S = PD.status || { tts: { engines: [] }, stt: {} };
     var corpo = {
@@ -51,25 +90,21 @@
       attivita: attivitaCorrente(), progressi: riepilogo()
     };
     return PD.api("/api/aula/presenza", corpo).then(function (r) {
-      var a = r.annuncio;
-      if (a && a.id && a.testo && a.id !== PD.progress.ultimoAnnuncio) {
-        PD.progress.ultimoAnnuncio = a.id; PD.saveProgress();
-        PD.bubble("📣 **Messaggio dal facilitatore:** " + a.testo, [{ t: "Ho capito", fn: function () {} }], 0);
-        PD.speak("Messaggio dal facilitatore. " + a.testo, true);
-      }
+      annuncio(r.annuncio);
       return r;
     }).catch(function () { return null; });
   };
   var prevHash = "";
   window.addEventListener("hashchange", function () {
     // quando l'allievo cambia pagina il facilitatore lo vede subito (al massimo una volta ogni 4 secondi)
-    if (PD.settings.aulaRuolo !== "allievo" || location.hash === prevHash) return;
+    if ((PD.settings.aulaRuolo !== "allievo" && !PD.ospite) || location.hash === prevHash) return;
     prevHash = location.hash; clearTimeout(PD._aulaT); PD._aulaT = setTimeout(PD.aulaPresenza, 4000);
   });
 
   /* ------------------------------------------------------------------ vista */
   PD.views.aula = function (el) {
     clearInterval(timer);
+    if (PD.ospite) return vistaOspite(el);
     if (!PD.server) {
       el.innerHTML = '<h1>🏫 Aula</h1><p class="notice info">Il quadro dell\'aula funziona con il programma installato (.exe per Windows, .deb per Linux), non con la versione portatile.</p>';
       return;
@@ -82,6 +117,29 @@
       if (!document.activeElement || !/INPUT|TEXTAREA|SELECT/.test(document.activeElement.tagName)) carica(el, false);
     }, 5000);
   };
+
+  /* pagina Aula sul tablet ospite: nome, stato del collegamento, cosa viene inviato */
+  function vistaOspite(el) {
+    el.innerHTML = '<h1>🏫 Aula</h1><div class="card"><h2 style="margin-top:0">📱 Questo tablet è collegato al PC dell\'aula</h2>' +
+      '<p>Usate la voce, l\'intelligenza artificiale e i contenuti del PC del facilitatore. <b>I vostri progressi restano su questo tablet.</b></p>' +
+      '<div class="field"><label for="ao-nome">Il vostro nome (lo vedrà il facilitatore)</label><div class="row">' +
+      '<input type="text" id="ao-nome" maxlength="60" placeholder="es. Maria Rossi" value="' + esc(PD.settings.studentName || "") + '" style="flex:1;min-width:12rem">' +
+      '<button class="btn" id="ao-salva" type="button">💾 Salva</button></div></div><div id="ao-stato" aria-live="polite"></div>' +
+      '<p class="notice info small">🔒 Al PC del facilitatore arrivano solo, nella rete dell\'aula: il vostro nome, la pagina che state usando, le lezioni completate, ' +
+      "i risultati dei quiz, gli attestati e la mano alzata. <b>Mai</b> le conversazioni con il Professore.</p></div>";
+    function stato() {
+      var b = $("#ao-stato", el); if (!b) return;
+      b.innerHTML = ospite.aula ? '<p class="notice ok">✅ Siete nel quadro dell\'aula' + (ospite.nome ? " «" + esc(ospite.nome) + "»" : "") +
+          '. Se vi serve aiuto premete «✋ Ho bisogno di aiuto».</p>'
+        : ospite.ok ? '<p class="notice">Il PC del facilitatore non ha acceso il quadro dell\'aula: il pulsante «✋ Ho bisogno di aiuto» comparirà quando lo farà.</p>'
+          : '<p class="notice">⚠️ Il PC dell\'aula non risponde. Controllate di essere collegati alla stessa rete Wi-Fi.</p>';
+    }
+    $("#ao-salva", el).onclick = function () {
+      PD.settings.studentName = $("#ao-nome", el).value.replace(/[\u0000-\u001f\u007f-\u009f]/g, " ").trim().slice(0, 60); PD.saveSettings();
+      presenzaOspite().then(function () { stato(); PD.toast("👍 Nome salvato: il facilitatore lo vede nel quadro dell'aula."); });
+    };
+    presenzaOspite().then(stato); stato();
+  }
 
   function carica(el, tutto) {
     PD.api("/api/aula").then(function (st) { ultimoStato = st; disegna(el, st, tutto); mani.aggiorna(st); }).catch(function (e) {
@@ -97,7 +155,7 @@
         ruoloCard("facilitatore", "🧑‍🏫", "Il PC del facilitatore", "Riceve i progressi degli allievi e mostra il quadro dell'aula.", ruolo) +
         ruoloCard("allievo", "🧑‍🎓", "Il PC di un allievo", "Si collega da solo al PC del facilitatore e gli invia nome, attività e progressi.", ruolo) +
         ruoloCard("", "💻", "Un PC senza aula", "Nessun collegamento: tutto resta su questo computer.", ruolo) + "</div>" +
-        '<div id="aula-campi"></div></div><div id="aula-vivo"></div>' +
+        '<div id="aula-campi"></div></div><div id="aula-vivo"></div>' + (PD.tablet ? PD.tablet.cartaHTML() : "") +
         '<div class="card"><h2 style="margin-top:0">🔍 La rete dell\'aula</h2><p class="small muted">Cerca i PC dei facilitatori e il server degli aggiornamenti nella rete locale.</p>' +
         '<button class="btn ghost" id="aula-cerca">🔍 Cerca nella rete</button><div id="aula-rete" style="margin-top:.6rem"></div></div>';
       campi(c, ruolo);
@@ -105,6 +163,7 @@
         r.onchange = function () { campi(c, this.value); };
       });
       $("#aula-cerca", c).onclick = function () { cerca(c); };
+      if (PD.tablet) PD.tablet.cartaBind(c);
     }
     vivo($("#aula-vivo", c), st);
     void s;
@@ -334,6 +393,7 @@
     }
     function alza(su, messaggio) {
       if (inCorso) return; inCorso = true;
+      if (PD.ospite) return alzaOspite(su, messaggio);
       var corpo = { alzata: su }; if (messaggio !== undefined) corpo.messaggio = messaggio;
       // prima la presenza aggiornata (pagina in uso), poi la mano: il server la invia subito al facilitatore
       (su && !statoMano.alzata && PD.aulaPresenza ? PD.aulaPresenza() : Promise.resolve()).then(function () {
@@ -347,8 +407,23 @@
         disegnaAllievo(); pianifica(1500);
       }).catch(function (e) { inCorso = false; PD.toast("Non riuscito: " + e.message, 5000); });
     }
+    function alzaOspite(su, messaggio) {
+      var m = ospite.mano, prima = m.alzata;
+      if (su && !m.alzata) m.da = Math.max(Math.floor(Date.now() / 1000), m.da + 1);   // nuova richiesta
+      if (su) { m.alzata = true; if (!prima) m.risposta = ""; if (messaggio !== undefined || !prima) m.messaggio = messaggio || ""; }
+      else { m.alzata = false; m.messaggio = ""; m.risposta = ""; }
+      presenzaOspite().then(function (r) {
+        inCorso = false;
+        if (!r) { PD.toast("Non riuscito: il PC dell'aula non risponde.", 5000); invioOk = false; }
+        statoMano = statoOspite().mano;
+        if (r && su && !prima) PD.toast("✋ Ho avvisato il facilitatore: arriva appena può.", 4500);
+        else if (r && su && messaggio !== undefined) { PD.toast("✉️ Messaggio inviato al facilitatore."); var i = $("#pd-mano-msg", elAllievo); if (i) i.value = ""; }
+        else if (r && !su) PD.toast("👇 Mano abbassata.");
+        disegnaAllievo(); pianifica(1500);
+      });
+    }
     function controllaAllievo() {
-      return PD.api("/api/aula").then(function (st) {
+      return (PD.ospite ? presenzaOspite().then(statoOspite) : PD.api("/api/aula")).then(function (st) {
         if (st.ruolo !== "allievo") { ruolo(st); return; }
         var m = st.mano || { alzata: false, risposta: "" }, prima = statoMano;
         invioOk = !(st.invio && st.invio.ok === false && st.invio.fa_s != null);
@@ -458,6 +533,7 @@
   var prevReady = PD.onReady;
   PD.onReady = function () {
     if (prevReady) prevReady();
+    if (PD.ospite) { presenzaOspite(); return; }     // la risposta dice se il PC è il facilitatore (mani.ruolo)
     if (!PD.server || !PD.settings.aulaRuolo) return;
     PD.api("/api/aula").then(function (st) { mani.ruolo(st); }).catch(function () { /* aula non disponibile */ });
   };

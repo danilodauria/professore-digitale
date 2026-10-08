@@ -24,9 +24,13 @@
     updateUrl: "", teacherName: "", eyesFollow: true,
     voiceId: "", netCheck: true, idleTips: true, greet: true, goodbye: true, studentName: "",
     aulaRuolo: "", aulaNome: "Aula", aulaCodice: "", aulaServer: "",
-    voiceCommands: false, tremore: false, vista: false, leggiFocus: false, domandaGiorno: true, aulaManoSuono: true
+    voiceCommands: false, tremore: false, vista: false, leggiFocus: false, domandaGiorno: true, aulaManoSuono: true,
+    tabletCondividi: false
   };
   PD.server = false;
+  /* Modalità ospite (3.4): questo browser è un tablet o un telefono collegato al PC dell'aula (tablet.js, pd_tablet.py).
+   * PD.server resta vero per voce, IA e contenuti del PC, ma i dati si salvano SOLO in questo browser. */
+  PD.ospite = false;
   PD.status = null;
   PD.settings = Object.assign({}, DEFAULTS);
   PD.progress = { lessons: {} };
@@ -46,13 +50,13 @@
   var saveTimers = {};
   PD.store = {
     load: function (key) {
-      if (!PD.server) return Promise.resolve(lsGet(key));
+      if (!PD.server || PD.ospite) return Promise.resolve(lsGet(key));
       return api("/api/data/" + key).then(function (r) { return r.value != null ? r.value : lsGet(key); })
         .catch(function () { return lsGet(key); });
     },
     save: function (key, value) {
       lsSet(key, value);
-      if (!PD.server) return;
+      if (!PD.server || PD.ospite) return;
       clearTimeout(saveTimers[key]);
       saveTimers[key] = setTimeout(function () {
         api("/api/data/" + key, { value: value }).catch(function () { /* riprova al prossimo salvataggio */ });
@@ -89,8 +93,11 @@
   PD.detect = function () {
     if (!/^https?:$/.test(location.protocol)) { PD.server = false; PD.status = null; renderChips(); return Promise.resolve(); }
     return timeout(8000, api("/api/status")).then(function (s) {
-      PD.server = true; PD.status = s; PD.version = s.version;
-    }).catch(function () { PD.server = false; PD.status = null; }).then(renderChips);
+      PD.server = true; PD.status = s; PD.version = s.version; PD.ospite = !!s.ospite;
+    }).catch(function (e) {
+      if (PD.ospite && e && e.status === 403) PD.toast("📱 Il collegamento con il PC dell'aula è scaduto: ricaricate la pagina e inserite il nuovo codice.", 8000);
+      PD.server = false; PD.status = null;
+    }).then(renderChips);
   };
   PD.aiReady = function () {
     return PD.server && PD.settings.aiEnabled && PD.status && PD.status.ai.available && PD.status.ai.models.length > 0;
@@ -101,7 +108,7 @@
     if (PD.settings.model && m.indexOf(PD.settings.model) >= 0) return PD.settings.model;
     return m[0] || "";
   };
-  PD.sttReady = function () { return PD.server && PD.status && !!PD.status.stt.engine; };
+  PD.sttReady = function () { return PD.server && !PD.ospite && PD.status && !!PD.status.stt.engine; };
 
   var TTS_NAME = { sapi: "voce di Windows", piper: "voce naturale", pico: "pico", "espeak-ng": "espeak-ng", espeak: "espeak" };
   PD.isWindows = function () { return !!(PD.status && PD.status.platform === "windows"); };
@@ -113,12 +120,14 @@
       html.push(PD.aiReady() ? chip(true, "🤖 " + PD.currentModel()) : chip(false, "🤖 Guida interna"));
       var tts = PD.status.tts.engines;
       html.push(chip(tts.length > 0, "🔊 " + (TTS_NAME[tts[0]] || tts[0] || "voce browser")));
-      html.push(chip(PD.sttReady(), "🎤 " + (PD.status.stt.engine || "microfono spento")));
+      if (!PD.ospite) html.push(chip(PD.sttReady(), "🎤 " + (PD.status.stt.engine || "microfono spento")));
     } else {
-      html.push(chip(false, "📄 Versione portatile (solo browser)"));
+      html.push(chip(false, window.PD_PWA ? "📱 App per telefono e tablet" : "📄 Versione portatile (solo browser)"));
       html.push(chip("speechSynthesis" in window, "🔊 Voce del browser"));
     }
     html.push(chip(true, "🔒 Offline"));
+    document.documentElement.classList.toggle("pd-ospite", !!PD.ospite);
+    if (PD.ospite) html.unshift('<span class="chip on pd-ospite-chip" title="Questo tablet usa la voce, l\'IA e i contenuti del PC del facilitatore. I progressi restano su questo tablet.">📱 Collegato al PC dell\'aula</span>');
     c.innerHTML = html.join("");
     renderNet();
     function chip(on, t) { return '<span class="chip ' + (on ? "on" : "off") + '" title="' + esc(t) + '">' + esc(t) + "</span>"; }
@@ -529,7 +538,7 @@
       '<div class="hero">' + PD.profHTML() + "<div>" +
       "<h1>" + hello + "!</h1>" +
       '<p class="lead">Sono il vostro <b>Professore Digitale</b>. Vi accompagno passo dopo passo nel mondo del computer, ' +
-      "con parole semplici e senza fretta. Funziono <b>senza Internet</b> e ciò che dite resta su questo computer.</p>" +
+      "con parole semplici e senza fretta. Funziono <b>senza Internet</b> e ciò che dite resta su questo " + (window.PD_PWA || PD.ospite ? "dispositivo" : "computer") + ".</p>" +
       '<div class="row">' +
       (nx ? '<button class="btn big" data-go="#/lessons/' + nx.id + '">▶ ' + (st.done ? "Continua: " : "Inizia: ") + esc(nx.title) + "</button>"
           : '<span class="notice ok">🎉 Avete completato tutte le lezioni del corso. Complimenti!</span>') +
@@ -549,13 +558,16 @@
       tile("🔥", "FeniceOS", "Il sistema che fa rinascere i vecchi computer: riuso ed economia circolare.", "#/fenice") +
       tile("🎓", "Quiz e attestati", "Tutti i grandi quiz e gli attestati da stampare con il vostro nome.", "#/quiz") +
       (PD.server ? '<a class="card tile" href="' + PD.vademecumUrl() + '" target="_blank" rel="noopener"><span class="big-ico">📘</span><h3>Vademecum</h3><p>Il libretto di istruzioni completo, da leggere o stampare.</p></a>' : "") +
-      (PD.server ? tile("🏫", "Aula", "Il quadro dell'aula: PC collegati, progressi degli allievi, messaggi.", "#/aula") : "") +
+      (PD.ospite ? tile("🏫", "Aula", "Il vostro nome nel quadro del facilitatore e il pulsante per chiedere aiuto.", "#/aula") :
+        PD.server ? tile("🏫", "Aula", "Il quadro dell'aula: PC collegati, progressi degli allievi, messaggi.", "#/aula") : "") +
       PD.hooks.homeTiles.map(function (f) { try { return f() || ""; } catch (e) { return ""; } }).join("") +
       "</div>" +
       PD.hooks.homeCards.map(function (c) { try { return c.html() || ""; } catch (e) { return ""; } }).join("") +
       '<div class="card promemoria" id="home-promemoria"></div>' +
       '<p class="sostieni-riga small muted">Il Professore Digitale è gratuito e libero. <a href="#/sostieni" data-go="#/sostieni">❤️ Sostieni il progetto</a></p>' +
-      (!PD.server ? '<p class="notice info small">Questa è la <b>versione portatile</b>: lezioni, guida, lavagna, palestra e quiz funzionano ovunque. ' +
+      (!PD.server && window.PD_PWA ? '<p class="notice info small">Questa è l\'<b>app per telefono e tablet</b>: lezioni, guida, palestra, quiz e lettura delle lettere funzionano anche senza Internet. ' +
+      "I vostri progressi restano su questo dispositivo.</p>" : "") +
+      (!PD.server && !window.PD_PWA ? '<p class="notice info small">Questa è la <b>versione portatile</b>: lezioni, guida, lavagna, palestra e quiz funzionano ovunque. ' +
       "Per l'intelligenza artificiale locale, le voci naturali, il microfono e l'aula installate il programma completo (<b>.exe</b> per Windows, <b>.deb</b> per Linux).</p>" : "") +
       (PD.isWindows() && !PD.aiReady() && PD.status.ai.recommended && !PD.status.ai.engine ? '<p class="notice info small">💡 Su questo computer può funzionare anche l\'<b>intelligenza artificiale locale</b> ' +
       '(consigliata: ' + esc(PD.status.ai.recommended) + '). <a href="#/setup" data-go="#/setup">Configuratela con un clic</a>.</p>' : "");
@@ -690,7 +702,7 @@
       '<div class="suggest" id="suggest">' + pickSuggestions(PD.history.length ? 4 : 8).map(function (s) { return "<button>" + esc(s) + "</button>"; }).join("") + "</div>" +
       '<form class="composer" id="composer"><button type="button" class="mic" id="mic" title="' +
       (PD.sttReady() ? "Premete e parlate; premete di nuovo per finire" : "Microfono non disponibile: vedi Impostazioni") + '" aria-label="Microfono"' +
-      (PD.sttReady() ? "" : " disabled") + '>🎤</button>' +
+      (PD.sttReady() ? "" : " disabled") + (PD.ospite ? " hidden" : "") + '>🎤</button>' +
       '<textarea id="question" rows="2" placeholder="Scrivete qui la domanda…" aria-label="La vostra domanda"></textarea>' +
       '<button class="btn big" id="send" type="submit">Invia</button></form>' +
       '<div class="row small" style="margin-top:.6rem"><button class="btn ghost" id="clear-chat" type="button">🧹 Nuova conversazione</button>' +
@@ -957,7 +969,9 @@
       sw("s-idle", "Quando nessuno lo usa per un po', il Professore dà qualche consiglio e poi si mette in attesa", s.idleTips) + "</div>" +
 
       '<div class="card"><h2 style="margin-top:0">🤖 Intelligenza artificiale locale</h2>' +
-      (PD.server ? (S.ai.available
+      (PD.ospite ? '<p class="notice info small">📱 Questo tablet usa l\'intelligenza artificiale del <b>PC dell\'aula</b>' +
+        (models.length ? ": è attiva." : ", che in questo momento non è attiva: risponde la guida interna.") + "</p>" :
+      PD.server ? (S.ai.available
         ? (models.length ? '<p class="notice ok small">' + esc(S.ai.engine_title || "Ollama") + " è attivo. Modelli installati: " + models.length + ".</p>"
           : '<p class="notice small">Ollama è attivo ma non ha modelli. ' + (PD.isWindows() ? 'Andate in <a href="#/setup" data-go="#/setup">Configura IA e voce</a>.' : "Installate un modello con <code>professore-digitale-setup-ia</code>.") + "</p>")
         : (PD.isWindows() ? '<p class="notice small">L\'IA locale non è attiva: il Professore risponde con la <b>guida interna</b>. <a href="#/setup" data-go="#/setup">Configurate l\'IA con un clic</a> (il programma sceglie il modello adatto a questo computer).</p>'
@@ -966,27 +980,28 @@
       sw("s-ai", "Usa l'IA quando disponibile", s.aiEnabled) +
       (models.length ? field("Modello", select("s-model", models.map(function (m) { return [m, m]; }), PD.currentModel())) : "") +
       sw("s-kbctx", "Suggerisci all'IA le informazioni della guida (risposte più precise)", s.useKbContext) +
-      (S ? '<p class="small muted">Modello consigliato per questo computer (' + Math.round(S.system.ram_mb / 1024 * 10) / 10 + " GB di RAM): <b>" + esc(S.ai.recommended) + "</b></p>" : "") + "</div>" +
+      (S && !PD.ospite ? '<p class="small muted">Modello consigliato per questo computer (' + Math.round(S.system.ram_mb / 1024 * 10) / 10 + " GB di RAM): <b>" + esc(S.ai.recommended) + "</b></p>" : "") + "</div>" +
 
-      '<div class="card"><h2 style="margin-top:0">🎤 Microfono</h2>' +
+      (PD.ospite ? "" : '<div class="card"><h2 style="margin-top:0">🎤 Microfono</h2>' +
       (PD.sttReady() ? '<p class="notice ok small">Riconoscimento vocale attivo: <b>' + esc(S.stt.engine) + "</b>.</p>"
         : (PD.isWindows() ? '<p class="notice small">Riconoscimento vocale non installato. Attivatelo da <a href="#/setup" data-go="#/setup">Configura IA e voce</a> (circa 50 MB, una sola volta con Internet, oppure dalla chiavetta).</p>'
           : '<p class="notice small">Riconoscimento vocale non installato. Per attivarlo (circa 50 MB, una sola volta con Internet) aprite un terminale e date il comando <code>professore-digitale-setup-voce</code>.</p>')) +
       sw("s-autosend", "Invia subito la domanda dopo aver parlato", s.autoSendVoice) +
-      (PD.server ? '<button class="btn ghost" id="reprobe">🔄 Ricontrolla i componenti</button>' : "") + "</div>" +
+      (PD.server ? '<button class="btn ghost" id="reprobe">🔄 Ricontrolla i componenti</button>' : "") + "</div>") +
 
-      '<div class="card"><h2 style="margin-top:0">📦 Dati e progressi</h2><p class="small muted">I progressi delle lezioni e la conversazione restano su questo computer' +
-      (S ? " nella cartella <code>" + esc(S.system.data_dir) + "</code>" : " nel browser") + ".</p>" +
+      '<div class="card"><h2 style="margin-top:0">📦 Dati e progressi</h2><p class="small muted">' + (PD.ospite ?
+        "I progressi delle lezioni e la conversazione restano <b>su questo tablet</b>, nel suo browser: il PC dell'aula non li salva. Per conservarli usate «Esporta progressi»." :
+        "I progressi delle lezioni e la conversazione restano su questo computer" + (S ? " nella cartella <code>" + esc(S.system.data_dir) + "</code>" : " nel browser") + ".") + "</p>" +
       '<div class="row"><button class="btn ghost" id="export">⬇️ Esporta progressi</button><label class="btn ghost">⬆️ Importa<input type="file" id="import" accept="application/json" hidden></label>' +
       '<button class="btn danger" id="reset">Azzera progressi</button></div></div>' +
 
       '<div class="card"><h2 style="margin-top:0">🧩 Contenuti aggiuntivi</h2><p class="small muted">Pacchetti di domande e lezioni preparati da voi o dal progetto. Si aggiungono senza reinstallare il programma.</p>' +
-      '<div id="packs-list"></div><div class="row" style="margin-top:.6rem"><label class="btn ghost">➕ Importa pacchetto<input type="file" id="pack-import" accept="application/json,.json" hidden></label>' +
+      '<div id="packs-list"></div><div class="row" style="margin-top:.6rem">' + (PD.ospite ? "" : '<label class="btn ghost">➕ Importa pacchetto<input type="file" id="pack-import" accept="application/json,.json" hidden></label>') +
       '<button class="btn ghost" id="pack-template">⬇️ Scarica il modello</button></div><div id="pack-res" class="small" style="margin-top:.5rem"></div></div>' +
 
-      '<div class="card"><h2 style="margin-top:0">🔄 Aggiornamenti</h2><p class="small muted">Il Professore <b>non</b> si collega mai a Internet da solo. Il controllo avviene solo se premete il pulsante. L\'indirizzo può essere un sito <b>https</b> oppure un computer della <b>rete locale</b> (es. http://192.168.1.10:8080/aggiornamenti.json).</p>' +
+      (PD.ospite ? "" : '<div class="card"><h2 style="margin-top:0">🔄 Aggiornamenti</h2><p class="small muted">Il Professore <b>non</b> si collega mai a Internet da solo. Il controllo avviene solo se premete il pulsante. L\'indirizzo può essere un sito <b>https</b> oppure un computer della <b>rete locale</b> (es. http://192.168.1.10:8080/aggiornamenti.json).</p>' +
       field("Indirizzo del file di versione", '<input type="url" id="s-upd" value="' + esc(s.updateUrl || (S ? S.update_url : "")) + '">') +
-      '<button class="btn ghost" id="check-upd"' + (PD.server ? "" : " disabled") + '>🌐 Controlla aggiornamenti</button><div id="upd-res" class="small" style="margin-top:.6rem"></div></div>' +
+      '<button class="btn ghost" id="check-upd"' + (PD.server ? "" : " disabled") + '>🌐 Controlla aggiornamenti</button><div id="upd-res" class="small" style="margin-top:.6rem"></div></div>') +
 
       '<div class="card"><h2 style="margin-top:0">🩺 Diagnostica</h2><div class="diag" id="diag"></div></div>' +
 
@@ -1066,7 +1081,7 @@
       setTimeout(function () { URL.revokeObjectURL(a.href); }, 2000);
     });
     var diag = {
-      modalita: PD.server ? "applicazione installata (server locale)" : "versione portatile (file HTML)",
+      modalita: PD.ospite ? "tablet collegato al PC dell'aula" : PD.server ? "applicazione installata (server locale)" : window.PD_PWA ? "app per telefono e tablet (PWA)" : "versione portatile (file HTML)",
       browser: navigator.userAgent, lingua: navigator.language,
       voci_browser: voices.filter(function (v) { return /^it/i.test(v.lang); }).map(function (v) { return v.name; }).join(", ") || "nessuna voce italiana",
       stato_server: S || "non disponibile"
@@ -1082,7 +1097,7 @@
       return '<div class="notice info small" style="display:flex;gap:.8rem;align-items:center;justify-content:space-between;flex-wrap:wrap"><div><b>' + esc(p.titolo) +
         "</b> · v" + esc(p.versione) + (p.autore ? " · " + esc(p.autore) : "") + "<br>" + (p.domande || []).length + " domande, " + (p.lezioni || []).length +
         " lezioni · " + ({ sistema: "incluso nel programma", computer: "installato per tutti gli utenti" }[en.origine] || "importato") + "</div>" +
-        (en.origine === "utente" ? '<button class="btn ghost" data-pack-remove="' + esc(p.id) + '">Rimuovi</button>' : "") + "</div>";
+        (en.origine === "utente" && !PD.ospite ? '<button class="btn ghost" data-pack-remove="' + esc(p.id) + '">Rimuovi</button>' : "") + "</div>";
     }).join("") : '<p class="small muted">Nessun pacchetto aggiuntivo.</p>';
     if (PD.packs.errors.length) html += '<div class="notice small"><b>Pacchetti ignorati perché non validi:</b><br>' +
       PD.packs.errors.map(function (x) { return esc(x.file) + ": " + esc(x.errori.join("; ")); }).join("<br>") + "</div>";
@@ -1186,6 +1201,7 @@
 
   function heartbeat() {
     if (!PD.server) return;
+    if (PD.ospite) { if (PD.aulaPresenza) PD.aulaPresenza(); return; }   // tablet: niente heartbeat, solo la presenza in aula
     fetch("/api/heartbeat", { method: "POST", headers: { "Content-Type": "application/json" }, body: "{}" }).catch(function () { /* server spento */ });
     if (PD.settings.aulaRuolo === "allievo" && PD.aulaPresenza) PD.aulaPresenza();
   }

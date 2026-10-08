@@ -20,7 +20,7 @@ winpath() { echo "Z:$1" | sed 's#/#\\#g'; }
 PIDW=""
 avvia() {
   PD_DATA_DIR="$(winpath "$W/dati")" PD_DOWNLOAD_DIR="$(winpath "$W/dl")" OLLAMA_HOST=http://127.0.0.1:18992 \
-  PD_NO_TRAY=1 PD_NO_ENGINE_START=1 wine "$APP/ProfessoreDigitale.exe" --no-browser --port 18993 --idle-timeout 0 >"$W/server.log" 2>&1 &
+  PD_TABLET_PORT=18969 PD_TABLET_LOOPBACK=1 PD_NO_TRAY=1 PD_NO_ENGINE_START=1 wine "$APP/ProfessoreDigitale.exe" --no-browser --port 18993 --idle-timeout 0 >"$W/server.log" 2>&1 &
   PIDW=$!
   for _ in $(seq 1 120); do curl -fs http://127.0.0.1:18993/api/status >/dev/null 2>&1 && return 0; sleep 0.5; done
   echo "  FAIL il server Windows non si avvia"; cat "$W/server.log"; return 1

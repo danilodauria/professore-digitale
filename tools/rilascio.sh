@@ -15,7 +15,8 @@
 #
 #  Risultato: cartella dist/pubblica/ pronta da caricare sul sito (GitHub Pages):
 #    aggiornamenti.json, pacchetto .deb, installatore Windows (.exe) e versione da chiavetta (.zip),
-#    versione portatile, contenuti, catalogo dei modelli di IA, note, vademecum, SHA256SUMS
+#    versione portatile, contenuti, catalogo dei modelli di IA, note, vademecum, SHA256SUMS,
+#    index.html (pagina del sito) e app/ (app per telefono e tablet, tools/make_pwa.py)
 # ==============================================================================
 set -euo pipefail
 cd "$(dirname "$0")/.."
@@ -25,7 +26,7 @@ TEST=1; GIT=1; APT=0; ARGS=()
 for a in "$@"; do
   case "$a" in
     --senza-test) TEST=0 ;; --senza-git) GIT=0 ;; --apt) APT=1 ;;
-    -h|--help) sed -n '2,21p' "$0" | sed 's/^# \{0,1\}//'; exit 0 ;;
+    -h|--help) sed -n '2,19p' "$0" | sed 's/^# \{0,1\}//'; exit 0 ;;
     *) ARGS+=("$a") ;;
   esac
 done
@@ -117,6 +118,9 @@ with open(os.path.join(pub, "NOTE-%s.md" % ver), "w", encoding="utf-8") as f:
             ("**Windows** (da XP a 11): doppio clic su `%s`, oppure dal Professore: Impostazioni → Aggiornamenti.\n\n" % exe if "windows" in info else "") +
             "Impostazioni e progressi degli allievi vengono conservati.\n")
 PY
+# app per telefono e tablet (PWA, funziona senza Internet dopo la prima apertura) e pagina principale del sito
+python3 tools/make_pwa.py src/web "$PUB/app"
+python3 tools/make_sito.py "$PUB" "$BASE_URL" "$PAGINA_PROGETTO"
 (cd "$PUB" && sha256sum -- *.deb *.exe *.zip *.html *.json contenuti/*.json 2>/dev/null > SHA256SUMS)
 
 # ---- 5. repository APT (facoltativo) ----

@@ -341,7 +341,8 @@
     return '<label class="switch' + (dis ? " pd-a11y-off" : "") + '"><input type="checkbox" id="' + pref + chiave + '" data-a11y="' + chiave + '"' +
       (s()[chiave] && !dis ? " checked" : "") + (dis ? " disabled" : "") + ">" + esc(ETICHETTE[chiave]) + "</label>" +
       (dis ? '<p class="small muted pd-a11y-nota">Il riconoscimento vocale non è installato su questo computer' +
-        (PD.server ? "" : " (nella versione portatile non c'è)") + ": i comandi a voce non sono disponibili. Vedete il riquadro «🎤 Microfono».</p>" : "");
+        (PD.ospite ? " (sui tablet collegati al PC dell'aula non c'è)" : PD.server ? "" : " (nella versione portatile non c'è)") + ": i comandi a voce non sono disponibili." +
+        (PD.ospite ? "" : " Vedete il riquadro «🎤 Microfono».") + "</p>" : "");
   }
   function legaInterruttori(box) {
     $$("input[data-a11y]", box).forEach(function (c) {
