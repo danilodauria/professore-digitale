@@ -145,7 +145,7 @@ seen_pct = False; t0 = time.time()
 while time.time() - t0 < 120:
     _, pr = call("/api/setup/progress")
     if 0 < pr.get("percento", -1) < 100: seen_pct = True
-    if pr.get("finito"): break
+    if pr.get("finito") and "chiavetta" not in pr.get("titolo", ""): break   # non scambiare il lavoro precedente per questo
     time.sleep(0.05)
 check("configurazione automatica riuscita", pr.get("riuscito") is True and pr.get("modello") == "qwen3.5:4b", pr)
 check("avanzamento mostrato durante lo scaricamento", seen_pct or any("pronto" in l for l in pr.get("registro", [])), pr.get("registro"))

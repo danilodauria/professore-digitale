@@ -5,6 +5,8 @@ gioca per intero cruciverba facile (tastiera fisica e a schermo), Indovina la fr
 Completa il proverbio e Parole a catena; stampa, telefono e tema scuro.
 Rimette a posto progressi e impostazioni che cambia. Autore: Danilo D'Auria - Licenza MIT"""
 
+import re
+
 V = "#view-mente"
 IDS = ["cruciverba", "frase", "anagramma", "proverbio", "catena"]
 
@@ -301,6 +303,10 @@ def _prova(page, ROOT, check, SHOTS):
         else:
             page.fill(V + " .mg-input", w.lower())
             page.press(V + " .mg-input", "Enter")
+        # anche le parole del Professore non si possono ripetere: si ricordano dal suo messaggio «Tocca a me: …»
+        _m = re.search(r"Tocca a me: ([A-ZÀ-Ú]+)", page.inner_text(V + " .mg-ca-msg") or "")
+        if _m:
+            usate.append(_m.group(1))
     s = fine_ok(page, "catena")
     check("catena: 5 parole a catena salvate", bool(s) and s["punti"] == 5, s)
 

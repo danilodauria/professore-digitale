@@ -166,6 +166,8 @@ def prova(page, ROOT, check, SHOTS):
         page.evaluate(RESTORE, orig)
         apri("#/home")
         dopo = page.evaluate(SNAP)
+        for _d in (dopo, orig):   # la «domanda del giorno» dell'Inizio si rinnova da sola (es. a mezzanotte): non conta
+            ((_d.get("progress") or {}).get("ripasso") or {}).pop("giorno", None)
         check("profili: dati rimessi com'erano",
               [e["id"] for e in dopo["profili"]["elenco"]] == [e["id"] for e in orig["profili"]["elenco"]]
               and dopo["progress"] == orig["progress"] and dopo["nome"] == orig["nome"], dopo["profili"])

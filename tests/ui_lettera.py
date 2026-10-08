@@ -261,6 +261,11 @@ def _prova_ocr(page, ROOT, check, SHOTS):
             except Exception as e:  # nessuna webcam (nemmeno finta) in questo browser
                 check("lettera: webcam assente gestita", page.is_visible("#lt-testo"), str(e)[:100])
         page.click("#lt-dimentica")
+        # il motore di lettura si spegne appena finisce il lavoro in corso (fermarlo a metà manda in errore tesseract.js)
+        try:
+            page.wait_for_function("!PD.lettera._ocr.worker", timeout=90000)
+        except Exception:
+            pass
         check("lettera: «Dimentica» toglie anche la foto", page.is_hidden("#lt-img-box") and page.input_value("#lt-testo") == "" and
               page.evaluate("!PD.lettera._ocr.worker"))
     finally:

@@ -1,3 +1,17 @@
+professore-digitale (3.4.0) stable; urgency=medium
+
+  * Il Professore su telefono e tablet: dal sito si installa come un'app
+    (Android e iPhone) e dopo la prima apertura funziona anche senza
+    Internet, compresa la lettura delle lettere con la fotocamera.
+  * Nuova opzione «Condividi con i tablet dell'aula»: i tablet sulla
+    stessa rete Wi-Fi si collegano al PC del facilitatore con un codice o
+    un QR code e usano le sue voci naturali e l'intelligenza artificiale;
+    ogni tablet tiene i suoi progressi. È spenta finché non la accendete
+    voi.
+  * Vademecum aggiornati con il capitolo «Telefoni e tablet».
+
+ -- Danilo D'Auria <danilodauria.site@gmail.com>  Fri, 09 Oct 2026 00:35:57 +0200
+
 professore-digitale (3.3.0) stable; urgency=medium
 
   * Voci più naturali: arrivano Giorgio (la nuova voce del Professore) e

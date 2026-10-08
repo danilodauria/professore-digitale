@@ -2,7 +2,7 @@
 <html lang="it">
 <head>
 <meta charset="utf-8">
-<title>Professore Digitale – Installare e aggiornare alla versione 3.3.0</title>
+<title>Professore Digitale – Installare e aggiornare alla versione 3.4.0</title>
 <meta name="author" content="Danilo D'Auria">
 <link rel="stylesheet" href="stile-manuale.css">
 <style>
@@ -22,10 +22,10 @@
   <div class="sopra">
     <div class="ka">CATTEDRA DIGITALE PORTATILE</div>
     <h1>Professore Digitale</h1>
-    <div class="sotto">Installare e aggiornare<br>alla versione 3.3.0 · passo dopo passo</div>
+    <div class="sotto">Installare e aggiornare<br>alla versione 3.4.0 · passo dopo passo</div>
     <div class="lavagna">
       <div class="gesso">Un aggiornamento<br>sereno, senza perdere<br>nulla.</div>
-      <div class="riga">Linux · Windows da XP a 11 · Chiavetta · Aule e firewall<br>Comandi pronti da copiare · Controlli finali<br>Problemi frequenti e soluzioni</div>
+      <div class="riga">Linux · Windows da XP a 11 · Chiavetta · Aule e firewall<br>Telefoni e tablet · Comandi pronti da copiare · Controlli finali<br>Problemi frequenti e soluzioni</div>
     </div>
     <img class="prof" src="professore.svg" alt="">
   </div>
@@ -34,7 +34,7 @@
     <span class="pill">Windows XP · 7 · 8 · 10 · 11</span><span class="pill">I progressi restano al loro posto</span>
     <div class="firma">
       <div><b>Danilo D'Auria</b><small>Ideazione e sviluppo · Tecnico IT &amp; Divulgatore Digitale per il Sociale</small></div>
-      <div class="v">v3.3.0<small>Ottobre 2026</small></div>
+      <div class="v">v3.4.0<small>Ottobre 2026</small></div>
     </div>
   </div>
 </section>
@@ -43,15 +43,15 @@
 <div class="pagina">
 <!-- ======================================================= COME USARE -->
 <h2 style="margin-top:2mm">Come usare questo libretto</h2>
-<p>Questo libretto spiega come <b>installare per la prima volta</b> il Professore Digitale 3.3.0 e come <b>aggiornare</b> una versione già presente,
+<p>Questo libretto spiega come <b>installare per la prima volta</b> il Professore Digitale 3.4.0 e come <b>aggiornare</b> una versione già presente,
 su computer <b>Linux</b> e <b>Windows</b>. Non serve leggerlo tutto: trovate il vostro caso nella tabella e andate al capitolo indicato.</p>
 <table class="percorso"><thead><tr><th>Il vostro caso</th><th>Capitolo</th></tr></thead><tbody>
-<tr><td><span class="dove lin">LINUX</span> Ho già il Professore (2.0, 2.1, 2.2, 2.3, 3.0, 3.1 o 3.2) e voglio la 3.3.0</td><td><b>2</b> · Aggiornare su Linux</td></tr>
+<tr><td><span class="dove lin">LINUX</span> Ho già il Professore (2.0, 2.1, 2.2, 2.3, 3.0, 3.1, 3.2 o 3.3) e voglio la 3.4.0</td><td><b>2</b> · Aggiornare su Linux</td></tr>
 <tr><td><span class="dove lin">LINUX</span> Non ho mai installato il Professore</td><td><b>3</b> · Prima installazione su Linux</td></tr>
-<tr><td><span class="dove win">WINDOWS</span> Voglio il Professore sul mio PC Windows (anche se ho già la 2.3, la 3.0, la 3.1 o la 3.2)</td><td><b>4</b> · Installare su Windows</td></tr>
-<tr><td><span class="dove win">WINDOWS</span> Ho la 2.3, la 3.0, la 3.1 o la 3.2 e voglio la 3.3.0, o arriverà una versione nuova</td><td><b>5</b> · Aggiornare su Windows</td></tr>
-<tr><td><span class="dove tutti">AULE</span> Devo preparare molti computer, anche senza Internet, e il quadro dell'aula</td><td><b>6</b> · Molti computer, chiavetta e aula</td></tr>
-<tr><td><span class="dove tutti">TUTTI</span> Voglio provarlo senza installare nulla</td><td><b>7</b> · Versione portatile e da chiavetta</td></tr>
+<tr><td><span class="dove win">WINDOWS</span> Voglio il Professore sul mio PC Windows (anche se ho già la 2.3, la 3.0, la 3.1, la 3.2 o la 3.3)</td><td><b>4</b> · Installare su Windows</td></tr>
+<tr><td><span class="dove win">WINDOWS</span> Ho la 2.3, la 3.0, la 3.1, la 3.2 o la 3.3 e voglio la 3.4.0, o arriverà una versione nuova</td><td><b>5</b> · Aggiornare su Windows</td></tr>
+<tr><td><span class="dove tutti">AULE</span> Devo preparare molti computer, anche senza Internet, il quadro dell'aula e i tablet</td><td><b>6</b> · Molti computer, chiavetta e aula</td></tr>
+<tr><td><span class="dove tutti">TUTTI</span> Voglio provarlo senza installare nulla, o usarlo sul telefono</td><td><b>7</b> · Portatile, chiavetta e telefono</td></tr>
 <tr><td><span class="dove tutti">TUTTI</span> Ho installato: funziona tutto?</td><td><b>8</b> · I controlli finali</td></tr>
 <tr><td><span class="dove tutti">TUTTI</span> Qualcosa non va</td><td><b>9</b> · Problemi frequenti</td></tr>
 </tbody></table>
@@ -70,41 +70,40 @@ contenuti aggiunti, intelligenza artificiale e microfono già configurati restan
 <li><span class="n">2</span><span class="tt">Aggiornare su Linux<small>Dal Professore, dal terminale o con il doppio clic</small></span><span class="toc-p" data-c="2"></span></li>
 <li><span class="n">3</span><span class="tt">Prima installazione su Linux<small>Installare e attivare IA, microfono e voce</small></span><span class="toc-p" data-c="3"></span></li>
 <li><span class="n">4</span><span class="tt">Installare su Windows<small>Da Windows XP a Windows 11, per tutti o solo per me</small></span><span class="toc-p" data-c="4"></span></li>
-<li><span class="n">5</span><span class="tt">Aggiornare su Windows<small>Dalla 2.3, 3.0, 3.1 o 3.2 alla 3.3.0 e alle versioni successive</small></span><span class="toc-p" data-c="5"></span></li>
-<li><span class="n">6</span><span class="tt">Molti computer, chiavetta e aula<small>Aule, centri, PC senza Internet, firewall per il quadro dell'aula</small></span><span class="toc-p" data-c="6"></span></li>
-<li><span class="n">7</span><span class="tt">Versione portatile e da chiavetta<small>Usare il Professore senza installarlo</small></span><span class="toc-p" data-c="7"></span></li>
-<li><span class="n">8</span><span class="tt">I controlli finali<small>Versione, voci, saluto, novità, persone, aula e mano alzata, progressi</small></span><span class="toc-p" data-c="8"></span></li>
+<li><span class="n">5</span><span class="tt">Aggiornare su Windows<small>Dalla 2.3, 3.0, 3.1, 3.2 o 3.3 alla 3.4.0 e alle versioni successive</small></span><span class="toc-p" data-c="5"></span></li>
+<li><span class="n">6</span><span class="tt">Molti computer, chiavetta e aula<small>Aule, centri, PC senza Internet, firewall per il quadro dell'aula e per i tablet</small></span><span class="toc-p" data-c="6"></span></li>
+<li><span class="n">7</span><span class="tt">Versione portatile, chiavetta e telefono<small>Usare il Professore senza installarlo, anche sul telefono e sul tablet</small></span><span class="toc-p" data-c="7"></span></li>
+<li><span class="n">8</span><span class="tt">I controlli finali<small>Versione, voci, saluto, novità, persone, aula, tablet, progressi</small></span><span class="toc-p" data-c="8"></span></li>
 <li><span class="n">9</span><span class="tt">Problemi frequenti<small>Sintomo, causa, rimedio</small></span><span class="toc-p" data-c="9"></span></li>
 <li><span class="n">10</span><span class="tt">Se un giorno volete togliere tutto<small>Disinstallazione su Linux e Windows</small></span><span class="toc-p" data-c="10"></span></li>
 </ul>
 <div class="box" style="margin-top:8mm"><span class="t">Riepilogo per chi ha fretta</span>
 <span class="dove lin">LINUX</span> nella cartella del file scaricato:
-<pre>sudo apt install ./professore-digitale_3.3.0_all.deb
-professore-digitale --version          # deve rispondere: Professore Digitale 3.3.0</pre>
-<span class="dove win">WINDOWS</span> doppio clic su <code>ProfessoreDigitale-Setup-3.3.0.exe</code> → se compare l'avviso blu: <b>Ulteriori informazioni → Esegui comunque</b> → <b>Avanti</b> fino a <b>Fine</b>.</div>
+<pre>sudo apt install ./professore-digitale_3.4.0_all.deb
+professore-digitale --version          # deve rispondere: Professore Digitale 3.4.0</pre>
+<span class="dove win">WINDOWS</span> doppio clic su <code>ProfessoreDigitale-Setup-3.4.0.exe</code> → se compare l'avviso blu: <b>Ulteriori informazioni → Esegui comunque</b> → <b>Avanti</b> fino a <b>Fine</b>.</div>
 
 <!-- ======================================================= 1 -->
 <section class="capitolo"><span class="marca">§§c1§§</span>
 <div class="capitolo-testa"><span class="num">1</span><div><div class="eti">CAPITOLO</div><h1>Prima di iniziare</h1></div></div>
 <p class="intro">Bastano pochi minuti e nessuna competenza particolare. Leggete questa pagina una volta: vi evita le sorprese più comuni.</p>
-<h2>Cosa c'è di nuovo nella 3.3.0</h2>
-<figure class="media"><img src="img-linux/82-lettera-spiegazione.jpg" alt=""><figcaption><b>Figura 1.</b> <b>«Spiegami questa lettera»</b>, una delle novità della 3.3.0: il Professore spiega una bolletta d'esempio
-(chi la manda, quanto pagare, entro quando, i codici utili e cosa fare), senza Internet.</figcaption></figure>
+<h2>Cosa c'è di nuovo nella 3.4.0</h2>
+<figure class="media"><img src="img-linux/98-app-telefono.jpg" alt=""><figcaption><b>Figura 1.</b> L'<b>app per telefono e tablet</b>, una delle novità della 3.4.0: la pagina Inizio,
+«Spiegami questa lettera» con la fotocamera del telefono e l'avviso che arriva quando c'è una versione nuova.</figcaption></figure>
 <ul>
-<li><b>🔊 Voci più naturali</b>: arrivano <b>Giorgio</b> (uomo, ora la voce predefinita) e <b>Serena</b> (donna), che si aggiungono a <b>Paola</b>, con pause più naturali
-tra una frase e l'altra. La voce «Riccardo» è stata tolta: chi l'aveva scelta passa da solo a Giorgio. Si scelgono in <b>Impostazioni → Voce → «Voce del Professore»</b>.
-Giorgio (di kirys79) e Serena (di committa) hanno licenza Creative Commons CC BY 4.0.</li>
-<li><b>✉️ «Spiegami questa lettera»</b>: si fotografa o si scansiona una bolletta, una multa, una lettera del Comune o dell'INPS (oppure se ne incolla il testo)
-e il Professore spiega tipo, importi, scadenze, codici, parole difficili e cosa fare, con un controllo anti-truffa. La foto si legge sul computer, senza Internet,
-e nulla viene salvato. Nella versione portatile si incolla il testo.</li>
-<li><b>🧩 Ginnastica per la mente</b>: il gioco del giorno, dodici giochi sereni (coppie, sequenza dei colori, lista della spesa, differenze, intruso, resto giusto,
-orologio, cruciverba da stampare, indovina la frase, parole mescolate, completa il proverbio, parole a catena) su tre livelli, e un diario dei progressi.</li>
-<li><b>✋ Mano alzata</b> in aula: l'allievo chiede aiuto con un pulsante, il facilitatore vede l'avviso (con un suono gentile, disattivabile) e risponde «Arrivo!» o «Risolto».</li>
-<li><b>✏️ Crea lezioni e quiz</b>: i facilitatori preparano lezioni, domande e grandi quiz su misura (con o senza attestato) partendo da modelli pronti, e premono «Salva e usa».</li>
-<li>La pagina del libro <b>Tecnologia Gentile</b> mostra la copertina vera.</li>
+<li><b>📲 L'app per telefono e tablet</b>: il Professore si apre dal sito (<code>https://danilodauria.github.io/professore-digitale/app/</code>, oppure inquadrando
+il QR code della pagina del sito), si mette sulla <b>schermata Home</b> di Android, iPhone e iPad e, dopo la prima apertura, funziona <b>anche senza Internet</b>.
+Ci sono lezioni, quiz, Palestra, guida, Ginnastica per la mente e «Spiegami questa lettera» con la fotocamera; l'IA locale, il microfono e l'aula no.
+I progressi restano sul telefono. Non si installa sul computer: è descritta nel capitolo 7.</li>
+<li><b>📱 Condividi con i tablet dell'aula</b>: il PC del facilitatore presta il Professore ai tablet collegati alla stessa rete Wi-Fi, con le sue voci naturali e la sua IA,
+senza installare nulla sui tablet e senza Internet. Si accende da <b>🏫 Aula</b> (è <b>spenta</b> finché non la accendete), mostra un <b>codice di 6 cifre</b> e un QR code;
+i tablet compaiono nel quadro dell'aula con la mano alzata. Usa la porta <b>8768 TCP</b>, solo nella rete locale (capitolo 6).</li>
 </ul>
-<p class="small">Restano tutte le novità delle versioni 3.0, 3.1 e 3.2, riassunte qui sotto.</p>
+<p class="small">Restano tutte le novità delle versioni 3.0, 3.1, 3.2 e 3.3, riassunte qui sotto.</p>
 <ul>
+<li><b>Dalla 3.3</b>: le voci naturali <b>Giorgio</b> (ora la voce predefinita; chi usava «Riccardo» passa da solo a Giorgio) e <b>Serena</b>, oltre a Paola;
+<b>✉️ «Spiegami questa lettera»</b>; la <b>🧩 Ginnastica per la mente</b> con dodici giochi; la <b>✋ mano alzata</b> in aula; <b>✏️ Crea lezioni e quiz</b>
+per i facilitatori; la copertina vera del libro <b>Tecnologia Gentile</b>.</li>
 <li><b>Dalla 3.2</b>: la <b>🏛️ Palestra della vita digitale</b> (sei prove senza rischi con le trappole da riconoscere), <b>🕵️ «È una truffa?»</b>,
 le <b>👥 persone</b> diverse sullo stesso computer, il <b>🔁 ripasso</b> e la <b>☀️ domanda del giorno</b>, l'<b>♿ accessibilità</b>,
 <b>🧭 Le mie competenze</b> DigComp 2.2 e <b>📋 Registro e incontri</b> per facilitatori ed enti.</li>
@@ -112,15 +111,16 @@ le <b>👥 persone</b> diverse sullo stesso computer, il <b>🔁 ripasso</b> e l
 Cultura generale (26 lezioni), le pagine del libro <b>Tecnologia Gentile</b> e di <b>FeniceOS</b>, una Palestra con 11 esercizi; il <b>quadro dell'aula</b>;
 pulsante <b>🖨️ Stampa</b>, indicatore <b>Online</b>, saluti, consigli, <b>promemoria</b>, pulsante <b>🚪 Esci</b> e la pagina <b>❤️ Sostieni il progetto</b>.</li>
 </ul>
-<div class="box"><span class="t">Perché il file è più grande</span>Il pacchetto per Linux (circa 230 MB) e l'installatore per Windows (circa 210 MB) sono più grandi
-della 3.2 perché <b>contengono tre voci naturali</b> e il «lettore» delle foto, che così funzionano subito e senza Internet. Se la connessione dell'aula è lenta, scaricate il file
+<div class="box"><span class="t">Perché il file è grande</span>Il pacchetto per Linux (circa 230 MB) e l'installatore per Windows (circa 210 MB) sono grandi
+perché <b>contengono tre voci naturali</b> e il «lettore» delle foto, che così funzionano subito e senza Internet. Se la connessione dell'aula è lenta, scaricate il file
 una volta sola e portatelo sugli altri computer con una chiavetta.</div>
 <h2>I file</h2>
 <table><thead><tr><th>File</th><th>Per chi</th></tr></thead><tbody>
-<tr><td><code>professore-digitale_3.3.0_all.deb</code></td><td><span class="dove lin">LINUX</span> Debian, Ubuntu, Linux Mint, FeniceOS e derivate: PC a 64 e 32 bit e schede ARM (circa 230 MB, voci incluse).</td></tr>
-<tr><td><code>ProfessoreDigitale-Setup-3.3.0.exe</code></td><td><span class="dove win">WINDOWS</span> Da Windows XP SP3 a Windows 11, a 32 e 64 bit (circa 210 MB, voci incluse).</td></tr>
-<tr><td><code>professore-digitale-windows-3.3.0.zip</code></td><td><span class="dove win">WINDOWS</span> Versione da chiavetta, senza installazione.</td></tr>
+<tr><td><code>professore-digitale_3.4.0_all.deb</code></td><td><span class="dove lin">LINUX</span> Debian, Ubuntu, Linux Mint, FeniceOS e derivate: PC a 64 e 32 bit e schede ARM (circa 230 MB, voci incluse).</td></tr>
+<tr><td><code>ProfessoreDigitale-Setup-3.4.0.exe</code></td><td><span class="dove win">WINDOWS</span> Da Windows XP SP3 a Windows 11, a 32 e 64 bit (circa 210 MB, voci incluse).</td></tr>
+<tr><td><code>professore-digitale-windows-3.4.0.zip</code></td><td><span class="dove win">WINDOWS</span> Versione da chiavetta, senza installazione.</td></tr>
 <tr><td><code>professore-digitale-portatile.html</code></td><td><span class="dove tutti">TUTTI</span> Prova veloce in qualsiasi browser, senza installazione.</td></tr>
+<tr><td><b>App per telefono e tablet</b></td><td><span class="dove tutti">TUTTI</span> Non è un file: si apre dal sito del progetto e si mette sulla schermata Home (capitolo 7).</td></tr>
 <tr><td><code>SHA256SUMS</code></td><td><span class="dove tutti">TUTTI</span> Le impronte per controllare che i file siano integri.</td></tr>
 </tbody></table>
 <p>I file si scaricano dal sito del progetto, oppure arrivano su chiavetta dal facilitatore. Dal Professore già installato su Linux si possono anche
@@ -132,7 +132,7 @@ se cambia anche un solo byte del file: deve essere uguale a quella scritta in <c
 <pre>sha256sum -c SHA256SUMS --ignore-missing</pre>
 <div class="esito">Deve comparire <b>OK</b> accanto al nome del file. Se compare un errore, scaricate o ricopiate di nuovo il file.</div>
 <p><span class="dove win">WINDOWS</span> Aprite la cartella del file, scrivete <code>cmd</code> nella barra degli indirizzi in alto e premete <kbd>Invio</kbd>; poi:</p>
-<pre>certutil -hashfile ProfessoreDigitale-Setup-3.3.0.exe SHA256</pre>
+<pre>certutil -hashfile ProfessoreDigitale-Setup-3.4.0.exe SHA256</pre>
 <div class="esito">Confrontate il codice che compare con quello scritto accanto al nome del file in <code>SHA256SUMS</code> (si apre con il Blocco note): devono essere <b>identici</b>.</div>
 <div class="box attenzione"><span class="t">Prima di aggiornare</span>Chiudete il Professore se è aperto. Non è obbligatorio (l'installazione lo chiude da sola), ma evita di
 interrompere una lezione a metà. Se volete stare doppiamente tranquilli, prima esportate i progressi: <b>Impostazioni → Dati e progressi → ⬇️ Esporta progressi</b>.</div>
@@ -141,14 +141,14 @@ interrompere una lezione a metà. Se volete stare doppiamente tranquilli, prima 
 <!-- ======================================================= 2 -->
 <section class="capitolo"><span class="marca">§§c2§§</span>
 <div class="capitolo-testa"><span class="num">2</span><div><div class="eti">CAPITOLO</div><h1>Aggiornare su Linux</h1></div></div>
-<p class="intro">Avete già il Professore 2.0, 2.1, 2.2, 2.3, 3.0, 3.1 o 3.2. La versione 3.3.0 si installa <b>direttamente sopra</b> la precedente: non serve disinstallarla.
+<p class="intro">Avete già il Professore 2.0, 2.1, 2.2, 2.3, 3.0, 3.1, 3.2 o 3.3. La versione 3.4.0 si installa <b>direttamente sopra</b> la precedente: non serve disinstallarla.
 Scegliete uno dei tre metodi.</p>
 <h2>Metodo A · Dal Professore (il più semplice)</h2>
 <div class="affianca">
 <div><ol class="passi">
 <li>Collegate il computer a Internet e aprite il Professore Digitale.</li>
 <li>Andate in <b>⚙️ Impostazioni</b>, scheda <b>🔄 Aggiornamenti</b>.</li>
-<li>Premete <b>🌐 Controlla aggiornamenti</b>: compare «È disponibile la versione 3.3.0» con l'elenco delle novità.</li>
+<li>Premete <b>🌐 Controlla aggiornamenti</b>: compare «È disponibile la versione 3.4.0» con l'elenco delle novità.</li>
 <li>Premete <b>⬇️ Scarica il nuovo pacchetto</b>. Il file viene salvato nella cartella <b>Scaricati</b> e verificato da solo con la sua impronta.</li>
 <li>Il Professore mostra il comando da scrivere: copiatelo e proseguite con il metodo B dal passo 2.</li>
 </ol></div>
@@ -159,29 +159,30 @@ Scegliete uno dei tre metodi.</p>
 <li>Aprite la cartella <b>Scaricati</b> (o quella dove si trova il file), fate clic destro in uno spazio vuoto e scegliete <b>Apri nel terminale</b>
 (su alcuni sistemi: <b>Apri un terminale qui</b>).</li>
 <li>Scrivete il comando e premete <kbd>Invio</kbd>:
-<pre>sudo apt install ./professore-digitale_3.3.0_all.deb</pre></li>
+<pre>sudo apt install ./professore-digitale_3.4.0_all.deb</pre></li>
 <li>Scrivete la password del computer e premete <kbd>Invio</kbd>. Mentre la scrivete <b>non compare nulla</b>, nemmeno gli asterischi: è normale.</li>
 <li>Se compare una domanda «Continuare? [S/n]», premete <kbd>S</kbd> e <kbd>Invio</kbd>. Aspettate il ritorno del cursore.</li>
 <li>Controllate la versione:
 <pre>professore-digitale --version</pre>
-<div class="esito">Risposta attesa: <b>Professore Digitale 3.3.0</b></div></li>
+<div class="esito">Risposta attesa: <b>Professore Digitale 3.4.0</b></div></li>
 </ol>
 <div class="box attenzione"><span class="t">Il «./» è indispensabile</span>Il punto e la barra davanti al nome dicono ad apt di usare il file della cartella,
 invece di cercarlo su Internet. Senza, compare «Impossibile trovare il pacchetto».</div>
 <h2>Metodo C · Con il doppio clic</h2>
-<p>Fate doppio clic su <code>professore-digitale_3.3.0_all.deb</code>: si apre l'installatore del sistema (Software Center, GDebi, Discover o simili).
+<p>Fate doppio clic su <code>professore-digitale_3.4.0_all.deb</code>: si apre l'installatore del sistema (Software Center, GDebi, Discover o simili).
 Premete <b>Aggiorna</b> o <b>Installa</b> e inserite la password. Sui computer più lenti questi programmi possono sembrare bloccati: aspettate, oppure usate il metodo B.</p>
 <h2>Se il vostro centro usa il «repository»</h2>
-<p>Se il facilitatore ha configurato il Professore come fonte di aggiornamenti del sistema, la 3.3.0 arriva con gli altri aggiornamenti
+<p>Se il facilitatore ha configurato il Professore come fonte di aggiornamenti del sistema, la 3.4.0 arriva con gli altri aggiornamenti
 (Gestore aggiornamenti), oppure dal terminale:</p>
 <pre>sudo apt update
 sudo apt install --only-upgrade professore-digitale</pre>
 <h2>Dopo l'aggiornamento</h2>
-<p>Se il Professore era aperto, chiudetelo e riapritelo dal menu delle applicazioni (categoria <b>Istruzione</b>): il Professore vi saluta con la sua nuova voce, <b>Giorgio</b>
-(chi usava «Riccardo» passa da solo a Giorgio; Serena e Paola si scelgono in <b>Impostazioni → Voce</b>).
+<p>Se il Professore era aperto, chiudetelo e riapritelo dal menu delle applicazioni (categoria <b>Istruzione</b>): il Professore vi saluta con la voce di <b>Giorgio</b>
+(chi arriva dalla 3.2 o da prima e usava «Riccardo» passa da solo a Giorgio; Serena e Paola si scelgono in <b>Impostazioni → Voce</b>).
 I componenti facoltativi già installati (IA con Ollama, microfono) continuano a funzionare senza rifare nulla.
 Persone, progressi, impostazioni e conversazioni restano (dalla 3.1 o da prima diventano quelli della prima «persona» del computer, con il nome dell'allievo già scritto
-nelle impostazioni). Le novità («Spiegami una lettera», Ginnastica per la mente, «Crea lezioni e quiz», la mano alzata in aula) si aggiungono nel menu. Per scegliere un modello di IA più recente: capitolo 3, «Componenti facoltativi».</p>
+nelle impostazioni). In <b>🏫 Aula</b> compare il riquadro <b>«📱 Condividi con i tablet dell'aula»</b>, spento finché non lo accendete; chi arriva dalla 3.2 o da prima trova
+anche «Spiegami una lettera», la Ginnastica per la mente, «Crea lezioni e quiz» e la mano alzata in aula. Per scegliere un modello di IA più recente: capitolo 3, «Componenti facoltativi».</p>
 </section>
 
 <!-- ======================================================= 3 -->
@@ -190,13 +191,13 @@ nelle impostazioni). Le novità («Spiegami una lettera», Ginnastica per la men
 <p class="intro">Il pacchetto funziona sulle distribuzioni basate su Debian con Python 3.7 o successivo: Debian 10–13, Ubuntu dalla 20.04, Linux Mint, Q4OS,
 Zorin OS, MX Linux, antiX, FeniceOS e derivate. L'installazione non scarica nulla da Internet, salvo la voce italiana di sistema se manca.</p>
 <ol class="passi">
-<li>Copiate <code>professore-digitale_3.3.0_all.deb</code> nella cartella <b>Scaricati</b>. Non installatelo direttamente dalla chiavetta.</li>
+<li>Copiate <code>professore-digitale_3.4.0_all.deb</code> nella cartella <b>Scaricati</b>. Non installatelo direttamente dalla chiavetta.</li>
 <li>Aprite il terminale in quella cartella (clic destro → <b>Apri nel terminale</b>) e scrivete:
-<pre>sudo apt install ./professore-digitale_3.3.0_all.deb</pre></li>
+<pre>sudo apt install ./professore-digitale_3.4.0_all.deb</pre></li>
 <li>Inserite la password (non si vede mentre la scrivete) e confermate con <kbd>S</kbd> se richiesto.
 Il pacchetto contiene già le voci naturali Giorgio, Serena e Paola e il «lettore» delle foto; il sistema installa anche, se mancano, la voce leggera <code>espeak-ng</code> e i caratteri con le icone colorate.</li>
 <li>Controllate:
-<pre>professore-digitale --version          # Professore Digitale 3.3.0
+<pre>professore-digitale --version          # Professore Digitale 3.4.0
 professore-digitale --status           # mostra IA, voci e microfono disponibili</pre></li>
 <li>Aprite il Professore dal menu delle applicazioni, categoria <b>Istruzione</b>, oppure scrivendo <code>professore-digitale</code>.</li>
 </ol>
@@ -216,9 +217,9 @@ Il vecchio si toglie con <code>ollama rm NOME</code> (per vedere i nomi: <code>o
 <!-- ======================================================= 4 -->
 <section class="capitolo"><span class="marca">§§c4§§</span>
 <div class="capitolo-testa"><span class="num">4</span><div><div class="eti">CAPITOLO</div><h1>Installare su Windows</h1></div></div>
-<p class="intro">Un solo installatore va bene per tutti i computer, da Windows XP a Windows 11. L'installazione non scarica nulla da Internet e richiede un paio di minuti. Se avete già la 2.3, la 3.0, la 3.1 o la 3.2, eseguitelo sopra: non serve disinstallare.</p>
+<p class="intro">Un solo installatore va bene per tutti i computer, da Windows XP a Windows 11. L'installazione non scarica nulla da Internet e richiede un paio di minuti. Se avete già la 2.3, la 3.0, la 3.1, la 3.2 o la 3.3, eseguitelo sopra: non serve disinstallare.</p>
 <ol class="passi">
-<li>Copiate <code>ProfessoreDigitale-Setup-3.3.0.exe</code> sul desktop o nella cartella <b>Download</b> e fate <b>doppio clic</b>.</li>
+<li>Copiate <code>ProfessoreDigitale-Setup-3.4.0.exe</code> sul desktop o nella cartella <b>Download</b> e fate <b>doppio clic</b>.</li>
 <li>Se compare la finestra blu <b>«Windows ha protetto il PC»</b>, fate clic su <b>Ulteriori informazioni</b> e poi su <b>Esegui comunque</b>.
 Accade con tutti i programmi nuovi senza firma digitale a pagamento; il Professore è software libero e verificabile con la sua impronta.</li>
 <li>Se Windows chiede «Consentire a questa app di apportare modifiche?», rispondete <b>Sì</b>.</li>
@@ -240,7 +241,7 @@ usa la sua guida interna. I dettagli sono nel <i>Vademecum per Windows</i>, capi
 <p>Serve un browser moderno: <b>Supermium</b>. Installatelo <b>prima</b> del Professore dalla chiavetta preparata dal facilitatore
 (cartella <code>ProfessoreDigitale-kit\browser</code>). Se il Professore si apre in Internet Explorer, compare un messaggio con le istruzioni.</p>
 <h2>Controllare la versione</h2>
-<p>Tasto destro sull'icona del Professore vicino all'orologio → <b>Apri il Professore Digitale</b> → <b>Impostazioni → Informazioni</b>: deve dire <b>3.3.0</b>.
+<p>Tasto destro sull'icona del Professore vicino all'orologio → <b>Apri il Professore Digitale</b> → <b>Impostazioni → Informazioni</b>: deve dire <b>3.4.0</b>.
 Oppure <span class="dove win">WINDOWS</span> nel Prompt dei comandi:</p>
 <pre>"%LOCALAPPDATA%\Programs\ProfessoreDigitale\ProfessoreDigitale.exe" --version
 <span class="c">rem se installato per tutti gli utenti:</span>
@@ -251,18 +252,19 @@ Oppure <span class="dove win">WINDOWS</span> nel Prompt dei comandi:</p>
 <!-- ======================================================= 5 -->
 <section class="capitolo"><span class="marca">§§c5§§</span>
 <div class="capitolo-testa"><span class="num">5</span><div><div class="eti">CAPITOLO</div><h1>Aggiornare su Windows</h1></div></div>
-<p class="intro">Dalla 2.3, 3.0, 3.1 o 3.2 alla 3.3.0, e poi alle versioni successive: due strade, entrambe senza disinstallare e senza perdere nulla.</p>
+<p class="intro">Dalla 2.3, 3.0, 3.1, 3.2 o 3.3 alla 3.4.0, e poi alle versioni successive: due strade, entrambe senza disinstallare e senza perdere nulla.</p>
 <h2>Dal Professore</h2>
 <ol class="passi">
 <li>Con il computer collegato a Internet: <b>⚙️ Impostazioni → 🔄 Aggiornamenti → 🌐 Controlla aggiornamenti</b>.</li>
 <li>Se c'è una versione nuova, leggete le novità e premete <b>⬇️ Scarica il nuovo pacchetto</b>: il file va nella cartella <b>Download</b> e viene verificato con la sua impronta.
-Per la 3.3.0 sono circa 210 MB: con una connessione lenta ci vuole qualche minuto.</li>
+Per la 3.4.0 sono circa 210 MB: con una connessione lenta ci vuole qualche minuto.</li>
 <li>Premete <b>▶ Installa adesso</b>: il Professore si chiude e parte l'installatore. Seguite le pagine come nel capitolo 4 e riapritelo alla fine.</li>
 </ol>
-<div class="box consiglio"><span class="t">Alla 3.3: cosa resta e cosa cambia</span>Restano persone, progressi delle lezioni, quiz e attestati, record della Palestra,
+<div class="box consiglio"><span class="t">Alla 3.4: cosa resta e cosa cambia</span>Restano persone, progressi delle lezioni, quiz e attestati, record della Palestra,
 promemoria, impostazioni, conversazione, registro, contenuti aggiunti, IA e microfono configurati (dalla 3.1 o da prima diventano quelli della prima «persona» del computer).
-Le voci naturali diventano <b>Giorgio</b>, <b>Serena</b> e <b>Paola</b>: chi usava «Riccardo» passa da solo a Giorgio. Si aggiungono «Spiegami questa lettera»,
-la Ginnastica per la mente, la mano alzata in aula e «Crea lezioni e quiz»; dalla 3.1 o da prima anche la Vita digitale, «È una truffa?», le persone, il ripasso,
+Si aggiunge <b>«📱 Condividi con i tablet dell'aula»</b>, spenta finché non la accendete; installando «per tutti gli utenti» l'installatore aggiunge la regola del firewall
+«Professore Digitale (tablet)». Dalla 3.2 o da prima arrivano anche le voci <b>Giorgio</b>, <b>Serena</b> e <b>Paola</b> (chi usava «Riccardo» passa da solo a Giorgio),
+«Spiegami questa lettera», la Ginnastica per la mente, la mano alzata in aula e «Crea lezioni e quiz»; dalla 3.1 o da prima anche la Vita digitale, «È una truffa?», le persone, il ripasso,
 le competenze, l'accessibilità e il registro; dalla 2.3 anche quiz e attestati, cultura generale, aula, saluti e promemoria.</div>
 <h2>Con il file</h2>
 <p>Fate doppio clic sul nuovo <code>ProfessoreDigitale-Setup-X.Y.Z.exe</code> (dal sito o dalla chiavetta) e seguite le stesse pagine del capitolo 4.
@@ -289,9 +291,9 @@ indicato (per esempio <code>http://192.168.1.10:8080/aggiornamenti.json</code>) 
 <h2><span class="dove win">WINDOWS</span> Installazione silenziosa</h2>
 <p>Da un Prompt dei comandi aperto come amministratore, nella cartella dell'installatore (anche dalla chiavetta):</p>
 <pre><span class="c">rem per tutti gli utenti del computer, senza domande</span>
-ProfessoreDigitale-Setup-3.3.0.exe /S /AllUsers
+ProfessoreDigitale-Setup-3.4.0.exe /S /AllUsers
 <span class="c">rem solo per l'utente attuale, senza password</span>
-ProfessoreDigitale-Setup-3.3.0.exe /S /CurrentUser</pre>
+ProfessoreDigitale-Setup-3.4.0.exe /S /CurrentUser</pre>
 <p>Si può mettere la riga in un file <code>installa.bat</code> sulla chiavetta e lanciarlo con doppio clic su ogni PC.</p>
 <h2><span class="dove win">WINDOWS</span> IA e voce senza Internet</h2>
 <ol class="passi">
@@ -315,12 +317,22 @@ Windows può chiedere se consentire l'accesso: scegliete le <b>reti private</b> 
 sudo ufw allow 8767/udp</pre>
 <p>Poi, nel Professore: <b>🏫 Aula → «Il PC del facilitatore»</b>, un codice dell'aula, <b>💾 Salva e applica</b>; nel riquadro «Questo PC» deve comparire
 <b>In ascolto per gli allievi ✅</b>. Sui PC degli allievi: <b>🏫 Aula → «Il PC di un allievo»</b>, nome e codice, <b>💾 Salva e applica</b>.</p>
+<h2><span class="dove tutti">AULE</span> I tablet dell'aula (novità della 3.4)</h2>
+<p>Se gli allievi usano dei tablet, il PC del facilitatore può prestare loro il Professore: <b>🏫 Aula → «📱 Condividi con i tablet dell'aula» → 📱 Apri la condivisione →
+📱 Accendi la condivisione</b>. Compaiono un QR code, l'indirizzo (per esempio <code>http://192.168.1.10:8768/</code>) e un <b>codice di 6 cifre</b>; sul tablet, collegato allo
+stesso Wi-Fi, si inquadra il QR code oppure si scrive l'indirizzo nel browser e poi il codice. Sui tablet non si installa nulla. La condivisione è <b>spenta</b> di serie,
+si accende solo dal PC e usa la porta <b>8768 TCP</b>, solo per la rete locale. A fine lezione: <b>⏹ Spegni la condivisione</b>.</p>
+<p><span class="dove win">WINDOWS</span> Con l'installazione «per tutti gli utenti» la regola del firewall «Professore Digitale (tablet)» c'è già; con «solo per me»
+Windows può chiedere il permesso la prima volta: <b>reti private</b> → <b>Consenti accesso</b>.</p>
+<p><span class="dove lin">LINUX</span> Se è attivo <b>ufw</b>, aprite la porta solo alla rete locale (con reti che iniziano per 10. o 172. scrivete <code>10.0.0.0/8</code> o <code>172.16.0.0/12</code>):</p>
+<pre>sudo ufw allow from 192.168.0.0/16 to any port 8768 proto tcp</pre>
+<p class="small">I dettagli, con le immagini, sono nel <i>Vademecum</i>, capitolo 20 «Telefoni e tablet».</p>
 </section>
 
 <!-- ======================================================= 7 -->
 <section class="capitolo"><span class="marca">§§c7§§</span>
-<div class="capitolo-testa"><span class="num">7</span><div><div class="eti">CAPITOLO</div><h1>Versione portatile e da chiavetta</h1></div></div>
-<p class="intro">Per una prova veloce, o sui computer che non si possono modificare (biblioteca, ufficio).</p>
+<div class="capitolo-testa"><span class="num">7</span><div><div class="eti">CAPITOLO</div><h1>Versione portatile, chiavetta e telefono</h1></div></div>
+<p class="intro">Per una prova veloce, sui computer che non si possono modificare (biblioteca, ufficio) e, dalla 3.4, sul telefono e sul tablet.</p>
 <h2>Versione portatile · <span class="dove tutti">TUTTI</span></h2>
 <p>Fate doppio clic su <code>professore-digitale-portatile.html</code>: si apre nel browser e funziona subito, anche da chiavetta e su qualsiasi sistema.
 Ci sono lezioni, quiz con attestato, cultura generale, Ginnastica per la mente, guida interna, lavagna, palestra e voce del browser; «Spiegami questa lettera» funziona
@@ -328,11 +340,22 @@ incollando il testo. Mancano IA, voci naturali, microfono, lettura delle foto e 
 I progressi restano nella memoria del browser di quel computer: per aggiornare basta sostituire il file con quello nuovo, i progressi restano.</p>
 <h2>Versione da chiavetta per Windows · <span class="dove win">WINDOWS</span></h2>
 <ol class="passi">
-<li>Clic destro su <code>professore-digitale-windows-3.3.0.zip</code> → <b>Estrai tutto</b>, scegliendo la chiavetta.</li>
+<li>Clic destro su <code>professore-digitale-windows-3.4.0.zip</code> → <b>Estrai tutto</b>, scegliendo la chiavetta.</li>
 <li>Aprite la cartella <code>ProfessoreDigitale</code> e fate doppio clic su <code>ProfessoreDigitale.exe</code>.</li>
 <li>I progressi vengono salvati nella sottocartella <code>dati</code> accanto al programma: la chiavetta passa da un PC all'altro con il proprio percorso.</li>
 </ol>
 <p><b>Per aggiornare</b> la versione da chiavetta: estraete il nuovo zip in una cartella nuova e poi copiate dentro la vecchia sottocartella <code>dati</code>.</p>
+<h2>App per telefono e tablet · <span class="dove tutti">TUTTI</span></h2>
+<p>Sul telefono o sul tablet aprite <code>https://danilodauria.github.io/professore-digitale/app/</code>, oppure inquadrate con la fotocamera il QR code della pagina del sito
+<code>https://danilodauria.github.io/professore-digitale/</code>. Poi mettetelo sulla schermata Home:</p>
+<ul>
+<li><b>Android</b>: con <b>Chrome</b>, toccate i tre puntini <b>⋮</b> → <b>«Installa app»</b> o <b>«Aggiungi a schermata Home»</b> → confermate.</li>
+<li><b>iPhone e iPad</b>: con <b>Safari</b>, toccate <b>Condividi</b> (il quadrato con la freccia) → <b>«Aggiungi alla schermata Home»</b> → <b>«Aggiungi»</b>.</li>
+</ul>
+<p>La prima apertura serve Internet; dopo funziona anche senza. Quando c'è una versione nuova compare <b>«È disponibile una nuova versione del Professore»</b>: toccate <b>Aggiorna</b>.
+Le voci sono quelle del telefono; non ci sono l'IA locale, il microfono e l'aula. «Spiegami questa lettera» usa la fotocamera (la prima volta serve Internet).
+I progressi restano <b>solo sul telefono</b>: se si cancellano i dati del browser si perdono, e su iPhone e iPad possono sparire se l'app non si apre per molti giorni.
+Per stare tranquilli: <b>Impostazioni → Dati e progressi → ⬇️ Esporta progressi</b>.</p>
 </section>
 
 <!-- ======================================================= 8 -->
@@ -340,12 +363,13 @@ I progressi restano nella memoria del browser di quel computer: per aggiornare b
 <div class="capitolo-testa"><span class="num">8</span><div><div class="eti">CAPITOLO</div><h1>I controlli finali</h1></div></div>
 <p class="intro">Cinque minuti per essere sicuri che tutto funzioni, prima che arrivi il gruppo.</p>
 <table><thead><tr><th style="width:6%"></th><th style="width:36%">Controllo</th><th>Come si fa · cosa deve succedere</th></tr></thead><tbody>
-<tr><td>☐</td><td><b>Versione</b></td><td>Impostazioni → Informazioni: <b>3.3.0</b>. Su Linux anche <code>professore-digitale --version</code>.</td></tr>
+<tr><td>☐</td><td><b>Versione</b></td><td>Impostazioni → Informazioni: <b>3.4.0</b>. Su Linux anche <code>professore-digitale --version</code>.</td></tr>
 <tr><td>☐</td><td><b>Il saluto</b></td><td>All'apertura il Professore saluta a voce (buongiorno, buon pomeriggio o buonasera) in una nuvoletta in basso a destra.</td></tr>
 <tr><td>☐</td><td><b>Le voci</b></td><td>Impostazioni → Voce → <b>Voce del Professore</b>: ci sono voci 👨 maschili e 👩 femminili (Giorgio, Serena e Paola sui PC a 64 bit). Sceglietene una: dice «Questa è la mia nuova voce».</td></tr>
 <tr><td>☐</td><td><b>I progressi</b></td><td>Pagina Lezioni: le lezioni già fatte risultano «✓ Completata» come prima.</td></tr>
 <tr><td>☐</td><td><b>Le novità</b></td><td>Nel menu ci sono Vita digitale, È una truffa?, <b>Spiegami una lettera</b>, <b>Ginnastica per la mente</b>, Quiz e attestati, Le mie competenze,
-Cultura generale, Tecnologia Gentile (con la copertina vera), FeniceOS, Aula, Registro e incontri e <b>Crea lezioni e quiz</b>; in alto c'è il pulsante ♿.</td></tr>
+Cultura generale, Tecnologia Gentile (con la copertina vera), FeniceOS, Aula, Registro e incontri e <b>Crea lezioni e quiz</b>; in alto c'è il pulsante ♿.
+In <b>🏫 Aula</b> c'è il riquadro <b>«📱 Condividi con i tablet dell'aula»</b>, spento.</td></tr>
 <tr><td>☐</td><td><b>La lettura delle lettere</b></td><td>Spiegami una lettera → l'esempio «💡 Bolletta della luce»: compaiono totale, scadenza e cosa fare. Con il programma installato
 ci sono anche i pulsanti per la foto e la webcam.</td></tr>
 <tr><td>☐</td><td><b>Le persone</b> (se più allievi usano il PC)</td><td>Impostazioni → <b>👥 Persone che usano questo computer</b>: aggiungete gli allievi. In alto compare il nome di chi sta usando il computer.</td></tr>
@@ -354,6 +378,7 @@ ci sono anche i pulsanti per la foto e la webcam.</td></tr>
 <tr><td>☐</td><td><b>Il microfono</b></td><td>Se configurato, la pastiglia 🎤 è verde. Premete il microfono e dite «come si scrive la chiocciola».</td></tr>
 <tr><td>☐</td><td><b>L'aula</b> (se la usate)</td><td>Sul PC del facilitatore: 🏫 Aula → «In ascolto per gli allievi ✅». Sui PC degli allievi: «✅ Collegato al PC del facilitatore».
 Provate la <b>mano alzata</b>: un allievo preme «✋ Ho bisogno di aiuto» e sul PC del facilitatore compare l'avviso con «Arrivo!» e «Risolto».</td></tr>
+<tr><td>☐</td><td><b>I tablet</b> (se li usate)</td><td>🏫 Aula → 📱 Apri la condivisione → <b>Accendi</b>. Su un tablet nello stesso Wi-Fi inquadrate il QR code: compare il Professore con «📱 Collegato al PC dell'aula». Alla fine: <b>⏹ Spegni la condivisione</b>.</td></tr>
 <tr><td>☐</td><td><b>Lo stato completo</b></td><td>Impostazioni → <b>🩺 Diagnostica</b>, oppure su Linux <code>professore-digitale --status</code>.</td></tr>
 </tbody></table>
 </section>
@@ -364,7 +389,7 @@ Provate la <b>mano alzata</b>: un allievo preme «✋ Ho bisogno di aiuto» e su
 <div class="box" style="margin-top:0"><span class="t">Chiedere aiuto</span>Copiate il contenuto di <b>Impostazioni → 🩺 Diagnostica</b> e mandatelo a chi vi assiste, insieme al
 messaggio di errore e al nome del sistema (per esempio «Linux Mint 22» o «Windows 10»). Contatto del progetto: danilodauria.site@gmail.com</div>
 <table style="font-size:8.4pt"><thead><tr><th style="width:28%">Sintomo</th><th style="width:26%">Causa probabile</th><th>Rimedio</th></tr></thead><tbody>
-<tr><td><span class="dove lin">LINUX</span> «Impossibile trovare il pacchetto»</td><td>Manca <code>./</code> davanti al nome</td><td><code>sudo apt install ./professore-digitale_3.3.0_all.deb</code></td></tr>
+<tr><td><span class="dove lin">LINUX</span> «Impossibile trovare il pacchetto»</td><td>Manca <code>./</code> davanti al nome</td><td><code>sudo apt install ./professore-digitale_3.4.0_all.deb</code></td></tr>
 <tr><td><span class="dove lin">LINUX</span> «Download is performed unsandboxed as root»</td><td>Il file è sulla chiavetta</td><td>È solo un avviso, l'installazione riesce. Per evitarlo copiate prima il file in Scaricati.</td></tr>
 <tr><td><span class="dove lin">LINUX</span> «Impossibile acquisire il lock» (dpkg/apt occupato)</td><td>Un altro aggiornamento è in corso</td><td>Aspettate qualche minuto che finisca (o chiudete il Gestore aggiornamenti) e ripetete il comando.</td></tr>
 <tr><td><span class="dove lin">LINUX</span> La password «non si scrive»</td><td>Protezione del terminale</td><td>È normale: scrivetela alla cieca e premete <kbd>Invio</kbd>.</td></tr>
@@ -375,6 +400,9 @@ messaggio di errore e al nome del sistema (per esempio «Linux Mint 22» o «Win
 <tr><td><span class="dove win">WINDOWS</span> Il Professore non parla</td><td>Windows a 32 bit senza voce italiana</td><td>Sui 64 bit scegliete Giorgio, Serena o Paola in Impostazioni → Voce. Altrimenti: Impostazioni di Windows → Ora e lingua → Voce → Aggiungi voci → Italiano.</td></tr>
 <tr><td><span class="dove lin">LINUX</span> Mancano Giorgio, Serena e Paola</td><td>PC a 32 bit o sistema troppo vecchio</td><td>Si usano le voci leggere, maschili e femminili. Controllate con <code>professore-digitale --status</code>.</td></tr>
 <tr><td><span class="dove tutti">AULE</span> L'allievo non trova il facilitatore</td><td>Reti diverse, firewall, codice sbagliato</td><td>Stessa rete per tutti; firewall come nel capitolo 6; scrivete a mano l'indirizzo del facilitatore; usate <b>🔍 Cerca nella rete</b>.</td></tr>
+<tr><td><span class="dove tutti">AULE</span> Il tablet non apre l'indirizzo del PC</td><td>Condivisione spenta, Wi-Fi diverso o «ospiti», firewall</td><td>Accendete la condivisione; stesso Wi-Fi principale; indirizzo esatto con <code>http://</code> e <code>:8768</code>; firewall come nel capitolo 6.</td></tr>
+<tr><td><span class="dove tutti">AULE</span> Sul tablet: «Il collegamento con il PC dell'aula è scaduto»</td><td>Codice cambiato o PC riavviato</td><td>Ricaricate la pagina e inserite il codice nuovo che compare sul PC.</td></tr>
+<tr><td><span class="dove tutti">TELEFONO</span> «Serve Internet, solo la prima volta»</td><td>App mai aperta con Internet</td><td>Collegatevi a Internet e riaprite l'app: dopo funziona anche senza.</td></tr>
 <tr><td><span class="dove tutti">TUTTI</span> «Controllo non riuscito» negli aggiornamenti</td><td>Niente Internet o indirizzo sbagliato</td><td>Controllate la connessione e l'indirizzo nella scheda Aggiornamenti; senza rete usate la chiavetta (capitolo 6).</td></tr>
 <tr><td><span class="dove tutti">TUTTI</span> «Impronta SHA-256 non corrispondente»</td><td>File rovinato durante lo scaricamento</td><td>Il Professore lo ha già scartato per sicurezza: riprovate più tardi.</td></tr>
 <tr><td><span class="dove tutti">TUTTI</span> La voce «Riccardo» non c'è più</td><td>Tolta nella 3.3</td><td>È stata sostituita da Giorgio, più naturale, scelto da solo. In Impostazioni → Voce ci sono anche Serena e Paola.</td></tr>
@@ -398,16 +426,16 @@ sudo apt autoremove --purge
 <span class="c"># 3. facoltativo: i modelli di IA (vedere i nomi, poi toglierli)</span>
 ollama list
 ollama rm NOME-DEL-MODELLO</pre>
-<p class="small">Se avevate aperto le porte dell'aula: <code>sudo ufw delete allow 8766/tcp</code> e <code>sudo ufw delete allow 8767/udp</code>.</p>
+<p class="small">Se avevate aperto le porte dell'aula: <code>sudo ufw delete allow 8766/tcp</code> e <code>sudo ufw delete allow 8767/udp</code>; per i tablet: <code>sudo ufw delete allow from 192.168.0.0/16 to any port 8768 proto tcp</code>.</p>
 <h2><span class="dove win">WINDOWS</span></h2>
 <ol class="passi">
 <li><b>Start → Impostazioni → App</b> (o <b>Pannello di controllo → Programmi e funzionalità</b>) → <b>Professore Digitale</b> → <b>Disinstalla</b>.</li>
-<li>Alla domanda «Volete cancellare anche i progressi…» rispondete <b>Sì</b> per una pulizia completa, <b>No</b> se pensate di reinstallare. Vengono tolte anche le voci incluse e la regola del firewall per l'aula.</li>
+<li>Alla domanda «Volete cancellare anche i progressi…» rispondete <b>Sì</b> per una pulizia completa, <b>No</b> se pensate di reinstallare. Vengono tolte anche le voci incluse e le regole del firewall per l'aula e per i tablet.</li>
 <li>Facoltativo: Ollama si toglie dallo stesso elenco di app.</li>
 </ol>
 <div class="box consiglio" style="margin-top:10mm"><span class="t">Per saperne di più</span>Il <i>Vademecum e libro di istruzioni</i> (per Linux e per Windows) spiega
 lezioni, guida, lavagna, palestra, Vita digitale, «È una truffa?», «Spiegami questa lettera», la Ginnastica per la mente, accessibilità, impostazioni, privacy,
-il lavoro del facilitatore con la mano alzata, il registro per gli enti e «Crea lezioni e quiz». Si apre anche dal Professore: <b>Impostazioni → Informazioni → 📖 Apri il vademecum</b>.</div>
+il lavoro del facilitatore con la mano alzata, telefoni e tablet, il registro per gli enti e «Crea lezioni e quiz». Si apre anche dal Professore: <b>Impostazioni → Informazioni → 📖 Apri il vademecum</b>.</div>
 </section>
 </div>
 
@@ -422,7 +450,7 @@ il lavoro del facilitatore con la mano alzata, il registro per gli enti e «Crea
     <p>È software libero: potete usarlo, copiarlo, migliorarlo e condividerlo. Questo libretto può essere stampato e distribuito liberamente.</p>
   </div>
   <div class="piede"><div><b>Danilo D'Auria</b><br>Tecnico IT &amp; Divulgatore Digitale per il Sociale<br>danilodauria.site@gmail.com</div>
-  <div style="text-align:right">Professore Digitale 3.3.0<br>Licenza MIT · Ottobre 2026</div></div>
+  <div style="text-align:right">Professore Digitale 3.4.0<br>Licenza MIT · Ottobre 2026</div></div>
 </section>
 </body>
 </html>

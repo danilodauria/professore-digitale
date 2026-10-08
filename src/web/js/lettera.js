@@ -689,13 +689,18 @@
     }, function (e) {
       OCR.stato = "errore"; OCR.promessa = null; throw e;
     });
+    OCR.promessa.then(function () { setTimeout(forseChiudi, 0); }, function () { setTimeout(forseChiudi, 0); });
     return OCR.promessa;
   }
+  /* Si spegne il motore solo quando non sta lavorando: fermarlo a metà di una lettura (o mentre si avvia) fa cadere
+   * tesseract.js in un errore interno. Se è occupato si chiude appena finisce (OCR.chiudiDopo). */
   function chiudiOcr() {
+    if (OCR.inUso > 0 || OCR.promessa) { OCR.chiudiDopo = true; return; }
     var w = OCR.worker;
-    OCR.worker = null; OCR.promessa = null; OCR.stato = "spento";
+    OCR.worker = null; OCR.stato = "spento"; OCR.chiudiDopo = false;
     if (w) { try { w.terminate(); } catch (e) { /* ignora */ } }
   }
+  function forseChiudi() { if (OCR.chiudiDopo && !(OCR.inUso > 0) && !OCR.promessa) chiudiOcr(); }
 
   /* ------------------------------------------------------------------------
    *  Immagine: carica, ridimensiona (~2000 px), ruota, scala di grigi, contrasto
@@ -991,7 +996,9 @@
       preparaOcr().then(function (w) {
         if (mio !== stato.lettura) return null;
         avviso("leggo", 0.22);
-        return w.recognize(stato.canvas);
+        OCR.inUso = (OCR.inUso || 0) + 1;
+        var fatto = function () { OCR.inUso--; setTimeout(forseChiudi, 0); };
+        return w.recognize(stato.canvas).then(function (r) { fatto(); return r; }, function (e) { fatto(); throw e; });
       }).then(function (res) {
         if (mio !== stato.lettura || !res) return;
         OCR.avviso = null;
