@@ -1,11 +1,13 @@
 /* ==============================================================================
  *  PROFESSORE DIGITALE - «Accessibilità vera» (3.2)
  *  Quattro aiuti, attivabili dalle Impostazioni o dal pulsante ♿ in alto:
- *   - Comandi a voce (serve il riconoscimento vocale locale): pulsante «🎙️ Comando» o tasto F2
+ *   - Comandi a voce (riconoscimento vocale locale del PC, oppure sul telefono la voce del telefono accesa dall'utente,
+ *     vedi voce.js): pulsante «🎙️ Comando» o tasto F2
  *   - Mani che tremano: pulsanti più grandi, protezione dai doppi clic involontari, cursore grande
  *   - Vedo poco: testo almeno 24 px, contorni di messa a fuoco evidenti, link sottolineati
  *   - Leggi ciò che indico: il Professore legge ad alta voce il pulsante o il campo indicato
- *  Tutto avviene su questo computer: nessun dato esce.
+ *  Sul PC tutto avviene su questo computer: nessun dato esce. Sul telefono (3.5) i comandi a voce usano il riconoscimento
+ *  del telefono (Google/Apple) solo se l'utente l'ha acceso dopo la spiegazione.
  *  JavaScript puro (ES5). Ideato e sviluppato da Danilo D'Auria - Licenza MIT
  * ============================================================================== */
 (function () {
@@ -36,6 +38,8 @@
 
   function s() { return PD.settings || {}; }
   function sttOk() { try { return !!(PD.sttReady && PD.sttReady()); } catch (e) { return false; } }
+  /* stato del microfono del telefono (voce.js, 3.5): "no" sul PC; "spento" = si può accendere dopo il consenso */
+  function micWeb() { try { return PD.micWeb ? PD.micWeb.stato() : "no"; } catch (e) { return "no"; } }
 
   /* ------------------------------------------------------------------------
    *  Classi sulla pagina
@@ -249,7 +253,10 @@
     if (e.key === "F2" || e.keyCode === 113) {
       if (!s().voiceCommands) return;
       e.preventDefault();
-      if (!sttOk()) { PD.toast("Il riconoscimento vocale non è installato: i comandi a voce non sono disponibili."); return; }
+      if (!sttOk()) {
+        if (micWeb() === "spento") { PD.micWeb.consenso(function (ok) { if (ok) { applica(); ascolta(); } }); return; }
+        PD.toast("Il riconoscimento vocale non è installato: i comandi a voce non sono disponibili."); return;
+      }
       ascolta();
     }
   });
@@ -337,17 +344,33 @@
    *  Interruttori (Impostazioni e menu rapido ♿)
    * ---------------------------------------------------------------------- */
   function interruttore(chiave, pref) {
-    var dis = chiave === "voiceCommands" && !sttOk();
-    return '<label class="switch' + (dis ? " pd-a11y-off" : "") + '"><input type="checkbox" id="' + pref + chiave + '" data-a11y="' + chiave + '"' +
-      (s()[chiave] && !dis ? " checked" : "") + (dis ? " disabled" : "") + ">" + esc(ETICHETTE[chiave]) + "</label>" +
-      (dis ? '<p class="small muted pd-a11y-nota">Il riconoscimento vocale non è installato su questo computer' +
+    var w = micWeb();
+    var dis = chiave === "voiceCommands" && !sttOk() && w !== "spento";
+    var nota = "";
+    if (dis && w === "insicuro") nota = "Su questo tablet il microfono funziona con l'app installata dal sito: i comandi a voce qui non sono disponibili.";
+    else if (dis && w === "assente") nota = "Questo browser non sa riconoscere la voce (per esempio Firefox): i comandi a voce non sono disponibili.";
+    else if (dis) nota = "Il riconoscimento vocale non è installato su questo computer" +
         (PD.ospite ? " (sui tablet collegati al PC dell'aula non c'è)" : PD.server ? "" : " (nella versione portatile non c'è)") + ": i comandi a voce non sono disponibili." +
-        (PD.ospite ? "" : " Vedete il riquadro «🎤 Microfono».") + "</p>" : "");
+        (PD.ospite ? "" : " Vedete il riquadro «🎤 Microfono».");
+    else if (chiave === "voiceCommands" && w === "spento") nota = "Accendendoli si accende anche il microfono del telefono (vi spiego prima come funziona).";
+    return '<label class="switch' + (dis ? " pd-a11y-off" : "") + '"><input type="checkbox" id="' + pref + chiave + '" data-a11y="' + chiave + '"' +
+      (s()[chiave] && !dis && (chiave !== "voiceCommands" || sttOk()) ? " checked" : "") + (dis ? " disabled" : "") + ">" + esc(ETICHETTE[chiave]) + "</label>" +
+      (nota ? '<p class="small muted pd-a11y-nota">' + esc(nota) + "</p>" : "");
   }
   function legaInterruttori(box) {
     $$("input[data-a11y]", box).forEach(function (c) {
       c.addEventListener("change", function () {
         var k = c.getAttribute("data-a11y");
+        /* telefono: i comandi a voce hanno bisogno del microfono del telefono, che si accende solo dopo il consenso */
+        if (k === "voiceCommands" && c.checked && !sttOk() && micWeb() === "spento") {
+          c.checked = false;
+          PD.micWeb.consenso(function (ok) {
+            if (!ok) return;
+            salva(k, true);
+            PD.toast("Premete il pulsante «🎙️ Comando» in basso a destra e dite «aiuto».", 6000);
+          });
+          return;
+        }
         salva(k, c.checked);
         if (k === "vista" && c.checked && s().theme !== "contrast") PD.toast("Consiglio: attivate anche l'alto contrasto per vedere meglio.", 5000);
         if (k === "voiceCommands" && c.checked) PD.toast("Premete il pulsante «🎙️ Comando» in basso a destra (o il tasto F2) e dite «aiuto».", 6000);
@@ -364,7 +387,8 @@
         '<p class="pd-a11y-contrasto"><button class="btn ghost" type="button" id="a11y-contrasto">◐ Attiva anche l\'alto contrasto</button></p>' +
         '<details class="pd-a11y-comandi"><summary>🎙️ Cosa si può dire (comandi a voce)</summary><ul>' +
         ELENCO_COMANDI.map(function (c) { return "<li><b>" + esc(c[0]) + "</b>: " + esc(c[1]) + "</li>"; }).join("") +
-        "</ul><p class=\"small muted\">Premete «🎙️ Comando» (o il tasto F2), parlate e aspettate un attimo: la registrazione si ferma da sola quando smettete di parlare. Tutto resta su questo computer.</p></details></div>";
+        "</ul><p class=\"small muted\">Premete «🎙️ Comando» (o il tasto F2), parlate e aspettate un attimo: la registrazione si ferma da sola quando smettete di parlare. " +
+        (micWeb() === "no" ? "Tutto resta su questo computer." : "Sul telefono la voce la capisce il servizio di riconoscimento del telefono (vedete il riquadro «🎤 Microfono»).") + "</p></details></div>";
     },
     bind: function (el) {
       var card = $("#pd-a11y-card", el); if (!card) return;
@@ -381,7 +405,10 @@
 
   /* Menu rapido ♿ nella barra in alto */
   function aggiornaMenu() {
-    $$("[data-a11y]").forEach(function (c) { c.checked = !!s()[c.getAttribute("data-a11y")] && !c.disabled; });
+    $$("[data-a11y]").forEach(function (c) {
+      var k = c.getAttribute("data-a11y");
+      c.checked = !!s()[k] && !c.disabled && (k !== "voiceCommands" || sttOk());
+    });
     $$("#a11y-contrasto, #a11y-q-contrasto").forEach(function (b) {
       b.textContent = s().theme === "contrast" ? "◐ Torna ai colori normali" : "◐ Attiva anche l'alto contrasto";
     });

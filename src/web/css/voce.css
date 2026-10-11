@@ -1,0 +1,56 @@
+/* ==============================================================================
+ *  PROFESSORE DIGITALE - Voce e microfono su telefoni e tablet (3.5, voce.js):
+ *  invito «👋 Toccate qui per cominciare», spiegazione del microfono, striscia «Vi ascolto…».
+ *  Ideato e sviluppato da Danilo D'Auria - Licenza MIT
+ * ============================================================================== */
+
+/* ---------- invito a schermo intero: un solo grande pulsante ---------- */
+.pd-tocca { position: fixed; inset: 0; z-index: 80; background: rgba(15, 25, 35, .55); display: flex; padding: 1rem;
+  padding-top: calc(1rem + env(safe-area-inset-top, 0px)); padding-bottom: calc(1rem + env(safe-area-inset-bottom, 0px)); }
+.pd-tocca-btn { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1rem;
+  border: 3px solid var(--brand); border-radius: calc(var(--radius) * 1.5); background: var(--panel); color: var(--ink);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, .3); cursor: pointer; padding: 1.5rem 1rem; font: inherit; text-align: center;
+  touch-action: manipulation; -webkit-tap-highlight-color: transparent; }
+.pd-tocca-btn .prof { width: min(13rem, 55vw); height: min(13rem, 55vw); }
+.pd-tocca-tit { font-size: clamp(1.6rem, 7vw, 2.4rem); font-weight: 800; color: var(--brand); line-height: 1.2; }
+.pd-tocca-sub { font-size: 1.1rem; color: var(--ink2); max-width: 22rem; }
+.pd-tocca-btn:focus-visible { outline: 4px solid var(--focus); outline-offset: 4px; }
+.pd-tocca-btn .pd-tocca-tit { animation: pd-tocca-respira 2.4s ease-in-out infinite; }
+@keyframes pd-tocca-respira { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.05); } }
+@media (prefers-reduced-motion: reduce) { .pd-tocca-btn .pd-tocca-tit { animation: none; } }
+@media (min-width: 700px) { .pd-tocca { align-items: center; justify-content: center; }
+  .pd-tocca-btn { flex: 0 1 34rem; min-height: 26rem; } }
+:root[data-theme="contrast"] .pd-tocca { background: rgba(0, 0, 0, .85); }
+:root[data-theme="contrast"] .pd-tocca-btn { border-color: #fff; }
+
+/* ---------- finestra «🎤 Parla con la voce» (consenso / spiegazione) ---------- */
+.pd-dialogo { position: fixed; inset: 0; z-index: 75; background: rgba(15, 25, 35, .55); display: flex; align-items: center;
+  justify-content: center; padding: 1rem; overflow-y: auto; }
+.pd-dialogo-card { width: 100%; max-width: 32rem; margin: auto; text-align: left; }
+.pd-dialogo-card h2 { margin: .2rem 0 .6rem; }
+.pd-dialogo-prof { width: 5.5rem; height: 5.5rem; float: right; margin: 0 0 .4rem .6rem; }
+.pd-dialogo-card .row { clear: both; flex-wrap: wrap; gap: .6rem; margin-top: 1rem; }
+.pd-dialogo-card .row .btn { flex: 1 1 10rem; justify-content: center; text-align: center; }
+@media (max-width: 480px) { .pd-dialogo-prof { width: 4.2rem; height: 4.2rem; } }
+
+/* ---------- striscia «Vi ascolto…» mentre il telefono ascolta ---------- */
+.pd-ascolto { position: fixed; left: 50%; transform: translateX(-50%); bottom: calc(1rem + env(safe-area-inset-bottom, 0px)); z-index: 55;
+  display: flex; align-items: center; gap: .7rem; width: calc(100% - 2rem); max-width: 34rem; padding: .7rem .9rem;
+  background: var(--panel); color: var(--ink); border: 3px solid var(--bad); border-radius: 99px; box-shadow: 0 8px 24px rgba(0, 0, 0, .25); }
+.pd-ascolto-onda { flex: none; width: 2.6rem; height: 2.6rem; border-radius: 50%; display: grid; place-items: center; background: var(--bad);
+  color: #fff; font-size: 1.3rem; animation: pd-ascolto-pulsa 1.2s infinite; }
+@keyframes pd-ascolto-pulsa { 0%, 100% { box-shadow: 0 0 0 0 rgba(185, 28, 28, .55); } 50% { box-shadow: 0 0 0 .6rem rgba(185, 28, 28, 0); } }
+@media (prefers-reduced-motion: reduce) { .pd-ascolto-onda { animation: none; } }
+.pd-ascolto-testo { flex: 1; min-width: 0; font-weight: 700; overflow: hidden; text-overflow: ellipsis; display: -webkit-box;
+  -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
+.pd-ascolto .btn { flex: none; min-height: 2.6rem; padding: .3rem .9rem; }
+#mic-nota { margin: .5rem 0 0; }
+@media print { .pd-tocca, .pd-dialogo, .pd-ascolto { display: none !important; } }
+#pd-mic-carta .switch { align-items: flex-start; }
+#pd-mic-carta .switch input { flex: none; margin-top: .15rem; }
+/* «Chiedi al Professore» sul telefono: la casella della domanda su tutta la riga, 🎤 e «Invia» sotto */
+@media (max-width: 560px) {
+  .composer { flex-wrap: wrap; }
+  .composer textarea { flex: 1 1 100%; order: -1; }
+  .composer #send { flex: 1; }
+}

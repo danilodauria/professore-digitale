@@ -21,6 +21,11 @@ ManifestSupportedOS all
 
 Name "${NOME} ${VERSIONE}"
 OutFile "${USCITA}"
+!ifdef FIRMA
+  ; firma digitale dell'installatore e del programma di disinstallazione (windows/firma.sh)
+  !uninstfinalize '"${FIRMA}" "%1"' = 0
+  !finalize '"${FIRMA}" "%1"' = 0
+!endif
 BrandingText "${NOME} ${VERSIONE} · Danilo D'Auria · Licenza MIT"
 VIProductVersion "${V1}.${V2}.${V3}.0"
 VIAddVersionKey /LANG=1040 "ProductName" "${NOME}"

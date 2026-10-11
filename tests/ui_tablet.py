@@ -118,13 +118,17 @@ def prova(page, ROOT, check, SHOTS):
     tp.wait_for_selector("#view-settings h1")
     testo = tp.inner_text("#view-settings")
     check("tablet: impostazioni di sistema nascoste (aggiornamenti, import, microfono, condivisione)",
-          tp.locator("#check-upd").count() == 0 and tp.locator("#pack-import").count() == 0 and "🎤 Microfono" not in testo and
+          tp.locator("#check-upd").count() == 0 and tp.locator("#pack-import").count() == 0 and "setup-voce" not in testo and
           "Condividi con i tablet" not in testo and tp.locator("#reprobe").count() == 0, testo[:300])
+    # 3.5: al posto del microfono del PC c'è «Parla con la voce» (voce del tablet, spenta di base) o la spiegazione dell'app
+    check("tablet: riquadro microfono del tablet (spento di base)", tp.locator("#pd-mic-carta").count() == 1 and
+          tp.evaluate("PD.settings.micTelefono === false && PD.sttReady() === false && ['spento', 'insicuro', 'assente'].indexOf(PD.micWeb.stato()) >= 0"),
+          tp.evaluate("PD.micWeb.stato()"))
     check("tablet: i progressi restano sul tablet (spiegato)", "su questo tablet" in testo)
     tp.screenshot(path=SHOTS + "/42-tablet-impostazioni.png", full_page=True)
     tp.goto(TB + "#/ask")
     tp.wait_for_selector("#question")
-    check("tablet: microfono nascosto", not tp.is_visible("#mic"))
+    check("tablet: microfono spento di base (🎤 nascosto finché non si accende)", not tp.is_visible("#mic"))
     tp.goto(TB + "#/editor")
     tp.wait_for_selector("#view-editor h1")
     check("tablet: nell'editor solo «Scarica il file»", tp.locator('#view-editor [data-act="salva"]').count() == 0 and

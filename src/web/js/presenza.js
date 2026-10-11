@@ -78,8 +78,11 @@
     PD.bubble(t, nx && !PD.isLate() ? [{ t: "▶ Continua la lezione", go: "#/lessons/" + nx.id }, { t: "Più tardi", fn: function () {} }] : null, 14000);
     if (!PD.settings.voice) return;
     var attiva = navigator.userActivation ? navigator.userActivation.hasBeenActive : false;
-    // l'avviatore apre il browser con la riproduzione automatica permessa; altrove si aspetta il primo clic
-    if (PD.server && !PD.ospite && !attiva) {   // sul tablet (ospite) il browser non permette l'audio prima di un tocco
+    var dopoTocco = function () { if (PD.invitoVoce) PD.invitoVoce(function () { PD.speak(t); }); else alPrimoGesto(function () { PD.speak(t); }); };
+    // telefoni e tablet (anche i tablet ospiti): il browser non lascia parlare prima di un tocco → invito «Toccate qui» (voce.js)
+    if (PD.mobile && !attiva && PD.voceDaSbloccare && PD.voceDaSbloccare()) { dopoTocco(); return; }
+    // l'avviatore apre il browser con la riproduzione automatica permessa; altrove si chiede un clic
+    if (PD.server && !PD.ospite && !attiva) {
       fetch("/api/tts", { method: "POST", headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ text: t, rate: PD.settings.rate, voice: PD.settings.voiceId || "" }) })
         .then(function (r) { if (!r.ok) throw new Error("voce"); return r.blob(); })
@@ -87,10 +90,12 @@
           var a = new Audio(URL.createObjectURL(b));
           return a.play().then(function () { PD.setProf("spiegazione"); a.onended = function () { if (PD.profState === "spiegazione") PD.setProf("riposo"); }; });
         })
-        .catch(function () { alPrimoGesto(function () { PD.speak(t); }); });
-    } else if (attiva) PD.speak(t);
-    else alPrimoGesto(function () { PD.speak(t); });
+        .catch(function (e) { if (e && e.name === "NotAllowedError") dopoTocco(); else PD.speak(t); });
+    } else PD.speak(t);   // se il browser non lascia parlare, PD.speak mostra l'invito (voce.js)
   }
+  /* usata anche dalla maschera del percorso (percorsi.js) per salutare dopo la scelta: se il browser non lascia
+   * parlare (telefono non ancora toccato) compare l'invito «Toccate qui» di voce.js */
+  PD.saluta = saluta;
   function alPrimoGesto(fn) {
     var fatto = false;
     function via() { if (fatto) return; fatto = true; document.removeEventListener("pointerdown", via, true); document.removeEventListener("keydown", via, true); setTimeout(fn, 60); }

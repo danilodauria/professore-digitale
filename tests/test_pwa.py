@@ -15,6 +15,7 @@ sys.path.insert(0, os.path.join(ROOT, "tools"))
 sys.path.insert(0, QUI)
 from make_pwa import crea_pwa  # noqa: E402
 from ui_lettera import immagine_png  # noqa: E402
+from ui_mobile import ATTIVAZIONE  # noqa: E402
 from PIL import Image  # noqa: E402
 from playwright.sync_api import sync_playwright  # noqa: E402
 
@@ -189,6 +190,27 @@ def main():
             check("aggiornato: la pagina è la nuova versione", page.evaluate("window.PD_VERSION") == "9.9.9-prova")
             check("aggiornato: i file OCR non si riscaricano (stessa cache)", any(k.startswith("professore-ocr-") for k in nuove))
             check("aggiornato: i progressi restano", page.evaluate("PD.progress.provaPwa === 'resta'"))
+
+            print("== primo avvio sul telefono: «Toccate qui per cominciare»")
+            vctx = b.new_context(viewport={"width": 390, "height": 844}, is_mobile=True, has_touch=True)
+            vctx.add_init_script(ATTIVAZIONE)   # un telefono vero, appena aperta l'app, non ha ancora ricevuto tocchi
+            vctx.on("request", lambda r: richieste.append(r.url))
+            vp = vctx.new_page()
+            vp.on("pageerror", lambda e: errori.append(str(e)))
+            vp.goto(APP + "?noprofilo#/home")
+            try:
+                vp.wait_for_selector("#pd-tocca", timeout=8000)
+                invito = vp.inner_text("#pd-tocca")
+            except Exception:
+                invito = ""
+            check("app: invito «Toccate qui per cominciare» al primo avvio", "Toccate qui per cominciare" in invito, invito)
+            vp.screenshot(path=SHOTS + "/pwa-tocca-390.png")
+            if invito:
+                vp.tap("#pd-tocca-btn")
+                vp.wait_for_selector("#pd-tocca", state="detached", timeout=5000)
+                check("app: dopo il tocco l'invito sparisce e la voce è sbloccata",
+                      vp.evaluate("sessionStorage.getItem('pd.voceSbloccata') === '1'") and vp.is_visible("#pd-bubble"))
+            vctx.close()
 
             # tablet
             tab = b.new_context(viewport={"width": 820, "height": 1180}, is_mobile=True, has_touch=True)

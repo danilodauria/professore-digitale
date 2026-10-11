@@ -25,6 +25,15 @@ Leggere questo file per intero prima di modificare qualunque cosa.
      (2 alla volta) e `POST /api/ospite/presenza` (quadro dell'aula, stessa validazione di `/aula/ciao`). Tutto il resto → 403
      (dati, pacchetti, aggiornamenti, setup, aula, spegnimento, microfono). I progressi dei tablet restano nel loro browser.
      «Cambia codice» chiude tutte le sessioni, «Spegni» chiude la porta. L'ascolto principale resta solo su 127.0.0.1.
+- **Microfono del telefono (3.5, `voce.js`)**: NON è un collegamento del programma ma un servizio del sistema del telefono.
+  Solo nell'app per telefono e tablet (PWA) e sui tablet ospiti, dove la trascrizione locale del PC non c'è, «🎤 Parla con la voce»
+  usa la Web Speech API del browser (`SpeechRecognition`, it-IT): su Chrome/Android e Safari/iOS la voce va ai server di
+  **Google/Apple**. Per questo è **spento di base** (impostazione `micTelefono: false`), si accende solo dopo una spiegazione onesta
+  («quello che dite viene inviato a loro; il Professore non salva nulla») con «Accendo»/«No grazie», e si spegne con un tocco
+  (Impostazioni → 🎤 Microfono, o «🔇 Spegni il microfono» in «Chiedi al Professore»). Sul PC con il server si usa SEMPRE e solo
+  la trascrizione locale (Vosk/whisper): mai proporre lì la Web Speech. Su http non sicuro (tablet collegato al PC) il browser
+  non dà il microfono: si spiega e si rimanda all'app del sito (`SITO_APP` in `voce.js` = `BASE_URL` di `rilascio.conf` + `/app/`:
+  aggiornarlo se cambia l'indirizzo del sito).
 - **Server senza dipendenze**: `src/server/*.py` usa solo la libreria standard, compatibile **Python 3.7+**
   (verificare con `vermin -t=3.7- --no-tips --violations src/server/*.py packaging/professore-digitale`).
 - **Interfaccia leggera**: JavaScript puro in stile ES5 (`var`, funzioni), niente framework né build step.
@@ -57,11 +66,13 @@ Leggere questo file per intero prima di modificare qualunque cosa.
 | `windows/contenuti/` | Pacchetti solo per Windows (es. `windows-primi-passi`): inclusi nell'installatore, nascosti su Linux |
 | `windows/installer/`, `windows/res/` | Installatore NSIS (per tutti gli utenti o solo per me, `/S` silenzioso), icona, manifest, immagini |
 | `windows/build-windows.sh` | Compila da Linux con mingw-w64 + NSIS → `dist/windows/` (lo chiama `build.sh`) |
+| `windows/firma.sh` | **Firma digitale Authenticode** (3.5) di exe/dll, installatore e disinstallatore (`!finalize`/`!uninstfinalize` in NSIS). Senza firma, Windows 11 con «Controllo intelligente delle app» blocca il programma. Si attiva da sola se è configurata (`~/.config/professore-digitale/firma.conf` o variabili: `PD_FIRMA_PFX`+`PD_FIRMA_PASSWORD`, oppure PKCS#11 `PD_FIRMA_PKCS11_MODULE`+`PD_FIRMA_CERT`+`PD_FIRMA_PKCS11_KEY`, oppure `PD_FIRMA_COMANDO`), serve `osslsigncode`. Il certificato è di Danilo (es. Certum «Open Source Code Signing» su SimplySign): MAI chiederlo né conservarlo nei sorgenti |
 | `src/web/js/eyes.js`, `setup.js`, `compat.js` | Occhi che seguono il mouse; pagina «Configura IA e voce» (solo Windows); avviso per browser troppo vecchi |
 | `src/web/js/quiz.js` | Grandi quiz (chiave `prove` dei pacchetti) e **attestato** (SVG → stampa, oppure PDF generato in JS senza librerie) |
 | `src/web/js/aree.js`, `data-fenice.js` | Percorsi tematici: Cultura generale (pacchetti `cultura-*`), FeniceOS (`feniceos` + dati della pagina), libro Tecnologia Gentile (`tecnologia-gentile`) |
 | `src/web/js/aula.js`, `src/server/pd_aula.py`, `windows/src/pd_aula.c` | Quadro dell'aula in rete locale (facilitatore/allievo), messaggi a tutti, stato della connessione; presenza e mano alzata dei tablet ospiti (aula.js) |
 | `src/web/js/tablet.js`, `qr.js`, `css/tablet.css` | Pagina `#/tablet` sul PC (accendi/spegni, codice grande, indirizzi, QR, tablet collegati) e riquadro in Aula/Impostazioni; `PD.qr` = generatore di QR code ES5 (byte, correzione M, versioni 1-6) |
+| `src/web/js/voce.js`, `css/voce.css` | **Voce e microfono su telefoni e tablet** (3.5): invito «👋 Toccate qui per cominciare» quando il browser non lascia parlare (`PD.voceBloccata`, `PD.invitoVoce`, `PD.sbloccaAudio`, `PD.voceDaSbloccare`); microfono del telefono `PD.micWeb` (`stato()` = `no` sul PC/portatile, `insicuro`, `assente`, `spento`, `acceso`; consenso, Impostazioni, striscia «Vi ascolto…»), `PD.ascolta(cb, campo)` = `PD.recorder.toggle(cb, campo)` che sceglie il motore |
 | `src/web/js/stampa.js`, `presenza.js` | Stampa della pagina o dell'argomento intero; saluti all'avvio, consigli quando è inattivo, attesa, uscita con promemoria |
 | `src/web/js/sostieni.js`, `data-sostieni.js` | Pagina «❤️ Sostieni il progetto» (PayPal, bonifico, QR già pronti, pulsanti Copia). `data-sostieni.js` si rigenera con `tools/genera-sostieni.py` (serve `segno`) se cambiano IBAN o PayPal: mai pubblicare il numero della carta, solo l'IBAN |
 | `src/web/js/vita.js`, `vita-sim2.js` | **Palestra della vita digitale** (dalla 3.2): simulatori sicuri con nomi di fantasia e fascia «PROVA»: `identita`, `visita`, `pagamento` (vita.js, che contiene il framework `PD.vita.registra(sim)` e `ctx.passo/bravo/errore/telefono/foglio/indirizzo/controlla/fine`), `banca`, `messaggi`, `posta` (vita-sim2.js). Risultati in `progress.vita` |
@@ -72,6 +83,7 @@ Leggere questo file per intero prima di modificare qualunque cosa.
 | `src/web/js/data-digcomp.js`, `data-incontri.js`, `enti.js`, `registro.js` | Competenze DigComp 2.2 (`PD.digcomp`, vista `#/competenze`), pagina facilitatori `#/enti/{incontri,registro,resoconto,digcomp}`, 12 incontri pronti da 2 ore, registro presenze e resoconto per l'ente (chiave dati `registro`, CSV, stampa) |
 | `src/web/js/lettera.js`, `src/web/vendor/ocr/` | «Spiegami questa lettera» (3.3): OCR offline con tesseract.js servito in locale (non nel portatile), motore a regole `PD.lettera.analizza`, nulla salvato |
 | `src/web/js/mente.js`, `mente-giochi.js` | «Ginnastica per la mente» (3.3): framework `PD.mente.registra(gioco)`, diario in `progress.mente`; giochi di memoria/attenzione/calcolo (mente.js) e cruciverba, indovina la frase, parole (mente-giochi.js) |
+| `src/web/js/data-percorsi.js`, `percorsi.js`, `css/percorsi.css` | **«Il nostro percorso»** (3.5): maschera all'avvio (dove si usa il Professore → chi lo usa → questionario di 8 domande), pagina `#/percorso` (mappa delle 8 fasi, «Continua da qui», spunte automatiche e manuali, stampa del programma per l'ente), riquadro in cima all'Inizio e nelle Impostazioni. `data-percorsi.js` = linea guida in 8 fasi uguale per tutti (accoglienza, dispositivo, comunicare, **sicurezza mai saltata**, servizi, quotidiano, mente e cultura, autonomia), biblioteca di tappe e 12 contesti; API `PD.percorsi` |
 | `src/web/js/editor.js` | «Crea lezioni e quiz» (3.3): editor visuale di pacchetti di contenuti, salva con `PD.packs.importText`; campo facoltativo `senza_attestato` nelle prove |
 | `tools/voci.sh`, `packaging/voci/` | Scarica e verifica (SHA-256) le **voci naturali incluse**: Piper Linux x86_64/aarch64 e Windows x64, voci **Giorgio** (m, predefinita), **Serena** (f) e Paola (f); Riccardo (x_low) tolto nella 3.3. I `.onnx.json` di Giorgio e Serena (CC BY 4.0) stanno ripuliti in `packaging/voci/` (`copia_voci DEST`). Cache in `~/.cache/professore-digitale/voci` |
 | `archivio/` | .deb prodotti in questa copia (ignorato da git, escluso dall'archivio sorgenti). I .deb pubblicati si conservano sul PC di Danilo in `$ARCHIVIO` (`~/professore-digitale-archivio`, vedi `rilascio.conf`) |
@@ -108,8 +120,11 @@ PD_SHARE_DIR=src python3 packaging/professore-digitale-contenuti valida src/cont
   Il «Grande Quiz dell'Informatica» (prova `informatica`, 264 domande) è il manuale di Danilo: non alterarne domande e risposte.
 - Dati nuovi in `progress.json`: `quiz` (risultati per prova), `attestati`, `promemoria`, `ultimoAnnuncio`;
   dalla 3.2 `vita`, `truffa`, `ripasso`, `profilo`. Chiavi dati nuove (server Python e C): `profili`, `registro`.
+  Dalla 3.5 `percorso` (per profilo): `{ contesto, chi, livello, risposte: {domanda: "si"|"poco"|"no"}, spunte: {chiave: true},
+  iniziato, aggiornato, ultimaTappa, nonChiedere }`; le spunte usano chiavi di attività (`lezione:mouse`, `pratica:desideri`, `tappa:mouse`)
+  e non dipendono dal contesto: cambiando contesto i progressi restano.
   Impostazioni nuove: `voiceId, netCheck, idleTips, greet, goodbye, studentName, aulaRuolo, aulaNome, aulaCodice, aulaServer`;
-  dalla 3.2 `voiceCommands, tremore, vista, leggiFocus, domandaGiorno`; dalla 3.4 `tabletCondividi`.
+  dalla 3.2 `voiceCommands, tremore, vista, leggiFocus, domandaGiorno`; dalla 3.4 `tabletCondividi`; dalla 3.5 `micTelefono`, `percorsoContesto` (contesto proposto alle persone nuove).
 - **Aula, mano alzata (3.3)**: `/aula/ciao` porta `mano: {alzata, da, messaggio}`; la risposta mirata torna nella risposta
   a quel PC (`mano: {da, stato: "arrivo"|"risolto"}`). API locali `/api/aula/mano` (allievo) e `/api/aula/rispondi`
   (facilitatore) in Python e C. Impostazione `aulaManoSuono`.
@@ -118,16 +133,37 @@ PD_SHARE_DIR=src python3 packaging/professore-digitale-contenuti valida src/cont
   (`prova(page, ROOT, check, SHOTS)`), chiamati da `test_ui.py`. Nei test usare selettori dentro la vista
   (`#view-lessons .quiz-q`): la domanda del giorno nell'Inizio usa le stesse classi dei quiz.
   Profili nei test: `?noprofilo` o `sessionStorage['pd.profiloScelto']='1'` evitano la scelta all'avvio.
+- **Voce sui telefoni (3.5)**: i browser mobili non parlano né suonano prima di un tocco. `PD.speak` (app.js) riconosce il
+  blocco (errore `not-allowed` della sintesi, `NotAllowedError` dell'audio, oppure nessun avvio entro 1,5 s su telefono/pagina mai
+  toccata) e chiama `PD.voceBloccata(riprova)`: invito grande la prima volta per sessione (`pd.invitoVisto`), poi solo un avviso e
+  si riprova al tocco successivo. Il saluto (presenza.js) su telefono/tablet mostra subito l'invito; sul PC, se il saluto parte,
+  nulla cambia. Sui telefoni (`PD.mobile`) un solo elemento audio (`PD.lettoreAudio()`) sbloccato al primo tocco, frasi ≤ 160
+  caratteri, attesa delle voci (iOS) fino a 1,5 s, voce `it-IT` anche se il browser scrive `it_IT`, `resume()` se resta in pausa.
+- **Microfono**: `PD.sttLocale()` = trascrizione del PC; `PD.sttReady()` (= `PD.micPronto()`) = locale OPPURE voce del telefono
+  accesa. I moduli usano `PD.sttReady()` per mostrare il microfono e `PD.recorder.toggle(cb)` / `PD.ascolta(cb)` per ascoltare.
 - Test: il saluto all'avvio si salta con `sessionStorage['pd.salutato']='1'` (test_ui.py) o con `?nosaluto`; i tempi dei consigli
   con `PD.idleConfig`. L'aula del server Python nei test usa `PD_AULA_PORT`/`PD_AULA_UDP`.
+- **Percorsi (3.5)**: la maschera del percorso compare solo aprendo sull'Inizio senza contesto scelto; ordine profilo → percorso → saluto
+  (se compare, imposta `pd.salutato` e saluta lei alla fine). Si salta come il saluto (`pd.salutato`, `?nosaluto`, `?noprofilo`) e anche con
+  `sessionStorage['pd.percorsoVisto']='1'` o `?nopercorso`: i test che aprono un contesto nuovo sull'Inizio devono usarne uno.
+  Ogni rimando delle attività (`lezione:ID`, `palestra:ID`, `vita:ID`, `mente:ID`, `quiz:ID`, `cultura:PACCHETTO`, `chiedi:DOMANDA DELLA GUIDA`…)
+  deve esistere: lo controlla `tests/ui_percorsi.py`, che fa anche il **censimento** (ogni lezione, esercizio, simulatore, gioco, quiz,
+  incontro e pagina è in almeno un percorso) e, per ogni contesto, pretende che ogni voce principale sia presente o in `ESCLUSI` con il
+  motivo. **Aggiungendo contenuti** (lezione, simulatore, gioco, prova, pagina) inseriteli in `data-percorsi.js` (o in `ESCLUSI`), altrimenti il test fallisce.
+  Cambiare il testo di una domanda della guida usata in `chiedi:` rompe il rimando: aggiornare anche `data-percorsi.js`.
 - **Tablet dell'aula (3.4)**: API locali (solo 127.0.0.1) `GET /api/tablet` → `{attivo, porta, codice, ips, indirizzi, dispositivi:
   [{id, ip, nome, pagina, fa_s}], errore}` e `POST /api/tablet {azione: accendi|spegni|codice|togli, id}` (accendi fallita → 409).
   Sul tablet `/api/status` ha `ospite: true` → `PD.ospite` (app.js): `PD.server` resta vero (voce, IA, contenuti) ma `PD.store`
-  usa SOLO localStorage; nascosti microfono, aggiornamenti, import/rimozione pacchetti, «Salva e usa» dell'editor, configurazione IA,
+  usa SOLO localStorage; nascosti microfono del PC (resta solo «Parla con la voce» del tablet, spento di base), aggiornamenti, import/rimozione pacchetti, «Salva e usa» dell'editor, configurazione IA,
   aula del facilitatore; niente heartbeat né `/api/shutdown`. Nei moduli: usare `PD.server && !PD.ospite` per tutto ciò che scrive
   sul PC o usa API fuori dalla lista bianca. Presenza del tablet: `POST /api/ospite/presenza {nome, attivita, progressi, mano}` →
   `{ok, aula: false}` oppure la risposta di `/aula/ciao` con `aula: true` (id nel quadro `tablet-<id sessione>`).
   Test: `PD_TABLET_PORT` (Python 18968, Wine 18969) e `PD_TABLET_LOOPBACK=1` (permette 127.0.0.1, SOLO nei test); `tests/ui_tablet.py`.
+  Dalla 3.5 il tablet ha il riquadro «🎤 Microfono» del telefono (`voce.js`) al posto di quello del PC; `/api/stt` resta vietata.
+  `tests/ui_mobile.py` prova voce e microfono con un telefono emulato (Android Chrome, API del server bloccate = come la PWA)
+  e `speechSynthesis`/`SpeechRecognition` finti (`FINTI`); `ATTIVAZIONE` sostituisce `navigator.userActivation` perché Playwright
+  segna come «già toccata» anche una pagina appena aperta (lo usa anche `test_pwa.py`). Riconoscimento vero di Google/Apple,
+  iOS e tablet reali in http non si provano qui: dichiararlo nella consegna.
   Installatore Windows: regola firewall «Professore Digitale (tablet)» TCP 8768, tolta alla disinstallazione.
 
 ## Versione per Windows (regole in più)

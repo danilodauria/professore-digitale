@@ -25,7 +25,8 @@
     voiceId: "", netCheck: true, idleTips: true, greet: true, goodbye: true, studentName: "",
     aulaRuolo: "", aulaNome: "Aula", aulaCodice: "", aulaServer: "",
     voiceCommands: false, tremore: false, vista: false, leggiFocus: false, domandaGiorno: true, aulaManoSuono: true,
-    tabletCondividi: false
+    tabletCondividi: false,
+    micTelefono: false, percorsoContesto: ""    // 3.5: «Parla con la voce» sul telefono/tablet (riconoscimento di Google/Apple): spento finché l'utente non lo accende
   };
   PD.server = false;
   /* Modalità ospite (3.4): questo browser è un tablet o un telefono collegato al PC dell'aula (tablet.js, pd_tablet.py).
@@ -108,7 +109,10 @@
     if (PD.settings.model && m.indexOf(PD.settings.model) >= 0) return PD.settings.model;
     return m[0] || "";
   };
-  PD.sttReady = function () { return PD.server && !PD.ospite && PD.status && !!PD.status.stt.engine; };
+  /* Microfono. sttLocale: trascrizione sul PC (Vosk/whisper del server, nulla esce). sttReady: c'è un microfono pronto,
+   * cioè quello locale OPPURE (app per telefono e tablet ospite, 3.5) la voce del telefono accesa dall'utente (voce.js). */
+  PD.sttLocale = function () { return !!(PD.server && !PD.ospite && PD.status && PD.status.stt && PD.status.stt.engine); };
+  PD.sttReady = function () { return PD.sttLocale() || !!(PD.micWeb && PD.micWeb.stato() === "acceso"); };
 
   var TTS_NAME = { sapi: "voce di Windows", piper: "voce naturale", pico: "pico", "espeak-ng": "espeak-ng", espeak: "espeak" };
   PD.isWindows = function () { return !!(PD.status && PD.status.platform === "windows"); };
@@ -120,11 +124,12 @@
       html.push(PD.aiReady() ? chip(true, "🤖 " + PD.currentModel()) : chip(false, "🤖 Guida interna"));
       var tts = PD.status.tts.engines;
       html.push(chip(tts.length > 0, "🔊 " + (TTS_NAME[tts[0]] || tts[0] || "voce browser")));
-      if (!PD.ospite) html.push(chip(PD.sttReady(), "🎤 " + (PD.status.stt.engine || "microfono spento")));
+      if (!PD.ospite) html.push(chip(PD.sttLocale(), "🎤 " + (PD.status.stt.engine || "microfono spento")));
     } else {
       html.push(chip(false, window.PD_PWA ? "📱 App per telefono e tablet" : "📄 Versione portatile (solo browser)"));
       html.push(chip("speechSynthesis" in window, "🔊 Voce del browser"));
     }
+    if (PD.micWeb && PD.micWeb.stato() === "acceso") html.push(chip(true, "🎤 Voce del telefono"));
     html.push(chip(true, "🔒 Offline"));
     document.documentElement.classList.toggle("pd-ospite", !!PD.ospite);
     if (PD.ospite) html.unshift('<span class="chip on pd-ospite-chip" title="Questo tablet usa la voce, l\'IA e i contenuti del PC del facilitatore. I progressi restano su questo tablet.">📱 Collegato al PC dell\'aula</span>');
@@ -257,10 +262,28 @@
     if (on) PD.setProf("spiegazione");
     else if (PD.profState === "spiegazione") PD.setProf("riposo");
   }
+  /* Telefoni e tablet (3.5): i browser mobili non fanno parlare né suonare la pagina finché non la si tocca.
+   * Lì si usa UN solo elemento audio, «sbloccato» al primo tocco da voce.js (iOS lo richiede), e i testi si spezzano
+   * in frasi più corte (Chrome per Android taglia quelle lunghe). Sul PC tutto resta come prima. */
+  PD.mobile = (function () {
+    var ua = navigator.userAgent || "", coarse = false;
+    try { coarse = !!(window.matchMedia && window.matchMedia("(pointer: coarse)").matches); } catch (e) { /* ignora */ }
+    return /Android|iPhone|iPad|iPod|Mobile|Silk|Kindle/i.test(ua) || (/Macintosh/.test(ua) && navigator.maxTouchPoints > 1) || coarse;
+  })();
+  var lettore = null;
+  PD.lettoreAudio = function () {
+    if (!PD.mobile) return null;
+    if (!lettore) { lettore = new Audio(); lettore.preload = "auto"; }
+    return lettore;
+  };
   PD.stopSpeech = function () {
     speech.gen++;
     if (speech.ctrl) { try { speech.ctrl.abort(); } catch (e) { /* ignora */ } speech.ctrl = null; }
-    if (speech.audio) { speech.audio.pause(); speech.audio.src = ""; speech.audio = null; }
+    if (speech.audio) {
+      var a = speech.audio; speech.audio = null;
+      a.onended = a.onerror = null; a.pause();
+      if (a === lettore) { a.removeAttribute("src"); try { a.load(); } catch (e) { /* ignora */ } } else a.src = "";
+    }
     if ("speechSynthesis" in window) window.speechSynthesis.cancel();
     speakingUI(false);
   };
@@ -274,10 +297,21 @@
     var gen = speech.gen;
     speakingUI(true);
     var done = function () { if (gen === speech.gen) speakingUI(false); };
-    if (engine === "browser") return speakBrowser(chunks, gen).then(done, done);
+    /* il browser non ha lasciato parlare (manca un tocco): voce.js mostra l'invito e poi riprova */
+    var bloccata = function (esito) {
+      if (gen !== speech.gen) return;
+      done();
+      if (PD.voceBloccata) PD.voceBloccata(function () { return PD.speak(text, force); }, esito);
+    };
+    if (engine === "browser") return speakBrowser(chunks, gen).then(function (esito) {
+      if (esito === "bloccata" || esito === "muta") bloccata(esito); else done();
+    }, done);
     return speakServer(chunks, gen).then(done, function (err) {
       if (gen !== speech.gen) return;
-      if ("speechSynthesis" in window) return speakBrowser(chunks, gen).then(done, done);
+      if (err && err.name === "NotAllowedError") return bloccata("bloccata");
+      if ("speechSynthesis" in window) return speakBrowser(chunks, gen).then(function (esito) {
+        if (esito === "bloccata" || esito === "muta") bloccata(esito); else done();
+      }, done);
       PD.toast("Voce non disponibile: " + err.message); done();
     });
   };
@@ -300,35 +334,86 @@
       return current.then(function (url) {
         return new Promise(function (res, rej) {
           if (gen !== speech.gen) { URL.revokeObjectURL(url); return res(); }
-          var a = new Audio(url); speech.audio = a;
+          var a = PD.lettoreAudio() || new Audio();
+          a.src = url; speech.audio = a;
           a.onended = function () { URL.revokeObjectURL(url); res(); };
           a.onerror = function () { URL.revokeObjectURL(url); rej(new Error("riproduzione non riuscita")); };
-          a.play().catch(rej);
+          var pr = a.play(); if (pr && pr.catch) pr.catch(rej);
         });
       }).then(playNext);
     }
     return playNext();
   }
+  /* «it-IT», «it_IT» (alcuni Android), «it»: tutte italiane; prima quelle esattamente it-IT */
+  function linguaIt(l) { return /^it([-_]|$)/i.test(String(l || "")); }
   function pickVoice() {
     var voices = window.speechSynthesis.getVoices() || [];
     if (PD.settings.browserVoice) {
       var v = voices.filter(function (x) { return x.name === PD.settings.browserVoice; })[0];
       if (v) return v;
     }
-    return voices.filter(function (x) { return /^it/i.test(x.lang); })[0] || null;
+    var it = voices.filter(function (x) { return linguaIt(x.lang); });
+    return it.filter(function (x) { return /^it[-_]it$/i.test(x.lang); })[0] || it[0] || null;
+  }
+  PD.pickVoice = pickVoice;
+  /* iOS (e a volte Android) elenca le voci solo dopo un po': si aspetta al massimo 1,5 s, una volta sola */
+  var vociAttese = false;
+  function vociPronte() {
+    var ss = window.speechSynthesis;
+    if (vociAttese || (ss.getVoices() || []).length) { vociAttese = true; return Promise.resolve(); }
+    return new Promise(function (res) {
+      var t0 = Date.now(), iv = setInterval(function () {
+        if ((ss.getVoices() || []).length || Date.now() - t0 > 1500) { clearInterval(iv); vociAttese = true; res(); }
+      }, 100);
+    });
+  }
+  /* sul telefono frasi più corte: le frasi lunghe si spezzano alle virgole o agli spazi */
+  function spezza(chunks, max) {
+    var out = [];
+    chunks.forEach(function (c) {
+      while (c.length > max) {
+        var cut = c.lastIndexOf(", ", max); if (cut < max / 3) cut = c.lastIndexOf(" ", max); if (cut < max / 3) cut = max;
+        out.push(c.slice(0, cut + 1).trim()); c = c.slice(cut + 1).trim();
+      }
+      if (c) out.push(c);
+    });
+    return out;
+  }
+  /* Una frase con la voce del browser. Esiti: "ok", "bloccata" (il browser chiede un tocco: errore not-allowed),
+   * "muta" (dopo 1,5 s non è partita e voce.js dice che serve un tocco: iOS non dà errori, tace e basta). */
+  function parlaFrase(testo, gen, primo) {
+    var ss = window.speechSynthesis;
+    return new Promise(function (res) {
+      var u = new SpeechSynthesisUtterance(testo), partita = false, finita = false, t0 = Date.now(), iv;
+      u.lang = "it-IT"; u.rate = PD.settings.rate; var v = pickVoice(); if (v) u.voice = v;
+      function fine(esito) { if (finita) return; finita = true; clearInterval(iv); res(esito); }
+      u.onstart = function () { partita = true; if (PD.voceSbloccata) PD.voceSbloccata(); };
+      u.onend = function () { fine("ok"); };
+      u.onerror = function (e) { fine(e && e.error === "not-allowed" && !partita ? "bloccata" : "ok"); };
+      try { if (ss.paused) ss.resume(); } catch (e) { /* ignora */ }
+      ss.speak(u);
+      iv = setInterval(function () {
+        if (gen !== speech.gen) return fine("ok");
+        try { if (ss.paused) ss.resume(); } catch (e) { /* Safari a volte resta in pausa */ }
+        if (ss.speaking) partita = true;
+        var dt = Date.now() - t0;
+        if (!partita && primo && dt >= 1500 && PD.voceDaSbloccare && PD.voceDaSbloccare()) { ss.cancel(); return fine("muta"); }
+        /* Chrome per Android a volte non manda «end»: se non parla più e non c'è altro in coda, è finita */
+        if (dt >= 1500 && !ss.speaking && !ss.pending) return fine("ok");
+        if (dt > 30000 + testo.length * 150) fine("ok");
+      }, 250);
+    });
   }
   function speakBrowser(chunks, gen) {
-    return chunks.reduce(function (p, chunk) {
-      return p.then(function () {
-        if (gen !== speech.gen) return;
-        return new Promise(function (res) {
-          var u = new SpeechSynthesisUtterance(chunk);
-          u.lang = "it-IT"; u.rate = PD.settings.rate; var v = pickVoice(); if (v) u.voice = v;
-          u.onend = res; u.onerror = res;
-          window.speechSynthesis.speak(u);
+    if (PD.mobile) chunks = spezza(chunks, 160);
+    return vociPronte().then(function () {
+      return chunks.reduce(function (p, chunk, i) {
+        return p.then(function (esito) {
+          if (gen !== speech.gen || (esito && esito !== "ok")) return esito;
+          return parlaFrase(chunk, gen, i === 0);
         });
-      });
-    }, Promise.resolve());
+      }, Promise.resolve("ok"));
+    });
   }
 
   /* ------------------------------------------------------------------------
@@ -695,6 +780,7 @@
     var aiLine = PD.aiReady()
       ? '<span class="badge done">🤖 IA locale attiva: ' + esc(PD.currentModel()) + "</span>"
       : '<span class="badge">📚 Risponde la guida interna' + (PD.server ? " (IA locale non attiva)" : "") + "</span>";
+    var micW = PD.micWeb ? PD.micWeb.stato() : "no";   // "no" = PC o portatile: microfono come sempre
     el.innerHTML =
       '<h1>💬 Chiedi al Professore</h1><p class="lead">Scrivete la vostra domanda' + (PD.sttReady() ? " oppure premete il microfono e parlate" : "") +
       ". Non esistono domande sbagliate. " + aiLine + "</p>" +
@@ -702,11 +788,13 @@
       '<div class="suggest" id="suggest">' + pickSuggestions(PD.history.length ? 4 : 8).map(function (s) { return "<button>" + esc(s) + "</button>"; }).join("") + "</div>" +
       '<form class="composer" id="composer"><button type="button" class="mic" id="mic" title="' +
       (PD.sttReady() ? "Premete e parlate; premete di nuovo per finire" : "Microfono non disponibile: vedi Impostazioni") + '" aria-label="Microfono"' +
-      (PD.sttReady() ? "" : " disabled") + (PD.ospite ? " hidden" : "") + '>🎤</button>' +
+      (PD.sttReady() ? "" : " disabled") + ((micW === "no" ? PD.ospite : micW !== "acceso") ? " hidden" : "") + '>🎤</button>' +
       '<textarea id="question" rows="2" placeholder="Scrivete qui la domanda…" aria-label="La vostra domanda"></textarea>' +
       '<button class="btn big" id="send" type="submit">Invia</button></form>' +
       '<div class="row small" style="margin-top:.6rem"><button class="btn ghost" id="clear-chat" type="button">🧹 Nuova conversazione</button>' +
-      '<button class="btn ghost" id="stop-gen" type="button" hidden>■ Ferma la risposta</button></div></div>' +
+      '<button class="btn ghost" id="stop-gen" type="button" hidden>■ Ferma la risposta</button>' +
+      (micW === "no" || micW === "assente" ? "" : '<button class="btn ghost" id="mic-voce" type="button"></button>') + "</div>" +
+      (micW === "assente" ? '<p class="small muted" id="mic-nota">🎤 Questo browser non sa riconoscere la voce: scrivete pure la domanda.</p>' : "") + "</div>" +
       '<aside class="ask-side"><div class="card" style="text-align:center">' + PD.profHTML() + '</div><div class="chalkboard" id="ask-board"></div></aside></div>';
     renderChat();
     var board = $("#ask-board", el);
@@ -718,7 +806,23 @@
     $("#clear-chat", el).onclick = function () { PD.history = []; PD.store.save("history", []); renderChat(); PD.renderDiagram(board, "", "La lavagna"); };
     $("#stop-gen", el).onclick = function () { if (chatCtrl) chatCtrl.abort(); };
     $("#mic", el).onclick = function () { PD.recorder.toggle(); };
+    var mv = $("#mic-voce", el);
+    if (mv) mv.onclick = function () { if (PD.micWeb) PD.micWeb.interruttore(); };
+    PD.aggiornaMicAsk();
     if (args[0]) { var q = decodeURIComponent(args.join("/")); history.replaceState(null, "", "#/ask"); $("#question").value = q; $("#question").focus(); }
+  };
+
+  /* Pulsanti del microfono in «Chiedi al Professore» dopo che l'utente accende o spegne la voce del telefono */
+  PD.aggiornaMicAsk = function () {
+    var mic = $("#mic"), mv = $("#mic-voce"), w = PD.micWeb ? PD.micWeb.stato() : "no";
+    if (!mic || w === "no") return;
+    mic.hidden = w !== "acceso"; mic.disabled = w !== "acceso";
+    mic.title = "Premete e parlate: il Professore si ferma da solo quando smettete";
+    if (mv) {
+      mv.textContent = w === "acceso" ? "🔇 Spegni il microfono" : "🎤 Parla con la voce";
+      mv.title = w === "acceso" ? "Spegne il riconoscimento della voce del telefono" : "Accende il microfono per parlare con il Professore";
+      mv.setAttribute("aria-pressed", w === "acceso" ? "true" : "false");
+    }
   };
 
   function renderChat() {
@@ -887,10 +991,11 @@
       return out;
     }
     function setBtn(on) { var b = $("#mic"); if (b) { b.classList.toggle("rec", on); b.textContent = on ? "■" : "🎤"; } }
+    PD.micBtn = setBtn;
     var onText = null;
     function start(cb) {
       onText = cb || null;
-      if (!PD.sttReady()) { PD.toast("Il riconoscimento vocale non è installato. Vedi Impostazioni."); return; }
+      if (!PD.sttLocale()) { PD.toast("Il riconoscimento vocale non è installato. Vedi Impostazioni."); return; }
       if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) { PD.toast("Il browser non permette l'uso del microfono."); return; }
       PD.stopSpeech();
       navigator.mediaDevices.getUserMedia({ audio: { channelCount: 1, echoCancellation: true, noiseSuppression: true } }).then(function (stream) {
@@ -931,8 +1036,21 @@
         })
         .catch(function (e) { PD.setProf("riposo"); PD.toast("Trascrizione non riuscita: " + e.message); });
     }
-    /* toggle(cb): con cb il testo riconosciuto va a cb invece che alla domanda (comandi vocali, «È una truffa?») */
-    return { toggle: function (cb) { if (st) stop(); else start(cb); }, stop: stop, encodeWav: encodeWav, active: function () { return !!st; } };
+    /* toggle(cb, campo): con cb il testo riconosciuto va a cb invece che alla domanda (comandi vocali, «È una truffa?»).
+     * Sceglie il motore: trascrizione locale del PC se c'è, altrimenti la voce del telefono (voce.js, 3.5), che chiede
+     * il consenso la prima volta. campo (facoltativo) = casella in cui mostrare il testo mentre si parla. */
+    function web() { return PD.micWeb && !PD.sttLocale() && PD.micWeb.stato() !== "no"; }
+    return {
+      toggle: function (cb, campo) {
+        if (st) return stop();
+        if (PD.micWeb && PD.micWeb.attivo()) return PD.micWeb.ferma();
+        if (web()) return PD.micWeb.ascolta(cb, campo);
+        start(cb);
+      },
+      stop: function () { if (PD.micWeb && PD.micWeb.attivo()) PD.micWeb.ferma(); stop(); },
+      encodeWav: encodeWav,
+      active: function () { return !!st || !!(PD.micWeb && PD.micWeb.attivo()); }
+    };
   })();
 
   /* ------------------------------------------------------------------------
@@ -982,8 +1100,9 @@
       sw("s-kbctx", "Suggerisci all'IA le informazioni della guida (risposte più precise)", s.useKbContext) +
       (S && !PD.ospite ? '<p class="small muted">Modello consigliato per questo computer (' + Math.round(S.system.ram_mb / 1024 * 10) / 10 + " GB di RAM): <b>" + esc(S.ai.recommended) + "</b></p>" : "") + "</div>" +
 
-      (PD.ospite ? "" : '<div class="card"><h2 style="margin-top:0">🎤 Microfono</h2>' +
-      (PD.sttReady() ? '<p class="notice ok small">Riconoscimento vocale attivo: <b>' + esc(S.stt.engine) + "</b>.</p>"
+      (PD.micWeb && PD.micWeb.stato() !== "no" ? PD.micWeb.cartaHTML() :
+      PD.ospite ? "" : '<div class="card"><h2 style="margin-top:0">🎤 Microfono</h2>' +
+      (PD.sttLocale() ? '<p class="notice ok small">Riconoscimento vocale attivo: <b>' + esc(S.stt.engine) + "</b>.</p>"
         : (PD.isWindows() ? '<p class="notice small">Riconoscimento vocale non installato. Attivatelo da <a href="#/setup" data-go="#/setup">Configura IA e voce</a> (circa 50 MB, una sola volta con Internet, oppure dalla chiavetta).</p>'
           : '<p class="notice small">Riconoscimento vocale non installato. Per attivarlo (circa 50 MB, una sola volta con Internet) aprite un terminale e date il comando <code>professore-digitale-setup-voce</code>.</p>')) +
       sw("s-autosend", "Invia subito la domanda dopo aver parlato", s.autoSendVoice) +
@@ -1031,6 +1150,7 @@
     bind("s-net", "change", function () { s.netCheck = this.checked; PD.saveSettings(); PD.checkNet(true); });
     bind("s-student", "change", function () { s.studentName = this.value.trim(); PD.saveSettings(); });
     bind("s-voiceid", "change", function () { s.voiceId = this.value; if (this.value) s.ttsMode = "server"; PD.saveSettings(); PD.speak("Buongiorno! Questa è la mia nuova voce.", true); }); chk("s-voice", "voice"); chk("s-autoread", "autoReadAnswers"); chk("s-autolessons", "autoReadLessons");
+    if (PD.micWeb) PD.micWeb.cartaBind(el);
     chk("s-ai", "aiEnabled"); chk("s-kbctx", "useKbContext"); chk("s-autosend", "autoSendVoice");
     bind("s-teacher", "change", function () { s.teacherName = this.value.trim(); PD.saveSettings(); });
     bind("s-rate", "input", function () { s.rate = +this.value; $("#rate-val").textContent = s.rate.toFixed(2); PD.saveSettings(); });

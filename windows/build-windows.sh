@@ -91,8 +91,17 @@ rm -rf "$A/piper/pkgconfig"
 copia_voci "$A/voci"
 
 if [ "$SOLO_APP" = 1 ]; then echo "✔ Applicazione pronta in $A"; exit 0; fi
+# ---- firma digitale (Authenticode): evita il blocco di «Sicurezza di Windows» / Controllo intelligente delle app ----
+FIRMA_DEF=()
+if windows/firma.sh --prova >/dev/null 2>&1; then
+  echo "» Firma digitale dei programmi"
+  find "$A" -type f \( -iname '*.exe' -o -iname '*.dll' \) -print0 | xargs -0 windows/firma.sh
+  FIRMA_DEF=(-DFIRMA="$ROOT/windows/firma.sh")    # l'installatore e il programma di disinstallazione si firmano in makensis
+else
+  echo "  ! Firma digitale non configurata: su Windows 11 «Sicurezza di Windows» può bloccare il programma (vedi windows/firma.sh)"
+fi
 echo "» Installatore"
-makensis -V2 -DVERSIONE="$VERSION" -DV1="$V1" -DV2="$V2" -DV3="$V3" -DSORGENTE="$ROOT/$A" -DUSCITA="$ROOT/$OUT/ProfessoreDigitale-Setup-$VERSION.exe" \
+makensis -V2 "${FIRMA_DEF[@]}" -DVERSIONE="$VERSION" -DV1="$V1" -DV2="$V2" -DV3="$V3" -DSORGENTE="$ROOT/$A" -DUSCITA="$ROOT/$OUT/ProfessoreDigitale-Setup-$VERSION.exe" \
   -DICONA="$ROOT/windows/res/professore.ico" -DRISORSE="$ROOT/windows/res" windows/installer/professore-digitale.nsi
 echo "» Versione da chiavetta (zip)"
 rm -f "$OUT/professore-digitale-windows-$VERSION.zip"

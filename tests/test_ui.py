@@ -435,13 +435,14 @@ with sync_playwright() as p:
         page.evaluate("""async () => { PD.settings.aulaRuolo = ''; await PD.api('/api/data/settings', {value: PD.settings}); await PD.api('/api/aula/rimuovi', {id: '*'}); return PD.api('/api/aula/applica', {}); }""")
     # saluto vocale all'avvio (nuova finestra senza il segno "gia' salutato")
     g = b.new_context(viewport={"width": 1366, "height": 800}).new_page()
+    g.add_init_script("try { sessionStorage.setItem('pd.percorsoVisto', '1') } catch (e) {}")   # la maschera del percorso si prova in ui_percorsi
     g.goto(ROOT + "#/home"); g.wait_for_selector("#pd-bubble", timeout=15000)
     check("saluto all'avvio", any(w in g.inner_text("#pd-bubble") for w in ("Buongiorno", "Buon pomeriggio", "Buonasera")))
     g.close()
 
     # --- moduli della 3.2: ognuno ha il suo file tests/ui_<modulo>.py con prova(page, ROOT, check, SHOTS) ---
     import importlib.util
-    for _nome in ("ui_vita", "ui_vita2", "ui_truffa", "ui_profili", "ui_ripasso", "ui_accessibilita", "ui_enti", "ui_registro", "ui_lettera", "ui_aula_mano", "ui_editor", "ui_mente", "ui_mente_giochi", "ui_tablet"):
+    for _nome in ("ui_vita", "ui_vita2", "ui_truffa", "ui_profili", "ui_ripasso", "ui_accessibilita", "ui_enti", "ui_registro", "ui_lettera", "ui_aula_mano", "ui_editor", "ui_mente", "ui_mente_giochi", "ui_tablet", "ui_mobile", "ui_percorsi"):
         _s = importlib.util.spec_from_file_location(_nome, os.path.join(os.path.dirname(os.path.abspath(__file__)), _nome + ".py"))
         _m = importlib.util.module_from_spec(_s); _s.loader.exec_module(_m)
         print("  ·· " + _nome)
