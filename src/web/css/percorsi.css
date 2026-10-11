@@ -58,7 +58,7 @@
 .pc-riepilogo h2 { margin-top: 0; }
 .pc-ri { list-style: none; padding: 0; margin: .4rem 0 .8rem; display: grid; gap: .5rem; font-size: 1.05rem; }
 .pc-ri li { display: flex; gap: .6rem; align-items: baseline; overflow-wrap: anywhere; }
-.pc-ri li > span { flex: none; width: 1.8rem; text-align: center; }
+.pc-ri li > span:first-child { flex: none; width: 1.8rem; text-align: center; }
 
 /* ===== pagina del percorso ===== */
 .pc-testa h1 { margin: 0; }

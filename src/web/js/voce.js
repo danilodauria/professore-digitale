@@ -161,7 +161,12 @@
       if (st === "spento") return PD.micWeb.consenso(function (ok) { if (ok) avvia(cb, campo); });
       if (st === "acceso") avvia(cb, campo);
     },
-    ferma: function () { if (ascolto) { try { ascolto.rec.stop(); } catch (e) { fine(); } } },
+    ferma: function () {
+      var a = ascolto; if (!a) return;
+      try { a.rec.stop(); } catch (e) { fine(); return; }
+      /* se il browser non avvisa la fine dell'ascolto, la striscia «Vi ascolto…» non deve restare a schermo */
+      setTimeout(function () { if (ascolto === a) { try { a.rec.abort(); } catch (e) { /* ignora */ } fine(); } }, 1500);
+    },
     /* pulsante «🎤 Parla con la voce» / «🔇 Spegni il microfono» */
     interruttore: function () {
       var st = PD.micWeb.stato();
@@ -261,6 +266,7 @@
     $("#pd-mic-no", d).focus();
   }
   document.addEventListener("keydown", function (e) { if (e.key === "Escape") { chiudiDialogo(); if (ascolto) PD.micWeb.ferma(); } });
+  window.addEventListener("hashchange", function () { if (ascolto) PD.micWeb.ferma(); });   // cambiando pagina si smette di ascoltare
 
   /* ---------------------------------------------------------------- ascolto con la Web Speech API */
   function pillola(testo) {

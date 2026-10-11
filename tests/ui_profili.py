@@ -139,7 +139,13 @@ def prova(page, ROOT, check, SHOTS):
         attendi_home(X)
 
         # --- gestione: cambia nome, elimina con doppia conferma ---
-        apri("#/profili")
+        for _t in range(4):   # dopo un cambio di persona l'app torna da sola all'Inizio: se succede adesso, si riapre la pagina
+            apri("#/profili")
+            try:
+                page.wait_for_selector("[data-pf-rinomina='%s']" % Y, state="visible", timeout=5000)
+                break
+            except Exception:
+                page.wait_for_timeout(500)
         page.wait_for_selector("#pf-gestisci")
         check("profili: non si elimina chi usa il computer", page.is_disabled("[data-pf-elimina='%s']" % X))
         page.click("[data-pf-rinomina='%s']" % Y)
