@@ -1,0 +1,54 @@
+# Professore Digitale - pubblica il sito (GitHub Pages) a ogni nuova Release.
+# Come si usa: nella Release della versione X.Y.Z si allega anche sito-X.Y.Z.zip (lo prepara tools/prepara-github.py).
+# Appena la Release è pubblicata, questo workflow scarica lo zip e lo mette online su
+# https://danilodauria.github.io/professore-digitale/ (aggiornamenti.json, pagina, app per telefono, contenuti).
+# Una sola volta, su GitHub: Settings → Pages → Source: «GitHub Actions».
+# Si può rilanciare a mano: Actions → «Pubblica il sito» → Run workflow (vuoto = ultima Release).
+# Autore: Danilo D'Auria - Licenza MIT
+name: Pubblica il sito
+
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+    inputs:
+      versione:
+        description: "Tag della Release da pubblicare (es. v3.5.1); vuoto = l'ultima"
+        required: false
+        default: ""
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  pubblica:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - name: Scarico sito-X.Y.Z.zip dalla Release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TAG: ${{ github.event.release.tag_name || inputs.versione }}
+        run: |
+          set -e
+          if [ -z "$TAG" ]; then TAG=$(gh release view -R "$GITHUB_REPOSITORY" --json tagName -q .tagName); fi
+          echo "Release: $TAG"
+          gh release download "$TAG" -R "$GITHUB_REPOSITORY" -p 'sito-*.zip' -D scaricato
+          mkdir sito
+          unzip -q scaricato/sito-*.zip -d sito
+          test -f sito/aggiornamenti.json || { echo "Nello zip manca aggiornamenti.json"; exit 1; }
+          python3 -c "import json;i=json.load(open('sito/aggiornamenti.json'));print('Versione', i['versione'])"
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: sito
+      - id: deploy
+        uses: actions/deploy-pages@v4

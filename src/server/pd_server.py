@@ -575,12 +575,31 @@ def scarica_pacchetto_deb(url, sha256):
         raise RuntimeError("nome del pacchetto non valido")
     if not RE_SHA.match(sha256 or ""):
         raise RuntimeError("manca l'impronta SHA-256: download rifiutato per sicurezza")
-    data = scarica(url, 200 * 1024 * 1024)
-    if hashlib.sha256(data).hexdigest() != sha256:
-        raise RuntimeError("impronta SHA-256 non corrispondente: file scartato")
+    # a pezzi direttamente su disco: il pacchetto supera i 200 MB (le voci naturali sono incluse)
+    if not url_consentito(url):
+        raise RuntimeError("indirizzo non valido (serve https, oppure http verso un computer della rete locale)")
+    limite, h, n = 900 * 1024 * 1024, hashlib.sha256(), 0
     dest = os.path.join(cartella_download(), nome)
-    with open(dest + ".part", "wb") as f:
-        f.write(data)
+    req = urllib.request.Request(url, headers={"User-Agent": "professore-digitale/" + VERSION})
+    try:
+        with urllib.request.urlopen(req, timeout=30) as r, open(dest + ".part", "wb") as f:
+            while True:
+                pezzo = r.read(1024 * 1024)
+                if not pezzo:
+                    break
+                n += len(pezzo)
+                if n > limite:
+                    raise RuntimeError("file troppo grande")
+                h.update(pezzo)
+                f.write(pezzo)
+        if h.hexdigest() != sha256:
+            raise RuntimeError("impronta SHA-256 non corrispondente: file scartato")
+    except BaseException:
+        try:
+            os.remove(dest + ".part")
+        except OSError:
+            pass
+        raise
     os.replace(dest + ".part", dest)
     return dest
 

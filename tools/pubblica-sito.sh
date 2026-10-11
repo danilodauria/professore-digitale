@@ -1,22 +1,9 @@
 #!/bin/bash
-# ==============================================================================
-#  Professore Digitale - carica dist/pubblica/ su GitHub Pages (ramo gh-pages)
-#  Uso:  tools/pubblica-sito.sh            (serve l'accesso a GitHub: token o chiave SSH)
-#  Una sola volta, su GitHub: Settings → Pages → Deploy from a branch → gh-pages / (root)
-#  Autore: Danilo D'Auria - Licenza MIT
-# ==============================================================================
-set -euo pipefail
-cd "$(dirname "$0")/.."
-source ./rilascio.conf
-PUB=dist/pubblica
-[ -f "$PUB/aggiornamenti.json" ] || { echo "Niente da pubblicare: eseguite prima tools/rilascio.sh"; exit 1; }
-VER=$(python3 -c "import json;print(json.load(open('$PUB/aggiornamenti.json'))['versione'])")
-T=$(mktemp -d); trap 'rm -rf "$T"' EXIT
-cp -r "$PUB"/. "$T/"
-touch "$T/.nojekyll"      # GitHub Pages: pubblica i file così come sono
-cd "$T"
-git init -q -b gh-pages
-git add -A
-git -c user.name="${MANUTENTORE% <*}" -c user.email="$(echo "$MANUTENTORE" | sed 's/.*<\(.*\)>.*/\1/')" commit -qm "Pubblicazione versione $VER"
-git push -f "$REPO_GIT" gh-pages
-echo "✔ Pubblicato: $BASE_URL/aggiornamenti.json (versione $VER). GitHub impiega 1-2 minuti ad aggiornare il sito."
+# Professore Digitale - (vecchio metodo, non più usato dalla 3.5.1)
+# Il sito non si carica più nel ramo gh-pages: GitHub rifiuta i file oltre 100 MB (installatori e .deb).
+# Ora: Release vX.Y.Z con i file di dist/github/rilascio-X.Y.Z/ (compreso sito-X.Y.Z.zip), poi il workflow
+# .github/workflows/pubblica-sito.yml pubblica il sito da solo. Vedi docs/Pubblicare_su_GitHub.pdf o tools/pubblica-tutto.sh.
+# Autore: Danilo D'Auria - Licenza MIT
+echo "Questo comando non si usa più: create la Release su GitHub con i file di dist/github/rilascio-X.Y.Z/"
+echo "(guida: docs/Pubblicare_su_GitHub.pdf), oppure da Linux con «gh»: tools/pubblica-tutto.sh"
+exit 1

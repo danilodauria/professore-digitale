@@ -122,6 +122,8 @@ PY
 python3 tools/make_pwa.py src/web "$PUB/app"
 python3 tools/make_sito.py "$PUB" "$BASE_URL" "$PAGINA_PROGETTO"
 (cd "$PUB" && sha256sum -- *.deb *.exe *.zip *.html *.json contenuti/*.json 2>/dev/null > SHA256SUMS)
+# GitHub: i file oltre i 100 MB vanno nella Release, il resto è sito-X.Y.Z.zip (pubblicato dal workflow)
+python3 tools/prepara-github.py "$PUB" "$PAGINA_PROGETTO" "$BASE_URL" dist/github
 
 # ---- 5. repository APT (facoltativo) ----
 [ "$APT" = 1 ] && tools/repo-apt.sh "$PUB/apt"
@@ -143,6 +145,7 @@ echo
 echo "Prossimi passi:"
 echo "  1. Provate il pacchetto su un PC di prova:  sudo apt install ./$PUB/professore-digitale_${NUOVA}_all.deb"
 echo "     e su Windows:  $PUB/ProfessoreDigitale-Setup-${NUOVA}.exe"
-echo "  2. Pubblicate:  tools/pubblica-tutto.sh   (GitHub)   oppure   tools/pubblica-locale.sh --cartella DEST   (senza GitHub)"
+echo "  2. Pubblicate su GitHub: Release v${NUOVA} con i file di dist/github/rilascio-${NUOVA}/ (guida: docs/Pubblicare_su_GitHub.pdf)"
+echo "     oppure da Linux:  tools/pubblica-tutto.sh   ·   senza GitHub:  tools/pubblica-locale.sh --cartella DEST"
 echo "     Copia di sicurezza senza GitHub:  tools/backup-locale.sh /media/\$USER/CHIAVETTA"
 echo "  3. Dagli altri PC: Impostazioni → Aggiornamenti → «Controlla aggiornamenti»."

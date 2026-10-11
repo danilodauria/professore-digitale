@@ -52,6 +52,9 @@ timeout 900 python3 tests/test_ui.py "file://$T/portatile.html" "$T/shots2" || E
 echo "== 4b. App per telefono e tablet (PWA, offline)"
 timeout 900 python3 tests/test_pwa.py "$T/shots-pwa" || ESITO=1
 
+echo "== 4c. Pubblicazione su GitHub (Release + sito)"
+timeout 300 python3 tests/test_github.py || ESITO=1
+
 echo "== 5. Versione per Windows (server nativo in Wine)"
 if command -v wine >/dev/null && command -v i686-w64-mingw32-gcc >/dev/null; then
   tests/test_windows.sh "$T" || ESITO=1

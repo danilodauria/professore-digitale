@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<title>Professore Digitale – Pubblicare su GitHub</title>
+<meta name="author" content="Danilo D'Auria">
+<link rel="stylesheet" href="stile-manuale.css">
+<style>
+.cover .sopra { height: 150mm; }
+.cover .sotto2 { height: 147mm; }
+.cover .prof { top: 52mm; width: 66mm; height: 66mm; }
+.indice-rapido { margin-top: 6mm; font-size: 10pt; }
+.indice-rapido li { margin: 1.4mm 0; }
+.bt { display: inline-block; font: 700 8.6pt "Noto Sans"; padding: .1em .65em; border-radius: 6px; border: 1px solid #c9d1d9; background: #f6f8fa; color: #24292f; white-space: nowrap; }
+.bt.verde { background: #1f883d; border-color: #1a7f37; color: #fff; }
+.bt.blu { background: #0969da; border-color: #0969da; color: #fff; }
+.menu { font-weight: 700; color: #0f3d63; }
+.una { display: inline-block; font: 700 7pt "Noto Sans"; letter-spacing: .12em; padding: .15em .6em; border-radius: 99px; vertical-align: middle; background: #fdf6dc; color: #a16207; margin-left: .4em; }
+.ogni { display: inline-block; font: 700 7pt "Noto Sans"; letter-spacing: .12em; padding: .15em .6em; border-radius: 99px; vertical-align: middle; background: #e8f6ec; color: #15803d; margin-left: .4em; }
+.schema { display: grid; grid-template-columns: 1fr 9mm 1fr 9mm 1fr; align-items: center; margin: 4mm 0 2mm; font-size: 8.6pt; }
+.schema .c { border: 1.4px solid var(--blu); border-radius: 8px; padding: 2.5mm; background: #fff; text-align: center; min-height: 26mm; }
+.schema .c b { display: block; color: var(--blu); font-size: 9.6pt; margin-bottom: 1mm; }
+.schema .f { text-align: center; color: var(--ara); font-size: 16pt; font-weight: 700; }
+.finestra { border: 1px solid #c9d1d9; border-radius: 8px; overflow: hidden; margin: .7em 0 1em; break-inside: avoid; font-size: 8.8pt; }
+.finestra .bar { background: #24292f; color: #fff; padding: 1.6mm 3mm; font: 700 8pt "Noto Sans"; }
+.finestra .bar span { color: #9aa4ae; font-weight: 400; }
+.finestra .dentro { padding: 3mm 4mm; background: #fff; }
+.finestra .riga { display: flex; gap: 3mm; align-items: center; margin: 1.5mm 0; }
+.finestra .campo { border: 1px solid #c9d1d9; border-radius: 5px; padding: .5mm 2mm; min-width: 50mm; background: #f6f8fa; font-family: "DejaVu Sans Mono", monospace; font-size: 8pt; }
+.finestra .eti { width: 34mm; color: #57606a; }
+.spunta { display: inline-block; width: 3.4mm; height: 3.4mm; border: 1.3px solid #57606a; border-radius: 2px; vertical-align: -0.5mm; margin-right: 1.5mm; }
+.spunta.si { background: #0969da; border-color: #0969da; }
+.annota { color: #b91c1c; font-weight: 700; }
+table.registro td { height: 9mm; }
+</style>
+</head>
+<body>
+
+<section class="cover">
+  <div class="sopra">
+    <div class="ka">CATTEDRA DIGITALE PORTATILE</div>
+    <h1>Professore Digitale</h1>
+    <div class="sotto">Pubblicare su GitHub<br>da Windows, passo dopo passo<br>libretto di istruzioni da conservare</div>
+    <img class="prof" src="professore.svg" alt="">
+  </div>
+  <div class="sotto2">
+    <ol class="indice-rapido">
+      <li><b>Come funziona</b> e le parole da conoscere</li>
+      <li><b>Preparare</b> i file ricevuti</li>
+      <li><b>Creare</b> il repository su GitHub <span class="una">UNA VOLTA</span></li>
+      <li><b>Caricare i sorgenti</b> con GitHub Desktop</li>
+      <li><b>Accendere il sito</b> (GitHub Pages) <span class="una">UNA VOLTA</span></li>
+      <li><b>Pubblicare la versione</b> (la Release)</li>
+      <li><b>Controllare</b> che tutto funzioni</li>
+      <li><b>Le versioni successive</b> <span class="ogni">OGNI VOLTA</span></li>
+      <li>Proteggere l'account · Se qualcosa va storto · Promemoria</li>
+    </ol>
+    <div class="firma">
+      <div><b>Danilo D'Auria</b><small>Promemoria personale per la pubblicazione</small></div>
+      <div class="v">dalla v3.5.1<small>Ottobre 2026</small></div>
+    </div>
+  </div>
+</section>
+<div class="segnaposto"></div>
+
+<div class="pagina">
+
+<h2 style="margin-top:2mm">1 · Come funziona, in breve</h2>
+<p>Il Professore Digitale vive su GitHub in <b>tre posti</b>, che lavorano insieme:</p>
+<div class="schema">
+  <div class="c"><b>📁 Il repository</b>i sorgenti del programma, con tutta la storia delle versioni. Si carica con <b>GitHub Desktop</b>.</div>
+  <div class="f">→</div>
+  <div class="c"><b>📦 La Release</b>«la scatola» di ogni versione: installatore Windows, pacchetto Linux, versione da chiavetta, sito. Si crea dal <b>sito di GitHub</b>.</div>
+  <div class="f">→</div>
+  <div class="c"><b>🌐 Il sito</b>la pagina per tutti, l'app per telefono e il file degli aggiornamenti. Si pubblica <b>da solo</b>.</div>
+</div>
+<p>Perché tre posti e non uno: GitHub <b>rifiuta i file più grandi di 100 MB</b> nel repository e nel sito, e i nostri installatori
+pesano più di 200 MB (dentro ci sono le voci naturali). Le Release invece accettano file fino a 2 GB l'uno. Il programma è già stato
+preparato per questo: il file degli aggiornamenti manda i PC a scaricare dalla Release, controllando sempre l'impronta SHA-256.</p>
+
+<h3>Le parole da conoscere</h3>
+<dl class="glossario colonne">
+<dt>Repository (o «repo»)</dt><dd>La cartella del progetto su GitHub, con la storia di ogni modifica.</dd>
+<dt>Commit</dt><dd>Una «fotografia» delle modifiche, con una frase che le descrive.</dd>
+<dt>Push</dt><dd>Spedire i commit dal vostro PC a GitHub.</dd>
+<dt>Branch «main»</dt><dd>La linea principale del progetto. Noi usiamo solo questa.</dd>
+<dt>Tag</dt><dd>Un'etichetta su un commit: <code>v3.5.1</code> = «qui c'è la versione 3.5.1».</dd>
+<dt>Release</dt><dd>La pagina di una versione con i file da scaricare (si chiamano <i>assets</i>).</dd>
+<dt>GitHub Pages</dt><dd>Il sito gratuito: <code>danilodauria.github.io/professore-digitale</code>.</dd>
+<dt>Actions</dt><dd>I «robot» di GitHub: il nostro pubblica il sito quando esce una Release.</dd>
+</dl>
+
+<div class="box"><span class="t">Cosa vi serve</span>
+<ul class="check">
+<li>L'account GitHub <b>danilodauria</b> (fatto) e <b>GitHub Desktop</b> aperto con quell'account (fatto: in alto a sinistra, <span class="menu">File → Options → Accounts</span> deve mostrare <i>danilodauria</i>).</li>
+<li>La cartella <code>Download\ProfessoreDigitale-3.5.1</code> con le parti <code>.parte</code> e <code>UNISCI-E-ESTRAI.bat</code>.</li>
+<li>Un browser (Edge o Chrome) collegato a github.com con lo stesso account.</li>
+<li>Circa un'ora la prima volta (quasi tutto è attesa dei caricamenti: ~1 GB). Le volte successive, 15 minuti.</li>
+</ul></div>
+<div class="box attenzione"><span class="t">Regola d'oro</span>Su GitHub non si mette <b>mai</b>: il numero della carta, password, il certificato di firma del codice o la chiave GPG.
+Il repository e il sito sono <b>pubblici</b>: li può vedere chiunque. L'IBAN e il link PayPal della pagina «Sostieni» sono fatti apposta per essere pubblici.</div>
+
+<h2>2 · Preparare i file ricevuti</h2>
+<ol class="passi">
+<li>Aprite <b>Esplora file</b> → <code>Download\ProfessoreDigitale-3.5.1</code>.</li>
+<li>Doppio clic su <b>UNISCI-E-ESTRAI.bat</b>. Se Windows mostra «Windows ha protetto il PC», cliccate <span class="menu">Ulteriori informazioni → Esegui comunque</span>
+(è il nostro file: lo potete aprire con il Blocco note per vedere cosa fa). Riunisce le parti, controlla le impronte (devono comparire solo <b>OK</b>) ed estrae tutto.
+Ci vogliono alcuni minuti.</li>
+<li>Alla fine, nella cartella <code>professore-digitale-3.5.1-github</code> trovate <b>due cartelle</b>:
+<table><thead><tr><th style="width:32%">Cartella</th><th>Contiene</th><th style="width:22%">Dove va</th></tr></thead><tbody>
+<tr><td><code>professore-digitale</code></td><td>I sorgenti del programma, con la storia e le impostazioni di git (una cartella nascosta <code>.git</code>: non toccatela).</td><td>Nel <b>repository</b>, con GitHub Desktop (capitoli 3–4)</td></tr>
+<tr><td><code>rilascio-3.5.1</code></td><td>5 file: <code>ProfessoreDigitale-Setup-3.5.1.exe</code>, <code>professore-digitale_3.5.1_all.deb</code>, <code>professore-digitale-windows-3.5.1.zip</code>, <code>sito-3.5.1.zip</code>, <code>NOTE-3.5.1.md</code></td><td>Nella <b>Release</b>, dal sito di GitHub (capitolo 6)</td></tr>
+</tbody></table></li>
+<li>Spostate la cartella <code>professore-digitale</code> in <code>Documenti\GitHub</code> (se la cartella <i>GitHub</i> non c'è, createla:
+tasto destro → <span class="menu">Nuovo → Cartella</span>). Il percorso finale sarà <code>Documenti\GitHub\professore-digitale</code>.</li>
+</ol>
+<div class="box consiglio"><span class="t">Perché spostarla</span>È la cartella «di lavoro» che GitHub Desktop terrà d'occhio per sempre. In Documenti è al sicuro dalle pulizie della cartella Download.
+<b>Non zippatela e non rinominatela</b> dopo averla aggiunta a GitHub Desktop.</div>
+
+<h2>3 · Creare il repository vuoto su GitHub <span class="una">SOLO LA PRIMA VOLTA</span></h2>
+<ol class="passi">
+<li>Nel browser andate su <code>github.com</code> (già entrati con l'account danilodauria). In alto a destra cliccate <span class="bt">+</span> → <span class="menu">New repository</span>.</li>
+<li>Compilate così:
+<div class="finestra"><div class="bar">Create a new repository <span>· github.com/new</span></div><div class="dentro">
+<div class="riga"><span class="eti">Owner</span><span class="campo">danilodauria</span></div>
+<div class="riga"><span class="eti">Repository name</span><span class="campo">professore-digitale</span> <span class="annota">← esattamente così, minuscolo, con il trattino</span></div>
+<div class="riga"><span class="eti">Description</span><span class="campo">Cattedra Digitale Portatile – alfabetizzazione digitale offline</span></div>
+<div class="riga"><span class="eti">Visibilità</span><span><span class="spunta si"></span><b>Public</b> &nbsp; <span class="spunta"></span>Private</span> <span class="annota">← Public: il sito gratuito funziona solo così</span></div>
+<div class="riga"><span class="eti">Add README</span><span><span class="spunta"></span>NO</span> &nbsp; <span class="eti" style="width:auto">.gitignore: <b>None</b> · License: <b>None</b></span> <span class="annota">← tutto vuoto</span></div>
+</div></div>
+Il repository deve nascere <b>vuoto</b>: README, licenza e .gitignore sono già nei sorgenti.</li>
+<li>Cliccate <span class="bt verde">Create repository</span>. Si apre una pagina con le istruzioni «Quick setup»: <b>non serve seguirle</b>, chiudetela pure.</li>
+</ol>
+<p class="small">Il nome conta: il programma cerca gli aggiornamenti su <code>danilodauria.github.io/professore-digitale</code> e scarica da
+<code>github.com/danilodauria/professore-digitale/releases</code>. Se il nome fosse diverso, gli aggiornamenti non arriverebbero.</p>
+
+<h2>4 · Caricare i sorgenti con GitHub Desktop</h2>
+<h3>4a · Aggiungere la cartella <span class="una">SOLO LA PRIMA VOLTA</span></h3>
+<ol class="passi">
+<li>In GitHub Desktop: menu <span class="menu">File → Add local repository…</span> (oppure <kbd>Ctrl</kbd>+<kbd>O</kbd>).</li>
+<li><span class="bt">Choose…</span> → selezionate <code>Documenti\GitHub\professore-digitale</code> → <span class="bt blu">Add repository</span>.</li>
+<li>In alto a sinistra ora c'è <b>Current repository: professore-digitale</b> e <b>Current branch: main</b>. La colonna «Changes» deve dire
+<b>0 changed files</b> (i file sono già tutti in un commit: la versione 3.5.1 l'ho preparata io).</li>
+</ol>
+<h3>4b · Spedire i sorgenti a GitHub</h3>
+<ol class="passi">
+<li>In alto, al centro della barra, c'è un pulsante: la prima volta si chiama <span class="bt">⬆ Publish branch</span>, le volte successive <span class="bt">⬆ Push origin</span>. Cliccatelo.</li>
+<li>Attendete che finisca (circa 90 MB: da 1 a 10 minuti secondo la connessione). Quando ha finito, il pulsante diventa <span class="bt">Fetch origin</span>.</li>
+<li>Controllo: nel browser aprite <code>github.com/danilodauria/professore-digitale</code>. Dovete vedere le cartelle (<code>src</code>, <code>docs</code>, <code>windows</code>…)
+e sotto la presentazione del progetto (il file README).</li>
+</ol>
+<div class="box attenzione"><span class="t">Se GitHub Desktop propone «Publish repository» invece di «Publish branch»</span>
+Vuol dire che la cartella non sa ancora dove spedire. Nessun problema: cliccate <span class="bt">Publish repository</span>, lasciate il nome <b>professore-digitale</b>,
+<b>togliete la spunta a «Keep this code private»</b>, Organization: <b>None</b>, poi <span class="bt blu">Publish repository</span>.
+Se risponde che il nome esiste già, il repository del capitolo 3 c'è: chiudete, menu <span class="menu">Repository → Repository settings → Remote</span> e scrivete
+<code>https://github.com/danilodauria/professore-digitale.git</code>, Save, poi <span class="bt">Publish branch</span>.</div>
+<p class="small">GitHub Desktop spedisce anche le etichette delle versioni (i <i>tag</i>, es. <code>v3.5.1</code>). Se non comparissero su GitHub non è un problema: il tag lo crea la Release del capitolo 6.</p>
+
+<h2>5 · Accendere il sito (GitHub Pages) <span class="una">SOLO LA PRIMA VOLTA</span></h2>
+<ol class="passi">
+<li>Su <code>github.com/danilodauria/professore-digitale</code> cliccate <span class="menu">⚙ Settings</span> (in alto, ultima voce della barra del repository).</li>
+<li>Nella colonna a sinistra, sezione «Code and automation», cliccate <span class="menu">Pages</span>.</li>
+<li>In <b>Build and deployment → Source</b> scegliete <b>GitHub Actions</b> (non «Deploy from a branch»). Non serve scegliere nessun modello proposto: il nostro
+«robot» c'è già nei sorgenti (<code>.github/workflows/pubblica-sito.yml</code>).</li>
+<li>Fine. Il sito comparirà da solo dopo la prima Release (capitolo 6).</li>
+</ol>
+<div class="box"><span class="t">Controllo facoltativo</span>Cliccate la scheda <span class="menu">Actions</span> del repository: deve comparire il workflow <b>«Pubblica il sito»</b>.
+Se GitHub chiede di abilitare le Actions («I understand my workflows, go ahead and enable them»), confermate.</div>
+
+<h2>6 · Pubblicare la versione: la Release</h2>
+<ol class="passi">
+<li>Sulla pagina del repository, a destra, cliccate <span class="menu">Releases</span> (oppure aprite <code>github.com/danilodauria/professore-digitale/releases</code>).</li>
+<li>Cliccate <span class="bt">Draft a new release</span> (la prima volta: <span class="bt verde">Create a new release</span>).</li>
+<li><b>Choose a tag</b>: se nell'elenco c'è <code>v3.5.1</code>, sceglietelo. Se non c'è, scrivete <code>v3.5.1</code> e cliccate <span class="menu">+ Create new tag: v3.5.1 on publish</span>;
+<b>Target</b> deve essere <code>main</code>. <span class="annota">La «v» minuscola davanti è obbligatoria.</span></li>
+<li><b>Release title</b>: <code>Professore Digitale 3.5.1</code>.</li>
+<li><b>Describe this release</b>: aprite <code>NOTE-3.5.1.md</code> della cartella <code>rilascio-3.5.1</code> con il Blocco note, selezionate tutto
+(<kbd>Ctrl</kbd>+<kbd>A</kbd>), copiate (<kbd>Ctrl</kbd>+<kbd>C</kbd>) e incollate qui (<kbd>Ctrl</kbd>+<kbd>V</kbd>).</li>
+<li>Trascinate nel riquadro <b>«Attach binaries by dropping them here or selecting them»</b> questi <b>4 file</b> della cartella <code>rilascio-3.5.1</code>:
+<table><thead><tr><th>File</th><th style="width:16%">Peso</th><th>A cosa serve</th></tr></thead><tbody>
+<tr><td><code>ProfessoreDigitale-Setup-3.5.1.exe</code></td><td>~215 MB</td><td>Installatore per Windows (da XP a 11)</td></tr>
+<tr><td><code>professore-digitale_3.5.1_all.deb</code></td><td>~230 MB</td><td>Pacchetto per Linux</td></tr>
+<tr><td><code>professore-digitale-windows-3.5.1.zip</code></td><td>~250 MB</td><td>Versione Windows da chiavetta</td></tr>
+<tr><td><code>sito-3.5.1.zip</code></td><td>~40 MB</td><td>Il sito: lo prende il «robot» e lo mette online. <b>Non dimenticatelo!</b></td></tr>
+</tbody></table>
+Ogni file mostra una barra di avanzamento. <b>Aspettate che siano finite tutte e quattro</b> (anche mezz'ora) senza chiudere la pagina.</li>
+<li>Lasciate <b>«Set as the latest release»</b> spuntato e <b>«Set as a pre-release»</b> senza spunta.</li>
+<li>Cliccate <span class="bt verde">Publish release</span>.</li>
+</ol>
+<div class="box consiglio"><span class="t">Se dovete interrompere</span><span class="bt">Save draft</span> salva tutto come bozza, file compresi: la ritrovate in Releases e la pubblicate dopo.
+I nomi dei file <b>non vanno cambiati</b>: il programma li cerca esattamente così.</div>
+
+<h2>7 · Controllare che tutto funzioni</h2>
+<ol class="passi">
+<li><b>Il robot</b>: scheda <span class="menu">Actions</span> → «Pubblica il sito». Dopo 1–3 minuti deve avere il <b>pallino verde ✔</b>. Se è rosso ✘, vedete «Se qualcosa va storto».</li>
+<li><b>Il sito</b>: aprite <code>https://danilodauria.github.io/professore-digitale/</code>. Deve comparire la pagina del Professore con «versione 3.5.1» e i pulsanti per scaricare.
+Provate a cliccare <b>Scarica per Windows</b>: il download deve partire (da github.com).</li>
+<li><b>Il file degli aggiornamenti</b>: <code>https://danilodauria.github.io/professore-digitale/aggiornamenti.json</code> deve mostrare <code>"versione": "3.5.1"</code>.</li>
+<li><b>L'app per telefono</b>: inquadrate il QR code della pagina con un telefono; si apre il Professore, che si può aggiungere alla schermata Home.</li>
+<li><b>Da un PC con il Professore</b>: <span class="menu">Impostazioni → Aggiornamenti → 🌐 Controlla aggiornamenti</span>. Deve annunciare la 3.5.1 (su un PC con una versione precedente).</li>
+</ol>
+
+<h2>8 · Le versioni successive <span class="ogni">OGNI VOLTA</span></h2>
+<p>Quando vi consegno una nuova versione (es. 3.6.0) trovate in Download la cartella <code>ProfessoreDigitale-3.6.0</code>. I capitoli 3 e 5 non si ripetono più.</p>
+<ol class="passi">
+<li><b>Preparare</b>: doppio clic su <code>UNISCI-E-ESTRAI.bat</code> (capitolo 2).</li>
+<li><b>Sostituire la cartella dei sorgenti</b>: <b>chiudete GitHub Desktop</b>. In <code>Documenti\GitHub</code> rinominate <code>professore-digitale</code> in
+<code>professore-digitale-vecchia</code>, poi spostate lì la nuova cartella <code>professore-digitale</code>. Riaprite GitHub Desktop: ritrova la cartella da solo
+(contiene già la versione nuova e l'indirizzo di GitHub).</li>
+<li><b>Spedire</b>: in GitHub Desktop cliccate <span class="bt">⬆ Push origin</span> (capitolo 4b). Se compare <span class="bt">Fetch origin</span> e nient'altro, cliccatelo e poi Push.</li>
+<li><b>Release</b>: come il capitolo 6, con il nuovo numero (tag <code>v3.6.0</code>, file della cartella <code>rilascio-3.6.0</code>).</li>
+<li><b>Controllo</b>: come il capitolo 7. Quando tutto funziona, la cartella <code>professore-digitale-vecchia</code> si può cancellare.</li>
+</ol>
+<div class="box"><span class="t">Solo contenuti nuovi o correzioni al sito?</span>Se vi consegno solo un nuovo <code>sito-X.Y.Z.zip</code> (per esempio con un catalogo di modelli
+di IA aggiornato), aprite la Release della versione attuale → <span class="menu">✏ Edit</span> → eliminate il vecchio <code>sito-…zip</code> con la ✕, trascinate il nuovo →
+<span class="bt verde">Update release</span>. Poi <span class="menu">Actions → Pubblica il sito → Run workflow</span> (campo vuoto = ultima Release) → <span class="bt verde">Run workflow</span>.</div>
+
+<h2>9 · Proteggere l'account GitHub</h2>
+<p>Da questo account dipendono gli aggiornamenti di tutti i PC che usano il Professore: va custodito come la chiave di casa.</p>
+<ol class="passi">
+<li><b>Verifica in due passaggi (2FA)</b>: su github.com, foto profilo → <span class="menu">Settings → Password and authentication → Enable two-factor authentication</span>.
+Si usa un'app sul telefono (es. Google Authenticator o Microsoft Authenticator) oppure una passkey. GitHub la chiede comunque a chi pubblica codice.</li>
+<li><b>Codici di recupero</b>: alla fine GitHub mostra i <i>recovery codes</i>. <b>Stampateli o scriveteli</b> e conservateli insieme a questo libretto
+(non nel PC, non in una foto sul telefono). Senza codici e senza telefono l'account non si recupera più.</li>
+<li><b>Accesso con Google</b>: avete creato l'account con Google, quindi la sicurezza dipende anche dall'account Google: tenete attiva anche lì la verifica in due passaggi.</li>
+<li><b>Email pubblica</b>: i commit portano la firma <i>Danilo D'Auria &lt;danilodauria.site@gmail.com&gt;</i>, l'indirizzo già pubblico del progetto.
+Non attivate l'opzione «Block command line pushes that expose my email» (Settings → Emails), altrimenti GitHub rifiuterebbe i push.</li>
+</ol>
+
+<h2>Se qualcosa va storto</h2>
+<table><thead><tr><th style="width:36%">Cosa succede</th><th>Cosa fare</th></tr></thead><tbody>
+<tr><td>UNISCI-E-ESTRAI.bat dice «ERRORE impronta»</td><td>Una parte si è rovinata: chiedetemi di ricopiarla, oppure cancellate quella <code>.parte</code> e riprovate dopo averla ricevuta di nuovo.</td></tr>
+<tr><td>GitHub Desktop: «Authentication failed» o chiede di accedere</td><td><span class="menu">File → Options → Accounts → Sign out</span>, poi <span class="menu">Sign in</span>: si apre il browser, accedete con Google come al solito e autorizzate GitHub Desktop.</td></tr>
+<tr><td>Push rifiutato con «refusing to allow an OAuth App to create or update workflow»</td><td>Uscite e rientrate in GitHub Desktop (riga sopra): al nuovo accesso concede il permesso «workflow». Se persiste, ditemelo: si carica quel solo file dal sito.</td></tr>
+<tr><td>Push rifiutato: «Updates were rejected… fetch first»</td><td>Su GitHub c'è qualcosa che il PC non ha (es. avete modificato un file dal sito). Cliccate <span class="bt">Fetch origin</span>, poi <span class="bt">Pull origin</span>, poi <span class="bt">Push origin</span>. Se compaiono «conflicts», fermatevi e scrivetemi.</td></tr>
+<tr><td>«GH001: Large files detected… exceeds 100 MB»</td><td>Un file grande è finito nei sorgenti. Non forzate: scrivetemi, lo tolgo io dalla storia. (Con le cartelle che vi consegno non deve succedere.)</td></tr>
+<tr><td>Actions: «Pubblica il sito» con ✘ rosso</td><td>Cliccatelo per vedere il passo fallito. «no assets match» = manca <code>sito-X.Y.Z.zip</code> nella Release: aggiungetelo (Edit) e poi <span class="menu">Run workflow</span>. «Pages not enabled / Get Pages site failed» = rifate il capitolo 5, poi <span class="menu">Re-run all jobs</span>.</td></tr>
+<tr><td>Il sito dà «404 There isn't a GitHub Pages site here»</td><td>Il robot non è ancora andato a buon fine (vedi riga sopra) oppure sono passati meno di 2–3 minuti. Il repository deve essere <b>Public</b>.</td></tr>
+<tr><td>Il Professore non vede la nuova versione</td><td>Controllate <code>aggiornamenti.json</code> nel browser (capitolo 7.3). Se lì c'è la versione giusta, aspettate qualche minuto: il sito ha una piccola memoria (cache).</td></tr>
+<tr><td>«Scarica il nuovo pacchetto» dice «impronta non corrispondente»</td><td>Il file nella Release non è quello consegnato (rinominato o scambiato). Edit della Release, eliminate il file e ricaricate quello della cartella <code>rilascio-…</code>.</td></tr>
+<tr><td>Ho sbagliato qualcosa nella Release</td><td>Si corregge tutto con <span class="menu">✏ Edit</span>. Per rifarla da capo: Edit → <span class="menu">Delete</span> in basso, poi si ricrea con lo stesso tag. Il tag sbagliato si cancella da <span class="menu">Releases → Tags</span>.</td></tr>
+</tbody></table>
+
+<h2>Promemoria degli indirizzi</h2>
+<table><tbody>
+<tr><td style="width:36%"><b>Repository (sorgenti)</b></td><td><code>https://github.com/danilodauria/professore-digitale</code></td></tr>
+<tr><td><b>Tutte le versioni</b></td><td><code>https://github.com/danilodauria/professore-digitale/releases</code></td></tr>
+<tr><td><b>Sito per tutti + app per telefono</b></td><td><code>https://danilodauria.github.io/professore-digitale/</code></td></tr>
+<tr><td><b>File degli aggiornamenti</b></td><td><code>https://danilodauria.github.io/professore-digitale/aggiornamenti.json</code></td></tr>
+<tr><td><b>Cartella sul PC</b></td><td><code>Documenti\GitHub\professore-digitale</code></td></tr>
+<tr><td><b>Il robot del sito</b></td><td>scheda Actions → «Pubblica il sito» (file <code>.github/workflows/pubblica-sito.yml</code>)</td></tr>
+</tbody></table>
+
+<h2 style="break-before:page">Registro delle pubblicazioni</h2>
+<p class="small">Da compilare a penna a ogni versione: aiuta a ricordare cosa è stato fatto e quando.</p>
+<table class="registro"><thead><tr><th style="width:14%">Versione</th><th style="width:14%">Data</th><th style="width:12%">Push ✔</th><th style="width:12%">Release ✔</th><th style="width:12%">Sito ✔</th><th>Note</th></tr></thead><tbody>
+<tr><td>3.5.1</td><td></td><td></td><td></td><td></td><td>Prima pubblicazione su GitHub</td></tr>
+<tr><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+<tr><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+<tr><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+<tr><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+<tr><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+<tr><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+<tr><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+</tbody></table>
+
+<div class="box"><span class="t">Riepilogo in una riga per ogni passo</span>
+<ol style="margin:0">
+<li><b>UNISCI-E-ESTRAI.bat</b> → due cartelle.</li>
+<li>Cartella <b>professore-digitale</b> in <code>Documenti\GitHub</code> (la vecchia rinominata).</li>
+<li>GitHub Desktop → <b>Push origin</b> (la prima volta: Add local repository + Publish branch).</li>
+<li>github.com → Releases → <b>Draft a new release</b> → tag <code>vX.Y.Z</code> → note → <b>4 file</b> → Publish release.</li>
+<li>Actions verde ✔ → sito → aggiornamenti.json → prova da un PC.</li>
+</ol></div>
+<p class="small">Da Linux esiste anche la via a riga di comando: <code>tools/pubblica-tutto.sh ZIP</code> (serve lo strumento <code>gh</code> collegato all'account).
+Senza GitHub: <code>tools/pubblica-locale.sh</code> (chiavetta o PC server dell'aula), come spiegato nel vademecum.</p>
+</div>
+
+<div class="segnaposto fine"></div>
+<section class="back">
+  <img class="prof" src="professore.svg" alt="">
+  <div class="dentro">
+    <h1>Tecnologia gentile,<br>per tutti.</h1>
+    <p>Professore Digitale · pubblicato su GitHub: sorgenti, versioni e sito, liberi e gratuiti.</p>
+  </div>
+  <div class="piede"><div><b>Danilo D'Auria</b><br>Tecnico IT &amp; Divulgatore Digitale per il Sociale<br>danilodauria.site@gmail.com</div>
+  <div style="text-align:right">Software libero · Licenza MIT<br>Ottobre 2026</div></div>
+</section>
+</body>
+</html>

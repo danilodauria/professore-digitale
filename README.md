@@ -6,6 +6,12 @@ Licenza **MIT** · Contatti: danilodauria.site@gmail.com
 Piattaforma didattica **offline** per l'alfabetizzazione informatica in centri anziani, scuole,
 biblioteche e associazioni. Pensata per girare anche su **computer ricondizionati**.
 
+## ⬇️ Scarica
+
+- **Sito con tutti i download e l'app per telefono e tablet:** https://danilodauria.github.io/professore-digitale/
+- **Tutte le versioni** (installatore Windows, pacchetto Linux, versione da chiavetta):
+  [Releases](https://github.com/danilodauria/professore-digitale/releases/latest)
+
 ## Cosa offre
 
 | Sezione | Funzione |

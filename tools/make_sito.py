@@ -10,6 +10,11 @@ import json, os, re, sys
 QUI = os.path.dirname(os.path.abspath(__file__))
 
 
+def loc(pub, nome):
+    """Percorso locale di un file del sito; i file grandi possono essere indirizzi assoluti (GitHub Releases)."""
+    return os.path.join(pub, os.path.basename(nome))
+
+
 def mb(p):
     return "%.1f MB" % (os.path.getsize(p) / 1e6) if os.path.isfile(p) else ""
 
@@ -35,17 +40,17 @@ def crea_pagina(pub, base_url, progetto=""):
     ver = info["versione"]
     pezzi = []
     w = info.get("windows")
-    if w and os.path.isfile(os.path.join(pub, w["pacchetto"])):
+    if w and os.path.isfile(loc(pub, w["pacchetto"])):
         extra = ""
-        if w.get("zip") and os.path.isfile(os.path.join(pub, w["zip"])):
+        if w.get("zip") and os.path.isfile(loc(pub, w["zip"])):
             extra = '<p class="piccolo" style="margin:.6rem 0 0">Senza installare, da chiavetta: <a href="%s">versione .zip</a> (%s)</p>' % (
-                H.escape(w["zip"], True), mb(os.path.join(pub, w["zip"])))
-        pezzi.append(scheda("🪟", "Windows", "Da Windows XP a Windows 11. Scaricate e fate doppio clic sul file (%s)." % mb(os.path.join(pub, w["pacchetto"])),
+                H.escape(w["zip"], True), mb(loc(pub, w["zip"])))
+        pezzi.append(scheda("🪟", "Windows", "Da Windows XP a Windows 11. Scaricate e fate doppio clic sul file (%s)." % mb(loc(pub, w["pacchetto"])),
                             w["pacchetto"], "⬇️ Scarica per Windows", extra))
     deb = info.get("pacchetto")
-    if deb and os.path.isfile(os.path.join(pub, deb)):
+    if deb and os.path.isfile(loc(pub, deb)):
         pezzi.append(scheda("🐧", "Linux", "Debian, Ubuntu, Mint, FeniceOS (%s). Doppio clic sul file, oppure nel terminale: <code>sudo apt install ./%s</code>" % (
-            mb(os.path.join(pub, deb)), H.escape(deb)), deb, "⬇️ Scarica per Linux"))
+            mb(loc(pub, deb)), H.escape(os.path.basename(deb))), deb, "⬇️ Scarica per Linux"))
     port = info.get("portatile")
     if port and os.path.isfile(os.path.join(pub, port)):
         pezzi.append(scheda("📄", "Versione portatile", "Un solo file da aprire con il browser, su qualunque computer, anche da chiavetta. Senza voce naturale e senza IA (%s)." % mb(os.path.join(pub, port)),

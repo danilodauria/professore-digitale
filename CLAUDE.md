@@ -57,6 +57,7 @@ Leggere questo file per intero prima di modificare qualunque cosa.
 | `src/web/js/packs.js` | Caricamento/validazione pacchetti lato browser (stesse regole di `pd_packs.py`) |
 | `src/web/js/board.js`, `practice.js` | Lavagna; Palestra |
 | `packaging/` | Avviatore, `professore-digitale-contenuti`, setup IA/voce, pulizia, .desktop, man, **changelog** |
+| `tools/prepara-github.py`, `.github/workflows/pubblica-sito.yml` | Pubblicazione su GitHub (3.5.1): Release con i file grandi + sito pubblicato dal workflow |
 | `tools/` | `rilascio.sh`, `pubblica-contenuti.sh`, `pubblica-sito.sh`, `pubblica-tutto.sh`, `pubblica-locale.sh`, `server-aggiornamenti.sh`, `backup-locale.sh`, `verifica_pubblicazione.py`, `repo-apt.sh`, `make_standalone.py`, `metainfo.py`, `prepara-ambiente.sh` |
 | `tools/make_pwa.py`, `tools/pwa/`, `tools/make_sito.py`, `tools/sito/` | **App per telefono e tablet** (PWA) → `dist/pubblica/app/`: la portatile + manifest + `sw.js` (offline dopo la prima apertura, OCR salvato al primo uso) + icone già pronte in `src/web/img/pwa/` + `vendor/ocr/`; pagina del sito `dist/pubblica/index.html` (download, QR di `BASE_URL/app/`). Le crea `rilascio.sh`; test `tests/test_pwa.py` |
 | `tests/` | `esegui_test.sh` (tutto), `test_packs.py`, `test_ui.py` (Playwright), `mock_ollama.py` |
@@ -96,8 +97,8 @@ python3 src/server/pd_server.py --port 8800   # prova dai sorgenti → http://12
 ./build.sh                         # compila la versione scritta in VERSION (dist/)
 tools/rilascio.sh correzione|minore|maggiore "Nota per gli utenti" ... [--apt] [--senza-git]
 tools/pubblica-contenuti.sh        # pubblica solo contenuti modificati (versione pacchetto aumentata)
-tools/pubblica-sito.sh             # carica dist/pubblica/ su GitHub Pages (lo esegue Danilo: servono le sue credenziali)
-tools/pubblica-tutto.sh ZIP        # per Danilo: verifica + firma APT + sito + sorgenti in un solo comando
+tools/prepara-github.py PUB PAGINA BASE OUT   # (lo chiama rilascio.sh) → dist/github/rilascio-X.Y.Z/ da allegare alla Release
+tools/pubblica-tutto.sh ZIP        # per Danilo da Linux con «gh»: verifica + sorgenti e tag + Release (il sito lo pubblica il workflow)
 PD_SHARE_DIR=src python3 packaging/professore-digitale-contenuti valida src/contenuti/*.json
 ```
 
@@ -190,7 +191,15 @@ PD_SHARE_DIR=src python3 packaging/professore-digitale-contenuti valida src/cont
   `PD_TABLET_PORT`, `PD_TABLET_LOOPBACK`.
 
 ## Pubblicazione: con GitHub oppure tutto in locale
-- **GitHub** (predefinito): `tools/pubblica-tutto.sh ZIP` → GitHub Pages + sorgenti.
+- **GitHub** (predefinito, dalla 3.5.1): GitHub rifiuta i file oltre **100 MB** nel repository e in GitHub Pages, e
+  installatore/.deb/zip superano i 200 MB. Quindi `rilascio.sh` chiama `tools/prepara-github.py` → `dist/github/rilascio-X.Y.Z/`
+  = i 3 file grandi + `sito-X.Y.Z.zip` (tutto il resto di `dist/pubblica/`, con `aggiornamenti.json` e `index.html` che puntano
+  ai file grandi in `PAGINA_PROGETTO/releases/download/vX.Y.Z/`, stesse impronte) + `NOTE-X.Y.Z.md`. Danilo crea la **Release**
+  `vX.Y.Z` e allega quei file (da Windows: dal sito di GitHub, guida `docs/Pubblicare_su_GitHub.pdf`; da Linux con `gh`:
+  `tools/pubblica-tutto.sh ZIP`); il workflow `.github/workflows/pubblica-sito.yml` scarica `sito-*.zip` dalla Release e lo
+  pubblica su GitHub Pages (Settings → Pages → Source: GitHub Actions). Il ramo `gh-pages` e `pubblica-sito.sh` non si usano più.
+  Il .deb si scarica a pezzi (limite 900 MB, `scarica_pacchetto_deb`), l'installatore Windows fino a 900 MB. Test: `tests/test_github.py`.
+  I sorgenti si caricano con GitHub Desktop (repository con `.git`, consegnato come `professore-digitale-X.Y.Z-repository`).
 - **Senza GitHub**: `tools/pubblica-locale.sh ZIP --cartella DEST [--indirizzo http://IP:8080]` prepara una cartella
   (chiavetta o PC server) con `installa-da-chiavetta.sh`, `LEGGIMI.txt` e, se c'è la chiave, `apt/` firmato;
   `tools/server-aggiornamenti.sh DEST [--servizio]` la serve in rete locale; `tools/backup-locale.sh DEST` sostituisce
@@ -239,11 +248,10 @@ PD_SHARE_DIR=src python3 packaging/professore-digitale-contenuti valida src/cont
    completo di `.git`** (senza i .deb):
    `tar --exclude=./build --exclude=./dist --exclude=./archivio --exclude='__pycache__' --transform 's,^\.,professore-digitale,' -czf professore-digitale-X.Y.Z-sorgenti.tar.gz .`
    (deve restare sotto 30 MB: se cresce, `git gc --aggressive` e niente file binari pesanti in git)
-7. Ricordare a Danilo che per pubblicare gli basta, dalla cartella dei NUOVI sorgenti estratti:
-   `tools/pubblica-tutto.sh ~/Scaricati/professore-digitale-X.Y.Z-da-pubblicare.zip`
-   (verifica le impronte, firma il repository APT con la sua chiave se presente, carica il sito su GitHub Pages
-   e invia sorgenti e tag). Con `--prova` fa solo i controlli. Nel messaggio finale riportare il comando esatto
-   con il nome dello zip consegnato. Il suo manuale di riferimento è `docs/Manuale_Aggiornamenti_con_Claude.pdf`.
+7. Danilo pubblica da **Windows con GitHub Desktop** (dalla 3.5.1): consegnargli il repository aggiornato (con `.git`, remote
+   rimosso) e la cartella `rilascio-X.Y.Z` (da `dist/github/`), e ricordargli i 3 passi del libretto `docs/Pubblicare_su_GitHub.pdf`:
+   (1) GitHub Desktop: sostituire i file del repository, Commit, Push; (2) sul sito: Releases → Draft a new release → tag `vX.Y.Z`
+   → trascinare i file di `rilascio-X.Y.Z` → Publish; (3) controllare Actions e il sito. Da Linux resta `tools/pubblica-tutto.sh ZIP`.
 8. Se è cambiato il comportamento visibile, aggiornare i Vademecum (`docs/`, Linux e Windows) e/o la Guida agli aggiornamenti.
    Le sorgenti HTML dei PDF stanno in `docs/sorgenti/` (si stampano in PDF con `tools/pdf-da-html.py`).
 

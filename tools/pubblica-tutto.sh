@@ -5,23 +5,25 @@
 #
 #  Uso:  tools/pubblica-tutto.sh ~/Scaricati/professore-digitale-X.Y.Z-da-pubblicare.zip
 #        tools/pubblica-tutto.sh                  (usa dist/pubblica/ se l'avete compilata voi)
-#  Opzioni:  --senza-apt   non firma/pubblica il repository APT
+#  Opzioni:  --apt         firma anche il repository APT (non va su GitHub Pages: i .deb superano 100 MB)
 #            --prova       fa tutti i controlli ma non carica nulla su GitHub
 #
 #  Cosa fa:
 #    1. controlla le impronte SHA-256 dei file ricevuti
 #    2. se sul computer c'è la vostra chiave di firma, rigenera e firma il repository APT
-#    3. carica il sito su GitHub Pages (ramo gh-pages)
-#    4. invia i sorgenti con la cronologia e i tag (ramo main)
+#    3. invia i sorgenti con la cronologia e i tag (ramo main)
+#    4. crea la Release vX.Y.Z con installatori e sito-X.Y.Z.zip (serve «gh», altrimenti spiega come farlo dal sito);
+#       il workflow .github/workflows/pubblica-sito.yml mette il sito su GitHub Pages
+#  GitHub non accetta file oltre i 100 MB nel repository né nel sito: i file grandi stanno nella Release.
 #  Autore: Danilo D'Auria - Licenza MIT
 # ==============================================================================
 set -euo pipefail
 cd "$(dirname "$0")/.."
 source ./rilascio.conf
-ZIP=""; APT=1; PROVA=0
+ZIP=""; APT=0; PROVA=0
 for a in "$@"; do
   case "$a" in
-    --senza-apt) APT=0 ;; --prova) PROVA=1 ;;
+    --senza-apt) APT=0 ;; --apt) APT=1 ;; --prova) PROVA=1 ;;
     -h|--help) sed -n '2,19p' "$0" | sed 's/^# \{0,1\}//'; exit 0 ;;
     *) ZIP="$a" ;;
   esac
@@ -63,17 +65,24 @@ touch "$T/sito/.nojekyll"
 
 if [ "$PROVA" = 1 ]; then ok "Prova completata: nessun file caricato."; ls "$T/sito"; exit 0; fi
 
-# ---- 3. sito ----
-echo "» Carico il sito su GitHub Pages…"
-( cd "$T/sito" && git init -q -b gh-pages && git add -A &&
-  git -c user.name="${MANUTENTORE% <*}" -c user.email="$(echo "$MANUTENTORE" | sed 's/.*<\(.*\)>.*/\1/')" commit -qm "Pubblicazione versione $VER" &&
-  git push -f -q "$REPO_GIT" gh-pages ) || err "Caricamento del sito non riuscito (controllate internet e il token di GitHub)"
-ok "Sito pubblicato: $BASE_URL/aggiornamenti.json"
-
-# ---- 4. sorgenti ----
+# ---- 3. sorgenti e tag (prima la Release ha bisogno del tag) ----
 if [ -d .git ]; then
   echo "» Invio i sorgenti e i tag…"
   git push -q "$REPO_GIT" main --tags && ok "Sorgenti inviati (ramo main e tag)" || att "Invio dei sorgenti non riuscito: riprovate con  git push $REPO_GIT main --tags"
+fi
+
+# ---- 4. Release con i file grandi + sito-X.Y.Z.zip (il workflow «Pubblica il sito» lo mette su GitHub Pages) ----
+python3 tools/prepara-github.py "$T/sito" "$PAGINA_PROGETTO" "$BASE_URL" "$T/github" >/dev/null || err "Preparazione per GitHub non riuscita"
+REL="$T/github/rilascio-$VER"
+if command -v gh >/dev/null && gh auth status >/dev/null 2>&1; then
+  echo "» Creo la Release v$VER su GitHub e carico i file (qualche minuto)…"
+  gh release create "v$VER" -R "${PAGINA_PROGETTO#https://github.com/}" --title "Professore Digitale $VER" \
+     --notes-file "$REL/NOTE-$VER.md" "$REL"/*.exe "$REL"/*.deb "$REL"/*.zip || err "Release non creata"
+  ok "Release pubblicata: $PAGINA_PROGETTO/releases/tag/v$VER (il sito si aggiorna da solo in 1-2 minuti)"
+else
+  mkdir -p "dist/github"; rm -rf "dist/github/rilascio-$VER"; cp -r "$REL" dist/github/
+  att "Strumento gh non pronto: create la Release dal sito (Releases → Draft a new release → tag v$VER)"
+  att "e trascinate i file di dist/github/rilascio-$VER/ (guida: docs/Pubblicare_su_GitHub.pdf)"
 fi
 echo
 ok "Fatto! Tra 1-2 minuti, da un PC con il Professore: Impostazioni → Aggiornamenti → «Controlla aggiornamenti»."

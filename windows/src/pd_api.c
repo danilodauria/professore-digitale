@@ -315,7 +315,7 @@ static void api_update_download(req_t *r, jv *req) {
     http_result hr; memset(&hr, 0, sizeof hr);
     int ok = http_download(url, tmp, 120, NULL, NULL, NULL, &hr);
     char hex[65];
-    if (ok && (file_size(tmp) > 300LL * 1024 * 1024 || !sha256_file(tmp, hex) || strcmp(hex, sha))) {
+    if (ok && (file_size(tmp) > 900LL * 1024 * 1024 || !sha256_file(tmp, hex) || strcmp(hex, sha))) {
         DeleteFileW(tmp); send_error(r, 502, "impronta SHA-256 non corrispondente: file scartato");
     } else if (!ok) {
         send_error(r, 502, hr.error[0] ? hr.error : "download non riuscito");
