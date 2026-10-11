@@ -1,3 +1,20 @@
+professore-digitale (3.5.0) stable; urgency=medium
+
+  * Su telefoni e tablet il Professore ora parla dall'inizio: basta toccare
+    lo schermo una volta («Toccate qui per cominciare»).
+  * Microfono su telefono e tablet: con «Parla con la voce» potete fare
+    le domande a voce. È spento finché non lo accendete voi, dopo una
+    spiegazione chiara sulla privacy.
+  * Nuovo «Il nostro percorso»: all'avvio scegliete dove usate il
+    Professore (centro anziani, scuola, biblioteca, centro sociale e altri)
+    e il programma vi guida passo passo, in 8 fasi, con tutto ciò che
+    c'è, senza dimenticare niente.
+  * Windows: preparata la firma digitale del programma contro il blocco di
+    «Sicurezza di Windows»; il vademecum spiega cosa fare intanto.
+  * Vademecum aggiornati.
+
+ -- Danilo D'Auria <danilodauria.site@gmail.com>  Sun, 11 Oct 2026 21:47:55 +0200
+
 professore-digitale (3.4.0) stable; urgency=medium
 
   * Il Professore su telefono e tablet: dal sito si installa come un'app
