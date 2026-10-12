@@ -1,3 +1,21 @@
+professore-digitale (3.5.2) stable; urgency=medium
+
+  * Licenza dei contenuti: lezioni, domande, quiz, vademecum e immagini
+    sono ora distribuiti con licenza Creative Commons BY-NC-SA 4.0, come
+    «Il Grande Quiz dell'Informatica». Il codice del programma resta
+    libero con licenza MIT.
+  * Nuova pagina «📜 Licenza» (dal menu o da Impostazioni): spiega in
+    parole semplici cosa si può fare, con il pulsante «Copia la
+    citazione».
+  * Ogni stampa (lezioni, schede, programmi, registri) e ogni attestato
+    riportano in fondo l'autore e la licenza.
+  * In «Crea lezioni e quiz» c'è il nuovo campo «Licenza» per i vostri
+    pacchetti.
+  * Vademecum per Linux e per Windows aggiornati con il capitolo sulla
+    licenza.
+
+ -- Danilo D'Auria <danilodauria.site@gmail.com>  Mon, 12 Oct 2026 16:03:34 +0200
+
 professore-digitale (3.5.1) stable; urgency=medium
 
   * Aggiornamenti più affidabili: il nuovo pacchetto per Linux si scarica
