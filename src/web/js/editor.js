@@ -33,7 +33,7 @@
 
   function nuovoPack() {
     return { formato: "professore-digitale-contenuti", formato_versione: 1, id: "", titolo: "", descrizione: "",
-      autore: (PD.settings && PD.settings.teacherName) || "", lezioni: [], domande: [], prove: [] };
+      autore: (PD.settings && PD.settings.teacherName) || "", licenza: "CC BY-NC-SA 4.0", lezioni: [], domande: [], prove: [] };
   }
   function nuovoStato(pack, meta) {
     return { pack: pack || nuovoPack(), meta: meta || { idFisso: false, versione: "", sporco: false }, tab: "pacchetto", lez: -1 };
@@ -178,6 +178,7 @@
     var b = S.pack, pid = idPacchetto(), lids = idLezioni(pid, b.lezioni);
     var p = { formato: "professore-digitale-contenuti", formato_versione: 1, id: pid, titolo: trim(b.titolo), versione: versione || S.meta.versione || "1.0.0" };
     if (trim(b.autore)) p.autore = trim(b.autore);
+    if (trim(b.licenza)) p.licenza = trim(b.licenza);
     if (trim(b.descrizione)) p.descrizione = trim(b.descrizione);
     if (PD.version && /^\d+\.\d+(\.\d+)?$/.test(PD.version)) p.richiede_app = PD.version;
     p.creato_con = MARCA;
@@ -249,6 +250,7 @@
     lun("titolo", "pacchetto", b.titolo, 120, "Il titolo");
     lun("descrizione", "pacchetto", b.descrizione, 600, "La descrizione");
     lun("autore", "pacchetto", b.autore, 600, "Il nome dell'autore");
+    lun("licenza", "pacchetto", b.licenza, 200, "La licenza");
     if (!trim(b.descrizione)) C("descrizione", "pacchetto", "Una descrizione di una riga aiuta i colleghi a capire a cosa serve il pacchetto.");
     if (!b.lezioni.length && !b.domande.length && !b.prove.length) E("pacchetto", "pacchetto", "Il pacchetto è vuoto: aggiungete almeno una lezione, una domanda o un grande quiz.");
     var parentesi = false;
@@ -436,6 +438,7 @@
       '<p class="small muted ed-id">Nome tecnico (si crea da solo dal titolo): <code id="ed-id">' + esc(idPacchetto()) + "</code>" + (S.meta.idFisso ? " · resta lo stesso dopo il primo salvataggio" : "") + "</p>" +
       campo("descrizione", "Descrizione (una o due frasi)", { area: true, righe: 2, max: 600, ph: "A cosa serve, per chi è pensato." }) +
       campo("autore", "Autore", { max: 120, ph: "Il vostro nome o quello dell'associazione", aiuto: PD.settings.teacherName ? "" : "Suggerimento: il nome del facilitatore si imposta in Impostazioni." }) +
+      campo("licenza", "Licenza", { max: 200, ph: "CC BY-NC-SA 4.0", aiuto: "Il pacchetto è vostro: scegliete voi come altri possono usarlo. «CC BY-NC-SA 4.0» = citare l'autore, niente usi commerciali, stessa licenza per le modifiche (come i contenuti del Professore)." }) +
       '<p class="small muted">Versione: <b>' + esc(S.meta.versione || "non ancora salvata") + "</b> · aumenta da sola a ogni «Salva e usa».</p>" + err("pacchetto") + "</div>";
     h += '<div class="card ed-sez"><h2>🗂️ I miei pacchetti</h2>' +
       (miei.length ? '<div class="ed-miei">' + miei.map(function (en) {

@@ -10,6 +10,8 @@ ESITO=0
 
 echo "== 1. Formato dei pacchetti di contenuti"
 python3 tests/test_packs.py || ESITO=1
+echo "== 1a. Licenze (codice MIT, contenuti CC BY-NC-SA 4.0)"
+python3 tests/test_licenza.py || ESITO=1
 echo "== 1b. Voci naturali incluse (Piper)"
 python3 tests/test_voci.py || ESITO=1
 

@@ -817,8 +817,7 @@
     var r = stato.r; if (!r) return;
     var html = '<header class="p-testa"><div><b>Professore Digitale</b> · Spiegami questa lettera</div><div>' + new Date().toLocaleDateString("it-IT") + "</div></header>" +
       "<h1>✉️ La spiegazione della lettera</h1>" + htmlSpiegazione(r, true) +
-      '<footer class="p-piede">Stampato dal Professore Digitale · software libero ideato da Danilo D\'Auria · funziona senza Internet. ' +
-      "La lettura automatica può sbagliare: controllate sempre la lettera vera. " + esc(AIUTO) + "</footer>";
+      PD.piedeStampa("La lettura automatica può sbagliare: controllate sempre la lettera vera. " + esc(AIUTO));
     PD.printHTML('<div class="lt-stampa">' + html + "</div>", "verticale");
   }
 

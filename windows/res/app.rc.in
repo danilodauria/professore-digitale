@@ -15,7 +15,7 @@ BEGIN
       VALUE "FileDescription", "@DESC@"
       VALUE "FileVersion", "@VERSION@"
       VALUE "InternalName", "@NAME@"
-      VALUE "LegalCopyright", "Danilo D'Auria - Licenza MIT"
+      VALUE "LegalCopyright", "(C) 2026 Danilo D'Auria - Codice MIT, contenuti CC BY-NC-SA 4.0"
       VALUE "OriginalFilename", "@NAME@.exe"
       VALUE "ProductName", "Professore Digitale"
       VALUE "ProductVersion", "@VERSION@"

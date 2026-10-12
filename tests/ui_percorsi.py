@@ -73,6 +73,7 @@ ESCLUSI = {
 # Nel programma ma fuori da ogni percorso, di proposito
 ESCLUSI_SEMPRE = {
     "sostieni": "pagina per sostenere il progetto, non didattica",
+    "licenza": "licenza e diritti d'autore dei contenuti (CC BY-NC-SA 4.0), non didattica",
     "setup": "configurazione tecnica (solo Windows), la fa chi installa",
     "attestato": "si apre dal quiz superato (rimando «quiz»)",
     "windows-primi-passi": "domande della guida per Windows: si raggiungono da «Chiedi al Professore»",

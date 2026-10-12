@@ -427,7 +427,7 @@
         return "<li><b>" + esc(c) + "</b> " + esc(x ? x.titolo : "") + "</li>";
       }).join("") + "</ul>" +
       '<p class="p-nota">Programma generato dal Professore Digitale secondo la linea guida in 8 fasi. Le competenze seguono il quadro europeo DigComp 2.2: indicazione orientativa, non certificazione.</p>' +
-      '<footer class="p-piede">Stampato dal Professore Digitale · software libero ideato da Danilo D\'Auria · funziona senza Internet</footer></div>';
+      PD.piedeStampa() + "</div>";
   }
   function stampa(perc) {
     perc = perc || percorsoUtente(); if (!perc) return;

@@ -3,8 +3,9 @@
  "formato_versione": 1,
  "id": "cultura-scienze",
  "titolo": "Cultura generale · Scienze",
- "versione": "1.0.0",
+ "versione": "1.0.1",
  "autore": "Danilo D'Auria",
+ "licenza": "CC BY-NC-SA 4.0",
  "descrizione": "Le scienze spiegate con parole semplici: il corpo umano e la prevenzione, il sistema solare, la materia e l'energia con le regole di sicurezza per corrente e gas, la natura e la biodiversità, il clima e la raccolta differenziata. Cinque lezioni, trenta risposte nella guida e il Grande Quiz di Scienze con attestato.",
  "richiede_app": "3.0.0",
  "suggerimenti": [

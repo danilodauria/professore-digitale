@@ -10,7 +10,7 @@ Convenzioni dell'HTML:
   <span class="toc-p" data-c="N"></span> nell'indice: viene riempito con la pagina del capitolo N
 Le pagine si numerano contando anche la copertina (come nel vademecum per Linux).
 Servono: playwright (Chromium), poppler-utils (pdftotext, pdfseparate, pdfunite) e i caratteri Noto.
-Autore: Danilo D'Auria - Licenza MIT"""
+Autore: Danilo D'Auria - Codice MIT, contenuti CC BY-NC-SA 4.0"""
 import os, re, shutil, subprocess, sys, tempfile
 from playwright.sync_api import sync_playwright
 
@@ -21,7 +21,8 @@ tmp = tempfile.mkdtemp(prefix="pd-pdf-")
 
 FOOTER = ('<div style="width:100%;font-family:\'Noto Sans\',sans-serif;font-size:7.5px;color:#6b7280;'
           'padding:0 18mm;display:flex;justify-content:space-between">'
-          '<span>Professore Digitale · ' + titolo + '</span><span style="font-weight:700;color:#1d5c8f" class="pageNumber"></span></div>')
+          '<span>Professore Digitale · ' + titolo + '</span><span>© 2026 Danilo D\'Auria · licenza CC BY-NC-SA 4.0</span>'
+          '<span style="font-weight:700;color:#1d5c8f" class="pageNumber"></span></div>')
 
 def variant(mode):
     """mode: corpo (copertine sostituite da pagine vuote), cover, back"""
@@ -79,4 +80,23 @@ subprocess.run(["pdfseparate", corpo, os.path.join(tmp, "p-%d.pdf")], check=True
 parts = [os.path.join(tmp, "cover.pdf")] + [os.path.join(tmp, "p-%d.pdf" % i) for i in range(2, n)] + [os.path.join(tmp, "back.pdf")]
 subprocess.run(["pdfunite"] + parts + [out], check=True)
 shutil.rmtree(tmp)
+# autore e licenza anche nelle proprietà del PDF (dalla 3.5.2): File → Proprietà nel lettore PDF
+try:
+    import pikepdf
+    with pikepdf.open(out, allow_overwriting_input=True) as pdf:
+        tit = "Professore Digitale – " + titolo
+        with pdf.open_metadata(set_pikepdf_as_editor=False) as meta:
+            meta["dc:title"] = tit
+            meta["dc:creator"] = ["Danilo D'Auria"]
+            meta["dc:rights"] = "© 2026 Danilo D'Auria – CC BY-NC-SA 4.0 – https://creativecommons.org/licenses/by-nc-sa/4.0/"
+            meta["xmpRights:Marked"] = "True"
+            meta["xmpRights:WebStatement"] = "https://creativecommons.org/licenses/by-nc-sa/4.0/"
+        # le proprietà dopo l'XMP: chiudendo open_metadata pikepdf riscrive le proprietà dall'XMP
+        pdf.docinfo["/Title"] = tit
+        pdf.docinfo["/Author"] = "Danilo D'Auria"
+        pdf.docinfo["/Subject"] = "Contenuti © 2026 Danilo D'Auria – licenza Creative Commons BY-NC-SA 4.0"
+        pdf.docinfo["/Keywords"] = "Professore Digitale, FeniceOS, CC BY-NC-SA 4.0, https://creativecommons.org/licenses/by-nc-sa/4.0/"
+        pdf.save(out)
+except ImportError:
+    print("(pikepdf assente: proprietà del PDF non scritte)")
 print("creato", out, "-", n, "pagine")

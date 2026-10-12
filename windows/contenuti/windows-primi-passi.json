@@ -3,8 +3,9 @@
  "formato_versione": 1,
  "id": "windows-primi-passi",
  "titolo": "Windows: primi passi e sicurezza",
- "versione": "1.0.0",
+ "versione": "1.0.1",
  "autore": "Danilo D'Auria",
+ "licenza": "CC BY-NC-SA 4.0",
  "descrizione": "Domande frequenti su Windows (da XP a Windows 11): menu Start, Esplora file, programmi bloccati, aggiornamenti, sicurezza, voce italiana.",
  "richiede_app": "2.3.0",
  "suggerimenti": [

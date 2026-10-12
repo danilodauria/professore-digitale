@@ -2,8 +2,44 @@ PROFESSORE DIGITALE - Cattedra Digitale Portatile
 Ideato e sviluppato da Danilo D'Auria - Tecnico IT & Divulgatore Digitale per il Sociale
 danilodauria.site@gmail.com
 
-Licenza: MIT
+Il Professore Digitale ha DUE licenze, come «Il Grande Quiz dell'Informatica»:
 
+  * il CODICE del programma: licenza MIT (testo qui sotto);
+  * i CONTENUTI (lezioni, domande e risposte, quiz, percorsi, vademecum,
+    immagini, grafica, il personaggio del Professore e il marchio della
+    fenice): licenza Creative Commons Attribuzione - Non commerciale -
+    Condividi allo stesso modo 4.0 Internazionale (CC BY-NC-SA 4.0).
+
+----------------------------------------------------------------------------
+CONTENUTI - CREATIVE COMMONS BY-NC-SA 4.0
+----------------------------------------------------------------------------
+(C) 2026 Danilo D'Auria - ideatore e sviluppatore di FeniceOS, autore di
+"Tecnologia Gentile: Informatica Sostenibile".
+
+Potete:
+* CONDIVIDERE: copiare e ridistribuire il materiale con qualsiasi mezzo;
+* MODIFICARE: remixare, trasformare il materiale e basarvi altre opere.
+
+Alle seguenti condizioni:
+* ATTRIBUZIONE: citate l'autore, Danilo D'Auria, il titolo dell'opera e il
+  link alla licenza, e indicate se avete fatto modifiche. Citazione consigliata:
+  "Professore Digitale - Cattedra Digitale Portatile" di Danilo D'Auria -
+  un progetto FeniceOS - licenza CC BY-NC-SA 4.0 -
+  https://danilodauria.github.io/professore-digitale/
+* NON COMMERCIALE: non potete usare il materiale per scopi commerciali.
+* STESSA LICENZA: se modificate il materiale, distribuite i vostri
+  contributi con la stessa licenza.
+
+Usarlo in corsi gratuiti, centri anziani, scuole, biblioteche e associazioni,
+e stampare lezioni e attestati per gli allievi, e' sempre permesso.
+I diritti morali d'autore restano a Danilo D'Auria (L. 633/1941).
+Sintesi:      https://creativecommons.org/licenses/by-nc-sa/4.0/deed.it
+Testo legale: https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode.it
+Per altri usi: danilodauria.site@gmail.com
+
+----------------------------------------------------------------------------
+CODICE - LICENZA MIT
+----------------------------------------------------------------------------
 Copyright (c) 2026 Danilo D'Auria
 
 Permission is hereby granted, free of charge, to any person obtaining a copy

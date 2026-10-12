@@ -84,8 +84,7 @@
       "</div></header><h1>" + esc(titolo) + "</h1>";
   }
   function piede() {
-    return '<footer class="p-piede">Stampato dal Professore Digitale · software libero ideato da Danilo D\'Auria · funziona senza Internet · ' +
-      "competenze secondo il quadro europeo DigComp " + esc(D.versione) + "</footer>";
+    return PD.piedeStampa("Competenze secondo il quadro europeo DigComp " + esc(D.versione) + ".");
   }
   function righe(n) { var h = '<div class="p-righe">'; for (var i = 0; i < n; i++) h += "<i></i>"; return h + "</div>"; }
   function stampa(html, orient) {

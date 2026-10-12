@@ -3,8 +3,9 @@
  "formato_versione": 1,
  "id": "cultura-arte",
  "titolo": "Cultura generale · Arte",
- "versione": "1.0.0",
+ "versione": "1.0.1",
  "autore": "Danilo D'Auria",
+ "licenza": "CC BY-NC-SA 4.0",
  "descrizione": "Un viaggio nella storia dell'arte, dai templi greci alle avanguardie: 5 lezioni (arte antica, Medioevo e Giotto, Rinascimento, dal Barocco all'Impressionismo, arte moderna e musei), 25 risposte su artisti e opere e il Grande Quiz dell'Arte con attestato.",
  "richiede_app": "3.0.0",
  "suggerimenti": [

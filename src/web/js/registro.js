@@ -508,7 +508,7 @@
       h += '<p class="small">X = presente · – = assente</p>';
     }
     h += '<div class="rg-firma"><div>Luogo e data<br><span class="rg-riga"></span></div><div>Il facilitatore' + (C.facilitatore ? " (" + esc(C.facilitatore) + ")" : "") + '<br><span class="rg-riga"></span></div></div>' +
-      '<footer class="p-piede">Registro tenuto con il Professore Digitale · software libero ideato da Danilo D\'Auria · i dati restano sul computer dell\'ente</footer></div>';
+      '<footer class="p-piede">Registro tenuto con il Professore Digitale · ideato da Danilo D\'Auria · i dati restano sul computer dell\'ente · ' + esc(PD.licenzaBreve()) + "</footer></div>";
     return h;
   }
 

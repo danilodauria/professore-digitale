@@ -4,7 +4,7 @@
  *  con una spiegazione in parole semplici, e la mappa: quali lezioni, simulatori della
  *  «Vita digitale» ed esercizi della Palestra allenano ciascuna competenza.
  *  Fonte del quadro: Commissione europea, JRC, «DigComp 2.2» (2022).
- *  JavaScript puro (ES5). Ideato e sviluppato da Danilo D'Auria - Licenza MIT
+ *  JavaScript puro (ES5). Ideato e sviluppato da Danilo D'Auria - Contenuti CC BY-NC-SA 4.0 (© 2026 Danilo D'Auria), codice MIT
  * ============================================================================== */
 window.PD_DIGCOMP = {
   versione: "2.2",

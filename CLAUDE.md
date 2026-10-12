@@ -1,6 +1,6 @@
 # Professore Digitale — istruzioni per chi mantiene il progetto (persone e assistenti IA)
 
-Progetto di **Danilo D'Auria** (licenza MIT). App didattica offline per l'alfabetizzazione digitale su Linux
+Progetto di **Danilo D'Auria** — **doppia licenza** (dalla 3.5.2, come «Il Grande Quiz dell'Informatica»): codice MIT (`LICENSE`), contenuti CC BY-NC-SA 4.0 (`LICENZA-CONTENUTI.md`). App didattica offline per l'alfabetizzazione digitale su Linux
 Debian/Ubuntu/Mint/FeniceOS (server locale Python, solo libreria standard) **e su Windows da XP SP3 a 11**
 (server nativo in C, `windows/`), con la stessa interfaccia web in JS puro (`src/web/`).
 Leggere questo file per intero prima di modificare qualunque cosa.
@@ -41,6 +41,13 @@ Leggere questo file per intero prima di modificare qualunque cosa.
 - **Lingua**: tutto in italiano, tono semplice e gentile, pensato per anziani e principianti.
 - **Mai perdere i dati degli allievi**: vedi "Compatibilità" sotto.
 - Aggiornamenti solo su richiesta dell'utente; ogni file scaricato è verificato con SHA-256.
+
+- **Licenze (dalla 3.5.2)**: il codice è MIT; lezioni, domande, quiz, pacchetti, percorsi, vademecum, immagini e grafica sono
+  © Danilo D'Auria, **CC BY-NC-SA 4.0**. Costanti, bollino CC, `PD.piedeStampa(extra)` (piè di pagina di OGNI stampa),
+  `PD.licenzaBreve()` e la pagina `#/licenza` stanno in `src/web/js/licenza.js`: nuove stampe usano `PD.piedeStampa`, mai un piè
+  di pagina scritto a mano. I pacchetti del progetto hanno `"licenza": "CC BY-NC-SA 4.0"` (campo facoltativo, max 200, validato in
+  `pd_packs.py` e `packs.js`). Nuovi file di contenuto o nuove immagini: stessa licenza, metadati con `tools/licenza-immagini.py`.
+  Tenere allineati `LICENSE`, `LICENZA-CONTENUTI.md`, `packaging/copyright`, `windows/LICENZE.txt`, il sito (`tools/sito/pagina.html`) e i vademecum.
 
 ## Mappa del codice
 | Percorso | Contenuto |

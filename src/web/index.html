@@ -4,6 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="author" content="Danilo D'Auria">
+<meta name="copyright" content="Codice MIT; contenuti (c) 2026 Danilo D'Auria, licenza CC BY-NC-SA 4.0">
+<link rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
 <meta name="description" content="Professore Digitale - Cattedra Digitale Portatile offline per l'alfabetizzazione informatica">
 <title>Professore Digitale</title>
 <link rel="icon" href="img/icon.svg" type="image/svg+xml">
@@ -29,7 +31,9 @@
 <!--
   PROFESSORE DIGITALE - Cattedra Digitale Portatile
   Ideato e sviluppato da Danilo D'Auria - Tecnico IT & Divulgatore Digitale per il Sociale
-  Licenza MIT - funziona interamente offline
+  Codice: licenza MIT. Contenuti (lezioni, domande, quiz, immagini): (c) 2026 Danilo D'Auria,
+  licenza Creative Commons BY-NC-SA 4.0 - https://creativecommons.org/licenses/by-nc-sa/4.0/deed.it
+  Funziona interamente offline
 -->
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
   <defs>
@@ -111,7 +115,7 @@
     <button class="nav-btn" data-view="setup" hidden><span class="ico">🧰</span><span>Configura IA e voce</span></button>
     <button class="nav-btn" data-view="settings"><span class="ico">⚙️</span><span>Impostazioni</span></button>
     <button class="nav-btn esci" id="btn-exit" type="button"><span class="ico">🚪</span><span>Esci</span></button>
-    <div class="credit">Ideato e sviluppato da<br><b>Danilo D'Auria</b><br>Licenza MIT · v<span id="app-version"></span></div>
+    <div class="credit">Ideato e sviluppato da<br><b>Danilo D'Auria</b><br><a href="#/licenza" data-go="#/licenza" class="credit-lic">Codice MIT · Contenuti CC BY-NC-SA 4.0</a><br>v<span id="app-version"></span></div>
   </nav>
 
   <main id="main" tabindex="-1">
@@ -129,6 +133,7 @@
     <section class="view" id="view-aula" hidden></section>
     <section class="view" id="view-tablet" hidden></section>
     <section class="view" id="view-sostieni" hidden></section>
+    <section class="view" id="view-licenza" hidden></section>
     <section class="view" id="view-vita" hidden></section>
     <section class="view" id="view-truffa" hidden></section>
     <section class="view" id="view-ripasso" hidden></section>
@@ -152,6 +157,7 @@
 <script src="js/data-copertina.js"></script>
 <script src="js/data-sostieni.js"></script>
 <script src="js/app.js"></script>
+<script src="js/licenza.js"></script>
 <script src="js/voce.js"></script>
 <script src="js/eyes.js"></script>
 <script src="js/packs.js"></script>

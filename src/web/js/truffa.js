@@ -368,8 +368,7 @@
     var html = '<header class="p-testa"><div><b>Professore Digitale</b> · È una truffa?</div><div>' + d.toLocaleDateString("it-IT") + "</div></header>" +
       "<h1>🕵️ Controllo di un messaggio sospetto</h1><p><b>Tipo:</b> " + esc(nomeTipo(r.tipo)) + "</p>" +
       '<div class="tr-stampa-testo">' + evidenzia(stato.testo, r.intervalli) + "</div>" + htmlEsito(r, "", true) +
-      '<footer class="p-piede">Stampato dal Professore Digitale · software libero ideato da Danilo D\'Auria · funziona senza Internet. ' +
-      "Il controllo automatico può sbagliare: nel dubbio verificate sempre con i contatti ufficiali.</footer>";
+      PD.piedeStampa("Il controllo automatico può sbagliare: nel dubbio verificate sempre con i contatti ufficiali.");
     PD.printHTML('<div class="tr-stampa">' + html + "</div>", "verticale");
   }
 

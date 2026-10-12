@@ -1,4 +1,4 @@
-/* Professore Digitale - Pagina FeniceOS (dati). Autore: Danilo D'Auria - Licenza MIT
+/* Professore Digitale - Pagina FeniceOS (dati). Autore: Danilo D'Auria - Contenuti CC BY-NC-SA 4.0 (© 2026 Danilo D'Auria), codice MIT
    Fonti: Vademecum ufficiale FeniceOS 1.1, manuale «FeniceOS - Tecnologia Gentile per Tutte le Età»,
    script di costruzione fenice-build-master.sh (FeniceOS 1.0.0 «Ashborn»). */
 window.PD_FENICE = {

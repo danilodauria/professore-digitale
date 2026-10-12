@@ -3,8 +3,9 @@
  "formato_versione": 1,
  "id": "cultura-geografia",
  "titolo": "Cultura generale · Geografia",
- "versione": "1.0.0",
+ "versione": "1.0.1",
  "autore": "Danilo D'Auria",
+ "licenza": "CC BY-NC-SA 4.0",
  "descrizione": "Un viaggio nella geografia per tutti: la Terra e le stagioni, l'Italia fisica, le 20 regioni con i capoluoghi, l'Europa e i suoi Paesi, e come leggere una mappa, anche sul telefono. Cinque lezioni, trenta risposte nella guida e il Grande Quiz di Geografia con attestato.",
  "richiede_app": "3.0.0",
  "suggerimenti": [

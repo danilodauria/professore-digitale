@@ -64,6 +64,8 @@ python3 tools/metainfo.py packaging/io.github.danilodauria.ProfessoreDigitale.me
 chmod 0644 "$S/metainfo/"*.xml
 install -m 0644 packaging/copyright "$S/doc/$PKG/copyright"
 install -m 0644 README.md "$S/doc/$PKG/README.md"
+install -m 0644 LICENSE "$S/doc/$PKG/LICENSE"
+install -m 0644 LICENZA-CONTENUTI.md "$S/doc/$PKG/LICENZA-CONTENUTI.md"
 # il vademecum sta con l'interfaccia (apribile dall'app, anche su sistemi che non installano /usr/share/doc)
 if [ -f docs/Vademecum_Professore_Digitale.pdf ]; then
   install -d -m 0755 "$S/$PKG/web/docs"; install -m 0644 docs/Vademecum_Professore_Digitale.pdf "$S/$PKG/web/docs/"
@@ -101,6 +103,9 @@ Description: cattedra digitale portatile per l'alfabetizzazione informatica
  .
  Funziona senza Internet anche su computer ricondizionati: nessun dato
  lascia il computer. Ideato e sviluppato da Danilo D'Auria.
+ .
+ Licenze: codice MIT; contenuti (lezioni, domande, quiz, vademecum, immagini)
+ Creative Commons BY-NC-SA 4.0, (c) 2026 Danilo D'Auria.
 CTRL
 (cd "$BUILD" && find usr -type f -print0 | sort -z | xargs -0 md5sum > DEBIAN/md5sums)
 chmod 0644 "$BUILD/DEBIAN/control" "$BUILD/DEBIAN/md5sums"

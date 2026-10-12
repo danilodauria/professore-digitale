@@ -28,6 +28,7 @@ MODELLO = {
     "titolo": "Le mie domande aggiuntive",
     "versione": "1.0.0",
     "autore": "Nome Cognome",
+    "licenza": "CC BY-NC-SA 4.0",
     "descrizione": "Domande e lezioni preparate per il nostro gruppo.",
     "richiede_app": "2.1.0",
     "suggerimenti": ["Come stampo un documento?"],
@@ -107,6 +108,7 @@ def valida(pack, versione_app=None):
         e.add("versione", "formato atteso tipo 1.0.0")
     for k in ("autore", "descrizione"):
         _testo(e, pack, k, "pacchetto", False, 600)
+    _testo(e, pack, "licenza", "pacchetto", False, 200)   # dalla 3.5.2, es. "CC BY-NC-SA 4.0"
     req = pack.get("richiede_app")
     if req not in (None, ""):
         if not isinstance(req, str) or not RE_VER.match(req):

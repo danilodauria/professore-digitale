@@ -3,8 +3,9 @@
  "formato_versione": 1,
  "id": "cultura-storia",
  "titolo": "Cultura generale · Storia",
- "versione": "1.0.0",
+ "versione": "1.0.1",
  "autore": "Danilo D'Auria",
+ "licenza": "CC BY-NC-SA 4.0",
  "descrizione": "Un viaggio nella storia, dalla Preistoria all'Europa unita: 6 lezioni (prime civiltà, Grecia e Roma, Medioevo, età moderna, Risorgimento, Novecento), 30 risposte su personaggi ed eventi e il Grande Quiz di Storia con attestato.",
  "richiede_app": "3.0.0",
  "suggerimenti": [

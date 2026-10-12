@@ -4,6 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="author" content="Danilo D'Auria">
+<link rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
 <meta name="description" content="Professore Digitale: il maestro paziente per imparare a usare computer, telefono e Internet. Gratuito, senza pubblicità, funziona anche senza Internet.">
 <title>Professore Digitale</title>
 <link rel="icon" href="app/icone/icona-192.png" type="image/png">
@@ -73,6 +74,12 @@ footer { border-top: 1px solid var(--line); margin-top: 2rem; padding-top: 1.2re
   .qr { display: none; }   /* sul telefono il QR non serve: c'è già il pulsante */
   .btn.grande { display: block; text-align: center; margin-right: 0; }
 }
+#licenza .licenza { display: flex; gap: .9rem; align-items: flex-start; }
+#licenza .licenza p { margin-top: 0; }
+#licenza .cc { flex: 0 0 auto; margin-top: .25rem; }
+#licenza .regole li { margin: .3rem 0; }
+#licenza .citazione { background: var(--brand-soft); border-left: 4px solid var(--accent); padding: .6rem .8rem; border-radius: 8px; word-break: break-word; }
+@media (max-width: 520px) { #licenza .licenza { flex-direction: column; } }
 </style>
 </head>
 <body>
@@ -131,8 +138,27 @@ non vengono mandati a nessuno. Se cancellate i dati del browser, si cancellano a
 <p class="altri">{{ALTRI}}</p>
 </section>
 
+<section id="licenza" aria-labelledby="t-licenza">
+<h2 id="t-licenza">📜 Licenza e diritti d'autore</h2>
+<div class="licenza">
+<svg class="cc" viewBox="0 0 88 31" width="88" height="31" role="img" aria-label="Creative Commons BY-NC-SA 4.0"><rect width="88" height="31" rx="4" fill="#abb1aa"/><rect x="1" y="1" width="86" height="29" rx="3" fill="#000"/><circle cx="15.5" cy="15.5" r="11.5" fill="#fff"/><text x="15.5" y="20" font-family="Arial, sans-serif" font-weight="700" font-size="11" text-anchor="middle" fill="#000">cc</text><text x="56" y="13" font-family="Arial, sans-serif" font-weight="700" font-size="8.5" text-anchor="middle" fill="#fff">BY · NC · SA</text><text x="56" y="24" font-family="Arial, sans-serif" font-size="7.5" text-anchor="middle" fill="#abb1aa">4.0 Internazionale</text></svg>
+<p>Lezioni, domande, quiz, percorsi, vademecum, immagini e grafica sono opera di <b>Danilo D'Auria</b> e sono distribuiti con licenza
+<a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.it" rel="license">Creative Commons Attribuzione – Non commerciale – Condividi allo stesso modo 4.0 Internazionale</a>.
+Potete usarli, stamparli, condividerli e adattarli, alle tre condizioni della licenza:</p>
+</div>
+<ul class="regole">
+<li><b>👤 Attribuzione</b> — citate sempre l'autore, Danilo D'Auria, il titolo e la licenza, e dite se avete fatto modifiche.</li>
+<li><b>🚫💶 Non commerciale</b> — non si possono usare per guadagnarci.</li>
+<li><b>🔁 Condividi allo stesso modo</b> — le versioni modificate vanno condivise con la stessa licenza.</li>
+</ul>
+<p class="piccolo">Usarlo in corsi gratuiti, centri anziani, scuole, biblioteche e associazioni è sempre permesso. Come citarlo:</p>
+<p class="citazione">«Professore Digitale – Cattedra Digitale Portatile» di Danilo D'Auria — un progetto FeniceOS — licenza CC BY-NC-SA 4.0 — https://danilodauria.github.io/professore-digitale/</p>
+<p class="piccolo">Il <b>codice</b> del programma è software libero con licenza MIT. «Il Grande Quiz dell'Informatica» ha la stessa licenza dei contenuti:
+<a href="https://danilodauria.github.io/grande-quiz/">danilodauria.github.io/grande-quiz</a>. I diritti morali d'autore restano sempre all'autore.</p>
+</section>
+
 <footer>
-<p>Professore Digitale – Cattedra Digitale Portatile · software libero (licenza MIT) ideato e sviluppato da <b>Danilo D'Auria</b>.{{PROGETTO}}</p>
+<p>Professore Digitale – Cattedra Digitale Portatile · ideato e sviluppato da <b>Danilo D'Auria</b> · © 2026 Danilo D'Auria · contenuti <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.it" rel="license">CC BY-NC-SA 4.0</a> · codice MIT.{{PROGETTO}}</p>
 <p>Ogni file si può controllare con le impronte SHA-256 dell'elenco <a href="SHA256SUMS">SHA256SUMS</a>. Il Professore non usa pubblicità né statistiche.</p>
 </footer>
 </div>

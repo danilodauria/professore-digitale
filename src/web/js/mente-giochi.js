@@ -854,7 +854,7 @@
       '<p>Scrivete una lettera per casella. Il numero tra parentesi dice quante lettere ha la parola.</p>' + tab(false) +
       '<div style="display:flex;gap:10mm"><div style="flex:1">' + defs("o", "Orizzontali") + '</div><div style="flex:1">' + defs("v", "Verticali") + "</div></div>" +
       '<div style="page-break-before:always;break-before:page"></div><h2>Soluzioni</h2>' + tab(true) +
-      '<p style="font-size:9pt">Stampato dal Professore Digitale · Ginnastica per la mente</p></div>';
+      '<p style="font-size:9pt">Stampato dal Professore Digitale · Ginnastica per la mente · ' + esc(PD.licenzaBreve()) + "</p></div>";
   }
 
   function avviaCruciverba(box, ctx) {

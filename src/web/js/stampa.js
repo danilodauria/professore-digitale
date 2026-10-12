@@ -38,7 +38,7 @@
       d.toLocaleDateString("it-IT") + "</div></header><h1>" + esc(titolo) + "</h1>";
   }
   function piede() {
-    return '<footer class="p-piede">Stampato dal Professore Digitale · software libero ideato da Danilo D\'Auria · funziona senza Internet</footer>';
+    return PD.piedeStampa();
   }
 
   /* lezione intera: passi, consigli, schemi, quiz (con le soluzioni in fondo) */

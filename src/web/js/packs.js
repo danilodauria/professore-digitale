@@ -29,6 +29,7 @@
     if (p.formato_versione !== 1) add("formato_versione", "deve essere 1");
     if (typeof p.id !== "string" || !RE_ID.test(p.id)) add("id", "solo lettere minuscole, cifre e trattini (2-49 caratteri)");
     txt(p, "titolo", "pacchetto", true, 120);
+    txt(p, "licenza", "pacchetto", false, 200);   // dalla 3.5.2, es. "CC BY-NC-SA 4.0" (come pd_packs.py)
     if (typeof p.versione !== "string" || !RE_VER.test(p.versione)) add("versione", "formato atteso tipo 1.0.0");
     if (p.richiede_app) {
       if (!RE_VER.test(p.richiede_app)) add("richiede_app", "formato atteso tipo 2.1.0");
@@ -211,7 +212,7 @@
     template: function () {
       return {
         formato: FORMATO, formato_versione: 1, id: "mie-domande", titolo: "Le mie domande aggiuntive", versione: "1.0.0",
-        autore: "Nome Cognome", descrizione: "Domande e lezioni preparate per il nostro gruppo.", richiede_app: "2.1.0",
+        autore: "Nome Cognome", licenza: "CC BY-NC-SA 4.0", descrizione: "Domande e lezioni preparate per il nostro gruppo.", richiede_app: "2.1.0",
         suggerimenti: ["Come stampo un documento?"],
         domande: [{ domanda: "Come stampo un documento?", parole_chiave: ["stampare", "stampa", "stampante", "ctrl p"],
           risposta: "1. Aprite il documento.\n2. Premete **Ctrl + P**.\n3. Scegliete la stampante e premete **Stampa**.",

@@ -515,7 +515,7 @@
             "</td><td>" + s.p + " su " + s.m + "</td><td>" + new Array((s.s || 0) + 1).join("★") + "</td></tr>";
         }).join("") + "</tbody></table>" : "") +
       '<p class="p-tip">Tenere la mente allenata è come fare una passeggiata ogni giorno: bastano pochi minuti, con costanza e serenità.</p>' +
-      '<footer class="p-piede">Stampato dal Professore Digitale · software libero ideato da Danilo D\'Auria · funziona senza Internet</footer>';
+      PD.piedeStampa();
     PD.printHTML(html, "verticale");
   }
 

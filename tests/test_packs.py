@@ -29,6 +29,8 @@ mut("quiz corretta booleana", lambda p: p["lezioni"][0]["quiz"][0].update(corret
 mut("palestra sconosciuta", lambda p: p["lezioni"][0].update(palestra="salto"))
 mut("lezione senza passi", lambda p: p["lezioni"][0].update(passi=[]))
 mut("richiede versione futura", lambda p: p.update(richiede_app="99.0.0"))
+mut("licenza non testuale", lambda p: p.update(licenza=4))
+mut("licenza troppo lunga", lambda p: p.update(licenza="x" * 201))
 for desc, p in cases:
     err = pd_packs.valida(p, "2.1.0")
     check("rifiutato: " + desc, len(err) > 0)

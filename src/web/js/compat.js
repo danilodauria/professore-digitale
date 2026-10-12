@@ -15,7 +15,7 @@
     '(cartella ProfessoreDigitale-kit\\browser) oppure chiedete al facilitatore.</li>' +
     '<li><b>Windows 7, 8, 10 e 11:</b> usate Microsoft Edge, Google Chrome o Firefox aggiornati.</li></ul>' +
     '<p>Poi riaprite il Professore Digitale: si aprir&agrave; da solo nel browser giusto.</p>' +
-    '<p style="font-size:.8em;color:#4b5563">Ideato e sviluppato da Danilo D\'Auria &middot; Licenza MIT</p></div>';
+    '<p style="font-size:.8em;color:#4b5563">Ideato e sviluppato da Danilo D\'Auria &middot; Codice MIT &middot; Contenuti CC BY-NC-SA 4.0</p></div>';
   function show() {
     var b = document.body;
     if (!b) return;

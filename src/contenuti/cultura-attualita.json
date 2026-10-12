@@ -3,8 +3,9 @@
  "formato_versione": 1,
  "id": "cultura-attualita",
  "titolo": "Cultura generale · Attualità e cittadinanza",
- "versione": "1.0.0",
+ "versione": "1.0.1",
  "autore": "Danilo D'Auria",
+ "licenza": "CC BY-NC-SA 4.0",
  "descrizione": "Educazione civica e grandi temi del nostro tempo spiegati in modo semplice: la Costituzione, come funziona lo Stato, l'Unione europea e l'ONU, come informarsi bene e riconoscere le notizie false, sostenibilità, clima e intelligenza artificiale. 5 lezioni, 30 risposte e il Grande Quiz di Cittadinanza e Attualità con attestato.",
  "richiede_app": "3.0.0",
  "suggerimenti": [

@@ -1,5 +1,5 @@
 /* Professore Digitale - Base di conoscenza offline (risponde anche senza IA)
- * Autore: Danilo D'Auria - Licenza MIT
+ * Autore: Danilo D'Auria - Contenuti CC BY-NC-SA 4.0 (© 2026 Danilo D'Auria), codice MIT
  * q = domanda tipo, k = parole chiave, a = risposta, d = schema Mermaid, l = lezione collegata
  */
 window.PD_KB = [

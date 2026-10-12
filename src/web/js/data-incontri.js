@@ -5,7 +5,7 @@
  *  Ogni passo della scaletta può aprire una lezione, un esercizio della Palestra,
  *  un simulatore della «Vita digitale», la pagina «È una truffa?», il ripasso o un quiz.
  *  Competenze secondo il quadro europeo DigComp 2.2 (vedi data-digcomp.js).
- *  JavaScript puro (ES5). Ideato e sviluppato da Danilo D'Auria - Licenza MIT
+ *  JavaScript puro (ES5). Ideato e sviluppato da Danilo D'Auria - Contenuti CC BY-NC-SA 4.0 (© 2026 Danilo D'Auria), codice MIT
  * ============================================================================== */
 window.PD_INCONTRI = [
   {

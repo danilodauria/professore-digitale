@@ -1,5 +1,7 @@
 Cattedra digitale offline per l'alfabetizzazione informatica.
-Ideato e sviluppato da Danilo D'Auria - Licenza MIT.
+Ideato e sviluppato da Danilo D'Auria.
+Codice: licenza MIT. Contenuti (lezioni, domande, quiz, vademecum, immagini):
+licenza Creative Commons BY-NC-SA 4.0 - vedi LICENZE.txt.
 
 COME SI USA
 - Fate doppio clic su "Professore Digitale" sul desktop o nel menu Start.

@@ -221,7 +221,7 @@
       '<text x="330" y="1640" font-family="' + sans + '" font-size="44" fill="#4b5563">Data</text>' +
       '<text x="330" y="1710" font-family="' + serif + '" font-size="58" fill="#1f2a37">' + xml(dataLunga(a.data)) + "</text>" +
       '<text x="330" y="1800" font-family="' + sans + '" font-size="36" fill="#6b7280">Codice: ' + xml(a.codice) + "</text>" +
-      '<text x="330" y="1855" font-family="' + sans + '" font-size="32" fill="#6b7280">Professore Digitale · Licenza MIT · ideato da Danilo D\'Auria</text>' +
+      '<text x="330" y="1855" font-family="' + sans + '" font-size="32" fill="#6b7280">Professore Digitale · © ' + new Date(a.data).getFullYear() + ' Danilo D\'Auria · contenuti CC BY-NC-SA 4.0</text>' +
       // firme
       '<path d="M' + (W - 1050) + ' 1700 H' + (W - 330) + '" stroke="#1f2a37" stroke-width="3"/>' +
       '<text x="' + (W - 690) + '" y="1680" text-anchor="middle" font-family="' + serif + '" font-style="italic" font-size="60" fill="#1d5c8f">' + xml(fac) + "</text>" +

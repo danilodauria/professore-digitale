@@ -3,9 +3,10 @@
  "formato_versione": 1,
  "id": "grande-quiz-informatica",
  "titolo": "Il Grande Quiz dell'Informatica",
- "versione": "1.0.0",
+ "versione": "1.0.1",
  "autore": "Danilo D'Auria",
- "descrizione": "Le 264 domande del manuale «Il Grande Quiz dell'Informatica» di Danilo D'Auria, ideatore di FeniceOS: storia, hardware, sistemi operativi, software, internet, comunicazione, sicurezza, cloud, intelligenza artificiale, economia circolare e FeniceOS, dal livello Base all'Esperto, con le soluzioni commentate. In più, il quiz finale del corso di informatica del Professore Digitale. Con il 70% di risposte giuste si ottiene l'attestato.",
+ "licenza": "CC BY-NC-SA 4.0",
+ "descrizione": "Le 264 domande del manuale «Il Grande Quiz dell'Informatica» di Danilo D'Auria, ideatore di FeniceOS: storia, hardware, sistemi operativi, software, internet, comunicazione, sicurezza, cloud, intelligenza artificiale, economia circolare e FeniceOS, dal livello Base all'Esperto, con le soluzioni commentate. In più, il quiz finale del corso di informatica del Professore Digitale. Con il 70% di risposte giuste si ottiene l'attestato. Contenuti © Danilo D'Auria, licenza CC BY-NC-SA 4.0 (danilodauria.github.io/grande-quiz).",
  "richiede_app": "3.0.0",
  "prove": [
   {

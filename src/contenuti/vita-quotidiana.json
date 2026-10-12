@@ -3,8 +3,9 @@
  "formato_versione": 1,
  "id": "vita-quotidiana",
  "titolo": "Il digitale nella vita quotidiana",
- "versione": "1.0.0",
+ "versione": "1.0.1",
  "autore": "Danilo D'Auria",
+ "licenza": "CC BY-NC-SA 4.0",
  "descrizione": "30 nuove risposte (stampa, foto, smartphone, acquisti, Wi-Fi pubblico, aggiornamenti) e 2 nuove lezioni: acquisti online sicuri e foto e ricordi al sicuro.",
  "richiede_app": "2.1.0",
  "suggerimenti": [

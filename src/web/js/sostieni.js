@@ -43,7 +43,7 @@
   PD.views.sostieni = function (el) {
     el.innerHTML =
       '<div class="card sostieni"><h1 style="margin-top:0">❤️ Sostieni il progetto</h1>' +
-      '<p class="lead">Il Professore Digitale è <b>gratuito</b>, <b>libero</b> (licenza MIT) e funziona senza Internet. ' +
+      '<p class="lead">Il Professore Digitale è <b>gratuito</b>, <b>libero</b> (codice MIT, contenuti Creative Commons BY-NC-SA 4.0: <a href="#/licenza" data-go="#/licenza">cosa potete fare</a>) e funziona senza Internet. ' +
       "È nato per aiutare chi muove i primi passi con il computer e per dare nuova vita ai PC usati.</p>" +
       "<p>Se vi è stato utile, potete sostenere il lavoro di <b>" + esc(D.intestatario) + "</b> con un <b>contributo libero</b>, " +
       "della cifra che preferite. Non è obbligatorio: il programma resta uguale per tutti.</p></div>" +

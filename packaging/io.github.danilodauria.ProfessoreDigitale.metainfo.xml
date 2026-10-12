@@ -2,7 +2,7 @@
 <component type="desktop-application">
   <id>io.github.danilodauria.ProfessoreDigitale</id>
   <metadata_license>MIT</metadata_license>
-  <project_license>MIT</project_license>
+  <project_license>MIT AND CC-BY-NC-SA-4.0</project_license>
   <name>Professore Digitale</name>
   <summary>Cattedra digitale portatile per l'alfabetizzazione informatica</summary>
   <description>

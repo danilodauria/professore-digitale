@@ -6,6 +6,23 @@ Source: Opera originale di Danilo D'Auria
 Files: *
 Copyright: 2026 Danilo D'Auria <danilodauria.site@gmail.com>
 License: MIT
+Comment: il CODICE (server, avviatori, script, HTML, CSS e JavaScript dell'interfaccia) e' MIT.
+ I CONTENUTI elencati qui sotto sono invece CC BY-NC-SA 4.0: vedi LICENZA-CONTENUTI.md.
+
+Files: usr/share/professore-digitale/contenuti/*
+ usr/share/professore-digitale/web/js/data-*.js
+ usr/share/professore-digitale/web/img/*
+ usr/share/professore-digitale/web/docs/*
+ usr/share/icons/hicolor/scalable/apps/professore-digitale.svg
+ usr/share/doc/professore-digitale/LICENZA-CONTENUTI.md
+Copyright: 2026 Danilo D'Auria <danilodauria.site@gmail.com>
+License: CC-BY-NC-SA-4.0
+Comment: lezioni, domande e risposte, quiz (compreso «Il Grande Quiz dell'Informatica»), percorsi,
+ incontri, testi dei simulatori e dei giochi, vademecum, immagini, grafica, il personaggio del
+ Professore e il marchio della fenice. Anche i testi delle lezioni scritti dentro i file
+ JavaScript dell'interfaccia sono contenuti CC BY-NC-SA 4.0.
+ Citazione consigliata: «Professore Digitale – Cattedra Digitale Portatile» di Danilo D'Auria —
+ un progetto FeniceOS — licenza CC BY-NC-SA 4.0 — https://danilodauria.github.io/professore-digitale/
 
 Files: usr/share/professore-digitale/web/vendor/mermaid.min.js
 Copyright: 2014-2022 Knut Sveidqvist and Mermaid contributors
@@ -89,3 +106,18 @@ License: Apache-2.0
  .
  On Debian systems, the complete text of the Apache License, Version 2.0
  can be found in "/usr/share/common-licenses/Apache-2.0".
+
+License: CC-BY-NC-SA-4.0
+ Creative Commons Attribuzione - Non commerciale - Condividi allo stesso modo
+ 4.0 Internazionale (CC BY-NC-SA 4.0).
+ .
+ Potete condividere (copiare e ridistribuire) e modificare il materiale alle
+ seguenti condizioni: Attribuzione (citare l'autore Danilo D'Auria, il titolo
+ dell'opera e il link alla licenza, indicando se avete apportato modifiche);
+ Non commerciale (niente usi commerciali); Condividi allo stesso modo (le
+ opere modificate vanno distribuite con la stessa licenza). I diritti morali
+ d'autore restano a Danilo D'Auria (L. 633/1941).
+ .
+ Sintesi: https://creativecommons.org/licenses/by-nc-sa/4.0/deed.it
+ Testo legale completo: https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode.it
+ Una copia del riepilogo e' in /usr/share/doc/professore-digitale/LICENZA-CONTENUTI.md

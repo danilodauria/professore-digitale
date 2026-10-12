@@ -1,7 +1,7 @@
 /* ==============================================================================
  *  PROFESSORE DIGITALE - Cattedra Digitale Portatile
  *  Nucleo dell'interfaccia (JavaScript puro, nessuna libreria esterna richiesta)
- *  Ideato e sviluppato da Danilo D'Auria - Licenza MIT
+ *  Ideato e sviluppato da Danilo D'Auria - Codice MIT, contenuti CC BY-NC-SA 4.0
  * ============================================================================== */
 (function () {
   "use strict";
@@ -649,7 +649,7 @@
       "</div>" +
       PD.hooks.homeCards.map(function (c) { try { return c.html() || ""; } catch (e) { return ""; } }).join("") +
       '<div class="card promemoria" id="home-promemoria"></div>' +
-      '<p class="sostieni-riga small muted">Il Professore Digitale è gratuito e libero. <a href="#/sostieni" data-go="#/sostieni">❤️ Sostieni il progetto</a></p>' +
+      '<p class="sostieni-riga small muted">Il Professore Digitale è gratuito e libero. <a href="#/sostieni" data-go="#/sostieni">❤️ Sostieni il progetto</a> · <a href="#/licenza" data-go="#/licenza">📜 Licenza: codice MIT, contenuti CC BY-NC-SA 4.0</a></p>' +
       (!PD.server && window.PD_PWA ? '<p class="notice info small">Questa è l\'<b>app per telefono e tablet</b>: lezioni, guida, palestra, quiz e lettura delle lettere funzionano anche senza Internet. ' +
       "I vostri progressi restano su questo dispositivo.</p>" : "") +
       (!PD.server && !window.PD_PWA ? '<p class="notice info small">Questa è la <b>versione portatile</b>: lezioni, guida, lavagna, palestra e quiz funzionano ovunque. ' +
@@ -1129,10 +1129,11 @@
 
       '<div class="card"><h2 style="margin-top:0">ℹ️ Informazioni</h2><dl class="kv"><dt>Programma</dt><dd>Professore Digitale – Cattedra Digitale Portatile</dd>' +
       "<dt>Versione</dt><dd>" + PD.version + "</dd><dt>Ideazione e sviluppo</dt><dd>Danilo D'Auria – Tecnico IT &amp; Divulgatore Digitale per il Sociale</dd>" +
-      "<dt>Contatti</dt><dd>danilodauria.site@gmail.com</dd><dt>Licenza</dt><dd>MIT (software libero)</dd>" +
+      "<dt>Contatti</dt><dd>danilodauria.site@gmail.com</dd><dt>Licenza</dt><dd>Codice MIT (software libero) · contenuti © Danilo D'Auria, Creative Commons BY-NC-SA 4.0 · <a href=\"#/licenza\" data-go=\"#/licenza\">📜 cosa potete fare</a></dd>" +
       "<dt>Componenti</dt><dd>" + (PD.isWindows() ? "Mermaid (MIT) per gli schemi; voce di Windows; Ollama o KoboldCpp, Vosk, Piper (facoltativi)" : "Mermaid (MIT) per gli schemi; Ollama, espeak-ng, Vosk (facoltativi)") + "</dd></dl>" +
       (PD.server ? '<p class="row"><a class="btn ghost" href="docs/' + (PD.isWindows() ? "Vademecum_Professore_Digitale_Windows.pdf" : "Vademecum_Professore_Digitale.pdf") + '" target="_blank" rel="noopener">📖 Apri il vademecum (PDF)</a>' +
         (PD.isWindows() ? '<button class="btn ghost" id="open-data">📂 Cartella dei progressi</button>' : "") + "</p>" : "") + "</div>" +
+      (PD.licenzaHTML ? PD.licenzaHTML() : "") +
       "</div>";
 
     function field(label, ctrl) { return '<div class="field"><label>' + label + "</label>" + ctrl + "</div>"; }
@@ -1144,6 +1145,7 @@
     function chk(id, key) { bind(id, "change", function () { s[key] = this.checked; PD.saveSettings(); renderChips(); }); }
 
     PD.hooks.settingsCards.forEach(function (c) { try { if (c.bind) c.bind(el); } catch (e) { if (window.console) console.error(e); } });
+    if (PD.licenzaBind) PD.licenzaBind(el);
     bind("s-font", "input", function () { s.fontSize = +this.value; $("#fs-val").textContent = s.fontSize + "px"; PD.saveSettings(); });
     bind("s-theme", "change", function () { s.theme = this.value; PD.saveSettings(); });
     chk("s-projector", "projector"); chk("s-eyes", "eyesFollow"); chk("s-greet", "greet"); chk("s-goodbye", "goodbye"); chk("s-idle", "idleTips");
@@ -1215,7 +1217,7 @@
     var html = L.length ? L.map(function (en) {
       var p = en.pacchetto;
       return '<div class="notice info small" style="display:flex;gap:.8rem;align-items:center;justify-content:space-between;flex-wrap:wrap"><div><b>' + esc(p.titolo) +
-        "</b> · v" + esc(p.versione) + (p.autore ? " · " + esc(p.autore) : "") + "<br>" + (p.domande || []).length + " domande, " + (p.lezioni || []).length +
+        "</b> · v" + esc(p.versione) + (p.autore ? " · " + esc(p.autore) : "") + (p.licenza ? " · licenza " + esc(p.licenza) : "") + "<br>" + (p.domande || []).length + " domande, " + (p.lezioni || []).length +
         " lezioni · " + ({ sistema: "incluso nel programma", computer: "installato per tutti gli utenti" }[en.origine] || "importato") + "</div>" +
         (en.origine === "utente" && !PD.ospite ? '<button class="btn ghost" data-pack-remove="' + esc(p.id) + '">Rimuovi</button>' : "") + "</div>";
     }).join("") : '<p class="small muted">Nessun pacchetto aggiuntivo.</p>';

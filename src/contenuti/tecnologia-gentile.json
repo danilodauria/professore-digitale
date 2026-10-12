@@ -3,8 +3,9 @@
  "formato_versione": 1,
  "id": "tecnologia-gentile",
  "titolo": "Tecnologia Gentile · il libro",
- "versione": "1.0.0",
+ "versione": "1.0.1",
  "autore": "Danilo D'Auria",
+ "licenza": "CC BY-NC-SA 4.0",
  "descrizione": "Il libro «Tecnologia Gentile: Informatica Sostenibile» di Danilo D'Auria, pubblicato su Amazon, raccontato in parole semplici: una lezione per ogni capitolo, dalla storia del computer alla sicurezza, dallo smartphone senza occhiali alla rigenerazione dei PC, fino all'Intelligenza Artificiale Gentile. Con domande e risposte sui temi del libro e un quiz finale con attestato.",
  "richiede_app": "3.0.0",
  "suggerimenti": [

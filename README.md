@@ -1,7 +1,7 @@
 # Professore Digitale — Cattedra Digitale Portatile
 
 **Ideato e sviluppato da Danilo D'Auria** — Tecnico IT & Divulgatore Digitale per il Sociale
-Licenza **MIT** · Contatti: danilodauria.site@gmail.com
+Codice: licenza **MIT** · Contenuti: **CC BY-NC-SA 4.0** · Contatti: danilodauria.site@gmail.com
 
 Piattaforma didattica **offline** per l'alfabetizzazione informatica in centri anziani, scuole,
 biblioteche e associazioni. Pensata per girare anche su **computer ricondizionati**.
@@ -147,3 +147,17 @@ tests/esegui_test.sh    # esegue tutti i test automatici
 * **Nessuna voce**: `sudo apt install espeak-ng`, poi in Impostazioni → «Prova la voce».
 * **IA lenta**: scegliete un modello più piccolo in Impostazioni o con `professore-digitale-setup-ia`.
 * **Microfono non attivo**: `professore-digitale-setup-voce`, poi Impostazioni → «Ricontrolla i componenti».
+
+## 📜 Licenze
+
+- **Contenuti** (lezioni, domande e risposte, quiz — compreso «Il Grande Quiz dell'Informatica» —, percorsi,
+  vademecum, immagini, grafica, il personaggio del Professore e il marchio della fenice):
+  © 2026 Danilo D'Auria, [Creative Commons BY-NC-SA 4.0](LICENZA-CONTENUTI.md) — citare sempre l'autore,
+  niente usi commerciali, stessa licenza per le versioni modificate.
+- **Codice**: [MIT](LICENSE).
+- **Componenti di altri autori** (Mermaid, tesseract.js, Piper, voci Giorgio/Serena/Paola, Vosk): ognuno con la propria
+  licenza, vedi `packaging/copyright` e `windows/LICENZE.txt`.
+
+Citazione consigliata:
+> «Professore Digitale – Cattedra Digitale Portatile» di Danilo D'Auria — un progetto FeniceOS — licenza CC BY-NC-SA 4.0 —
+> https://danilodauria.github.io/professore-digitale/

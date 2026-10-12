@@ -1,6 +1,6 @@
 ; ==============================================================================
 ;  PROFESSORE DIGITALE - installatore per Windows (da XP SP3 a Windows 11, 32 e 64 bit)
-;  Ideato e sviluppato da Danilo D'Auria - Licenza MIT
+;  Ideato e sviluppato da Danilo D'Auria - Codice MIT, contenuti CC BY-NC-SA 4.0
 ;
 ;  Si compila da Linux con windows/build-windows.sh (makensis). Opzioni da riga di comando:
 ;    ProfessoreDigitale-Setup-X.Y.Z.exe /S                 installazione silenziosa
@@ -26,14 +26,14 @@ OutFile "${USCITA}"
   !uninstfinalize '"${FIRMA}" "%1"' = 0
   !finalize '"${FIRMA}" "%1"' = 0
 !endif
-BrandingText "${NOME} ${VERSIONE} · Danilo D'Auria · Licenza MIT"
+BrandingText "${NOME} ${VERSIONE} · Danilo D'Auria · MIT e CC BY-NC-SA 4.0"
 VIProductVersion "${V1}.${V2}.${V3}.0"
 VIAddVersionKey /LANG=1040 "ProductName" "${NOME}"
 VIAddVersionKey /LANG=1040 "CompanyName" "${EDITORE}"
 VIAddVersionKey /LANG=1040 "FileDescription" "Installazione del Professore Digitale"
 VIAddVersionKey /LANG=1040 "FileVersion" "${VERSIONE}"
 VIAddVersionKey /LANG=1040 "ProductVersion" "${VERSIONE}"
-VIAddVersionKey /LANG=1040 "LegalCopyright" "Danilo D'Auria - Licenza MIT"
+VIAddVersionKey /LANG=1040 "LegalCopyright" "© 2026 Danilo D'Auria - Codice MIT, contenuti CC BY-NC-SA 4.0"
 
 ; ---- per tutti gli utenti (Program Files) oppure solo per me (senza password) ----
 !define MULTIUSER_EXECUTIONLEVEL Highest
@@ -64,9 +64,9 @@ VIAddVersionKey /LANG=1040 "LegalCopyright" "Danilo D'Auria - Licenza MIT"
 !define MUI_WELCOMEPAGE_TITLE "Benvenuti nel Professore Digitale"
 !define MUI_WELCOMEPAGE_TEXT "Il Professore Digitale è un insegnante paziente che vive nel computer: lezioni guidate, risposte a voce, schemi alla lavagna ed esercizi di mouse e tastiera.$\r$\n$\r$\nFunziona SENZA Internet e non invia nessun dato.$\r$\n$\r$\nAl termine potrete attivare, se volete, l'intelligenza artificiale locale e il microfono: il programma controllerà il computer e sceglierà da solo il modello più adatto.$\r$\n$\r$\nPremete Avanti per continuare."
 !insertmacro MUI_PAGE_WELCOME
-!define MUI_LICENSEPAGE_TEXT_TOP "Il Professore Digitale è software libero (licenza MIT)."
+!define MUI_LICENSEPAGE_TEXT_TOP "Codice: licenza MIT. Contenuti: licenza Creative Commons BY-NC-SA 4.0."
 !define MUI_LICENSEPAGE_BUTTON "Avanti >"
-!define MUI_LICENSEPAGE_TEXT_BOTTOM "È gratuito e potete copiarlo e regalarlo liberamente. Premete Avanti per continuare."
+!define MUI_LICENSEPAGE_TEXT_BOTTOM "È gratuito: potete copiarlo e regalarlo citando l'autore, senza usi commerciali. Premete Avanti per continuare."
 !insertmacro MUI_PAGE_LICENSE "${SORGENTE}\LICENZE.txt"
 !insertmacro MULTIUSER_PAGE_INSTALLMODE
 !insertmacro MUI_PAGE_COMPONENTS

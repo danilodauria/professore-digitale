@@ -1,5 +1,5 @@
 /* Professore Digitale - Percorso didattico di alfabetizzazione digitale
- * Autore: Danilo D'Auria - Licenza MIT
+ * Autore: Danilo D'Auria - Contenuti CC BY-NC-SA 4.0 (© 2026 Danilo D'Auria), codice MIT
  * Ogni lezione: passi (testo + schema facoltativo), esercizio in Palestra, quiz finale.
  * Sintassi testo: **grassetto**, *corsivo*, elenchi con "- " o "1. ", righe vuote = paragrafi.
  */
@@ -265,7 +265,7 @@ window.PD_LESSONS = [
       x: "Il **sistema operativo** è il *direttore d'orchestra* del computer: fa lavorare insieme schermo, tastiera, memoria e programmi.\n\nI più conosciuti sono Windows, macOS e **Linux**.",
       d: "flowchart TD\n  U[\"👤 Voi\"] --> P[\"Programmi: browser, posta, scrittura\"] --> SO[\"🎼 Sistema operativo\"] --> H[\"🔩 Hardware: processore, memoria, disco\"]" },
     { t: "Il software libero",
-      x: "Il **software libero** si può usare, studiare, modificare e condividere liberamente. È come una **ricetta** che tutti possono leggere e migliorare.\n\nEsempi: Linux, Firefox, LibreOffice, VLC, GIMP, e anche questo Professore Digitale (licenza MIT)." },
+      x: "Il **software libero** si può usare, studiare, modificare e condividere liberamente. È come una **ricetta** che tutti possono leggere e migliorare.\n\nEsempi: Linux, Firefox, LibreOffice, VLC, GIMP, e anche questo Professore Digitale (codice con licenza MIT; lezioni e quiz con licenza Creative Commons BY-NC-SA 4.0)." },
     { t: "Riuso ed economia circolare",
       x: "Molti computer vengono buttati perché *\"sono lenti\"*, ma spesso il problema è il software, non l'hardware.\n\nCon una **distribuzione Linux leggera** (come Linux Mint XFCE, Q4OS, antiX o una live dedicata) un computer di 10 anni torna utile: meno rifiuti elettronici, più persone connesse.",
       d: "flowchart LR\n  V[\"💻 PC vecchio\"] --> L[\"🐧 Linux leggero\"] --> N[\"✨ PC rinato\"] --> S[\"🤝 Scuola, centro anziani, famiglia\"]" }
