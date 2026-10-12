@@ -1248,7 +1248,7 @@
     },
     {
      "titolo": "Perché è una scelta etica",
-     "testo": "Scegliere software libero non è solo una questione tecnica:\n\n- **Riuso**: i sistemi leggeri tengono in vita computer che altrimenti diventerebbero rifiuti.\n- **Trasparenza**: chiunque può verificare cosa fa davvero un programma. Nessuno deve fidarsi ciecamente di ciò che non può ispezionare.\n- **Condivisione**: il sapere resta di tutti, come in una biblioteca.\n- **Inclusione**: scuole, associazioni e famiglie possono usarlo senza costi di licenza.\n\nAnche il Professore Digitale è software libero, con **licenza MIT**.",
+     "testo": "Scegliere software libero non è solo una questione tecnica:\n\n- **Riuso**: i sistemi leggeri tengono in vita computer che altrimenti diventerebbero rifiuti.\n- **Trasparenza**: chiunque può verificare cosa fa davvero un programma. Nessuno deve fidarsi ciecamente di ciò che non può ispezionare.\n- **Condivisione**: il sapere resta di tutti, come in una biblioteca.\n- **Inclusione**: scuole, associazioni e famiglie possono usarlo senza costi di licenza.\n\nAnche il Professore Digitale è software libero: il codice ha **licenza MIT**, mentre lezioni, domande e quiz hanno licenza **Creative Commons BY-NC-SA 4.0** (citare l'autore, niente usi commerciali, stessa licenza per le modifiche).",
      "schema": "flowchart TD\n  S[\"🕊️ Software libero\"] --> A[\"♻️ Riuso\"]\n  S --> B[\"🔍 Trasparenza\"]\n  S --> C[\"📚 Sapere condiviso\"]\n  S --> D[\"🤝 Inclusione\"]"
     }
    ],
@@ -3408,12 +3408,12 @@
      "domanda": "Con quale licenza è distribuito il Professore Digitale?",
      "opzioni": [
       "Licenza a pagamento",
-      "MIT",
+      "MIT per il codice, Creative Commons BY-NC-SA 4.0 per i contenuti",
       "Tutti i diritti riservati",
       "Licenza solo per aziende"
      ],
      "corretta": 1,
-     "spiegazione": "La licenza MIT è una licenza di software libero molto semplice.",
+     "spiegazione": "Il codice ha la licenza MIT, una licenza di software libero molto semplice; lezioni e quiz sono Creative Commons BY-NC-SA 4.0, come il Grande Quiz.",
      "categoria": "Software libero"
     },
     {

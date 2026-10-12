@@ -4467,12 +4467,12 @@
      "domanda": "Con quale licenza libera è distribuito il Professore Digitale?",
      "opzioni": [
       "Nessuna: è vietato copiarlo",
-      "MIT",
+      "MIT per il codice, Creative Commons BY-NC-SA 4.0 per i contenuti",
       "Una licenza valida solo un mese",
       "Una licenza a pagamento annuale"
      ],
      "corretta": 1,
-     "spiegazione": "La licenza MIT permette di usare, copiare, modificare e condividere il programma.",
+     "spiegazione": "La licenza MIT permette di usare, copiare, modificare e condividere il programma; le lezioni e i quiz si possono condividere citando l'autore e senza scopi commerciali (CC BY-NC-SA 4.0).",
      "categoria": "Software libero e Linux"
     },
     {

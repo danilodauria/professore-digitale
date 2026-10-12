@@ -28,7 +28,7 @@
  *  «opz: true» = facoltativa: la tappa è completa quando sono fatte tutte le attività non facoltative
  *  (se sono tutte facoltative, ne basta una). «conduttore: true» = la vede solo chi conduce.
  *  Tutti i rimandi sono controllati da tests/ui_percorsi.py (esistono, e nulla di ciò che c'è viene dimenticato).
- *  JavaScript puro (ES5). Ideato e sviluppato da Danilo D'Auria - Licenza MIT
+ *  JavaScript puro (ES5). Ideato e sviluppato da Danilo D'Auria - Contenuti CC BY-NC-SA 4.0 (© 2026 Danilo D'Auria), codice MIT
  * ============================================================================== */
 window.PD_PERCORSI = {
   versione: 1,
