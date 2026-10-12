@@ -43,7 +43,7 @@
   /* piè di pagina comune a tutte le stampe; «extra» è HTML già pronto */
   PD.piedeStampa = function (extra) {
     return '<footer class="p-piede">Stampato dal Professore Digitale · ideato da Danilo D\'Auria · funziona senza Internet. ' +
-      "Contenuti © " + anni() + " Danilo D'Auria, licenza Creative Commons BY-NC-SA 4.0 (citare l'autore, niente usi commerciali, " +
+      "Contenuti © " + anni() + " Danilo D'Auria, licenza Creative Commons CC BY-NC-SA 4.0 (citare l'autore, niente usi commerciali, " +
       "stessa licenza per le modifiche) · codice MIT." + (extra ? " " + extra : "") + "</footer>";
   };
 
