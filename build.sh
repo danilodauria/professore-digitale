@@ -37,7 +37,11 @@ install -d "$BUILD/usr/bin" "$S/$PKG/server" "$S/$PKG/contenuti" "$S/application
            "$S/doc/$PKG" "$S/man/man1" "$S/metainfo"
 install -m 0755 packaging/professore-digitale packaging/professore-digitale-setup-ia packaging/professore-digitale-setup-voce \
                 packaging/professore-digitale-pulizia packaging/professore-digitale-contenuti "$BUILD/usr/bin/"
-install -m 0644 src/server/pd_server.py src/server/pd_stt_worker.py src/server/pd_packs.py src/server/pd_aula.py "$S/$PKG/server/"
+# TUTTI i moduli del server (dalla 3.5.3: prima mancava pd_tablet.py e il server non partiva)
+install -m 0644 src/server/pd_*.py "$S/$PKG/server/"
+for m in $(sed -n 's/^import \(pd_[a-z_]*\).*/\1/p' src/server/pd_server.py); do
+  [ -f "$S/$PKG/server/$m.py" ] || { echo "ERRORE: il pacchetto non contiene server/$m.py"; exit 1; }
+done
 install -m 0644 VERSION "$S/$PKG/VERSION"
 python3 -c 'import json,sys; json.dump({"aggiornamenti_url": sys.argv[1], "pagina": sys.argv[2]}, open(sys.argv[3],"w"), indent=1)' \
         "$AGGIORNAMENTI_URL" "$PAGINA_PROGETTO" "$S/$PKG/distribuzione.json"
@@ -113,6 +117,8 @@ chmod 0644 "$BUILD/DEBIAN/control" "$BUILD/DEBIAN/md5sums"
 echo "» Pacchetto .deb"
 dpkg-deb --root-owner-group -Zxz --build "$BUILD" "$DIST/${PKG}_${VERSION}_all.deb" >/dev/null
 ls -la "$DIST"/*.deb
+echo "» Prova del .deb (estratto, server installato avviato davvero)"
+python3 tests/test_deb.py "$DIST/${PKG}_${VERSION}_all.deb" || { echo "ERRORE: il .deb non funziona, rilascio fermato"; exit 1; }
 
 echo "» Versione HTML portatile"
 python3 tools/make_standalone.py src/web "$DIST/professore-digitale-portatile.html"

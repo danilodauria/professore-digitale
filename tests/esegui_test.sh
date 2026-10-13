@@ -12,6 +12,8 @@ echo "== 1. Formato dei pacchetti di contenuti"
 python3 tests/test_packs.py || ESITO=1
 echo "== 1a. Licenze (codice MIT, contenuti CC BY-NC-SA 4.0)"
 python3 tests/test_licenza.py || ESITO=1
+echo "== 1a2. Pacchetto .deb (se già compilato in dist/)"
+for d in dist/professore-digitale_*_all.deb; do [ -f "$d" ] && { python3 tests/test_deb.py "$d" || ESITO=1; }; done
 echo "== 1b. Voci naturali incluse (Piper)"
 python3 tests/test_voci.py || ESITO=1
 
