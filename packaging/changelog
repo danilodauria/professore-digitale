@@ -1,3 +1,12 @@
+professore-digitale (3.5.3) stable; urgency=medium
+
+  * Corretto un errore grave del pacchetto per Linux: nella 3.5.2 mancava
+    un file del programma e compariva «Il server locale non si è
+    avviato». Ora il Professore si avvia di nuovo normalmente.
+  * Le impostazioni e i progressi degli allievi restano tutti al loro posto.
+
+ -- Danilo D'Auria <danilodauria.site@gmail.com>  Tue, 13 Oct 2026 13:22:35 +0200
+
 professore-digitale (3.5.2) stable; urgency=medium
 
   * Licenza dei contenuti: lezioni, domande, quiz, vademecum e immagini
