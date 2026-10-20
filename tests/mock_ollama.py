@@ -5,6 +5,7 @@ from http.server import ThreadingHTTPServer, BaseHTTPRequestHandler
 REPLY = ("Il **Wi-Fi** è come una strada invisibile.\n\n1. Il router crea la strada.\n2. Il computer la percorre.\n\n"
          "[DIAGRAMMA]\nflowchart LR\n  A[\"Computer\"] --> B[\"Router\"] --> C[\"Internet\"]\n[/DIAGRAMMA]")
 LAST = {}
+TRAD = []          # quante richieste di traduzione sono arrivate (si leggono da /trad)
 MODELS = ["qwen2.5:1.5b", "llama3.2:3b"]
 class H(BaseHTTPRequestHandler):
     def log_message(self, *a): pass
@@ -12,6 +13,8 @@ class H(BaseHTTPRequestHandler):
         if self.path == "/api/tags":
             b = json.dumps({"models": [{"name": m} for m in MODELS]}).encode()
             self.send_response(200); self.send_header("Content-Type", "application/json"); self.send_header("Content-Length", str(len(b))); self.end_headers(); self.wfile.write(b)
+        elif self.path == "/trad":
+            b = json.dumps(TRAD).encode(); self.send_response(200); self.send_header("Content-Length", str(len(b))); self.end_headers(); self.wfile.write(b)
         elif self.path == "/last":
             b = json.dumps(LAST).encode(); self.send_response(200); self.send_header("Content-Length", str(len(b))); self.end_headers(); self.wfile.write(b)
         else:
@@ -29,6 +32,15 @@ class H(BaseHTTPRequestHandler):
         if req.get("stream") is False:
             b = json.dumps({"message": {"role": "assistant", "content": "Il mouse serve a indicare e scegliere."}, "done": True}).encode()
             self.send_response(200); self.send_header("Content-Type", "application/json"); self.send_header("Content-Length", str(len(b))); self.end_headers(); self.wfile.write(b)
+            return
+        msgs = req.get("messages") or [{}]
+        if "Answer ONLY with JSON" in (msgs[0].get("content") or ""):     # traduzione dell'interfaccia (i18n.js)
+            testi = json.loads(msgs[-1].get("content") or "{}").get("testi", [])
+            TRAD.append(len(testi))
+            b = json.dumps({"t": ["[EN] " + t for t in testi]}, ensure_ascii=False)
+            self.send_response(200); self.send_header("Content-Type", "application/x-ndjson"); self.end_headers()
+            self.wfile.write((json.dumps({"message": {"role": "assistant", "content": b}, "done": False}) + "\n").encode())
+            self.wfile.write((json.dumps({"message": {"content": ""}, "done": True}) + "\n").encode())
             return
         LAST.clear(); LAST.update(req)
         self.send_response(200); self.send_header("Content-Type", "application/x-ndjson"); self.end_headers()

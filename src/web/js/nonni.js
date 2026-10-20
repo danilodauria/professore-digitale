@@ -329,9 +329,10 @@
 
   /* ---------- FFmpeg: serve per unire le risposte in un MP3 (si installa una volta, dalla fonte ufficiale) */
   function aiutoFfmpeg(sistema) {
-    var win = sistema === "windows", cmd = win ? "winget install --id Gyan.FFmpeg -e" : "sudo apt install ffmpeg";
+    var win = sistema === "windows", mac = sistema === "mac", cmd = win ? "winget install --id Gyan.FFmpeg -e" : mac ? "brew install ffmpeg" : "sudo apt install ffmpeg";
     return '<div class="card nt-ffmpeg"><b>🎚️ Per unire le risposte in un unico podcast MP3 serve FFmpeg</b>, un programma libero e gratuito. Intanto le risposte si ascoltano (e si pubblicano) una per una.' +
       (win ? "<ol><li>Aprite il menu Start, scrivete <b>Terminale</b> (o <b>PowerShell</b>) e apritelo.</li><li>Incollate questo comando e premete Invio:</li></ol>"
+        : mac ? "<ol><li>Serve <b>Homebrew</b> (gratuito): le istruzioni sono su <b>brew.sh</b>.</li><li>Aprite il <b>Terminale</b> (Launchpad → Altro → Terminale), incollate questo comando e premete Invio:</li></ol>"
         : "<ol><li>Aprite il <b>Terminale</b> (Ctrl+Alt+T).</li><li>Incollate questo comando, premete Invio e scrivete la vostra password:</li></ol>") +
       '<div class="row"><code class="nt-cmd">' + esc(cmd) + '</code><button type="button" class="btn ghost" data-copia="' + esc(cmd) + '">📋 Copia</button></div>' +
       (win ? '<p class="small muted">Su Windows 7 o 8, oppure senza winget: scaricate FFmpeg da <b>ffmpeg.org</b> (versione «essentials») e copiate <code>ffmpeg.exe</code> nella cartella <code>%LOCALAPPDATA%\\ProfessoreDigitale\\ffmpeg</code>.</p>' : "") +

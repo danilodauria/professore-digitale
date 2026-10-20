@@ -25,10 +25,22 @@ SHARE = os.environ.get("PD_SHARE_DIR", "/usr/share/professore-digitale")
 SERVER = os.path.join(SHARE, "server", "pd_server.py")
 RUNTIME_DIR = os.environ.get("XDG_RUNTIME_DIR") or tempfile.gettempdir()
 RUNTIME_FILE = os.path.join(RUNTIME_DIR, "%s-%d.json" % (APP_ID, os.getuid()))
+MAC = sys.platform == "darwin"
+# browser per macOS (dentro le app): prima quelli che aprono una finestra pulita «da programma»
+MAC_APP = ("/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
+           "/Applications/Microsoft Edge.app/Contents/MacOS/Microsoft Edge",
+           "/Applications/Brave Browser.app/Contents/MacOS/Brave Browser",
+           "/Applications/Chromium.app/Contents/MacOS/Chromium",
+           "/Applications/Vivaldi.app/Contents/MacOS/Vivaldi")
 
 
 def notify_error(msg):
     sys.stderr.write("Professore Digitale: %s\n" % msg)
+    if MAC:
+        testo = msg.replace("\\", "/").replace('"', "'")
+        subprocess.call(["osascript", "-e", 'display dialog "%s" buttons {"OK"} with title "Professore Digitale"' % testo],
+                        stderr=subprocess.DEVNULL)
+        return
     if os.environ.get("DISPLAY") or os.environ.get("WAYLAND_DISPLAY"):
         for cmd in (["zenity", "--error", "--title=Professore Digitale", "--text=" + msg],
                     ["kdialog", "--error", msg, "--title", "Professore Digitale"],
@@ -51,8 +63,14 @@ def running_port():
     return None
 
 
+def cartella_log():
+    if MAC:
+        return os.path.expanduser("~/Library/Logs/ProfessoreDigitale")
+    return os.path.join(os.environ.get("XDG_STATE_HOME") or os.path.expanduser("~/.local/state"), APP_ID)
+
+
 def start_server():
-    log_dir = os.path.join(os.environ.get("XDG_STATE_HOME") or os.path.expanduser("~/.local/state"), APP_ID)
+    log_dir = cartella_log()
     try:
         os.makedirs(log_dir, exist_ok=True)
         log = open(os.path.join(log_dir, "server.log"), "ab")
@@ -74,14 +92,17 @@ def open_browser(url):
     if custom:
         return subprocess.Popen([custom, url], start_new_session=True)
     # 1) browser Chromium-like in "modalita' applicazione" (finestra pulita, senza barre)
-    for b in ("chromium", "chromium-browser", "google-chrome", "google-chrome-stable",
-              "brave-browser", "microsoft-edge", "vivaldi"):
-        exe = shutil.which(b)
+    nomi = MAC_APP if MAC else ("chromium", "chromium-browser", "google-chrome", "google-chrome-stable",
+                                "brave-browser", "microsoft-edge", "vivaldi")
+    for b in nomi:
+        exe = (b if os.path.isfile(b) else None) if MAC else shutil.which(b)
         if exe:
             return subprocess.Popen([exe, "--app=" + url, "--no-first-run",
                                      "--autoplay-policy=no-user-gesture-required"],
                                     stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
                                     start_new_session=True)
+    if MAC:      # 2) browser predefinito (Safari, Firefox...)
+        return subprocess.Popen(["open", url], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
     # 2) Firefox in nuova finestra
     for b in ("firefox-esr", "firefox", "librewolf"):
         exe = shutil.which(b)
@@ -125,7 +146,7 @@ def main():
             return 1
         port = start_server()
         if not port:
-            notify_error("Il server locale non si e' avviato. Controllare ~/.local/state/professore-digitale/server.log")
+            notify_error("Il server locale non si e' avviato. Controllare %s/server.log" % cartella_log())
             return 1
     url = "http://127.0.0.1:%d/" % port
     if "--status" in args:

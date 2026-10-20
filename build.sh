@@ -1,7 +1,7 @@
 #!/bin/bash
 # ==============================================================================
 #  Professore Digitale - script di compilazione
-#  Produce in dist/: pacchetto .deb (Architecture: all), versione HTML portatile,
+#  Produce in dist/: pacchetto .deb (Architecture: all), app per macOS (.zip), versione HTML portatile,
 #  pacchetti di contenuti, archivio sorgenti e SHA256SUMS; in dist/windows/ l'installatore
 #  per Windows (se ci sono mingw-w64 e NSIS, vedi windows/build-windows.sh).    Uso:  ./build.sh
 #  La versione si legge dal file VERSION (unica fonte). Per un rilascio usate
@@ -21,7 +21,7 @@ grep -q "^$PKG ($VERSION)" packaging/changelog || { echo "Manca la voce $VERSION
 
 echo "» Verifica sintassi e contenuti"
 python3 -m py_compile src/server/*.py packaging/professore-digitale packaging/professore-digitale-contenuti
-bash -n tools/voci.sh
+bash -n tools/voci.sh packaging/mac/avvia.sh
 for f in packaging/professore-digitale-setup-ia packaging/professore-digitale-setup-voce packaging/professore-digitale-pulizia packaging/prerm packaging/postrm; do bash -n "$f"; done
 command -v node >/dev/null && for f in src/web/js/*.js; do node --check "$f"; done
 find src -name '__pycache__' -prune -exec rm -rf {} +
@@ -122,6 +122,23 @@ python3 tests/test_deb.py "$DIST/${PKG}_${VERSION}_all.deb" || { echo "ERRORE: i
 
 echo "» Versione HTML portatile"
 python3 tools/make_standalone.py src/web "$DIST/professore-digitale-portatile.html"
+
+echo "» Versione per macOS (app in uno zip: stesso server Python, voci del Mac)"
+M=build/mac; A="$M/Professore Digitale.app"
+mkdir -p "$A/Contents/MacOS" "$A/Contents/Resources"
+# lo stesso albero del .deb, senza le voci Piper (il loro motore e' solo per Linux)
+cp -r "$S/$PKG" "$A/Contents/Resources/app"; rm -rf "$A/Contents/Resources/app/voci"
+install -m 0755 packaging/professore-digitale "$A/Contents/Resources/app/professore-digitale"
+install -m 0755 packaging/mac/avvia.sh "$A/Contents/MacOS/avvia.sh"
+sed "s/@VERSIONE@/$VERSION/g" packaging/mac/Info.plist > "$A/Contents/Info.plist"
+rsvg-convert -w 1024 -h 1024 src/web/img/icon.svg -o "$M/icona-1024.png"
+python3 -c "import sys; from PIL import Image; Image.open(sys.argv[1]).convert('RGBA').save(sys.argv[2])" "$M/icona-1024.png" "$A/Contents/Resources/icona.icns"
+cp packaging/mac/LEGGIMI-MAC.txt "$M/"
+{ cat LICENSE; echo; echo "--------------------------------------------------------------------------"; echo; cat LICENZA-CONTENUTI.md; } > "$M/LICENZE.txt"
+find "$A" -type d -exec chmod 0755 {} +
+rm -f "$DIST/ProfessoreDigitale-$VERSION-macOS.zip"
+( cd "$M" && zip -qry -X "../../$DIST/ProfessoreDigitale-$VERSION-macOS.zip" "Professore Digitale.app" LEGGIMI-MAC.txt LICENZE.txt )
+ls -la "$DIST/ProfessoreDigitale-$VERSION-macOS.zip"
 
 echo "» Pacchetti di contenuti"
 if ls src/contenuti/*.json >/dev/null 2>&1; then mkdir -p "$DIST/contenuti"; cp src/contenuti/*.json "$DIST/contenuti/"; fi

@@ -9,7 +9,7 @@ biblioteche e associazioni. Pensata per girare anche su **computer ricondizionat
 ## ⬇️ Scarica
 
 - **Sito con tutti i download e l'app per telefono e tablet:** https://danilodauria.github.io/professore-digitale/
-- **Tutte le versioni** (installatore Windows, pacchetto Linux, versione da chiavetta):
+- **Tutte le versioni** (installatore Windows, pacchetto Linux, app per macOS, versione da chiavetta):
   [Releases](https://github.com/danilodauria/professore-digitale/releases/latest)
 
 ## Cosa offre
@@ -20,6 +20,7 @@ biblioteche e associazioni. Pensata per girare anche su **computer ricondizionat
 | 💬 **Chiedi al Professore** | Domande scritte o a voce. Risponde la **guida interna** (sempre disponibile) oppure l'**IA locale** (Ollama) se installata, con schema disegnato sulla lavagna e risposta letta ad alta voce. |
 | 🖊️ **Lavagna** | 28 schemi pronti da proiettare + disegno libero con gessetti colorati, cancellino, annulla, salvataggio PNG. |
 | 🎯 **Palestra** | Esercizi di clic, doppio clic, trascinamento e tastiera (fino a @ e maiuscole), con record personali. |
+| 🌐 **Sei lingue** | Italiano, inglese, francese, spagnolo, tedesco e rumeno: interfaccia tradotta a mano, lezioni e risposte lunghe tradotte dall'IA locale (se c'è), sul computer. |
 | ⚙️ **Impostazioni** | Testo ingrandibile, tema chiaro/scuro/alto contrasto, modalità proiettore, voce e velocità, scelta del modello IA, esportazione progressi, diagnostica, controllo aggiornamenti *solo su richiesta*. |
 
 ## Due modi di usarlo
@@ -28,7 +29,9 @@ biblioteche e associazioni. Pensata per girare anche su **computer ricondizionat
    Un solo pacchetto per PC moderni **e** datati: non crea ambienti virtuali, non scarica nulla
    all'installazione, `Architecture: all` (funziona su amd64, i386, arm64, armhf).
 2. **Installatore per Windows** — vedi la sezione dedicata più sotto.
-3. **Versione portatile** — `professore-digitale-portatile.html`: un unico file da aprire con doppio clic
+3. **App per macOS** — `ProfessoreDigitale-<versione>-macOS.zip` (macOS 10.15 e successivi): si trascina
+   «Professore Digitale.app» in Applicazioni; usa le voci italiane del Mac, l'IA con Ollama per Mac se installata.
+4. **Versione portatile** — `professore-digitale-portatile.html`: un unico file da aprire con doppio clic
    in qualsiasi browser, anche da chiavetta USB e su Windows/macOS. Include lezioni, guida interna,
    lavagna, palestra e voce del browser (senza IA e senza microfono).
 

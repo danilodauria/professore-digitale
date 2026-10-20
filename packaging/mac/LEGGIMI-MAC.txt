@@ -1,0 +1,24 @@
+PROFESSORE DIGITALE per macOS — Ideato e sviluppato da Danilo D'Auria
+
+INSTALLARE
+1. Aprite lo zip (doppio clic) e trascinate «Professore Digitale.app» nella cartella Applicazioni.
+2. La prima volta: tasto destro (o Ctrl+clic) sull'app → «Apri» → «Apri».
+   (L'app non è ancora firmata da Apple: macOS lo chiede una volta sola.)
+   Su macOS 15 e successivi: Impostazioni di Sistema → Privacy e sicurezza → «Apri comunque».
+3. Se manca Python 3, macOS propone gli «Strumenti da riga di comando»: Installa, poi riaprite.
+
+Il programma si apre in una finestra di Chrome, Edge o Brave se presenti, altrimenti in Safari.
+I progressi restano in: ~/Library/Application Support/ProfessoreDigitale
+Per aggiornare: Impostazioni → Controlla aggiornamenti scarica il nuovo zip nella cartella Download;
+trascinate la nuova app in Applicazioni sostituendo la vecchia. I progressi si conservano.
+
+COSA C'È SUL MAC
+- Tutte le lezioni, i quiz, la palestra, Vita digitale, Nonni Teach, le lingue (6), l'aula e i tablet.
+- Voce: le voci italiane del Mac (Alice, Federica, Luca...). Per voci più belle: Impostazioni di Sistema
+  → Accessibilità → Contenuto letto ad alta voce → Voce di sistema → Gestisci voci → Italiano.
+- Intelligenza artificiale (facoltativa): installate «Ollama per Mac» da ollama.com e poi, nel Terminale,
+  ollama pull qwen3.5:2b  (oppure il modello consigliato nelle Impostazioni del Professore).
+- Podcast di Nonni Teach in un unico MP3: serve FFmpeg (brew install ffmpeg, con Homebrew da brew.sh).
+- Il riconoscimento vocale del Professore (microfono) non è ancora disponibile sul Mac: si scrive.
+
+Codice MIT, contenuti CC BY-NC-SA 4.0.

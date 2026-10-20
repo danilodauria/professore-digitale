@@ -17,9 +17,11 @@
   PD.views.setup = function (el) {
     stopPoll();
     if (!PD.server || !PD.status || !PD.status.setup) {
-      el.innerHTML = '<h1>🧰 Configura IA e voce</h1>' + (PD.server
+      el.innerHTML = '<h1>🧰 Configura IA e voce</h1>' + (PD.server && PD.isMac()
+        ? '<div class="card"><p>Sul Mac l\'intelligenza artificiale si attiva installando <b>Ollama per Mac</b> (da <b>ollama.com</b>); le voci si scelgono in Impostazioni di Sistema → Accessibilità → Contenuto letto ad alta voce.</p></div>'
+        : PD.server
         ? '<div class="card"><p>Su Linux la configurazione si fa dal menu delle applicazioni (<b>Professore Digitale: configura IA</b> e <b>configura microfono</b>) oppure dal terminale con <code>professore-digitale-setup-ia</code> e <code>professore-digitale-setup-voce</code>.</p></div>'
-        : '<div class="card"><p>Questa è la versione portatile: l\'intelligenza artificiale e il microfono si configurano nella versione installata (<b>.exe</b> per Windows, <b>.deb</b> per Linux).</p></div>');
+        : '<div class="card"><p>Questa è la versione portatile: l\'intelligenza artificiale e il microfono si configurano nella versione installata (<b>.exe</b> per Windows, <b>.deb</b> per Linux, <b>.zip</b> per Mac).</p></div>');
       return;
     }
     el.innerHTML = '<h1>🧰 Configura IA e voce</h1><p class="lead">Il Professore controlla il vostro computer e sceglie da solo l\'intelligenza artificiale più adatta. ' +

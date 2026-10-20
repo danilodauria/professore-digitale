@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Crea la pagina principale del sito (dist/pubblica/index.html) dal modello tools/sito/pagina.html:
-cos'è il Professore, app per telefono e tablet (app/, con QR code), download per Windows e Linux.
+cos'è il Professore, app per telefono e tablet (app/, con QR code), download per Windows, Linux e macOS.
 Uso: make_sito.py CARTELLA_PUBBLICA BASE_URL [PAGINA_PROGETTO]
 Legge aggiornamenti.json nella cartella; il QR code si crea solo se c'è la libreria «segno»
 (pip install segno), altrimenti la pagina esce senza QR. Autore: Danilo D'Auria - Licenza MIT"""
@@ -51,6 +51,10 @@ def crea_pagina(pub, base_url, progetto=""):
     if deb and os.path.isfile(loc(pub, deb)):
         pezzi.append(scheda("🐧", "Linux", "Debian, Ubuntu, Mint, FeniceOS (%s). Doppio clic sul file, oppure nel terminale: <code>sudo apt install ./%s</code>" % (
             mb(loc(pub, deb)), H.escape(os.path.basename(deb))), deb, "⬇️ Scarica per Linux"))
+    m = info.get("mac")
+    if m and os.path.isfile(loc(pub, m["pacchetto"])):
+        pezzi.append(scheda("🍎", "macOS", "Mac con macOS 10.15 o successivo (%s). Aprite lo zip e trascinate «Professore Digitale.app» in Applicazioni; la prima volta tasto destro → Apri." % mb(loc(pub, m["pacchetto"])),
+                            m["pacchetto"], "⬇️ Scarica per Mac"))
     port = info.get("portatile")
     if port and os.path.isfile(os.path.join(pub, port)):
         pezzi.append(scheda("📄", "Versione portatile", "Un solo file da aprire con il browser, su qualunque computer, anche da chiavetta. Senza voce naturale e senza IA (%s)." % mb(os.path.join(pub, port)),

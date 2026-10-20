@@ -211,13 +211,49 @@ PD_SHARE_DIR=src python3 packaging/professore-digitale-contenuti valida src/cont
 - Variabili utili ai test: `PD_DATA_DIR`, `PD_LOCAL_DIR`, `PD_DOWNLOAD_DIR`, `PD_NO_TRAY`, `PD_NO_ENGINE_START`, `OLLAMA_HOST`, `PD_DEBUG`,
   `PD_TABLET_PORT`, `PD_TABLET_LOOPBACK`.
 
+## Lingue (dalla 3.7): italiano, inglese, francese, spagnolo, tedesco, rumeno
+- `src/web/js/i18n.js` (come nel Consulente Digitale): pulsante 🌐 in alto, riquadro nelle Impostazioni, impostazione
+  `lingua` (DEFAULTS in `app.js`). Un `MutationObserver` traduce testi e attributi (placeholder, title, aria-label, alt)
+  con i dizionari `src/web/i18n/<lingua>.json`; le chiavi sono il testo italiano normalizzato (numeri → `#`, giorni → `@g`,
+  mesi → `@m`). Non si traducono `[data-no-trad]`, `pre`, `code`, i messaggi dell'utente e quelli già scritti dall'IA (`.da-ia`).
+- I dizionari si fanno **a mano**: `tools/i18n/lista.json` è FISSA (gli indici dei lotti `t*.tsv` puntano lì);
+  riga dei lotti: `indice<TAB>en<TAB>fr<TAB>es<TAB>de<TAB>ro` (`=` = uguale all'italiano). Testi nuovi o sfuggiti:
+  `tools/i18n/extra.tsv` con l'italiano in prima colonna. Poi `python3 tools/i18n/costruisci.py` (controlla che `#`, `@g`, `@m`
+  siano uguali). `tools/i18n/estrai.py` (Playwright) scrive i testi nuovi in `nuovi.json`. Per trovare quelli mancanti:
+  aprite il programma in inglese e leggete `Object.keys(PD.i18n.mancanti)` nella console.
+  Registro: inglese «you», francese vous, spagnolo usted, tedesco Sie, rumeno dumneavoastră; nomi propri invariati
+  (Borgoprova, Banca del Borgo, Neura, Nonni Teach, FeniceOS, Professore Digitale, Tecnologia Gentile...).
+- Lezioni, risposte e quiz (testi lunghi, non nei dizionari) li traduce l'**IA locale** con l'API esistente `/api/chat`
+  (nessuna API nuova); le traduzioni restano nella chiave dati `traduzioni` (in `DATA_KEYS` di `pd_server.py` **e** `pd_api.c`),
+  al massimo 1,5 milioni di caratteri. Ai prompt dell'IA si aggiunge `PD.i18n.istruzioneIA()` (rispondi nella lingua scelta).
+- Voce: in un'altra lingua si usano le voci del browser per quella lingua; senza voci, il Professore legge in italiano.
+- La versione portatile e l'app (PWA) hanno i dizionari dentro la pagina (`<script type="application/json" id="pd-i18n-xx">`,
+  `tools/make_standalone.py`). Test: `tests/ui_i18n.py` (con il finto Ollama che «traduce» con `[EN] `).
+- I vademecum restano in italiano. Mai tradurre le risposte dei quiz cambiandone l'ordine.
+
+## Versione per macOS (dalla 3.7)
+- `build.sh` crea `dist/ProfessoreDigitale-X.Y.Z-macOS.zip` con «Professore Digitale.app»: `Contents/MacOS/avvia.sh`
+  (cerca Python 3 ≥ 3.7, altrimenti propone gli Strumenti da riga di comando di Apple), `Contents/Resources/app/` = lo stesso
+  albero del .deb **senza le voci Piper** (il motore Piper incluso è solo Linux) + l'avviatore `professore-digitale`,
+  icona `icona.icns` fatta da `icon.svg`. File in `packaging/mac/`.
+- Server: `MAC = sys.platform == "darwin"`; dati in `~/Library/Application Support/ProfessoreDigitale`, registro in
+  `~/Library/Logs/ProfessoreDigitale`; voce con il comando `say` (voci `it_IT`, prima Luca), RAM con `sysctl`, `/api/status`
+  ha `platform: "mac"`, Download in `~/Downloads`. Aggiornamenti: voce `mac` in `aggiornamenti.json`
+  (`{"pacchetto": zip, "sha256"}`), scritta da `tools/rilascio.sh`; il Mac non scarica mai il .deb.
+- Microfono (STT) non disponibile sul Mac; IA con Ollama per Mac (se installato); FFmpeg con Homebrew.
+- Test: `tests/test_mac.py` (finto `say`, aggiornamenti, struttura dello zip e avvio vero del suo server con Python di Linux).
+  Un Mac vero non si prova qui: dichiararlo nella consegna (Gatekeeper, voci vere, Safari/Chrome).
+
 ## Pubblicazione: con GitHub oppure tutto in locale
 - **GitHub** (predefinito, dalla 3.5.1): GitHub rifiuta i file oltre **100 MB** nel repository e in GitHub Pages, e
   installatore/.deb/zip superano i 200 MB. Quindi `rilascio.sh` chiama `tools/prepara-github.py` → `dist/github/rilascio-X.Y.Z/`
   = i 3 file grandi + `sito-X.Y.Z.zip` (tutto il resto di `dist/pubblica/`, con `aggiornamenti.json` e `index.html` che puntano
   ai file grandi in `PAGINA_PROGETTO/releases/download/vX.Y.Z/`, stesse impronte) + `NOTE-X.Y.Z.md`. Danilo crea la **Release**
-  `vX.Y.Z` e allega quei file (da Windows: dal sito di GitHub, guida `docs/Pubblicare_su_GitHub.pdf`; da Linux con `gh`:
-  `tools/pubblica-tutto.sh ZIP`); il workflow `.github/workflows/pubblica-sito.yml` scarica `sito-*.zip` dalla Release e lo
+  `vX.Y.Z` e allega quei file (da Windows: **doppio clic su `PUBBLICA-RELEASE.bat`** della cartella `rilascio-X.Y.Z`, dalla 3.6.0 —
+  lo scrive `prepara-github.py` da `tools/github/PUBBLICA-RELEASE.bat` (`__REPO__` → utente/repository): riunisce le parti `.parte`,
+  controlla `SHA256SUMS` se c'è, installa GitHub CLI con winget se manca, fa il login nel browser la prima volta, controlla che
+  `VERSION` su GitHub sia già X.Y.Z (Push fatto) e crea la Release con `gh release create --target main` o completa quella iniziata
+  dal sito; in alternativa dal sito di GitHub, guida `docs/Pubblicare_su_GitHub.pdf`; da Linux con `gh`: `tools/pubblica-tutto.sh ZIP`); il workflow `.github/workflows/pubblica-sito.yml` scarica `sito-*.zip` dalla Release e lo
   pubblica su GitHub Pages (Settings → Pages → Source: GitHub Actions). Il ramo `gh-pages` e `pubblica-sito.sh` non si usano più.
   Il .deb si scarica a pezzi (limite 900 MB, `scarica_pacchetto_deb`), l'installatore Windows fino a 900 MB. Test: `tests/test_github.py`.
   I sorgenti si caricano con GitHub Desktop (repository con `.git`, consegnato come `professore-digitale-X.Y.Z-repository`).
@@ -271,8 +307,8 @@ PD_SHARE_DIR=src python3 packaging/professore-digitale-contenuti valida src/cont
    (deve restare sotto 30 MB: se cresce, `git gc --aggressive` e niente file binari pesanti in git)
 7. Danilo pubblica da **Windows con GitHub Desktop** (dalla 3.5.1): consegnargli il repository aggiornato (con `.git`, remote
    rimosso) e la cartella `rilascio-X.Y.Z` (da `dist/github/`), e ricordargli i 3 passi del libretto `docs/Pubblicare_su_GitHub.pdf`:
-   (1) GitHub Desktop: sostituire i file del repository, Commit, Push; (2) sul sito: Releases → Draft a new release → tag `vX.Y.Z`
-   → trascinare i file di `rilascio-X.Y.Z` → Publish; (3) controllare Actions e il sito. Da Linux resta `tools/pubblica-tutto.sh ZIP`.
+   (1) GitHub Desktop: sostituire i file del repository, Commit, Push; (2) doppio clic su `PUBBLICA-RELEASE.bat` nella cartella
+   `rilascio-X.Y.Z` (oppure sul sito: Releases → Draft a new release → tag `vX.Y.Z` → trascinare i file → Publish); (3) controllare Actions e il sito. Da Linux resta `tools/pubblica-tutto.sh ZIP`.
 8. Se è cambiato il comportamento visibile, aggiornare i Vademecum (`docs/`, Linux e Windows) e/o la Guida agli aggiornamenti.
    Le sorgenti HTML dei PDF stanno in `docs/sorgenti/` (si stampano in PDF con `tools/pdf-da-html.py`).
 

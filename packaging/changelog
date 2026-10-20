@@ -1,3 +1,17 @@
+professore-digitale (3.7.0) stable; urgency=medium
+
+  * 🌐 Il Professore parla sei lingue: italiano, inglese, francese,
+    spagnolo, tedesco e rumeno. Si sceglie con il pulsante 🌐 in alto o
+    nelle Impostazioni
+  * Menu, pulsanti, giochi, prove e attestati sono tradotti a mano; lezioni
+    e risposte lunghe le traduce l'IA locale, se c'è, sul computer
+  * 🍎 Nuova app per Mac (macOS 10.15 e successivi): voci italiane del
+    Mac, aggiornamenti dalle Impostazioni, progressi conservati
+  * Sul sito e nella Release c'è il download per Mac; vademecum aggiornati
+    con le lingue e il Mac
+
+ -- Danilo D'Auria <danilodauria.site@gmail.com>  Tue, 20 Oct 2026 12:31:23 +0200
+
 professore-digitale (3.6.0) stable; urgency=medium
 
   * 🎙️ Nuovo: Nonni Teach. Neura intervista i nonni, registra le

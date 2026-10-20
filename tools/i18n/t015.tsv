@@ -1,0 +1,181 @@
+2600	feed not found (	flux introuvable (	feed no encontrado (	Feed nicht gefunden (	feed negăsit (
+2601	stops the voice	arrête la voix	detiene la voz	stoppt die Stimme	oprește vocea
+2602	invalid file	fichier non valide	archivo no válido	ungültige Datei	fișier nevalid
+2603	ends with «.	se termine par « .	termina con «.	endet mit «.	se termină cu «.
+2604	up to # colours	jusqu'à # couleurs	hasta # colores	bis zu # Farben	până la # culori
+2605	up to # colours, faster	jusqu'à # couleurs, plus rapide	hasta # colores, más rápido	bis zu # Farben, schneller	până la # culori, mai rapid
+2606	until	jusqu'au	hasta el	bis zum	până la
+2607	fake	faux	falso	gefälscht	fals
+2609	slip of paper	petit papier	papelito	Zettel	bilețel
+2610	expected format like #.#	format attendu du type #.#	formato esperado tipo #.#	erwartetes Format wie #.#	format așteptat de tip #.#
+2611	average attendance	fréquentation moyenne	asistencia media	durchschnittliche Teilnahme	frecvență medie
+2612	days in a row	jours d'affilée	días seguidos	Tage hintereinander	zile la rând
+2613	days in a row 🔥	jours d'affilée 🔥	días seguidos 🔥	Tage hintereinander 🔥	zile la rând 🔥
+2614	days in a row.	jours d'affilée.	días seguidos.	Tage hintereinander.	zile la rând.
+2615	days ago	il y a quelques jours	días atrás	Tage her	zile în urmă
+2616	days ago)	jours)	días atrás)	Tage her)	zile în urmă)
+2617	day in a row	jour d'affilée	día seguido	Tag hintereinander	zi la rând
+2618	already learned).	déjà apprises).	ya aprendidas).	schon gelernt).	deja învățate).
+2619	already known	déjà connue	ya conocida	schon bekannt	deja cunoscută
+2620	already known	déjà connues	ya conocidas	schon bekannt	deja cunoscute
+2621	already expired (yesterday)	déjà échue (hier)	ya vencida (ayer)	schon abgelaufen (gestern)	deja expirată (ieri)
+2622	already expired for	échue depuis	vencida desde hace	abgelaufen seit	expirată de
+2623	groups of #	groupes de #	grupos de #	Gruppen von #	grupuri de #
+2624	groups of #, thinner	groupes de #, plus fins	grupos de #, más finos	Gruppen von #, dünner	grupuri de #, mai subțiri
+2625	look to the side	regarder de côté	mirar de lado	zur Seite schauen	priviți în lateral
+2626	built-in guide	guide intégré	guía interna	interner Leitfaden	ghid intern
+2627	has strings	a des cordes	tiene cuerdas	hat Saiten	are corzi
+2628	has many hyphens, typical of fake addresses	a beaucoup de tirets, typique des fausses adresses	tiene muchos guiones, típico de las direcciones falsas	hat viele Bindestriche, typisch für falsche Adressen	are multe cratime, tipic adreselor false
+2629	https://	=	=	=	=
+2630	https://borgoprova-servizi.top	=	=	=	=
+2631	https://www.comune.borgoprova.it › servizi	https://www.comune.borgoprova.it › services	https://www.comune.borgoprova.it › servicios	https://www.comune.borgoprova.it › Dienste	https://www.comune.borgoprova.it › servicii
+2632	https://www.giornaleprova.it › borgoprova	=	=	=	=
+2633	content is downloaded from the facilitator's PC	les contenus se téléchargent depuis le PC de l'animateur	los contenidos se descargan del PC del facilitador	Inhalte werden vom PC des Kursleiters geladen	conținutul se descarcă de pe PC-ul facilitatorului
+2634	the missing data and never deletes anything.	les données manquantes et n'efface jamais rien.	los datos que faltan y nunca borra nada.	die fehlenden Daten und löscht nie etwas.	datele lipsă și nu șterge niciodată nimic.
+2635	packages are removed from the facilitator's PC	les paquets se retirent depuis le PC de l'animateur	los paquetes se quitan desde el PC del facilitador	Pakete werden am PC des Kursleiters entfernt	pachetele se elimină de pe PC-ul facilitatorului
+2636	quiz results and certificates, the name and the memory of this computer.	les résultats des quiz et les attestations, le nom et la mémoire de cet ordinateur.	los resultados de los quiz y los certificados, el nombre y la memoria de este ordenador.	die Quizergebnisse und Urkunden, den Namen und den Speicher dieses Computers.	rezultatele testelor și certificatele, numele și memoria acestui calculator.
+2637	quiz results, certificates and the raised hand.	les résultats des quiz, les attestations et la main levée.	los resultados de los quiz, los certificados y la mano levantada.	die Quizergebnisse, die Urkunden und die gehobene Hand.	rezultatele testelor, certificatele și mâna ridicată.
+2638	PC voice id	id de la voix du PC	id de voz del PC	Stimmen-ID des PCs	id-ul vocii PC-ului
+2639	yesterday	hier	ayer	gestern	ieri
+2640	the Professor reads the page	le Professeur lit la page	el Profesor lee la página	der Professor liest die Seite vor	Profesorul citește pagina
+2641	the Professor will explain it in simple words.	le Professeur vous l'explique avec des mots simples.	el Profesor se la explica con palabras sencillas.	der Professor erklärt es Ihnen mit einfachen Worten.	Profesorul v-o explică în cuvinte simple.
+2642	the notice code	le code de l'avis	el código del aviso	die Zahlungscode-Nummer	codul avizului
+2643	the customer code and the password, then press	le code client et le mot de passe, puis appuyez sur	el código de cliente y la contraseña, luego pulse	die Kundennummer und das Passwort, dann drücken Sie	codul de client și parola, apoi apăsați
+2644	the prescription code	le code de l'ordonnance	el código de la receta	die Rezeptnummer	codul rețetei
+2645	the booking code	le code de réservation	el código de reserva	die Buchungsnummer	codul programării
+2646	the tax code	le code fiscal	el código fiscal	die Steuernummer	codul fiscal
+2647	the organisation's tax code	le code fiscal de l'organisme	el código fiscal de la entidad	die Steuernummer der Einrichtung	codul fiscal al instituției
+2648	the file does not contain a JSON object	le fichier ne contient pas d'objet JSON	el archivo no contiene un objeto JSON	die Datei enthält kein JSON-Objekt	fișierul nu conține un obiect JSON
+2649	the file is not valid JSON	le fichier n'est pas un JSON valide	el archivo no es un JSON válido	die Datei ist kein gültiges JSON	fișierul nu este un JSON valid
+2650	the next day and then a few days apart, until you remember it well.	le lendemain puis à quelques jours d'intervalle, jusqu'à ce que vous la reteniez bien.	al día siguiente y luego cada pocos días, hasta que la recuerde bien.	am nächsten Tag und dann im Abstand von einigen Tagen, bis Sie sie gut können.	a doua zi și apoi la câteva zile distanță, până o rețineți bine.
+2653	the username	le nom d'utilisateur	el nombre de usuario	den Benutzernamen	numele de utilizator
+2654	the name «Marco Rossi» matches the IBAN.	le nom « Marco Rossi » correspond à l'IBAN.	el nombre «Marco Rossi» coincide con el IBAN.	der Name «Marco Rossi» passt zur IBAN.	numele «Marco Rossi» corespunde IBAN-ului.
+2655	the podcast	le podcast	el pódcast	der Podcast	podcastul
+2657	the product you ordered at the counter on @g has arrived. You can collect it at the pharmacy during opening hours.	le produit que vous avez commandé au comptoir le @g est arrivé. Vous pouvez le retirer à la pharmacie aux heures d'ouverture.	el producto que encargó en el mostrador el @g ha llegado. Puede recogerlo en la farmacia en horario de apertura.	das Produkt, das Sie am @g an der Theke bestellt haben, ist da. Sie können es zu den Öffnungszeiten in der Apotheke abholen.	produsul comandat la ghișeu pe @g a sosit. Îl puteți ridica de la farmacie în timpul programului.
+2658	the right change is **	la bonne monnaie est **	el cambio correcto es **	das richtige Wechselgeld ist **	restul corect este **
+2659	the game box and	le cadre du jeu et	el recuadro del juego y	das Spielfeld und	caseta jocului și
+2660	your neighbourhood	ton quartier	tu barrio	dein Viertel	cartierul tău
+2661	image not available	image non disponible	imagen no disponible	Bild nicht verfügbar	imagine indisponibilă
+2662	learned	apprises	aprendidas	gelernt	învățate
+2663	alternatively record only the voice of the adult interviewed. This is a sample model: adapt it to your organisation's rules.	sinon enregistrez seulement la voix de l'adulte interviewé. Ceci est un modèle indicatif : adaptez-le aux règles de votre organisme.	como alternativa grabe solo la voz del adulto entrevistado. Este es un modelo orientativo: adáptelo a las normas de su entidad.	alternativ nehmen Sie nur die Stimme des befragten Erwachsenen auf. Dies ist eine Vorlage: passen Sie sie an die Regeln Ihrer Einrichtung an.	alternativ înregistrați doar vocea adultului intervievat. Acesta este un model orientativ: adaptați-l regulilor instituției dumneavoastră.
+2664	waiting in the next few days.	en attente dans les prochains jours.	pendientes en los próximos días.	in den nächsten Tagen fällig.	în așteptare în zilele următoare.
+2665	in progress · time elapsed	en cours · temps écoulé	en curso · tiempo transcurrido	läuft · vergangene Zeit	în curs · timp scurs
+2666	online	en ligne	en línea	online	online
+2667	in preparation	en préparation	en preparación	in Vorbereitung	în pregătire
+2668	o'clock	pile	en punto	Uhr	fix
+2669	thirty	et demie	y media	halb	și jumătate
+2670	relating to the project interview	en relation avec l'entretien du projet	en relación con la entrevista del proyecto	im Zusammenhang mit dem Interview des Projekts	în legătură cu interviul proiectului
+2671	in review in total	en révision au total	en repaso en total	insgesamt in Wiederholung	în recapitulare în total
+2672	in total ·	au total ·	en total ·	insgesamt ·	în total ·
+2673	in total 🎲	au total 🎲	en total 🎲	insgesamt 🎲	în total 🎲
+2674	in total. Click to put them in the basket, click again to take them out. Then press «I've finished shopping».	au total. Cliquez pour les mettre dans le panier, cliquez à nouveau pour les retirer. Puis appuyez sur « J'ai fini les courses ».	en total. Haga clic para ponerlos en el carrito, vuelva a hacer clic para quitarlos. Luego pulse «He terminado la compra».	insgesamt. Klicken Sie, um sie in den Korb zu legen, und noch einmal, um sie herauszunehmen. Dann drücken Sie «Einkauf fertig».	în total. Dați clic ca să le puneți în coș, din nou ca să le scoateți. Apoi apăsați «Am terminat cumpărăturile».
+2675	in use now	en usage maintenant	en uso ahora	jetzt in Gebrauch	în uz acum
+2676	included in the program	inclus dans le programme	incluido en el programa	im Programm enthalten	inclus în program
+2677	meetings of # hours	rencontres de # heures	encuentros de # horas	Treffen zu # Stunden	întâlniri de # ore
+2678	meetings of # hours (	rencontres de # heures (	encuentros de # horas (	Treffen zu # Stunden (	întâlniri de # ore (
+2679	meetings and	rencontres et	encuentros y	Treffen und	întâlniri și
+2680	non-existent meeting	rencontre inexistante	encuentro inexistente	nicht vorhandenes Treffen	întâlnire inexistentă
+2681	address can be a website	adresse peut être un site	dirección puede ser una web	Adresse kann eine Webseite sein	adresa poate fi un site
+2684	start of the fake window and	début de la fausse fenêtre et	inicio de la ventana falsa y	Beginn des falschen Fensters und	începutul ferestrei false și
+2685	start of each lesson and mark who is there.	début de chaque leçon et notez qui est là.	inicio de cada lección y anote quién está.	Beginn jeder Lektion und notieren Sie, wer da ist.	începutul fiecărei lecții și notați cine este prezent.
+2686	enter card number, expiry date, CVV code and PIN	saisissez le numéro de carte, la date d'expiration, le code CVV et le PIN	introduzca número de tarjeta, caducidad, código CVV y PIN	geben Sie Kartennummer, Ablaufdatum, CVV-Code und PIN ein	introduceți numărul cardului, data expirării, codul CVV și PIN-ul
+2687	installed for all users	installé pour tous les utilisateurs	instalado para todos los usuarios	für alle Benutzer installiert	instalat pentru toți utilizatorii
+2688	installation and setup	installation et configuration	instalación y configuración	Installation und Einrichtung	instalare și configurare
+2689	local artificial intelligence	intelligence artificielle locale	inteligencia artificial local	lokale künstliche Intelligenz	inteligență artificială locală
+2691	recorded interviews	entretiens enregistrés	entrevistas grabadas	aufgenommene Interviews	interviuri înregistrate
+2692	odd ones out at the first try	intrus du premier coup	intrusos al primer intento	Eindringlinge beim ersten Versuch	intruși din prima încercare
+2693	odd ones out of	intrus sur	intrusos de	Eindringlinge von	intruși din
+2696	the last letter	la dernière lettre	la última letra	der letzte Buchstabe	ultima literă
+2697	the password	le mot de passe	la contraseña	das Passwort	parola
+2699	the big keyboard	le grand clavier	el teclado grande	die große Tastatur	tastatura mare
+2700	conversations with the Professor.	les conversations avec le Professeur.	las conversaciones con el Profesor.	die Gespräche mit dem Professor.	conversațiile cu Profesorul.
+2701	its natural voices, its artificial intelligence and its content,	ses voix naturelles, son intelligence artificielle et ses contenus,	sus voces naturales, su inteligencia artificial y sus contenidos,	seine natürlichen Stimmen, seine künstliche Intelligenz und seine Inhalte,	vocile lui naturale, inteligența artificială și conținutul,
+2702	the last # digits of the card	les # derniers chiffres de la carte	las últimas # cifras de la tarjeta	die letzten # Ziffern der Karte	ultimele # cifre ale cardului
+2703	the last two letters	les deux dernières lettres	las dos últimas letras	die letzten zwei Buchstaben	ultimele două litere
+2704	you are entitled	vous avez droit	usted tiene derecho	Sie haben Anspruch	aveți dreptul
+2705	letter from the Municipality	lettre de la mairie	carta del Ayuntamiento	Brief der Gemeinde	scrisoare de la Primărie
+2706	letter revealed	lettre révélée	letra revelada	Buchstabe aufgedeckt	literă dezvăluită
+2707	letters to check: they are coloured orange.	lettres à revoir : elles sont colorées en orange.	letras que revisar: están coloreadas de naranja.	Buchstaben zu prüfen: sie sind orange markiert.	litere de revăzut: sunt colorate în portocaliu.
+2708	letters revealed	lettres révélées	letras reveladas	Buchstaben aufgedeckt	litere dezvăluite
+2709	lessons completed	leçons terminées	lecciones completadas	abgeschlossene Lektionen	lecții terminate
+2710	lessons with diagrams and quizzes.	leçons avec schémas et quiz.	lecciones con esquemas y quiz.	Lektionen mit Schaubildern und Quiz.	lecții cu scheme și teste.
+2711	lessons and the	leçons et les	lecciones y los	Lektionen und die	lecții și
+2713	Creative Commons licence, right to withdraw consent, reference to the GDPR and care with minors.	licence Creative Commons, droit de retirer le consentement, référence au RGPD et attention aux mineurs.	licencia Creative Commons, derecho a retirar el consentimiento, referencia al RGPD y atención a los menores.	Creative-Commons-Lizenz, Recht auf Widerruf der Zustimmung, Verweis auf die DSGVO und Vorsicht bei Minderjährigen.	licență Creative Commons, dreptul de a retrage acordul, trimitere la GDPR și atenție la minori.
+2714	basic levels	niveaux de base	niveles básicos	Grundstufen	niveluri de bază
+2717	Mon	lun	lun	Mo	lun
+2718	# day to go: it's tomorrow!	il manque # jour : c'est demain !	falta # día: ¡es mañana!	noch # Tag: es ist morgen!	mai este # zi: e mâine!
+2719	marco rossi	=	=	=	=
+2720	quarter to	moins le quart	menos cuarto	Viertel vor	fără un sfert
+2722	messages out of	messages sur	mensajes de	Nachrichten von	mesaje din
+2723	min ago	min	hace min	Min. her	min în urmă
+2724	minutes this week ⏱️	minutes cette semaine ⏱️	minutos esta semana ⏱️	Minuten diese Woche ⏱️	minute săptămâna aceasta ⏱️
+2725	measures liquids	mesure les liquides	mide los líquidos	misst Flüssigkeiten	măsoară lichidele
+2726	measures weight	mesure le poids	mide el peso	misst das Gewicht	măsoară greutatea
+2727	measures temperature or angles	mesure la température ou les angles	mide la temperatura o los ángulos	misst Temperatur oder Winkel	măsoară temperatura sau unghiurile
+2728	measure length	mesurent la longueur	miden la longitud	messen die Länge	măsoară lungimea
+2729	unsaved changes	modifications non enregistrées	cambios sin guardar	nicht gespeicherte Änderungen	modificări nesalvate
+2730	coin of	pièce de	moneda de	Münze zu	monedă de
+2731	coin m	pièce m	moneda m	Münze m	moneda m
+2732	compatible engine	moteur compatible	motor compatible	kompatibler Motor	motor compatibil
+2733	reading engine not available	moteur de lecture non disponible	motor de lectura no disponible	Lesemodul nicht verfügbar	motorul de citire indisponibil
+2734	reading engine not found	moteur de lecture introuvable	motor de lectura no encontrado	Lesemodul nicht gefunden	motorul de citire negăsit
+2735	diagram engine missing	moteur de schémas absent	motor de esquemas ausente	Schaubild-Modul fehlt	motorul de scheme lipsește
+2736	diagram engine not loaded	moteur de schémas non chargé	motor de esquemas no cargado	Schaubild-Modul nicht geladen	motorul de scheme neîncărcat
+2737	fine of # €	amende de # €	multa de # €	Bußgeld von # €	amendă de # €
+2738	in the browser	dans le navigateur	en el navegador	im Browser	în browser
+2739	in the secure form:	dans le formulaire sécurisé :	en el formulario seguro:	im sicheren Formular:	în formularul securizat:
+2740	no local network address	aucune adresse réseau locale	ninguna dirección de red local	keine lokale Netzwerkadresse	nicio adresă de rețea locală
+2741	none found	aucun trouvé	ninguno encontrado	keiner gefunden	niciunul găsit
+2742	name missing	nom manquant	falta el nombre	Name fehlt	lipsește numele
+2743	not	pas	no	nicht	nu
+2744	not yet saved	pas encore enregistrée	todavía no guardada	noch nicht gespeichert	încă nesalvată
+2745	not yet saved	pas encore enregistré	todavía no guardado	noch nicht gespeichert	încă nesalvat
+2746	is not there.	n'y est pas.	no está.	ist nicht da.	nu este.
+2747	not checked	non vérifié	no comprobado	nicht geprüft	neverificat
+2748	not available	non disponible	no disponible	nicht verfügbar	indisponibil
+2749	does not save it and does not send it to anyone. When you have finished press «🗑️ Forget this letter».	ne l'enregistre pas et ne l'envoie à personne. Quand vous avez fini appuyez sur « 🗑️ Oublier cette lettre ».	no la guarda y no la envía a nadie. Cuando termine pulse «🗑️ Olvidar esta carta».	speichert ihn nicht und schickt ihn niemandem. Wenn Sie fertig sind, drücken Sie «🗑️ Diesen Brief vergessen».	nu o salvează și nu o trimite nimănui. Când ați terminat apăsați «🗑️ Uită această scrisoare».
+2752	I can't read photos (	je n'arrive pas à lire les photos (	no consigo leer las fotos (	ich kann die Fotos nicht lesen (	nu reușesc să citesc fotografiile (
+2753	saves nothing	n'enregistre rien	no guarda nada	speichert nichts	nu salvează nimic
+2754	can no longer be recovered.	ne pourront plus être récupérés.	no se podrán recuperar.	können nicht mehr wiederhergestellt werden.	nu se vor mai putea recupera.
+2755	no ball is used	on n'utilise pas de balle	no se usa la pelota	man benutzt keinen Ball	nu se folosește mingea
+2756	are not a certification	ne sont pas une certification	no son una certificación	sind keine Zertifizierung	nu sunt o certificare
+2757	never come back	ne reviennent plus	no vuelven más	kommen nicht mehr zurück	nu se mai întorc
+2758	is not in the contacts	n'est pas dans les contacts	no está en los contactos	ist nicht in den Kontakten	nu este în contacte
+2759	nothing is left.	il ne reste rien.	no queda nada.	es ist nichts übrig.	nu a mai rămas nimic.
+2760	is not a regional capital	n'est pas un chef-lieu de région	no es capital de región	ist keine Regionalhauptstadt	nu este reședință de regiune
+2761	is not a multiple of #	n'est pas un multiple de #	no es múltiplo de #	ist kein Vielfaches von #	nu este multiplu de #
+2763	the number you have always used	le numéro que vous avez toujours utilisé	el número que siempre ha usado	die Nummer, die Sie immer benutzt haben	numărul pe care l-ați folosit mereu
+2764	number of the right answer, counting from #	numéro de la bonne réponse, en comptant à partir de #	número de la respuesta correcta, contando desde #	Nummer der richtigen Antwort, gezählt ab #	numărul răspunsului corect, numărând de la #
+2765	whole number between # and #	nombre entier entre # et #	número entero entre # y #	ganze Zahl zwischen # und #	număr întreg între # și #
+2766	number written on the back of the card	numéro écrit au dos de la carte	número escrito en el reverso de la tarjeta	Nummer auf der Kartenrückseite	numărul scris pe spatele cardului
+2767	new members.	nouveaux inscrits.	nuevos inscritos.	neue Teilnehmer.	noi înscriși.
+2768	new, still empty	nouveau, encore vide	nuevo, todavía vacío	neu, noch leer	nou, încă gol
+2770	busy or blocked by the firewall	occupé ou bloqué par le pare-feu	ocupado o bloqueado por el cortafuegos	belegt oder von der Firewall blockiert	ocupat sau blocat de firewall
+2771	today	aujourd'hui	hoy	heute	azi
+2772	today. A few minutes, calmly.	aujourd'hui. Quelques minutes, avec calme.	hoy. Pocos minutos, con calma.	heute. Ein paar Minuten, in Ruhe.	azi. Câteva minute, cu calm.
+2773	every # minutes	toutes les # minutes	cada # minutos	alle # Minuten	la fiecare # minute
+2774	or press the microphone and speak	ou appuyez sur le micro et parlez	o pulse el micrófono y hable	oder drücken Sie das Mikrofon und sprechen Sie	sau apăsați microfonul și vorbiți
+2775	or a computer of the	ou un ordinateur de la	o un ordenador de la	oder ein Computer der	sau un calculator al
+2776	now on the	maintenant sur l'	ahora en la	jetzt auf der	acum pe
+2777	hours of training	heures de formation	horas de formación	Stunden Schulung	ore de formare
+2778	hours ago	heures	horas atrás	Stunden her	ore în urmă
+2779	hours in total),	heures au total),	horas en total),	Stunden insgesamt),	ore în total),
+2780	hours). Skills according to the European DigComp framework	heures). Compétences selon le cadre européen DigComp	horas). Competencias según el marco europeo DigComp	Stunden). Kompetenzen nach dem europäischen DigComp-Rahmen	ore). Competențe conform cadrului european DigComp
+2781	clocks read at the first try	horloges lues du premier coup	relojes leídos al primer intento	Uhren beim ersten Versuch gelesen	ceasuri citite din prima
+2782	clocks out of	horloges sur	relojes de	Uhren von	ceasuri din
+2784	pay only # € shipping	payez seulement # € de livraison	pague solo # € de envío	zahlen Sie nur # € Versand	plătiți doar # € transport
+2785	pay at once, within # hours, by credit card.	payez tout de suite, sous # heures, par carte de crédit.	pague ya, en # horas, con la tarjeta de crédito.	zahlen Sie sofort, innerhalb von # Stunden, mit Kreditkarte.	plătiți imediat, în # ore, cu cardul de credit.
+2786	home page	page d'accueil	página de inicio	Startseite	pagina de start
+2787	balloons in	ballons en	globos en	Luftballons in	baloane în
+2788	keywords: #-# are enough, the ones learners would really use.	mots-clés : #-# suffisent, ceux que les apprenants utiliseraient vraiment.	palabras clave: bastan #-#, las que usarían de verdad los alumnos.	Stichwörter: #-# genügen, die, die Lernende wirklich benutzen würden.	cuvinte cheie: ajung #-#, cele pe care le-ar folosi cu adevărat cursanții.
+2789	words): perhaps it's better to split it into two steps.	mots) : il vaut peut-être mieux le diviser en deux étapes.	palabras): quizá convenga dividirlo en dos pasos.	Wörter): vielleicht besser in zwei Schritte teilen.	cuvinte): poate e mai bine să-l împărțiți în doi pași.
+2790	words): better stay under #, short sentences.	mots) : mieux vaut rester sous #, phrases courtes.	palabras): mejor quedarse por debajo de #, frases breves.	Wörter): besser unter # bleiben, kurze Sätze.	cuvinte): mai bine rămâneți sub #, fraze scurte.
+2791	games in total 🎲	parties au total 🎲	partidas en total 🎲	Spiele insgesamt 🎲	jocuri în total 🎲
+2792	goes to the next step	passe à l'étape suivante	pasa al paso siguiente	geht zum nächsten Schritt	trece la pasul următor
+2793	designed for groups of beginners and older people: from the first contact with the computer to public services online and security.	pensé pour des groupes de débutants et de personnes âgées : du premier contact avec l'ordinateur aux services publics en ligne et à la sécurité.	pensado para grupos de principiantes y personas mayores: desde el primer contacto con el ordenador hasta los servicios públicos en línea y la seguridad.	gedacht für Gruppen von Anfängern und älteren Menschen: vom ersten Kontakt mit dem Computer bis zu öffentlichen Online-Diensten und Sicherheit.	gândit pentru grupuri de începători și persoane în vârstă: de la primul contact cu calculatorul la serviciile publice online și siguranță.
+2794	to delete and	pour effacer et	para borrar y	zum Löschen und	pentru a șterge și
+2795	for the facilitator	pour l'animateur	para quien dirige	für die Kursleitung	pentru cine conduce
+2796	to be turned into text. Internet is needed.	pour être transformé en texte. Il faut Internet.	para transformarlo en texto. Se necesita Internet.	um in Text umgewandelt zu werden. Internet ist nötig.	pentru a fi transformat în text. Este nevoie de Internet.
+2797	for groups, associations, schools and libraries. For a quote write to	pour groupes, associations, écoles et bibliothèques. Pour un devis écrivez à	para grupos, asociaciones, colegios y bibliotecas. Para un presupuesto escriba a	für Gruppen, Vereine, Schulen und Bibliotheken. Für ein Angebot schreiben Sie an	pentru grupuri, asociații, școli și biblioteci. Pentru o ofertă scrieți la
+2798	for today.	pour aujourd'hui.	para hoy.	für heute.	pentru azi.
+2799	to recognise you straight away:	pour vous reconnaître tout de suite :	para reconocerle enseguida:	um Sie sofort zu erkennen:	pentru a vă recunoaște imediat:

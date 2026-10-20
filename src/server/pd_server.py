@@ -86,8 +86,10 @@ def _leggi_distribuzione():
 VERSION = _leggi_versione()
 DISTRIBUZIONE = _leggi_distribuzione()
 
+MAC = sys.platform == "darwin"
 XDG_DATA = os.environ.get("XDG_DATA_HOME") or os.path.join(os.path.expanduser("~"), ".local", "share")
-DATA_DIR = os.environ.get("PD_DATA_DIR") or os.path.join(XDG_DATA, APP_ID)
+DATA_DIR = os.environ.get("PD_DATA_DIR") or (os.path.join(os.path.expanduser("~"), "Library", "Application Support", "ProfessoreDigitale")
+                                             if MAC else os.path.join(XDG_DATA, APP_ID))
 MODELS_DIR = os.path.join(DATA_DIR, "models")
 SYSTEM_PACKS = os.environ.get("PD_SYSTEM_PACKS") or os.path.join(SHARE_DIR, "contenuti")
 USER_PACKS = os.path.join(DATA_DIR, "contenuti")
@@ -103,7 +105,7 @@ if not OLLAMA_HOST.startswith("http"):
 UPDATE_URL_DEFAULT = DISTRIBUZIONE.get("aggiornamenti_url") or \
     "https://raw.githubusercontent.com/danilodauria/professore-digitale/main/aggiornamenti.json"
 
-DATA_KEYS = ("settings", "progress", "history", "board", "practice", "profili", "registro")
+DATA_KEYS = ("settings", "progress", "history", "board", "practice", "profili", "registro", "traduzioni")
 MAX_BODY = 8 * 1024 * 1024        # 8 MB (audio del microfono)
 COPERTINA_NONNI = os.path.join(WEB_DIR, "img", "nonni-teach", "copertina.jpg")
 MAX_JSON = 2 * 1024 * 1024
@@ -153,6 +155,12 @@ def read_json_file(path, default=None):
 
 
 def mem_total_mb():
+    if MAC:
+        try:
+            p = subprocess.run(["sysctl", "-n", "hw.memsize"], stdout=subprocess.PIPE, stderr=subprocess.DEVNULL, timeout=5)
+            return int(p.stdout.decode().strip() or 0) // (1024 * 1024)
+        except (OSError, ValueError, subprocess.SubprocessError):
+            return 0
     try:
         with open("/proc/meminfo") as f:
             for line in f:
@@ -164,6 +172,9 @@ def mem_total_mb():
 
 
 def nome_sistema():
+    if MAC:
+        import platform
+        return ("macOS " + (platform.mac_ver()[0] or "")).strip()
     info = {}
     try:
         with open("/etc/os-release") as f:
@@ -288,9 +299,39 @@ def _espeak():
     return shutil.which("espeak-ng") or shutil.which("espeak")
 
 
+VOCI_MAC = {"luca": "m", "alice": "f", "federica": "f", "paola": "f", "emma": "f", "giorgio": "m"}
+
+
+def voci_say():
+    """Voci italiane di macOS (comando «say»): [(nome, genere, migliorata)]. Si leggono una volta ogni 5 minuti."""
+    if not MAC or not shutil.which("say"):
+        return []
+    with LOCK:
+        if STATE.get("say_t") and time.time() - STATE["say_t"] < 300:
+            return STATE.get("say_voci") or []
+    voci = []
+    try:
+        p = subprocess.run(["say", "-v", "?"], stdout=subprocess.PIPE, stderr=subprocess.DEVNULL, timeout=15)
+        for riga in p.stdout.decode("utf-8", "replace").splitlines():
+            m = re.match(r"^(.+?)\s+(it[_-]IT)\s+#", riga)
+            if m:
+                nome = m.group(1).strip()
+                base = nome.split("(")[0].strip().lower()
+                voci.append((nome, VOCI_MAC.get(base, "f"), "(" in nome))
+    except (OSError, subprocess.SubprocessError):
+        pass
+    with LOCK:
+        STATE["say_voci"], STATE["say_t"] = voci, time.time()
+    return voci
+
+
 def tts_voices():
     """Elenco delle voci disponibili: [{"id", "nome", "genere": "m"/"f", "motore", "naturale"}]."""
     voci = []
+    for nome, genere, migliore in voci_say():
+        descr = {"m": "uomo", "f": "donna"}[genere]
+        voci.append({"id": "say:" + nome, "nome": "%s (%s, voce del Mac)" % (nome, descr), "genere": genere,
+                     "motore": "say", "naturale": migliore})
     if piper_bin():
         def posto(b):
             for i, n in enumerate(PIPER_ORDINE):
@@ -315,7 +356,7 @@ def tts_voices():
 
 
 def tts_engines():
-    engines = []
+    engines = ["say"] if voci_say() else []
     if piper_bin() and piper_models():
         engines.append("piper")
     if shutil.which("pico2wave"):
@@ -346,6 +387,9 @@ def _ordine_voci(voice, engine):
         ordine.append(voice)
     elif engine:      # compatibilita' con le versioni precedenti: si chiedeva un motore
         ordine += [v["id"] for v in voci if v["motore"] == engine or (engine == "espeak-ng" and v["id"].startswith("espeak:"))][:1]
+    if MAC:     # sul Mac prima la voce maschile (il Professore e' un uomo), poi le migliorate
+        ordine += sorted([v["id"] for v in voci if v["motore"] == "say" and v["id"] not in ordine],
+                         key=lambda i: (0 if i.lower().startswith("say:luca") else 1, i))
     ordine += [v for v in VOCE_PREDEFINITA if v in ids and v not in ordine]
     ordine += [v for v in ids if v not in ordine]
     return ordine
@@ -359,13 +403,20 @@ def synthesize(text, rate=1.0, engine=None, voice=None):
     rate = max(0.5, min(1.6, float(rate or 1.0)))
     ordine = _ordine_voci(voice, engine)
     if not ordine:
-        raise RuntimeError("nessun motore vocale installato (installare espeak-ng)")
+        raise RuntimeError("nessun motore vocale installato (installare espeak-ng)" if not MAC else
+                           "nessuna voce italiana del Mac: Impostazioni di Sistema → Accessibilità → Contenuto letto ad alta voce")
     last_err = None
     for vid in ordine[:3]:
         try:
             with tempfile.TemporaryDirectory(prefix="pd-tts-") as tmp:
                 out = os.path.join(tmp, "voce.wav")
-                if vid.startswith("piper:"):
+                if vid.startswith("say:"):
+                    eng = "say"
+                    subprocess.run(["say", "-v", vid[4:], "-r", str(int(175 * rate)), "-o", out,
+                                    "--file-format=WAVE", "--data-format=LEI16@22050", "-f", "-"],
+                                   input=text.encode("utf-8"), stdout=subprocess.DEVNULL,
+                                   stderr=subprocess.DEVNULL, timeout=120, check=True)
+                elif vid.startswith("piper:"):
                     eng = "piper"
                     model = piper_models().get(vid[6:])
                     subprocess.run([piper_bin(), "--model", model, "--output_file", out,
@@ -542,6 +593,12 @@ def check_update(url):
                     res[chiave] = u
         sha = str(info.get("sha256", "")).lower()
         res["sha256"] = sha if RE_SHA.match(sha) else None
+        if MAC:      # sul Mac si scarica lo zip con l'app, non il .deb
+            mac = info.get("mac") if isinstance(info.get("mac"), dict) else {}
+            u, sha = mac.get("pacchetto"), str(mac.get("sha256", "")).lower()
+            u = urllib.parse.urljoin(url, u) if isinstance(u, str) and u else None
+            res["pacchetto"] = u if u and url_consentito(u) else None
+            res["sha256"] = sha if RE_SHA.match(sha) else None
         installati = {p["pacchetto"]["id"]: p["pacchetto"]["versione"] for p in pacchetti_installati()[0]}
         for c in (info.get("contenuti") or [])[:50]:
             if not isinstance(c, dict):
@@ -569,6 +626,9 @@ def check_update(url):
 
 
 def cartella_download():
+    if MAC:
+        d = os.path.join(os.path.expanduser("~"), "Downloads")
+        return d if os.path.isdir(d) else os.path.expanduser("~")
     try:
         p = subprocess.run(["xdg-user-dir", "DOWNLOAD"], stdout=subprocess.PIPE, stderr=subprocess.DEVNULL, timeout=5)
         d = p.stdout.decode().strip()
@@ -587,7 +647,7 @@ def scarica_pacchetto_deb(url, sha256):
     """Scarica il nuovo .deb in Scaricati verificandone l'impronta SHA-256. Non installa nulla."""
     import hashlib
     nome = url.rsplit("/", 1)[-1]
-    if not re.match(r"^professore-digitale_\d+\.\d+\.\d+_all\.deb$", nome):
+    if not re.match(r"^(professore-digitale_\d+\.\d+\.\d+_all\.deb|ProfessoreDigitale-\d+\.\d+\.\d+-macOS\.zip)$", nome):
         raise RuntimeError("nome del pacchetto non valido")
     if not RE_SHA.match(sha256 or ""):
         raise RuntimeError("manca l'impronta SHA-256: download rifiutato per sicurezza")
@@ -752,7 +812,7 @@ class Handler(BaseHTTPRequestHandler):
             # tablet dell'aula: solo cio' che serve all'interfaccia, niente percorsi di disco o dati del PC
             ok, models = ollama_models()
             return self._send(200, {
-                "ok": True, "version": VERSION, "mode": "server", "ospite": True,
+                "ok": True, "version": VERSION, "mode": "server", "platform": "mac" if MAC else "linux", "ospite": True,
                 "ai": {"available": ok, "models": models},
                 "tts": {"engines": tts_engines(), "voices": tts_voices()},
                 "stt": {"engine": None, "detail": None}, "system": {},
@@ -804,7 +864,7 @@ class Handler(BaseHTTPRequestHandler):
                 return self._send(200, {"ok": True, "episodi": pd_nonni.elenco(DATA_DIR), "ffmpeg": bool(pd_nonni.ffmpeg()),
                                         "voce_neura": voce_neura(), "sito": os.path.join(DATA_DIR, "nonni-teach-sito"),
                                         "url_predefinito": pd_nonni.SITO_PREDEFINITO, "consulente": pd_nonni.stato_consulente(DATA_DIR),
-                                        "sistema": "linux"})
+                                        "sistema": "mac" if MAC else "linux"})
             if path == "/api/nonni/sito.zip":
                 zp = os.path.join(DATA_DIR, "nonni-teach-sito.zip")
                 if not os.path.isfile(zp):
@@ -911,7 +971,7 @@ class Handler(BaseHTTPRequestHandler):
                 dest = scarica_pacchetto_deb(str(req.get("url", "")), str(req.get("sha256") or ""))
             except (RuntimeError, OSError) as e:
                 return self._error(502, str(e))
-            return self._send(200, {"ok": True, "file": dest})
+            return self._send(200, {"ok": True, "file": dest, "mac": MAC})
 
         if path.startswith("/api/aula/") and AULA[0]:
             req = self._read_json()

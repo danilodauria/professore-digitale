@@ -28,7 +28,7 @@ try:
     pub = os.path.join(T, "pubblica"); os.makedirs(os.path.join(pub, "contenuti")); os.makedirs(os.path.join(pub, "app"))
     ver = "9.9.9"
     grandi = {"professore-digitale_%s_all.deb" % ver: b"d" * 5000, "ProfessoreDigitale-Setup-%s.exe" % ver: b"e" * 4000,
-              "professore-digitale-windows-%s.zip" % ver: b"z" * 3000}
+              "professore-digitale-windows-%s.zip" % ver: b"z" * 3000, "ProfessoreDigitale-%s-macOS.zip" % ver: b"m" * 2500}
     for n, b in grandi.items():
         open(os.path.join(pub, n), "wb").write(b)
     open(os.path.join(pub, "contenuti", "x.json"), "w").write("{}")
@@ -39,13 +39,19 @@ try:
             "sha256": sha(grandi["professore-digitale_%s_all.deb" % ver]), "portatile": "professore-digitale-portatile.html",
             "pagina": "https://github.com/danilodauria/professore-digitale", "contenuti": [{"id": "x", "url": "contenuti/x.json"}],
             "windows": {"pacchetto": "ProfessoreDigitale-Setup-%s.exe" % ver, "sha256": "a" * 64,
-                        "zip": "professore-digitale-windows-%s.zip" % ver, "zip_sha256": "b" * 64}}
+                        "zip": "professore-digitale-windows-%s.zip" % ver, "zip_sha256": "b" * 64},
+            "mac": {"pacchetto": "ProfessoreDigitale-%s-macOS.zip" % ver, "sha256": "c" * 64}}
     json.dump(info, open(os.path.join(pub, "aggiornamenti.json"), "w"))
     prog = "https://github.com/danilodauria/professore-digitale"
     rel, files = pg.prepara(pub, prog, "https://danilodauria.github.io/professore-digitale", os.path.join(T, "github"))
     check("cartella rilascio-%s" % ver, os.path.basename(rel) == "rilascio-%s" % ver)
     check("file grandi spostati nella Release", all(n in files for n in grandi))
     check("sito-%s.zip e note nella Release" % ver, "sito-%s.zip" % ver in files and "NOTE-%s.md" % ver in files)
+    bat = open(os.path.join(rel, "PUBBLICA-RELEASE.bat"), encoding="utf-8", newline="").read()
+    check("PUBBLICA-RELEASE.bat con il repository giusto e a capo di Windows",
+          "set REPO=danilodauria/professore-digitale\r\n" in bat and "__REPO__" not in bat and "\n" not in bat.replace("\r\n", ""))
+    check("PUBBLICA-RELEASE.bat ricava la versione dalle note e usa gh",
+          "NOTE-*.md" in bat and "release create %TAG%" in bat and "--notes-file %NOTE%" in bat)
     z = zipfile.ZipFile(os.path.join(rel, "sito-%s.zip" % ver))
     nomi = z.namelist()
     check("il sito NON contiene i file grandi", not any(n in nomi for n in grandi))
@@ -56,11 +62,14 @@ try:
     check("aggiornamenti.json: .deb dalla Release", ai["pacchetto"] == base + "professore-digitale_%s_all.deb" % ver)
     check("aggiornamenti.json: Windows dalla Release",
           ai["windows"]["pacchetto"] == base + "ProfessoreDigitale-Setup-%s.exe" % ver and ai["windows"]["zip"].startswith(base))
+    check("aggiornamenti.json: Mac dalla Release", ai["mac"]["pacchetto"] == base + "ProfessoreDigitale-%s-macOS.zip" % ver
+          and ai["mac"]["sha256"] == "c" * 64)
     check("impronte invariate", ai["sha256"] == info["sha256"] and ai["windows"]["sha256"] == "a" * 64)
     check("contenuti restano relativi", ai["contenuti"][0]["url"] == "contenuti/x.json")
     pagina = z.read("index.html").decode("utf-8")
     check("la pagina scarica dalla Release", (base + "ProfessoreDigitale-Setup-%s.exe" % ver) in pagina
           and (base + "professore-digitale_%s_all.deb" % ver) in pagina)
+    check("la pagina ha la scheda per Mac", (base + "ProfessoreDigitale-%s-macOS.zip" % ver) in pagina and "Scarica per Mac" in pagina)
     check("la pagina mostra le dimensioni", "MB)" in pagina)
     check("dist/pubblica non modificata", json.load(open(os.path.join(pub, "aggiornamenti.json")))["pacchetto"] == info["pacchetto"]
           and all(os.path.isfile(os.path.join(pub, n)) for n in grandi))

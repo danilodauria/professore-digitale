@@ -16,6 +16,8 @@ echo "== 1a. Licenze (codice MIT, contenuti CC BY-NC-SA 4.0)"
 python3 tests/test_licenza.py || ESITO=1
 echo "== 1a2. Pacchetto .deb (se già compilato in dist/)"
 D="dist/professore-digitale_$(cat VERSION)_all.deb"; if [ -f "$D" ]; then python3 tests/test_deb.py "$D" || ESITO=1; else echo "  (nessun .deb della versione $(cat VERSION) in dist/: lo prova build.sh a ogni compilazione)"; fi
+echo "== 1a3. Versione per macOS (voci del Mac, aggiornamenti, app nello zip se compilata)"
+timeout 300 python3 tests/test_mac.py || ESITO=1
 echo "== 1b. Voci naturali incluse (Piper)"
 python3 tests/test_voci.py || ESITO=1
 

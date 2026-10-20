@@ -11,6 +11,12 @@ def js_safe(s):
     return s.replace("</script", "<\\/script").replace("<!--", "<\\!--")
 
 
+def prima_di_body(html, pezzo):
+    """Inserisce prima dell'ULTIMO </body> (il codice di Mermaid ne contiene altri, dentro le stringhe)."""
+    i = html.rfind("</body>")
+    return html[:i] + pezzo + "\n" + html[i:]
+
+
 def crea_html(web, versione=None, titolo="Professore Digitale (versione portatile)"):
     """Restituisce l'HTML a file singolo. versione=None -> quella scritta in VERSION."""
     root = os.path.normpath(os.path.join(web, "..", ".."))
@@ -31,7 +37,12 @@ def crea_html(web, versione=None, titolo="Professore Digitale (versione portatil
     boot = "window.PD_VERSION=%s;window.PD_PACKS_BUILTIN=%s;" % (json.dumps(versione), json.dumps(packs, ensure_ascii=False))
     html = html.replace("<script>\n", "<script>\n" + js_safe(boot) + "\n", 1)
     mermaid = js_safe(rd("vendor/mermaid.min.js"))
-    html = html.replace("</body>", '<script type="text/plain" id="pd-mermaid-src">' + mermaid + "</script>\n</body>")
+    html = prima_di_body(html, '<script type="text/plain" id="pd-mermaid-src">' + mermaid + "</script>")
+    # 3.7: dizionari delle lingue dentro la pagina (in file:// il browser non può leggerli a parte)
+    for f in sorted(glob.glob(os.path.join(web, "i18n", "*.json"))):
+        lingua = os.path.splitext(os.path.basename(f))[0]
+        testo = json.dumps(json.load(open(f, encoding="utf-8")), ensure_ascii=False, separators=(",", ":"))
+        html = prima_di_body(html, '<script type="application/json" id="pd-i18n-%s">%s</script>' % (lingua, js_safe(testo)))
     html = html.replace("<title>Professore Digitale</title>", "<title>" + titolo + "</title>")
     assert 'src="js/' not in html and 'href="css/' not in html
     return html

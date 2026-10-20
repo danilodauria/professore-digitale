@@ -489,3 +489,15 @@ h2.sez { font-size: 1.25rem; margin: 1.6rem 0 .6rem; }
 .licenza-card .licenza-regole li { margin: .35rem 0; }
 .licenza-card .citazione { background: var(--brand-soft, rgba(127,127,127,.12)); border-left: 4px solid var(--accent, #e76f24); padding: .6rem .8rem; border-radius: 6px; font-size: .95em; word-break: break-word; }
 @media (max-width: 520px) { .licenza-card .licenza-testa { flex-direction: column; } }
+
+/* 3.7 - lingue del programma (i18n.js) */
+.pd-btn-lingua { display: inline-flex; align-items: center; gap: .2rem; }
+.pd-btn-lingua .cod { font-size: .72em; font-weight: 800; letter-spacing: .03em; }
+.pd-lingue { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .45rem; margin: .4rem 0 .7rem; }
+.menu-pop .pd-lingue button, .pd-lingue button { display: flex; align-items: center; gap: .5rem; padding: .6rem .7rem; border-radius: 12px;
+  border: 2px solid var(--line); background: var(--panel); color: var(--ink); cursor: pointer; font: inherit; text-align: left; }
+.pd-lingue button.scelta { border-color: var(--brand); background: var(--brand-soft); }
+.pd-lingue .band { font-size: 1.4em; line-height: 1; }
+.pd-lingua-menu { min-width: 21rem; max-width: 30rem; padding: .6rem; }
+.pd-lingua-ia { display: flex; gap: .5rem; align-items: flex-start; margin: .3rem .2rem; }
+@media (max-width: 560px) { .pd-lingue { grid-template-columns: 1fr 1fr; } .menu-pop.pd-lingua-menu { min-width: 0; left: 8px; right: 8px !important; } }

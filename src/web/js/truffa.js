@@ -489,7 +489,7 @@
     var out = $("#tr-ia-box", box), btn = $("#tr-ia", box);
     ferma();
     out.hidden = false; out.className = "tr-ia";
-    out.innerHTML = '<h3>🤖 Il parere dell\'IA locale <span class="small muted">(' + esc(PD.currentModel()) + ')</span></h3><div class="tr-ia-testo"><span class="muted">Sto pensando…</span></div>' +
+    out.innerHTML = '<h3>🤖 Il parere dell\'IA locale <span class="small muted">(' + esc(PD.currentModel()) + ')</span></h3><div class="tr-ia-testo" data-no-trad><span class="muted">' + esc(PD.i18n ? PD.i18n.t("Sto pensando…") : "Sto pensando…") + '</span></div>' +
       '<p class="small muted">L\'IA può sbagliare: conta di più il controllo qui sopra. In ogni caso, verificate sempre con i contatti ufficiali.</p>' +
       '<button class="btn ghost" id="tr-ia-stop">■ Ferma</button>';
     var dove = $(".tr-ia-testo", out), stop = $("#tr-ia-stop", out);
@@ -504,7 +504,7 @@
       if (PD.profState === "pensiero") PD.setProf("riposo");
     }
     fetch("/api/chat", { method: "POST", headers: { "Content-Type": "application/json" }, signal: ctrl.signal,
-      body: JSON.stringify({ model: PD.currentModel(), messages: [{ role: "system", content: PROMPT_IA }, { role: "user", content: utente }] }) })
+      body: JSON.stringify({ model: PD.currentModel(), messages: [{ role: "system", content: PROMPT_IA + (PD.i18n ? PD.i18n.istruzioneIA() : "") }, { role: "user", content: utente }] }) })
       .then(function (res) {
         if (!res.ok) return res.json().then(function (j) { throw new Error(j.error || "errore IA"); });
         var reader = res.body.getReader(), dec = new TextDecoder(), buf = "";
@@ -529,7 +529,7 @@
         var t = pulisci(full);
         if (!t.trim()) throw new Error("risposta vuota");
         dove.innerHTML = PD.md(t);
-        if (PD.settings.autoReadAnswers) PD.speak(t);
+        if (PD.settings.autoReadAnswers) PD.speak(t, false, { tradotto: true });
       })
       .catch(function (err) {
         fine();

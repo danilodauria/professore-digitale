@@ -90,6 +90,9 @@ if [ -f "dist/windows/ProfessoreDigitale-Setup-${NUOVA}.exe" ]; then
   cp "dist/windows/ProfessoreDigitale-Setup-${NUOVA}.exe" archivio/
   cp "dist/windows/ProfessoreDigitale-Setup-${NUOVA}.exe" "$ARCHIVIO/" 2>/dev/null || true
 fi
+if [ -f "dist/ProfessoreDigitale-${NUOVA}-macOS.zip" ]; then      # app per macOS
+  cp "dist/ProfessoreDigitale-${NUOVA}-macOS.zip" "$PUB/"; cp "dist/ProfessoreDigitale-${NUOVA}-macOS.zip" archivio/
+fi
 cp windows/catalogo-ia.json "$PUB/catalogo-ia.json"
 python3 - "$NUOVA" "$DATA_ISO" "$PAGINA_PROGETTO" "$PUB" "${NOTE[@]}" <<'PY'
 import hashlib, json, os, sys, glob
@@ -106,6 +109,9 @@ info = {"versione": ver, "data": data, "note": note, "pacchetto": deb, "sha256":
 exe, wzip = "ProfessoreDigitale-Setup-%s.exe" % ver, "professore-digitale-windows-%s.zip" % ver
 if os.path.isfile(os.path.join(pub, exe)):          # versione per Windows (installatore e chiavetta)
     info["windows"] = {"pacchetto": exe, "sha256": sha(os.path.join(pub, exe)), "zip": wzip, "zip_sha256": sha(os.path.join(pub, wzip))}
+mzip = "ProfessoreDigitale-%s-macOS.zip" % ver
+if os.path.isfile(os.path.join(pub, mzip)):         # app per macOS (zip con «Professore Digitale.app»)
+    info["mac"] = {"pacchetto": mzip, "sha256": sha(os.path.join(pub, mzip))}
 cat = os.path.join(pub, "catalogo-ia.json")          # modelli di IA consigliati: si aggiornano anche senza nuova versione
 if os.path.isfile(cat):
     info["catalogo_ia"] = {"url": "catalogo-ia.json", "sha256": sha(cat), "versione": json.load(open(cat, encoding="utf-8"))["versione"]}
@@ -116,6 +122,7 @@ with open(os.path.join(pub, "NOTE-%s.md" % ver), "w", encoding="utf-8") as f:
     f.write("# Professore Digitale %s (%s)\n\n" % (ver, data) + "".join("- %s\n" % n for n in note) +
             "\n## Installazione o aggiornamento\n\n**Linux** (Debian, Ubuntu, Mint, FeniceOS):\n\n```\nsudo apt install ./%s\n```\n\n" % deb +
             ("**Windows** (da XP a 11): doppio clic su `%s`, oppure dal Professore: Impostazioni → Aggiornamenti.\n\n" % exe if "windows" in info else "") +
+            ("**macOS** (10.15 e successivi): aprite `%s` e trascinate «Professore Digitale.app» in Applicazioni (la prima volta: tasto destro → Apri).\n\n" % mzip if "mac" in info else "") +
             "Impostazioni e progressi degli allievi vengono conservati.\n")
 PY
 # app per telefono e tablet (PWA, funziona senza Internet dopo la prima apertura) e pagina principale del sito
@@ -144,8 +151,8 @@ ls -1 "$PUB"
 echo
 echo "Prossimi passi:"
 echo "  1. Provate il pacchetto su un PC di prova:  sudo apt install ./$PUB/professore-digitale_${NUOVA}_all.deb"
-echo "     e su Windows:  $PUB/ProfessoreDigitale-Setup-${NUOVA}.exe"
-echo "  2. Pubblicate su GitHub: Release v${NUOVA} con i file di dist/github/rilascio-${NUOVA}/ (guida: docs/Pubblicare_su_GitHub.pdf)"
+echo "     e su Windows:  $PUB/ProfessoreDigitale-Setup-${NUOVA}.exe   ·   su Mac: $PUB/ProfessoreDigitale-${NUOVA}-macOS.zip"
+echo "  2. Pubblicate su GitHub: da Windows doppio clic su PUBBLICA-RELEASE.bat in dist/github/rilascio-${NUOVA}/ (oppure guida: docs/Pubblicare_su_GitHub.pdf)"
 echo "     oppure da Linux:  tools/pubblica-tutto.sh   ·   senza GitHub:  tools/pubblica-locale.sh --cartella DEST"
 echo "     Copia di sicurezza senza GitHub:  tools/backup-locale.sh /media/\$USER/CHIAVETTA"
 echo "  3. Dagli altri PC: Impostazioni → Aggiornamenti → «Controlla aggiornamenti»."

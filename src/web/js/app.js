@@ -27,7 +27,8 @@
     voiceCommands: false, tremore: false, vista: false, leggiFocus: false, domandaGiorno: true, aulaManoSuono: true,
     tabletCondividi: false,
     micTelefono: false, percorsoContesto: "",   // 3.5: «Parla con la voce» sul telefono/tablet (riconoscimento di Google/Apple): spento finché l'utente non lo accende
-    nonniUrl: "", nonniTitolo: "", nonniAutore: "", nonniEmail: ""   // 3.6: sito del podcast di Nonni Teach (nonni.js)
+    nonniUrl: "", nonniTitolo: "", nonniAutore: "", nonniEmail: "",   // 3.6: sito del podcast di Nonni Teach (nonni.js)
+    lingua: "it", traduzioneIA: true   // 3.7: lingua del programma e traduzione dei contenuti lunghi con l'IA locale (i18n.js)
   };
   PD.server = false;
   /* Modalità ospite (3.4): questo browser è un tablet o un telefono collegato al PC dell'aula (tablet.js, pd_tablet.py).
@@ -117,6 +118,7 @@
 
   var TTS_NAME = { sapi: "voce di Windows", piper: "voce naturale", pico: "pico", "espeak-ng": "espeak-ng", espeak: "espeak" };
   PD.isWindows = function () { return !!(PD.status && PD.status.platform === "windows"); };
+  PD.isMac = function () { return !!(PD.status && PD.status.platform === "mac"); };
   function renderChips() {
     var nb = $('.nav-btn[data-view="setup"]'); if (nb) nb.hidden = !(PD.server && PD.status && PD.status.setup);
     var c = $("#chips"); if (!c) return;
@@ -291,12 +293,27 @@
     if ("speechSynthesis" in window) window.speechSynthesis.cancel();
     speakingUI(false);
   };
-  PD.speak = function (text, force) {
+  /* 3.7: in un'altra lingua (i18n.js) il testo si traduce (dizionario o IA locale) e lo legge una voce del sistema in quella
+   * lingua; se non si può tradurre, o manca una voce in quella lingua, si legge in italiano come prima.
+   * opts.tradotto = il testo è già nella lingua scelta (risposte dell'IA). */
+  var voceLingua = null;          // null = italiano; altrimenti codice BCP 47 (en-GB…) per la voce del browser
+  PD.speak = function (text, force, opts) {
     if (!PD.settings.voice && !force) return Promise.resolve();
+    var I = PD.i18n;
+    if (I && I.attiva() && !(opts && opts.lingua)) {
+      PD.stopSpeech();
+      var gen0 = speech.gen, tradotto = opts && opts.tradotto;
+      return (tradotto ? Promise.resolve(text) : I.traduciTesto(PD.plain(text))).then(function (t) {
+        if (gen0 !== speech.gen) return;
+        var ok = (tradotto || t !== PD.plain(text) || I.conosce(PD.plain(text))) && haVoceLingua(I.bcp());
+        return PD.speak(ok ? t : text, force, { lingua: ok ? I.bcp() : "it-IT" });
+      });
+    }
+    voceLingua = opts && opts.lingua && !/^it/i.test(opts.lingua) ? opts.lingua : null;
     PD.stopSpeech();
     var chunks = splitSentences(PD.plain(text));
     if (!chunks.length) return Promise.resolve();
-    var engine = speechEngine();
+    var engine = voceLingua ? ("speechSynthesis" in window ? "browser" : null) : speechEngine();
     if (!engine) { PD.toast("Nessuna voce disponibile su questo computer."); return Promise.resolve(); }
     var gen = speech.gen;
     speakingUI(true);
@@ -351,8 +368,18 @@
   /* «it-IT», «it_IT» (alcuni Android), «it»: tutte italiane; prima quelle esattamente it-IT */
   function linguaIt(l) { return /^it([-_]|$)/i.test(String(l || "")); }
   var FEMMINILI = /elsa|isabella|alice|federica|paola|emma|giorgia|elena|francesca|chiara|silvia|bianca|carla|serena|female|donna|laura|monica/i;
+  function vociDellaLingua(bcp) {
+    var l = String(bcp || "").slice(0, 2), voci = ("speechSynthesis" in window && window.speechSynthesis.getVoices()) || [];
+    return voci.filter(function (x) { return new RegExp("^" + l + "([-_]|$)", "i").test(x.lang || ""); });
+  }
+  function haVoceLingua(bcp) { return vociDellaLingua(bcp).length > 0; }
   function pickVoice() {
     var voices = window.speechSynthesis.getVoices() || [];
+    if (voceLingua) {                                         // 3.7: voce nella lingua scelta, prima quelle che lavorano sul computer
+      var vl = vociDellaLingua(voceLingua);
+      vl.sort(function (a, b) { function p(v) { return (v.localService === false || /online|natural|google/i.test(v.name) ? -100 : 0) + (v.lang.replace("_", "-") === voceLingua ? 5 : 0); } return p(b) - p(a); });
+      return vl[0] || null;
+    }
     if (PD.voceSpeciale && PD.voceSpeciale.femminile) {      // Neura: una voce italiana femminile, se c'è
       var f = voices.filter(function (x) { return linguaIt(x.lang) && FEMMINILI.test(x.name); })[0];
       if (f) return f;
@@ -394,7 +421,7 @@
     var ss = window.speechSynthesis;
     return new Promise(function (res) {
       var u = new SpeechSynthesisUtterance(testo), partita = false, finita = false, t0 = Date.now(), iv;
-      u.lang = "it-IT"; u.rate = PD.settings.rate; var v = pickVoice(); if (v) u.voice = v;
+      u.lang = voceLingua || "it-IT"; u.rate = PD.settings.rate; var v = pickVoice(); if (v) u.voice = v;
       function fine(esito) { if (finita) return; finita = true; clearInterval(iv); res(esito); }
       u.onstart = function () { partita = true; if (PD.voceSbloccata) PD.voceSbloccata(); };
       u.onend = function () { fine("ok"); };
@@ -662,7 +689,7 @@
       (!PD.server && window.PD_PWA ? '<p class="notice info small">Questa è l\'<b>app per telefono e tablet</b>: lezioni, guida, palestra, quiz e lettura delle lettere funzionano anche senza Internet. ' +
       "I vostri progressi restano su questo dispositivo.</p>" : "") +
       (!PD.server && !window.PD_PWA ? '<p class="notice info small">Questa è la <b>versione portatile</b>: lezioni, guida, lavagna, palestra e quiz funzionano ovunque. ' +
-      "Per l'intelligenza artificiale locale, le voci naturali, il microfono e l'aula installate il programma completo (<b>.exe</b> per Windows, <b>.deb</b> per Linux).</p>" : "") +
+      "Per l'intelligenza artificiale locale, le voci naturali, il microfono e l'aula installate il programma completo (<b>.exe</b> per Windows, <b>.deb</b> per Linux, <b>.zip</b> per Mac).</p>" : "") +
       (PD.isWindows() && !PD.aiReady() && PD.status.ai.recommended && !PD.status.ai.engine ? '<p class="notice info small">💡 Su questo computer può funzionare anche l\'<b>intelligenza artificiale locale</b> ' +
       '(consigliata: ' + esc(PD.status.ai.recommended) + '). <a href="#/setup" data-go="#/setup">Configuratela con un clic</a>.</p>' : "");
     if (PD.renderPromemoria) PD.renderPromemoria($("#home-promemoria", el));
@@ -848,11 +875,11 @@
     var meta = '<div class="meta"><span>' + (m.source === "ai" ? "🤖 " + esc(m.model || "IA locale") : "📚 Guida interna") + "</span>" +
       '<button data-speak="' + i + '">🔊 Riascolta</button>' + (m.diagram ? '<button data-diagram="' + i + '">📊 Schema</button>' : "") +
       (m.lesson ? '<button data-go="#/lessons/' + esc(m.lesson) + (m.step != null ? "/" + m.step : "") + '">📚 Apri la lezione</button>' : "") + "</div>";
-    return '<div class="msg bot">' + PD.md(m.content) + meta + "</div>";
+    return '<div class="msg bot' + (m.source === "ai" || m.tradotto ? " da-ia" : "") + '">' + PD.md(m.content) + meta + "</div>";
   }
   document.addEventListener("click", function (e) {
     var t = e.target.closest("[data-speak]");
-    if (t) { var m = PD.history[+t.getAttribute("data-speak")]; if (m) PD.speak(m.content, true); return; }
+    if (t) { var m = PD.history[+t.getAttribute("data-speak")]; if (m) PD.speak(m.content, true, { tradotto: m.source === "ai" || !!m.tradotto }); return; }
     t = e.target.closest("[data-diagram]");
     if (t) { var d = PD.history[+t.getAttribute("data-diagram")]; var b = $("#ask-board"); if (d && b) { PD.renderDiagram(b, d.diagram, "La lavagna"); b.scrollIntoView({ behavior: "smooth" }); } }
   });
@@ -890,14 +917,24 @@
       r.map(function (x) { return "- " + x.doc.title + ": " + PD.plain(x.doc.answer).replace(/\s+/g, " ").slice(0, 600); }).join("\n");
   }
 
-  function finishAnswer(msg) {
+  function finishAnswerOra(msg) {
     PD.history.push(msg);
     if (PD.history.length > 60) PD.history = PD.history.slice(-60);
     PD.store.save("history", PD.history);
     renderChat();
     var b = $("#ask-board");
     if (msg.diagram) { PD.lastDiagram = { code: msg.diagram, title: "Schema della risposta" }; if (b) PD.renderDiagram(b, msg.diagram, "La lavagna"); }
-    if (PD.settings.autoReadAnswers) PD.speak(msg.content); else PD.setProf("riposo");
+    if (PD.settings.autoReadAnswers) PD.speak(msg.content, false, { tradotto: msg.source === "ai" || !!msg.tradotto }); else PD.setProf("riposo");
+  }
+  /* 3.7: in un'altra lingua la risposta della guida interna (in italiano) si traduce intera con l'IA locale, se c'è */
+  function finishAnswer(msg) {
+    var I = PD.i18n;
+    if (!(I && I.attiva() && msg.source === "kb" && I.iaPronta())) return finishAnswerOra(msg);
+    PD.setProf("pensiero");
+    I.traduciTesto(msg.content).then(function (t) {
+      if (t && t !== msg.content) { msg.content = t; msg.tradotto = I.lingua; }
+      finishAnswerOra(msg);
+    });
   }
 
   function askKB(text, prefix) {
@@ -920,10 +957,11 @@
   function askAI(text) {
     busy = true; PD.setProf("pensiero");
     var box = $("#chat"), bubble = document.createElement("div");
-    bubble.className = "msg bot typing"; bubble.textContent = "";
+    bubble.className = "msg bot typing da-ia"; bubble.textContent = "";
     if (box) { box.appendChild(bubble); box.scrollTop = box.scrollHeight; }
     var stopBtn = $("#stop-gen"); if (stopBtn) stopBtn.hidden = false;
-    var sys = SYSTEM_PROMPT + (PD.settings.teacherName ? "\nIl corso è tenuto da " + PD.settings.teacherName + "." : "") + kbContext(text);
+    var sys = SYSTEM_PROMPT + (PD.settings.teacherName ? "\nIl corso è tenuto da " + PD.settings.teacherName + "." : "") + kbContext(text) +
+      (PD.i18n ? PD.i18n.istruzioneIA() : "");
     var past = PD.history.slice(0, -1).slice(-8).map(function (m) { return { role: m.role, content: m.role === "assistant" ? m.content.slice(0, 1500) : m.content }; });
     var messages = [{ role: "system", content: sys }].concat(past, [{ role: "user", content: text }]);
     var model = PD.currentModel(), full = "";
@@ -1100,10 +1138,11 @@
         (models.length ? ": è attiva." : ", che in questo momento non è attiva: risponde la guida interna.") + "</p>" :
       PD.server ? (S.ai.available
         ? (models.length ? '<p class="notice ok small">' + esc(S.ai.engine_title || "Ollama") + " è attivo. Modelli installati: " + models.length + ".</p>"
-          : '<p class="notice small">Ollama è attivo ma non ha modelli. ' + (PD.isWindows() ? 'Andate in <a href="#/setup" data-go="#/setup">Configura IA e voce</a>.' : "Installate un modello con <code>professore-digitale-setup-ia</code>.") + "</p>")
+          : '<p class="notice small">Ollama è attivo ma non ha modelli. ' + (PD.isWindows() ? 'Andate in <a href="#/setup" data-go="#/setup">Configura IA e voce</a>.' : PD.isMac() ? "Nel Terminale date il comando <code>ollama pull " + esc(S.ai.recommended) + "</code>." : "Installate un modello con <code>professore-digitale-setup-ia</code>.") + "</p>")
+        : PD.isMac() ? '<p class="notice small">L\'IA locale non è attiva: il Professore risponde con la <b>guida interna</b>. Per attivarla scaricate <b>Ollama per Mac</b> da <b>ollama.com</b>, apritelo e poi, nel Terminale, date il comando <code>ollama pull ' + esc(S.ai.recommended) + '</code>.</p>'
         : (PD.isWindows() ? '<p class="notice small">L\'IA locale non è attiva: il Professore risponde con la <b>guida interna</b>. <a href="#/setup" data-go="#/setup">Configurate l\'IA con un clic</a> (il programma sceglie il modello adatto a questo computer).</p>'
           : '<p class="notice small">Ollama non è in esecuzione: il Professore risponde con la <b>guida interna</b>. Per attivare l\'IA aprite un terminale e date il comando <code>professore-digitale-setup-ia</code>.</p>'))
-        : '<p class="notice info small">Nella versione portatile l\'IA non è disponibile: installate il programma completo (.exe o .deb).</p>') +
+        : '<p class="notice info small">Nella versione portatile l\'IA non è disponibile: installate il programma completo (.exe, .deb o .zip per Mac).</p>') +
       sw("s-ai", "Usa l'IA quando disponibile", s.aiEnabled) +
       (models.length ? field("Modello", select("s-model", models.map(function (m) { return [m, m]; }), PD.currentModel())) : "") +
       sw("s-kbctx", "Suggerisci all'IA le informazioni della guida (risposte più precise)", s.useKbContext) +
@@ -1112,6 +1151,7 @@
       (PD.micWeb && PD.micWeb.stato() !== "no" ? PD.micWeb.cartaHTML() :
       PD.ospite ? "" : '<div class="card"><h2 style="margin-top:0">🎤 Microfono</h2>' +
       (PD.sttLocale() ? '<p class="notice ok small">Riconoscimento vocale attivo: <b>' + esc(S.stt.engine) + "</b>.</p>"
+        : PD.isMac() ? '<p class="notice small">Sul Mac il riconoscimento vocale del Professore non è ancora disponibile: potete sempre scrivere le domande.</p>'
         : (PD.isWindows() ? '<p class="notice small">Riconoscimento vocale non installato. Attivatelo da <a href="#/setup" data-go="#/setup">Configura IA e voce</a> (circa 50 MB, una sola volta con Internet, oppure dalla chiavetta).</p>'
           : '<p class="notice small">Riconoscimento vocale non installato. Per attivarlo (circa 50 MB, una sola volta con Internet) aprite un terminale e date il comando <code>professore-digitale-setup-voce</code>.</p>')) +
       sw("s-autosend", "Invia subito la domanda dopo aver parlato", s.autoSendVoice) +
@@ -1267,6 +1307,11 @@
           o.innerHTML = '<div class="notice ok">✅ Aggiornamento scaricato e verificato:<br><code>' + esc(x.file) + '</code><br>Impostazioni e progressi verranno conservati.' +
             '<div class="row" style="margin-top:.6rem"><button class="btn" id="upd-run">▶ Installa adesso</button></div><span class="small muted">Il Professore si chiude e si riapre al termine dell\'installazione.</span></div>';
           $("#upd-run").onclick = function () { api("/api/update-install", { file: x.file }).then(function () { PD.toast("Avvio dell'installazione…", 5000); }).catch(function (e) { PD.toast("Non riuscito: " + e.message); }); };
+          return;
+        }
+        if (x.mac) {
+          o.innerHTML = '<div class="notice ok">✅ Pacchetto scaricato e verificato:<br><code>' + esc(x.file) + "</code><br>Chiudete il Professore, aprite lo zip nella cartella Download " +
+            "e trascinate «Professore Digitale.app» nella cartella Applicazioni, sostituendo quella vecchia.<br>Impostazioni e progressi verranno conservati.</div>";
           return;
         }
         o.innerHTML = '<div class="notice ok">✅ Pacchetto scaricato e verificato:<br><code>' + esc(x.file) + "</code><br>Per installarlo aprite un terminale e date:<br><code>sudo apt install " +
