@@ -62,12 +62,22 @@ powershell -NoProfile -Command "Get-FileHash *.exe,*.deb,*.zip -Algorithm SHA256
 rem --- 4. Il Push della versione deve essere gia' su GitHub ---
 set SUGIT=
 for /f "delims=" %%V in ('call %GH% api -H "Accept: application/vnd.github.raw" repos/%REPO%/contents/VERSION 2^>nul') do set SUGIT=%%V
+if not defined SUGIT (echo. & echo  Non riesco a raggiungere GitHub: Internet si e' interrotto. & echo  Controllate la connessione, aspettate un minuto e rilanciate questo file. & pause & exit /b 1)
 if not "%SUGIT%"=="%VER%" (echo. & echo  Su GitHub la versione e' ancora: %SUGIT% & echo  Fate prima Commit e Push in GitHub Desktop, poi rilanciate questo file. & pause & exit /b 1)
 echo  Su GitHub c'e' la versione %VER%: bene.
 
 rem --- 5. Creo la Release (o completo quella gia' iniziata dal sito) ---
 echo.
 echo  Carico i file: ci vuole qualche minuto, non chiudete la finestra.
+call %GH% release view %TAG% -R %REPO% >nul 2>nul
+if not errorlevel 1 goto esiste
+call %GH% release create %TAG% %FILES% -R %REPO% --target main --title "Professore Digitale %VER%" --notes-file %NOTE% --latest
+if errorlevel 1 goto riprova
+goto fatto
+:riprova
+echo.
+echo  Il caricamento si e' interrotto (di solito per Internet): riprovo tra 30 secondi...
+timeout /t 30 >nul
 call %GH% release view %TAG% -R %REPO% >nul 2>nul
 if not errorlevel 1 goto esiste
 call %GH% release create %TAG% %FILES% -R %REPO% --target main --title "Professore Digitale %VER%" --notes-file %NOTE% --latest
