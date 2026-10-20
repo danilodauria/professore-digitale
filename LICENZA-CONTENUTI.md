@@ -9,7 +9,9 @@ Sono contenuti, e quindi coperti da questa licenza:
   «Il Grande Quiz dell'Informatica» e i percorsi su FeniceOS e sul libro «Tecnologia Gentile»;
 - i percorsi, gli incontri pronti, i simulatori e i giochi come testi e scenari;
 - i vademecum (Linux e Windows), le guide e i libretti in PDF e le loro sorgenti in `docs/`;
-- le immagini, le icone, la grafica, il personaggio del Professore e il marchio della fenice.
+- **Nonni Teach** (dalla 3.6, trasferito dal Consulente Digitale): la banca delle domande, i contesti, i temi, la liberatoria,
+  i testi delle pagine e la copertina del podcast (`src/web/js/data-nonni.js`, `src/web/js/nonni.js`, `src/web/img/nonni-teach/`);
+- le immagini, le icone, la grafica, il personaggio del Professore, il cervello digitale «Neura» e il marchio della fenice.
 
 © 2026 Danilo D'Auria — distribuiti con licenza
 **Creative Commons Attribuzione – Non commerciale – Condividi allo stesso modo 4.0 Internazionale (CC BY-NC-SA 4.0)**.
@@ -42,5 +44,8 @@ sul diritto d'autore (L. 633/1941). Per usi diversi da quelli consentiti, contat
 - Il **codice** del programma è distribuito con licenza MIT (file `LICENSE`).
 - I **componenti di altri autori** inclusi (Mermaid, tesseract.js, Piper, le voci Giorgio, Serena e Paola, Vosk…)
   mantengono la propria licenza: vedi `packaging/copyright` (Linux) e `windows/LICENZE.txt` (Windows).
+- Le **registrazioni di Nonni Teach** appartengono alle persone intervistate e a chi le realizza: restano sul computer e si
+  pubblicano solo con il loro consenso, con la licenza indicata nella liberatoria (il sito del podcast propone CC BY-NC-SA 4.0).
+- **FFmpeg**, che Nonni Teach usa per montare il podcast se lo installate voi, ha la sua licenza e si scarica dalle fonti ufficiali.
 - I **pacchetti di contenuti creati dagli utenti** con «Crea lezioni e quiz» appartengono a chi li scrive, che
   sceglie la licenza nel campo `licenza` del pacchetto.

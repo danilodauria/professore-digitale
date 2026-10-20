@@ -161,6 +161,9 @@
         imposta(vista("tablet"), "📱", "Tablet dell'aula", "#/tablet");
         x.disponibile = !!(PD.server && !PD.ospite);
         break;
+      case "nonni":
+        imposta(vista("nonni") && PD.nonniTeach, "🎙️", "Nonni Teach: Neura intervista i nonni", "#/nonni");
+        break;
       case "pratica":
         x.ok = !!a.k && !!a.t; x.ico = "✍️"; x.titolo = a.t || "Attività in presenza";
         break;

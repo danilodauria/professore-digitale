@@ -93,11 +93,13 @@
     var tocco = PD.mobile, el = document.createElement("div");
     el.className = "pd-tocca"; el.id = "pd-tocca";
     el.setAttribute("role", "dialog"); el.setAttribute("aria-modal", "true"); el.setAttribute("aria-labelledby", "pd-tocca-tit");
+    var neura = !!(PD.neura && PD.neura.attiva());     // 3.6: in Nonni Teach parla Neura
     el.innerHTML = '<button type="button" class="pd-tocca-btn" id="pd-tocca-btn">' +
-      '<svg class="prof riposo" aria-hidden="true"><use href="#prof-svg"/></svg>' +
+      (neura ? '<canvas class="neura-tocca" width="150" height="150" aria-hidden="true"></canvas>' : '<svg class="prof riposo" aria-hidden="true"><use href="#prof-svg"/></svg>') +
       '<span class="pd-tocca-tit" id="pd-tocca-tit">👋 ' + (tocco ? "Toccate qui per cominciare" : "Fate clic qui per cominciare") + "</span>" +
-      '<span class="pd-tocca-sub">Così il Professore può parlarvi con la sua voce.</span></button>';
+      '<span class="pd-tocca-sub">' + (neura ? "Così Neura può parlarvi con la sua voce." : "Così il Professore può parlarvi con la sua voce.") + "</span></button>";
     document.body.appendChild(el);
+    if (neura) PD.neura.crea(el.querySelector("canvas"), { mini: true });
     invito = { el: el, riprova: riprova, toccato: false };
     var btn = el.querySelector("button");
     btn.onclick = function () {

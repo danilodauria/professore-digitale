@@ -93,7 +93,7 @@ CENSIMENTO_JS = r"""() => {
   const pacchetti = {}; PD.lessonsOf('cultura').forEach(L => pacchetti[L.pack] = 1);
   Object.keys(pacchetti).forEach(p => add('cultura:' + p, 'cultura'));
   const viste = { truffa: 'truffa', lettera: 'lettera', ripasso: 'ripasso', competenze: 'competenze', ask: 'chiedi', settings: 'impostazioni',
-    profili: 'profili', board: 'lavagna', editor: 'editor', aula: 'aula', tablet: 'tablet', quiz: 'quiz', libro: 'libro', fenice: 'fenice', mente: 'mente' };
+    profili: 'profili', board: 'lavagna', editor: 'editor', aula: 'aula', tablet: 'tablet', quiz: 'quiz', libro: 'libro', fenice: 'fenice', mente: 'mente', nonni: 'nonni' };
   const altreViste = Object.keys(PD.views).filter(v => !viste[v] && ['home', 'lessons', 'practice', 'vita', 'cultura', 'enti', 'percorso'].indexOf(v) < 0);
   Object.keys(viste).forEach(v => { if (PD.views[v]) add(viste[v], 'vista'); });
   const rif = PD.percorsi.riferimenti(), presi = {};
@@ -149,7 +149,7 @@ RIMANDI_JS = r"""() => {
       case 'enti': return ['incontri', 'registro', 'resoconto', 'digcomp'].indexOf(id) >= 0 && !!PD.views.enti;
       case 'pratica': return !!(x.att.k && x.att.t);
       default: { const v = { libro: 'libro', fenice: 'fenice', truffa: 'truffa', lettera: 'lettera', ripasso: 'ripasso', competenze: 'competenze',
-        impostazioni: 'settings', profili: 'profili', lavagna: 'board', editor: 'editor', aula: 'aula', tablet: 'tablet' }[x.tipo];
+        impostazioni: 'settings', profili: 'profili', lavagna: 'board', editor: 'editor', aula: 'aula', tablet: 'tablet', nonni: 'nonni' }[x.tipo];
         return !!(v && PD.views[v] && document.getElementById('view-' + v)); }
     }
   };

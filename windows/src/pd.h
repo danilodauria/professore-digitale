@@ -241,6 +241,10 @@ void setup_api(req_t *r, const char *path);
 void setup_plan_json(buf_t *b);
 const char *setup_recommended_model(void);
 
+/* Nonni Teach (3.6): interviste, podcast e sito (pd_nonni.c) */
+void   nonni_api(req_t *r, int post);
+size_t nonni_limite(const char *path);   /* corpo massimo per audio e .cdbackup, 0 = normale */
+
 /* zip */
 int unzip_to(const wchar_t *zip, const wchar_t *dest, volatile LONG *cancel, char *err, size_t errn);
 

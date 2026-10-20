@@ -407,6 +407,41 @@ st, t5 = call("/api/tablet", {"azione": "spegni"})
 time.sleep(0.5)
 check("tablet: «Spegni» chiude la porta", t5["attivo"] is False and t5["codice"] == "" and porta_chiusa(TP), t5)
 
+# --- Nonni Teach (3.6): montaggio del podcast con un FFmpeg finto (la riga di comando e i capitoli) ---
+ffdir = os.path.join(WORK, "dati", "locale", "ffmpeg")
+os.makedirs(ffdir, exist_ok=True)
+cc = subprocess.run(["i686-w64-mingw32-gcc", "-O1", "-o", os.path.join(ffdir, "ffmpeg.exe"), os.path.join(os.path.dirname(os.path.abspath(__file__)), "dati", "finto-ffmpeg.c")],
+                    stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+check("nonni: FFmpeg finto compilato", cc.returncode == 0, cc.stdout[-300:])
+st, info = call("/api/nonni")
+check("nonni: FFmpeg trovato in %LOCALAPPDATA%\\ProfessoreDigitale\\ffmpeg", st == 200 and info["ffmpeg"] is True and info["sistema"] == "windows", info)
+st, ep = call("/api/nonni/salva", {"episodio": {"intervistato": "nonna Win", "luogo": "Napoli", "consenso_registrare": True, "consenso_pubblicare": False,
+                                                 "domande": [{"testo": "Prima domanda"}, {"testo": "Seconda: con \"virgolette\" e = ; #"}, {"testo": "Terza"}]}})
+check("nonni: intervista salvata (Windows)", st == 200 and ep.get("id", "").endswith("nonna-win"), ep)
+wav = b"RIFF" + b"\0" * 2000
+for n in (1, 2):
+    req = urllib.request.Request(BASE + "/api/nonni/%s/audio/%d" % (ep["id"], n), data=wav, headers={"Content-Type": "audio/wav"}, method="POST")
+    with urllib.request.urlopen(req, timeout=60) as r:
+        q = json.loads(r.read().decode())
+    check("nonni: risposta %d salvata con la durata letta da FFmpeg" % n, q["file"] == "r%02d.wav" % n and abs(q["durata"] - 1.2) < 0.11, q)
+st, m = call("/api/nonni/%s/monta" % ep["id"], {})
+check("nonni: podcast montato (Windows)", st == 200 and m.get("ok") and m.get("podcast") == "podcast.mp3", m)
+caps = m.get("capitoli") or []
+voce = m.get("voce_domande")
+attesi = 3 if voce else 2          # presentazione + 2 domande con la voce di Neura, altrimenti solo le 2 risposte
+check("nonni: capitoli giusti", len(caps) == attesi and (not voce or caps[0]["titolo"] == "Presentazione") and caps[-1]["titolo"].startswith("2. Seconda"), caps)
+arg = open(os.path.join(ffdir, "ffmpeg-argomenti.txt"), encoding="utf-8", errors="replace").read().split("----\n")
+mont = [a.split("\n") for a in arg if "-filter_complex" in a]
+pezzi = 5 if voce else 2
+check("nonni: riga di comando del montaggio (ingressi, filtri, capitoli)", mont and mont[-1].count("-i") == pezzi + 1 and
+      ("concat=n=%d:v=0:a=1[out]" % pezzi) in mont[-1][mont[-1].index("-filter_complex") + 1] and mont[-1][mont[-1].index("-map_chapters") + 1] == str(pezzi)
+      and mont[-1][-2].endswith("podcast.mp3"), mont[-1] if mont else arg[-2:])
+cap_txt = open(os.path.join(WORK, "dati", "nonni-teach", ep["id"], "capitoli.txt"), encoding="utf-8").read()
+check("nonni: capitoli.txt con i caratteri speciali protetti", cap_txt.startswith(";FFMETADATA1") and "\\=" in cap_txt and "\\;" in cap_txt and "\\#" in cap_txt, cap_txt[:300])
+st, e = call("/api/nonni/" + ep["id"])
+check("nonni: l'intervista ricorda podcast, capitoli e durata", e.get("podcast") == "podcast.mp3" and len(e.get("capitoli", [])) == attesi and e.get("durata", 0) > 0, e)
+call("/api/nonni/%s/elimina" % ep["id"], {})
+
 # --- chiusura ---
 rt = os.path.join(WORK, "dati", "locale", "runtime.json")
 check("file di esecuzione presente", os.path.isfile(rt))

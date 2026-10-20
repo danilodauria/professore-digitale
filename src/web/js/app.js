@@ -26,7 +26,8 @@
     aulaRuolo: "", aulaNome: "Aula", aulaCodice: "", aulaServer: "",
     voiceCommands: false, tremore: false, vista: false, leggiFocus: false, domandaGiorno: true, aulaManoSuono: true,
     tabletCondividi: false,
-    micTelefono: false, percorsoContesto: ""    // 3.5: «Parla con la voce» sul telefono/tablet (riconoscimento di Google/Apple): spento finché l'utente non lo accende
+    micTelefono: false, percorsoContesto: "",   // 3.5: «Parla con la voce» sul telefono/tablet (riconoscimento di Google/Apple): spento finché l'utente non lo accende
+    nonniUrl: "", nonniTitolo: "", nonniAutore: "", nonniEmail: ""   // 3.6: sito del podcast di Nonni Teach (nonni.js)
   };
   PD.server = false;
   /* Modalità ospite (3.4): questo browser è un tablet o un telefono collegato al PC dell'aula (tablet.js, pd_tablet.py).
@@ -257,7 +258,10 @@
     if (browserOk) return "browser";
     return null;
   }
+  /* 3.6: mentre conduce Neura (Nonni Teach, neura.js) la voce è la sua: PD.voceSpeciale = { server: "id voce del PC", femminile: true } */
+  PD.voceSpeciale = null;
   function speakingUI(on) {
+    if (PD.onSpeaking) PD.onSpeaking(on);
     $("#btn-stop").hidden = !on;
     if (on) PD.setProf("spiegazione");
     else if (PD.profState === "spiegazione") PD.setProf("riposo");
@@ -319,7 +323,7 @@
     var ctrl = new AbortController(); speech.ctrl = ctrl;
     return fetch("/api/tts", {
       method: "POST", headers: { "Content-Type": "application/json" }, signal: ctrl.signal,
-      body: JSON.stringify({ text: text, rate: PD.settings.rate, voice: PD.settings.voiceId || "" })
+      body: JSON.stringify({ text: text, rate: PD.settings.rate, voice: (PD.voceSpeciale && PD.voceSpeciale.server) || PD.settings.voiceId || "" })
     }).then(function (r) {
       if (!r.ok) return r.json().then(function (j) { throw new Error(j.error || "errore voce"); });
       return r.blob();
@@ -346,8 +350,13 @@
   }
   /* «it-IT», «it_IT» (alcuni Android), «it»: tutte italiane; prima quelle esattamente it-IT */
   function linguaIt(l) { return /^it([-_]|$)/i.test(String(l || "")); }
+  var FEMMINILI = /elsa|isabella|alice|federica|paola|emma|giorgia|elena|francesca|chiara|silvia|bianca|carla|serena|female|donna|laura|monica/i;
   function pickVoice() {
     var voices = window.speechSynthesis.getVoices() || [];
+    if (PD.voceSpeciale && PD.voceSpeciale.femminile) {      // Neura: una voce italiana femminile, se c'è
+      var f = voices.filter(function (x) { return linguaIt(x.lang) && FEMMINILI.test(x.name); })[0];
+      if (f) return f;
+    }
     if (PD.settings.browserVoice) {
       var v = voices.filter(function (x) { return x.name === PD.settings.browserVoice; })[0];
       if (v) return v;

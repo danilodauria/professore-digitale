@@ -112,6 +112,9 @@ with sync_playwright() as p:
         "cos'è il wifi": "Cos'è il Wi-Fi?",
         "come si allega una foto": "Come si allega una foto a un'email?",
         "dove sono i file scaricati": "Dove trovo i file scaricati?",
+        "come registro i ricordi dei nonni": "Cos'è Nonni Teach?",
+        "fare un podcast con i nonni": "Cos'è Nonni Teach?",
+        "chi è neura": "Chi è Neura?",
     }
     if page.evaluate("PD_KB.some(e => e.pack === 'vita-quotidiana')"):
         probe.update({"come stampo una lettera": "Come stampo un documento?", "posso usare il wifi del bar": "Posso usare il Wi-Fi pubblico?",
@@ -442,7 +445,7 @@ with sync_playwright() as p:
 
     # --- moduli della 3.2: ognuno ha il suo file tests/ui_<modulo>.py con prova(page, ROOT, check, SHOTS) ---
     import importlib.util
-    for _nome in ("ui_vita", "ui_vita2", "ui_truffa", "ui_profili", "ui_ripasso", "ui_accessibilita", "ui_enti", "ui_registro", "ui_lettera", "ui_aula_mano", "ui_editor", "ui_mente", "ui_mente_giochi", "ui_tablet", "ui_mobile", "ui_percorsi", "ui_licenza"):
+    for _nome in ("ui_vita", "ui_vita2", "ui_truffa", "ui_profili", "ui_ripasso", "ui_accessibilita", "ui_enti", "ui_registro", "ui_lettera", "ui_aula_mano", "ui_editor", "ui_mente", "ui_mente_giochi", "ui_nonni", "ui_tablet", "ui_mobile", "ui_percorsi", "ui_licenza"):
         _s = importlib.util.spec_from_file_location(_nome, os.path.join(os.path.dirname(os.path.abspath(__file__)), _nome + ".py"))
         _m = importlib.util.module_from_spec(_s); _s.loader.exec_module(_m)
         print("  ·· " + _nome)

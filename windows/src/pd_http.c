@@ -169,7 +169,7 @@ static void serve_conn(SOCKET s, int ospite) {
     InterlockedExchange(&G.last_seen, (LONG)GetTickCount());
     if (!strcmp(r.method, "POST")) {
         if (!ospite && !origin_ok(&r)) { send_error(&r, 403, "origine non consentita"); goto out; }
-        size_t limit = !strcmp(r.path, "/api/stt") ? PD_MAX_BODY : PD_MAX_JSON + 64 * 1024;
+        size_t limit = !strcmp(r.path, "/api/stt") ? PD_MAX_BODY : nonni_limite(r.path) ? nonni_limite(r.path) : PD_MAX_JSON + 64 * 1024;
         if (r.clen < 0 || (unsigned long long)r.clen > limit) { send_error(&r, 400, "richiesta troppo grande"); goto out; }
         r.body = (char *)malloc((size_t)r.clen + 1);
         if (!r.body) { send_error(&r, 500, "memoria insufficiente"); goto out; }

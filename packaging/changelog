@@ -1,3 +1,19 @@
+professore-digitale (3.6.0) stable; urgency=medium
+
+  * 🎙️ Nuovo: Nonni Teach. Neura intervista i nonni, registra le
+    risposte e crea il podcast con i capitoli, da ascoltare e, con il
+    consenso, pubblicare
+  * Quando aprite Nonni Teach conduce Neura, il cervello digitale, con la
+    sua voce; quando uscite torna il Professore
+  * Le interviste registrate con il Consulente Digitale si copiano qui con
+    un clic, oppure da un backup .cdbackup
+  * Il sito del podcast ha la copertina e l'email di contatto chieste da
+    Spotify e Apple Podcasts
+  * Nonni Teach entra nei percorsi di centro anziani, scuola primaria,
+    biblioteca, casa, parrocchia e casa di riposo
+
+ -- Danilo D'Auria <danilodauria.site@gmail.com>  Tue, 20 Oct 2026 00:12:47 +0200
+
 professore-digitale (3.5.3) stable; urgency=medium
 
   * Corretto un errore grave del pacchetto per Linux: nella 3.5.2 mancava

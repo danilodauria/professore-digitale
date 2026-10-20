@@ -52,6 +52,7 @@ sys.path.insert(0, HERE)
 import pd_packs  # noqa: E402  (pacchetti di contenuti)
 import pd_aula   # noqa: E402  (quadro dell'aula in rete locale, stato della connessione)
 import pd_tablet  # noqa: E402  (condivisione con i tablet dell'aula, spenta se non la si accende)
+import pd_nonni   # noqa: E402  (Nonni Teach: interviste, podcast e sito, dalla 3.6)
 
 SHARE_DIR = os.path.normpath(os.path.join(HERE, ".."))
 WEB_DIR = os.path.normpath(os.environ.get("PD_WEB_DIR") or os.path.join(SHARE_DIR, "web"))
@@ -104,6 +105,7 @@ UPDATE_URL_DEFAULT = DISTRIBUZIONE.get("aggiornamenti_url") or \
 
 DATA_KEYS = ("settings", "progress", "history", "board", "practice", "profili", "registro")
 MAX_BODY = 8 * 1024 * 1024        # 8 MB (audio del microfono)
+COPERTINA_NONNI = os.path.join(WEB_DIR, "img", "nonni-teach", "copertina.jpg")
 MAX_JSON = 2 * 1024 * 1024
 MAX_TTS_CHARS = 6000
 
@@ -394,6 +396,20 @@ def synthesize(text, rate=1.0, engine=None, voice=None):
             last_err = e
             log("TTS", vid, "fallito:", e)
     raise RuntimeError("sintesi vocale non riuscita: %s" % last_err)
+
+
+def voce_neura():
+    """Neura (Nonni Teach) ha una voce femminile: prima Serena o Paola (Piper), poi Pico o espeak-ng femminile."""
+    voci = tts_voices()
+    for cond in (lambda v: v["genere"] == "f" and v["naturale"], lambda v: v["genere"] == "f"):
+        for v in voci:
+            if cond(v):
+                return v["id"]
+    return None
+
+
+def sintetizza_neura(testo):
+    return synthesize(testo, 0.95, None, voce_neura())[0]
 
 
 # ------------------------------------------------------------------------------
@@ -777,10 +793,38 @@ class Handler(BaseHTTPRequestHandler):
             if key not in DATA_KEYS:
                 return self._error(404, "chiave sconosciuta")
             return self._send(200, {"ok": True, "value": read_json_file(os.path.join(DATA_DIR, key + ".json"))})
+        if path.startswith("/api/nonni"):
+            return self._nonni_get(path)
+        return self._error(404, "API sconosciuta")
+
+    # --- Nonni Teach (3.6): solo da questo PC, mai dai tablet ---
+    def _nonni_get(self, path):
+        try:
+            if path == "/api/nonni":
+                return self._send(200, {"ok": True, "episodi": pd_nonni.elenco(DATA_DIR), "ffmpeg": bool(pd_nonni.ffmpeg()),
+                                        "voce_neura": voce_neura(), "sito": os.path.join(DATA_DIR, "nonni-teach-sito"),
+                                        "url_predefinito": pd_nonni.SITO_PREDEFINITO, "consulente": pd_nonni.stato_consulente(DATA_DIR),
+                                        "sistema": "linux"})
+            if path == "/api/nonni/sito.zip":
+                zp = os.path.join(DATA_DIR, "nonni-teach-sito.zip")
+                if not os.path.isfile(zp):
+                    return self._error(404, "prima create il sito")
+                with open(zp, "rb") as f:
+                    return self._send(200, f.read(), "application/zip", {"Content-Disposition": 'attachment; filename="nonni-teach-sito.zip"'})
+            parti = path.split("/")
+            if len(parti) == 4:
+                return self._send(200, dict(pd_nonni.leggi(DATA_DIR, parti[3]), ok=True))
+            if len(parti) == 6 and parti[4] == "file":
+                dati, ctype = pd_nonni.file_audio(DATA_DIR, parti[3], urllib.parse.unquote(parti[5]))
+                return self._send(200, dati, ctype)
+        except ValueError as e:
+            return self._error(404, str(e))
         return self._error(404, "API sconosciuta")
 
     # --- API POST ---
     def _api_post(self, path):
+        if path.startswith("/api/nonni/"):
+            return self._nonni_post(path)
         if path == "/api/heartbeat":
             self._read_body(1024)
             return self._send(200, {"ok": True})
@@ -933,6 +977,34 @@ class Handler(BaseHTTPRequestHandler):
             threading.Thread(target=self.server.shutdown, daemon=True).start()
             return None
 
+        return self._error(404, "API sconosciuta")
+
+    def _nonni_post(self, path):
+        ctype = (self.headers.get("Content-Type") or "").split(";")[0].strip()
+        m = re.match(r"^/api/nonni/([a-z0-9-]+)/audio/(\d{1,2})$", path)
+        if m:
+            if not ctype.startswith("audio/"):
+                raise ValueError("serve un file audio")
+            corpo = self._read_body(pd_nonni.MAX_AUDIO)
+            return self._send(200, dict(pd_nonni.salva_audio(DATA_DIR, m.group(1), m.group(2), corpo, ctype), ok=True))
+        if path == "/api/nonni/importa-backup":
+            corpo = self._read_body(pd_nonni.MAX_BACKUP)
+            return self._send(200, pd_nonni.importa_backup(DATA_DIR, corpo))
+        req = self._read_json()
+        if path == "/api/nonni/salva":
+            return self._send(200, dict(pd_nonni.salva(DATA_DIR, req.get("episodio")), ok=True))
+        if path == "/api/nonni/sito":
+            return self._send(200, pd_nonni.crea_sito(DATA_DIR, req.get("url"), req.get("titolo"), req.get("autore"), req.get("email"), COPERTINA_NONNI))
+        if path == "/api/nonni/importa":
+            return self._send(200, pd_nonni.importa_consulente(DATA_DIR))
+        m = re.match(r"^/api/nonni/([a-z0-9-]+)/(monta|elimina)$", path)
+        if m:
+            if m.group(2) == "elimina":
+                return self._send(200, pd_nonni.elimina(DATA_DIR, m.group(1)))
+            try:
+                return self._send(200, pd_nonni.monta(DATA_DIR, m.group(1), sintetizza_neura if tts_engines() else None))
+            except RuntimeError as e:
+                return self._error(500, str(e))
         return self._error(404, "API sconosciuta")
 
     # --- chat in streaming verso Ollama ---

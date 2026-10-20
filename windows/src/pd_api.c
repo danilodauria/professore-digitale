@@ -1,5 +1,5 @@
 /* Professore Digitale per Windows - API (stesse risposte del server Python di Linux)
- * /api/status, chat, tts, stt, data/(chiave), packs, update-check, update-download, update-install, setup/(azione)
+ * /api/status, chat, tts, stt, data/(chiave), packs, update-check, update-download, update-install, setup/(azione), nonni (pd_nonni.c)
  * Ideato e sviluppato da Danilo D'Auria - Licenza MIT */
 #include "pd.h"
 #include <shellapi.h>
@@ -400,6 +400,10 @@ void handle_api(req_t *r) {
     jv *req = NULL;
 
     if (!strncmp(path, "/api/setup/", 11)) { setup_api(r, path + 11); return; }
+    if (!strncmp(path, "/api/nonni", 10) && (!path[10] || path[10] == '/')) {   /* Nonni Teach: solo da questo PC */
+        if (r->ospite) { send_error(r, 403, "non consentito dai tablet"); return; }
+        nonni_api(r, post); return;
+    }
     if (!r->ospite && !strcmp(path, "/api/tablet")) {        /* condivisione con i tablet: solo da questo PC */
         if (!post) { tablet_api(r, NULL); return; }
         req = read_json(r, err, sizeof err);

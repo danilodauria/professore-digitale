@@ -10,6 +10,8 @@ ESITO=0
 
 echo "== 1. Formato dei pacchetti di contenuti"
 python3 tests/test_packs.py || ESITO=1
+echo "== 1a1. Nonni Teach (interviste, trasferimento dal Consulente, sito e feed del podcast)"
+python3 tests/test_nonni.py || ESITO=1
 echo "== 1a. Licenze (codice MIT, contenuti CC BY-NC-SA 4.0)"
 python3 tests/test_licenza.py || ESITO=1
 echo "== 1a2. Pacchetto .deb (se già compilato in dist/)"

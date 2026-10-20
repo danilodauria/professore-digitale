@@ -25,6 +25,10 @@ Leggere questo file per intero prima di modificare qualunque cosa.
      (2 alla volta) e `POST /api/ospite/presenza` (quadro dell'aula, stessa validazione di `/aula/ciao`). Tutto il resto → 403
      (dati, pacchetti, aggiornamenti, setup, aula, spegnimento, microfono). I progressi dei tablet restano nel loro browser.
      «Cambia codice» chiude tutte le sessioni, «Spegni» chiude la porta. L'ascolto principale resta solo su 127.0.0.1.
+- **Nonni Teach (3.6)** non apre collegamenti da solo: «🎧 Carica gli episodi» legge il feed del podcast pubblicato (`…/nonni-teach/feed.xml`)
+  dal browser SOLO quando l'utente lo preme (come «Controlla aggiornamenti»). Le registrazioni restano in `<dati>/nonni-teach/`; il sito
+  (`nonni-teach-sito/` + zip) lo carica l'utente nel repository GitHub `danilodauria/nonni-teach`. FFmpeg (montaggio) non è incluso:
+  si spiega come installarlo (`sudo apt install ffmpeg`, `winget install --id Gyan.FFmpeg -e` o `ffmpeg.exe` in `%LOCALAPPDATA%\ProfessoreDigitale\ffmpeg`).
 - **Microfono del telefono (3.5, `voce.js`)**: NON è un collegamento del programma ma un servizio del sistema del telefono.
   Solo nell'app per telefono e tablet (PWA) e sui tablet ospiti, dove la trascrizione locale del PC non c'è, «🎤 Parla con la voce»
   usa la Web Speech API del browser (`SpeechRecognition`, it-IT): su Chrome/Android e Safari/iOS la voce va ai server di
@@ -58,7 +62,7 @@ Leggere questo file per intero prima di modificare qualunque cosa.
 | `src/server/pd_tablet.py`, `windows/src/pd_tablet.c` | **Tablet dell'aula** (3.4): stato della condivisione, codice, sessioni, limite dei tentativi, pagina del codice, IP ammessi |
 | `src/server/pd_packs.py` | Formato e validazione dei pacchetti di contenuti (gemello di `src/web/js/packs.js`) |
 | `src/server/pd_stt_worker.py` | Riconoscimento vocale (Vosk / faster-whisper) in processo separato |
-| `src/web/js/data-lessons.js`, `data-kb.js` | 13 lezioni e 43 risposte di base |
+| `src/web/js/data-lessons.js`, `data-kb.js` | 13 lezioni e 45 risposte di base |
 | `src/contenuti/*.json` | Pacchetti di contenuti inclusi nel .deb e nella versione portatile |
 | `src/web/js/app.js` | Interfaccia, ricerca nella guida (`PD.search`), voce, chat IA, impostazioni, `migrate()` |
 | `src/web/js/packs.js` | Caricamento/validazione pacchetti lato browser (stesse regole di `pd_packs.py`) |
@@ -94,6 +98,10 @@ Leggere questo file per intero prima di modificare qualunque cosa.
 | `src/web/js/data-percorsi.js`, `percorsi.js`, `css/percorsi.css` | **«Il nostro percorso»** (3.5): maschera all'avvio (dove si usa il Professore → chi lo usa → questionario di 8 domande), pagina `#/percorso` (mappa delle 8 fasi, «Continua da qui», spunte automatiche e manuali, stampa del programma per l'ente), riquadro in cima all'Inizio e nelle Impostazioni. `data-percorsi.js` = linea guida in 8 fasi uguale per tutti (accoglienza, dispositivo, comunicare, **sicurezza mai saltata**, servizi, quotidiano, mente e cultura, autonomia), biblioteca di tappe e 12 contesti; API `PD.percorsi` |
 | `src/web/js/editor.js` | «Crea lezioni e quiz» (3.3): editor visuale di pacchetti di contenuti, salva con `PD.packs.importText`; campo facoltativo `senza_attestato` nelle prove |
 | `tools/voci.sh`, `packaging/voci/` | Scarica e verifica (SHA-256) le **voci naturali incluse**: Piper Linux x86_64/aarch64 e Windows x64, voci **Giorgio** (m, predefinita), **Serena** (f) e Paola (f); Riccardo (x_low) tolto nella 3.3. I `.onnx.json` di Giorgio e Serena (CC BY 4.0) stanno ripuliti in `packaging/voci/` (`copia_voci DEST`). Cache in `~/.cache/professore-digitale/voci` |
+| `src/server/pd_nonni.py`, `windows/src/pd_nonni.c` | **Nonni Teach** (3.6, trasferito identico dal Consulente Digitale): interviste in `<dati>/nonni-teach/<id>/` (`episodio.json`, `rNN.*` risposte, `dNN.wav`/`intro.wav` voce di Neura, `podcast.mp3`, `capitoli.txt`), montaggio FFmpeg con capitoli ID3, sito + feed RSS con copertina ed email (Spotify/Apple), zip, trasferimento dal Consulente (cartella dello stesso PC `importa_consulente`, `PD_CONSULENTE_DIR` nei test; file `.cdbackup` `importa_backup`). API in **entrambi** i server: `GET /api/nonni`, `/api/nonni/<id>`, `/api/nonni/<id>/file/<nome>`, `/api/nonni/sito.zip`; `POST /api/nonni/salva`, `/api/nonni/<id>/audio/<n>` (corpo audio, max 80 MB), `/api/nonni/<id>/monta|elimina`, `/api/nonni/sito`, `/api/nonni/importa`, `/api/nonni/importa-backup` (max 400 MB). Mai dai tablet (403). Consenso a registrare obbligatorio anche lato server |
+| `src/web/js/nonni.js`, `data-nonni.js`, `css/nonni.css` | Pagina `#/nonni` (Nuova intervista, Archivio, Pubblica e ascolta, Liberatoria; sui tablet/PWA/portatile solo ascolto e liberatoria) e banca delle domande (216 domande, 24 temi, 7 contesti: **identica** a quella del Consulente). Preferenze del sito in `DEFAULTS`: `nonniUrl`, `nonniTitolo`, `nonniAutore`, `nonniEmail` |
+| `src/web/js/neura.js` | **Neura**, il cervello olografico del Consulente: `PD.neura.crea/stato/livello`; **cambio di conduttore**: `PD.neura.entra()` (aprendo `#/nonni`: marchio in alto, voce femminile con `PD.voceSpeciale = {server, femminile}` letta da `fetchWav`/`pickVoice` in app.js, `PD.onSpeaking` → stato «parla») e `PD.neura.esci()` su ogni `hashchange` verso un'altra sezione (torna il Professore). Saluto solo la prima volta per sessione (`pd.neuraSalutata`) |
+| `src/web/img/nonni-teach/copertina.jpg`, `tools/copertina-nonni.py` | Copertina del podcast 3000×3000 (Apple/Spotify), rigenerabile con Pillow; poi `tools/licenza-immagini.py` |
 | `archivio/` | .deb prodotti in questa copia (ignorato da git, escluso dall'archivio sorgenti). I .deb pubblicati si conservano sul PC di Danilo in `$ARCHIVIO` (`~/professore-digitale-archivio`, vedi `rilascio.conf`) |
 
 ## Comandi
@@ -128,6 +136,7 @@ PD_SHARE_DIR=src python3 packaging/professore-digitale-contenuti valida src/cont
   Il «Grande Quiz dell'Informatica» (prova `informatica`, 264 domande) è il manuale di Danilo: non alterarne domande e risposte.
 - Dati nuovi in `progress.json`: `quiz` (risultati per prova), `attestati`, `promemoria`, `ultimoAnnuncio`;
   dalla 3.2 `vita`, `truffa`, `ripasso`, `profilo`. Chiavi dati nuove (server Python e C): `profili`, `registro`.
+  Dalla 3.6 le interviste di Nonni Teach stanno in file a parte (`<dati>/nonni-teach/`), non nelle chiavi dati.
   Dalla 3.5 `percorso` (per profilo): `{ contesto, chi, livello, risposte: {domanda: "si"|"poco"|"no"}, spunte: {chiave: true},
   iniziato, aggiornato, ultimaTappa, nonChiedere }`; le spunte usano chiavi di attività (`lezione:mouse`, `pratica:desideri`, `tappa:mouse`)
   e non dipendono dal contesto: cambiando contesto i progressi restano.
@@ -147,6 +156,11 @@ PD_SHARE_DIR=src python3 packaging/professore-digitale-contenuti valida src/cont
   si riprova al tocco successivo. Il saluto (presenza.js) su telefono/tablet mostra subito l'invito; sul PC, se il saluto parte,
   nulla cambia. Sui telefoni (`PD.mobile`) un solo elemento audio (`PD.lettoreAudio()`) sbloccato al primo tocco, frasi ≤ 160
   caratteri, attesa delle voci (iOS) fino a 1,5 s, voce `it-IT` anche se il browser scrive `it_IT`, `resume()` se resta in pausa.
+- **Nonni Teach nei test**: `tests/test_nonni.py` (pd_nonni senza browser: trasferimento, .cdbackup malevoli, feed, copertina), `tests/ui_nonni.py`
+  (Python e Wine: Neura entra/esce, API, WAV generato nel browser, montaggio con o senza FFmpeg, sito e zip; le richieste che devono fallire si fanno
+  con urllib, non dal browser, perché `test_ui.py` conta gli errori della console), `tests/test_windows_api.py` monta il podcast con un **FFmpeg finto**
+  (`tests/dati/finto-ffmpeg.c`). FFmpeg vero su Windows, il microfono vero e Spotify/Apple non si provano qui: dichiararlo nella consegna.
+  Il Consulente Digitale dalla 1.4.0 NON ha più Nonni Teach (rimanda qui): non rimetterlo là.
 - **Microfono**: `PD.sttLocale()` = trascrizione del PC; `PD.sttReady()` (= `PD.micPronto()`) = locale OPPURE voce del telefono
   accesa. I moduli usano `PD.sttReady()` per mostrare il microfono e `PD.recorder.toggle(cb)` / `PD.ascolta(cb)` per ascoltare.
 - Test: il saluto all'avvio si salta con `sessionStorage['pd.salutato']='1'` (test_ui.py) o con `?nosaluto`; i tempi dei consigli

@@ -6,9 +6,11 @@ Il Professore Digitale ha DUE licenze, come «Il Grande Quiz dell'Informatica»:
 
   * il CODICE del programma: licenza MIT (testo qui sotto);
   * i CONTENUTI (lezioni, domande e risposte, quiz, percorsi, vademecum,
-    immagini, grafica, il personaggio del Professore e il marchio della
-    fenice): licenza Creative Commons Attribuzione - Non commerciale -
-    Condividi allo stesso modo 4.0 Internazionale (CC BY-NC-SA 4.0).
+    immagini, grafica, il personaggio del Professore, Nonni Teach con le
+    sue domande, la liberatoria e la copertina del podcast, il cervello
+    digitale «Neura» e il marchio della fenice): licenza Creative Commons
+    Attribuzione - Non commerciale - Condividi allo stesso modo 4.0
+    Internazionale (CC BY-NC-SA 4.0).
 
 ----------------------------------------------------------------------------
 CONTENUTI - CREATIVE COMMONS BY-NC-SA 4.0

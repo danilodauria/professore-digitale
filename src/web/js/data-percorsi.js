@@ -23,7 +23,7 @@
  *  Attività (stringa = solo il rimando, oppure oggetto { r, t, p, opz, conduttore, k }):
  *    lezione:ID[ p: passo ]  palestra:ID  vita:ID  mente  mente:ID  mente:diario  quiz  quiz:ID
  *    cultura:PACCHETTO  libro  fenice  truffa  lettera  ripasso  competenze  chiedi  chiedi:DOMANDA DELLA GUIDA
- *    impostazioni  profili  lavagna  editor  enti:incontri|registro|resoconto|digcomp  incontro:ID  aula  tablet
+ *    impostazioni  profili  lavagna  editor  enti:incontri|registro|resoconto|digcomp  incontro:ID  aula  tablet  nonni (3.6)
  *    pratica (attività in presenza, si spunta a mano: serve «k», chiave stabile)
  *  «opz: true» = facoltativa: la tappa è completa quando sono fatte tutte le attività non facoltative
  *  (se sono tutte facoltative, ne basta una). «conduttore: true» = la vede solo chi conduce.
@@ -345,6 +345,11 @@ window.PD_PERCORSI = {
       att: [{ r: "cultura:cultura-storia", opz: true }, { r: "cultura:cultura-geografia", opz: true }, { r: "cultura:cultura-scienze", opz: true },
         { r: "cultura:cultura-arte", opz: true }, { r: "cultura:cultura-attualita", opz: true },
         { r: "quiz:storia", opz: true }, { r: "quiz:geografia", opz: true }, { r: "quiz:scienze", opz: true }, { r: "quiz:arte", opz: true }] },
+    nonni: { titolo: "Nonni Teach: i ricordi diventano un podcast",
+      perche: "Neura intervista un nonno o una nonna: si registrano ricordi e saperi, si crea il podcast e, con il consenso, lo si pubblica. Un ponte tra generazioni.",
+      durata: 60, digcomp: ["3.1", "2.4", "2.2"],
+      att: [{ r: "pratica", k: "liberatoria", t: "Prima di registrare: stampate la liberatoria e fatela firmare (Nonni Teach → Liberatoria)" },
+        { r: "nonni", t: "Nonni Teach: un'intervista con Neura (domande, registrazione, podcast)" }] },
     libro: { titolo: "Tecnologia Gentile: il libro",
       perche: "Il libro di Danilo D'Auria racconta un'informatica a misura di persona: inclusiva e rispettosa dell'ambiente.",
       durata: 30, digcomp: ["4.3", "4.4"],
@@ -399,7 +404,7 @@ window.PD_PERCORSI = {
         sicurezza: { tappe: ["password", "truffe", "telefonate", "dispositivi"] },
         servizi: { tappe: ["spid", "salute", "pagamenti", "lettere"] },
         quotidiano: { tappe: ["acquisti", "informarsi", "ia", "riuso"] },
-        mente: { tappe: ["ginnastica", "parole", "cultura", "libro"] },
+        mente: { tappe: ["ginnastica", "parole", "cultura", "libro", "nonni"] },
         autonomia: { tappe: ["ripasso", "quizCorso", "competenze"] }
       } },
 
@@ -433,7 +438,8 @@ window.PD_PERCORSI = {
             "parole", "attenzione",
             { id: "scoperte", base: "cultura", titolo: "Scoperte: Terra, spazio, natura e storia", perche: "Le lezioni di cultura collegano il computer a ciò che si studia in classe.",
               att: ["lezione:terra", "lezione:sistema-solare", "lezione:natura-ecosistemi", { r: "lezione:storia-prime-civilta", opz: true },
-                { r: "lezione:italia-regioni", opz: true }, { r: "lezione:corpo-umano", opz: true }, { r: "cultura:cultura-scienze", opz: true }] }] },
+                { r: "lezione:italia-regioni", opz: true }, { r: "lezione:corpo-umano", opz: true }, { r: "cultura:cultura-scienze", opz: true }] },
+            { id: "nonni", titolo: "Intervistiamo i nonni", perche: "I bambini preparano le domande, Neura le legge e registra i racconti dei nonni: un podcast della classe (per pubblicarlo serve anche il consenso dei genitori)." }] },
         autonomia: { titolo: "Verifica e festa finale",
           tappe: ["ripasso", { id: "quizCorso", titolo: "Il quiz del corso", att: ["quiz:corso", { r: "quiz", t: "L'attestato con il nome di ciascuno", opz: true }] }, "competenze"] }
       } },
@@ -487,7 +493,8 @@ window.PD_PERCORSI = {
         sicurezza: { tappe: ["password", "truffe", "telefonate", "dispositivi", "privacy"] },
         servizi: { tappe: ["spid", "salute", "pagamenti", "lettere"] },
         quotidiano: { titolo: "Informazione e ricerca", tappe: ["ricerca", "informarsi", "ia", "stampa", "acquisti"] },
-        mente: { titolo: "Cultura e lettura", tappe: ["cultura", "libro", "riuso", { id: "ginnastica", perche: "I giochi per la mente sono un ottimo motivo per tornare in biblioteca e allenare mouse e tastiera." }] },
+        mente: { titolo: "Cultura e lettura", tappe: ["cultura", "libro", "riuso", { id: "ginnastica", perche: "I giochi per la mente sono un ottimo motivo per tornare in biblioteca e allenare mouse e tastiera." },
+          { id: "nonni", titolo: "L'archivio sonoro del territorio", perche: "Con Nonni Teach la biblioteca raccoglie le voci e i ricordi del quartiere in un podcast da conservare e far ascoltare." }] },
         autonomia: { consiglio: "Stampate le competenze DigComp della persona all'inizio e alla fine: è la prova del percorso fatto, utile anche per l'ente.",
           tappe: ["competenze", "quizCorso", "ripasso"] }
       } },
@@ -523,7 +530,7 @@ window.PD_PERCORSI = {
         sicurezza: { tappe: ["password", "truffe", "telefonate", "dispositivi"] },
         servizi: { tappe: ["spid", "salute", "pagamenti", "lettere"] },
         quotidiano: { tappe: ["acquisti", "stampa", "informarsi", "ia", "riuso"] },
-        mente: { tappe: ["ginnastica", "parole", "cultura", "libro"] },
+        mente: { tappe: ["ginnastica", "parole", "cultura", "libro", "nonni"] },
         autonomia: { tappe: ["ripasso", "quizCorso", "competenze"] }
       } },
 
@@ -543,7 +550,8 @@ window.PD_PERCORSI = {
         servizi: { tappe: ["spid", "salute", "pagamenti", "lettere"] },
         quotidiano: { tappe: ["informarsi", "acquisti", "ia"] },
         mente: { tappe: ["ginnastica", "parole", { id: "arte", base: "cultura", titolo: "Arte e storia", perche: "Chiese, affreschi e storia del territorio: la cultura diventa un ponte tra generazioni.",
-          att: ["lezione:arte-medievale", "lezione:storia-medioevo", { r: "lezione:arte-rinascimento", opz: true }, { r: "cultura:cultura-arte", opz: true }, { r: "cultura:cultura-storia", opz: true }] }] },
+          att: ["lezione:arte-medievale", "lezione:storia-medioevo", { r: "lezione:arte-rinascimento", opz: true }, { r: "cultura:cultura-arte", opz: true }, { r: "cultura:cultura-storia", opz: true }] },
+          { id: "nonni", titolo: "I ragazzi intervistano i nonni", perche: "Con Nonni Teach i ragazzi fanno le domande e i nonni raccontano: il podcast resta alla comunità." }] },
         autonomia: { tappe: ["ripasso", "quizCorso", "competenze"] }
       } },
 
@@ -566,7 +574,8 @@ window.PD_PERCORSI = {
         quotidiano: { titolo: "Notizie e ricordi", tappe: [{ id: "informarsi", titolo: "Il giornale e le notizie", durata: 20 }] },
         mente: { titolo: "Mente in forma e ricordi", consiglio: "Il gioco del giorno è un piccolo rito: lodate ogni partita. La storia del Novecento e le canzoni di una volta aprono ricordi bellissimi.",
           tappe: ["ginnastica", "parole", "attenzione", { id: "ricordi", base: "cultura", titolo: "I ricordi del Novecento", perche: "Parlare della propria giovinezza con l'aiuto di foto e lezioni fa bene alla memoria e all'umore.",
-            att: ["lezione:storia-novecento", { r: "lezione:italia-regioni", opz: true }, { r: "cultura:cultura-arte", opz: true }, { r: "cultura:cultura-storia", opz: true }] }] },
+            att: ["lezione:storia-novecento", { r: "lezione:italia-regioni", opz: true }, { r: "cultura:cultura-arte", opz: true }, { r: "cultura:cultura-storia", opz: true }] },
+            { id: "nonni", titolo: "I miei ricordi in un podcast", durata: 30, perche: "Con Nonni Teach l'operatore registra con calma i racconti della persona: un regalo prezioso per figli e nipoti (6-8 domande bastano)." }] },
         autonomia: { titolo: "I miei progressi", tappe: [{ id: "ripasso", titolo: "La domanda del giorno" }, { id: "diario", base: "competenze", titolo: "Il diario della mente", perche: "Vedere i giorni di gioco e le stelle conquistate è una soddisfazione da condividere con i familiari.",
           att: ["mente:diario", { r: "competenze", opz: true }] }] }
       } },
@@ -616,7 +625,7 @@ window.PD_PERCORSI = {
         sicurezza: { tappe: ["password", "truffe", "telefonate", "dispositivi"] },
         servizi: { tappe: ["spid", "salute", "pagamenti", "lettere"] },
         quotidiano: { tappe: ["acquisti", "informarsi", "ia", "stampa", "riuso"] },
-        mente: { tappe: ["ginnastica", "parole", "cultura", "libro"] },
+        mente: { tappe: ["ginnastica", "parole", "cultura", "libro", "nonni"] },
         autonomia: { tappe: ["ripasso", "quizCorso", "competenze"] }
       } }
   ]
