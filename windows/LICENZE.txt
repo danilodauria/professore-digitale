@@ -102,4 +102,9 @@ fonti ufficiali soltanto dopo il consenso dell'utente. Ognuno ha la propria lice
   (dati: Multilingual LibriSpeech) - modelli Piper, Licenza Creative Commons CC BY 4.0
   (https://creativecommons.org/licenses/by/4.0/deed.it). I file .onnx.json di Serena sono
   stati ripuliti per funzionare con il motore Piper incluso.
+* Voce "Nicola" (uomo) e voce "Sara" (donna): modello Kokoro-82M v1.0 di hexgrad
+  (https://huggingface.co/hexgrad/Kokoro-82M), conversione ONNX di k2-fsa - Licenza Apache 2.0.
+  Motore sherpa-onnx (cartella "kokoro", https://github.com/k2-fsa/sherpa-onnx) - Licenza Apache 2.0;
+  contiene ONNX Runtime (Microsoft, Licenza MIT) ed eSpeak NG (dati in voci\kokoro\espeak-ng-data,
+  licenza GPL-3.0 o successiva: sorgenti su https://github.com/espeak-ng/espeak-ng).
 * Supermium (solo per Windows XP e Vista) - Licenza BSD.

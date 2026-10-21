@@ -36,10 +36,10 @@ check("sito: sezione licenza, rel=license e citazione", 'id="licenza"' in sito a
 check("README: doppia licenza", CC in leggi("README.md") and "LICENZA-CONTENUTI.md" in leggi("README.md"))
 
 # vademecum e libretti: sorgenti e PDF
-for s in ("vademecum-linux.html", "vademecum-windows.html"):
+for s in ("vademecum-linux.html", "vademecum-windows.html", "vademecum-mac.html"):
     h = leggi("docs/sorgenti/" + s)
     check("vademecum %s: capitolo sulla licenza e copertina" % s, "Licenza e diritti d'autore" in h and "Contenuti CC BY-NC-SA 4.0" in h and "Software libero · MIT<" not in h)
-for pdf in ("Vademecum_Professore_Digitale.pdf", "Vademecum_Professore_Digitale_Windows.pdf"):
+for pdf in ("Vademecum_Professore_Digitale.pdf", "Vademecum_Professore_Digitale_Windows.pdf", "Vademecum_Professore_Digitale_Mac.pdf"):
     p = os.path.join(ROOT, "docs", pdf)
     info = subprocess.run(["pdfinfo", p], capture_output=True, text=True).stdout
     testo = subprocess.run(["pdftotext", "-l", "6", p, "-"], capture_output=True, text=True).stdout

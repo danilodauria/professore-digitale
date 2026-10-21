@@ -62,7 +62,7 @@
       '<p class="row"><button class="btn ghost" type="button" id="licenza-copia">📋 Copia la citazione</button>' +
       '<a class="btn ghost" href="' + L.legale + '" target="_blank" rel="noopener">⚖️ Testo legale completo</a></p>' +
       '<p class="small muted">Il <b>codice</b> del programma è software libero con licenza <b>MIT</b>. «Il Grande Quiz dell\'Informatica» ha la stessa licenza dei contenuti ' +
-      "(" + esc(L.citazioneQuiz) + "). I componenti di altri autori (Mermaid, tesseract.js, Piper e le voci Giorgio, Serena e Paola, Vosk) mantengono la propria licenza, " +
+      "(" + esc(L.citazioneQuiz) + "). I componenti di altri autori (Mermaid, tesseract.js, Piper, Kokoro e sherpa-onnx, le voci Nicola, Sara, Giorgio, Serena e Paola, Vosk) mantengono la propria licenza, " +
       "elencata nel vademecum. Nonni Teach (domande, liberatoria, copertina) e Neura sono contenuti con la stessa licenza; le registrazioni delle interviste appartengono alle persone intervistate e si pubblicano solo con il loro consenso. I pacchetti creati da voi con «Crea lezioni e quiz» sono vostri. I diritti morali d'autore restano sempre all'autore. " +
       "Per altri usi: " + L.contatto + ".</p></div>";
   };

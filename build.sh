@@ -47,7 +47,7 @@ python3 -c 'import json,sys; json.dump({"aggiornamenti_url": sys.argv[1], "pagin
         "$AGGIORNAMENTI_URL" "$PAGINA_PROGETTO" "$S/$PKG/distribuzione.json"
 chmod 0644 "$S/$PKG/distribuzione.json"
 cp -r src/web "$S/$PKG/web"
-echo "» Voci naturali incluse (Piper: Giorgio, Serena e Paola; motore per PC a 64 bit x86 e ARM)"
+echo "» Voci naturali incluse (Kokoro: Nicola e Sara, PC x86 a 64 bit; Piper: Giorgio, Serena e Paola, PC a 64 bit x86 e ARM)"
 source tools/voci.sh; prepara_voci
 install -d "$BUILD/usr/lib/$PKG/piper" "$S/$PKG/voci"
 for a in x86_64 aarch64; do
@@ -55,8 +55,12 @@ for a in x86_64 aarch64; do
   mv "$BUILD/usr/lib/$PKG/piper/piper" "$BUILD/usr/lib/$PKG/piper/$a"
 done
 rm -rf "$BUILD/usr/lib/$PKG/piper/"*/pkgconfig
+# Kokoro (dalla 3.8): libreria sherpa-onnx per x86_64 e modello con le voci Nicola e Sara
+install -d "$BUILD/usr/lib/$PKG/kokoro/x86_64"
+install -m 0644 "$SHERPA_DIR/linux-x86_64/"*.so "$BUILD/usr/lib/$PKG/kokoro/x86_64/"
 find "$BUILD/usr/lib/$PKG" -type d -exec chmod 0755 {} +
 copia_voci "$S/$PKG/voci"; chmod 0644 "$S/$PKG/voci/"*
+copia_kokoro "$S/$PKG/voci/kokoro"; find "$S/$PKG/voci/kokoro" -type d -exec chmod 0755 {} +; find "$S/$PKG/voci/kokoro" -type f -exec chmod 0644 {} +
 if ls src/contenuti/*.json >/dev/null 2>&1; then install -m 0644 src/contenuti/*.json "$S/$PKG/contenuti/"; fi
 find "$S/$PKG/web" -type d -exec chmod 0755 {} +; find "$S/$PKG/web" -type f -exec chmod 0644 {} +
 rm -f "$S/$PKG/web/vendor/mermaid.LICENSE"
@@ -103,7 +107,7 @@ Description: cattedra digitale portatile per l'alfabetizzazione informatica
  disegnare, una palestra di esercizi, grandi quiz con attestato da stampare,
  lezioni di cultura generale, le pagine di FeniceOS e del libro Tecnologia
  Gentile e un quadro dell'aula per il facilitatore in rete locale. Include le
- voci naturali italiane Giorgio, Serena e Paola (Piper).
+ voci naturali italiane Nicola e Sara (Kokoro), Giorgio, Serena e Paola (Piper).
  .
  Funziona senza Internet anche su computer ricondizionati: nessun dato
  lascia il computer. Ideato e sviluppato da Danilo D'Auria.
@@ -128,6 +132,12 @@ M=build/mac; A="$M/Professore Digitale.app"
 mkdir -p "$A/Contents/MacOS" "$A/Contents/Resources"
 # lo stesso albero del .deb, senza le voci Piper (il loro motore e' solo per Linux)
 cp -r "$S/$PKG" "$A/Contents/Resources/app"; rm -rf "$A/Contents/Resources/app/voci"
+# il vademecum giusto per il Mac (dalla 3.8) al posto di quello per Linux
+rm -f "$A/Contents/Resources/app/web/docs/Vademecum_Professore_Digitale.pdf"
+if [ -f docs/Vademecum_Professore_Digitale_Mac.pdf ]; then
+  install -d "$A/Contents/Resources/app/web/docs"; cp docs/Vademecum_Professore_Digitale_Mac.pdf "$A/Contents/Resources/app/web/docs/"
+  cp docs/Vademecum_Professore_Digitale_Mac.pdf "$M/"
+fi
 install -m 0755 packaging/professore-digitale "$A/Contents/Resources/app/professore-digitale"
 install -m 0755 packaging/mac/avvia.sh "$A/Contents/MacOS/avvia.sh"
 sed "s/@VERSIONE@/$VERSION/g" packaging/mac/Info.plist > "$A/Contents/Info.plist"
@@ -137,7 +147,7 @@ cp packaging/mac/LEGGIMI-MAC.txt "$M/"
 { cat LICENSE; echo; echo "--------------------------------------------------------------------------"; echo; cat LICENZA-CONTENUTI.md; } > "$M/LICENZE.txt"
 find "$A" -type d -exec chmod 0755 {} +
 rm -f "$DIST/ProfessoreDigitale-$VERSION-macOS.zip"
-( cd "$M" && zip -qry -X "../../$DIST/ProfessoreDigitale-$VERSION-macOS.zip" "Professore Digitale.app" LEGGIMI-MAC.txt LICENZE.txt )
+( cd "$M" && zip -qry -X "../../$DIST/ProfessoreDigitale-$VERSION-macOS.zip" "Professore Digitale.app" LEGGIMI-MAC.txt LICENZE.txt $(ls Vademecum_*.pdf 2>/dev/null) )
 ls -la "$DIST/ProfessoreDigitale-$VERSION-macOS.zip"
 
 echo "» Pacchetti di contenuti"

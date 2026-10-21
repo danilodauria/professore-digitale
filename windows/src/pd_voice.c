@@ -1,5 +1,6 @@
 /* Professore Digitale per Windows - voce (sintesi) e microfono (riconoscimento), entrambi offline
- *  Sintesi:  voci naturali Piper Giorgio, Serena e Paola (64 bit, incluse)  >  voci italiane di Windows (SAPI 5, da XP in poi)
+ *  Sintesi:  voci naturali Kokoro Nicola e Sara (dalla 3.8, 64 bit, pd-kokoro.exe sempre acceso)  >  Piper Giorgio, Serena e Paola
+ *            (64 bit, incluse)  >  voci italiane di Windows (SAPI 5, da XP in poi)
  *  Microfono: Vosk con modello italiano, tramite pd-stt.exe (64 bit, processo separato)
  * Ideato e sviluppato da Danilo D'Auria - Licenza MIT */
 #define COBJMACROS
@@ -22,10 +23,12 @@ static void vu(void) { LeaveCriticalSection(&vlock); }
 /* ------------------------------------------------------------------ elenco delle voci
  * Voci naturali Piper (incluse nell'installatore: Giorgio, uomo, Serena e Paola, donne; solo Windows a 64 bit)
  * e tutte le voci italiane di Windows (SAPI 5 e OneCore), maschili e femminili. */
+/* piper: 0 = voce di Windows (SAPI/OneCore), 1 = Piper, 2 = Kokoro (rif = numero della voce nel modello) */
 typedef struct { char id[320]; char nome[200]; char genere[2]; int piper; wchar_t rif[MAX_PATH]; } voce_t;
 #define MAX_VOCI 32
 static voce_t g_voci[MAX_VOCI]; static int g_nvoci = 0; static DWORD g_voci_t = 0;
 static wchar_t g_piper_exe[MAX_PATH];
+static wchar_t g_kokoro_exe[MAX_PATH], g_kokoro_dir[MAX_PATH];
 
 static int is64os(void) {
     SYSTEM_INFO si; GetNativeSystemInfo(&si);
@@ -134,12 +137,141 @@ static void aggiungi_sapi(const wchar_t *catid, voce_t *v, int *n) {
     ISpObjectTokenCategory_Release(cat);
 }
 
+/* ------------------------------------------------------------------ Kokoro (dalla 3.8)
+ * pd-kokoro.exe (64 bit) carica il modello una volta e resta acceso: le richieste passano dalla sua entrata standard in UTF-8,
+ * una per riga (sid TAB velocita TAB file.wav TAB testo -> OK / ERR). Dopo 15 minuti senza parlare si chiude e libera la memoria;
+ * se il server si chiude, la pipe si chiude e pd-kokoro.exe esce da solo. Sui PC con meno di 4 processori Kokoro viene dopo Piper. */
+static CRITICAL_SECTION klock; static LONG kinit = 0;
+static HANDLE k_proc = NULL, k_in = NULL, k_out = NULL; static DWORD k_ultimo = 0, k_guasto = 0; static int k_vigile = 0;
+static void kl(void) { if (InterlockedCompareExchange(&kinit, 1, 0) == 0) InitializeCriticalSection(&klock); EnterCriticalSection(&klock); }
+static void ku(void) { LeaveCriticalSection(&klock); }
+static int kokoro_prima(void) { SYSTEM_INFO si; GetSystemInfo(&si); return si.dwNumberOfProcessors >= 4 || getenv("PD_KOKORO_PRIMA"); }
+
+static void kokoro_chiudi(void) {          /* con klock preso */
+    if (k_in) { CloseHandle(k_in); k_in = NULL; }
+    if (k_proc) { if (WaitForSingleObject(k_proc, 3000) != WAIT_OBJECT_0) TerminateProcess(k_proc, 1); CloseHandle(k_proc); k_proc = NULL; }
+    if (k_out) { CloseHandle(k_out); k_out = NULL; }
+}
+/* legge una riga dall'uscita di pd-kokoro.exe entro il tempo dato; 0 se si chiude o non risponde */
+static int kokoro_riga(char *r, size_t n, DWORD ms) {
+    size_t k = 0; DWORD t0 = GetTickCount();
+    r[0] = 0;
+    for (;;) {
+        DWORD avail = 0, letti = 0; char c;
+        if (!PeekNamedPipe(k_out, NULL, 0, NULL, &avail, NULL)) return 0;
+        if (avail) {
+            if (!ReadFile(k_out, &c, 1, &letti, NULL) || !letti) return 0;
+            if (c == '\n') { while (k && r[k - 1] == '\r') k--; r[k] = 0; return 1; }
+            if (k + 1 < n) r[k++] = c;
+            continue;
+        }
+        if (WaitForSingleObject(k_proc, 15) == WAIT_OBJECT_0) {
+            if (PeekNamedPipe(k_out, NULL, 0, NULL, &avail, NULL) && avail) continue;
+            return 0;
+        }
+        if (GetTickCount() - t0 > ms) return 0;
+    }
+}
+static unsigned __stdcall kokoro_vigila(void *a) {
+    (void)a;
+    for (;;) {
+        Sleep(60000);
+        kl();
+        if (k_proc && GetTickCount() - k_ultimo > 15u * 60u * 1000u) { kokoro_chiudi(); pd_log("Kokoro a riposo"); }
+        ku();
+    }
+    return 0;
+}
+static int kokoro_avvia(char *err, size_t errn) {   /* con klock preso */
+    if (k_proc && WaitForSingleObject(k_proc, 0) == WAIT_TIMEOUT) return 1;
+    kokoro_chiudi();
+    if (k_guasto && GetTickCount() - k_guasto < 300000) { snprintf(err, errn, "Kokoro non disponibile"); return 0; }
+    wchar_t exe[MAX_PATH], dir[MAX_PATH];
+    vl(); wcsncpy(exe, g_kokoro_exe, MAX_PATH); wcsncpy(dir, g_kokoro_dir, MAX_PATH); vu();
+    if (!exe[0]) { snprintf(err, errn, "Kokoro non installato"); return 0; }
+    SECURITY_ATTRIBUTES sa = { sizeof sa, NULL, TRUE };
+    HANDLE in_r, in_w, out_r, out_w;
+    if (!CreatePipe(&in_r, &in_w, &sa, 0)) return 0;
+    if (!CreatePipe(&out_r, &out_w, &sa, 0)) { CloseHandle(in_r); CloseHandle(in_w); return 0; }
+    SetHandleInformation(in_w, HANDLE_FLAG_INHERIT, 0); SetHandleInformation(out_r, HANDLE_FLAG_INHERIT, 0);
+    STARTUPINFOW si; PROCESS_INFORMATION pi; memset(&si, 0, sizeof si); si.cb = sizeof si;
+    si.dwFlags = STARTF_USESTDHANDLES | STARTF_USESHOWWINDOW; si.wShowWindow = SW_HIDE;
+    si.hStdInput = in_r; si.hStdOutput = out_w; si.hStdError = GetStdHandle(STD_ERROR_HANDLE);
+    SYSTEM_INFO sy; GetSystemInfo(&sy); int th = sy.dwNumberOfProcessors > 4 ? 4 : (int)sy.dwNumberOfProcessors; if (th < 1) th = 1;
+    wchar_t *qe = quote_arg(exe), *qd = quote_arg(dir), *cl = wcsdup_printf(L"%ls %ls %d", qe, qd, th);
+    wchar_t cwd[MAX_PATH]; wcsncpy(cwd, exe, MAX_PATH - 1); cwd[MAX_PATH - 1] = 0; wchar_t *sl = wcsrchr(cwd, L'\\'); if (sl) *sl = 0;
+    BOOL ok = CreateProcessW(NULL, cl, NULL, NULL, TRUE, CREATE_NO_WINDOW | CREATE_UNICODE_ENVIRONMENT, NULL, cwd, &si, &pi);
+    free(qe); free(qd); free(cl); CloseHandle(in_r); CloseHandle(out_w);
+    if (!ok) { CloseHandle(in_w); CloseHandle(out_r); k_guasto = GetTickCount(); snprintf(err, errn, "pd-kokoro.exe non avviabile"); return 0; }
+    CloseHandle(pi.hThread);
+    k_proc = pi.hProcess; k_in = in_w; k_out = out_r;
+    char r[400];
+    if (!kokoro_riga(r, sizeof r, 180000) || strcmp(r, "PRONTO")) {
+        snprintf(err, errn, "Kokoro non avviabile: %s", r[0] ? r : "nessuna risposta");
+        pd_log("%s", err);
+        kokoro_chiudi(); k_guasto = GetTickCount(); if (!k_guasto) k_guasto = 1;
+        return 0;
+    }
+    k_guasto = 0; k_ultimo = GetTickCount();
+    if (!k_vigile) { HANDLE t = (HANDLE)_beginthreadex(NULL, 0, kokoro_vigila, NULL, 0, NULL); if (t) { CloseHandle(t); k_vigile = 1; } }
+    pd_log("Kokoro pronto (%d thread)", th);
+    return 1;
+}
+static int kokoro_disponibile(void) { kl(); int ok = !(k_guasto && GetTickCount() - k_guasto < 300000); ku(); return ok; }
+
+static int kokoro_parla(const wchar_t *testo, int sid, double vel, const wchar_t *wav, char *err, size_t errn) {
+    char *t8 = u16to8(testo), *w8 = u16to8(wav);
+    for (char *c = t8; *c; c++) if (*c == '\t' || *c == '\n' || *c == '\r') *c = ' ';
+    buf_t q; buf_init(&q); buf_addf(&q, "%d\t%.2f\t%s\t%s\n", sid, vel, w8, t8);
+    int ok = 0;
+    kl();
+    for (int prova = 0; prova < 2 && !ok; prova++) {
+        if (!kokoro_avvia(err, errn)) break;
+        DWORD scritti = 0; char r[400] = "";
+        if (WriteFile(k_in, q.p, (DWORD)q.n, &scritti, NULL) && scritti == q.n && kokoro_riga(r, sizeof r, 120000)) {
+            if (!strcmp(r, "OK")) ok = 1;
+            else if (!strncmp(r, "ERR ", 4)) { snprintf(err, errn, "%s", r + 4); break; }
+            else {      /* risposta estranea (il motore si e' fermato con un errore grave): Kokoro qui non va */
+                TerminateProcess(k_proc, 1); kokoro_chiudi();
+                k_guasto = GetTickCount(); if (!k_guasto) k_guasto = 1;
+                snprintf(err, errn, "Kokoro si e' fermato: %.200s", r); break;
+            }
+        } else {
+            kokoro_chiudi();             /* si era chiuso: si riaccende una volta; se si chiude ancora, Kokoro qui non va */
+            if (prova == 1) { k_guasto = GetTickCount(); if (!k_guasto) k_guasto = 1; snprintf(err, errn, "Kokoro si chiude da solo su questo computer"); }
+        }
+    }
+    k_ultimo = GetTickCount();
+    ku();
+    buf_free(&q); free(t8); free(w8);
+    return ok;
+}
+
+static void aggiungi_kokoro(voce_t *v, int *n) {
+    static const struct { const char *id, *nome, *gen; int sid; } K[] = { { "nicola", "Nicola (uomo, voce naturale)", "m", 36 },
+                                                                          { "sara", "Sara (donna, voce naturale)", "f", 35 } };
+    for (int i = 0; i < 2 && *n < MAX_VOCI; i++) {
+        voce_t *x = &v[(*n)++]; memset(x, 0, sizeof *x);
+        x->piper = 2; snprintf(x->id, sizeof x->id, "kokoro:%s", K[i].id); snprintf(x->nome, sizeof x->nome, "%s", K[i].nome);
+        x->genere[0] = K[i].gen[0]; _snwprintf(x->rif, MAX_PATH, L"%d", K[i].sid);
+    }
+}
+
 static void scan_voci(int force) {
     vl();
     if (!force && g_voci_t && GetTickCount() - g_voci_t < 300000) { vu(); return; }
     vu();
-    voce_t v[MAX_VOCI]; int n = 0; wchar_t exe[MAX_PATH] = L"";
+    voce_t v[MAX_VOCI]; int n = 0; wchar_t exe[MAX_PATH] = L"", kexe[MAX_PATH] = L"", kdir[MAX_PATH] = L"";
     if (is64os()) {
+        /* Kokoro: pd-kokoro.exe in kokoro\ e il modello in voci\kokoro\ (cartella del programma o dei dati locali) */
+        const wchar_t *basi[2] = { G.install_dir, G.local_dir };
+        for (int i = 0; i < 2 && !kexe[0]; i++) {
+            wchar_t e[MAX_PATH], d[MAX_PATH], m[MAX_PATH];
+            _snwprintf(e, MAX_PATH, L"%ls\\kokoro\\pd-kokoro.exe", basi[i]); e[MAX_PATH - 1] = 0;
+            _snwprintf(d, MAX_PATH, L"%ls\\voci\\kokoro", basi[i]); d[MAX_PATH - 1] = 0;
+            _snwprintf(m, MAX_PATH, L"%ls\\model.int8.onnx", d); m[MAX_PATH - 1] = 0;
+            if (file_exists(e) && file_exists(m)) { wcsncpy(kexe, e, MAX_PATH - 1); wcsncpy(kdir, d, MAX_PATH - 1); }
+        }
         wchar_t cand[2][MAX_PATH];
         _snwprintf(cand[0], MAX_PATH, L"%ls\\piper\\piper.exe", G.local_dir); cand[0][MAX_PATH - 1] = 0;
         _snwprintf(cand[1], MAX_PATH, L"%ls\\piper\\piper.exe", G.install_dir); cand[1][MAX_PATH - 1] = 0;
@@ -162,23 +294,36 @@ static void scan_voci(int force) {
     for (int i = 0; i < n; i++) for (int j = i + 1; j < n; j++) {
         if (posto_voce(v[j].id) < posto_voce(v[i].id)) { voce_t t = v[i]; v[i] = v[j]; v[j] = t; }
     }
+    /* Kokoro (Nicola, Sara): prima di tutte sui PC con almeno 4 processori, altrimenti dopo le voci Piper */
+    if (kexe[0] && kokoro_disponibile() && n + 2 <= MAX_VOCI) {
+        if (kokoro_prima()) { memmove(v + 2, v, (size_t)n * sizeof *v); int m = 0; aggiungi_kokoro(v, &m); n += 2; }
+        else aggiungi_kokoro(v, &n);
+    }
     HRESULT ci = CoInitializeEx(NULL, COINIT_MULTITHREADED);
     aggiungi_sapi(PD_VOICES_SAPI, v, &n);
     aggiungi_sapi(PD_VOICES_ONECORE, v, &n);
     if (SUCCEEDED(ci)) CoUninitialize();
     vl();
     memcpy(g_voci, v, sizeof v); g_nvoci = n; wcsncpy(g_piper_exe, exe, MAX_PATH - 1); g_piper_exe[MAX_PATH - 1] = 0;
+    wcsncpy(g_kokoro_exe, kexe, MAX_PATH - 1); g_kokoro_exe[MAX_PATH - 1] = 0; wcsncpy(g_kokoro_dir, kdir, MAX_PATH - 1); g_kokoro_dir[MAX_PATH - 1] = 0;
     g_voci_t = GetTickCount(); if (!g_voci_t) g_voci_t = 1;
     vu();
 }
 
 void tts_invalidate(void) { vl(); g_voci_t = 0; vu(); }
-static unsigned __stdcall preriscalda(void *a) { (void)a; scan_voci(1); return 0; }
+static unsigned __stdcall preriscalda(void *a) {
+    (void)a; scan_voci(1);
+    /* se il Professore parlera' con Kokoro, il modello si carica subito: il saluto parte prima */
+    vl(); int k = g_nvoci && g_voci[0].piper == 2; vu();
+    if (k) { char e[200]; kl(); kokoro_avvia(e, sizeof e); ku(); }
+    return 0;
+}
 void tts_init(void) { HANDLE t = (HANDLE)_beginthreadex(NULL, 0, preriscalda, NULL, 0, NULL); if (t) CloseHandle(t); }
 
 static int conta(int piper) { scan_voci(0); vl(); int k = 0; for (int i = 0; i < g_nvoci; i++) if (g_voci[i].piper == piper) k++; vu(); return k; }
 static int sapi_available(void) { return conta(0) > 0; }
 int tts_has_piper(void) { return conta(1) > 0; }
+static int tts_has_kokoro(void) { return conta(2) > 0; }
 
 int sapi_italian_voices(buf_t *out) {
     scan_voci(0);
@@ -198,7 +343,7 @@ void tts_voices_json(buf_t *b) {
         voce_t *x = &g_voci[i];
         if (i) buf_adds(b, ", ");
         buf_adds(b, "{\"id\": "); json_str(b, x->id); buf_adds(b, ", \"nome\": "); json_str(b, x->nome);
-        buf_adds(b, ", \"genere\": "); json_str(b, x->genere); buf_addf(b, ", \"motore\": \"%s\", \"naturale\": %s}", x->piper ? "piper" : "sapi", x->piper ? "true" : "false");
+        buf_adds(b, ", \"genere\": "); json_str(b, x->genere); buf_addf(b, ", \"motore\": \"%s\", \"naturale\": %s}", x->piper == 2 ? "kokoro" : x->piper ? "piper" : "sapi", x->piper ? "true" : "false");
     }
     buf_adds(b, "]");
     vu();
@@ -237,11 +382,12 @@ out:
 }
 
 /* ------------------------------------------------------------------ elenco motori */
-int tts_engine_count(void) { return (tts_has_piper() ? 1 : 0) + (sapi_available() ? 1 : 0); }
+int tts_engine_count(void) { return (tts_has_kokoro() ? 1 : 0) + (tts_has_piper() ? 1 : 0) + (sapi_available() ? 1 : 0); }
 void tts_engines_json(buf_t *b) {
     int k = 0;
     buf_adds(b, "[");
-    if (tts_has_piper()) { buf_adds(b, "\"piper\""); k++; }
+    if (tts_has_kokoro()) { buf_adds(b, "\"kokoro\""); k++; }
+    if (tts_has_piper()) { if (k) buf_adds(b, ", "); buf_adds(b, "\"piper\""); k++; }
     if (sapi_available()) { if (k) buf_adds(b, ", "); buf_adds(b, "\"sapi\""); }
     buf_adds(b, "]");
 }
@@ -303,7 +449,11 @@ int tts_synthesize(const char *text, double rate, const char *engine, const char
     int ok = 0;
     for (int t = 0; t < no && t < 3 && !ok; t++) {
         voce_t *x = &v[ord[t]];
-        if (x->piper) {
+        if (x->piper == 2) {
+            char e2[300] = "";
+            if (kokoro_parla(clean, _wtoi(x->rif), rate, tmpf, e2, sizeof e2) && file_size(tmpf) > 44) ok = 1;
+            else { pd_log("Kokoro: %s", e2); if (!kokoro_disponibile()) tts_invalidate(); }
+        } else if (x->piper) {
             char *t8 = u16to8(clean);
             wchar_t *qe = quote_arg(pe), *qm = quote_arg(x->rif), *qo = quote_arg(tmpf);
             wchar_t *cl = wcsdup_printf(L"%ls --model %ls --output_file %ls --length_scale %.2f --sentence_silence 0.25", qe, qm, qo, 1.0 / rate);
@@ -317,7 +467,7 @@ int tts_synthesize(const char *text, double rate, const char *engine, const char
             if (sapi_speak(clean, rate, tmpf, x->id + 5, e2, sizeof e2) && file_size(tmpf) > 44) ok = 1;
             else { snprintf(err, errn, "%s", e2[0] ? e2 : "sintesi vocale non riuscita"); pd_log("SAPI: %s", err); }
         }
-        if (ok) snprintf(used, usedn, "%s", x->piper ? "piper" : "sapi");
+        if (ok) snprintf(used, usedn, "%s", x->piper == 2 ? "kokoro" : x->piper ? "piper" : "sapi");
     }
     if (ok) ok = file_read(tmpf, wav, 64u * 1024u * 1024u);
     if (!ok && !err[0]) snprintf(err, errn, "sintesi vocale non riuscita");

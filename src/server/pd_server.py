@@ -52,6 +52,7 @@ sys.path.insert(0, HERE)
 import pd_packs  # noqa: E402  (pacchetti di contenuti)
 import pd_aula   # noqa: E402  (quadro dell'aula in rete locale, stato della connessione)
 import pd_tablet  # noqa: E402  (condivisione con i tablet dell'aula, spenta se non la si accende)
+import pd_kokoro  # noqa: E402  (voce naturale Kokoro: Nicola e Sara, dalla 3.8)
 import pd_nonni   # noqa: E402  (Nonni Teach: interviste, podcast e sito, dalla 3.6)
 
 SHARE_DIR = os.path.normpath(os.path.join(HERE, ".."))
@@ -213,8 +214,9 @@ def ollama_models(timeout=1.5):
 
 
 # ------------------------------------------------------------------------------
-#  Sintesi vocale (TTS): voci naturali Piper (incluse nel pacchetto: Giorgio, Serena e Paola),
-#  Pico (femminile) ed espeak-ng (varianti maschili e femminili). L'utente sceglie la voce.
+#  Sintesi vocale (TTS): dalla 3.8 Kokoro (Nicola, uomo, e Sara, donna: le piu' naturali, per PC x86_64),
+#  voci naturali Piper (incluse nel pacchetto: Giorgio, Serena e Paola), Pico (femminile) ed espeak-ng
+#  (varianti maschili e femminili). L'utente sceglie la voce.
 # ------------------------------------------------------------------------------
 LIB_DIR = os.environ.get("PD_LIB_DIR") or "/usr/lib/professore-digitale"
 VOICES_DIR = os.environ.get("PD_VOICES_DIR") or os.path.join(SHARE_DIR, "voci")
@@ -224,6 +226,7 @@ PIPER_ORDINE = ("giorgio", "serena", "paola")   # il Professore e' un uomo: prim
 PIPER_PAUSA = "0.25"                           # secondi di pausa tra una frase e l'altra: la voce respira
 ESPEAK_VARIANTI = (("m3", "Voce leggera maschile", "m"), ("m1", "Voce leggera maschile, grave", "m"),
                    ("f2", "Voce leggera femminile", "f"), ("f4", "Voce leggera femminile, morbida", "f"))
+KOKORO_PREDEFINITE = ("kokoro:nicola", "kokoro:sara")
 VOCE_PREDEFINITA = ("piper:it_IT-giorgio-medium", "piper:it_IT-serena-medium", "piper:it_IT-paola-medium",
                     "piper:it_IT-riccardo-x_low", "espeak:m3", "pico")
 
@@ -272,6 +275,37 @@ def piper_bin():
     with LOCK:
         STATE["piper_bin"], STATE["piper_t"] = trovato, time.time()
     return trovato
+
+
+def kokoro():
+    """Motore Kokoro (pd_kokoro.Motore) se libreria e modello ci sono per questo computer, altrimenti None."""
+    with LOCK:
+        if "kokoro" in STATE:
+            return STATE["kokoro"]
+    trovato = pd_kokoro.trova(
+        [os.environ.get("PD_KOKORO_LIB"), os.path.join(DATA_DIR, "kokoro", "lib"),
+         os.path.join(LIB_DIR, "kokoro", pd_kokoro.arch())],
+        [os.environ.get("PD_KOKORO_DIR"), os.path.join(DATA_DIR, "kokoro", "modello"), os.path.join(VOICES_DIR, "kokoro")])
+    motore = pd_kokoro.Motore(trovato[0], trovato[1], log) if trovato and not MAC else None
+    with LOCK:
+        STATE.setdefault("kokoro", motore)
+        return STATE["kokoro"]
+
+
+def kokoro_prima():
+    """Nicola e' la voce predefinita sui PC con almeno 4 processori; su quelli piu' lenti Kokoro parlerebbe a scatti
+    (ci mette piu' tempo a preparare la frase che a dirla): li' restano prima le voci Piper (Giorgio, Serena, Paola), molto piu' leggere."""
+    return (os.cpu_count() or 1) >= 4 or os.environ.get("PD_KOKORO_PRIMA") == "1"
+
+
+def kokoro_prepara():
+    """All'avvio del server: se la voce del Professore sara' Kokoro, il modello si carica subito (il saluto parte prima)."""
+    m = kokoro()
+    if not m:
+        return
+    voce = (read_json_file(os.path.join(DATA_DIR, "settings.json"), {}) or {}).get("voiceId") or ""
+    if voce.startswith("kokoro:") or (not voce and kokoro_prima()):
+        m.prepara()
 
 
 def piper_models():
@@ -332,6 +366,11 @@ def tts_voices():
         descr = {"m": "uomo", "f": "donna"}[genere]
         voci.append({"id": "say:" + nome, "nome": "%s (%s, voce del Mac)" % (nome, descr), "genere": genere,
                      "motore": "say", "naturale": migliore})
+    m = kokoro()
+    if m and m.disponibile():
+        for vid, nome, genere, _ in pd_kokoro.VOCI:
+            voci.append({"id": "kokoro:" + vid, "nome": "%s (%s, voce naturale)" % (nome, {"m": "uomo", "f": "donna"}[genere]),
+                         "genere": genere, "motore": "kokoro", "naturale": True})
     if piper_bin():
         def posto(b):
             for i, n in enumerate(PIPER_ORDINE):
@@ -357,6 +396,9 @@ def tts_voices():
 
 def tts_engines():
     engines = ["say"] if voci_say() else []
+    m = kokoro()
+    if m and m.disponibile():
+        engines.append("kokoro")
     if piper_bin() and piper_models():
         engines.append("piper")
     if shutil.which("pico2wave"):
@@ -390,7 +432,8 @@ def _ordine_voci(voice, engine):
     if MAC:     # sul Mac prima la voce maschile (il Professore e' un uomo), poi le migliorate
         ordine += sorted([v["id"] for v in voci if v["motore"] == "say" and v["id"] not in ordine],
                          key=lambda i: (0 if i.lower().startswith("say:luca") else 1, i))
-    ordine += [v for v in VOCE_PREDEFINITA if v in ids and v not in ordine]
+    predefinite = KOKORO_PREDEFINITE + VOCE_PREDEFINITA if kokoro_prima() else VOCE_PREDEFINITA[:3] + KOKORO_PREDEFINITE + VOCE_PREDEFINITA[3:]
+    ordine += [v for v in predefinite if v in ids and v not in ordine]
     ordine += [v for v in ids if v not in ordine]
     return ordine
 
@@ -416,6 +459,12 @@ def synthesize(text, rate=1.0, engine=None, voice=None):
                                     "--file-format=WAVE", "--data-format=LEI16@22050", "-f", "-"],
                                    input=text.encode("utf-8"), stdout=subprocess.DEVNULL,
                                    stderr=subprocess.DEVNULL, timeout=120, check=True)
+                elif vid.startswith("kokoro:"):
+                    eng = "kokoro"
+                    sid = {v[0]: v[3] for v in pd_kokoro.VOCI}.get(vid[7:])
+                    if sid is None or not kokoro():
+                        raise RuntimeError("voce Kokoro sconosciuta")
+                    kokoro().sintetizza(text, sid, rate, out)
                 elif vid.startswith("piper:"):
                     eng = "piper"
                     model = piper_models().get(vid[6:])
@@ -450,8 +499,11 @@ def synthesize(text, rate=1.0, engine=None, voice=None):
 
 
 def voce_neura():
-    """Neura (Nonni Teach) ha una voce femminile: prima Serena o Paola (Piper), poi Pico o espeak-ng femminile."""
+    """Neura (Nonni Teach) ha una voce femminile: prima una naturale (Sara di Kokoro sui PC veloci, Serena o Paola di Piper),
+    poi Pico o espeak-ng femminile."""
     voci = tts_voices()
+    if not kokoro_prima():
+        voci = [v for v in voci if v["motore"] != "kokoro"] + [v for v in voci if v["motore"] == "kokoro"]
     for cond in (lambda v: v["genere"] == "f" and v["naturale"], lambda v: v["genere"] == "f"):
         for v in voci:
             if cond(v):
@@ -1331,6 +1383,7 @@ def main(argv=None):
     threading.Thread(target=idle_watchdog, args=(server,), daemon=True).start()
     threading.Thread(target=stt_probe, daemon=True).start()  # pre-riscaldamento
     threading.Thread(target=piper_bin, daemon=True).start()
+    threading.Thread(target=kokoro_prepara, daemon=True).start()
     try:
         aula = pd_aula.Aula(DATA_DIR, VERSION, lambda: read_json_file(os.path.join(DATA_DIR, "settings.json"), {}), log)
         aula.sistema = {"os": nome_sistema(), "ram_mb": mem_total_mb(), "cpus": os.cpu_count() or 0,

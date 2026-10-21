@@ -85,6 +85,7 @@ mkdir -p "$ARCHIVIO" 2>/dev/null && cp "dist/professore-digitale_${NUOVA}_all.de
 cp windows/contenuti/*.json "$PUB/contenuti/" 2>/dev/null || true
 [ -f docs/Vademecum_Professore_Digitale.pdf ] && cp docs/Vademecum_Professore_Digitale.pdf "$PUB/"
 [ -f docs/Vademecum_Professore_Digitale_Windows.pdf ] && cp docs/Vademecum_Professore_Digitale_Windows.pdf "$PUB/"
+[ -f docs/Vademecum_Professore_Digitale_Mac.pdf ] && cp docs/Vademecum_Professore_Digitale_Mac.pdf "$PUB/"
 if [ -f "dist/windows/ProfessoreDigitale-Setup-${NUOVA}.exe" ]; then
   cp "dist/windows/ProfessoreDigitale-Setup-${NUOVA}.exe" "dist/windows/professore-digitale-windows-${NUOVA}.zip" "$PUB/"
   cp "dist/windows/ProfessoreDigitale-Setup-${NUOVA}.exe" archivio/

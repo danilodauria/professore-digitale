@@ -60,7 +60,7 @@ def crea_pagina(pub, base_url, progetto=""):
         pezzi.append(scheda("📄", "Versione portatile", "Un solo file da aprire con il browser, su qualunque computer, anche da chiavetta. Senza voce naturale e senza IA (%s)." % mb(os.path.join(pub, port)),
                             port, "⬇️ Scarica il file"))
     altri = []
-    for f, t in (("Vademecum_Professore_Digitale.pdf", "📘 Vademecum (Linux)"), ("Vademecum_Professore_Digitale_Windows.pdf", "📘 Vademecum (Windows)"),
+    for f, t in (("Vademecum_Professore_Digitale.pdf", "📘 Vademecum (Linux)"), ("Vademecum_Professore_Digitale_Windows.pdf", "📘 Vademecum (Windows)"), ("Vademecum_Professore_Digitale_Mac.pdf", "📘 Vademecum (Mac)"),
                  ("NOTE-%s.md" % ver, "📝 Novità della versione %s" % ver)):
         if os.path.isfile(os.path.join(pub, f)):
             altri.append('<a href="%s">%s</a>' % (H.escape(f, True), t))

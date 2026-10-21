@@ -16,6 +16,10 @@ windows/build-windows.sh --solo-app > "$W/build.log" 2>&1 || { echo "  FAIL comp
 grep "Compatibilità Windows XP" "$W/build.log" | sed 's/^/  /'
 APP="$(pwd)/build/windows/app"
 
+# Kokoro (onnxruntime per Windows) usa le istruzioni AMX se il processore le ha: sotto Wine servono il permesso (tests/dati/amx-wine.c)
+if grep -qw amx_tile /proc/cpuinfo && gcc -shared -fPIC -O2 -o "$W/amx-wine.so" tests/dati/amx-wine.c 2>/dev/null; then
+  export LD_PRELOAD="$W/amx-wine.so${LD_PRELOAD:+:$LD_PRELOAD}"
+fi
 winpath() { echo "Z:$1" | sed 's#/#\\#g'; }
 PIDW=""
 avvia() {

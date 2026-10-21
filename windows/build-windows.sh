@@ -42,7 +42,7 @@ echo "» Compilo il programma (32 bit: gira da Windows XP a Windows 11)"
 CF="-O2 -Wall -Wextra -Wno-unused-parameter -Wno-cast-function-type -Wno-missing-field-initializers -D_WIN32_WINNT=0x0501 -DWINVER=0x0501 -D_WIN32_IE=0x0600 -DUNICODE -D_UNICODE -D__USE_MINGW_ANSI_STDIO=1 -municode -fno-stack-protector"
 OBJS=()
 for f in windows/src/pd_*.c; do
-  n=$(basename "$f" .c); [ "$n" = pd_stt_main ] && continue
+  n=$(basename "$f" .c); [ "$n" = pd_stt_main ] || [ "$n" = pd_kokoro_main ] && continue
   i686-w64-mingw32-gcc $CF -c "$f" -o "$W/obj32/$n.o"; OBJS+=("$W/obj32/$n.o")
 done
 mkres ProfessoreDigitale "Professore Digitale - Cattedra Digitale Portatile" i686-w64-mingw32-windres "$W/obj32/res.o"
@@ -78,7 +78,7 @@ python3 -c 'import json,sys; json.dump({"aggiornamenti_url": sys.argv[1], "pagin
 sed 's/$/\r/' windows/LICENZE.txt > "$A/LICENZE.txt"
 { echo "Professore Digitale $VERSION per Windows"; echo; sed -n '1,200p' windows/LEGGIMI.txt; } | sed 's/$/\r/' > "$A/LEGGIMI.txt"
 cp windows/res/professore.ico "$A/professore.ico"
-echo "» Voci naturali (Piper per Windows a 64 bit: Giorgio, Serena e Paola)"
+echo "» Voci naturali (Windows a 64 bit: Kokoro con Nicola e Sara; Piper con Giorgio, Serena e Paola)"
 source tools/voci.sh; prepara_voci
 python3 - "$VOCI_CACHE/piper_windows_amd64.zip" "$A" <<'PY'
 import sys, zipfile, os
@@ -89,6 +89,13 @@ z.extractall(dest)
 PY
 rm -rf "$A/piper/pkgconfig"
 copia_voci "$A/voci"
+# Kokoro (dalla 3.8): pd-kokoro.exe (64 bit) con la libreria sherpa-onnx e il modello con Nicola e Sara
+mkres pd-kokoro "Professore Digitale - voce naturale Kokoro" x86_64-w64-mingw32-windres "$W/obj64/res-kokoro.o" senza-icona
+mkdir -p "$A/kokoro"
+x86_64-w64-mingw32-gcc -O2 -Wall -Wno-deprecated-declarations -municode -mconsole -static-libgcc -s -I "$SHERPA_DIR/include" \
+  -o "$A/kokoro/pd-kokoro.exe" windows/src/pd_kokoro_main.c "$W/obj64/res-kokoro.o" "$SHERPA_DIR/windows-x64/sherpa-onnx-c-api.dll"
+cp "$SHERPA_DIR/windows-x64/"*.dll "$A/kokoro/"
+copia_kokoro "$A/voci/kokoro"
 
 if [ "$SOLO_APP" = 1 ]; then echo "✔ Applicazione pronta in $A"; exit 0; fi
 # ---- firma digitale (Authenticode): evita il blocco di «Sicurezza di Windows» / Controllo intelligente delle app ----

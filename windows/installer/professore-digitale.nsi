@@ -176,11 +176,14 @@ Section "Microfono offline: motore Vosk (il modello italiano si scarica poi)" SE
   ${EndIf}
 SectionEnd
 
-Section "Voci naturali italiane: Giorgio (uomo), Serena e Paola (donna)" SEC_VOCI
+Section "Voci naturali italiane: Nicola e Giorgio (uomo), Sara, Serena e Paola (donna)" SEC_VOCI
   ${If} ${RunningX64}
     RMDir /r "$INSTDIR\piper"
     SetOutPath "$INSTDIR\piper"
     File /r "${SORGENTE}\piper\*.*"
+    RMDir /r "$INSTDIR\kokoro"                               ; dalla 3.8: voce Kokoro (Nicola e Sara)
+    SetOutPath "$INSTDIR\kokoro"
+    File /r "${SORGENTE}\kokoro\*.*"
     SetOutPath "$INSTDIR\voci"
     Delete "$INSTDIR\voci\it_IT-riccardo-x_low.onnx"        ; dalla 3.3 sostituita da Giorgio
     Delete "$INSTDIR\voci\it_IT-riccardo-x_low.onnx.json"
@@ -221,7 +224,7 @@ SectionEnd
 !insertmacro MUI_FUNCTION_DESCRIPTION_BEGIN
   !insertmacro MUI_DESCRIPTION_TEXT ${SEC_APP} "Lezioni, guida interna, lavagna, palestra e voce di Windows. Funziona senza Internet."
   !insertmacro MUI_DESCRIPTION_TEXT ${SEC_DESK} "Un'icona sul desktop per aprire il Professore con un doppio clic."
-  !insertmacro MUI_DESCRIPTION_TEXT ${SEC_VOCI} "Voci italiane molto naturali, una maschile e una femminile, già pronte (circa 120 MB, nessun download). Richiedono Windows a 64 bit."
+  !insertmacro MUI_DESCRIPTION_TEXT ${SEC_VOCI} "Voci italiane molto naturali, maschili e femminili, già pronte (circa 360 MB, nessun download). Richiedono Windows a 64 bit."
   !insertmacro MUI_DESCRIPTION_TEXT ${SEC_MIC} "Permette di fare domande a voce. Il modello della lingua italiana (circa 50 MB) si scarica dalla configurazione guidata o dalla chiavetta."
 !insertmacro MUI_FUNCTION_DESCRIPTION_END
 
@@ -238,6 +241,7 @@ Section "Uninstall"
   RMDir /r "$INSTDIR\contenuti"
   RMDir /r "$INSTDIR\stt"
   RMDir /r "$INSTDIR\piper"
+  RMDir /r "$INSTDIR\kokoro"
   RMDir /r "$INSTDIR\voci"
   StrCmp $MultiUser.InstallMode "AllUsers" 0 +9
   nsExec::Exec 'netsh advfirewall firewall delete rule name="Professore Digitale (aula)"'

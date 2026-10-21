@@ -42,7 +42,7 @@ sul diritto d'autore (L. 633/1941). Per usi diversi da quelli consentiti, contat
 
 ## Che cosa resta fuori
 - Il **codice** del programma è distribuito con licenza MIT (file `LICENSE`).
-- I **componenti di altri autori** inclusi (Mermaid, tesseract.js, Piper, le voci Giorgio, Serena e Paola, Vosk…)
+- I **componenti di altri autori** inclusi (Mermaid, tesseract.js, Piper, Kokoro e sherpa-onnx, le voci Nicola, Sara, Giorgio, Serena e Paola, Vosk…)
   mantengono la propria licenza: vedi `packaging/copyright` (Linux) e `windows/LICENZE.txt` (Windows).
 - Le **registrazioni di Nonni Teach** appartengono alle persone intervistate e a chi le realizza: restano sul computer e si
   pubblicano solo con il loro consenso, con la licenza indicata nella liberatoria (il sito del podcast propone CC BY-NC-SA 4.0).

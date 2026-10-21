@@ -13,13 +13,13 @@ def check(name, cond, detail=""):
     results.append((name, bool(cond)))
     print(("  OK  " if cond else "  FAIL") + " " + name + ("  -> " + str(detail)[:400] if detail and not cond else ""))
 
-def call(path, body=None, headers=None, raw=False):
+def call(path, body=None, headers=None, raw=False, timeout=60):
     h = {"Content-Type": "application/json"} if body is not None else {}
     h.update(headers or {})
     data = json.dumps(body).encode() if body is not None else None
     req = urllib.request.Request(BASE + path, data=data, headers=h, method="POST" if body is not None else "GET")
     try:
-        with urllib.request.urlopen(req, timeout=60) as r:
+        with urllib.request.urlopen(req, timeout=timeout) as r:
             b = r.read(); return r.status, (b if raw else json.loads(b.decode() or "{}"))
     except urllib.error.HTTPError as e:
         b = e.read()
@@ -176,6 +176,20 @@ check("voci: elenco con genere (voci naturali incluse)", isinstance(voci, list) 
 if voci:
     st, wav = call("/api/tts", {"text": "Buongiorno", "voice": voci[-1]["id"]}, raw=True)
     check("sintesi con la voce scelta", st == 200 and wav[:4] == b"RIFF", st)
+if os.path.isfile(os.path.join(APP, "kokoro", "pd-kokoro.exe")):     # 3.8: voce Kokoro (Nicola e Sara) con pd-kokoro.exe
+    kv = {v["id"]: v for v in voci if v["motore"] == "kokoro"}
+    check("Kokoro: Nicola (uomo) e Sara (donna) elencate", kv.get("kokoro:nicola", {}).get("genere") == "m" and
+          kv.get("kokoro:sara", {}).get("genere") == "f" and kv["kokoro:nicola"].get("naturale") is True, list(kv))
+    check("Kokoro tra i motori", "kokoro" in s7["tts"].get("engines", []), s7["tts"].get("engines"))
+    import io, wave
+    for vid in ("kokoro:nicola", "kokoro:sara"):
+        st, wav = call("/api/tts", {"text": "Perché è così? Città, più, però: va bene!", "voice": vid}, raw=True, timeout=300)
+        try:
+            w = wave.open(io.BytesIO(wav)); dur = w.getnframes() / float(w.getframerate())
+        except Exception:
+            dur = 0
+        # le lettere accentate arrivano giuste (UTF-8 nella pipe): la frase dura come su Linux, circa 3 secondi
+        check("Kokoro parla con accenti: " + vid, st == 200 and wav[:4] == b"RIFF" and 2.0 < dur < 6.0, (st, dur))
 st, rete = call("/api/rete")
 check("stato della connessione", st == 200 and isinstance(rete.get("online"), bool), rete)
 st, a0 = call("/api/aula")

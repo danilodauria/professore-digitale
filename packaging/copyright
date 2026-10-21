@@ -54,6 +54,22 @@ Comment: Piper 2023.11.14-2, binari ufficiali (https://github.com/rhasspy/piper)
  licenza GPL-3.0-or-later, sorgenti su https://github.com/rhasspy/espeak-ng),
  distribuiti come programmi separati usati da Piper.
 
+Files: usr/lib/professore-digitale/kokoro/*
+Copyright: 2022-2026 Xiaomi Corporation e i contributori di sherpa-onnx (k2-fsa); Microsoft Corporation (ONNX Runtime)
+License: Apache-2.0
+Comment: sherpa-onnx v1.13.8, librerie condivise ufficiali (https://github.com/k2-fsa/sherpa-onnx),
+ usate dal processo separato src/server/pd_kokoro.py. ONNX Runtime ha licenza MIT. La libreria contiene
+ anche eSpeak NG (licenza GPL-3.0-or-later, sorgenti su https://github.com/espeak-ng/espeak-ng).
+
+Files: usr/share/professore-digitale/voci/kokoro/*
+Copyright: 2024-2025 hexgrad (modello Kokoro-82M v1.0, https://huggingface.co/hexgrad/Kokoro-82M);
+ conversione ONNX int8 multilingue di k2-fsa (sherpa-onnx, tts-models/kokoro-int8-multi-lang-v1_0)
+License: Apache-2.0
+Comment: voci italiane "im_nicola" (Nicola, uomo, numero 36) e "if_sara" (Sara, donna, numero 35).
+ La cartella espeak-ng-data contiene solo i dati di eSpeak NG per italiano e inglese
+ (licenza GPL-3.0-or-later, sorgenti su https://github.com/espeak-ng/espeak-ng).
+ Testo completo della licenza Apache 2.0: /usr/share/common-licenses/Apache-2.0
+
 Files: usr/share/professore-digitale/voci/it_IT-paola-medium.*
 Copyright: modello Piper "paola" (rhasspy/piper-voices); dati: paolapersico1/Voice-Dataset-Italian
 License: MIT

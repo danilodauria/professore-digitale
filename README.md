@@ -48,7 +48,7 @@ a 32 e 64 bit. Si installa per tutti gli utenti oppure solo per sé (senza passw
   scheda video e memoria video, spazio libero; sceglie dal catalogo il modello migliore per quel PC e installa tutto:
   **Ollama** su Windows 10 22H2/11, **KoboldCpp** (motore compatibile) su Windows 7/8/8.1 a 64 bit.
   XP, Vista e i sistemi a 32 bit usano la guida interna. Il catalogo (`windows/catalogo-ia.json`) si aggiorna online.
-* **Microfono offline** (Vosk, 64 bit) e **voce naturale** Piper «Paola», facoltativi.
+* **Microfono offline** (Vosk, 64 bit), facoltativo. **Voci naturali incluse** (64 bit): Nicola e Sara (Kokoro, dalla 3.8), Giorgio, Serena e Paola (Piper).
 * **Chiavetta per le aule senza Internet**: si prepara su un PC collegato e si installa sugli altri; ogni file è verificato
   con SHA-256.
 * Vademecum dedicato: `docs/Vademecum_Professore_Digitale_Windows.pdf`.
@@ -85,7 +85,7 @@ Browser (interfaccia HTML/JS, nessuna libreria esterna salvo Mermaid incluso)
    ▼
 pd_server.py  — Python 3 standard library, nessun pip
    ├── /api/chat  → Ollama locale (facoltativo, streaming)
-   ├── /api/tts   → piper › pico2wave › espeak-ng  (voce offline)
+   ├── /api/tts   → kokoro › piper › pico2wave › espeak-ng  (voce offline)
    ├── /api/stt   → pd_stt_worker.py (Vosk / faster-whisper nel venv utente)
    └── /api/data  → ~/.local/share/professore-digitale/*.json
 ```
@@ -158,7 +158,7 @@ tests/esegui_test.sh    # esegue tutti i test automatici
   © 2026 Danilo D'Auria, [Creative Commons BY-NC-SA 4.0](LICENZA-CONTENUTI.md) — citare sempre l'autore,
   niente usi commerciali, stessa licenza per le versioni modificate.
 - **Codice**: [MIT](LICENSE).
-- **Componenti di altri autori** (Mermaid, tesseract.js, Piper, voci Giorgio/Serena/Paola, Vosk): ognuno con la propria
+- **Componenti di altri autori** (Mermaid, tesseract.js, Piper, Kokoro e sherpa-onnx, voci Nicola/Sara/Giorgio/Serena/Paola, Vosk): ognuno con la propria
   licenza, vedi `packaging/copyright` e `windows/LICENZE.txt`.
 
 Citazione consigliata:

@@ -124,7 +124,7 @@ if [ "$PIPER" = 1 ]; then
   case "$(uname -m)" in x86_64) PA="x86_64" ;; aarch64|arm64) PA="aarch64" ;; armv7l) PA="armv7l" ;; *) PA="" ;; esac
   if [ -z "$PA" ]; then attenzione "Piper non è disponibile per $(uname -m): si userà espeak-ng."
   elif [ -x "/usr/lib/professore-digitale/piper/$PA/piper" ] && /usr/lib/professore-digitale/piper/$PA/piper --version >/dev/null 2>&1; then
-    ok "Le voci naturali Giorgio (uomo), Serena e Paola (donna) sono già incluse nel programma: sceglietele in Impostazioni → Voce."
+    ok "Le voci naturali Nicola e Giorgio (uomini), Sara, Serena e Paola (donne) sono già incluse nel programma: sceglietele in Impostazioni → Voce."
   else
     TMP2=$(mktemp -d)
     if scarica "https://github.com/rhasspy/piper/releases/download/$PIPER_VER/piper_linux_$PA.tar.gz" "$TMP2/p.tgz" \

@@ -22,7 +22,7 @@
     ttsMode: "auto", browserVoice: "",
     aiEnabled: true, model: "", useKbContext: true, autoSendVoice: true,
     updateUrl: "", teacherName: "", eyesFollow: true,
-    voiceId: "", netCheck: true, idleTips: true, greet: true, goodbye: true, studentName: "",
+    voiceId: "", voce38: false, netCheck: true, idleTips: true, greet: true, goodbye: true, studentName: "",
     aulaRuolo: "", aulaNome: "Aula", aulaCodice: "", aulaServer: "",
     voiceCommands: false, tremore: false, vista: false, leggiFocus: false, domandaGiorno: true, aulaManoSuono: true,
     tabletCondividi: false,
@@ -116,7 +116,7 @@
   PD.sttLocale = function () { return !!(PD.server && !PD.ospite && PD.status && PD.status.stt && PD.status.stt.engine); };
   PD.sttReady = function () { return PD.sttLocale() || !!(PD.micWeb && PD.micWeb.stato() === "acceso"); };
 
-  var TTS_NAME = { sapi: "voce di Windows", piper: "voce naturale", pico: "pico", "espeak-ng": "espeak-ng", espeak: "espeak" };
+  var TTS_NAME = { sapi: "voce di Windows", piper: "voce naturale", kokoro: "voce naturale Kokoro", pico: "pico", "espeak-ng": "espeak-ng", espeak: "espeak" };
   PD.isWindows = function () { return !!(PD.status && PD.status.platform === "windows"); };
   PD.isMac = function () { return !!(PD.status && PD.status.platform === "mac"); };
   function renderChips() {
@@ -245,7 +245,8 @@
     var chunks = [], cur = "";
     parts.forEach(function (p) {
       p = p.trim(); if (!p) return;
-      if ((cur + " " + p).length > 220 && cur) { chunks.push(cur); cur = p; } else { cur = cur ? cur + " " + p : p; }
+      /* la prima frase da sola (fino a 100 caratteri): la voce parte prima, mentre il PC prepara il resto */
+      if ((cur + " " + p).length > (chunks.length ? 220 : 100) && cur) { chunks.push(cur); cur = p; } else { cur = cur ? cur + " " + p : p; }
     });
     if (cur) chunks.push(cur);
     return chunks.filter(function (c) { return /[a-zA-Z0-9àèéìòù]/.test(c); });
@@ -640,7 +641,7 @@
   };
   PD.isLate = function (d) { var h = (d || new Date()).getHours(); return h >= 22 || h < 5; };
   PD.vademecumUrl = function () {
-    return PD.server ? "docs/" + (PD.isWindows() ? "Vademecum_Professore_Digitale_Windows.pdf" : "Vademecum_Professore_Digitale.pdf") : "";
+    return PD.server ? "docs/" + (PD.isWindows() ? "Vademecum_Professore_Digitale_Windows.pdf" : PD.isMac() ? "Vademecum_Professore_Digitale_Mac.pdf" : "Vademecum_Professore_Digitale.pdf") : "";
   };
   PD.tileHTML = function (ico, t, d, go, cls) {
     return '<button class="card tile' + (cls ? " " + cls : "") + '" data-go="' + go + '"><span class="big-ico">' + ico + "</span><h3>" + t + "</h3><p>" + d + "</p></button>";
@@ -1180,7 +1181,7 @@
       "<dt>Versione</dt><dd>" + PD.version + "</dd><dt>Ideazione e sviluppo</dt><dd>Danilo D'Auria – Tecnico IT &amp; Divulgatore Digitale per il Sociale</dd>" +
       "<dt>Contatti</dt><dd>danilodauria.site@gmail.com</dd><dt>Licenza</dt><dd>Codice MIT (software libero) · contenuti © Danilo D'Auria, Creative Commons BY-NC-SA 4.0 · <a href=\"#/licenza\" data-go=\"#/licenza\">📜 cosa potete fare</a></dd>" +
       "<dt>Componenti</dt><dd>" + (PD.isWindows() ? "Mermaid (MIT) per gli schemi; voce di Windows; Ollama o KoboldCpp, Vosk, Piper (facoltativi)" : "Mermaid (MIT) per gli schemi; Ollama, espeak-ng, Vosk (facoltativi)") + "</dd></dl>" +
-      (PD.server ? '<p class="row"><a class="btn ghost" href="docs/' + (PD.isWindows() ? "Vademecum_Professore_Digitale_Windows.pdf" : "Vademecum_Professore_Digitale.pdf") + '" target="_blank" rel="noopener">📖 Apri il vademecum (PDF)</a>' +
+      (PD.server ? '<p class="row"><a class="btn ghost" href="' + PD.vademecumUrl() + '" target="_blank" rel="noopener">📖 Apri il vademecum (PDF)</a>' +
         (PD.isWindows() ? '<button class="btn ghost" id="open-data">📂 Cartella dei progressi</button>' : "") + "</p>" : "") + "</div>" +
       (PD.licenzaHTML ? PD.licenzaHTML() : "") +
       "</div>";
@@ -1371,6 +1372,9 @@
   /* Impostazioni: dalla 3.3 la voce «Riccardo» (bassa qualità) è sostituita da «Giorgio» */
   function migraImpostazioni(s) {
     if (s && /riccardo/.test(s.voiceId || "")) s.voiceId = "piper:it_IT-giorgio-medium";
+    /* 3.8: chi aveva Giorgio (la predefinita di prima) passa alla voce predefinita nuova, Nicola; se poi
+     * sceglie di nuovo Giorgio nelle Impostazioni, la scelta resta (voce38 = già fatto) */
+    if (s && !s.voce38) { if (/giorgio/.test(s.voiceId || "")) s.voiceId = ""; s.voce38 = true; }
     return s;
   }
   PD.migraProgressi = migrate;   // usata anche da profili.js per i progressi delle altre persone

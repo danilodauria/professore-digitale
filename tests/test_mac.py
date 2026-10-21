@@ -109,6 +109,9 @@ else:
     mancano = [n for n in servono if n not in nomi]
     check("zip per Mac: file dell'app presenti", not mancano, mancano)
     check("zip per Mac: senza le voci Piper (solo Linux)", not any("/app/voci/" in n for n in nomi))
+    check("zip per Mac: il vademecum per Mac, non quello per Linux",
+          A + "Resources/app/web/docs/Vademecum_Professore_Digitale_Mac.pdf" in nomi and "Vademecum_Professore_Digitale_Mac.pdf" in nomi
+          and A + "Resources/app/web/docs/Vademecum_Professore_Digitale.pdf" not in nomi)
     eseg = (zf.getinfo(A + "MacOS/avvia.sh").external_attr >> 16) & stat.S_IXUSR
     check("zip per Mac: avvia.sh eseguibile", eseg)
     pl = plistlib.loads(zf.read(A + "Info.plist"))
