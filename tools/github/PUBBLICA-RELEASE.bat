@@ -40,6 +40,8 @@ echo  Primo accesso: rispondete con INVIO alle domande (GitHub.com, HTTPS, Login
 echo  Copiate il codice che compare, poi incollatelo nella pagina che si apre e premete Authorize.
 echo.
 call %GH% auth login --hostname github.com --git-protocol https --web
+rem senza Git per Windows l'ultimo passo del login fallisce, ma l'accesso e' riuscito: per la Release basta questo
+call %GH% auth status >nul 2>nul
 if errorlevel 1 goto errore
 :authok
 
